@@ -1,0 +1,126 @@
+@import url('./variables.css');
+
+/* Base overrides */
+.reveal {
+  font-family: var(--font-body);
+  font-size: 32px;
+  color: var(--text-primary);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+/* Headings */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: var(--font-heading);
+  color: var(--text-heading);
+  font-weight: 600;
+  text-transform: none;
+}
+
+.reveal h1 {
+  font-size: 2em;
+}
+
+.reveal h2 {
+  font-size: 1.5em;
+  color: var(--accent);
+}
+
+.reveal h3 {
+  font-size: 1.2em;
+  color: var(--accent-secondary);
+}
+
+/* Paragraphs and lists */
+.reveal p, .reveal li {
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.reveal ul, .reveal ol {
+  margin-left: var(--spacing-lg);
+}
+
+.reveal li {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Links */
+.reveal a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s;
+}
+
+.reveal a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+}
+
+/* Code */
+.reveal pre {
+  background: var(--bg-code);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  font-size: 0.55em;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.reveal code {
+  font-family: var(--font-mono);
+  color: var(--code-text);
+}
+
+.reveal p code, .reveal li code {
+  background: var(--bg-code);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* Images */
+.reveal img {
+  max-height: 55vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Muted/secondary text */
+.reveal .muted {
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+/* Blockquotes */
+.reveal blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: var(--spacing-md);
+  font-style: italic;
+  color: var(--text-muted);
+  background: rgba(100, 255, 218, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Title slide styling */
+.reveal .title-slide h1 {
+  font-size: 2.5em;
+  margin-bottom: var(--spacing-lg);
+}
+
+.reveal .title-slide .subtitle {
+  color: var(--accent);
+  font-size: 1.2em;
+}
+
+/* Section divider slides */
+.reveal .section-divider {
+  text-align: center;
+}
+
+.reveal .section-divider h2 {
+  font-size: 2em;
+}

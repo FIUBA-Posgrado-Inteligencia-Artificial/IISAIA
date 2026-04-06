@@ -1,0 +1,22 @@
+:root {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-code: #0f0f1a;
+  --text-primary: #e0e0e0;
+  --text-heading: #ffffff;
+  --text-muted: #8892b0;
+  --accent: #64ffda;
+  --accent-secondary: #82aaff;
+  --link: #82aaff;
+  --link-hover: #64ffda;
+  --code-text: #c3e88d;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-heading: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+}
