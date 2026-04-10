@@ -208,14 +208,45 @@
 
         <!-- Tokenizacion -->
         <section>
-          <h2>Tokenizacion</h2>
-          <ul>
-            <li class="fragment fade-in">Conversion de texto UTF-8 a tokens de un vocabulario fijo</li>
-            <li class="fragment fade-in">La LLM se entrena con ventanas de secuencias de tokens</li>
-            <li class="fragment fade-in"><a href="https://tiktokenizer.vercel.app/?model=cl100k_base" target="_blank">Tiktokenizer</a> (demo en vivo)</li>
-          </ul>
+          <!-- Title hidden until last step -->
+          <h2 id="tok-title" style="opacity: 0; transition: opacity 0.5s;">Tokenizacion</h2>
+
+          <!-- Animated tokenization sequence -->
+          <div id="tok-anim" style="background: var(--bg-code); border-radius: 8px; padding: 16px 20px; font-family: var(--font-mono); min-height: 180px; display: flex; flex-direction: column; justify-content: center;">
+            <div id="tok-label" style="font-size: 0.5em; color: var(--text-muted); margin-bottom: 10px;"></div>
+            <div id="tok-content" style="font-size: 0.55em; line-height: 1.8; transition: opacity 0.3s;"></div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div style="display: flex; justify-content: center; gap: 16px; margin-top: 12px;">
+            <button id="tok-prev" style="background: var(--bg-secondary); border: 1px solid var(--text-muted); border-radius: 6px; padding: 6px 16px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.45em; cursor: pointer; transition: border-color 0.2s;">← Anterior</button>
+            <span id="tok-step-indicator" style="color: var(--text-muted); font-size: 0.4em; display: flex; align-items: center;"></span>
+            <button id="tok-next" style="background: var(--bg-secondary); border: 1px solid var(--text-muted); border-radius: 6px; padding: 6px 16px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.45em; cursor: pointer; transition: border-color 0.2s;">Siguiente →</button>
+          </div>
+
+          <!-- Concepts revealed at end -->
+          <div id="tok-concepts" style="opacity: 0; transition: opacity 0.5s; margin-top: 12px;">
+            <ul style="font-size: 0.75em;">
+              <li>Este proceso se llama <strong style="color: var(--accent);">tokenizacion</strong>: convertir texto en numeros que la red neuronal puede procesar</li>
+              <li>El vocabulario es fijo (ej: ~100.000 tokens en GPT-4) y se aprende del dataset</li>
+              <li>La LLM se entrena tomando ventanas de secuencias de tokens y prediciendo el siguiente</li>
+              <li><a href="https://tiktokenizer.vercel.app/?model=cl100k_base" target="_blank">Tiktokenizer</a> (demo en vivo)</li>
+            </ul>
+          </div>
+
+          <!-- Load animation from external text file -->
+          <script src="tokenizer-anim.js"></script>
+          <script>
+            initTokenizerAnim({
+              textUrl: 'tokenizer-text.txt',
+              containerId: 'tok-anim',
+              titleId: 'tok-title',
+              conceptsId: 'tok-concepts'
+            });
+          </script>
+
           <aside class="notes">
-            El texto crudo en UTF-8 se convierte a tokens que forman parte de un vocabulario. Este proceso se llama tokenizacion. Mostrar Tiktokenizer para que los estudiantes vean como un texto se descompone en tokens. Explicar que entrenar una LLM implica agarrar ventanas que contienen una secuencia de tokens y predecir el siguiente.
+            Esta slide arranca sin titulo a proposito — la idea es que los estudiantes vean el proceso de conversion antes de ponerle nombre. El texto se carga desde tokenizer-text.txt, asi que se puede cambiar el ejemplo editando ese archivo. Primero se muestra como texto plano con caracteres especiales visibles. Luego cada caracter con su valor numerico en UTF-8, despues en binario para reforzar que todo son 0s y 1s. Luego el tokenizador (BPE) agrupa bytes frecuentes en tokens. Al final se revela que esto se llama tokenizacion y se muestran los conceptos clave. Usar Tiktokenizer en vivo para que los estudiantes experimenten.
           </aside>
         </section>
 

@@ -1,0 +1,3 @@
+Los modelos de lenguaje
+no entienden texto,
+entienden numeros.
