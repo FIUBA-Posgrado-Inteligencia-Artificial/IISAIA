@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Course presentations for Intro to AI-Assisted Software Development",
   "scripts": {
-    "start": "npx serve . -l 3000"
+    "start": "npx live-server --host=0.0.0.0 --port=3000"
   },
   "devDependencies": {
+    "live-server": "^1.2.2",
     "reveal.js": "^5.2.1",
     "serve": "^14.2.4"
   }
