@@ -45,9 +45,7 @@ After cloning:
 cp -r tools/skills/* ~/.claude/skills/
 
 # Python tools (yt-transcript)
-python -m venv tools/.venv
-source tools/.venv/Scripts/activate  # Windows
-pip install -r tools/requirements.txt
+cd tools && uv sync && cd ..
 ```
 
 ## Run
