@@ -4,13 +4,14 @@
 
 | Source | Sections | Purpose |
 |--------|----------|---------|
-| `notas.md` | All | Contenido de la clase |
+| `source_material/index.md` | All | Indice y estructura del contenido |
+| `source_material/*.md` | All | Contenido de la clase |
 | `../../programa.md` | Semana 1 row | Alcance y temas de la semana |
 | `../../_config/slide-conventions.md` | All | Reglas de formato |
 | `../../shared/templates/week-template.html` | All | Template base HTML |
 
 ## Process
-1. Read `notas.md` and identify logical sections
+1. Read `source_material/index.md` and then the referenced files to understand the content
 2. Map sections to slides (one concept per slide)
 3. Generate `slides/index.html` following conventions and template
 4. Place detailed explanations in speaker notes

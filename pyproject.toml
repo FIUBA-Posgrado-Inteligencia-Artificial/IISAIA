@@ -1,0 +1,7 @@
+[project]
+name = "intro-desarrollo-asistido-ia"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "youtube-transcript-api",
+]

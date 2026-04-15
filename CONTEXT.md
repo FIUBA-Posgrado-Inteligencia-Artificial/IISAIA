@@ -1,16 +1,11 @@
 # Task Routing
 
-## Draft Notes
-1. Read `programa.md` — find the row for the target week in the schedule table
-2. Use the week's topics as scope for `semanas/NN/notas.md`
-3. Write or refine lecture notes in Spanish, technical but accessible
-
 ## Generate Slides
 1. Read `semanas/NN/CONTEXT.md` for the week's stage contract
-2. Read `semanas/NN/notas.md` for content
+2. Read all files in `semanas/NN/source_material/` for content (start with `index.md` for structure)
 3. Read `_config/slide-conventions.md` for formatting rules
 4. Copy `shared/templates/week-template.html` to `semanas/NN/slides/index.html` if starting fresh
-5. Transform notes into reveal.js slides following conventions
+5. Transform source material into reveal.js slides following conventions
 6. Place detailed explanations in speaker notes
 
 ## Style / Theme Changes
@@ -20,5 +15,5 @@
 
 ## New Week Setup
 1. Read `shared/CONTEXT.md` for setup instructions
-2. Create `semanas/NN/` folder structure (CONTEXT.md, notas.md, slides/, img/)
+2. Create `semanas/NN/` folder structure (CONTEXT.md, source_material/, slides/, img/)
 3. Copy template, populate CONTEXT.md with topics from `programa.md`
