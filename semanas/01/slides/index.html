@@ -444,9 +444,8 @@
               <svg id="crawl-viz" viewBox="0 0 360 240" style="width: 100%; max-height: 36vh; background: var(--bg-code); border-radius: 8px;">
                 <!-- Nodes and edges drawn by JS -->
               </svg>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+              <div style="margin-top: 6px;">
                 <span style="color: var(--text-muted); font-size: 0.5em;">Paginas semilla → seguir links → indexar → repetir</span>
-                <span id="crawl-counter" style="color: var(--accent); font-family: var(--font-mono); font-size: 0.55em;">0 paginas</span>
               </div>
             </div>
             <!-- Info -->
@@ -461,14 +460,13 @@
                 <div style="color: var(--accent-secondary); font-size: 1.1em; font-weight: bold; font-family: var(--font-mono);">HTML crudo</div>
                 <div style="color: var(--text-muted);">de cada pagina</div>
               </div>
-              <p class="fragment fade-in" style="color: var(--text-primary); margin-top: 16px; font-size: 0.9em;">Punto de partida de todos los datasets de LLMs</p>
+              <p style="color: var(--text-primary); margin-top: 16px; font-size: 0.9em;">Punto de partida de todos los datasets de LLMs</p>
             </div>
           </div>
 
           <script>
           document.addEventListener('DOMContentLoaded', function() {
             var svg = document.getElementById('crawl-viz');
-            var counter = document.getElementById('crawl-counter');
             if (!svg || typeof Reveal === 'undefined') return;
 
             var nodes = [];
@@ -556,7 +554,6 @@
 
               nodes.push(idx);
               count++;
-              counter.textContent = count + ' paginas';
             }
 
             function addEdge(fromIdx, toIdx) {
@@ -616,7 +613,6 @@
               edges = [];
               count = 0;
               step = 0;
-              counter.textContent = '0 paginas';
               timer = setInterval(tick, 350);
             }
 
@@ -774,15 +770,15 @@
               </div>
               <!-- HTML source -->
               <div style="background: var(--bg-code); border-radius: 8px; padding: 10px; font-family: var(--font-mono); font-size: 0.75em; line-height: 1.5;">
-                <div><span style="color: #e06c75;">&lt;body&gt;</span></div>
+                <div><span style="color: #636d83; text-decoration: line-through;">&lt;body&gt;</span></div>
                 <div style="padding-left: 14px; color: #636d83; text-decoration: line-through;">&lt;nav&gt;Main page | Contents...&lt;/nav&gt;</div>
                 <div style="padding-left: 14px; color: #636d83; text-decoration: line-through;">&lt;div class="sidebar"&gt;...&lt;/div&gt;</div>
-                <div style="padding-left: 14px;"><span style="color: #e06c75;">&lt;div</span> <span style="color: #d19a66;">id=</span><span style="color: #98c379;">"content"</span><span style="color: #e06c75;">&gt;</span></div>
-                <div style="padding-left: 28px;"><span style="color: #e06c75;">&lt;h1&gt;</span><span style="color: var(--text-primary);">Large language model</span><span style="color: #e06c75;">&lt;/h1&gt;</span></div>
-                <div style="padding-left: 28px;"><span style="color: #e06c75;">&lt;p&gt;</span><span style="color: var(--text-primary);">A large language model (LLM) is a type of...</span><span style="color: #e06c75;">&lt;/p&gt;</span></div>
-                <div style="padding-left: 14px;"><span style="color: #e06c75;">&lt;/div&gt;</span></div>
+                <div style="padding-left: 14px;"><span style="color: #636d83; text-decoration: line-through;">&lt;div id="content"&gt;</span></div>
+                <div style="padding-left: 28px;"><span style="color: #636d83; text-decoration: line-through;">&lt;h1&gt;</span><span style="color: var(--text-primary);">Large language model</span><span style="color: #636d83; text-decoration: line-through;">&lt;/h1&gt;</span></div>
+                <div style="padding-left: 28px;"><span style="color: #636d83; text-decoration: line-through;">&lt;p&gt;</span><span style="color: var(--text-primary);">A large language model (LLM) is a type of...</span><span style="color: #636d83; text-decoration: line-through;">&lt;/p&gt;</span></div>
+                <div style="padding-left: 14px;"><span style="color: #636d83; text-decoration: line-through;">&lt;/div&gt;</span></div>
                 <div style="padding-left: 14px; color: #636d83; text-decoration: line-through;">&lt;footer&gt;Privacy | Terms...&lt;/footer&gt;</div>
-                <div><span style="color: #e06c75;">&lt;/body&gt;</span></div>
+                <div><span style="color: #636d83; text-decoration: line-through;">&lt;/body&gt;</span></div>
               </div>
               <p style="color: var(--text-primary); font-size: 0.75em; text-align: center;"><span style="color: #636d83; text-decoration: line-through;">tachado</span> = descartado por el pipeline</p>
             </div>

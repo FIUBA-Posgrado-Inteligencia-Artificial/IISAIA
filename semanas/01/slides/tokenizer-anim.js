@@ -84,7 +84,7 @@ function buildAnimation(text, containerId, titleId, conceptsId) {
 
         html += '<ul style="margin-top: 12px; font-size: 0.8em; color: var(--text-muted); list-style: disc; padding-left: 20px; line-height: 1.6;">';
         html += '<li>Secuencia unidimensional de caracteres</li>';
-        html += '<li><a href="https://huggingface.co/datasets/allenai/c4/viewer/af/validation?row=89" target="_blank" style="color: var(--link);">Ejemplo de dataset C4</a></li>';
+        html += '<li><a href="https://huggingface.co/datasets/allenai/c4/viewer/af/validation?p=19&row=1909" target="_blank" style="color: var(--link);">Ejemplo de dataset C4</a></li>';
         html += '</ul>';
         return html;
       }
