@@ -1060,90 +1060,197 @@
           </aside>
         </section>
 
-        <!-- Parameters as knobs -->
+        <!-- The network: parameters, scale, architecture -->
         <section>
-          <h2>Parametros: las perillas del modelo</h2>
+          <h2>La red por dentro</h2>
           <div style="display: flex; gap: var(--spacing-lg); align-items: flex-start; margin-top: 12px;">
+            <!-- Left: what parameters are -->
             <div style="flex: 1; font-size: 0.75em;">
               <ul>
-                <li class="fragment fade-in">La red neuronal es una expresion matematica</li>
-                <li class="fragment fade-in">Mezcla inputs (tokens) con <strong>parametros</strong> (numeros ajustables)</li>
-                <li class="fragment fade-in">Operaciones simples: multiplicacion, suma, exponenciacion</li>
+                <li>La red es una funcion matematica con millones de numeros ajustables: <strong>parametros</strong></li>
+                <li class="fragment fade-in">Al inicio son aleatorios (predicciones basura)</li>
+                <li class="fragment fade-in">Con cada paso de entrenamiento mejoran un poco</li>
+                <li class="fragment fade-in">Al final, los parametros contienen una compresion estadistica del dataset</li>
               </ul>
-              <div class="fragment fade-in" style="background: var(--bg-code); border-radius: 8px; padding: 10px 14px; font-family: var(--font-mono); font-size: 0.8em; margin-top: 12px; color: var(--code-text);">
-                y = softmax(W2 * relu(W1 * x + b1) + b2)
-              </div>
-              <p class="fragment fade-in" style="font-size: 0.85em; color: var(--text-muted); margin-top: 8px;">Entrenar = encontrar valores de W, b que hagan buenas predicciones</p>
             </div>
-            <div class="fragment fade-in" style="flex: 0 0 35%; font-size: 0.7em;">
+            <!-- Right: scale -->
+            <div class="fragment fade-in" style="flex: 0 0 30%; font-size: 0.65em;">
               <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; text-align: center;">
-                <div style="color: var(--text-muted); margin-bottom: 8px;">Escala de parametros</div>
-                <div style="display: flex; align-items: flex-end; gap: 12px; justify-content: center; margin-bottom: 8px;">
+                <div style="display: flex; align-items: flex-end; gap: 16px; justify-content: center; margin-bottom: 8px;">
                   <div>
-                    <div style="background: var(--accent); width: 16px; height: 20px; border-radius: 3px; margin: 0 auto;"></div>
-                    <div style="color: var(--text-muted); font-size: 0.85em; margin-top: 4px;">GPT-2</div>
+                    <div style="background: var(--accent); width: 18px; height: 16px; border-radius: 3px; margin: 0 auto;"></div>
+                    <div style="color: var(--text-muted); font-size: 0.85em; margin-top: 4px;">GPT-2 (2019)</div>
                     <div style="color: var(--accent); font-weight: bold;">1.600M</div>
                   </div>
                   <div>
-                    <div style="background: var(--accent-secondary); width: 16px; height: 80px; border-radius: 3px; margin: 0 auto;"></div>
-                    <div style="color: var(--text-muted); font-size: 0.85em; margin-top: 4px;">Llama 3</div>
+                    <div style="background: var(--accent-secondary); width: 18px; height: 80px; border-radius: 3px; margin: 0 auto;"></div>
+                    <div style="color: var(--text-muted); font-size: 0.85em; margin-top: 4px;">Llama 3 (2024)</div>
                     <div style="color: var(--accent-secondary); font-weight: bold;">405.000M</div>
                   </div>
                 </div>
-                <div style="color: var(--text-muted); font-size: 0.85em;">Al inicio son aleatorios. Con cada paso de entrenamiento mejoran.</div>
+                <div style="color: var(--text-muted); font-size: 0.9em;">Misma idea, 250x mas parametros</div>
               </div>
             </div>
           </div>
+          <!-- Architecture -->
+          <div class="fragment fade-in" style="margin-top: 16px; background: var(--bg-secondary); border-radius: 8px; padding: 12px 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.7em;">
+              <div>
+                <span style="color: var(--text-primary); font-weight: bold;">Arquitectura: Transformer</span>
+                <span style="color: var(--text-muted);"> — </span>
+                <a href="https://arxiv.org/abs/1706.03762" target="_blank" style="font-size: 0.9em;">"Attention is All You Need"</a>
+                <span style="color: var(--text-muted);"> (Google, 2017)</span>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; margin-top: 8px; font-size: 0.65em; color: var(--text-muted);">
+              <div>Sin memoria — es <strong style="color: var(--text-primary);">stateless</strong>: misma entrada, misma salida</div>
+              <div>Usada en todos los LLMs modernos (GPT, Claude, Gemini, Llama, DeepSeek)</div>
+            </div>
+          </div>
           <aside class="notes">
-            Piensen en los parametros como perillas de un DJ set. Al girar las perillas se obtienen diferentes predicciones para cada secuencia de tokens. Entrenar la red significa descubrir una configuracion de parametros que sea consistente con las estadisticas del dataset. La expresion matematica en si no es complicada: multiplicaciones, sumas, exponenciacion. Lo que la hace poderosa es la escala — miles de millones de parametros. GPT-2 tenia 1.6 mil millones de parametros; Llama 3 tiene 405 mil millones. En el inicio los parametros son aleatorios (predicciones aleatorias). Con cada actualizacion, las predicciones mejoran un poquito. Es un proceso iterativo.
+            La red neuronal que hace la prediccion tiene millones o miles de millones de numeros ajustables llamados parametros. Piensen en ellos como perillas: al inicio estan en posiciones aleatorias y las predicciones son basura. Con cada paso de entrenamiento se ajustan un poquito y las predicciones mejoran. Al final del entrenamiento, esos parametros contienen una compresion estadistica de todo el dataset — los patrones de como los tokens se siguen unos a otros. GPT-2 tenia 1.600 millones de parametros; Llama 3 tiene 405.000 millones. Misma idea fundamental, 250 veces mas grande. La arquitectura especifica se llama Transformer, introducida en 2017. Lo importante: es stateless (sin memoria). No recuerda conversaciones anteriores. Misma entrada produce la misma distribucion de salida. Abrir bbycroft.net para que vean como fluye la informacion de tokens a predicciones a traves de las capas.
           </aside>
         </section>
 
-        <!-- Transformer -->
+        <!-- Attention + MLP intuition -->
         <section>
-          <h2>El Transformer</h2>
-          <p style="font-size: 0.7em; color: var(--text-muted);"><a href="https://arxiv.org/abs/1706.03762" target="_blank">"Attention is All You Need"</a> (Google, 2017)</p>
-          <!-- Block diagram -->
-          <div style="display: flex; align-items: center; justify-content: center; gap: 0; margin: 16px 0; font-size: 0.6em;">
+          <h2>Atencion: que tokens importan?</h2>
+          <p style="font-size: 0.7em; color: var(--text-muted);">Para predecir el siguiente token, no todos los anteriores son igual de relevantes</p>
+          <!-- Attention visualization: causal — each token attends to previous ones only -->
+          <div style="margin-top: 16px;">
+            <div style="display: flex; align-items: flex-end; justify-content: center; gap: 6px; font-size: 0.7em; position: relative; padding-top: 80px;">
+              <svg viewBox="0 0 480 80" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 480px; height: 80px; overflow: visible;">
+                <!-- gato attends to el (medium) -->
+                <path d="M120,75 Q80,60 40,75" stroke="#f67019" stroke-width="1.5" fill="none" opacity="0.5" class="fragment fade-in" data-fragment-index="1"/>
+                <!-- se attends to el (weak), gato (medium) -->
+                <path d="M200,75 Q120,50 40,75" stroke="#acc236" stroke-width="0.8" fill="none" opacity="0.2" class="fragment fade-in" data-fragment-index="1"/>
+                <path d="M200,75 Q160,58 120,75" stroke="#acc236" stroke-width="1.5" fill="none" opacity="0.5" class="fragment fade-in" data-fragment-index="1"/>
+                <!-- sento attends to el (weak), gato (strong), se (medium) -->
+                <path d="M285,75 Q160,35 40,75" stroke="#e8508b" stroke-width="0.8" fill="none" opacity="0.15" class="fragment fade-in" data-fragment-index="1"/>
+                <path d="M285,75 Q200,40 120,75" stroke="#e8508b" stroke-width="2.5" fill="none" opacity="0.6" class="fragment fade-in" data-fragment-index="1"/>
+                <path d="M285,75 Q242,55 200,75" stroke="#e8508b" stroke-width="1.5" fill="none" opacity="0.4" class="fragment fade-in" data-fragment-index="1"/>
+                <!-- en attends to sento (strong), gato (medium), others weak -->
+                <path d="M365,75 Q200,20 40,75" stroke="#9b59b6" stroke-width="0.5" fill="none" opacity="0.1" class="fragment fade-in" data-fragment-index="2"/>
+                <path d="M365,75 Q240,25 120,75" stroke="#9b59b6" stroke-width="1.5" fill="none" opacity="0.35" class="fragment fade-in" data-fragment-index="2"/>
+                <path d="M365,75 Q280,40 200,75" stroke="#9b59b6" stroke-width="0.8" fill="none" opacity="0.2" class="fragment fade-in" data-fragment-index="2"/>
+                <path d="M365,75 Q325,55 285,75" stroke="#9b59b6" stroke-width="2.5" fill="none" opacity="0.6" class="fragment fade-in" data-fragment-index="2"/>
+                <!-- el₂ attends to all previous -->
+                <path d="M440,75 Q240,5 40,75" stroke="#27ae60" stroke-width="0.5" fill="none" opacity="0.1" class="fragment fade-in" data-fragment-index="3"/>
+                <path d="M440,75 Q280,10 120,75" stroke="#27ae60" stroke-width="2.5" fill="none" opacity="0.6" class="fragment fade-in" data-fragment-index="3"/>
+                <path d="M440,75 Q320,25 200,75" stroke="#27ae60" stroke-width="1" fill="none" opacity="0.25" class="fragment fade-in" data-fragment-index="3"/>
+                <path d="M440,75 Q362,35 285,75" stroke="#27ae60" stroke-width="2" fill="none" opacity="0.5" class="fragment fade-in" data-fragment-index="3"/>
+                <path d="M440,75 Q402,55 365,75" stroke="#27ae60" stroke-width="0.8" fill="none" opacity="0.2" class="fragment fade-in" data-fragment-index="3"/>
+              </svg>
+              <span style="background: #4dc9f622; border: 1px solid #4dc9f6; border-radius: 4px; padding: 4px 10px; color: #4dc9f6; min-width: 50px; text-align: center;">el</span>
+              <span style="background: #f6701922; border: 1px solid #f67019; border-radius: 4px; padding: 4px 10px; color: #f67019; min-width: 50px; text-align: center;">gato</span>
+              <span style="background: #acc23622; border: 1px solid #acc236; border-radius: 4px; padding: 4px 10px; color: #acc236; min-width: 50px; text-align: center;">se</span>
+              <span style="background: #e8508b22; border: 1px solid #e8508b; border-radius: 4px; padding: 4px 10px; color: #e8508b; min-width: 50px; text-align: center;">sento</span>
+              <span style="background: #9b59b622; border: 1px solid #9b59b6; border-radius: 4px; padding: 4px 10px; color: #9b59b6; min-width: 50px; text-align: center;">en</span>
+              <span style="background: #27ae6022; border: 1px solid #27ae60; border-radius: 4px; padding: 4px 10px; color: #27ae60; min-width: 50px; text-align: center;">el</span>
+            </div>
+            <p class="fragment fade-in" data-fragment-index="1" style="font-size: 0.65em; color: var(--text-muted); text-align: center; margin-top: 8px;">La secuencia se atiende a si misma (<strong style="color: var(--accent);">self-attention</strong>): cada token mira solo a los anteriores. El grosor indica la relevancia.</p>
+          </div>
+          <!-- Sequential flow -->
+          <div class="fragment fade-in" style="display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 20px; font-size: 0.6em;">
             <div style="background: var(--bg-secondary); border: 1px solid var(--text-muted); border-radius: 8px; padding: 8px 14px; text-align: center;">
               <div style="color: var(--text-primary); font-weight: bold;">Tokens</div>
-              <div style="color: var(--text-muted); font-size: 0.85em;">entrada</div>
+              <div style="color: var(--text-muted); font-size: 0.85em;">representacion actual</div>
             </div>
             <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
             <div style="background: var(--bg-secondary); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 14px; text-align: center;">
-              <div style="color: var(--accent); font-weight: bold;">Embedding</div>
-              <div style="color: var(--text-muted); font-size: 0.85em;">token → vector</div>
-            </div>
-            <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-            <div style="background: var(--bg-secondary); border: 2px solid var(--accent); border-radius: 8px; padding: 8px 14px; text-align: center;">
-              <div style="color: var(--accent); font-weight: bold;">Atencion + MLP</div>
-              <div style="color: var(--text-muted); font-size: 0.85em;">x N capas</div>
+              <div style="color: var(--accent); font-weight: bold;">Atencion</div>
+              <div style="color: var(--text-muted); font-size: 0.85em;">cada token recopila info<br>de los anteriores</div>
             </div>
             <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
             <div style="background: var(--bg-secondary); border: 1px solid var(--accent-secondary); border-radius: 8px; padding: 8px 14px; text-align: center;">
-              <div style="color: var(--accent-secondary); font-weight: bold;">Probabilidades</div>
-              <div style="color: var(--text-muted); font-size: 0.85em;">siguiente token</div>
+              <div style="color: var(--accent-secondary); font-weight: bold;">MLP</div>
+              <div style="color: var(--text-muted); font-size: 0.85em;">transforma cada token<br>por separado</div>
+            </div>
+            <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            <div style="background: var(--bg-secondary); border: 1px solid var(--text-muted); border-radius: 8px; padding: 8px 14px; text-align: center;">
+              <div style="color: var(--text-primary); font-weight: bold;">Tokens</div>
+              <div style="color: var(--text-muted); font-size: 0.85em;">representacion<br>actualizada</div>
             </div>
           </div>
-          <ul style="font-size: 0.75em;">
-            <li class="fragment fade-in">Atencion: cada token puede "ver" a todos los anteriores</li>
-            <li class="fragment fade-in">Sin memoria — misma entrada siempre produce misma distribucion de salida</li>
-          </ul>
-          <p class="fragment fade-in" style="font-size: 0.8em;"><a href="https://bbycroft.net/llm" target="_blank">Visualizacion interactiva de nanoGPT</a></p>
+          <div class="fragment fade-in" style="font-size: 0.7em; color: var(--text-muted); margin-top: 12px; text-align: center;">
+            <p>Atencion + MLP = un <strong style="color: var(--text-primary);">Transformer block</strong>. Un <strong style="color: var(--accent);">Transformer</strong> es este bloque apilado N veces.</p>
+            <ul style="display: inline-block; text-align: left; margin-top: 6px; font-size: 0.9em;">
+              <li>La entrada y salida de cada bloque tienen la misma forma — esto permite apilarlos</li>
+              <li>GPT-2: 48 bloques</li>
+              <li>Modelos modernos: 80-128 bloques</li>
+            </ul>
+          </div>
+          <!-- Token representation before/after -->
+          <div class="fragment fade-in" style="margin-top: 14px; font-size: 0.55em;">
+            <div style="display: flex; gap: var(--spacing-md); align-items: stretch;">
+              <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 10px 12px;">
+                <div style="color: var(--text-muted); font-weight: bold; margin-bottom: 6px;">Antes del bloque</div>
+                <div style="display: flex; gap: 6px;">
+                  <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
+                    <div style="color: #4dc9f6; font-weight: bold;">el</div>
+                    <div style="color: var(--text-muted); font-size: 0.85em;">solo sabe de si mismo</div>
+                  </div>
+                  <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
+                    <div style="color: #f67019; font-weight: bold;">gato</div>
+                    <div style="color: var(--text-muted); font-size: 0.85em;">solo sabe de si mismo</div>
+                  </div>
+                  <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
+                    <div style="color: #e8508b; font-weight: bold;">sento</div>
+                    <div style="color: var(--text-muted); font-size: 0.85em;">solo sabe de si mismo</div>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              </div>
+              <div style="flex: 1; background: var(--bg-secondary); border: 1px solid var(--accent); border-radius: 8px; padding: 10px 12px;">
+                <div style="color: var(--accent); font-weight: bold; margin-bottom: 6px;">Despues del bloque</div>
+                <div style="display: flex; gap: 6px;">
+                  <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
+                    <div style="color: #4dc9f6; font-weight: bold;">el</div>
+                    <div style="color: var(--text-muted); font-size: 0.85em;">sin cambios (nada antes)</div>
+                  </div>
+                  <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
+                    <div style="color: #f67019; font-weight: bold;">gato</div>
+                    <div style="color: var(--text-muted); font-size: 0.85em;">+ contexto de <span style="color: #4dc9f6;">el</span></div>
+                  </div>
+                  <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
+                    <div style="color: #e8508b; font-weight: bold;">sento</div>
+                    <div style="color: var(--text-muted); font-size: 0.85em;">+ contexto de <span style="color: #4dc9f6;">el</span> <span style="color: #f67019;">gato</span> <span style="color: #acc236;">se</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="color: var(--text-muted); margin-top: 8px; text-align: center;">Con cada bloque, los tokens acumulan mas contexto. Despues de N bloques, cada token "sabe" sobre toda la secuencia anterior. <a href="https://bbycroft.net/llm" target="_blank">Ver en vivo</a></p>
+          </div>
           <aside class="notes">
-            El Transformer es la arquitectura especifica que usan todos los LLMs modernos. Fue introducida en el paper "Attention is All You Need" por Google en 2017. La informacion fluye de los tokens de entrada a traves de capas de atencion (que permiten a cada token "ver" a los anteriores en la secuencia) y perceptrones multicapa (MLP). No vamos a entrar en los detalles matematicos — lo importante es que es una funcion matematica con parametros fijos, que transforma tokens de entrada en predicciones de salida. No tiene memoria — es stateless. Misma entrada, misma distribucion de probabilidades de salida. Abrir la visualizacion de bbycroft.net y mostrar como fluye la informacion.
+            La clave del Transformer son estos dos bloques que se repiten. Primero, atencion: cada token mira a los tokens anteriores y decide cuales son relevantes — esto es causal self-attention, donde cada token solo puede ver hacia atras porque al generar el futuro no existe todavia. Segundo, el MLP: cada token pasa por una red feed-forward que transforma su representacion individualmente. Estos dos pasos se apilan N veces (GPT-2 tiene 48 capas, modelos modernos 80-128). Lo importante es que con cada bloque, la representacion de cada token se enriquece. Despues de la primera capa, "sento" sabe un poco sobre "el gato se". Despues de la segunda capa, sabe mas. Al final de las N capas, el ultimo token tiene una representacion que integra informacion de toda la secuencia. Abrir bbycroft.net para ver como las representaciones cambian capa por capa.
+          </aside>
+        </section>
+
+        <!-- Training in action -->
+        <section>
+          <h2>Entrenamiento en accion</h2>
+          <div id="training-demo" style="background: var(--bg-code); border-radius: 8px; padding: 14px 18px; min-height: 280px;"></div>
+          <script src="training-anim.js"></script>
+          <script>
+            initTrainingAnim({ containerId: 'training-demo' });
+          </script>
+          <aside class="notes">
+            Esta animacion muestra como se ve entrenar un modelo en la practica. Se avanza paso a paso: cada step procesa un millon de tokens y ajusta los parametros. El loss baja con cada paso — loss bajo significa mejores predicciones. A la vez, mostramos texto generado por el modelo en cada punto. Al inicio (step 0) los parametros son aleatorios y sale basura total. A step 100 ya aprende las palabras mas frecuentes. A step 420 (~1% del entrenamiento, ~15 minutos en 8x H100) hay coherencia local pero no global. A mitad del entrenamiento el texto es fluido. Al final, el texto es indistinguible de paginas de internet reales. Esto es GPT-2 como referencia: 32,000 steps, ~7 seg/step en 8x H100. Modelos modernos entrenan por mucho mas tiempo con muchos mas datos y GPUs.
           </aside>
         </section>
 
         <!-- Inference / Sampling -->
         <section>
           <h2>Inferencia: generar texto nuevo</h2>
+          <p style="font-size: 0.7em; color: var(--text-muted);">Entrenamiento listo. Ahora, a generar texto token por token.</p>
           <div id="inference-demo" style="background: var(--bg-code); border-radius: 8px; padding: 14px 18px; font-family: var(--font-mono); min-height: 200px;"></div>
           <script src="inference-anim.js"></script>
           <script>
             initInferenceAnim({ containerId: 'inference-demo' });
           </script>
-          <p style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">El sistema es <strong style="color: var(--text-primary);">estocastico</strong>: en cada paso se tira una moneda cargada. Mismo prefijo, distinto resultado cada vez.</p>
+          <p style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">El sistema es <strong style="color: var(--text-primary);">estocastico</strong>: en cada paso se tira una moneda cargada. Mismo prefijo, distinto resultado cada vez. Por eso el boton "regenerar" de ChatGPT da respuestas diferentes.</p>
           <aside class="notes">
             Inferencia es generar texto nuevo del modelo. Empezamos con un prefijo de tokens, lo pasamos por la red, obtenemos probabilidades para el siguiente token, y muestreamos. El token muestreado se agrega al contexto y repetimos. El sistema es estocastico: en cada paso tiramos una moneda cargada. Los tokens con alta probabilidad salen mas seguido, pero no siempre. Esto significa que cada vez que ejecutamos la inferencia, obtenemos un texto diferente. Demostrar con la animacion: generar una oracion, luego regenerar y mostrar que sale otra cosa. Esto no es un bug, es una propiedad fundamental del sistema.
           </aside>

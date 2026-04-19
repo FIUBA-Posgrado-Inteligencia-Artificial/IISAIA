@@ -184,10 +184,10 @@ function initInferenceAnim(opts) {
     }
 
     // Network indicator
-    var networkHtml = '<div style="text-align: center; margin: 8px 0;">' +
-      '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2v8m0 4v8m0-12l-6 6m6-6l6 6" stroke="#8892b0" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>' +
-      '<div style="display: inline-block; background: var(--bg-secondary); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 16px; color: var(--accent); font-size: 0.8em;">Red Neuronal</div>' +
-      '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2v20m0 0l-5-5m5 5l5-5" stroke="#8892b0" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>' +
+    var networkHtml = '<div style="text-align: center; margin: 8px 0; display: flex; flex-direction: column; align-items: center; gap: 0;">' +
+      '<svg width="24" height="16" viewBox="0 0 24 16"><path d="M12 0v12m0 0l-5-5m5 5l5-5" stroke="#8892b0" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>' +
+      '<div style="background: var(--bg-secondary); border: 1px solid var(--accent); border-radius: 6px; padding: 4px 16px; color: var(--accent); font-size: 0.8em;">Red Neuronal</div>' +
+      '<svg width="24" height="16" viewBox="0 0 24 16"><path d="M12 0v12m0 0l-5-5m5 5l5-5" stroke="#8892b0" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>' +
       '</div>';
 
     // Buttons
