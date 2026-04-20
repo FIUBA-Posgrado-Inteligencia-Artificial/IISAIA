@@ -1392,6 +1392,58 @@
           </aside>
         </section>
 
+        <!-- VRAM requirements -->
+        <section>
+          <h2>Cuanta memoria necesita un modelo?</h2>
+          <p style="font-size: 0.8em; color: var(--text-muted);">Cada parametro ocupa bytes en VRAM. La cuenta es directa.</p>
+          <div style="background: var(--bg-code); border-radius: 8px; padding: 12px 16px; font-family: var(--font-mono); font-size: 0.8em; margin-top: 12px;">
+            <span style="color: var(--text-muted);">VRAM =</span> <span style="color: var(--accent);">parametros</span> <span style="color: var(--text-muted);">x</span> <span style="color: var(--accent-secondary);">bytes por parametro</span>
+          </div>
+          <div style="margin-top: 16px; font-size: 0.65em;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid var(--text-muted);">
+                <th style="padding: 6px; text-align: left; color: var(--text-muted);">Modelo</th>
+                <th style="padding: 6px; text-align: right; color: var(--text-muted);">Params</th>
+                <th style="padding: 6px; text-align: right; color: var(--text-muted);">BF16 (2B)</th>
+                <th style="padding: 6px; text-align: right; color: var(--text-muted);">FP8 (1B)</th>
+                <th style="padding: 6px; text-align: left; color: var(--text-muted);">Donde corre</th>
+              </tr>
+              <tr>
+                <td style="padding: 6px;">Llama 3.2 3B</td>
+                <td style="padding: 6px; text-align: right; color: var(--accent);">3B</td>
+                <td style="padding: 6px; text-align: right;">6 GB</td>
+                <td style="padding: 6px; text-align: right;">3 GB</td>
+                <td style="padding: 6px; color: var(--code-text);">Tu celular</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px;">Llama 3.1 8B</td>
+                <td style="padding: 6px; text-align: right; color: var(--accent);">8B</td>
+                <td style="padding: 6px; text-align: right;">16 GB</td>
+                <td style="padding: 6px; text-align: right;">8 GB</td>
+                <td style="padding: 6px; color: var(--code-text);">Tu laptop (GPU gaming)</td>
+              </tr>
+              <tr class="fragment fade-in">
+                <td style="padding: 6px;">Llama 3.1 70B</td>
+                <td style="padding: 6px; text-align: right; color: var(--accent);">70B</td>
+                <td style="padding: 6px; text-align: right;">140 GB</td>
+                <td style="padding: 6px; text-align: right;">70 GB</td>
+                <td style="padding: 6px; color: var(--code-text);">1 nodo (2x A100)</td>
+              </tr>
+              <tr class="fragment fade-in" style="background: var(--accent); background: rgba(100,255,218,0.08);">
+                <td style="padding: 6px; font-weight: bold;">Llama 3.1 405B</td>
+                <td style="padding: 6px; text-align: right; color: var(--accent); font-weight: bold;">405B</td>
+                <td style="padding: 6px; text-align: right; font-weight: bold;">810 GB</td>
+                <td style="padding: 6px; text-align: right; font-weight: bold;">405 GB</td>
+                <td style="padding: 6px; color: var(--accent); font-weight: bold;">8x H100 (nuestro pod)</td>
+              </tr>
+            </table>
+          </div>
+          <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">Cuantizar (BF16 &rarr; FP8) reduce la precision pero corta la memoria a la mitad. Por eso nuestro pod usa la version FP8.</p>
+          <aside class="notes">
+            Cada parametro del modelo necesita estar en la memoria de la GPU para hacer inferencia. En formato BF16 (el formato nativo de entrenamiento), cada parametro ocupa 2 bytes. La cuenta es directa: 405 mil millones de parametros por 2 bytes = 810 GB de VRAM. Una GPU H100 tiene 80 GB. No alcanza con una — necesitas al menos 8 para que quepa el modelo repartido entre todas (tensor parallelism). Por eso cuantizar es tan importante: en FP8 cada parametro ocupa 1 byte en vez de 2, reduciendo a 405 GB. Perdemos un poco de precision numerica pero en la practica la calidad es casi identica. Meta publico una version oficial en FP8, que es la que estamos usando en nuestro pod con 8x H100 — 640 GB de VRAM total, suficiente para los 405 GB del modelo mas el overhead de KV cache y el contexto. Los modelos mas chicos de la familia Llama caben en hardware mucho mas accesible: el 8B entra en una GPU gaming comun, y el 3B puede correr hasta en un celular moderno.
+          </aside>
+        </section>
+
         <!-- Base model capabilities -->
         <section>
           <h2>Conocimiento del modelo base</h2>
