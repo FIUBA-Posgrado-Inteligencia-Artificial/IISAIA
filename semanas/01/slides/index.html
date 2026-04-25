@@ -256,7 +256,7 @@
       <section class="title-slide">
         <h1>Semana 1</h1>
         <p class="subtitle">Funcionamiento de LLMs</p>
-        <p class="muted">Introduccion al desarrollo de software asistido por IA</p>
+        <p class="muted">Introducción al desarrollo de software asistido por IA</p>
         <aside class="notes">
           Clase basada en "Deep Dive into How LLMs Work" de Andrej Karpathy (~3.5h). Vamos a recorrer todo el pipeline de como se construye algo como ChatGPT: desde los datos crudos de internet hasta los modelos de razonamiento. La idea es generar modelos mentales para entender que es esta herramienta, que hace bien, que hace mal, y cuales son sus limitaciones.
         </aside>
@@ -283,7 +283,7 @@
           </div>
           <script>
           (function() {
-            var text = 'Los modelos de lenguaje son sistemas de prediccion de tokens entrenados con texto de internet. Detras de esta respuesta hay un pipeline de tres etapas...';
+            var text = 'Los modelos de lenguaje son sistemas de predicción de tokens entrenados con texto de internet. Detras de esta respuesta hay un pipeline de tres etapas...';
             var el, idx = 0, timer;
             if (typeof Reveal !== 'undefined') {
               Reveal.on('fragmentshown', function(e) {
@@ -306,11 +306,11 @@
           })();
           </script>
           <div class="fragment fade-in" data-fragment-index="3" style="margin-top: 24px; text-align: center;">
-            <p style="font-size: 1em; color: var(--accent);">Que hay detras de este cuadro de texto?</p>
+            <p style="font-size: 1em; color: var(--accent);">Que hay detrás de este cuadro de texto?</p>
             <p style="font-size: 0.75em; color: var(--text-muted);">Que son estas palabras que aparecen? Como se generan? Con que estas hablando?</p>
           </div>
           <aside class="notes">
-            Arrancar con esto en pantalla. Dejar que el texto se vaya tipeando solo. Despues de unos segundos, hacer click para mostrar las preguntas. Esto enmarca toda la clase: vamos a abrir la caja negra y entender que hay detras. Las preguntas son las de Karpathy: que hay detras de este cuadro de texto? Que son estas palabras? Como se generan? Con que estas hablando exactamente? Al final de la clase van a poder responder todo esto.
+            Arrancar con esto en pantalla. Dejar que el texto se vaya tipeando solo. Después de unos segundos, hacer click para mostrar las preguntas. Esto enmarca toda la clase: vamos a abrir la caja negra y entender que hay detrás. Las preguntas son las de Karpathy: que hay detrás de este cuadro de texto? Que son estas palabras? Como se generan? Con que estas hablando exactamente? Al final de la clase van a poder responder todo esto.
           </aside>
         </section>
 
@@ -322,7 +322,7 @@
             <div class="pipe-node fragment" data-fragment-index="0" data-group="pre">
               <div class="pipe-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg></div>
               <div class="pipe-label">Internet</div>
-              <div class="pipe-sub">miles de millones de paginas</div>
+              <div class="pipe-sub">miles de millones de páginas</div>
             </div>
             <div class="pipe-arrow fragment" data-fragment-index="1"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
             <div class="pipe-node fragment" data-fragment-index="1" data-group="pre">
@@ -334,7 +334,7 @@
             <div class="pipe-node fragment" data-fragment-index="2" data-group="pre">
               <div class="pipe-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="6" height="12" rx="1"/><rect x="9" y="3" width="6" height="18" rx="1"/><rect x="16" y="9" width="6" height="6" rx="1"/></svg></div>
               <div class="pipe-label">Tokens</div>
-              <div class="pipe-sub">texto a numeros</div>
+              <div class="pipe-sub">texto a números</div>
             </div>
             <div class="pipe-arrow fragment" data-fragment-index="3"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
             <div class="pipe-node fragment" data-fragment-index="3" data-group="pre">
@@ -356,8 +356,8 @@
             <div class="pipe-arrow fragment" data-fragment-index="7"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
             <div class="pipe-node fragment" data-fragment-index="6" data-group="post">
               <div class="pipe-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 9v4m0 4h.01"/><circle cx="12" cy="12" r="10"/></svg></div>
-              <div class="pipe-label">Alucinaciones</div>
-              <div class="pipe-sub">limites y herramientas</div>
+              <div class="pipe-label">Alucinaciónes</div>
+              <div class="pipe-sub">límites y herramientas</div>
             </div>
             <div class="pipe-arrow fragment" data-fragment-index="6"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
             <div class="pipe-node fragment" data-fragment-index="5" data-group="post">
@@ -408,7 +408,7 @@
           </script>
 
           <aside class="notes">
-            Ir avanzando con flechas o tap. Cada paso enciende el siguiente nodo del pipeline. Contar la historia: "Empezamos descargando internet. Filtramos el 93%. Tokenizamos. Entrenamos prediciendo el siguiente token. Sale un modelo base. Le ensenamos a conversar con SFT. Investigamos las alucinaciones y le damos herramientas. Y con RL aprende a pensar." Al final, dos clicks mas: primero se ilumina la fila de arriba como "Pre-training" (la parte cara, meses, miles de GPUs). Despues la fila de abajo como "Post-training" (mas barato pero igual de importante). Esas dos fases son la estructura del resto de la clase.
+            Ir avanzando con flechas o tap. Cada paso enciende el siguiente nodo del pipeline. Contar la historia: "Empezamos descargando internet. Filtramos el 93%. Tokenizamos. Entrenamos prediciendo el siguiente token. Sale un modelo base. Le ensenamos a conversar con SFT. Investigamos las alucinaciones y le damos herramientas. Y con RL aprende a pensar." Al final, dos clicks más: primero se ilumina la fila de arriba como "Pre-training" (la parte cara, meses, miles de GPUs). Después la fila de abajo como "Post-training" (más barato pero igual de importante). Esas dos fases son la estructura del resto de la clase.
           </aside>
         </section>
 
@@ -443,11 +443,11 @@
               <p style="color: var(--text-muted); margin-top: 8px;">Rastreando la web desde 2007</p>
               <div style="margin-top: 16px;">
                 <div style="color: var(--accent); font-size: 1.4em; font-weight: bold; font-family: var(--font-mono);">2.7B</div>
-                <div style="color: var(--text-muted);">paginas indexadas</div>
+                <div style="color: var(--text-muted);">páginas indexadas</div>
               </div>
               <div style="margin-top: 12px;">
                 <div style="color: var(--accent-secondary); font-size: 1.1em; font-weight: bold; font-family: var(--font-mono);">HTML crudo</div>
-                <div style="color: var(--text-muted);">de cada pagina</div>
+                <div style="color: var(--text-muted);">de cada página</div>
               </div>
               <p style="color: var(--text-primary); margin-top: 16px; font-size: 0.9em;">Punto de partida de todos los datasets de LLMs</p>
             </div>
@@ -619,7 +619,7 @@
           </script>
 
           <aside class="notes">
-            La animacion muestra como funciona un crawler: empieza con 3 paginas semilla (nodos verdes), sigue los links de cada pagina (lineas), y va descubriendo paginas nuevas (nodos azules). Cada nodo es una pagina indexada. En la realidad esto pasa a una escala de miles de millones. Common Crawl es una organizacion sin fines de lucro que hace esto desde 2007. Tiene crawlers corriendo constantemente, indexando paginas y siguiendo links. A 2024, han indexado 2.7 mil millones de paginas web. Los datos son completamente abiertos y gratuitos, almacenados en Amazon S3. Lo que guardan es el HTML crudo y completo de cada pagina. Ningun laboratorio de IA entrena directamente con estos datos crudos — son demasiado sucios. Cada empresa toma esto como punto de partida y aplica su propio pipeline de filtrado.
+            La animación muestra como funciona un crawler: empieza con 3 páginas semilla (nodos verdes), sigue los links de cada página (líneas), y va descubriendo páginas nuevas (nodos azules). Cada nodo es una página indexada. En la realidad esto pasa a una escala de miles de millones. Common Crawl es una organización sin fines de lucro que hace esto desde 2007. Tiene crawlers corriendo constantemente, indexando páginas y siguiendo links. A 2024, han indexado 2.7 mil millones de páginas web. Los datos son completamente abiertos y gratuitos, almacenados en Amazon S3. Lo que guardan es el HTML crudo y completo de cada página. Ningun laboratorio de IA entrena directamente con estos datos crudos — son demasiado sucios. Cada empresa toma esto como punto de partida y aplica su propio pipeline de filtrado.
           </aside>
         </section>
 
@@ -691,7 +691,7 @@
           </script>
 
           <aside class="notes">
-            Esto es lo que Common Crawl guarda: un header en formato WARC (Web ARChive, un estandar ISO para archivar contenido web) con metadata, y el HTML crudo completo. Al principio todo se ve igual — es un bloque de HTML sin distincion. Dejar que los estudiantes lo miren un momento. Cuando avanzo, se ve el contraste: la mayoria es ruido (scripts, CSS, navegacion, ads, cookies, footer) y se tacha. El texto util es una fraccion minima. Sin filtrado, le dariamos a la red neuronal mayormente basura. Esto motiva el pipeline de FineWeb.
+            Esto es lo que Common Crawl guarda: un header en formato WARC (Web ARChive, un estándar ISO para archivar contenido web) con metadata, y el HTML crudo completo. Al principio todo se ve igual — es un bloque de HTML sin distinción. Dejar que los estudiantes lo miren un momento. Cuando avanzo, se ve el contraste: la mayoria es ruido (scripts, CSS, navegación, ads, cookies, footer) y se tacha. El texto útiles una fracción minima. Sin filtrado, le dariamos a la red neuronal mayormente basura. Esto motiva el pipeline de FineWeb.
           </aside>
         </section>
 
@@ -717,15 +717,15 @@
             <div style="display: flex; justify-content: center; align-items: center; gap: 0;">
               <span class="pipeline-box">Filtrado de URLs<span class="tooltip">Eliminar spam, malware, sitios adultos</span></span>
               <span class="pipeline-arrow"><svg viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="#8892b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="pipeline-box">Extraccion de texto<span class="tooltip">trafilatura: extraer texto limpio del HTML</span></span>
+              <span class="pipeline-box">Extracción de texto<span class="tooltip">trafilatura: extraer texto limpio del HTML</span></span>
               <span class="pipeline-arrow"><svg viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="#8892b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="pipeline-box">Filtrado por idioma<span class="tooltip">fastText classifier, score > 0.65</span></span>
               <span class="pipeline-arrow"><svg viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="#8892b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="pipeline-box">Filtros de calidad<span class="tooltip">Heuristicas Gopher (largo, repeticion, etc.)</span></span>
+              <span class="pipeline-box">Filtros de calidad<span class="tooltip">Heuristicas Gopher (largo, repetición, etc.)</span></span>
             </div>
             <svg width="24" height="28" style="align-self: flex-end; margin-right: calc(50% - 250px);"><path d="M12 2v20m0 0l-5-5m5 5l5-5" stroke="#8892b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <div style="display: flex; justify-content: center; align-items: center; gap: 0;">
-              <span class="pipeline-box">Remocion de PII<span class="tooltip">Eliminar emails, telefonos, direcciones IP</span></span>
+              <span class="pipeline-box">Remoción de PII<span class="tooltip">Eliminar emails, telefonos, direcciones IP</span></span>
               <span class="pipeline-arrow"><svg viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="#8892b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span class="pipeline-box">Filtros custom<span class="tooltip">Reglas propias de FineWeb</span></span>
               <span class="pipeline-arrow"><svg viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="#8892b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -735,7 +735,7 @@
             </div>
           </div>
           <aside class="notes">
-            FineWeb es un dataset de HuggingFace con 15 billones de tokens extraidos de 96 snapshots de Common Crawl. Empieza con ~200 mil millones de paginas y despues de todo el pipeline de filtrado se queda con solo el 7%. Se descarta el 93%. Cada paso tiene su razon: URL filtering elimina spam y malware. Text extraction saca el texto limpio del HTML (usando trafilatura). Language filtering usa un clasificador fastText para quedarse con paginas que tienen >65% de un idioma. Los filtros de calidad (del paper Gopher de DeepMind) eliminan documentos demasiado cortos, repetitivos, etc. PII removal saca emails, telefonos, IPs. MinHash deduplication elimina documentos casi identicos. Mostrar la pagina de FineWeb en vivo.
+            FineWeb es un dataset de HuggingFace con 15 billones de tokens extraidos de 96 snapshots de Common Crawl. Empieza con ~200 mil millones de páginas y después de todo el pipeline de filtrado se queda con solo el 7%. Se descarta el 93%. Cada paso tiene su razón: URL filtering elimina spam y malware. Text extraction saca el texto limpio del HTML (usando trafilatura). Language filtering usa un clasificador fastText para quedarse con páginas que tienen >65% de un idioma. Los filtros de calidad (del paper Gopher de DeepMind) eliminan documentos demasiado cortos, repetitivos, etc. PII removal saca emails, telefonos, IPs. MinHash deduplication elimina documentos casi identicos. Mostrar la página de FineWeb en vivo.
           </aside>
         </section>
 
@@ -795,7 +795,7 @@
             </div>
           </div>
           <aside class="notes">
-            Asi se ve un registro de FineWeb. A la izquierda, la pagina web como se ve en un navegador. Abajo, el HTML crudo con las partes descartadas tachadas (nav, sidebar, footer). A la derecha, el registro limpio que queda: solo texto con metadata. Esto es lo que la red neuronal va a ver durante el entrenamiento. Todo el contenido de internet se reduce a texto plano limpio. Mencionar: FineWeb tiene 15 billones de estos registros. Cada uno es un fragmento de alguna pagina web, filtrado y limpio.
+            Asi se ve un registro de FineWeb. A la izquierda, la página web como se ve en un navegador. Abajo, el HTML crudo con las partes descartadas tachadas (nav, sidebar, footer). A la derecha, el registro limpio que queda: solo texto con metadata. Esto es lo que la red neuronal va a ver durante el entrenamiento. Todo el contenido de internet se reduce a texto plano limpio. Mencionar: FineWeb tiene 15 billones de estos registros. Cada uno es un fragmento de alguna página web, filtrado y limpio.
           </aside>
         </section>
 
@@ -805,15 +805,15 @@
       <section>
 
         <section class="section-divider">
-          <h2>Tokenizacion</h2>
+          <h2>Tokenización</h2>
           <aside class="notes">
-            Antes de alimentar texto a una red neuronal, necesitamos convertirlo en numeros. Las redes neuronales esperan secuencias de simbolos de un conjunto finito. La tokenizacion es el proceso de convertir texto en esos simbolos.
+            Antes de alimentar texto a una red neuronal, necesitamos convertirlo en números. Las redes neuronales esperan secuencias de simbolos de un conjunto finito. La tokenización es el proceso de convertir texto en esos simbolos.
           </aside>
         </section>
 
         <!-- Tokenizer animation (DO NOT TOUCH the animation code/logic) -->
         <section>
-          <h2 id="tok-title" style="opacity: 0; transition: opacity 0.5s;">Tokenizacion</h2>
+          <h2 id="tok-title" style="opacity: 0; transition: opacity 0.5s;">Tokenización</h2>
 
           <div id="tok-anim" style="background: var(--bg-code); border-radius: 8px; padding: 16px 20px; font-family: var(--font-mono); min-height: 180px; display: flex; flex-direction: column; justify-content: center;">
             <div id="tok-label" style="font-size: 0.5em; color: var(--text-muted); margin-bottom: 10px;"></div>
@@ -828,7 +828,7 @@
 
           <div id="tok-concepts" style="opacity: 0; transition: opacity 0.5s; margin-top: 12px;">
             <ul style="font-size: 0.75em;">
-              <li>Este proceso se llama <strong style="color: var(--accent);">tokenizacion</strong>: segmentar texto en subpalabras (tokens)</li>
+              <li>Este proceso se llama <strong style="color: var(--accent);">tokenización</strong>: segmentar texto en subpalabras (tokens)</li>
               <li>GPT-4 usa un vocabulario de ~100.000 tokens</li>
               <li><a href="https://tiktokenizer.vercel.app/?model=cl100k_base" target="_blank">Tiktokenizer</a></li>
             </ul>
@@ -845,7 +845,7 @@
           </script>
 
           <aside class="notes">
-            La animacion arranca sin titulo para que los estudiantes vean el proceso antes de ponerle nombre. Primero muestra texto plano, luego cada caracter con su valor UTF-8, despues como BPE agrupa bytes frecuentes en tokens. Al final revela que esto se llama tokenizacion. El vocabulario es fijo — GPT-4 usa 100,277 tokens. El dataset de FineWeb tiene 15 billones de tokens. Son los atomos de texto para la red neuronal. Usar Tiktokenizer en vivo para que experimenten: "hello world" son 2 tokens, pero "Hello World" son 3. Es case-sensitive. Probar con nombres en espanol.
+            La animación arranca sin titulo para que los estudiantes vean el proceso antes de ponerle nombre. Primero muestra texto plano, luego cada carácter con su valor UTF-8, después como BPE agrupa bytes frecuentes en tokens. Al final revela que esto se llama tokenización. El vocabulario es fijo — GPT-4 usa 100,277 tokens. El dataset de FineWeb tiene 15 billones de tokens. Son los atomos de texto para la red neuronal. Usar Tiktokenizer en vivo para que experimenten: "hello world" son 2 tokens, pero "Hello World" son 3. Es case-sensitive. Probar con nombres en español.
           </aside>
         </section>
 
@@ -857,7 +857,7 @@
         <section class="section-divider">
           <h2>Entrenamiento de la Red Neuronal</h2>
           <aside class="notes">
-            Ahora que tenemos una secuencia gigante de tokens, vamos a entrenar una red neuronal para que aprenda los patrones estadisticos de como estos tokens se siguen unos a otros.
+            Ahora que tenemos una secuencia gigante de tokens, vamos a entrenar una red neuronal para que aprenda los patrones estadísticos de como estos tokens se siguen unos a otros.
           </aside>
         </section>
 
@@ -874,11 +874,11 @@
               <svg width="36" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
               <div style="background: var(--bg-secondary); border: 2px solid var(--text-muted); border-radius: 8px; padding: 10px 18px; text-align: center;">
                 <div style="color: var(--text-primary); font-weight: bold;">Red Neuronal</div>
-                <div style="color: var(--text-muted); font-size: 0.85em;">parametros ajustables</div>
+                <div style="color: var(--text-muted); font-size: 0.85em;">parámetros ajustables</div>
               </div>
               <svg width="36" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
               <div style="background: var(--bg-secondary); border: 1px solid var(--accent-secondary); border-radius: 8px; padding: 10px 18px; text-align: center;">
-                <div style="color: var(--accent-secondary); font-weight: bold;">Prediccion</div>
+                <div style="color: var(--accent-secondary); font-weight: bold;">Predicción</div>
                 <div style="color: var(--text-muted); font-size: 0.85em;">respuesta generada</div>
               </div>
             </div>
@@ -892,7 +892,7 @@
                 <div style="color: var(--text-muted); font-size: 0.9em;">vs</div>
               </div>
               <div style="background: var(--bg-secondary); border: 1px solid var(--accent-secondary); border-radius: 8px; padding: 10px 18px; text-align: center;">
-                <div style="color: var(--accent-secondary); font-weight: bold;">Prediccion</div>
+                <div style="color: var(--accent-secondary); font-weight: bold;">Predicción</div>
               </div>
               <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
               <div style="background: var(--bg-secondary); border: 1px solid #e74c3c; border-radius: 8px; padding: 10px 18px; text-align: center;">
@@ -904,13 +904,13 @@
             <div class="fragment fade-in" style="text-align: center; margin-top: 12px; font-size: 0.6em;">
               <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--bg-secondary); border: 1px dashed var(--text-muted); border-radius: 8px; padding: 8px 16px;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                <span style="color: var(--text-primary);">Ajustar parametros para reducir el error. Repetir millones de veces.</span>
+                <span style="color: var(--text-primary);">Ajustar parámetros para reducir el error. Repetir millones de veces.</span>
               </div>
             </div>
           </div>
           <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); margin-top: 16px;">La pregunta clave: <strong style="color: var(--text-primary);">de donde sacamos las respuestas correctas?</strong></p>
           <aside class="notes">
-            Antes de meternos en los detalles del entrenamiento de LLMs, necesitamos entender que se necesita para entrenar cualquier red neuronal. Tres ingredientes: 1) Una entrada — datos que la red va a procesar. 2) Una respuesta correcta (ground truth) — lo que queremos que la red aprenda a predecir. 3) Una medida de error (loss) — un numero que dice que tan lejos estuvo la prediccion de la respuesta correcta. El proceso de entrenamiento es un loop: pasar la entrada, obtener la prediccion, compararla con la respuesta correcta, calcular el error, y ajustar los parametros de la red para reducir ese error. Esto se repite millones de veces con diferentes datos. La pregunta clave para LLMs es: de donde sacamos millones de respuestas correctas?
+            Antes de meternos en los detalles del entrenamiento de LLMs, necesitamos entender que se necesita para entrenar cualquier red neuronal. Tres ingredientes: 1) Una entrada — datos que la red va a procesar. 2) Una respuesta correcta (ground truth) — lo que queremos que la red aprenda a predecir. 3) Una medida de error (loss) — un número que dice que tan lejos estuvo la predicción de la respuesta correcta. El proceso de entrenamiento es un loop: pasar la entrada, obtener la predicción, compararla con la respuesta correcta, calcular el error, y ajustar los parámetros de la red para reducir ese error. Esto se repite millones de veces con diferentes datos. La pregunta clave para LLMs es: de donde sacamos millones de respuestas correctas?
           </aside>
         </section>
 
@@ -964,13 +964,13 @@
           </div>
           <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); margin-top: 16px;">Esto permite entrenar con billones de ejemplos sin anotar nada a mano</p>
           <aside class="notes">
-            Antes de ver como funciona el entrenamiento, aclaremos algo clave. En aprendizaje supervisado clasico (como clasificar imagenes de gatos vs perros con una CNN), humanos tienen que etiquetar cada imagen manualmente. Esto es caro y lento — ImageNet necesito miles de personas para etiquetar 14 millones de imagenes. El truco de los LLMs es que usan aprendizaje auto-supervisado: la "etiqueta" es simplemente el siguiente token en la secuencia. Si el texto dice "el gato se sento", podemos tomar "el gato se" como entrada y "sento" como la respuesta correcta. Nadie tuvo que etiquetar nada — las etiquetas son gratis porque vienen del propio texto. Esto es lo que permite escalar a billones de ejemplos de entrenamiento.
+            Antes de ver como funciona el entrenamiento, aclaremos algo clave. En aprendizaje supervisado clasico (como clasificar imágenes de gatos vs perros con una CNN), humanos tienen que etiquetar cada imagen manualmente. Esto es caro y lento — ImageNet necesito miles de personas para etiquetar 14 millones de imágenes. El truco de los LLMs es que usan aprendizaje auto-supervisado: la "etiqueta" es simplemente el siguiente token en la secuencia. Si el texto dice "el gato se sento", podemos tomar "el gato se" como entrada y "sento" como la respuesta correcta. Nadie tuvo que etiquetar nada — las etiquetas son gratis porque vienen del propio texto. Esto es lo que permite escalar a billones de ejemplos de entrenamiento.
           </aside>
         </section>
 
         <!-- Next-token prediction -->
         <section>
-          <h2>Prediccion del siguiente token</h2>
+          <h2>Predicción del siguiente token</h2>
           <div style="font-size: 0.75em;">
             <p>La red toma una ventana de tokens y predice el siguiente:</p>
             <div style="display: flex; align-items: center; gap: 12px; margin: 16px 0;" class="fragment fade-in">
@@ -1009,7 +1009,7 @@
                 <div style="color: var(--text-muted); font-size: 0.75em;">(viene del dataset)</div>
               </div>
               <span style="color: var(--text-muted);">&#8594;</span>
-              <div style="color: var(--text-primary);">Ajustar parametros para que <span style="color: var(--accent);"> en</span> tenga mas probabilidad</div>
+              <div style="color: var(--text-primary);">Ajustar parámetros para que <span style="color: var(--accent);"> en</span> tenga más probabilidad</div>
             </div>
             <!-- Animated update trigger -->
             <div class="fragment fade-in" id="bar-update-trigger" style="margin-top: 10px; text-align: center; font-size: 0.85em; color: var(--text-muted);">
@@ -1045,7 +1045,7 @@
           });
           </script>
           <aside class="notes">
-            Asi funciona el entrenamiento: tomamos una ventana de tokens del dataset (puede ser de 0 a 8000 tokens), la pasamos por la red neuronal, y obtenemos una distribucion de probabilidad sobre todos los tokens del vocabulario. La red dice: "creo que el siguiente token es 'single' con 12% de probabilidad, 'post' con 3%, etc." Sabemos cual es el token correcto porque lo sacamos del dataset. Si el token correcto tenia poca probabilidad, ajustamos los parametros de la red para que le de mas probabilidad. Al avanzar se ve la animacion: "single" sube de 12% a 18%, las demas bajan. Esto se repite millones de veces con diferentes ventanas.
+            Asi funciona el entrenamiento: tomamos una ventana de tokens del dataset (puede ser de 0 a 8000 tokens), la pasamos por la red neuronal, y obtenemos una distribución de probabilidad sobre todos los tokens del vocabulario. La red dice: "creo que el siguiente token es 'single' con 12% de probabilidad, 'post' con 3%, etc." Sabemos cual es el token correcto porque lo sacamos del dataset. Si el token correcto tenía poca probabilidad, ajustamos los parámetros de la red para que le de más probabilidad. Al avanzar se ve la animación: "single" sube de 12% a 18%, las demás bajan. Esto se repite millones de veces con diferentes ventanas.
           </aside>
         </section>
 
@@ -1056,10 +1056,10 @@
             <!-- Left: what parameters are -->
             <div style="flex: 1; font-size: 0.75em;">
               <ul>
-                <li>La red es una funcion matematica con millones de numeros ajustables: <strong>parametros</strong></li>
+                <li>La red es una función matemática con millones de números ajustables: <strong>parámetros</strong></li>
                 <li class="fragment fade-in">Al inicio son aleatorios (predicciones basura)</li>
                 <li class="fragment fade-in">Con cada paso de entrenamiento mejoran un poco</li>
-                <li class="fragment fade-in">Al final, los parametros contienen una compresion estadistica del dataset</li>
+                <li class="fragment fade-in">Al final, los parámetros contienen una compresión estadística del dataset</li>
               </ul>
             </div>
             <!-- Right: scale -->
@@ -1077,7 +1077,7 @@
                     <div style="color: var(--accent-secondary); font-weight: bold;">405.000M</div>
                   </div>
                 </div>
-                <div style="color: var(--text-muted); font-size: 0.9em;">Misma idea, 250x mas parametros</div>
+                <div style="color: var(--text-muted); font-size: 0.9em;">Misma idea, 250x más parámetros</div>
               </div>
             </div>
           </div>
@@ -1097,13 +1097,13 @@
             </div>
           </div>
           <aside class="notes">
-            La red neuronal que hace la prediccion tiene millones o miles de millones de numeros ajustables llamados parametros. Piensen en ellos como perillas: al inicio estan en posiciones aleatorias y las predicciones son basura. Con cada paso de entrenamiento se ajustan un poquito y las predicciones mejoran. Al final del entrenamiento, esos parametros contienen una compresion estadistica de todo el dataset — los patrones de como los tokens se siguen unos a otros. GPT-2 tenia 1.600 millones de parametros; Llama 3 tiene 405.000 millones. Misma idea fundamental, 250 veces mas grande. La arquitectura especifica se llama Transformer, introducida en 2017. Lo importante: es stateless (sin memoria). No recuerda conversaciones anteriores. Misma entrada produce la misma distribucion de salida. Abrir bbycroft.net para que vean como fluye la informacion de tokens a predicciones a traves de las capas.
+            La red neuronal que hace la predicción tiene millones o miles de millones de números ajustables llamados parámetros. Piensen en ellos como perillas: al inicio están en posiciones aleatorias y las predicciones son basura. Con cada paso de entrenamiento se ajustan un poquito y las predicciones mejoran. Al final del entrenamiento, esos parámetros contienen una compresión estadística de todo el dataset — los patrones de como los tokens se siguen unos a otros. GPT-2 tenía 1.600 millones de parámetros; Llama 3 tiene 405.000 millones. Misma idea fundamental, 250 veces más grande. La arquitectura específica se llama Transformer, introducida en 2017. Lo importante: es stateless (sin memoria). No recuerda conversaciones anteriores. Misma entrada produce la misma distribución de salida. Abrir bbycroft.net para que vean como fluye la información de tokens a predicciones a través de las capas.
           </aside>
         </section>
 
         <!-- Attention + MLP intuition -->
         <section>
-          <h2>Atencion: que tokens importan?</h2>
+          <h2>Atención: que tokens importan?</h2>
           <p style="font-size: 0.7em; color: var(--text-muted);">Para predecir el siguiente token, no todos los anteriores son igual de relevantes</p>
           <!-- Attention visualization: causal — each token attends to previous ones only -->
           <div style="margin-top: 16px;">
@@ -1143,11 +1143,11 @@
           <div class="fragment fade-in" style="display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 20px; font-size: 0.6em;">
             <div style="background: var(--bg-secondary); border: 1px solid var(--text-muted); border-radius: 8px; padding: 8px 14px; text-align: center;">
               <div style="color: var(--text-primary); font-weight: bold;">Tokens</div>
-              <div style="color: var(--text-muted); font-size: 0.85em;">representacion actual</div>
+              <div style="color: var(--text-muted); font-size: 0.85em;">representación actual</div>
             </div>
             <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
             <div style="background: var(--bg-secondary); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 14px; text-align: center;">
-              <div style="color: var(--accent); font-weight: bold;">Atencion</div>
+              <div style="color: var(--accent); font-weight: bold;">Atención</div>
               <div style="color: var(--text-muted); font-size: 0.85em;">cada token recopila info<br>de los anteriores</div>
             </div>
             <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
@@ -1158,11 +1158,11 @@
             <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
             <div style="background: var(--bg-secondary); border: 1px solid var(--text-muted); border-radius: 8px; padding: 8px 14px; text-align: center;">
               <div style="color: var(--text-primary); font-weight: bold;">Tokens</div>
-              <div style="color: var(--text-muted); font-size: 0.85em;">representacion<br>actualizada</div>
+              <div style="color: var(--text-muted); font-size: 0.85em;">representación<br>actualizada</div>
             </div>
           </div>
           <div class="fragment fade-in" style="font-size: 0.7em; color: var(--text-muted); margin-top: 12px; text-align: center;">
-            <p>Atencion + MLP = un <strong style="color: var(--text-primary);">Transformer block</strong>. Un <strong style="color: var(--accent);">Transformer</strong> es este bloque apilado N veces.</p>
+            <p>Atención + MLP = un <strong style="color: var(--text-primary);">Transformer block</strong>. Un <strong style="color: var(--accent);">Transformer</strong> es este bloque apilado N veces.</p>
             <ul style="display: inline-block; text-align: left; margin-top: 6px; font-size: 0.9em;">
               <li>La entrada y salida de cada bloque tienen la misma forma — esto permite apilarlos</li>
               <li>GPT-2: 48 bloques</li>
@@ -1193,7 +1193,7 @@
                 <svg width="28" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
               </div>
               <div style="flex: 1; background: var(--bg-secondary); border: 1px solid var(--accent); border-radius: 8px; padding: 10px 12px;">
-                <div style="color: var(--accent); font-weight: bold; margin-bottom: 6px;">Despues del bloque</div>
+                <div style="color: var(--accent); font-weight: bold; margin-bottom: 6px;">Después del bloque</div>
                 <div style="display: flex; gap: 6px;">
                   <div style="flex: 1; background: var(--bg-code); border-radius: 4px; padding: 6px; text-align: center;">
                     <div style="color: #4dc9f6; font-weight: bold;">el</div>
@@ -1210,23 +1210,23 @@
                 </div>
               </div>
             </div>
-            <p style="color: var(--text-muted); margin-top: 8px; text-align: center;">Con cada bloque, los tokens acumulan mas contexto. Despues de N bloques, cada token "sabe" sobre toda la secuencia anterior. <a href="https://bbycroft.net/llm" target="_blank">Ver en vivo</a></p>
+            <p style="color: var(--text-muted); margin-top: 8px; text-align: center;">Con cada bloque, los tokens acumulan más contexto. Después de N bloques, cada token "sabe" sobre toda la secuencia anterior. <a href="https://bbycroft.net/llm" target="_blank">Ver en vivo</a></p>
           </div>
           <aside class="notes">
-            La clave del Transformer son estos dos bloques que se repiten. Primero, atencion: cada token mira a los tokens anteriores y decide cuales son relevantes — esto es causal self-attention, donde cada token solo puede ver hacia atras porque al generar el futuro no existe todavia. Segundo, el MLP: cada token pasa por una red feed-forward que transforma su representacion individualmente. Estos dos pasos se apilan N veces (GPT-2 tiene 48 capas, modelos modernos 80-128). Lo importante es que con cada bloque, la representacion de cada token se enriquece. Despues de la primera capa, "sento" sabe un poco sobre "el gato se". Despues de la segunda capa, sabe mas. Al final de las N capas, el ultimo token tiene una representacion que integra informacion de toda la secuencia. Abrir bbycroft.net para ver como las representaciones cambian capa por capa.
+            La clave del Transformer son estos dos bloques que se repiten. Primero, atención: cada token mira a los tokens anteriores y decide cuales son relevantes — esto es causal self-attention, donde cada token solo puede ver hacia atrás porque al generar el futuro no existe todavia. Segundo, el MLP: cada token pasa por una red feed-forward que transforma su representación individualmente. Estos dos pasos se apilan N veces (GPT-2 tiene 48 capas, modelos modernos 80-128). Lo importante es que con cada bloque, la representación de cada token se enriquece. Después de la primera capa, "sento" sabe un poco sobre "el gato se". Después de la segunda capa, sabe más. Al final de las N capas, el último token tiene una representación que integra información de toda la secuencia. Abrir bbycroft.net para ver como las representaciones cambian capa por capa.
           </aside>
         </section>
 
         <!-- Training in action -->
         <section>
-          <h2>Entrenamiento en accion</h2>
+          <h2>Entrenamiento en acción</h2>
           <div id="training-demo" style="background: var(--bg-code); border-radius: 8px; padding: 14px 18px; min-height: 280px;"></div>
           <script src="training-anim.js"></script>
           <script>
             initTrainingAnim({ containerId: 'training-demo' });
           </script>
           <aside class="notes">
-            Esta animacion muestra como se ve entrenar un modelo en la practica. Se avanza paso a paso: cada step procesa un millon de tokens y ajusta los parametros. El loss baja con cada paso — loss bajo significa mejores predicciones. A la vez, mostramos texto generado por el modelo en cada punto. Al inicio (step 0) los parametros son aleatorios y sale basura total. A step 100 ya aprende las palabras mas frecuentes. A step 420 (~1% del entrenamiento, ~15 minutos en 8x H100) hay coherencia local pero no global. A mitad del entrenamiento el texto es fluido. Al final, el texto es indistinguible de paginas de internet reales. Esto es GPT-2 como referencia: 32,000 steps, ~7 seg/step en 8x H100. Modelos modernos entrenan por mucho mas tiempo con muchos mas datos y GPUs.
+            Esta animación muestra como se ve entrenar un modelo en la práctica. Se avanza paso a paso: cada step procesa un millon de tokens y ajusta los parámetros. El loss baja con cada paso — loss bajo significa mejores predicciones. A la vez, mostramos texto generado por el modelo en cada punto. Al inicio (step 0) los parámetros son aleatorios y sale basura total. A step 100 ya aprende las palabras más frecuentes. A step 420 (~1% del entrenamiento, ~15 minutos en 8x H100) hay coherencia local pero no global. A mitad del entrenamiento el texto es fluido. Al final, el texto es indistinguible de páginas de internet reales. Esto es GPT-2 como referencia: 32,000 steps, ~7 seg/step en 8x H100. Modelos modernos entrenan por mucho más tiempo con muchos más datos y GPUs.
           </aside>
         </section>
 
@@ -1239,9 +1239,9 @@
           <script>
             initInferenceAnim({ containerId: 'inference-demo' });
           </script>
-          <p style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">El sistema es <strong style="color: var(--text-primary);">estocastico</strong>: en cada paso se tira una moneda cargada. Mismo prefijo, distinto resultado cada vez. Por eso el boton "regenerar" de ChatGPT da respuestas diferentes.</p>
+          <p style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">El sistema es <strong style="color: var(--text-primary);">estocástico</strong>: en cada paso se tira una moneda cargada. Mismo prefijo, distinto resultado cada vez. Por eso el boton "regenerar" de ChatGPT da respuestas diferentes.</p>
           <aside class="notes">
-            Inferencia es generar texto nuevo del modelo. Empezamos con un prefijo de tokens, lo pasamos por la red, obtenemos probabilidades para el siguiente token, y muestreamos. El token muestreado se agrega al contexto y repetimos. El sistema es estocastico: en cada paso tiramos una moneda cargada. Los tokens con alta probabilidad salen mas seguido, pero no siempre. Esto significa que cada vez que ejecutamos la inferencia, obtenemos un texto diferente. Demostrar con la animacion: generar una oracion, luego regenerar y mostrar que sale otra cosa. Esto no es un bug, es una propiedad fundamental del sistema.
+            Inferencia es generar texto nuevo del modelo. Empezamos con un prefijo de tokens, lo pasamos por la red, obtenemos probabilidades para el siguiente token, y muestreamos. El token muestreado se agrega al contexto y repetimos. El sistema es estocástico: en cada paso tiramos una moneda cargada. Los tokens con alta probabilidad salen más seguido, pero no siempre. Esto significa que cada vez que ejecutamos la inferencia, obtenemos un texto diferente. Demostrar con la animación: generar una oración, luego regenerar y mostrar que sale otra cosa. Esto no es un bug, es una propiedad fundamental del sistema.
           </aside>
         </section>
 
@@ -1253,14 +1253,14 @@
         <section class="section-divider">
           <h2>Computo y Modelos Base</h2>
           <aside class="notes">
-            Ya vimos como funciona el entrenamiento de redes neuronales. Ahora vamos a hablar de la escala: cuanto cuesta entrenar un modelo real, que hardware se usa, y que obtenemos al final. Lo que sale del pre-training tiene capacidades sorprendentes, pero tambien limitaciones claras que motivan la siguiente etapa.
+            Ya vimos como funciona el entrenamiento de redes neuronales. Ahora vamos a hablar de la escala: cuánto cuesta entrenar un modelo real, que hardware se usa, y que obtenemos al final. Lo que sale del pre-training tiene capacidades sorprendentes, pero también limitaciones claras que motivan la siguiente etapa.
           </aside>
         </section>
 
         <!-- GPT-2 vs Llama 3.1: same stack, different scale -->
         <section>
           <h2>Mismo stack, otra escala</h2>
-          <p style="font-size: 0.8em; color: var(--text-muted);">GPT-2 (2019) fue el primer stack moderno reconocible. Lo demas es escala.</p>
+          <p style="font-size: 0.8em; color: var(--text-muted);">GPT-2 (2019) fue el primer stack moderno reconocible. Lo demás es escala.</p>
           <div style="display: flex; gap: var(--spacing-lg); margin-top: 12px; font-size: 0.8em;">
             <div style="flex: 1;">
               <div style="margin-bottom: 8px;">
@@ -1292,7 +1292,7 @@
             Fuentes: <a href="https://openai.com/index/better-language-models/" target="_blank">GPT-2 (OpenAI 2019)</a> &middot; <a href="https://github.com/karpathy/llm.c/discussions/677" target="_blank">llm.c reproduction (Karpathy)</a> &middot; <a href="https://arxiv.org/pdf/2407.21783" target="_blank">Llama 3 paper (Meta 2024)</a>
           </p>
           <aside class="notes">
-            GPT-2 fue publicado en 2019 y es el primer modelo con un stack reconocible por estandares modernos — mismo tipo de red (Transformer), misma idea de pre-training. La diferencia con modelos actuales es solo de escala. GPT-2 tenia 1.6 mil millones de parametros; Llama 3.1 405B de Meta tiene 405 mil millones — 250 veces mas. El contexto paso de 1,024 a 128,000 tokens. Y los datos de entrenamiento pasaron de ~100 mil millones de tokens a 15 billones — 150 veces mas. En terminos de computo, entrenar Llama 3.1 405B consumio 30.84 millones de GPU-horas en H100s. Para dimensionar: si tuvieras una sola GPU, tardarias 3,500 anios. Karpathy reprodujo GPT-2 por ~$600 en un dia con hardware moderno. Pero Llama 3.1 405B es otra escala completamente distinta.
+            GPT-2 fue publicado en 2019 y es el primer modelo con un stack reconocible por estándares modernos — mismo tipo de red (Transformer), misma idea de pre-training. La diferencia con modelos actuales es solo de escala. GPT-2 tenía 1.6 mil millones de parámetros; Llama 3.1 405B de Meta tiene 405 mil millones — 250 veces más. El contexto pasó de 1,024 a 128,000 tokens. Y los datos de entrenamiento pasaron de ~100 mil millones de tokens a 15 billones — 150 veces más. En términos de computo, entrenar Llama 3.1 405B consumió 30.84 millones de GPU-horas en H100s. Para dimensionar: si tuvieras una sola GPU, tardarias 3,500 años. Karpathy reprodujo GPT-2 por ~$600 en un día con hardware moderno. Pero Llama 3.1 405B es otra escala completamente distinta.
           </aside>
         </section>
 
@@ -1306,21 +1306,21 @@
                 <li>Se hace una vez</li>
                 <li>Meses de computo, miles de GPUs</li>
                 <li>Millones de USD</li>
-                <li>Produce los parametros</li>
+                <li>Produce los parámetros</li>
               </ul>
             </div>
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;" class="fragment fade-in">
               <p style="color: var(--accent-secondary); font-weight: bold; margin-bottom: 8px;">Inferencia</p>
               <ul style="margin: 0; padding-left: 16px;">
                 <li>Cada vez que un usuario habla con el modelo</li>
-                <li>Parametros congelados, sin mas aprendizaje</li>
+                <li>Parametros congelados, sin más aprendizaje</li>
                 <li>Fracciones de centavo por consulta</li>
                 <li>Es lo que pasa en ChatGPT</li>
               </ul>
             </div>
           </div>
           <aside class="notes">
-            Es importante distinguir estas dos fases. El entrenamiento es el proceso caro y largo que vimos: procesar billones de tokens, ajustar parametros, reducir el loss. Se hace una vez y tarda meses en miles de GPUs. El resultado son los parametros — los miles de millones de numeros que definen el modelo. La inferencia es lo que pasa cuando un usuario interactua con el modelo. Los parametros estan congelados — no se aprende nada nuevo. El modelo simplemente recibe tokens, los pasa por la red, y predice el siguiente token. Cuando hablas con ChatGPT, ese modelo fue entrenado por OpenAI hace meses. Cada mensaje tuyo es solo inferencia: parametros fijos generando tokens. Esta distincion importa para lo que viene: el post-training (SFT) es una segunda ronda de entrenamiento, mucho mas corta y barata, pero el principio es el mismo.
+            Es importante distinguir estas dos fases. El entrenamiento es el proceso caro y largo que vimos: procesar billones de tokens, ajustar parámetros, reducir el loss. Se hace una vez y tarda meses en miles de GPUs. El resultado son los parámetros — los miles de millones de números que definen el modelo. La inferencia es lo que pasa cuando un usuario interactua con el modelo. Los parámetros están congelados — no se aprende nada nuevo. El modelo simplemente recibe tokens, los pasa por la red, y predice el siguiente token. Cuando hablas con ChatGPT, ese modelo fue entrenado por OpenAI hace meses. Cada mensaje tuyo es solo inferencia: parámetros fijos generando tokens. Esta distinción importa para lo que viene: el post-training (SFT) es una segunda ronda de entrenamiento, mucho más corta y barata, pero el principio es el mismo.
           </aside>
         </section>
 
@@ -1378,7 +1378,7 @@
           <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); margin-top: 16px;">Llama 3.1 405B: 30.84M GPU-horas en H100. Emisiones: 8,930 toneladas de CO2eq. <a href="https://www.runpod.io/pricing" target="_blank">RunPod pricing</a></p>
           <p class="fragment fade-in" style="font-size: 0.8em; color: var(--accent); margin-top: 8px;">Pero correr el modelo entrenado (inferencia) requiere muchisimo menos &mdash; ya lo vamos a ver.</p>
           <aside class="notes">
-            El entrenamiento no corre en una laptop — corre en GPUs especializadas. La H100 de NVIDIA es la GPU dominante, con 80GB de memoria de alta velocidad. Las GPUs son ideales porque el entrenamiento es masivamente paralelizable. Se apilan 8 en un nodo, y miles de nodos en un datacenter. Se pueden alquilar: un nodo de 8x H100 sale ~$24/hora. Para dimensionar: Meta publico que entrenar Llama 3.1 405B consumio 30.84 millones de GPU-horas en H100. Si alquilaras esas GPUs a $3/hora, el costo seria mas de $90 millones solo en computo. Y generaron 8,930 toneladas de CO2 equivalente — como manejar un auto 2,000 veces alrededor de la Tierra. Las grandes empresas tienen sus propios datacenters con decenas de miles de GPUs. Nvidia se convirtio en una de las empresas mas valiosas del mundo porque todas las big tech necesitan estas GPUs. Importante destacar: esta es la escala del pre-training. Para inferencia (correr el modelo ya entrenado) alcanza con una fraccion de eso, como vamos a ver en las proximas slides.
+            El entrenamiento no corre en una laptop — corre en GPUs especializadas. La H100 de NVIDIA es la GPU dominante, con 80GB de memoria de alta velocidad. Las GPUs son ideales porque el entrenamiento es masivamente paralelizable. Se apilan 8 en un nodo, y miles de nodos en un datacenter. Se pueden alquilar: un nodo de 8x H100 sale ~$24/hora. Para dimensionar: Meta publicó que entrenar Llama 3.1 405B consumió 30.84 millones de GPU-horas en H100. Si alquilaras esas GPUs a $3/hora, el costo seria más de $90 millones solo en computo. Y generaron 8,930 toneladas de CO2 equivalente — como manejar un auto 2,000 veces alrededor de la Tierra. Las grandes empresas tienen sus propios datacenters con decenas de miles de GPUs. Nvidia se convirtió en una de las empresas más valiosas del mundo porque todas las big tech necesitan estas GPUs. Importante destacar: esta es la escala del pre-training. Para inferencia (correr el modelo ya entrenado) alcanza con una fracción de eso, como vamos a ver en las próximas slides.
           </aside>
         </section>
 
@@ -1388,26 +1388,26 @@
           <p style="font-size: 0.8em; color: var(--text-muted);">Para "publicar" un modelo se necesitan dos cosas:</p>
           <div style="display: flex; gap: var(--spacing-lg); margin-top: 16px; font-size: 0.75em;">
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;">
-              <p style="color: var(--accent); font-weight: bold;">Codigo</p>
-              <p>~300 lineas de Python que describen la arquitectura (el forward pass de la red). <a href="https://github.com/meta-llama/llama-models/blob/main/models/llama3/model.py" target="_blank">Ver model.py de Llama 3</a></p>
+              <p style="color: var(--accent); font-weight: bold;">Código</p>
+              <p>~300 líneas de Python que describen la arquitectura (el forward pass de la red). <a href="https://github.com/meta-llama/llama-models/blob/main/models/llama3/model.py" target="_blank">Ver model.py de Llama 3</a></p>
             </div>
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;" class="fragment fade-in">
               <p style="color: var(--accent-secondary); font-weight: bold;">Parametros</p>
-              <p>Miles de millones de numeros: el ajuste preciso de cada "perilla" de la red. Aca esta el valor.</p>
+              <p>Miles de millones de números: el ajuste preciso de cada "perilla" de la red. Aca esta el valor.</p>
             </div>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 16px;">Los 405 mil millones de parametros de Llama 3.1 capturan los <strong style="color: var(--accent);">patrones estadisticos</strong> de 15 billones de tokens en 8 idiomas &mdash; no el texto original (compresion lossy, como JPEG o MP3). Formato: BF16 (2 bytes por parametro), ~800GB en disco.</p>
+          <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 16px;">Los 405 mil millones de parámetros de Llama 3.1 capturan los <strong style="color: var(--accent);">patrones estadísticos</strong> de 15 billones de tokens en 8 idiomas &mdash; no el texto original (compresión lossy, como JPEG o MP3). Formato: BF16 (2 bytes por parámetro), ~800GB en disco.</p>
           <aside class="notes">
-            Lo que sale del pre-training se llama "modelo base". Para publicarlo se necesitan dos cosas. Primero, el codigo: unas pocas cientos de lineas de Python que describen la arquitectura de la red — la secuencia exacta de operaciones del forward pass. Esto es codigo estandar. Segundo, los parametros: miles de millones de numeros, el resultado de todo ese entrenamiento. Llama 3.1 de Meta tiene 405 mil millones de parametros almacenados en formato BF16 (Brain Float 16), ocupando unos 800GB en disco. Para correr inferencia necesitas al menos 8 GPUs de 80GB cada una — mas de 600GB de VRAM solo para cargar los parametros. El valor no esta en el codigo, que es relativamente simple — esta en los parametros, que representan meses de computo en miles de H100s procesando 15 billones de tokens de internet en 8 idiomas. Son como un archivo zip de internet, pero con compresion lossy: la esencia de los patrones estadisticos, no una copia exacta.
+            Lo que sale del pre-training se llama "modelo base". Para publicarlo se necesitan dos cosas. Primero, el código: unas pocas cientos de líneas de Python que describen la arquitectura de la red — la secuencia exacta de operaciones del forward pass. Esto es código estándar. Segundo, los parámetros: miles de millones de números, el resultado de todo ese entrenamiento. Llama 3.1 de Meta tiene 405 mil millones de parámetros almacenados en formato BF16 (Brain Float 16), ocupando unos 800GB en disco. Para correr inferencia necesitas al menos 8 GPUs de 80GB cada una — más de 600GB de VRAM solo para cargar los parámetros. El valor no esta en el código, que es relativamente simple — esta en los parámetros, que representan meses de computo en miles de H100s procesando 15 billones de tokens de internet en 8 idiomas. Son como un archivo zip de internet, pero con compresión lossy: la esencia de los patrones estadísticos, no una copia exacta.
           </aside>
         </section>
 
         <!-- VRAM requirements -->
         <section>
           <h2>Cuanta memoria necesita un modelo?</h2>
-          <p style="font-size: 0.8em; color: var(--text-muted);">Cada parametro ocupa bytes en VRAM. La cuenta es directa.</p>
+          <p style="font-size: 0.8em; color: var(--text-muted);">Cada parámetro ocupa bytes en VRAM. La cuenta es directa.</p>
           <div style="background: var(--bg-code); border-radius: 8px; padding: 12px 16px; font-family: var(--font-mono); font-size: 0.8em; margin-top: 12px;">
-            <span style="color: var(--text-muted);">VRAM =</span> <span style="color: var(--accent);">parametros</span> <span style="color: var(--text-muted);">x</span> <span style="color: var(--accent-secondary);">bytes por parametro</span>
+            <span style="color: var(--text-muted);">VRAM =</span> <span style="color: var(--accent);">parámetros</span> <span style="color: var(--text-muted);">x</span> <span style="color: var(--accent-secondary);">bytes por parámetro</span>
           </div>
           <div style="margin-top: 16px; font-size: 0.65em;">
             <table style="width: 100%; border-collapse: collapse;">
@@ -1448,16 +1448,16 @@
               </tr>
             </table>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">Cuantizar (BF16 &rarr; FP8) corta la memoria a la mitad. Asi es como Meta hace caber 405B en 8 H100s con la version FP8 oficial.</p>
+          <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">Cuantizar (BF16 &rarr; FP8) corta la memoria a la mitad. Asi es como Meta hace caber 405B en 8 H100s con la versión FP8 oficial.</p>
           <aside class="notes">
-            Cada parametro del modelo necesita estar en la memoria de la GPU para hacer inferencia. En formato BF16 (el formato nativo de entrenamiento), cada parametro ocupa 2 bytes. La cuenta es directa: 70 mil millones de parametros por 2 bytes = 140 GB de VRAM; 405 mil millones por 2 bytes = 810 GB. Una GPU H100 tiene 80 GB, asi que para 70B en BF16 hacen falta 2 GPUs (tensor parallelism reparte el modelo entre ellas), y para 405B en BF16 ni siquiera 8 H100s alcanzan. Por eso cuantizar es tan importante: en FP8 cada parametro ocupa 1 byte en vez de 2, reduciendo la memoria a la mitad. Es asi como Meta hace caber el 405B en 8 H100s con la version FP8 oficial — pasamos de 810 GB a 405 GB, y entra en 640 GB de VRAM con margen para el KV cache. Perdemos un poco de precision numerica pero en la practica la calidad es casi identica. Los modelos mas chicos caben en hardware mucho mas accesible: el 8B entra en una GPU gaming comun, y el 3B puede correr hasta en un celular moderno.
+            Cada parámetro del modelo necesita estar en la memoria de la GPU para hacer inferencia. En formato BF16 (el formato nativo de entrenamiento), cada parámetro ocupa 2 bytes. La cuenta es directa: 70 mil millones de parámetros por 2 bytes = 140 GB de VRAM; 405 mil millones por 2 bytes = 810 GB. Una GPU H100 tiene 80 GB, así que para 70B en BF16 hacen falta 2 GPUs (tensor parallelism reparte el modelo entre ellas), y para 405B en BF16 ni siquiera 8 H100s alcanzan. Por eso cuantizar es tan importante: en FP8 cada parámetro ocupa 1 byte en vez de 2, reduciendo la memoria a la mitad. Es así como Meta hace caber el 405B en 8 H100s con la versión FP8 oficial — pasamos de 810 GB a 405 GB, y entra en 640 GB de VRAM con margen para el KV cache. Perdemos un poco de precisión numérica pero en la práctica la calidad es casi identica. Los modelos más chicos caben en hardware mucho más accesible: el 8B entra en una GPU gaming común, y el 3B puede correr hasta en un celular moderno.
           </aside>
         </section>
 
         <!-- Base model capabilities -->
         <section>
           <h2>Conocimiento del modelo base</h2>
-          <p style="font-size: 0.8em; color: var(--text-muted);">No es un asistente — es un autocompletado. Pero al predecir tokens, aprendio sobre el mundo.</p>
+          <p style="font-size: 0.8em; color: var(--text-muted);">No es un asistente — es un autocompletado. Pero al predecir tokens, aprendió sobre el mundo.</p>
           <div style="display: flex; align-items: stretch; gap: 12px; margin-top: 16px; font-size: 0.7em;">
             <div style="flex: 1; background: var(--bg-code); border-radius: 8px; padding: 10px 14px;">
               <p style="color: var(--text-muted); margin-bottom: 4px;">Prompt:</p>
@@ -1473,28 +1473,28 @@
           </div>
           <div class="fragment fade-in" style="background: var(--bg-secondary); border-radius: 8px; padding: 10px 14px; font-size: 0.75em; margin-top: 12px; display: flex; align-items: baseline; gap: 8px;">
             <span style="color: var(--accent-secondary); font-weight: bold; flex-shrink: 0;">Clave:</span>
-            <span>el conocimiento es una reconstruccion estadistica, no una base de datos. Lo frecuente en internet se recuerda bien. Lo raro se puede reconstruir mal.</span>
+            <span>el conocimiento es una reconstrucción estadística, no una base de datos. Lo frecuente en internet se recuerda bien. Lo raro se puede reconstruir mal.</span>
           </div>
           <aside class="notes">
-            El modelo base NO es un asistente. No responde preguntas — simplemente continua secuencias de tokens, genera "remixes" de internet. Pero aca esta lo interesante: para poder predecir bien el siguiente token, el modelo tuvo que aprender una enorme cantidad sobre el mundo. Llama 3.1 70B base saca 79.3 en MMLU (un examen de conocimiento general con preguntas de 57 materias), 92.9 en ARC-Challenge (razonamiento cientifico), y 89.7 en TriviaQA. El 405B saca un poco mas (85.2, 96.1, 91.8), pero el 70B ya es muy capaz. Sabe de geografia, historia, ciencia, idiomas, codigo — todo eso esta codificado en los parametros. Se puede extraer ese conocimiento con los prompts adecuados. Si le damos "Top 10 landmarks in Paris:" el modelo genera una lista razonable porque ha visto miles de articulos turisticos sobre Paris. Pero es una reconstruccion estadistica, no una base de datos. Lo frecuente en internet se recuerda bien. Lo raro se puede reconstruir mal. Vamos a ver esto en accion con el modelo real en unos minutos.
+            El modelo base NO es un asistente. No responde preguntas — simplemente continua secuencias de tokens, genera "remixes" de internet. Pero aca esta lo interesante: para poder predecir bien el siguiente token, el modelo tuvo que aprender una enorme cantidad sobre el mundo. Llama 3.1 70B base saca 79.3 en MMLU (un examen de conocimiento general con preguntas de 57 materias), 92.9 en ARC-Challenge (razonamiento científico), y 89.7 en TriviaQA. El 405B saca un poco más(85.2, 96.1, 91.8), pero el 70B ya es muy capaz. Sabe de geografía, historia, ciencia, idiomas, código — todo eso esta codificado en los parámetros. Se puede extraer ese conocimiento con los prompts adecuados. Si le damos "Top 10 landmarks in Paris:" el modelo genera una lista razonable porque ha visto miles de artículos turísticos sobre Paris. Pero es una reconstrucción estadística, no una base de datos. Lo frecuente en internet se recuerda bien. Lo raro se puede reconstruir mal. Vamos a ver esto en acción con el modelo real en unos minutos.
           </aside>
         </section>
 
         <!-- Memorization and hallucination -->
         <section>
-          <h2>Memorizacion y alucinacion</h2>
+          <h2>Memorización y alucinación</h2>
           <div style="display: flex; gap: var(--spacing-lg); margin-top: 16px; font-size: 0.75em;">
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;">
-              <p style="color: var(--accent); font-weight: bold; margin-bottom: 6px;">Memorizacion</p>
+              <p style="color: var(--accent); font-weight: bold; margin-bottom: 6px;">Memorización</p>
               <p>Documentos de alta calidad (Wikipedia) vistos 10+ veces durante el entrenamiento se recitan casi verbatim</p>
               <div style="background: var(--bg-code); border-radius: 4px; padding: 6px 8px; margin-top: 8px; font-size: 0.9em;">
-                <span style="color: var(--text-muted);">Prompt:</span> primer parrafo de Wikipedia sobre cebras<br/>
+                <span style="color: var(--text-muted);">Prompt:</span> primer párrafo de Wikipedia sobre cebras<br/>
                 <span style="color: var(--accent);">&#8594;</span> lo continua de memoria
               </div>
             </div>
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;" class="fragment fade-in">
-              <p style="color: var(--accent-secondary); font-weight: bold; margin-bottom: 6px;">Alucinacion</p>
-              <p>Datos fuera de su fecha de corte: el modelo inventa, tomando su mejor guess estadistico</p>
+              <p style="color: var(--accent-secondary); font-weight: bold; margin-bottom: 6px;">Alucinación</p>
+              <p>Datos fuera de su fecha de corte: el modelo inventa, tomando su mejor guess estadístico</p>
               <div style="background: var(--bg-code); border-radius: 4px; padding: 6px 8px; margin-top: 8px; font-size: 0.9em;">
                 <span style="color: var(--text-muted);">Llama 3.1 cutoff:</span> diciembre 2023<br/>
                 <span style="color: var(--text-muted);">Prompt:</span> "En las elecciones de 2025..."<br/>
@@ -1503,7 +1503,7 @@
             </div>
           </div>
           <aside class="notes">
-            El modelo base exhibe dos comportamientos interesantes que son las dos caras de la misma moneda. Memorizacion: documentos de alta calidad como Wikipedia probablemente fueron vistos 10+ veces durante el entrenamiento (se les da mas peso por ser fuentes confiables). El modelo puede recitarlos casi de memoria — le das el primer parrafo del articulo de cebras y continua con una copia casi perfecta. Esto se llama regurgitacion y generalmente no es deseable. Alucinacion: Llama 3.1 tiene un cutoff de conocimiento de diciembre 2023. Todo lo que paso despues de esa fecha no existe en sus parametros. Pero el modelo no dice "no se" — inventa. Si le preguntas sobre las elecciones de 2025, cada generacion es un "universo paralelo" diferente. Karpathy demostro esto con un modelo anterior: una vez dijo que Mike Pence era running mate, otra vez dijo Ron DeSantis. El modelo toma su mejor guess estadistico basado en lo que sabe, pero no tiene forma de distinguir lo que sabe de lo que inventa. Esto lo vamos a poder probar en vivo en unos minutos.
+            El modelo base exhibe dos comportamientos interesantes que son las dos caras de la misma moneda. Memorización: documentos de alta calidad como Wikipedia probablemente fueron vistos 10+ veces durante el entrenamiento (se les da más peso por ser fuentes confiables). El modelo puede recitarlos casi de memoria — le das el primer párrafo del artículo de cebras y continua con una copia casi perfecta. Esto se llama regurgitación y generalmente no es deseable. Alucinación: Llama 3.1 tiene un cutoff de conocimiento de diciembre 2023. Todo lo que pasó después de esa fecha no existe en sus parámetros. Pero el modelo no dice "no se" — inventa. Si le preguntas sobre las elecciones de 2025, cada generación es un "universo paralelo" diferente. Karpathy demostró esto con un modelo anterior: una vez dijo que Mike Pence era running mate, otra vez dijo Ron DeSantis. El modelo toma su mejor guess estadístico basado en lo que sabe, pero no tiene forma de distinguir lo que sabe de lo que inventa. Esto lo vamos a poder probar en vivo en unos minutos.
           </aside>
         </section>
 
@@ -1515,7 +1515,7 @@
           <script src="base-model-chat.js"></script>
           <script>initBaseModelChat({ containerId: 'base-model-demo' });</script>
           <aside class="notes">
-            Aca vamos a interactuar con un primo cercano del modelo que venimos describiendo — Llama 3.1 70B de Meta, el modelo base puro (no la version instruct). 70 mil millones de parametros entrenados con 7 millones de GPU-horas en 15 billones de tokens, mismo cutoff de diciembre 2023 que el 405B. Solo sabe autocompletar texto. A la izquierda tenemos una interfaz tipo chat, pero es una ilusion — a la derecha pueden ver lo que realmente esta pasando: todo es una cadena de texto continua. El modelo no tiene concepto de "turnos" ni "conversacion". Simplemente recibe texto y genera la continuacion mas probable. Recuerden el cutoff de diciembre 2023 — cualquier cosa posterior a eso la va a inventar. Noten que esta corriendo en 2 GPUs H100 de 80GB cada una — 160 GB de VRAM, suficiente para los 140 GB del modelo en BF16. Usamos 70B y no 405B por costo: 2 H100 sale ~$5/h vs ~$24/h para 8 H100. Si activan "Mostrar tokens especiales" pueden ver el token de inicio de secuencia que Llama usa internamente.
+            Aca vamos a interactuar con un primo cercano del modelo que venimos describiendo — Llama 3.1 70B de Meta, el modelo base puro (no la versión instruct). 70 mil millones de parámetros entrenados con 7 millones de GPU-horas en 15 billones de tokens, mismo cutoff de diciembre 2023 que el 405B. Solo sabe autocompletar texto. A la izquierda tenemos una interfaz tipo chat, pero es una ilusión — a la derecha pueden ver lo que realmente esta pasando: todo es una cadena de texto continua. El modelo no tiene concepto de "turnos" ni "conversación". Simplemente recibe texto y genera la continuación más probable. Recuerden el cutoff de diciembre 2023 — cualquier cosa posterior a eso la va a inventar. Noten que esta corriendo en 2 GPUs H100 de 80GB cada una — 160 GB de VRAM, suficiente para los 140 GB del modelo en BF16. Usamos 70B y no 405B por costo: 2 H100 sale ~$5/h vs ~$24/h para 8 H100. Si activan "Mostrar tokens especiales" pueden ver el token de inicio de secuencia que Llama usa internamente.
           </aside>
         </section>
 
@@ -1539,11 +1539,11 @@
           </div>
           <div style="display: flex; gap: 12px; margin-top: 12px; font-size: 0.7em;">
             <div style="flex: 1; text-align: center; color: var(--text-muted);">Traductor instantaneo</div>
-            <div style="flex: 1; text-align: center; color: var(--text-muted);" class="fragment fade-in">Asistente simulado — pero fragil</div>
+            <div style="flex: 1; text-align: center; color: var(--text-muted);" class="fragment fade-in">Asistente simulado — pero frágil</div>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.85em; margin-top: 16px;"><strong>El conocimiento esta en los parametros. El comportamiento de asistente, no.</strong></p>
+          <p class="fragment fade-in" style="font-size: 0.85em; margin-top: 16px;"><strong>El conocimiento esta en los parámetros. El comportamiento de asistente, no.</strong></p>
           <aside class="notes">
-            Si probaron en la demo anterior a darle un prompt tipo "Human: ... Assistant: ...", puede que el modelo haya seguido el patron. Eso es in-context learning: el modelo reconoce el patron algoritmico en el contexto y lo continua. El few-shot prompting es darle ejemplos del patron que queres que siga y dejarlo completar. A la izquierda, un ejemplo simple de traduccion. A la derecha, algo mas ambicioso: simular un asistente completo armando un prompt que parece una conversacion. El modelo toma ese rol porque esta continuando el patron. Pero es fragil, incomodo, y limitado. El punto clave: todo el conocimiento del mundo ya esta en los parametros gracias al pre-training — Llama 3.1 70B saca 79 en MMLU (y el 405B 85) solo con completado de texto. Lo que falta es darle el comportamiento de asistente — que responda preguntas, sea util, rechace pedidos peligrosos. Eso es exactamente lo que hace el post-training.
+            Si probaron en la demo anterior a darle un prompt tipo "Human: ... Assistant: ...", puede que el modelo haya seguido el patrón. Eso es in-context learning: el modelo reconoce el patrón algorítmico en el contexto y lo continua. El few-shot prompting es darle ejemplos del patrón que queres que siga y dejarlo completar. A la izquierda, un ejemplo simple de traducción. A la derecha, algo más ambicioso: simular un asistente completo armando un prompt que parece una conversación. El modelo toma ese rol porque esta continuando el patrón. Pero es frágil, incomodo, y limitado. El punto clave: todo el conocimiento del mundo ya esta en los parámetros gracias al pre-training — Llama 3.1 70B saca 79 en MMLU (y el 405B 85) solo con completado de texto. Lo que falta es darle el comportamiento de asistente — que responda preguntas, sea útil, rechace pedidos peligrosos. Eso es exactamente lo que hace el post-training.
           </aside>
         </section>
 
@@ -1556,7 +1556,58 @@
           <h2>Post-Training: SFT</h2>
           <p class="muted">Supervised Fine-Tuning</p>
           <aside class="notes">
-            El pre-training nos da un modelo base — como el Llama 3.1 70B que acabamos de ver en accion. Un simulador de internet muy capaz pero no un asistente. Ahora viene la segunda etapa: el post-training, donde convertimos ese modelo base en un asistente. En el caso de Llama, Meta uso mas de 25 millones de ejemplos sinteticos ademas de datasets publicos de instrucciones. La tecnica principal se llama Supervised Fine-Tuning (SFT). Es computacionalmente mucho mas barato que el pre-training pero igualmente importante.
+            Cerramos el pre-training y abrimos la segunda etapa: el post-training. La técnica principal se llama Supervised Fine-Tuning (SFT).
+          </aside>
+        </section>
+
+        <!-- Bridge: from base model to assistant -->
+        <section>
+          <h2>Del modelo base al asistente</h2>
+          <p style="font-size: 0.8em; color: var(--text-muted);">Tenemos un autocompletado de internet. Queremos un asistente.</p>
+
+          <div style="display: flex; gap: 14px; margin-top: 16px; align-items: stretch; font-size: 0.7em;">
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px;">
+              <div style="color: var(--text-muted); font-weight: bold; margin-bottom: 8px;">Lo que tenemos</div>
+              <div style="color: var(--accent-secondary); font-weight: bold; font-size: 1.15em; margin-bottom: 10px;">Modelo base</div>
+              <div style="background: var(--bg-code); border-radius: 4px; padding: 8px 12px; font-style: italic; line-height: 1.5; margin-bottom: 10px;">
+                "I'm an internet text autocompleter."
+              </div>
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.75;">
+                <li><span style="color: var(--accent);">&check;</span> Autocompleta texto</li>
+                <li><span style="color: var(--accent);">&check;</span> Conoce mucho del mundo</li>
+                <li><span style="color: #e8508b;">&times;</span> No responde preguntas</li>
+                <li><span style="color: #e8508b;">&times;</span> No tiene concepto de turnos</li>
+              </ul>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; gap: 4px;">
+              <div style="color: var(--accent); font-size: 0.9em; text-align: center; font-weight: bold;">post-training</div>
+              <svg width="42" height="14" viewBox="0 0 42 14"><path d="M2 7h34m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </div>
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px; border: 1px solid var(--accent);" class="fragment fade-in">
+              <div style="color: var(--text-muted); font-weight: bold; margin-bottom: 8px;">Lo que queremos</div>
+              <div style="color: var(--accent); font-weight: bold; font-size: 1.15em; margin-bottom: 10px;">Asistente</div>
+              <div style="background: var(--bg-code); border-radius: 4px; padding: 8px 12px; font-style: italic; line-height: 1.5; margin-bottom: 10px;">
+                "How can I help you?"
+              </div>
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.75;">
+                <li><span style="color: var(--accent);">&check;</span> Responde preguntas</li>
+                <li><span style="color: var(--accent);">&check;</span> Sigue instrucciones</li>
+                <li><span style="color: var(--accent);">&check;</span> Rechaza pedidos peligrosos</li>
+                <li><span style="color: var(--accent);">&check;</span> Conversa multi-turno</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <p class="fragment fade-in" style="font-size: 0.95em; margin-top: 18px; text-align: center; color: var(--accent);">
+            Misma red. Mismo algoritmo. Distinto dataset.
+          </p>
+
+          <aside class="notes">
+            Recap rápido para abrir la sección. El pre-training nos dio un modelo base — el Llama 3.1 70B que acabamos de ver en acción. Es esencialmente un simulador de texto de internet: buenisimo para autocompletar, pero no responde preguntas ni tiene concepto de "turnos" en una conversación. Lo que queremos es un asistente: algo que responda preguntas, siga instrucciones, conversa multi-turno, y rechace pedidos peligrosos cuando corresponda. La forma de conseguirlo es el post-training. Y aca esta lo elegante: no cambia ni la arquitectura ni el algoritmo de entrenamiento. Es la misma red neuronal, el mismo gradient descent, las mismas operaciones. Lo único que cambia es el dataset: en vez de internet, le damos conversaciones humano-asistente. Y además es muchisimo más barato en computo — pre-training tarda meses en miles de GPUs; post-training tarda unas pocas horas, porque el dataset de conversaciones es comparativamente chiquito.
           </aside>
         </section>
 
@@ -1584,42 +1635,119 @@
             </div>
           </div>
           <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 12px;">Se reemplaza el dataset de internet por un dataset de conversaciones y se sigue entrenando</p>
+          <p class="fragment fade-in" style="font-size: 0.7em; color: var(--text-muted); margin-top: 6px;">Ver ejemplos reales: <a href="https://huggingface.co/datasets/OpenAssistant/oasst1/viewer" target="_blank">OpenAssistant/oasst1</a> &middot; ~84K mensajes de entrenamiento en conversaciones multi-turno aportadas por la comunidad</p>
           <aside class="notes">
-            La idea es simple: tomamos el modelo base y le cambiamos el dataset. En vez de internet, le damos conversaciones de ejemplo entre humano y asistente. Estas conversaciones cubren todo tipo de temas: matematica, escritura creativa, codigo, recetas, y tambien negaciones (cosas que el modelo no deberia ayudar a hacer). Se usa el mismo algoritmo de entrenamiento, la misma red — solo cambia el dataset. El modelo se ajusta rapidamente para imitar el patron de estas conversaciones. Pre-training puede tomar 3 meses en miles de GPUs. Post-training toma unas 3 horas, porque el dataset de conversaciones es mucho mas chico.
+            La idea es simple: tomamos el modelo base y le cambiamos el dataset. En vez de internet, le damos conversaciones de ejemplo entre humano y asistente. Estas conversaciones cubren todo tipo de temas: matemática, escritura creativa, código, recetas, y también negaciones (cosas que el modelo no deberia ayudar a hacer). Se usa el mismo algoritmo de entrenamiento, la misma red — solo cambia el dataset. El modelo se ajusta rapidamente para imitar el patrón de estas conversaciones. Pre-training puede tomar 3 meses en miles de GPUs. Post-training toma unas 3 horas, porque el dataset de conversaciones es mucho más chico.
           </aside>
         </section>
 
         <!-- Human labelers -->
         <section>
           <h2>Anotadores humanos</h2>
-          <ul>
-            <li class="fragment fade-in">Humanos profesionales escriben las respuestas ideales del asistente</li>
-            <li class="fragment fade-in">Siguen instrucciones detalladas (cientos de paginas): ser util, veraz, inofensivo</li>
-            <li class="fragment fade-in">Contratados a traves de Upwork, Scale AI, etc.</li>
-          </ul>
-          <p class="fragment fade-in"><a href="https://arxiv.org/pdf/2203.02155" target="_blank">InstructGPT (OpenAI, 2022)</a> — primer paper publico sobre SFT</p>
+          <p style="font-size: 0.8em; color: var(--text-muted);">Tres pasos por cada conversación del dataset</p>
+          <div style="display: flex; gap: 10px; margin-top: 16px; font-size: 0.6em; align-items: stretch;">
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;">
+              <div style="color: var(--text-muted); font-weight: bold; margin-bottom: 8px; font-size: 1.1em;">1. Labeling instructions</div>
+              <p style="color: var(--text-muted); margin-bottom: 8px;">Las escribe la empresa que entrena el modelo</p>
+              <div style="background: var(--bg-code); border-radius: 4px; padding: 8px; font-family: var(--font-mono); line-height: 1.6;">
+                <div style="color: var(--accent);">&bull; Helpful</div>
+                <div style="color: var(--accent);">&bull; Truthful</div>
+                <div style="color: var(--accent);">&bull; Harmless</div>
+                <div style="color: var(--text-muted); margin-top: 6px; font-style: italic;">+ cientos de páginas de reglas</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; flex-shrink: 0;">
+              <svg width="22" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </div>
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;" class="fragment fade-in">
+              <div style="color: var(--accent-secondary); font-weight: bold; margin-bottom: 8px; font-size: 1.1em;">2. El labeler inventa un prompt</div>
+              <p style="color: var(--text-muted); margin-bottom: 8px;">Una pregunta plausible de usuario</p>
+              <div style="background: var(--bg-code); border-radius: 4px; padding: 8px; font-style: italic; line-height: 1.5;">
+                "List five ideas for how to regain enthusiasm for my career"
+              </div>
+              <p style="color: var(--text-muted); margin-top: 6px; font-size: 0.95em;">Otros: traducciones, código, refusals, tareas creativas&hellip;</p>
+            </div>
+
+            <div style="display: flex; align-items: center; flex-shrink: 0;">
+              <svg width="22" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--text-muted)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </div>
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 12px;" class="fragment fade-in">
+              <div style="color: var(--accent); font-weight: bold; margin-bottom: 8px; font-size: 1.1em;">3. &hellip;y escribe la respuesta ideal</div>
+              <p style="color: var(--text-muted); margin-bottom: 8px;">Siguiendo las instrucciones</p>
+              <div style="background: var(--bg-code); border-radius: 4px; padding: 8px; line-height: 1.5;">
+                1. Reflexiona sobre que te entusiasmaba<br>
+                2. Establece metas pequenas y específicas<br>
+                3. Habla con un mentor<br>
+                4. Aprende una skill nueva<br>
+                5. Toma un descanso intencional
+              </div>
+              <p style="color: var(--text-muted); margin-top: 6px; font-size: 0.95em;">El modelo aprende a imitar este patrón</p>
+            </div>
+
+          </div>
+          <p class="fragment fade-in" style="font-size: 0.7em; color: var(--text-muted); margin-top: 14px;">
+            Contratados via Upwork, Scale AI &middot; Primer paper público: <a href="https://arxiv.org/pdf/2203.02155" target="_blank">InstructGPT (OpenAI, 2022)</a>
+          </p>
           <aside class="notes">
-            Los datos de conversaciones no aparecen magicamente. OpenAI, en su paper InstructGPT de 2022, explico el proceso. Contratan humanos profesionales (via Upwork o Scale AI) cuyo trabajo es crear conversaciones ideales. Estos labelers reciben instrucciones detalladas (labeling instructions) de cientos de paginas que dicen como debe comportarse el asistente. En alto nivel: ser helpful (util), truthful (veraz) y harmless (inofensivo). Los labelers inventan prompts y luego escriben las respuestas ideales. Tipos de prompts que usaron: "list five ideas for how to regain enthusiasm for my career," "what are the top 10 sci-fi books," "translate this sentence to Spanish." Las instrucciones dicen como manejar cada caso, incluyendo negaciones.
+            Los datos de conversaciones no aparecen mágicamente. OpenAI, en su paper InstructGPT de 2022, explicó el proceso en detalle. Hay tres pasos básicos. Primero, la empresa que entrena el modelo escribe instrucciones detalladas — las "labeling instructions" — de cientos de páginas, que dicen como debe comportarse el asistente en cada situación. En alto nivel: helpful, truthful, harmless. Segundo, contratan humanos profesionales (via Upwork, Scale AI, etc.) que estudian esas instrucciones y luego inventan prompts plausibles: "list five ideas for how to regain enthusiasm for my career", o traducciones, o pedidos de código, o cosas que el modelo no deberia ayudar a hacer (refusals). Tercero, el mismo labeler escribe la respuesta ideal — la que cumple con todas las reglas. Esa respuesta es lo que el modelo aprende a imitar. La calidad del modelo final depende directamente de la calidad de los labelers y de las instrucciones que les dan.
           </aside>
         </section>
 
         <!-- Synthetic data -->
         <section>
-          <h2>Datos sinteticos y datasets modernos</h2>
-          <ul>
-            <li class="fragment fade-in">Hoy los LLMs ayudan a crear los datasets de SFT</li>
-            <li class="fragment fade-in">Humanos editan y verifican, no escriben todo de cero</li>
-            <li class="fragment fade-in">Millones de conversaciones parcialmente sinteticas</li>
-          </ul>
-          <div class="fragment fade-in" style="font-size: 0.8em; margin-top: 12px;">
-            <p>Ejemplos publicos:</p>
-            <ul>
-              <li><a href="https://github.com/thunlp/UltraChat" target="_blank">UltraChat</a> — conversaciones sinteticas a gran escala</li>
-              <li><a href="https://huggingface.co/datasets/sahil2801/CodeAlpaca-20k/viewer" target="_blank">CodeAlpaca-20k</a> — dataset de codigo</li>
-            </ul>
+          <h2>De humano a sintético</h2>
+          <p style="font-size: 0.8em; color: var(--text-muted);">Cómo cambió el dataset de SFT en pocos años</p>
+          <div style="display: flex; gap: 14px; margin-top: 16px; align-items: stretch; font-size: 0.7em;">
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                <span style="color: var(--accent-secondary); font-weight: bold; font-size: 1.15em;">InstructGPT</span>
+                <span style="color: var(--text-muted); font-size: 0.95em;">2022</span>
+              </div>
+              <table style="width: 100%; font-size: 0.95em;">
+                <tr><td style="padding: 4px 0; color: var(--text-muted); width: 32%;">Quien</td><td>Solo humanos</td></tr>
+                <tr><td style="padding: 4px 0; color: var(--text-muted);">Volumen</td><td>~13.000 ejemplos</td></tr>
+                <tr><td style="padding: 4px 0; color: var(--text-muted);">Proceso</td><td>Labeler escribe todo de cero</td></tr>
+              </table>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; gap: 4px;">
+              <div style="color: var(--text-muted); font-size: 0.75em; text-align: center;">unos años</div>
+              <svg width="36" height="14" viewBox="0 0 36 14"><path d="M2 7h28m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </div>
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px; border: 1px solid var(--accent);" class="fragment fade-in">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                <span style="color: var(--accent); font-weight: bold; font-size: 1.15em;">Hoy</span>
+                <span style="color: var(--text-muted); font-size: 0.95em;">2024+</span>
+              </div>
+              <table style="width: 100%; font-size: 0.95em;">
+                <tr><td style="padding: 4px 0; color: var(--text-muted); width: 32%;">Quien</td><td>LLM con revisión humana</td></tr>
+                <tr><td style="padding: 4px 0; color: var(--text-muted);">Volumen</td><td>Millones de ejemplos</td></tr>
+                <tr><td style="padding: 4px 0; color: var(--text-muted);">Proceso</td><td>LLM genera borrador, humano edita y valida</td></tr>
+              </table>
+            </div>
+
           </div>
+
+          <div class="fragment fade-in" style="margin-top: 14px; font-size: 0.7em;">
+            <p style="color: var(--text-muted); margin-bottom: 6px;">Datasets públicos para explorar:</p>
+            <div style="display: flex; gap: 10px;">
+              <div style="flex: 1; background: var(--bg-code); border-radius: 6px; padding: 8px 12px;">
+                <a href="https://github.com/thunlp/UltraChat" target="_blank">UltraChat</a> &middot; ~1.5M conversaciones sinteticas
+              </div>
+              <div style="flex: 1; background: var(--bg-code); border-radius: 6px; padding: 8px 12px;">
+                <a href="https://huggingface.co/datasets/sahíl2801/CodeAlpaca-20k/viewer" target="_blank">CodeAlpaca-20k</a> &middot; 20K ejemplos de código
+              </div>
+            </div>
+          </div>
+
           <aside class="notes">
-            Desde InstructGPT (2022), las cosas avanzaron mucho. Hoy los propios LLMs ayudan a generar los datasets de conversaciones. Ya no es comun que los humanos escriban todo de cero — es mas comun que un LLM genere una respuesta borrador y luego un humano la edite o valide. Los datasets modernos como UltraChat tienen millones de conversaciones, la mayoria sinteticas pero editadas por humanos. Se mezclan datos de diferentes fuentes y tipos (SFT mixtures): conversaciones generales, codigo, matematica, tareas creativas, etc. Mostrar UltraChat y CodeAlpaca como ejemplos.
+            En 2022, cuando OpenAI publicó InstructGPT, todo el dataset de SFT venia de humanos escribiendo cada respuesta ideal. Tenian aproximadamente 13.000 ejemplos labeler-written. Eso era el state of the art. En los pocos años desde entonces el proceso cambió mucho. Hoy es muy raro que un humano escriba una respuesta entera de cero — es más común que un LLM existente genere un borrador y un humano lo edite o valide. Eso permite escalar a millones de conversaciones. Los datasets modernos como UltraChat tienen ~1.5 millones de conversaciones sinteticas, mayoritariamente generadas por LLMs y editadas por humanos. Hay datasets especializados como CodeAlpaca-20k para código. Y se mezclan muchas fuentes diferentes en lo que se llama "SFT mixtures". Mostrar UltraChat y CodeAlpaca para que vean ejemplos reales de como se ven estas conversaciones.
           </aside>
         </section>
 
@@ -1637,20 +1765,67 @@
             <li class="fragment fade-in">En inferencia: se arma el contexto y se deja al modelo generar desde <code>assistant</code></li>
           </ul>
           <aside class="notes">
-            Todo tiene que ser tokens porque la red neuronal solo procesa tokens. Las conversaciones se codifican con tokens especiales nuevos que se agregan al vocabulario: im_start (inicio de turno), im_sep (separador), im_end (fin de turno). Estos NO son texto — son tokens especiales que no existian antes. GPT-4o usa "im" (imaginary monologue) como prefijo. Cada LLM tiene su propio formato, es un poco "wild west." En inferencia, cuando vas a ChatGPT, el servidor arma el contexto con im_start user im_sep [tu pregunta] im_end im_start assistant im_sep — y desde ahi el modelo empieza a generar tokens, que es la respuesta que ves.
+            Todo tiene que ser tokens porque la red neuronal solo procesa tokens. Las conversaciones se codifican con tokens especiales nuevos que se agregan al vocabulario: im_start (inicio de turno), im_sep (separador), im_end (fin de turno). Estos NO son texto — son tokens especiales que no existian antes. GPT-4o usa "im" (imaginary monologue) como prefijo. Cada LLM tiene su propio formato, es un poco "wild west." En inferencia, cuando vas a ChatGPT, el servidor arma el contexto con im_start user im_sep [tu pregunta] im_end im_start assistant im_sep — y desde ahí el modelo empieza a generar tokens, que es la respuesta que ves.
           </aside>
         </section>
 
         <!-- What you're really talking to -->
         <section>
           <h2>A que le estas hablando</h2>
-          <ul>
-            <li class="fragment fade-in">No es una IA magica — es una simulacion estadistica</li>
-            <li class="fragment fade-in">Imita a un anotador humano experto siguiendo instrucciones</li>
-            <li class="fragment fade-in">Piensen: "que diria un labeler de OpenAI en esta situacion?"</li>
-          </ul>
+          <p style="font-size: 0.8em; color: var(--text-muted);">No es magia. Es una simulación estadística de algo muy específico.</p>
+
+          <div style="display: flex; gap: 14px; margin-top: 16px; align-items: stretch; font-size: 0.7em;">
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px;">
+              <div style="color: var(--text-muted); font-weight: bold; margin-bottom: 10px;">Lo que ves</div>
+              <div style="background: var(--accent-secondary); color: var(--bg-primary); border-radius: 12px 12px 2px 12px; padding: 7px 11px; max-width: 78%; margin-left: auto; font-size: 0.95em;">
+                How can I regain enthusiasm for my career?
+              </div>
+              <div style="background: var(--bg-code); color: var(--text-primary); border-radius: 12px 12px 12px 2px; padding: 8px 12px; max-width: 90%; margin-top: 8px; line-height: 1.5; font-size: 0.95em;">
+                Here are five ideas:<br>
+                1. Reflect on what excited you&hellip;<br>
+                2. Set small, specific goals&hellip;<br>
+                3. Talk to a mentor&hellip;<br>
+                <span style="color: var(--text-muted);">&hellip;</span>
+              </div>
+              <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.9em; text-align: center;">ChatGPT</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;">
+              <div style="font-size: 2.2em; color: var(--accent); line-height: 1;">&asymp;</div>
+              <div style="color: var(--text-muted); font-size: 0.8em; margin-top: 4px;">simulación de</div>
+            </div>
+
+            <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px; border: 1px solid var(--accent);" class="fragment fade-in">
+              <div style="color: var(--text-muted); font-weight: bold; margin-bottom: 10px;">De donde viene</div>
+
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--accent)" stroke-width="1.5">
+                  <circle cx="12" cy="8" r="4"/>
+                  <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                </svg>
+                <div>
+                  <div style="color: var(--accent); font-weight: bold; font-size: 1.05em;">Labeler experto</div>
+                  <div style="color: var(--text-muted); font-size: 0.9em;">contratado por OpenAI</div>
+                </div>
+              </div>
+
+              <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.75; font-size: 0.95em;">
+                <li>&bull; Leyo cientos de páginas de guidelines</li>
+                <li>&bull; Sigue las reglas: helpful, truthful, harmless</li>
+                <li>&bull; Para código: software engineer</li>
+                <li>&bull; Para medicina: MD</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <p class="fragment fade-in" style="font-size: 0.85em; margin-top: 16px; text-align: center; color: var(--accent);">
+            Cuando hablas con ChatGPT, hablas con una simulación estadística de un labeler entrenado.
+          </p>
+
           <aside class="notes">
-            Desmitifiquemos esto. Cuando le hablas a ChatGPT, lo que recibes es estadisticamente consistente con lo que habria en el dataset de entrenamiento. Y ese dataset tiene su origen en humanos siguiendo instrucciones de etiquetado. No es una IA magica — es una simulacion de un anotador humano. Ese anotador no es cualquier persona de internet: es un experto contratado, educado, que leyo cientos de paginas de instrucciones. Para preguntas de codigo, los labelers suelen ser ingenieros de software experimentados. Entonces estas hablando con una simulacion instantanea de un experto entrenado. Es como preguntar: "que diria un labeler de OpenAI si le doy esta pregunta y 2 horas para responder?" Y obtienes la simulacion de esa respuesta.
+            Desmitifiquemos esto. Cuando le hablas a ChatGPT, lo que recibes es estadísticamente consistente con lo que habría en el dataset de entrenamiento. Y ese dataset tiene su origen en humanos siguiendo instrucciones de etiquetado. Por eso la respuesta no viene de una IA mágica — viene de una simulación de un labeler humano. Ese labeler no es cualquier persona de internet: es un experto contratado, que leyo cientos de páginas de instrucciones (helpful, truthful, harmless), y que para temas técnicos esta domain-matched (un labeler de código es probablemente un software engineer; un labeler de medicina, un MD). Entonces cuando le pregunto a ChatGPT, lo que obtengo es la "respuesta promedio" que ese tipo de experto daria, simulada en un instante. La calidad del modelo final esta directamente acotada por la calidad del labeler simulado. Esto también explica los límites: si los labelers no saben algo, el modelo tampoco. Si las instrucciones tienen un sesgo, el modelo lo absorbe.
           </aside>
         </section>
 
@@ -1660,9 +1835,9 @@
       <section>
 
         <section class="section-divider">
-          <h2>Alucinaciones y Uso de Herramientas</h2>
+          <h2>Alucinaciónes y Uso de Herramientas</h2>
           <aside class="notes">
-            Ahora entramos en lo que Karpathy llama "psicologia de LLMs" — los efectos cognitivos emergentes del pipeline de entrenamiento. El primero y mas importante: las alucinaciones.
+            Ahora entramos en lo que Karpathy llama "psicologia de LLMs" — los efectos cognitivos emergentes del pipeline de entrenamiento. El primero y más importante: las alucinaciones.
           </aside>
         </section>
 
@@ -1677,30 +1852,30 @@
               <div>"Quien es John Barrasso?" &#8594; respuesta segura</div>
             </div>
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 10px; border: 1px solid var(--accent-secondary);">
-              <div style="color: var(--accent-secondary); margin-bottom: 4px;">En produccion:</div>
+              <div style="color: var(--accent-secondary); margin-bottom: 4px;">En producción:</div>
               <div>"Quien es Orson Kovats?" &#8594; <span style="color: #e74c3c;">inventa una biografia</span></div>
-              <div style="color: var(--text-muted); margin-top: 8px; font-size: 0.9em;">El modelo imita el patron confiado del dataset, sepa o no la respuesta</div>
+              <div style="color: var(--text-muted); margin-top: 8px; font-size: 0.9em;">El modelo imita el patrón confiado del dataset, sepa o no la respuesta</div>
             </div>
           </div>
           <aside class="notes">
-            Las alucinaciones son cuando el LLM inventa informacion. El mecanismo es simple: en el dataset de entrenamiento, TODAS las preguntas de la forma "Quien es X?" se responden con confianza con la respuesta correcta. El modelo aprende ese patron — tono confiado + respuesta informativa. Cuando le preguntas por alguien que no existe (como "Orson Kovats" que Karpathy invento), el modelo no dice "no se." Dice una biografia inventada, con el mismo tono confiado. Incluso si internamente hay neuronas que "saben" que no tiene informacion sobre esa persona, el patrón estadístico del dataset dice: responde con confianza. Demostrar con HuggingFace Playground: preguntarle por Orson Kovats y mostrar como cada vez inventa algo diferente.
+            Las alucinaciones son cuando el LLM inventa información. El mecanismo es simple: en el dataset de entrenamiento, TODAS las preguntas de la forma "Quien es X?" se responden con confianza con la respuesta correcta. El modelo aprende ese patrón — tono confiado + respuesta informativa. Cuando le preguntas por alguien que no existe (como "Orson Kovats" que Karpathy invento), el modelo no dice "no se." Dice una biografia inventada, con el mismo tono confiado. Incluso si internamente hay neuronas que "saben" que no tiene información sobre esa persona, el patrón estadístico del dataset dice: responde con confianza. Demostrar con HuggingFace Playground: preguntarle por Orson Kovats y mostrar como cada vez inventa algo diferente.
           </aside>
         </section>
 
         <!-- Mitigation 1: teach "I don't know" -->
         <section>
-          <h2>Mitigacion: ensenar a decir "no se"</h2>
+          <h2>Mitigación: ensenar a decir "no se"</h2>
           <div style="font-size: 0.75em;">
             <ol>
               <li class="fragment fade-in">Tomar documentos del dataset, generar preguntas con un LLM</li>
               <li class="fragment fade-in">Interrogar al modelo 3 veces sobre cada pregunta</li>
-              <li class="fragment fade-in">Si no sabe &#8594; agregar al dataset: "No tengo esa informacion"</li>
+              <li class="fragment fade-in">Si no sabe &#8594; agregar al dataset: "No tengo esa información"</li>
               <li class="fragment fade-in">Fine-tunear con esos ejemplos</li>
             </ol>
           </div>
-          <p class="fragment fade-in"><a href="https://arxiv.org/pdf/2407.21783" target="_blank">Llama 3 paper (Meta, 2024)</a> — seccion "Factuality"</p>
+          <p class="fragment fade-in"><a href="https://arxiv.org/pdf/2407.21783" target="_blank">Llama 3 paper (Meta, 2024)</a> — sección "Factuality"</p>
           <aside class="notes">
-            Meta explico en el paper de Llama 3 como atacaron las alucinaciones. El procedimiento: 1) Tomar documentos del dataset de entrenamiento. 2) Usar un LLM para generar preguntas sobre esos documentos. 3) Interrogar al modelo 3 veces con cada pregunta y comparar con la respuesta correcta. 4) Si el modelo no sabe, crear una conversacion donde la respuesta correcta es "No tengo esa informacion" o "No estoy seguro." 5) Agregar esas conversaciones al dataset de fine-tuning. La clave: probablemente hay una neurona interna que se activa cuando el modelo no tiene certeza. Pero esa neurona NO estaba conectada a la salida de texto. Al agregar ejemplos de "no se" al dataset, le damos al modelo la oportunidad de aprender esa conexion. Es como cablear la neurona de incertidumbre a la capacidad de decir "no se" en palabras.
+            Meta explicó en el paper de Llama 3 como atacaron las alucinaciones. El procedimiento: 1) Tomar documentos del dataset de entrenamiento. 2) Usar un LLM para generar preguntas sobre esos documentos. 3) Interrogar al modelo 3 veces con cada pregunta y comparar con la respuesta correcta. 4) Si el modelo no sabe, crear una conversación donde la respuesta correcta es "No tengo esa información" o "No estoy seguro." 5) Agregar esas conversaciones al dataset de fine-tuning. La clave: probablemente hay una neurona interna que se activa cuando el modelo no tiene certeza. Pero esa neurona NO estaba conectada a la salida de texto. Al agregar ejemplos de "no se" al dataset, le damos al modelo la oportunidad de aprender esa conexion. Es como cablear la neurona de incertidumbre a la capacidad de decir "no se" en palabras.
           </aside>
         </section>
 
@@ -1715,20 +1890,20 @@
               <div class="flow-step active" style="flex: 1;">Modelo emite: <code style="color: var(--accent);">&lt;search_start&gt;</code> Nobel Physics 2024 winner <code style="color: var(--accent);">&lt;search_end&gt;</code></div>
             </div>
             <div class="fragment fade-in" style="display: flex; align-items: center; gap: 8px;">
-              <div class="flow-step" style="flex: 1; border-color: var(--accent-secondary);">Sistema pausa la generacion &#8594; ejecuta busqueda en Bing/Google &#8594; pega resultados en el contexto</div>
+              <div class="flow-step" style="flex: 1; border-color: var(--accent-secondary);">Sistema pausa la generación &#8594; ejecuta busqueda en Bing/Google &#8594; pega resultados en el contexto</div>
             </div>
             <div class="fragment fade-in" style="display: flex; align-items: center; gap: 8px;">
-              <div class="flow-step active" style="flex: 1;">Modelo continua generando con la informacion fresca en su contexto</div>
+              <div class="flow-step active" style="flex: 1;">Modelo continua generando con la información fresca en su contexto</div>
             </div>
           </div>
           <aside class="notes">
-            En vez de solo decir "no se," podemos darle herramientas. La mas importante: busqueda web. El mecanismo: se agregan tokens especiales al vocabulario (search_start, search_end). Cuando el modelo emite search_start, el sistema de inferencia pausa la generacion, toma la query entre los dos tokens especiales, la ejecuta contra un buscador (Bing en el caso de OpenAI), y pega los resultados como texto en la ventana de contexto. Ahora esa informacion esta directamente disponible para el modelo — no es un recuerdo vago, es datos frescos en su memoria de trabajo. El modelo aprende a usar herramientas con unos miles de ejemplos en el dataset de SFT. Gracias al conocimiento del pre-training, ya "sabe" que es una busqueda web y que tipo de queries funcionan bien. Web search es solo una herramienta — tambien puede usar Python (code interpreter), DALL-E, etc.
+            En vez de solo decir "no se," podemos darle herramientas. La más importante: busqueda web. El mecanismo: se agregan tokens especiales al vocabulario (search_start, search_end). Cuando el modelo emite search_start, el sistema de inferencia pausa la generación, toma la query entre los dos tokens especiales, la ejecuta contra un buscador (Bing en el caso de OpenAI), y pega los resultados como texto en la ventana de contexto. Ahora esa información esta directamente disponible para el modelo — no es un recuerdo vago, es datos frescos en su memoria de trabajo. El modelo aprende a usar herramientas con unos miles de ejemplos en el dataset de SFT. Gracias al conocimiento del pre-training, ya "sabe" que es una busqueda web y que tipo de queries funcionan bien. Web search es solo una herramienta — también puede usar Python (code interpreter), DALL-E, etc.
           </aside>
         </section>
 
         <!-- Parametric vs context knowledge -->
         <section>
-          <h2>Conocimiento en parametros vs contexto</h2>
+          <h2>Conocimiento en parámetros vs contexto</h2>
           <div style="display: flex; gap: var(--spacing-lg); margin-top: 12px; font-size: 0.75em;">
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 14px; text-align: center;">
               <h3 style="font-size: 1em; margin-bottom: 8px;">Parametros</h3>
@@ -1741,9 +1916,9 @@
               <p style="color: var(--text-muted); font-size: 0.9em;">Lo que tenes frente a los ojos</p>
             </div>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 16px;">Siempre que sea posible, copiar la informacion relevante al contexto en vez de confiar en la memoria del modelo</p>
+          <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 16px;">Siempre que sea posible, copiar la información relevante al contexto en vez de confiar en la memoria del modelo</p>
           <aside class="notes">
-            Distincion fundamental. El conocimiento en los parametros es como un recuerdo vago — algo que leiste hace un mes. Puede ser correcto para cosas que vio muchas veces (como datos de Wikipedia), pero impreciso para cosas que vio pocas veces. El contexto window es como la memoria de trabajo — datos que tenes directamente frente a los ojos. Acceso directo, preciso. Implicacion practica: para resumir el capitulo 1 de Pride and Prejudice, es MUCHO mejor pegar el texto del capitulo en el prompt que pedirle al modelo que lo recuerde. El modelo produce un resumen de mucha mas calidad con el texto en el contexto que de memoria. Igual que vos: producirias un mejor resumen si acabas de releer el capitulo.
+            Distinción fundamental. El conocimiento en los parámetros es como un recuerdo vago — algo que leiste hace un mes. Puede ser correcto para cosas que vio muchas veces (como datos de Wikipedia), pero impreciso para cosas que vio pocas veces. El contexto window es como la memoria de trabajo — datos que tenes directamente frente a los ojos. Acceso directo, preciso. Implicación práctica: para resumir el capítulo 1 de Pride and Prejudice, es MUCHO mejor pegar el texto del capítulo en el prompt que pedirle al modelo que lo recuerde. El modelo produce un resumen de mucha más calidad con el texto en el contexto que de memoria. Igual que vos: producirias un mejor resumen si acabas de releer el capítulo.
           </aside>
         </section>
 
@@ -1755,7 +1930,7 @@
         <section class="section-divider">
           <h2>Limitaciones Cognitivas</h2>
           <aside class="notes">
-            Los LLMs tienen limitaciones cognitivas especificas que surgen de como funcionan a nivel de tokens. Entender estas limitaciones es clave para usarlos bien.
+            Los LLMs tienen limitaciones cognitivas específicas que surgen de como funcionan a nivel de tokens. Entender estas limitaciones es clave para usarlos bien.
           </aside>
         </section>
 
@@ -1766,26 +1941,26 @@
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 10px; border: 1px solid #e74c3c;">
               <div style="color: #e74c3c; margin-bottom: 6px;">Mala respuesta:</div>
               <div>"La respuesta es <strong>$3</strong>. Porque los 2 naranjas cuestan $4, y 13-4=9, dividido 3 manzanas..."</div>
-              <div style="color: var(--text-muted); margin-top: 6px;">Toda la computacion tiene que caber en un solo token ("3")</div>
+              <div style="color: var(--text-muted); margin-top: 6px;">Toda la computación tiene que caber en un solo token ("3")</div>
             </div>
             <div style="flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 10px; border: 1px solid #27ae60;">
               <div style="color: #27ae60; margin-bottom: 6px;">Buena respuesta:</div>
               <div>"Costo naranjas: 2 x $2 = $4. Costo manzanas: $13 - $4 = $9. Precio por manzana: $9 / 3 = <strong>$3</strong>"</div>
-              <div style="color: var(--text-muted); margin-top: 6px;">La computacion se distribuye en muchos tokens intermedios</div>
+              <div style="color: var(--text-muted); margin-top: 6px;">La computación se distribuye en muchos tokens intermedios</div>
             </div>
           </div>
           <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 12px;">Cada token tiene una cantidad fija y finita de computo (~100 capas). No se puede esperar razonamiento complejo en un solo token.</p>
           <aside class="notes">
-            Concepto clave: cada token que genera el modelo usa la misma cantidad fija de computo — ~100 capas de la red neuronal. No se puede hacer razonamiento complejo en un solo forward pass. Ejemplo: "Emily compra 3 manzanas y 2 naranjas. Cada naranja cuesta $2. El total es $13. Cuanto cuesta cada manzana?" La respuesta mala pone "$3" como primer token — tiene que meter toda la computacion en un token. La respuesta buena distribuye los calculos intermedios en muchos tokens. Esto no es solo estilo — la respuesta con razonamiento intermedio es FUNDAMENTALMENTE mas probable de ser correcta porque el modelo tiene mas tokens para distribuir su computacion. Por eso chain-of-thought prompting funciona tan bien.
+            Concepto clave: cada token que genera el modelo usa la misma cantidad fija de computo — ~100 capas de la red neuronal. No se puede hacer razonamiento complejo en un solo forward pass. Ejemplo: "Emily compra 3 manzanas y 2 naranjas. Cada naranja cuesta $2. El total es $13. Cuanto cuesta cada manzana?" La respuesta mala pone "$3" como primer token — tiene que meter toda la computación en un token. La respuesta buena distribuye los calculos intermedios en muchos tokens. Esto no es solo estilo — la respuesta con razonamiento intermedio es FUNDAMENTALMENTE más probable de ser correcta porque el modelo tiene más tokens para distribuir su computación. Por eso chain-of-thought prompting funciona tan bien.
           </aside>
         </section>
 
         <!-- Arithmetic, counting, spelling -->
         <section>
-          <h2>Aritmetica, conteo y deletreo</h2>
+          <h2>Aritmética, conteo y deletreo</h2>
           <ul>
-            <li class="fragment fade-in">Aritmetica mental: funciona para numeros chicos, falla con grandes</li>
-            <li class="fragment fade-in">Conteo: "cuantos puntos hay?" — el modelo adivina en un token</li>
+            <li class="fragment fade-in">Aritmética mental: funciona para números chicos, falla con grandes</li>
+            <li class="fragment fade-in">Conteo: "cuántos puntos hay?" — el modelo adivina en un token</li>
             <li class="fragment fade-in">Deletreo: "imprime cada tercera letra" — no ve letras, ve tokens</li>
           </ul>
           <div class="fragment fade-in" style="background: var(--bg-code); border-radius: 8px; padding: 10px 14px; font-size: 0.7em; margin-top: 12px;">
@@ -1793,9 +1968,9 @@
             <p style="color: #e74c3c;">Modelo: "2" (incorrecto — son 3)</p>
             <p style="color: var(--text-muted); margin-top: 4px;">El modelo ve: [" straw", "berry"] — no tiene acceso a letras individuales</p>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.8em;">Solucion: decirle "usa codigo" — el interprete de Python no se equivoca</p>
+          <p class="fragment fade-in" style="font-size: 0.8em;">Solución: decirle "usa código" — el interprete de Python no se equivoca</p>
           <aside class="notes">
-            Los modelos tienen varios deficits cognitivos especificos. Aritmetica: para numeros chicos funciona bien, pero para grandes puede fallar en cualquier paso intermedio. Es aritmetica mental hecha por la red neuronal — no hay garantia de precision. Conteo: si le pones muchos puntos y preguntas cuantos hay, tiene que resolverlo en un solo token. No hay suficiente computo para eso. Deletreo: el famoso "cuantas R tiene strawberry" — por mucho tiempo los modelos decian 2 en vez de 3. La razon: el modelo ve [straw, berry], no letras individuales. Tiene que deducir que letras hay dentro de cada token. La solucion para todos estos: "usa codigo." El modelo escribe un programa Python, lo ejecuta, y el interprete da la respuesta correcta. Nunca confies en la aritmetica mental de un LLM para cosas importantes.
+            Los modelos tienen varios déficits cognitivos específicos. Aritmética: para números chicos funciona bien, pero para grandes puede fallar en cualquier paso intermedio. Es aritmética mental hecha por la red neuronal — no hay garantia de precisión. Conteo: si le pones muchos puntos y preguntas cuántos hay, tiene que resolverlo en un solo token. No hay suficiente computo para eso. Deletreo: el famoso "cuántas R tiene strawberry" — por mucho tiempo los modelos decían 2 en vez de 3. La razón: el modelo ve [straw, berry], no letras individuales. Tiene que deducir que letras hay dentro de cada token. La solución para todos estos: "usa código." El modelo escribe un programa Python, lo ejecuta, y el interprete da la respuesta correcta. Nunca confies en la aritmética mental de un LLM para cosas importantes.
           </aside>
         </section>
 
@@ -1809,7 +1984,7 @@
           </ul>
           <p class="fragment fade-in" style="font-size: 0.8em; color: var(--text-muted); margin-top: 12px;">Las capacidades del modelo son como un queso suizo: enormes, pero con agujeros impredecibles. Usalo como herramienta, no como oraculo.</p>
           <aside class="notes">
-            Un ejemplo famoso: "es 9.11 mayor que 9.9?" Los modelos dicen que si. 9.11 no es mayor que 9.9 como numeros decimales. Cuando investigaron las activaciones de la red, encontraron que neuronas asociadas con versiculos biblicos se activaban — en la Biblia, versiculo 9:11 viene despues de 9:9. El modelo se "distrae" cognitivamente. Lo increible es que el mismo modelo puede resolver problemas de olimpiada de matematica. Las capacidades son como un queso suizo: inmensas, pero con agujeros impredecibles. No se puede predecir donde van a estar los agujeros. Moraleja: usa los LLMs como herramientas, no como oraculos infalibles. Verifica su trabajo. Usalos para inspiracion, primer borrador, pero siempre revisa.
+            Un ejemplo famoso: "es 9.11 mayor que 9.9?" Los modelos dicen que si. 9.11 no es mayor que 9.9 como números decimales. Cuando investigaron las activaciones de la red, encontraron que neuronas asociadas con versiculos biblicos se activaban — en la Biblia, versiculo 9:11 viene después de 9:9. El modelo se "distrae" cognitivamente. Lo increíble es que el mismo modelo puede resolver problemas de olimpiada de matemática. Las capacidades son como un queso suizo: inmensas, pero con agujeros impredecibles. No se puede predecir donde van a estar los agujeros. Moraleja: usa los LLMs como herramientas, no como oraculos infalibles. Verifica su trabajo. Usalos para inspiración, primer borrador, pero siempre revisa.
           </aside>
         </section>
 
@@ -1821,7 +1996,7 @@
         <section class="section-divider">
           <h2>Reinforcement Learning</h2>
           <aside class="notes">
-            Hemos cubierto dos etapas: pre-training (conocimiento de internet) y SFT (comportamiento de asistente). La tercera y ultima etapa es reinforcement learning — y es la que esta cambiando todo en este momento.
+            Hemos cubierto dos etapas: pre-training (conocimiento de internet) y SFT (comportamiento de asistente). La tercera y última etapa es reinforcement learning — y es la que esta cambiando todo en este momento.
           </aside>
         </section>
 
@@ -1831,7 +2006,7 @@
           <div style="display: flex; gap: var(--spacing-md); margin-top: 16px; font-size: 0.7em;">
             <div class="stage-box">
               <h3 style="font-size: 1em;">Pre-training</h3>
-              <p>Leer la exposicion del libro</p>
+              <p>Leer la exposición del libro</p>
               <p style="color: var(--text-muted); font-size: 0.85em;">Adquirir conocimiento base</p>
             </div>
             <div class="stage-box">
@@ -1841,13 +2016,13 @@
             </div>
             <div class="stage-box highlight">
               <h3 style="font-size: 1em;">RL</h3>
-              <p>Hacer ejercicios de practica</p>
+              <p>Hacer ejercicios de práctica</p>
               <p style="color: var(--text-muted); font-size: 0.85em;">Descubrir como resolver</p>
             </div>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 16px;">En RL no hay solucion de referencia — solo la respuesta final. El modelo descubre el camino.</p>
+          <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 16px;">En RL no hay solución de referencia — solo la respuesta final. El modelo descubre el camino.</p>
           <aside class="notes">
-            Para motivar el RL, pensemos en como funciona la escuela. Hay tres tipos de informacion en un libro de texto: 1) Exposicion: texto de fondo, conocimiento. Esto es el equivalente del pre-training. 2) Ejercicios resueltos: un experto muestra la solucion paso a paso. Esto es SFT — imitas al experto. 3) Ejercicios de practica: te dan el problema y la respuesta final, pero no la solucion. Tenes que descubrir como llegar. Esto es RL. Los ejercicios de practica son fundamentales para aprender de verdad, porque te obligan a descubrir tus propias estrategias. El RL hace lo mismo con los LLMs.
+            Para motivar el RL, pensemos en como funciona la escuela. Hay tres tipos de información en un libro de texto: 1) Exposición: texto de fondo, conocimiento. Esto es el equivalente del pre-training. 2) Ejercicios resueltos: un experto muestra la solución paso a paso. Esto es SFT — imitas al experto. 3) Ejercicios de práctica: te dan el problema y la respuesta final, pero no la solución. Tenes que descubrir como llegar. Esto es RL. Los ejercicios de práctica son fundamentales para aprender de verdad, porque te obligan a descubrir tus propias estrategias. El RL hace lo mismo con los LLMs.
           </aside>
         </section>
 
@@ -1855,18 +2030,18 @@
         <section>
           <h2>Por que SFT no alcanza</h2>
           <div style="display: flex; gap: var(--spacing-sm); font-size: 0.6em; margin-top: 12px;">
-            <div class="rl-attempt" style="flex: 1;">Solucion A:<br>2*$2=$4<br>$13-$4=$9<br>$9/3=<strong>$3</strong></div>
-            <div class="rl-attempt" style="flex: 1;">Solucion B:<br>Sea x el precio<br>3x+4=13<br>x=<strong>$3</strong></div>
-            <div class="rl-attempt" style="flex: 1;">Solucion C:<br>Naranjas=$4<br>Manzanas=$9<br>Cada una=<strong>$3</strong></div>
-            <div class="rl-attempt" style="flex: 1;">Solucion D:<br>13-4=9, 9/3=<strong>$3</strong></div>
+            <div class="rl-attempt" style="flex: 1;">Solución A:<br>2*$2=$4<br>$13-$4=$9<br>$9/3=<strong>$3</strong></div>
+            <div class="rl-attempt" style="flex: 1;">Solución B:<br>Sea x el precio<br>3x+4=13<br>x=<strong>$3</strong></div>
+            <div class="rl-attempt" style="flex: 1;">Solución C:<br>Naranjas=$4<br>Manzanas=$9<br>Cada una=<strong>$3</strong></div>
+            <div class="rl-attempt" style="flex: 1;">Solución D:<br>13-4=9, 9/3=<strong>$3</strong></div>
           </div>
           <ul style="font-size: 0.75em; margin-top: 12px;">
             <li class="fragment fade-in">Las 4 dan la respuesta correcta, pero cual es mejor <em>para el modelo</em>?</li>
-            <li class="fragment fade-in">Lo que es facil para un humano puede ser dificil para el LLM y viceversa</li>
+            <li class="fragment fade-in">Lo que es fácil para un humano puede ser dificil para el LLM y viceversa</li>
             <li class="fragment fade-in">El modelo necesita descubrir que secuencias de tokens le funcionan a el</li>
           </ul>
           <aside class="notes">
-            Ejemplo concreto de por que SFT no es suficiente. Para el problema de las manzanas, hay muchas soluciones correctas. Un humano labeler podria escribir cualquiera de estas cuatro. Pero no sabemos cual es optima para el LLM. Algunas usan ecuaciones (quiza triviales para el modelo), otras hablan en lenguaje natural (quiza mas dificil de seguir para el modelo). Lo que es un salto mental trivial para un humano puede ser imposible para el LLM en un solo token. Lo que un humano explicaria con muchas palabras puede ser obvio para el modelo. No estamos en posicion de escribir las secuencias de tokens ideales para el LLM. Necesitamos que el propio modelo las descubra.
+            Ejemplo concreto de por que SFT no es suficiente. Para el problema de las manzanas, hay muchas soluciones correctas. Un humano labeler podría escribir cualquiera de estas cuatro. Pero no sabemos cual es optima para el LLM. Algunas usan ecuaciones (quizá triviales para el modelo), otras hablan en lenguaje natural (quizá más difícil de seguir para el modelo). Lo que es un salto mental trivial para un humano puede ser imposible para el LLM en un solo token. Lo que un humano explicaria con muchas palabras puede ser obvio para el modelo. No estamos en posición de escribir las secuencias de tokens ideales para el LLM. Necesitamos que el propio modelo las descubra.
           </aside>
         </section>
 
@@ -1887,7 +2062,7 @@
             <li class="fragment fade-in">El modelo no imita a un humano — descubre sus propias estrategias</li>
           </ul>
           <aside class="notes">
-            El proceso de RL es simple conceptualmente. Para un problema dado: 1) Generar miles de intentos de solucion (recordar que el modelo es estocastico, cada intento es diferente). 2) Verificar cuales llegan a la respuesta correcta. 3) Las soluciones correctas (verdes) se usan para entrenar — reforzar esos caminos de tokens. Las incorrectas (rojas) se descartan. 4) Repetir con miles de problemas diferentes. En la practica, se pueden generar millones de soluciones. Es como un estudiante que practica miles de problemas, revisa cuales hizo bien, y aprende de esos. La diferencia clave con SFT: las soluciones no vienen de un humano experto — vienen del propio modelo. El modelo descubre por si mismo que secuencias de tokens lo llevan a respuestas correctas.
+            El proceso de RL es simple conceptualmente. Para un problema dado: 1) Generar miles de intentos de solución (recordar que el modelo es estocástico, cada intento es diferente). 2) Verificar cuales llegan a la respuesta correcta. 3) Las soluciones correctas (verdes) se usan para entrenar — reforzar esos caminos de tokens. Las incorrectas (rojas) se descartan. 4) Repetir con miles de problemas diferentes. En la práctica, se pueden generar millones de soluciones. Es como un estudiante que practica miles de problemas, revisa cuales hizo bien, y aprende de esos. La diferencia clave con SFT: las soluciones no vienen de un humano experto — vienen del propio modelo. El modelo descubre por si mismo que secuencias de tokens lo llevan a respuestas correctas.
           </aside>
         </section>
 
@@ -1896,7 +2071,7 @@
           <h2>DeepSeek R1: emergen cadenas de pensamiento</h2>
           <ul>
             <li class="fragment fade-in"><a href="https://arxiv.org/pdf/2501.12948" target="_blank">Paper (enero 2025)</a> — RL para LLMs explicado abiertamente</li>
-            <li class="fragment fade-in">El modelo aprende a generar soluciones cada vez mas largas</li>
+            <li class="fragment fade-in">El modelo aprende a generar soluciones cada vez más largas</li>
             <li class="fragment fade-in">Descubre por su cuenta: reevaluar, reformular, backtracking</li>
           </ul>
           <div class="fragment fade-in" style="background: var(--bg-code); border-radius: 8px; padding: 10px 14px; font-family: var(--font-mono); font-size: 0.6em; line-height: 1.6; margin-top: 12px;">
@@ -1905,7 +2080,7 @@
             <span style="color: var(--text-muted);">Actually, if I approach this differently..."</span>
           </div>
           <aside class="notes">
-            El paper de DeepSeek R1 de enero 2025 fue revolucionario porque explico publicamente como hacer RL para LLMs. Lo mas increible no son los numeros sino lo cualitativo. A medida que el RL avanza, el modelo genera soluciones cada vez mas largas. Por que? Porque descubrio que pensar mas le da mejores resultados. El modelo aprende a hacer cosas como: "wait wait wait, that's not right. Let me re-evaluate..." — reevaluar pasos, probar desde diferentes perspectivas, hacer backtracking. Estas son estrategias cognitivas que emergen del RL sin que nadie las programe. Ningun humano podria hardcodear esto en un dataset de SFT. Es una propiedad emergente de la optimizacion. El modelo descubre como pensar.
+            El paper de DeepSeek R1 de enero 2025 fue revolucionario porque explicó publicamente como hacer RL para LLMs. Lo más increíble no son los números sino lo cualitativo. A medida que el RL avanza, el modelo genera soluciones cada vez más largas. Por que? Porque descubrio que pensar más le da mejores resultados. El modelo aprende a hacer cosas como: "wait wait wait, that's not right. Let me re-evaluate..." — reevaluar pasos, probar desde diferentes perspectivas, hacer backtracking. Estas son estrategias cognitivas que emergen del RL sin que nadie las programe. Ningun humano podría hardcodear esto en un dataset de SFT. Es una propiedad emergente de la optimización. El modelo descubre como pensar.
           </aside>
         </section>
 
@@ -1919,7 +2094,7 @@
           </ul>
           <p class="fragment fade-in" style="font-size: 0.8em; color: var(--text-muted); margin-top: 12px;">En dominios verificables, RL puede descubrir estrategias que ningun humano conoce</p>
           <aside class="notes">
-            El poder del RL no es nuevo en IA. AlphaGo de DeepMind lo demostro en el juego de Go. Primero entrenaron imitando a jugadores expertos (supervised learning) — llego a ser muy bueno pero nunca supero a los mejores. Despues usaron RL: el sistema juega contra si mismo y aprende que movimientos llevan a ganar. El RL supero dramaticamente al supervised learning y vencio a Lee Sedol, el mejor jugador del mundo. El famoso "Move 37" fue una jugada que ningun experto humano habria hecho — probabilidad 1/10,000 de ser jugada por un humano. Pero fue brillante. AlphaGo descubrio una estrategia desconocida para la humanidad. En principio, lo mismo puede pasar con LLMs: descubrir formas de razonar que no se nos ocurririan.
+            El poder del RL no es nuevo en IA. AlphaGo de DeepMind lo demostró en el juego de Go. Primero entrenaron imitando a jugadores expertos (supervised learning) — llegó a ser muy bueno pero nunca supero a los mejores. Después usaron RL: el sistema juega contra si mismo y aprende que movimientos llevan a ganar. El RL supero dramaticamente al supervised learning y vencio a Lee Sedol, el mejor jugador del mundo. El famoso "Move 37" fue una jugada que ningun experto humano habría hecho — probabilidad 1/10,000 de ser jugada por un humano. Pero fue brillante. AlphaGo descubrio una estrategia desconocida para la humanidad. En principio, lo mismo puede pasar con LLMs: descubrir formas de razonar que no se nos ocurririan.
           </aside>
         </section>
 
@@ -1927,15 +2102,15 @@
         <section>
           <h2>RLHF: RL en dominios no verificables</h2>
           <ul>
-            <li class="fragment fade-in">Problemas de matematica: facil verificar si la respuesta es correcta</li>
+            <li class="fragment fade-in">Problemas de matemática: fácil verificar si la respuesta es correcta</li>
             <li class="fragment fade-in">"Escribe un chiste sobre pelicanos": como puntuar?</li>
-            <li class="fragment fade-in">Solucion: entrenar un <strong>reward model</strong> que simule preferencias humanas</li>
+            <li class="fragment fade-in">Solución: entrenar un <strong>reward model</strong> que simule preferencias humanas</li>
           </ul>
           <div class="fragment fade-in" style="font-size: 0.75em; margin-top: 12px;">
             <p>Humanos ordenan respuestas de mejor a peor &#8594; red neuronal aprende a puntuar &#8594; RL contra ese puntaje simulado</p>
           </div>
           <aside class="notes">
-            Todo lo que vimos de RL funciona en dominios verificables: matematica, codigo, Go — donde hay una respuesta correcta clara. Pero que pasa con tareas como escritura creativa, resumen, chistes? No hay respuesta correcta objetiva. La solucion se llama RLHF (Reinforcement Learning from Human Feedback). El truco: entrenar una red neuronal separada (reward model) que simule las preferencias humanas. Le mostramos pares de respuestas a humanos, les pedimos que ordenen de mejor a peor. Con esos datos entrenamos el reward model para dar puntajes. Luego hacemos RL contra el reward model en vez de contra una respuesta correcta. Es un nivel de indirecion: en vez de preguntar a un humano cada vez (imposible con miles de evaluaciones), le preguntamos a un simulador de humanos.
+            Todo lo que vimos de RL funciona en dominios verificables: matemática, código, Go — donde hay una respuesta correcta clara. Pero que pasa con tareas como escritura creativa, resumen, chistes? No hay respuesta correcta objetiva. La solución se llama RLHF (Reinforcement Learning from Human Feedback). El truco: entrenar una red neuronal separada (reward model) que simule las preferencias humanas. Le mostramos pares de respuestas a humanos, les pedimos que ordenen de mejor a peor. Con esos datos entrenamos el reward model para dar puntajes. Luego hacemos RL contra el reward model en vez de contra una respuesta correcta. Es un nivel de indirecion: en vez de preguntar a un humano cada vez (imposible con miles de evaluaciones), le preguntamos a un simulador de humanos.
           </aside>
         </section>
 
@@ -1945,16 +2120,16 @@
           <ul>
             <li class="fragment fade-in">El reward model es una red neuronal con fallas propias</li>
             <li class="fragment fade-in">RL es MUY bueno en encontrar como hackear el reward model</li>
-            <li class="fragment fade-in">Despues de ~200 steps los resultados colapsan</li>
+            <li class="fragment fade-in">Después de ~200 steps los resultados colapsan</li>
           </ul>
           <div class="fragment fade-in" style="background: var(--bg-code); border-radius: 8px; padding: 10px 14px; font-size: 0.7em; margin-top: 12px;">
-            <p style="color: var(--text-muted);">Mejor chiste despues de mucho RLHF:</p>
+            <p style="color: var(--text-muted);">Mejor chiste después de mucho RLHF:</p>
             <p style="color: #e74c3c;">"the the the the the the" (score: 1.0)</p>
             <p style="color: var(--text-muted); font-size: 0.85em;">El RL encontro un adversarial example que engana al reward model</p>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.8em; color: var(--text-muted);">RLHF no es el RL "magico" de AlphaGo. Es un fine-tuning limitado, no una mejora indefinida.</p>
+          <p class="fragment fade-in" style="font-size: 0.8em; color: var(--text-muted);">RLHF no es el RL "mágico" de AlphaGo. Es un fine-tuning limitado, no una mejora indefinida.</p>
           <aside class="notes">
-            RLHF tiene un problema grave: el reward model es gameable. Recordar que el reward model es una red neuronal con miles de millones de parametros. RL es EXTREMADAMENTE bueno en encontrar inputs que obtienen puntajes altos pero de forma falsa — adversarial examples. Si corres RLHF por mucho tiempo: las primeras ~200 actualizaciones, los chistes sobre pelicanos mejoran. Despues de eso, colapsan completamente. El mejor "chiste" se convierte en algo como "the the the the" con puntaje 1.0. Es nonsense que engana al reward model. Por eso RLHF se corre por pocos cientos de steps y se corta. No se puede ejecutar indefinidamente como el RL de AlphaGo (donde ganar un juego no se puede hackear). Karpathy dice: "RLHF no es RL de verdad" — es un fine-tuning marginal, no la mejora magica e indefinida del RL en dominios verificables.
+            RLHF tiene un problema grave: el reward model es gameable. Recordar que el reward model es una red neuronal con miles de millones de parámetros. RL es EXTREMADAMENTE bueno en encontrar inputs que obtienen puntajes altos pero de forma falsa — adversarial examples. Si corres RLHF por mucho tiempo: las primeras ~200 actualizaciones, los chistes sobre pelicanos mejoran. Después de eso, colapsan completamente. El mejor "chiste" se convierte en algo como "the the the the" con puntaje 1.0. Es nonsense que engana al reward model. Por eso RLHF se corre por pocos cientos de steps y se corta. No se puede ejecutar indefinidamente como el RL de AlphaGo (donde ganar un juego no se puede hackear). Karpathy dice: "RLHF no es RL de verdad" — es un fine-tuning marginal, no la mejora mágica e indefinida del RL en dominios verificables.
           </aside>
         </section>
 
@@ -1985,7 +2160,7 @@
               <h3 style="font-size: 1em;">2. SFT</h3>
               <p>Conversaciones humano/asistente</p>
               <p style="color: var(--text-muted);">~3 horas</p>
-              <p style="color: var(--text-muted);">Resultado: asistente basico</p>
+              <p style="color: var(--text-muted);">Resultado: asistente básico</p>
             </div>
             <div style="display: flex; align-items: center; color: var(--text-muted);">&#8594;</div>
             <div class="stage-box highlight">
@@ -1996,7 +2171,7 @@
             </div>
           </div>
           <aside class="notes">
-            Resumen del pipeline completo. Tres etapas: 1) Pre-training: descargar internet, tokenizar, entrenar red neuronal a predecir el siguiente token. Toma meses y cuesta millones de dolares. Sale un modelo base que es un simulador de texto de internet. 2) SFT: cambiar el dataset por conversaciones, seguir entrenando. Toma horas. Sale un asistente que puede responder preguntas. 3) RL: darle problemas de practica, dejar que descubra como resolverlos. Sale un modelo de razonamiento que puede pensar paso a paso. Modelos como GPT-4o son principalmente SFT (con un poco de RLHF que no es el RL "magico"). Modelos como o1, o3, DeepSeek R1 son thinking models entrenados con RL real.
+            Resumen del pipeline completo. Tres etapas: 1) Pre-training: descargar internet, tokenizar, entrenar red neuronal a predecir el siguiente token. Toma meses y cuesta millones de dolares. Sale un modelo base que es un simulador de texto de internet. 2) SFT: cambiar el dataset por conversaciones, seguir entrenando. Toma horas. Sale un asistente que puede responder preguntas. 3) RL: darle problemas de práctica, dejar que descubra como resolverlos. Sale un modelo de razonamiento que puede pensar paso a paso. Modelos como GPT-4o son principalmente SFT (con un poco de RLHF que no es el RL "mágico"). Modelos como o1, o3, DeepSeek R1 son thinking models entrenados con RL real.
           </aside>
         </section>
 
@@ -2004,13 +2179,13 @@
         <section>
           <h2>Lo que viene</h2>
           <ul>
-            <li class="fragment fade-in"><strong>Multimodalidad:</strong> audio, imagenes, video como tokens adicionales</li>
-            <li class="fragment fade-in"><strong>Agentes:</strong> tareas de largo plazo con supervision humana</li>
+            <li class="fragment fade-in"><strong>Multimodalidad:</strong> audio, imágenes, video como tokens adicionales</li>
+            <li class="fragment fade-in"><strong>Agentes:</strong> tareas de largo plazo con supervisión humana</li>
             <li class="fragment fade-in"><strong>Uso de computadoras:</strong> teclado y mouse controlados por el modelo</li>
             <li class="fragment fade-in"><strong>Test-time training:</strong> modelos que aprenden mientras los usas</li>
           </ul>
           <aside class="notes">
-            Tendencias: 1) Multimodalidad: los modelos van a manejar audio, imagenes y video nativamente. No es un cambio fundamental — se tokeniza audio (espectrograma) e imagenes (patches) y se aplica el mismo pipeline. 2) Agentes: en vez de tareas individuales, los modelos van a ejecutar trabajos complejos a lo largo del tiempo, reportando progreso. Vamos a hablar de ratios humano-a-agente. 3) Uso de computadoras: modelos que controlan teclado y mouse. ChatGPT Operator es un ejemplo temprano. 4) Test-time training: actualmente los parametros son fijos despues del entrenamiento. En el futuro, los modelos podran actualizar sus parametros mientras los usas — como tu cerebro cuando duerme y consolida memorias.
+            Tendencias: 1) Multimodalidad: los modelos van a manejar audio, imágenes y video nativamente. No es un cambio fundamental — se tokeniza audio (espectrograma) e imágenes (patches) y se aplica el mismo pipeline. 2) Agentes: en vez de tareas individuales, los modelos van a ejecutar trabajos complejos a lo largo del tiempo, reportando progreso. Vamos a hablar de ratios humano-a-agente. 3) Uso de computadoras: modelos que controlan teclado y mouse. ChatGPT Operator es un ejemplo temprano. 4) Test-time training: actualmente los parámetros son fijos después del entrenamiento. En el futuro, los modelos podrán actualizar sus parámetros mientras los usas — como tu cerebro cuando duerme y consolida memorias.
           </aside>
         </section>
 
@@ -2020,7 +2195,7 @@
           <div style="font-size: 0.8em;">
             <h3>Seguir el campo</h3>
             <ul>
-              <li><a href="https://lmarena.ai/" target="_blank">LM Arena</a> — leaderboard de LLMs por comparacion humana</li>
+              <li><a href="https://lmarena.ai/" target="_blank">LM Arena</a> — leaderboard de LLMs por comparación humana</li>
               <li><a href="https://buttondown.com/ainews" target="_blank">AI News</a> — newsletter comprehensive</li>
             </ul>
             <h3 style="margin-top: 16px;">Usar los modelos</h3>
@@ -2032,7 +2207,7 @@
             </ul>
           </div>
           <aside class="notes">
-            Recursos para seguir el campo: LM Arena (lmarena.ai) rankea modelos por comparacion humana ciega. Google esta primero ahora, seguido de OpenAI y DeepSeek en tercer lugar. DeepSeek es notable porque es open weights (MIT license). La newsletter AI News de Swyx es comprehensiva y sale cada 2-3 dias. Para usar modelos: los propietarios (ChatGPT, Claude, Gemini) se usan desde sus webs. Para open weights, Together.ai tiene un playground donde podes probar muchos modelos. LM Studio permite correr modelos localmente en tu MacBook (versiones distilled/mas chicas). Hyperbolic sirve modelos base — utiles e interesantes para experimentar.
+            Recursos para seguir el campo: LM Arena (lmarena.ai) rankea modelos por comparación humana ciega. Google esta primero ahora, seguido de OpenAI y DeepSeek en tercer lugar. DeepSeek es notable porque es open weights (MIT license). La newsletter AI News de Swyx es comprehensiva y sale cada 2-3 dias. Para usar modelos: los propietarios (ChatGPT, Claude, Gemini) se usan desde sus webs. Para open weights, Together.ai tiene un playground donde podes probar muchos modelos. LM Studio permite correr modelos localmente en tu MacBook (versiones distilled/más chicas). Hyperbolic sirve modelos base — útiles e interesantes para experimentar.
           </aside>
         </section>
 
@@ -2046,13 +2221,13 @@
             <ul>
               <li class="fragment fade-in">Son herramientas poderosas, no oraculos infalibles</li>
               <li class="fragment fade-in">Verificar siempre su trabajo</li>
-              <li class="fragment fade-in">Usar para inspiracion, primer borrador, preguntas</li>
+              <li class="fragment fade-in">Usar para inspiración, primer borrador, preguntas</li>
               <li class="fragment fade-in">Las alucinaciones mejoran pero no desaparecen</li>
               <li class="fragment fade-in">Las capacidades "queso suizo" son reales</li>
             </ul>
           </div>
           <aside class="notes">
-            Mensaje final de Karpathy: los LLMs son herramientas increiblemente poderosas que uso cientos de veces por dia. Pero hay que ser consciente de sus limitaciones. Alucinan. Tienen agujeros impredecibles en sus capacidades. Fallan en cosas triviales. Usalos como herramientas en tu toolbox. Verificá su trabajo. Usalos para inspiración, para el primer borrador, para hacer preguntas — pero siempre revisa y se responsable del producto final.
+            Mensaje final de Karpathy: los LLMs son herramientas increíblemente poderosas que uso cientos de veces por día. Pero hay que ser consciente de sus limitaciones. Alucinan. Tienen agujeros impredecibles en sus capacidades. Fallan en cosas triviales. Usalos como herramientas en tu toolbox. Verificá su trabajo. Usalos para inspiración, para el primer borrador, para hacer preguntas — pero siempre revisa y se responsable del producto final.
           </aside>
         </section>
 
