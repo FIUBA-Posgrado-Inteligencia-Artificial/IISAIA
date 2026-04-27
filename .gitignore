@@ -5,3 +5,5 @@ semana_1.md
 .env
 .runpod-pod
 __pycache__/
+
+*.DS_Store
