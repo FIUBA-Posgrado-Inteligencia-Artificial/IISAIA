@@ -1944,7 +1944,8 @@
           <h2>Limitaciones Cognitivas</h2>
           <p class="muted">Las asperezas de un sistema basado en la generación estocastica de tokens</p>
           <aside class="notes">
-            Los LLMs pueden alucinar, como vimos. Pero hay otro tipo de limitación más fundamental: limitaciones cognitivas que surgen directamente de cómo funcionan a nivel de tokens. Entender estos bordes afilados es clave para usarlos bien — y para saber cuándo usar herramientas en vez de confiar en la "aritmética mental" del modelo.
+            <p><u>Divisor de sección. Limitaciones cognitivas.</u></p>
+            <p><em>"Los LLMs pueden alucinar, como vimos. Pero hay otro tipo de limitación más fundamental: limitaciones cognitivas que surgen directamente de cómo funcionan a nivel de tokens. Entender estos bordes afilados es clave para usarlos bien, y para saber cuándo usar herramientas en vez de confiar en la aritmética mental del modelo."</em></p>
           </aside>
         </section>
 
@@ -1989,7 +1990,9 @@
             <span>decirle "usá código." El modelo escribe un programa Python, lo ejecuta, y el intérprete da la respuesta correcta.</span>
           </div>
           <aside class="notes">
-            Los modelos tienen varios déficits cognitivos específicos, todos causados por la misma raíz: computo finito por token. Aritmética: para números chicos funciona bien, pero para grandes puede fallar en cualquier paso intermedio. Es aritmética mental hecha por la red neuronal — no hay garantía de precisión. Conteo: si le ponés muchos puntos y preguntás cuántos hay, tiene que resolverlo en un solo token. No hay suficiente cómputo para eso. Deletreo: el famoso "cuántas R tiene strawberry" — por mucho tiempo los modelos decían 2 en vez de 3. La razón: el modelo ve [straw, berry], no letras individuales. Tiene que deducir qué letras hay dentro de cada token. La solución para todos estos: "usá código." El modelo escribe un programa Python, lo ejecuta, y el intérprete da la respuesta correcta. Nunca confíes en la aritmética mental de un LLM para cosas importantes.
+            <p><strong>Avanzar fragmentos: aritmética → conteo → deletreo → solución.</strong></p>
+            <p><u>Tres déficits cognitivos: aritmética, conteo, deletreo. Todos por cómputo finito por token.</u></p>
+            <p><em>"Los modelos tienen varios déficits cognitivos específicos, todos causados por la misma raíz: cómputo finito por token. Aritmética: para números chicos funciona bien, pero para grandes puede fallar en cualquier paso intermedio. Es aritmética mental hecha por la red neuronal, no hay garantía de precisión. Conteo: si le ponés muchos puntos y preguntás cuántos hay, tiene que resolverlo en un solo token. No hay suficiente cómputo para eso. Deletreo: el famoso 'cuántas R tiene strawberry'. Por mucho tiempo los modelos decían 2 en vez de 3. La razón: el modelo ve straw-berry, no letras individuales. La solución para todos estos: 'usá código'. El modelo escribe un programa Python, lo ejecuta, y el intérprete da la respuesta correcta. Nunca confíen en la aritmética mental de un LLM para cosas importantes."</em></p>
           </aside>
         </section>
 
@@ -2026,7 +2029,9 @@
             ¿Pero cómo "piensa" una red neuronal que genera tokens de izquierda a derecha?
           </p>
           <aside class="notes">
-            Transición clave. Todo lo que vimos en la sección anterior — alucinaciones, uso de herramientas, búsqueda web — eran problemas de conocimiento. El modelo no sabía algo y la solución era darle la información. Pero ahora pensemos en otro tipo de problema: uno donde toda la información ya está en el prompt. El problema de los obreros y los muros no requiere que el modelo sepa nada del mundo. Requiere que razone, que compute, que "piense." Y acá viene la pregunta interesante: ¿cómo piensa una red neuronal? Recordemos que el modelo genera tokens de izquierda a derecha, uno a la vez. Cada token pasa por las mismas ~100 capas de la red neuronal. Esa es una cantidad fija y finita de cómputo por token. ¿Qué implica eso?
+            <p><strong>Click para revelar el panel de razonamiento. Click final para la pregunta retórica.</strong></p>
+            <p><u>Transición: del problema de conocimiento al problema de razonamiento. Setup para finite compute.</u></p>
+            <p><em>"Transición clave. Todo lo que vimos en la sección anterior, alucinaciones, herramientas, búsqueda web, eran problemas de conocimiento. El modelo no sabía algo y la solución era darle la información. Pero ahora pensemos en otro tipo de problema: uno donde toda la información ya está en el prompt. El problema de los obreros y los muros no requiere que el modelo sepa nada del mundo. Requiere que razone, que compute, que piense. Y acá viene la pregunta interesante: ¿cómo piensa una red neuronal que genera tokens de izquierda a derecha? Cada token pasa por las mismas 100 capas. Es una cantidad fija y finita de cómputo por token. ¿Qué implica eso?"</em></p>
           </aside>
         </section>
 
@@ -2057,7 +2062,9 @@
             <a href="https://platform.openai.com/playground/chat?models=gpt-3.5-turbo" target="_blank">Probémoslo en el playground &rarr;</a>
           </p>
           <aside class="notes">
-            Concepto clave: cada token que genera el modelo usa la misma cantidad fija de cómputo — ~100 capas de la red neuronal. No se puede hacer razonamiento complejo en un solo forward pass. Veamos dos respuestas posibles al problema de los obreros. La respuesta A pone "48" como primer token — toda la computación del problema tiene que caber en ese único token. Todo lo que viene después es justificación post-hoc: el modelo ya emitió la respuesta, no puede cambiarla. La respuesta B distribuye los cálculos intermedios en muchos tokens. Cada paso es simple: 8×10=80, 80×3=240, 240/5=48. Ningún token tiene que hacer algo demasiado difícil. Esto no es solo mejor estilo — es FUNDAMENTALMENTE más probable de ser correcto porque el modelo tiene más tokens (más cómputo) para llegar a la respuesta. Por eso chain-of-thought prompting funciona tan bien: le estás dando al modelo más tokens para pensar.
+            <p><strong>Avanzar fragmentos: revelar etiquetas de cada respuesta y luego el punchline. Al final, abrir el playground para probar.</strong></p>
+            <p><u>Por qué chain-of-thought funciona: distribuir cómputo en tokens intermedios.</u></p>
+            <p><em>"Concepto clave: cada token que genera el modelo usa la misma cantidad fija de cómputo, alrededor de 100 capas. No se puede hacer razonamiento complejo en un solo forward pass. Veamos dos respuestas posibles. La respuesta A pone 48 como primer token: toda la computación del problema tiene que caber en ese único token. Todo lo que viene después es justificación post-hoc: el modelo ya emitió la respuesta, no puede cambiarla. La respuesta B distribuye los cálculos intermedios en muchos tokens. Cada paso es simple: 8 por 10 igual a 80, 80 por 3 igual a 240, 240 dividido 5 igual a 48. Ningún token tiene que hacer algo demasiado difícil. Esto no es solo mejor estilo: es fundamentalmente más probable de ser correcto. Por eso chain-of-thought funciona tan bien: le estás dando al modelo más tokens para pensar."</em></p>
           </aside>
         </section>
 
@@ -2070,7 +2077,8 @@
           <h2>Reinforcement Learning</h2>
           <p class="muted">Dejar que el modelo aprenda por su cuenta</p>
           <aside class="notes">
-            Acabamos de ver que los modelos necesitan tokens para pensar — que distribuir el razonamiento en muchos tokens intermedios da mejores resultados. Pero en SFT, son los humanos los que escriben esas soluciones paso a paso. ¿Y si los humanos no saben cuál es la mejor forma de razonar para el modelo? Ahí es donde entra reinforcement learning.
+            <p><u>Divisor de sección. Reinforcement learning.</u></p>
+            <p><em>"Acabamos de ver que los modelos necesitan tokens para pensar, que distribuir el razonamiento en muchos tokens intermedios da mejores resultados. Pero en SFT, son los humanos los que escriben esas soluciones paso a paso. ¿Y si los humanos no saben cuál es la mejor forma de razonar para el modelo? Ahí es donde entra reinforcement learning."</em></p>
           </aside>
         </section>
 
@@ -2144,7 +2152,9 @@
 
           <p class="fragment fade-in" style="font-size: 0.8em; margin-top: 14px;">El ejercicio de práctica solo dice "Rta: 48 h" &mdash; el camino para llegar ahí tiene que ser encontrado.</p>
           <aside class="notes">
-            Ahora que entendemos RLHF y sus limitaciones, pensemos en el RL verificable con una analogía que todos conocemos: la escuela. Hay tres formas de aprender en un libro de texto. Leer la teoría: absorber conocimiento (pre-training). Estudiar ejercicios resueltos: imitar al experto (SFT). Hacer ejercicios de práctica: solo tenés el problema y la respuesta final en la clave — tenés que descubrir el camino vos solo (RL verificable). Click en cada "página" para ver qué equivale en el LLM. Notar que el ejercicio de práctica — a diferencia de RLHF — tiene una respuesta correcta objetiva. No hace falta un reward model gameable. La señal es limpia: ¿llegaste a 48 o no?
+            <p><strong>Click en cada página del libro para revelar a qué equivale en el LLM. Click en la tercera (RL) para revelarla.</strong></p>
+            <p><u>Métáfora del libro de texto: teoría / ejercicios resueltos / ejercicios de práctica = pre-training / SFT / RL.</u></p>
+            <p><em>"Pensemos en el RL verificable con una analogía que todos conocemos: la escuela. Hay tres formas de aprender en un libro de texto. Leer la teoría: absorber conocimiento, eso es pre-training. Estudiar ejercicios resueltos: imitar al experto, eso es SFT. Hacer ejercicios de práctica: solo tenés el problema y la respuesta final en la clave, tenés que descubrir el camino vos solo. Eso es RL verificable. Notar que el ejercicio de práctica, a diferencia de RLHF, tiene una respuesta correcta objetiva. No hace falta un reward model gameable. La señal es limpia: ¿llegaste a 48 o no?"</em></p>
           </aside>
         </section>
 
@@ -2166,7 +2176,9 @@
             El modelo necesita descubrir qué secuencias de tokens le funcionan a él.
           </p>
           <aside class="notes">
-            Conexión directa con lo que acabamos de ver. Mostramos que distribuir el razonamiento en muchos tokens intermedios es fundamental. Pero en SFT, las soluciones las escriben labelers humanos. Un humano labeler podría escribir cualquiera de estas cuatro — y no sabemos cuál es la distribución óptima de tokens para el LLM. Lo que es un salto mental trivial para un humano puede ser imposible para el LLM en un solo token. Lo que un humano explicaría con muchas palabras puede ser obvio para el modelo. La cognición del modelo es diferente a la nuestra. No estamos en posición de escribir las secuencias de tokens ideales para el LLM. Necesitamos que el propio modelo las descubra — y eso es exactamente lo que hace el RL verificable.
+            <p><strong>Click para revelar el problema y luego el punchline.</strong></p>
+            <p><u>Argumento de por qué SFT no alcanza: humanos no saben cuál es la distribución óptima de tokens para el LLM.</u></p>
+            <p><em>"Conexión directa con lo que acabamos de ver. Mostramos que distribuir el razonamiento en muchos tokens intermedios es fundamental. Pero en SFT, las soluciones las escriben labelers humanos. Un humano labeler podría escribir cualquiera de estas cuatro, y no sabemos cuál es la distribución óptima de tokens para el LLM. Lo que es un salto mental trivial para un humano puede ser imposible para el LLM en un solo token. Lo que un humano explicaría con muchas palabras puede ser obvio para el modelo. La cognición del modelo es diferente a la nuestra. No estamos en posición de escribir las secuencias de tokens ideales para el LLM. Necesitamos que el propio modelo las descubra. Y eso es exactamente lo que hace el RL verificable."</em></p>
           </aside>
         </section>
 
@@ -2177,7 +2189,9 @@
           <script src="rl-anim.js"></script>
           <script>initRlAnim({ containerId: 'rl-anim-demo' });</script>
           <aside class="notes">
-            Animación interactiva del loop de RL verificable. A diferencia de RLHF, acá la señal no es un reward model gameable — es la respuesta correcta. Avanzar con el botón. Paso 1: un LLM generador crea problemas con respuesta verificable. Paso 2: el modelo que estamos entrenando genera miles de intentos de solución (es estocástico — cada intento es diferente). Paso 3: un verificador evalúa cada intento contra la respuesta correcta. Paso 4: las soluciones correctas se usan para actualizar los parámetros — reforzar los caminos de tokens que llevaron a respuestas correctas. Y después: nuevo problema, repetir. Miles de problemas, miles de intentos por problema. A diferencia de RLHF, esto se puede correr indefinidamente porque la señal no se puede hackear. Todo el loop puede ser automático — no necesita humanos en el loop.
+            <p><strong>Avanzar la animación paso a paso con el botón.</strong></p>
+            <p><u>Animación del loop de RL verificable. 4 pasos: generar → muestrear → verificar → actualizar.</u></p>
+            <p><em>"A diferencia de RLHF, acá la señal no es un reward model gameable: es la respuesta correcta. Paso 1: un LLM generador crea problemas con respuesta verificable. Paso 2: el modelo que estamos entrenando genera miles de intentos de solución, es estocástico, cada intento es diferente. Paso 3: un verificador evalúa cada intento contra la respuesta correcta. Paso 4: las soluciones correctas se usan para actualizar los parámetros, reforzando los caminos de tokens que llevaron a respuestas correctas. Y después: nuevo problema, repetir. Miles de problemas, miles de intentos por problema. A diferencia de RLHF, esto se puede correr indefinidamente porque la señal no se puede hackear. Todo el loop puede ser automático, no necesita humanos."</em></p>
           </aside>
         </section>
 
@@ -2188,7 +2202,9 @@
           <script src="deepseek-anim.js"></script>
           <script>initDeepSeekAnim({ containerId: 'deepseek-anim-demo' });</script>
           <aside class="notes">
-            Animación de 5 pasos sobre DeepSeek R1. Paso 0 (contexto): OpenAI o1 salió en septiembre 2024 — primera prueba de que RL mejora razonamiento, pero no publicaron nada. Cuatro meses después DeepSeek publicó todo. Los números son del paper directamente. Paso 1 (dinámica): dos gráficos simplificados de las Figuras 2 y 3 del paper. A medida que avanza el RL, la precisión en AIME sube de 15.6% a 71% y la longitud de las respuestas crece. El modelo descubre solo que necesita más tokens. Paso 2 (aha moment): ejemplo textual del paper (Table 3) donde el modelo se detiene, dice "wait wait wait, that's an aha moment" y reinicia su approach. Comportamientos emergentes que nadie programó. Paso 3 (benchmarks): tabla con datos del paper comparando GPT-4o, Claude 3.5, o1, y R1. Los modelos SFT quedan muy atrás en razonamiento. R1 es comparable a o1 con todo publicado. Paso 4 (conclusión): cuatro puntos clave — no hacen falta datos humanos de razonamiento, las cadenas de pensamiento emergen solas, más tokens = mejor razonamiento, la señal verificable no se puede hackear. La capacidad de razonar estaba latente — el RL solo le dio el incentivo.
+            <p><strong>Avanzar paso a paso por la animación de DeepSeek R1.</strong></p>
+            <p><u>5 pasos: contexto → dinámica del entrenamiento → aha moment → benchmarks → conclusión.</u></p>
+            <p><em>"Animación de DeepSeek R1. OpenAI o1 salió en septiembre de 2024: primera prueba de que RL mejora razonamiento, pero no publicaron nada. Cuatro meses después DeepSeek publicó todo. Los números son del paper directamente. A medida que avanza el RL, la precisión en AIME sube de 15.6% a 71% y la longitud de las respuestas crece. El modelo descubre solo que necesita más tokens. Hay un momento famoso, el aha moment, donde el modelo se detiene a mitad de un problema, dice 'wait wait wait, that's an aha moment' y reinicia su approach. Comportamientos emergentes que nadie programó. La tabla compara GPT-4o, Claude 3.5, o1 y R1: los modelos SFT quedan muy atrás en razonamiento. La capacidad de razonar estaba latente: el RL solo le dio el incentivo."</em></p>
           </aside>
         </section>
 
