@@ -719,7 +719,7 @@
           const text = await response.text();
           content.textContent = text;
         } catch (err) {
-          content.textContent = '// No se pudo leer el archivo (estás abriendo desde el filesystem y el navegador bloquea fetch). Servilo con `npm start` para ver el código.';
+          content.textContent = '// No se pudo leer el archivo desde el navegador (security policy de file://). Para ver el código, abrí demo.html con cualquier editor de texto, o usá Ctrl+U / Cmd+Option+U en el navegador.';
         }
         modal.hidden = false;
       });
