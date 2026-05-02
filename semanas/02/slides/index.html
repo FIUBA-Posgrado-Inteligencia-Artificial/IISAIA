@@ -10,6 +10,27 @@
   <link rel="stylesheet" href="../../../_config/theme/custom.css">
   <link rel="stylesheet" href="../../../_config/theme/components.css">
   <style>
+    /* §3 box-model diagram (concentric layers). */
+    .box-model { display: flex; flex-direction: column; align-items: center;
+      font-family: var(--font-mono); font-size: 0.65em; }
+    .box-model .layer { border: 2px solid var(--text-muted); padding: 18px 36px;
+      border-radius: 6px; text-align: center; transition: border-color 0.3s; }
+    .box-model .layer.margin   { border-color: #f59e0b; }
+    .box-model .layer.border-l { border-color: #ef4444; padding: 14px 32px; }
+    .box-model .layer.padding  { border-color: #10b981; padding: 14px 32px; }
+    .box-model .layer.content  { border-color: var(--accent); padding: 14px 28px;
+      background: var(--bg-secondary); color: var(--text-primary); }
+    .box-model .label { color: var(--text-muted); font-size: 0.85em; margin-bottom: 4px; }
+    .box-model .label.margin   { color: #f59e0b; }
+    .box-model .label.border-l { color: #ef4444; }
+    .box-model .label.padding  { color: #10b981; }
+    .box-model .label.content  { color: var(--accent); }
+    /* §3 palette swatches. */
+    .palette { display: flex; gap: 12px; justify-content: center; }
+    .palette .swatch { width: 80px; height: 80px; border-radius: 8px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      padding-bottom: 6px; font-family: var(--font-mono); font-size: 0.5em;
+      color: var(--text-primary); border: 1px solid var(--text-muted); }
     /* Week-02 specific: 5-layer roadmap re-highlight.
        Active layer pulses with accent color; inactive ones dim. */
     .layer-roadmap { display: flex; gap: 8px; align-items: center; justify-content: center;
@@ -394,6 +415,180 @@
       <!-- ============================================================
            §3 — Estilo CSS
            ============================================================ -->
+      <section>
+
+        <!-- §3.1: Apertura — roadmap activa "Estilo" -->
+        <section>
+          <h2>Capa 2 — Estilo</h2>
+          <div class="layer-roadmap active-2">
+            <div class="pipe-node" data-layer="1"><div class="pipe-label">Estructura</div><div class="pipe-sub">HTML</div></div>
+            <span class="pipe-arrow">→</span>
+            <div class="pipe-node" data-layer="2"><div class="pipe-label">Estilo</div><div class="pipe-sub">CSS</div></div>
+            <span class="pipe-arrow">→</span>
+            <div class="pipe-node" data-layer="3"><div class="pipe-label">Comportamiento</div><div class="pipe-sub">JavaScript</div></div>
+            <span class="pipe-arrow">→</span>
+            <div class="pipe-node" data-layer="4"><div class="pipe-label">Estado</div><div class="pipe-sub">datos</div></div>
+            <span class="pipe-arrow">→</span>
+            <div class="pipe-node" data-layer="5"><div class="pipe-label">Empaque</div><div class="pipe-sub">single-file</div></div>
+          </div>
+          <p style="margin-top: 32px; font-size: 0.95em; text-align: center; max-width: 32em; margin-left: auto; margin-right: auto;">
+            CSS es enorme. Para dirigir a la IA alcanza con <span style="color: var(--accent);">cuatro perillas</span>.
+          </p>
+          <aside class="notes">
+            <p><u>Apertura de §3. Capa de estilo activa.</u></p>
+            <p><em>"Si el HTML son los sustantivos, el CSS responde a la pregunta cómo se ven. CSS es enorme: cientos de propiedades, módulos enteros que llenan libros. Pero para dirigir a una IA no necesitás ese inventario. Necesitás cuatro perillas. Con eso alcanzás para describir el 90% de las decisiones visuales del curso."</em></p>
+          </aside>
+        </section>
+
+        <!-- §3.2: Box model -->
+        <section>
+          <h2>Perilla 1 — El modelo de caja</h2>
+          <div style="display: flex; gap: 32px; align-items: center; margin-top: 12px;">
+            <div class="box-model" style="flex: 0 0 auto;">
+              <div class="layer margin">
+                <div class="label margin">margin</div>
+                <div class="layer border-l">
+                  <div class="label border-l">border</div>
+                  <div class="layer padding">
+                    <div class="label padding">padding</div>
+                    <div class="layer content">
+                      <div class="label content">content</div>
+                      hola
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="flex: 1; font-size: 0.8em;">
+              <p style="margin-bottom: 12px;">Todo elemento HTML es una caja con cuatro capas concéntricas.</p>
+              <p style="color: var(--text-muted); font-size: 0.9em;">La diferencia entre una página "apretada" y una que "respira" se decide en <strong style="color: var(--accent);">padding</strong> y <strong style="color: var(--accent);">margin</strong>. Si no tenés esos dos nombres, no podés pedir el cambio.</p>
+              <pre style="margin-top: 16px; box-shadow: none;"><code class="language-css" data-trim>button {
+  padding: 12px 20px;
+  margin: 8px 0;
+}</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><u>Box model. Las dos palabras de "respirar": padding y margin.</u></p>
+            <p><em>"Todo elemento HTML es una caja. No 'casi todo': todo. Y cada caja tiene cuatro capas concéntricas como una cebolla. Adentro está el contenido. Después padding, que es el espacio interno entre el contenido y el borde. Después border, el borde mismo. Y afuera margin, el espacio externo que separa esta caja de las que la rodean. La diferencia entre una página apretada y una que respira se decide en padding y margin. Sin esos dos nombres, vas a decirle a la IA 'dale más aire' y la IA va a tirar al azar."</em></p>
+          </aside>
+        </section>
+
+        <!-- §3.3: Flex vs Grid -->
+        <section>
+          <h2>Perilla 2 — Layout: una o dos dimensiones</h2>
+          <div class="comparison-2col" style="margin-top: 12px;">
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
+              <h3 style="color: var(--accent);">Flexbox — 1D</h3>
+              <p style="font-size: 0.78em;">Acomoda en una dirección: fila o columna.</p>
+              <pre style="margin-top: 8px; font-size: 0.85em; box-shadow: none;"><code class="language-css" data-trim>.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}</code></pre>
+              <p style="font-size: 0.7em; color: var(--text-muted); margin-top: 8px;">Caso típico: nav-bar, toolbar, grupo de botones.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary);">
+              <h3 style="color: var(--accent-secondary);">Grid — 2D</h3>
+              <p style="font-size: 0.78em;">Tablero: filas y columnas a la vez.</p>
+              <pre style="margin-top: 8px; font-size: 0.85em; box-shadow: none;"><code class="language-css" data-trim>.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}</code></pre>
+              <p style="font-size: 0.7em; color: var(--text-muted); margin-top: 8px;">Caso típico: galería, dashboard, cuadrícula de productos.</p>
+            </div>
+          </div>
+          <p style="margin-top: 16px; font-size: 0.75em; color: var(--text-muted); text-align: center;">
+            Nombrar <em>flex</em> o <em>grid</em> en el prompt evita que la IA improvise con <code>inline-block</code> o floats antiguos.
+          </p>
+          <aside class="notes">
+            <p><u>Las dos respuestas dominantes a "cómo se acomodan las cajas".</u></p>
+            <p><em>"La pregunta principal del CSS no es de qué color son las cosas. Es cómo se acomodan las cajas entre sí. Y en 2026 hay dos respuestas que tenés que saber nombrar. Flex sirve cuando querés acomodar elementos en una sola dirección. Grid sirve cuando el layout es un tablero. Si nombrás flex o grid en el prompt, el código sale bien al primer intento. Si decís 'quiero que estén una al lado de la otra', la IA improvisa con cosas viejas y vas a iterar tres veces."</em></p>
+          </aside>
+        </section>
+
+        <!-- §3.4: Tipografía + color + variables -->
+        <section>
+          <h2>Perillas 3 y 4 — Tipografía, color y variables</h2>
+          <div class="palette" style="margin: 12px 0 20px;">
+            <div class="swatch" style="background: #0f172a;">#0f172a</div>
+            <div class="swatch" style="background: #e2e8f0; color: #0f172a;">#e2e8f0</div>
+            <div class="swatch" style="background: #6366f1;">#6366f1</div>
+            <div class="swatch" style="background: #94a3b8; color: #0f172a;">#94a3b8</div>
+          </div>
+          <div class="comparison-2col">
+            <div class="bg-code-card">
+              <p style="font-size: 0.7em; color: var(--text-muted); margin-bottom: 8px;">Hardcodeado en cada lugar</p>
+              <pre style="margin: 0; font-size: 0.8em; box-shadow: none;"><code class="language-css" data-trim>.btn { background: #6366f1; }
+.link { color: #6366f1; }
+.badge { border: 1px solid #6366f1; }</code></pre>
+            </div>
+            <div class="bg-code-card" style="border-left: 4px solid var(--accent);">
+              <p style="font-size: 0.7em; color: var(--accent); margin-bottom: 8px;">Con variables CSS — la perilla del LLM</p>
+              <pre style="margin: 0; font-size: 0.8em; box-shadow: none;"><code class="language-css" data-trim>:root { --color-accent: #6366f1; }
+.btn { background: var(--color-accent); }
+.link { color: var(--color-accent); }
+.badge { border: 1px solid var(--color-accent); }</code></pre>
+            </div>
+          </div>
+          <p style="margin-top: 16px; font-size: 0.75em; text-align: center; max-width: 36em; margin-left: auto; margin-right: auto;">
+            Una variable es <span style="color: var(--accent);">un punto de entrada</span>. Cambiar "el acento a verde" es una línea, no veinte ocurrencias.
+          </p>
+          <aside class="notes">
+            <p><u>Tipografía/paleta + variables CSS. La paleta de cuatro tonos como ejemplo concreto.</u></p>
+            <p><em>"Dos perillas más. Tipografía: una sola sans para todo, o una pareja heading+body. Color: una paleta minimalista de cuatro tonos. Fondo, texto, acento, opcionalmente un acento secundario. Y arriba de todo eso, la perilla más importante para trabajar con IA: las variables CSS. Mirá la diferencia. A la izquierda, el color hardcodeado en cada regla. Si querés cambiarlo, la IA tiene que buscar veinte ocurrencias y reemplazarlas a mano. A la derecha, una sola variable. Cambiar la paleta es cambiar una línea. Esa es la perilla que querés que tu código tenga siempre."</em></p>
+          </aside>
+        </section>
+
+        <!-- §3.5: Live demo — demo.html §2 -->
+        <section>
+          <h2>Las perillas en vivo</h2>
+          <div style="text-align: center; margin-top: 8px;">
+            <iframe src="../source_material/demo.html#estilo" style="width: 92%; height: 56vh; border: 1px solid var(--text-muted); border-radius: 8px; background: var(--bg-secondary);"></iframe>
+          </div>
+          <p style="margin-top: 12px; font-size: 0.7em; text-align: center; color: var(--text-muted);">
+            Flex con <code>justify-content</code> en vivo. Theme switcher: una variable controla toda la paleta.
+          </p>
+          <aside class="notes">
+            <p><strong>Tocar los botones de justify-content. Después tocar el theme switcher para ver una variable cambiar toda la paleta.</strong></p>
+            <p><u>Demo en vivo del §2 de demo.html. Layout y variables.</u></p>
+            <p><em>"Vamos a verlas en demo.html. Flex con justify-content: cada botón cambia un valor distinto. flex-start, center, space-between. Es la perilla en directo. Y abajo, el theme switcher. Tocá el botón de tema y mirá: una sola variable se cambia, y toda la página se reviste. Ese es el patrón que querés que tu código tenga siempre."</em></p>
+          </aside>
+        </section>
+
+        <!-- §3.6: Prompt vago vs específico -->
+        <section>
+          <h2>Cómo le pedís estilo a una IA</h2>
+          <div class="comparison-2col" style="margin-top: 12px; align-items: stretch;">
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted);">
+              <h3 style="color: var(--text-muted); margin-bottom: 12px;">Vago</h3>
+              <p style="font-style: italic; font-size: 0.85em;">"Hacelo más lindo."</p>
+              <p style="font-size: 0.7em; color: var(--text-muted); margin-top: 16px;">
+                La IA inventa. Te devuelve una página genérica que probablemente no es lo que tenías en la cabeza.
+              </p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
+              <h3 style="color: var(--accent); margin-bottom: 12px;">Específico</h3>
+              <p style="font-style: italic; font-size: 0.72em; line-height: 1.55;">
+                "Cambiá el <strong>&lt;main&gt;</strong> a un <strong>grid</strong> de 3 columnas con <strong>gap</strong> 24px. El <strong>&lt;button&gt;</strong> primario: fondo <strong>var(--color-primary)</strong>, <strong>padding</strong> 12px 20px, <strong>border-radius</strong> 8px."
+              </p>
+              <p style="font-size: 0.7em; color: var(--accent); margin-top: 12px;">
+                Layout, modelo de caja y variables, todo nombrado. La IA no inventa porque no tiene que.
+              </p>
+            </div>
+          </div>
+          <p style="margin-top: 18px; font-size: 0.8em; text-align: center;">
+            La diferencia entre <em>dirigir</em> y <em>rezar</em>.
+          </p>
+          <aside class="notes">
+            <p><u>Cierre de §3. Aplicación de las cuatro perillas en un prompt.</u></p>
+            <p><em>"Mirá el contraste. Hacelo más lindo: la IA inventa. La página queda genérica. Versus el prompt específico: nombra layout grid con tres columnas, gap concreto, padding y border-radius en píxeles, color por variable. Cuatro perillas en cinco líneas. La IA no improvisa porque no tiene que. La próxima capa es donde las páginas dejan de ser estáticas: comportamiento y estado."</em></p>
+          </aside>
+        </section>
+
+      </section>
 
       <!-- ============================================================
            §4 — Estado, DOM y eventos
