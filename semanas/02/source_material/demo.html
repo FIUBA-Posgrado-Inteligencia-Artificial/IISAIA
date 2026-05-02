@@ -140,25 +140,38 @@
       margin-bottom: var(--space-md);
     }
     .estructura-controls button.active {
-      background: var(--color-accent);
+      outline: 2px solid var(--color-text);
     }
-    #estructura-render article {
+    #estructura-render article,
+    #estructura-render .article-fake {
       background: var(--color-surface-2);
       padding: var(--space-md);
       border-radius: var(--radius-sm);
     }
-    #estructura-render header h3 { margin-top: 0; color: var(--color-accent); }
-    #estructura-render nav { margin: var(--space-sm) 0; }
-    #estructura-render nav a {
+    #estructura-render header h3,
+    #estructura-render .title-fake {
+      margin: 0 0 var(--space-md) 0;
+      color: var(--color-accent);
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    #estructura-render nav,
+    #estructura-render .nav-fake { margin: var(--space-sm) 0; }
+    #estructura-render nav a,
+    #estructura-render .nav-fake a {
       color: var(--color-accent);
       margin-right: var(--space-md);
       text-decoration: none;
     }
-    #estructura-render nav a:hover { text-decoration: underline; }
-    #estructura-render section, #estructura-render .section-fake {
+    #estructura-render nav a:hover,
+    #estructura-render .nav-fake a:hover { text-decoration: underline; }
+    #estructura-render section,
+    #estructura-render .section-fake {
       margin-top: var(--space-md);
     }
-    #estructura-render footer, #estructura-render .footer-fake {
+    #estructura-render footer,
+    #estructura-render .footer-fake {
       margin-top: var(--space-md);
       color: var(--color-muted);
       font-size: 0.85rem;
