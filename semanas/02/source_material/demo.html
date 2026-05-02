@@ -287,6 +287,34 @@
       color: var(--color-muted);
     }
     .event-log li { padding: 2px 0; border-bottom: 1px solid var(--color-surface); }
+
+    /* === §4 DOM === */
+    .dom-tree, .dom-tree ul {
+      list-style: none;
+      padding-left: var(--space-md);
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    .dom-tree li {
+      padding: 2px 0;
+      cursor: pointer;
+      color: var(--color-muted);
+      transition: color var(--transition);
+    }
+    .dom-tree li:hover > .dom-label { color: var(--color-accent); }
+    .dom-label {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .dom-label .tag { color: var(--color-accent); }
+    .dom-label .id { color: var(--color-warn); }
+    .dom-label .cls { color: var(--color-success); }
+    .dom-highlight {
+      outline: 2px dashed var(--color-warn) !important;
+      outline-offset: 4px;
+    }
   </style>
 </head>
 <body>
@@ -382,7 +410,10 @@
     <section class="demo-section" id="dom">
       <h2>4. El DOM — el árbol vivo</h2>
       <p class="lead">El HTML es texto. El DOM es la representación viva en la memoria del navegador.</p>
-      <!-- Task 13 fills this section -->
+      <p>Estás mirando el árbol del DOM de la sección §3 (estado y comportamiento). Cuando agregás o borrás items en el todo, este árbol se actualiza solo. Pasá el mouse sobre un nodo para resaltarlo arriba.</p>
+      <div class="demo-area">
+        <ul class="dom-tree" id="dom-tree"></ul>
+      </div>
     </section>
 
     <section class="demo-section" id="single-file">
@@ -556,7 +587,60 @@
       });
     }
     initEstado();
-    // Task 13: initDOM()
+    // === §4 DOM ===
+    function initDOM() {
+      const tree = document.getElementById('dom-tree');
+      const root = document.getElementById('estado');
+      let highlightedEl = null;
+
+      function clearHighlight() {
+        if (highlightedEl) {
+          highlightedEl.classList.remove('dom-highlight');
+          highlightedEl = null;
+        }
+      }
+
+      function renderNode(el) {
+        const li = document.createElement('li');
+        const label = document.createElement('span');
+        label.className = 'dom-label';
+        const tag = `<span class="tag">${el.tagName.toLowerCase()}</span>`;
+        const id = el.id ? `<span class="id">#${el.id}</span>` : '';
+        const cls = el.className && typeof el.className === 'string'
+          ? `<span class="cls">.${el.className.split(' ').filter(Boolean).join('.')}</span>`
+          : '';
+        label.innerHTML = `&lt;${tag}${id}${cls}&gt;`;
+        li.appendChild(label);
+
+        label.addEventListener('mouseenter', () => {
+          clearHighlight();
+          el.classList.add('dom-highlight');
+          highlightedEl = el;
+        });
+        label.addEventListener('mouseleave', clearHighlight);
+
+        if (el.children.length > 0) {
+          const ul = document.createElement('ul');
+          for (const child of el.children) {
+            ul.appendChild(renderNode(child));
+          }
+          li.appendChild(ul);
+        }
+        return li;
+      }
+
+      function rebuild() {
+        clearHighlight();
+        tree.innerHTML = '';
+        tree.appendChild(renderNode(root));
+      }
+
+      rebuild();
+
+      const observer = new MutationObserver(() => rebuild());
+      observer.observe(root, { childList: true, subtree: true });
+    }
+    initDOM();
     // Task 14: initSingleFile()
   </script>
 </body>
