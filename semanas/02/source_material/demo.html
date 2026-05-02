@@ -176,6 +176,37 @@
       color: var(--color-muted);
       margin-top: var(--space-md);
     }
+
+    /* === §2 Estilo === */
+    .estilo-controls {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-md);
+    }
+    .estilo-controls button.active { outline: 2px solid var(--color-text); }
+    .flex-playground {
+      display: flex;
+      justify-content: flex-start;
+      gap: var(--space-sm);
+      background: var(--color-surface-2);
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+      min-height: 80px;
+      transition: justify-content var(--transition);
+    }
+    .flex-item {
+      background: var(--color-accent);
+      color: white;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+    .estilo-current {
+      color: var(--color-muted);
+      margin-top: var(--space-sm);
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -207,7 +238,31 @@
     <section class="demo-section" id="estilo">
       <h2>2. Estilo — Layout y variables CSS</h2>
       <p class="lead">El CSS responde a "cómo se ven". Layout y variables son las dos perillas que vale la pena nombrar.</p>
-      <!-- Task 11 fills this section -->
+      <h3>Flexbox: una dimensión</h3>
+      <div class="estilo-controls">
+        <button data-jc="flex-start" class="jc-btn active">flex-start</button>
+        <button data-jc="center" class="jc-btn secondary">center</button>
+        <button data-jc="space-between" class="jc-btn secondary">space-between</button>
+        <button data-jc="space-around" class="jc-btn secondary">space-around</button>
+        <button data-jc="flex-end" class="jc-btn secondary">flex-end</button>
+      </div>
+      <div class="demo-area">
+        <div class="flex-playground" id="flex-playground">
+          <div class="flex-item">A</div>
+          <div class="flex-item">B</div>
+          <div class="flex-item">C</div>
+        </div>
+        <p class="estilo-current"><code id="flex-current">justify-content: flex-start</code></p>
+      </div>
+
+      <h3 style="margin-top: var(--space-lg)">Variables CSS: cambiá la perilla</h3>
+      <div class="estilo-controls">
+        <button data-accent="#6366f1" class="theme-btn active" style="background:#6366f1">Indigo</button>
+        <button data-accent="#10b981" class="theme-btn secondary" style="background:#10b981">Esmeralda</button>
+        <button data-accent="#f59e0b" class="theme-btn secondary" style="background:#f59e0b">Ámbar</button>
+        <button data-accent="#ef4444" class="theme-btn secondary" style="background:#ef4444">Rojo</button>
+      </div>
+      <p class="estilo-current"><code id="theme-current">--color-accent: #6366f1</code></p>
     </section>
 
     <section class="demo-section" id="estado">
@@ -297,7 +352,38 @@
       paint();
     }
     initEstructura();
-    // Task 11: initEstilo()
+    // === §2 Estilo ===
+    function initEstilo() {
+      const playground = document.getElementById('flex-playground');
+      const current = document.getElementById('flex-current');
+      const jcButtons = document.querySelectorAll('.jc-btn');
+      jcButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const jc = btn.dataset.jc;
+          playground.style.justifyContent = jc;
+          current.textContent = `justify-content: ${jc}`;
+          jcButtons.forEach(b => {
+            b.classList.toggle('active', b === btn);
+            b.classList.toggle('secondary', b !== btn);
+          });
+        });
+      });
+
+      const themeCurrent = document.getElementById('theme-current');
+      const themeButtons = document.querySelectorAll('.theme-btn');
+      themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const accent = btn.dataset.accent;
+          document.documentElement.style.setProperty('--color-accent', accent);
+          themeCurrent.textContent = `--color-accent: ${accent}`;
+          themeButtons.forEach(b => {
+            b.classList.toggle('active', b === btn);
+            b.classList.toggle('secondary', b !== btn);
+          });
+        });
+      });
+    }
+    initEstilo();
     // Task 12: initEstado()
     // Task 13: initDOM()
     // Task 14: initSingleFile()
