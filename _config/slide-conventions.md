@@ -8,7 +8,7 @@ Rules for generating and formatting reveal.js presentations.
 
 ## Slide Density
 - One main concept per slide. If it needs scrolling, split it.
-- Title slides: week number + topic title + subtitle.
+- Title slides: `h1` is the **topic title** (NOT "Semana NN"). The subtitle is a short tagline that captures the week's through-line. The week number lives in the document `<title>` tag only.
 - Section divider slides: use `class="section-divider"` for major topic transitions.
 
 ## Headings
