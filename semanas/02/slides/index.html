@@ -422,7 +422,7 @@
         <section>
           <h2>Adentro de los contenedores</h2>
           <div class="comparison-2col" style="margin-top: 12px;">
-            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
+            <div class="bg-secondary-card fragment fade-in" data-fragment-index="1" style="border-left: 4px solid var(--accent);">
               <h3 style="color: var(--accent); margin-bottom: 12px;">Contenido</h3>
               <table style="width: 100%; font-size: 0.7em;">
                 <tr><td style="padding: 4px 0; color: var(--accent); font-family: var(--font-mono); width: 35%;">&lt;h1&gt;–&lt;h6&gt;</td><td>jerarquía de encabezados</td></tr>
@@ -432,7 +432,7 @@
                 <tr><td style="padding: 4px 0; color: var(--accent); font-family: var(--font-mono);">&lt;img&gt;</td><td>imagen, siempre con <code>alt</code></td></tr>
               </table>
             </div>
-            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary);">
+            <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary);">
               <h3 style="color: var(--accent-secondary); margin-bottom: 12px;">Interacción</h3>
               <table style="width: 100%; font-size: 0.7em;">
                 <tr><td style="padding: 4px 0; color: var(--accent-secondary); font-family: var(--font-mono); width: 35%;">&lt;button&gt;</td><td>botón clickeable</td></tr>
@@ -442,12 +442,14 @@
               </table>
             </div>
           </div>
-          <p style="margin-top: 16px; font-size: 0.7em; color: var(--text-muted); text-align: center;">
+          <p class="fragment fade-in" data-fragment-index="2" style="margin-top: 16px; font-size: 0.7em; color: var(--text-muted); text-align: center;">
             Sin <code>&lt;label&gt;</code> no hay accesibilidad. Sin <code>alt</code> tampoco.
           </p>
           <aside class="notes">
-            <p><u>Las dos familias de elementos que viven adentro: contenido e interacción.</u></p>
-            <p><em>"Adentro de los contenedores va el contenido en sí. Encabezados con jerarquía, párrafos, listas, links, imágenes. Y cuando la página le pide algo al usuario, aparecen las cuatro de interacción: button, input, form, label. La nota al pie es importante: sin label el input no es accesible para un lector de pantalla, y sin alt la imagen no es accesible para nadie. Estos son los nombres con los que vas a pedir piezas concretas."</em></p>
+            <p><strong>Revelar Contenido (click 1). Explicarlo. Revelar Interacción + la nota inferior (click 2).</strong></p>
+            <p><u>Las dos familias de elementos que viven adentro de los contenedores: contenido e interacción.</u></p>
+            <p><em>"Adentro de los contenedores va el contenido en sí. Encabezados con jerarquía — h1 a h6, donde h1 es el título principal de la página. Párrafos con la etiqueta p. Listas: ul para no ordenadas, ol para ordenadas, y li para cada ítem. Enlaces con la etiqueta a, que apunta a otra página o a un ancla interna. E imágenes con img — y siempre con el atributo alt, que es el texto que describe la imagen para alguien que no la puede ver."</em></p>
+            <p><em>"Y cuando la página le pide algo al usuario, aparecen las cuatro etiquetas de interacción: button para botones clickeables, input para campos de entrada — el tipo se controla con el atributo type, sea texto, número, email o checkbox. Form agrupa inputs y los envía juntos. Label es la etiqueta visible asociada a cada input. Repito lo de la nota al pie: sin label, el input no es accesible para un lector de pantalla; sin alt, la imagen no es accesible para nadie. Estos son los nombres con los que vas a pedir piezas concretas en cualquier prompt."</em></p>
           </aside>
         </section>
 
