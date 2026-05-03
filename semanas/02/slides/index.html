@@ -312,7 +312,8 @@
             </div>
             <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted);">
               <h3 style="color: var(--text-muted); margin-bottom: 8px;">Sopa de divs</h3>
-              <p style="font-size: 0.72em; margin-bottom: 8px;">Todo es <code>&lt;div&gt;</code>. La etiqueta no dice nada; el propósito vive en una clase. Es el camino fácil cuando nadie planea qué etiqueta corresponde.</p>
+              <p style="font-size: 0.7em; margin-bottom: 8px;"><code>&lt;div&gt;</code> es el contenedor genérico de HTML: un bloque sin significado propio. Existe para agrupar contenido cuando <em>ninguna</em> etiqueta semántica encaja.</p>
+              <p style="font-size: 0.7em; margin-bottom: 8px;">La <strong>sopa de divs</strong> es cuando se lo usa para todo. El propósito vive en una clase, no en la etiqueta.</p>
               <pre style="margin: 0; box-shadow: none;"><code class="language-html" data-trim style="font-size: 0.85em;">
 &lt;div class="top-bar"&gt;
   &lt;div class="link-item"&gt;Inicio&lt;/div&gt;
@@ -329,7 +330,8 @@
           <aside class="notes">
             <p><u>Concepto: dos estilos de escribir HTML para producir la misma página visualmente. Semántico vs sopa de divs.</u></p>
             <p><em>"Antes de hacer cualquier comparación, quiero que vean que hay dos formas distintas de escribir el mismo HTML para producir la misma página. La primera, a la izquierda, se llama HTML semántico: cada bloque tiene una etiqueta que describe qué es. nav para la navegación, main para el contenido principal, h1 para el título. Las etiquetas hablan."</em></p>
-            <p><em>"La segunda, a la derecha, tiene un nombre informal: 'sopa de divs'. Todo es div. La etiqueta div no significa nada por sí sola — es la caja genérica de HTML. El propósito de cada bloque vive en una clase, en un atributo class. Cuando alguien empieza a programar HTML, o cuando un LLM genera código sin instrucciones precisas, el resultado suele ser sopa de divs."</em></p>
+            <p><em>"La segunda versión está hecha enteramente con divs. Pausemos un segundo en qué es un div: es el contenedor genérico de HTML, un bloque sin significado propio. Existe a propósito en el lenguaje, para agrupar contenido cuando ninguna etiqueta semántica encaja — por ejemplo, una caja arbitraria que querés estilizar con CSS y nada más. Es una herramienta, no un error."</em></p>
+            <p><em>"La 'sopa de divs' es lo que pasa cuando se la usa para todo. Cuando alguien empieza a programar HTML, o cuando un LLM genera código sin instrucciones precisas, el resultado es páginas donde el header es un div, el main es un div, la nav es un div. La etiqueta div no dice nada; el propósito vive en una clase, en un atributo class. Es el camino fácil porque no tenés que pensar qué etiqueta corresponde — metés div y seguís."</em></p>
             <p><em>"Y acá viene lo importante: las dos versiones, cuando el navegador las dibuja, se ven exactamente iguales. Mismo título, mismo enlace, misma posición. Pero el código es muy distinto. La próxima slide es la prueba: dos archivos reales, abrimos cada uno, comparamos."</em></p>
           </aside>
         </section>
