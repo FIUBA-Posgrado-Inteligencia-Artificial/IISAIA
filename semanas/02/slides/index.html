@@ -119,7 +119,9 @@
           <aside class="notes">
             <p><strong>Revelar Antes. Pausa breve. Revelar Ahora.</strong></p>
             <p><u>La inversión del ratio escribir/leer es el dato central de la clase.</u></p>
-            <p><em>"Cuando vos delegás la sintaxis a un modelo, el ratio entre escribir y leer se invierte. Antes pasabas la mayor parte del tiempo escribiendo, hoy la mayor parte del tiempo es leyendo respuestas que la IA te tira y decidiendo si las pegás en producción o las descartás. Y leer código que no entendés es lo mismo que aceptar una decisión que vos no tomaste."</em></p>
+            <p><em>"Cuando vos delegás la sintaxis a un modelo, el ratio entre escribir y leer se invierte."</em></p>
+            <p><em>"Antes pasabas la mayor parte del tiempo escribiendo. Una parte chica del tiempo, leyendo."</em></p>
+            <p><em>"Hoy la mayor parte del tiempo es leyendo respuestas que la IA te tira y decidiendo si las pegás en producción o las descartás. Y leer código que no entendés es lo mismo que aceptar una decisión que vos no tomaste."</em></p>
           </aside>
         </section>
 
@@ -140,8 +142,10 @@
             Para dirigir hace falta una cosa básica: <strong>saber cómo se llaman las cosas.</strong>
           </p>
           <aside class="notes">
+            <p><strong>Revelar la frase de cierre con un click.</strong></p>
             <p><u>Slide del rol. La frase que cierra es el setup del resto de la clase.</u></p>
-            <p><em>"El rol que vamos a practicar durante estas ocho semanas no es el de programador clásico. Es el de supervisor arquitectónico. Tu trabajo es decidir qué se construye, en qué orden, con qué piezas y por qué. La IA escribe; vos dirigís. Y para dirigir hace falta vocabulario técnico propio: saber cómo se llaman las cosas."</em></p>
+            <p><em>"El rol que vamos a practicar durante estas ocho semanas no es el de programador clásico. Es el de supervisor arquitectónico. Tu trabajo es decidir qué se construye, en qué orden, con qué piezas y por qué. La IA escribe; vos dirigís."</em></p>
+            <p><em>"Y para dirigir hace falta una cosa básica: saber cómo se llaman las cosas. Eso es lo único que ningún modelo te puede regalar."</em></p>
           </aside>
         </section>
 
@@ -163,9 +167,12 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Revelar las tres tarjetas en orden.</strong></p>
+            <p><strong>Revelar las tres tarjetas en orden, una por click.</strong></p>
             <p><u>Las tres consecuencias concretas de delegar la sintaxis a un modelo.</u></p>
-            <p><em>"Cuando delegás la sintaxis, tres cosas se mueven al mismo tiempo. La velocidad explota, eso es real y es bueno. Pero el costo de equivocarte al especificar también explota: la IA elige por vos si no le decís exactamente qué querés. Y leer pasa a ser más importante que escribir, porque cada respuesta es un texto que tenés que auditar. Las tres apuntan al mismo lugar: necesitás vocabulario."</em></p>
+            <p><em>"Cuando delegás la sintaxis, tres cosas se mueven al mismo tiempo."</em></p>
+            <p><em>"La velocidad explota, eso es real y es bueno."</em></p>
+            <p><em>"Pero el costo de equivocarte al especificar también explota: la IA elige por vos si no le decís exactamente qué querés."</em></p>
+            <p><em>"Y leer pasa a ser más importante que escribir, porque cada respuesta es un texto que tenés que auditar. Las tres apuntan al mismo lugar: necesitás vocabulario."</em></p>
           </aside>
         </section>
 
@@ -173,39 +180,45 @@
         <section>
           <h2>La anatomía en cinco capas</h2>
           <div class="layer-roadmap" id="layer-roadmap-overview">
-            <div class="pipe-node fragment" data-layer="1">
+            <div class="pipe-node fragment" data-fragment-index="1" data-layer="1">
               <div class="pipe-label">Estructura</div>
               <div class="pipe-sub">HTML</div>
             </div>
-            <span class="pipe-arrow fragment">→</span>
-            <div class="pipe-node fragment" data-layer="2">
+            <span class="pipe-arrow fragment" data-fragment-index="2">→</span>
+            <div class="pipe-node fragment" data-fragment-index="2" data-layer="2">
               <div class="pipe-label">Estilo</div>
               <div class="pipe-sub">CSS</div>
             </div>
-            <span class="pipe-arrow fragment">→</span>
-            <div class="pipe-node fragment" data-layer="3">
+            <span class="pipe-arrow fragment" data-fragment-index="3">→</span>
+            <div class="pipe-node fragment" data-fragment-index="3" data-layer="3">
               <div class="pipe-label">Comportamiento</div>
               <div class="pipe-sub">JavaScript</div>
             </div>
-            <span class="pipe-arrow fragment">→</span>
-            <div class="pipe-node fragment" data-layer="4">
+            <span class="pipe-arrow fragment" data-fragment-index="4">→</span>
+            <div class="pipe-node fragment" data-fragment-index="4" data-layer="4">
               <div class="pipe-label">Estado</div>
               <div class="pipe-sub">datos en memoria</div>
             </div>
-            <span class="pipe-arrow fragment">→</span>
-            <div class="pipe-node fragment" data-layer="5">
+            <span class="pipe-arrow fragment" data-fragment-index="5">→</span>
+            <div class="pipe-node fragment" data-fragment-index="5" data-layer="5">
               <div class="pipe-label">Empaque</div>
               <div class="pipe-sub">single-file</div>
             </div>
           </div>
-          <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); text-align: center; margin-top: 16px;">
+          <p class="fragment fade-in" data-fragment-index="6" style="font-size: 0.75em; color: var(--text-muted); text-align: center; margin-top: 16px;">
             El orden no es arbitrario. Estructura primero, estilo después, comportamiento y estado encima, empaque al final.<br>
             Vamos a volver a este mapa al inicio de cada capa.
           </p>
           <aside class="notes">
             <p><strong>Revelar las 5 capas en orden con flechas. Cada click suma una capa. Último click revela la nota inferior.</strong></p>
             <p><u>Roadmap de la anatomía. Mapa al que se vuelve al inicio de §§2–5.</u></p>
-            <p><em>"El resto de la clase la vamos a pasar mirando una página real, demo.html, que está armada como un showroom de las cinco capas que componen cualquier interfaz web. Estructura: los sustantivos, qué cosa es cada bloque. Estilo: cómo se ven esos sustantivos. Comportamiento: qué pasa cuando el usuario interactúa. Estado: el dato que la página recuerda entre clicks. Y empaque: cómo distribuís todo eso en un archivo. Cada capa la vamos a abrir con sus propios términos, y vamos a volver a este mapa cada vez."</em></p>
+            <p><em>"El resto de la clase la vamos a pasar mirando una página real, demo.html, que está armada como un showroom de las cinco capas que componen cualquier interfaz web."</em></p>
+            <p><em>"Estructura: los sustantivos, qué cosa es cada bloque."</em></p>
+            <p><em>"Estilo: cómo se ven esos sustantivos."</em></p>
+            <p><em>"Comportamiento: qué pasa cuando el usuario interactúa."</em></p>
+            <p><em>"Estado: el dato que la página recuerda entre clicks."</em></p>
+            <p><em>"Y empaque: cómo distribuís todo eso en un archivo."</em></p>
+            <p><em>"Cada capa la vamos a abrir con sus propios términos, y vamos a volver a este mapa cada vez."</em></p>
           </aside>
         </section>
 
@@ -299,7 +312,10 @@
           <aside class="notes">
             <p><strong>Mostrar las dos líneas. Pausa. Revelar "idénticas". Pausa. Revelar "no lo son". Pausa. Revelar la explicación.</strong></p>
             <p><u>Hook de §2. Construye la tensión: visualmente iguales, semánticamente distintas.</u></p>
-            <p><em>"Compará estas dos líneas. Visualmente son idénticas: las dos te van a renderizar el mismo texto en la misma posición. Pero para el navegador, para los lectores de pantalla, para los buscadores, y sobre todo para la IA que después tenga que tocar tu código, no son la misma cosa. La primera dice 'esto es un encabezado'. La segunda dice 'esto es una caja anónima'. El outline del documento, que es el árbol de qué contiene qué, solo se construye con la primera. Con la segunda, no existe."</em></p>
+            <p><em>"Compará estas dos líneas. La de la izquierda usa la etiqueta header. La de la derecha es un div con la palabra header como nombre. La pregunta: ¿son lo mismo?"</em></p>
+            <p><em>"Visualmente, sí. Las dos te van a renderizar el mismo texto en la misma posición."</em></p>
+            <p><em>"Pero para el navegador, los lectores de pantalla, los buscadores y la IA que después tenga que tocar tu código, no son la misma cosa."</em></p>
+            <p><em>"La primera dice 'esto es un encabezado'. La segunda dice 'esto es una caja anónima'. El outline del documento, que es el árbol de qué contiene qué, solo se construye con la primera. Con la segunda, no existe."</em></p>
           </aside>
         </section>
 
@@ -635,7 +651,9 @@
           <aside class="notes">
             <p><strong>Mostrar el contador. Pausa. Revelar la pregunta. Pausa larga (5–8s). Revelar "tres cosas, en este orden".</strong></p>
             <p><u>Hook de §4. La pregunta abre el espacio para los tres conceptos.</u></p>
-            <p><em>"Mirá esto. Un contador clásico. Hago click, aparece uno. Otro click, dos. Pero pensemos un segundo: ¿qué se actualizó exactamente entre el click y el número que viste en pantalla? No es una sola cosa. Son tres cosas, en orden. Las tres tienen nombre. Vamos a ponérselos."</em></p>
+            <p><em>"Mirá esto. Un contador clásico. Hago click, aparece uno. Otro click, dos."</em></p>
+            <p><em>"Pero pensemos un segundo: ¿qué se actualizó exactamente entre el click y el número que viste en pantalla?"</em></p>
+            <p><em>"No es una sola cosa. Son tres cosas, en orden. Las tres tienen nombre. Vamos a ponérselos."</em></p>
           </aside>
         </section>
 
@@ -660,9 +678,12 @@
             </div>
           </div>
           <aside class="notes">
-            <p><strong>Revelar los tres conceptos en orden.</strong></p>
+            <p><strong>Revelar los tres conceptos en orden, uno por click.</strong></p>
             <p><u>Las tres entidades del triángulo dinámico, una por columna.</u></p>
-            <p><em>"Tres conceptos. El estado es el dato que la página recuerda: vive en variables, no en pantalla. El DOM es el HTML pero vivo: un árbol en memoria que JavaScript puede modificar. Los eventos son la voz del usuario: cualquier cosa que el usuario hace genera uno. Para escuchar uno registrás un listener; la función que se ejecuta es el handler. Las tres palabras son las que la IA necesita para no inventar atajos malos."</em></p>
+            <p><em>"Tres conceptos."</em></p>
+            <p><em>"El estado es el dato que la página recuerda: vive en variables, no en pantalla. Es invisible hasta que alguien decide dibujarlo."</em></p>
+            <p><em>"El DOM es el HTML pero vivo: un árbol en memoria que JavaScript puede modificar. Cambiarlo cambia lo que el usuario ve sin recargar."</em></p>
+            <p><em>"Los eventos son la voz del usuario: cualquier cosa que el usuario hace genera uno. Para escuchar uno registrás un listener; la función que se ejecuta es el handler. Las tres palabras son las que la IA necesita para no inventar atajos malos."</em></p>
           </aside>
         </section>
 
@@ -670,25 +691,32 @@
         <section>
           <h2>El ciclo: evento → estado → DOM</h2>
           <div style="display: flex; align-items: center; gap: 8px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
-            <div class="flow-step fragment fade-in">Estado inicial<br><code style="font-size: 0.8em;">count = 0</code></div>
-            <span class="flow-arrow fragment fade-in">→</span>
-            <div class="flow-step fragment fade-in">Click<br><span style="color: var(--text-muted); font-size: 0.85em;">evento</span></div>
-            <span class="flow-arrow fragment fade-in">→</span>
-            <div class="flow-step fragment fade-in">Listener<br><span style="color: var(--text-muted); font-size: 0.85em;">se activa</span></div>
-            <span class="flow-arrow fragment fade-in">→</span>
-            <div class="flow-step fragment fade-in active">Mutación de estado<br><code style="font-size: 0.8em;">count = 1</code></div>
-            <span class="flow-arrow fragment fade-in">→</span>
-            <div class="flow-step fragment fade-in active">Mutación de DOM<br><code style="font-size: 0.8em;">span.textContent = 1</code></div>
-            <span class="flow-arrow fragment fade-in">→</span>
-            <div class="flow-step fragment fade-in">Render<br><span style="color: var(--text-muted); font-size: 0.85em;">"1" en pantalla</span></div>
+            <div class="flow-step fragment fade-in" data-fragment-index="1">Estado inicial<br><code style="font-size: 0.8em;">count = 0</code></div>
+            <span class="flow-arrow fragment fade-in" data-fragment-index="2">→</span>
+            <div class="flow-step fragment fade-in" data-fragment-index="2">Click<br><span style="color: var(--text-muted); font-size: 0.85em;">evento</span></div>
+            <span class="flow-arrow fragment fade-in" data-fragment-index="3">→</span>
+            <div class="flow-step fragment fade-in" data-fragment-index="3">Listener<br><span style="color: var(--text-muted); font-size: 0.85em;">se activa</span></div>
+            <span class="flow-arrow fragment fade-in" data-fragment-index="4">→</span>
+            <div class="flow-step fragment fade-in active" data-fragment-index="4">Mutación de estado<br><code style="font-size: 0.8em;">count = 1</code></div>
+            <span class="flow-arrow fragment fade-in" data-fragment-index="5">→</span>
+            <div class="flow-step fragment fade-in active" data-fragment-index="5">Mutación de DOM<br><code style="font-size: 0.8em;">span.textContent = 1</code></div>
+            <span class="flow-arrow fragment fade-in" data-fragment-index="6">→</span>
+            <div class="flow-step fragment fade-in" data-fragment-index="6">Render<br><span style="color: var(--text-muted); font-size: 0.85em;">"1" en pantalla</span></div>
           </div>
-          <p class="fragment fade-in" style="margin-top: 24px; font-size: 0.78em; color: var(--accent); text-align: center; max-width: 36em; margin-left: auto; margin-right: auto;">
+          <p class="fragment fade-in" data-fragment-index="7" style="margin-top: 24px; font-size: 0.78em; color: var(--accent); text-align: center; max-width: 36em; margin-left: auto; margin-right: auto;">
             Los dos pasos centrales son los críticos: <strong>el estado y el DOM se mueven por separado</strong>. Si te olvidás de uno, la pantalla miente.
           </p>
           <aside class="notes">
-            <p><strong>Revelar paso a paso. En el cuarto y quinto paso, marcar que ahí es donde la IA suele equivocarse cuando no le nombrás "estado".</strong></p>
+            <p><strong>Revelar paso a paso, un click por etapa. Cada click suma un paso al ciclo.</strong></p>
             <p><u>El ciclo de 5 pasos. Los pasos centrales son la mutación de estado y la mutación del DOM, que son dos cosas distintas.</u></p>
-            <p><em>"Acá está el ciclo desarmado. Estado inicial, count en cero. El usuario hace click, eso es el evento. El listener se activa: la función que registramos para ese tipo de evento. Y ahí pasan las dos cosas críticas, en orden: primero se actualiza el estado, count pasa a uno. Después se actualiza el DOM, el span muestra uno. Y recién al final el navegador re-renderiza ese nodo. El estado y el DOM no son la misma cosa, aunque caminen en paralelo. Si tu listener actualiza solamente el estado y se olvida del DOM, la pantalla muestra cero pero el dato es uno. Si actualiza solamente el DOM, la pantalla muestra uno pero la próxima vez que rendericen el contador desde el estado, vuelve a cero."</em></p>
+            <p><em>"Acá está el ciclo desarmado. Vamos a recorrerlo paso por paso."</em></p>
+            <p><em>"Estado inicial: count en cero. Esto es lo que existe antes de que el usuario haga nada."</em></p>
+            <p><em>"El usuario hace click. Eso es el evento. El navegador lo emite, vos elegiste escucharlo."</em></p>
+            <p><em>"El listener se activa: es la función que registramos para ese tipo de evento. Acá adentro pasan las dos cosas críticas."</em></p>
+            <p><em>"Primero: se actualiza el estado. Count pasa a uno. El dato cambió, pero la pantalla todavía muestra cero."</em></p>
+            <p><em>"Segundo: se actualiza el DOM. Span.textContent pasa a uno. El árbol del documento ahora coincide con el dato."</em></p>
+            <p><em>"Y recién al final el navegador re-renderiza ese nodo. El usuario ve uno."</em></p>
+            <p><em>"El estado y el DOM no son la misma cosa, aunque caminen en paralelo. Si tu listener actualiza solamente uno de los dos, la pantalla miente."</em></p>
           </aside>
         </section>
 

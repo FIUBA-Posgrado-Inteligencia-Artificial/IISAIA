@@ -52,6 +52,9 @@ Format meanings:
 - <u>Underline</u> (`<u>`): description of what this slide is about / context for you. NOT spoken aloud. Used to refresh your memory at a glance.
 - *Italic* (`<em>`): the script — what comes out of your mouth. Always between quotes, conversational Spanish.
 
+**Each `<p><em>...</em></p>` block corresponds to one "press down arrow" boundary.**
+On slides with fragments (progressive reveals), split the script into multiple short `<em>` blocks, one per reveal action. The first block is what you say while landing on the slide; each subsequent block is what you say *after* triggering the next reveal. Never write a single monolithic `<em>` block on a slide that has fragments — the speaker would have to read ahead to figure out where to press the arrow. Split it. On slides with no fragments, one `<em>` block is fine.
+
 Concision rules:
 - **Bold and underlined parts must be glanceable in under 2 seconds.** Specific and terse — no full sentences if a phrase will do. The non-spoken content is consumed *while you're already talking* — if you have to stop and read it, it's too long. If it's vague, it's not useful.
 - **Italic (script) can be longer.** It's what you actually say. Use natural conversational Spanish — second-person ("vamos a", "podés"), rhetorical questions, the actual phrasing.
