@@ -15,17 +15,20 @@
        overflow: auto + word-wrap: normal — that forces a horizontal
        scrollbar instead of wrapping. We override both. */
     .reveal pre {
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      white-space: pre-wrap;
-      word-break: break-word;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
     }
     .reveal pre code {
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow: visible;
-      max-height: none;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      overflow: visible !important;
+      max-height: none !important;
+      display: block;
     }
     /* §3 box-model diagram (concentric layers). */
     .box-model { display: flex; flex-direction: column; align-items: center;
@@ -654,7 +657,7 @@
               <h3 style="color: var(--accent); margin-bottom: 8px;">Tipografía</h3>
               <p style="font-size: 0.72em;">Una decisión binaria: una sola sans para todo, o una pareja <em>heading + body</em> (serif para títulos, sans para cuerpo).</p>
               <p style="font-size: 0.72em; color: var(--text-muted); margin-top: 8px;">La propiedad es <code>font-family</code>.</p>
-              <pre style="margin-top: 8px; font-size: 0.85em; box-shadow: none;"><code class="language-css" data-trim>body { font-family: 'Inter', sans-serif; }
+              <pre style="margin-top: 8px; font-size: 0.6em; box-shadow: none;"><code class="language-css" data-trim>body { font-family: 'Inter', sans-serif; }
 h1, h2 { font-family: 'Georgia', serif; }</code></pre>
             </div>
             <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary);">
@@ -688,14 +691,14 @@ h1, h2 { font-family: 'Georgia', serif; }</code></pre>
           <div class="comparison-2col" style="margin-top: 12px;">
             <div class="bg-code-card fragment fade-in" data-fragment-index="1">
               <p style="font-size: 0.7em; color: var(--text-muted); margin-bottom: 8px;">Hardcodeado en cada lugar</p>
-              <pre style="margin: 0; font-size: 0.8em; box-shadow: none;"><code class="language-css" data-trim>.btn { background: #6366f1; }
+              <pre style="margin: 0; font-size: 0.65em; box-shadow: none;"><code class="language-css" data-trim>.btn { background: #6366f1; }
 .link { color: #6366f1; }
 .badge { border: 1px solid #6366f1; }</code></pre>
               <p style="font-size: 0.65em; color: var(--text-muted); margin-top: 8px;">Cambiar el acento: la IA busca y reemplaza N ocurrencias. Riesgo de romper algo.</p>
             </div>
             <div class="bg-code-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent);">
               <p style="font-size: 0.7em; color: var(--accent); margin-bottom: 8px;">Con variables CSS</p>
-              <pre style="margin: 0; font-size: 0.8em; box-shadow: none;"><code class="language-css" data-trim>:root { --color-accent: #6366f1; }
+              <pre style="margin: 0; font-size: 0.65em; box-shadow: none;"><code class="language-css" data-trim>:root { --color-accent: #6366f1; }
 .btn { background: var(--color-accent); }
 .link { color: var(--color-accent); }
 .badge { border: 1px solid var(--color-accent); }</code></pre>
