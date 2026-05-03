@@ -459,28 +459,31 @@
           <h2>Cómo le pedís estructura a una IA</h2>
           <div class="comparison-2col" style="margin-top: 12px; align-items: stretch;">
             <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted);">
-              <h3 style="color: var(--text-muted); margin-bottom: 12px;">Prompt vago</h3>
-              <p style="font-style: italic; font-size: 0.8em;">"Hacé una página de contacto."</p>
+              <h3 style="color: var(--text-muted); margin-bottom: 12px;">Prompt sin vocabulario</h3>
+              <p style="font-style: italic; font-size: 0.78em; line-height: 1.5;">
+                "Necesito una página de contacto. Tiene un menú arriba, un formulario para nombre, email y mensaje, y un pie con mi copyright."
+              </p>
               <p style="font-size: 0.7em; color: var(--text-muted); margin-top: 16px;">
-                El modelo inventa la estructura. Probablemente, sopa de divs.
+                La intención está clara, pero la estructura la inventa la IA. Probablemente, sopa de divs.
               </p>
             </div>
             <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
               <h3 style="color: var(--accent); margin-bottom: 12px;">Prompt con vocabulario</h3>
-              <p style="font-style: italic; font-size: 0.72em; line-height: 1.5;">
-                "Hacé una página de contacto. <strong>&lt;header&gt;</strong> con <strong>&lt;nav&gt;</strong> (Inicio, Sobre mí, Contacto); <strong>&lt;main&gt;</strong> con un <strong>&lt;section&gt;</strong> introductorio y un <strong>&lt;form&gt;</strong> con <strong>&lt;label&gt;</strong>+<strong>&lt;input&gt;</strong> para nombre y email, más un <strong>&lt;textarea&gt;</strong>; <strong>&lt;footer&gt;</strong> con copyright."
+              <p style="font-style: italic; font-size: 0.78em; line-height: 1.5;">
+                "Necesito una página de contacto. Estructura: <strong>&lt;header&gt;</strong> con <strong>&lt;nav&gt;</strong>, <strong>&lt;main&gt;</strong> con un <strong>&lt;form&gt;</strong> para nombre, email y mensaje, y <strong>&lt;footer&gt;</strong> con copyright."
               </p>
-              <p style="font-size: 0.7em; color: var(--accent); margin-top: 12px;">
-                Mismo objetivo, vocabulario explícito. La IA tiene el outline; solo rellena.
+              <p style="font-size: 0.7em; color: var(--accent); margin-top: 16px;">
+                Misma intención, cinco etiquetas nombradas. La IA tiene el outline; solo rellena.
               </p>
             </div>
           </div>
           <p style="margin-top: 20px; font-size: 0.8em; text-align: center;">
-            No es más largo en intención. Es más <em>preciso</em>.
+            No es más largo. Es más <em>preciso</em>.
           </p>
           <aside class="notes">
             <p><u>Cierre de §2. La recompensa del vocabulario aplicada a un prompt real.</u></p>
-            <p><em>"Acá es donde el vocabulario te paga. Mirá la diferencia entre los dos prompts. La intención es la misma: una página de contacto. Pero el segundo nombra cada pieza estructural con la etiqueta correcta. Header, nav, main, section, form, label, input, footer. La IA no improvisa porque no tiene que improvisar: vos le diste el outline, ella solamente rellena. Y eso vale para cualquier prompt de UI que escribas en este curso. Próxima capa: cómo se ven estos elementos."</em></p>
+            <p><em>"Acá es donde el vocabulario te paga. Mirá los dos prompts. La intención es exactamente la misma: una página de contacto con menú, formulario y pie. Pero el primero le entrega esa intención a la IA con palabras de usuario y nada más. La IA tiene libertad para inventar la estructura, y como la mayoría de los modelos generan sopa de divs cuando no se les dice nada, eso es lo que vas a recibir."</em></p>
+            <p><em>"El segundo prompt no es más largo. Cinco palabras técnicas — header, nav, main, form, footer — convierten el mismo pedido en algo deterministico. No hace falta nombrar cada label, cada input, cada textarea: con el esqueleto alcanza. La IA rellena lo de adentro con sus propios defaults, pero la estructura la decidiste vos. Eso es dirigir. Próxima capa: cómo se ven estos elementos."</em></p>
           </aside>
         </section>
 
