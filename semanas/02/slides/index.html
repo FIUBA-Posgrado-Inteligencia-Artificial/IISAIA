@@ -353,39 +353,40 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="fragment fade-in" data-fragment-index="1">
                 <td style="padding: 8px 10px; font-weight: 600;">Claridad</td>
                 <td style="padding: 8px 10px;">Las etiquetas describen el contenido. Leés el código y entendés la página.</td>
                 <td style="padding: 8px 10px;">Todos los bloques se ven iguales. El propósito hay que adivinarlo desde las clases.</td>
               </tr>
-              <tr>
+              <tr class="fragment fade-in" data-fragment-index="2">
                 <td style="padding: 8px 10px; font-weight: 600;">Accesibilidad</td>
                 <td style="padding: 8px 10px;">Los lectores de pantalla saltan directo a <code>&lt;nav&gt;</code> o <code>&lt;main&gt;</code>: existen como puntos de referencia nativos.</td>
                 <td style="padding: 8px 10px;">No hay puntos de referencia. Para suplirlo hay que agregar atributos <code>role</code> y <code>aria-*</code> a mano.</td>
               </tr>
-              <tr>
+              <tr class="fragment fade-in" data-fragment-index="3">
                 <td style="padding: 8px 10px; font-weight: 600;">SEO</td>
                 <td style="padding: 8px 10px;">Buscadores entienden la jerarquía y la importancia del contenido.</td>
                 <td style="padding: 8px 10px;">El buscador ve cajas sin estructura clara: indexación más pobre.</td>
               </tr>
-              <tr>
+              <tr class="fragment fade-in" data-fragment-index="4">
                 <td style="padding: 8px 10px; font-weight: 600;">Mantenimiento</td>
                 <td style="padding: 8px 10px;">Leer <code>&lt;article&gt;</code> y saber qué contiene.</td>
                 <td style="padding: 8px 10px;">Leer divs anidados con clases inventadas y reconstruir la intención del autor.</td>
               </tr>
             </tbody>
           </table>
-          <p style="margin-top: 18px; font-size: 0.7em; text-align: center; color: var(--text-muted); max-width: 38em; margin-left: auto; margin-right: auto;">
+          <p class="fragment fade-in" data-fragment-index="5" style="margin-top: 18px; font-size: 0.7em; text-align: center; color: var(--text-muted); max-width: 38em; margin-left: auto; margin-right: auto;">
             La sopa de divs no aparece por mala fe: aparece por hábito viejo, por frameworks que la fomentan, o porque tirar un <code>&lt;div&gt;</code> es más rápido que pensar qué etiqueta corresponde.
           </p>
           <aside class="notes">
+            <p><strong>Cinco clicks: una fila por click (claridad → accesibilidad → SEO → mantenimiento), después la nota de cierre.</strong></p>
             <p><u>Tradeoffs entre HTML semántico y sopa de divs en cuatro dimensiones. La nota inferior justifica por qué la sopa de divs sigue siendo común.</u></p>
-            <p><em>"La pregunta natural acá es: si las dos páginas se ven iguales y las dos funcionan, ¿qué importa cuál usemos? Importa por cuatro dimensiones."</em></p>
-            <p><em>"Claridad: el código semántico se lee. Si abren un archivo HTML y lo primero que ven son sus etiquetas, entienden la página antes de ejecutarla. Con sopa de divs, todos los bloques se ven iguales y tienen que ir adivinando qué hace cada uno desde el nombre de la clase."</em></p>
-            <p><em>"Accesibilidad: los lectores de pantalla, que son la herramienta que usan personas con discapacidad visual para navegar la web, usan las etiquetas semánticas como puntos de referencia. Pueden saltar directo a la navegación, directo al contenido principal. Con sopa de divs no hay puntos de referencia: para suplirlo hay que agregar a mano atributos role y aria, y eso casi nadie lo hace bien."</em></p>
-            <p><em>"SEO: los buscadores como Google leen el HTML para entender de qué trata la página. Si tenés etiquetas semánticas, el buscador entiende la jerarquía: el título principal, las secciones, la navegación. Con sopa de divs, ve cajas sin estructura, y la indexación es más pobre. Para un sitio que necesita ser encontrado por Google, esto se traduce en tráfico."</em></p>
-            <p><em>"Mantenimiento: dentro de seis meses alguien va a tener que tocar este código — vos mismo, otro desarrollador, o una IA. Leer un article y saber qué contiene es trivial. Leer divs anidados con clases inventadas y reconstruir la intención original del autor es una pérdida de tiempo."</em></p>
-            <p><em>"Y la pregunta final: si todo esto es tan obvio, ¿por qué la sopa de divs sigue siendo tan común? Por tres razones. Hábito viejo: las versiones anteriores de HTML no tenían estas etiquetas semánticas, así que el div era la herramienta universal. Frameworks: muchas librerías populares de CSS o de componentes generan divs anidados por defecto. Y planificación: tirar un div es más rápido que pensar dos segundos qué etiqueta corresponde. Las tres razones son comprensibles, pero ninguna es una buena defensa cuando el código se queda en producción."</em></p>
+            <p><em>"La pregunta natural acá es: si las dos páginas se ven iguales y las dos funcionan, ¿qué importa cuál usemos? Importa por cuatro dimensiones, una por una."</em></p>
+            <p><em>"Claridad. El código semántico se lee. Si abren un archivo HTML y lo primero que ven son sus etiquetas, entienden la página antes de ejecutarla. Con sopa de divs, todos los bloques se ven iguales y tienen que ir adivinando qué hace cada uno desde el nombre de la clase."</em></p>
+            <p><em>"Accesibilidad. Los lectores de pantalla, que son la herramienta que usan personas con discapacidad visual para navegar la web, usan las etiquetas semánticas como puntos de referencia. Pueden saltar directo a la navegación, directo al contenido principal. Con sopa de divs no hay puntos de referencia: para suplirlo hay que agregar a mano atributos role y aria, y eso casi nadie lo hace bien."</em></p>
+            <p><em>"SEO. Los buscadores como Google leen el HTML para entender de qué trata la página. Si tenés etiquetas semánticas, el buscador entiende la jerarquía: el título principal, las secciones, la navegación. Con sopa de divs, ve cajas sin estructura, y la indexación es más pobre. Para un sitio que necesita ser encontrado por Google, esto se traduce en tráfico."</em></p>
+            <p><em>"Mantenimiento. Dentro de seis meses alguien va a tener que tocar este código — vos mismo, otro desarrollador, o una IA. Leer un article y saber qué contiene es trivial. Leer divs anidados con clases inventadas y reconstruir la intención original del autor es una pérdida de tiempo."</em></p>
+            <p><em>"La pregunta final: si todo esto es tan obvio, ¿por qué la sopa de divs sigue siendo tan común? Por tres razones, ninguna buena pero todas reales. Hábito viejo: las versiones anteriores de HTML no tenían estas etiquetas semánticas, así que el div era la herramienta universal. Frameworks: muchas librerías populares de CSS o de componentes generan divs anidados por defecto. Y planificación: tirar un div es más rápido que pensar dos segundos qué etiqueta corresponde."</em></p>
           </aside>
         </section>
 
