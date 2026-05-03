@@ -513,16 +513,20 @@
             <div class="pipe-node" data-layer="5"><div class="pipe-label">Empaque</div><div class="pipe-sub">archivos</div></div>
           </div>
           <p style="margin-top: 32px; font-size: 0.95em; text-align: center; max-width: 32em; margin-left: auto; margin-right: auto;">
-            CSS es enorme. Para dirigir a la IA alcanza con <span style="color: var(--accent);">cuatro perillas</span>.
+            CSS es enorme. Para dirigir a la IA alcanza con <span style="color: var(--accent);">cuatro primitivas</span>.
           </p>
-          <p class="fragment fade-in" style="margin-top: 16px; font-size: 0.85em; text-align: center; color: var(--text-muted); max-width: 30em; margin-left: auto; margin-right: auto;">
+          <p style="margin-top: 8px; font-size: 0.7em; text-align: center; color: var(--text-muted); max-width: 34em; margin-left: auto; margin-right: auto; font-style: italic;">
+            Una <strong>primitiva</strong> es una pieza básica e indivisible del lenguaje, sobre la que se construye todo lo demás.
+          </p>
+          <p class="fragment fade-in" style="margin-top: 20px; font-size: 0.85em; text-align: center; color: var(--text-muted); max-width: 30em; margin-left: auto; margin-right: auto;">
             Empecemos por la más básica: ¿qué es exactamente <em>una caja</em> en CSS?
           </p>
           <aside class="notes">
-            <p><strong>Después de la frase principal, revelar la pregunta de transición con un click.</strong></p>
-            <p><u>Apertura de §3. Capa de estilo activa. La pregunta de cierre arma la próxima slide.</u></p>
-            <p><em>"Si el HTML nombra las partes, el CSS responde a la pregunta cómo se ven. CSS es enorme: cientos de propiedades, módulos enteros que llenan libros. Pero para dirigir a una IA no necesitás ese inventario. Necesitás cuatro perillas. Con eso alcanzás para describir el 90% de las decisiones visuales del curso."</em></p>
-            <p><em>"La primera perilla es la más básica de todas. Antes de decidir colores, layouts o tipografías, hay una unidad que se repite en cada elemento del CSS: la caja. ¿Qué es una caja, exactamente? Vamos a verlo."</em></p>
+            <p><strong>Después de la frase principal y la definición, revelar la pregunta de transición con un click.</strong></p>
+            <p><u>Apertura de §3. Capa de estilo activa. Definimos qué es una primitiva y arranca el recorrido por las cuatro.</u></p>
+            <p><em>"Si el HTML nombra las partes, el CSS responde a la pregunta cómo se ven. CSS es enorme: cientos de propiedades, módulos enteros que llenan libros. Pero para dirigir a una IA no necesitás ese inventario. Necesitás cuatro primitivas."</em></p>
+            <p><em>"Pausemos un segundo en la palabra. Una primitiva, en programación, es una pieza básica e indivisible del lenguaje: una unidad que no se descompone en otras más simples, y sobre la que se construye todo lo demás. En CSS, las cuatro primitivas que vamos a ver son los bloques fundamentales con los que se arman todas las decisiones visuales que vas a pedirle a la IA."</em></p>
+            <p><em>"La primera primitiva es la más básica de todas. Antes de decidir colores, layouts o tipografías, hay una unidad que se repite en cada elemento del CSS: la caja. ¿Qué es una caja, exactamente? Vamos a verlo."</em></p>
           </aside>
         </section>
 
@@ -593,8 +597,8 @@
             <p><strong>Revelar Flexbox (click 1). Revelar Grid (click 2). Revelar la nota inferior (click 3).</strong></p>
             <p><u>Las dos respuestas dominantes a "cómo se acomodan las cajas".</u></p>
             <p><em>"La pregunta principal del CSS no es de qué color son las cosas. Es cómo se acomodan las cajas entre sí. Y en 2026 hay dos respuestas que tenés que saber nombrar."</em></p>
-            <p><em>"Flexbox sirve cuando querés acomodar elementos en una sola dirección: fila o columna. Le decís al contenedor display flex y se vuelve un flex container. Las perillas que importan son justify-content para distribuir en el eje principal, align-items para alinear en el eje cruzado, y gap para la separación entre items. Caso típico: una nav-bar, una toolbar, un grupo de botones."</em></p>
-            <p><em>"Grid sirve cuando el layout es un tablero: filas y columnas a la vez. Display grid hace al contenedor un grid container. La perilla central es grid-template-columns donde declarás cuántas columnas hay y de qué ancho. El gap también funciona acá. Caso típico: una galería de tarjetas, un dashboard, un panel de productos."</em></p>
+            <p><em>"Flexbox sirve cuando querés acomodar elementos en una sola dirección: fila o columna. Le decís al contenedor display flex y se vuelve un flex container. Las propiedades que importan son justify-content para distribuir en el eje principal, align-items para alinear en el eje cruzado, y gap para la separación entre items. Caso típico: una nav-bar, una toolbar, un grupo de botones."</em></p>
+            <p><em>"Grid sirve cuando el layout es un tablero: filas y columnas a la vez. Display grid hace al contenedor un grid container. La propiedad central es grid-template-columns donde declarás cuántas columnas hay y de qué ancho. El gap también funciona acá. Caso típico: una galería de tarjetas, un dashboard, un panel de productos."</em></p>
             <p><em>"Si nombrás flex o grid en el prompt, el código sale bien al primer intento. Si decís 'quiero que estén una al lado de la otra' sin nombrar nada, la IA puede improvisar con inline-block o con floats antiguos, y vas a iterar tres veces para llegar al resultado que un término técnico te daba directo."</em></p>
           </aside>
         </section>
@@ -626,18 +630,18 @@ h1, h2 { font-family: 'Georgia', serif; }</code></pre>
           </p>
           <aside class="notes">
             <p><strong>Revelar Tipografía (click 1). Revelar Color (click 2). Revelar la nota inferior (click 3).</strong></p>
-            <p><u>Tipografía y color como dos sub-perillas que se nombran con números concretos para evitar adivinanzas.</u></p>
-            <p><em>"La tercera perilla agrupa tipografía y color, las dos cosas que más afectan la sensación general de un sitio."</em></p>
+            <p><u>Tipografía y color, las dos decisiones que cubre la tercera primitiva. Ambas se nombran con valores concretos para evitar adivinanzas.</u></p>
+            <p><em>"La tercera primitiva agrupa tipografía y color, las dos cosas que más afectan la sensación general de un sitio."</em></p>
             <p><em>"Tipografía: la decisión cabe en dos opciones. Una sola sans para todo el sitio, simple y limpia. O una pareja: una serif para los títulos y una sans para el cuerpo, lo que se usa cuando querés más personalidad. La propiedad CSS es font-family. Importa nombrarla porque si decís 'algo elegante', la IA puede tirar Comic Sans en sentido irónico, no se sabe."</em></p>
             <p><em>"Color: una paleta de cuatro tonos suele alcanzar para todo el curso. Un color de fondo, un color de texto que contraste con el fondo, un acento para botones y links, y opcionalmente un acento secundario o un tono muted para texto secundario. Cuatro hex; con eso ya tenés un sistema visual."</em></p>
             <p><em>"Y la regla práctica de cierre: nombrá la fuente y los códigos hex. Si pedís 'que se vea moderno', la IA inventa una paleta genérica. Si pedís fondo cero-efe-uno-siete-dos-a, texto e-dos-e-ocho-efe-cero, acento efe-cinco-nueve-e-cero-be, obtenés exactamente eso. La diferencia entre dirigir y rezar."</em></p>
           </aside>
         </section>
 
-        <!-- §3.5: Variables CSS — la perilla del LLM -->
+        <!-- §3.5: Variables CSS — la primitiva del LLM -->
         <section>
           <h2>Perilla 4 — Variables CSS</h2>
-          <p style="margin-top: 8px; font-size: 0.85em; color: var(--accent); text-align: center;">La perilla del LLM.</p>
+          <p style="margin-top: 8px; font-size: 0.85em; color: var(--accent); text-align: center;">La primitiva del LLM.</p>
           <div class="comparison-2col" style="margin-top: 12px;">
             <div class="bg-code-card fragment fade-in" data-fragment-index="1">
               <p style="font-size: 0.7em; color: var(--text-muted); margin-bottom: 8px;">Hardcodeado en cada lugar</p>
@@ -661,16 +665,16 @@ h1, h2 { font-family: 'Georgia', serif; }</code></pre>
           <aside class="notes">
             <p><strong>Revelar Hardcodeado (click 1). Revelar Variables (click 2). Revelar la nota inferior (click 3).</strong></p>
             <p><u>Variables CSS como punto de entrada que la IA puede modificar limpiamente. Conexión directa con el theme switcher de demo.html.</u></p>
-            <p><em>"La cuarta perilla es la más importante para trabajar con IA. Las variables CSS, también llamadas custom properties. Se declaran en :root con dos guiones adelante del nombre, y se usan con var(nombre) en cualquier regla."</em></p>
+            <p><em>"La cuarta primitiva es la más importante para trabajar con IA. Las variables CSS, también llamadas custom properties. Se declaran en :root con dos guiones adelante del nombre, y se usan con var(nombre) en cualquier regla."</em></p>
             <p><em>"Mirá el contraste a la izquierda. El color hex está hardcodeado en cada regla — tres lugares, podrían ser veinte. Si querés cambiar el acento a verde, la IA tiene que buscar veinte ocurrencias del hex y reemplazarlas a mano. Cada reemplazo es un riesgo: ¿y si ese hex también se usa para otra cosa? Se va a romper."</em></p>
-            <p><em>"A la derecha, una sola variable centraliza el color. Cambiar el acento es cambiar una línea. Cero ambigüedad, cero riesgo. Por eso la llamo 'la perilla del LLM': es el patrón que hace que las modificaciones futuras sean baratas."</em></p>
+            <p><em>"A la derecha, una sola variable centraliza el color. Cambiar el acento es cambiar una línea. Cero ambigüedad, cero riesgo. Por eso la llamo 'la primitiva del LLM': es el patrón que hace que las modificaciones futuras sean baratas."</em></p>
             <p><em>"En la próxima slide vamos a abrir demo.html y ver esto en vivo. Tiene un theme switcher: cuatro botones que cambian una sola variable, y toda la página se reviste."</em></p>
           </aside>
         </section>
 
         <!-- §3.6: Live demo — botón a demo.html#estilo -->
         <section>
-          <h2>Las perillas, en vivo</h2>
+          <h2>Las primitivas, en vivo</h2>
           <div style="margin-top: 24px; text-align: center;">
             <p style="font-size: 0.85em; max-width: 36em; margin: 0 auto 24px;">
               Demo.html §2 tiene dos demos paradas en lo que acabamos de ver: un <strong>flex playground</strong> con los botones de <code>justify-content</code>, y un <strong>theme switcher</strong> que cambia toda la paleta tocando una variable.
@@ -680,7 +684,7 @@ h1, h2 { font-family: 'Georgia', serif; }</code></pre>
           <aside class="notes">
             <p><strong>Abrir demo.html#estilo en una pestaña nueva. Tocar los botones de justify-content (flex-start, center, space-between, space-around, flex-end) — los items se redistribuyen en vivo. Después tocar el theme switcher (Indigo, Esmeralda, Ámbar, Rojo): una sola variable cambia y toda la página se reviste.</strong></p>
             <p><u>Slide-puente al demo. Conecta lo conceptual de §3.3 (flex) y §3.5 (variables) con la página interactiva.</u></p>
-            <p><em>"Vamos a ver las dos perillas en directo. Abro demo.html en otra pestaña. Acá tenemos un flex playground: cinco botones con valores distintos de justify-content. Toco flex-start: los items se pegan a la izquierda. Toco center: al medio. Toco space-between: los extremos pegados, el resto repartido. Es la perilla en vivo."</em></p>
+            <p><em>"Vamos a ver las dos primitivas en directo. Abro demo.html en otra pestaña. Acá tenemos un flex playground: cinco botones con valores distintos de justify-content. Toco flex-start: los items se pegan a la izquierda. Toco center: al medio. Toco space-between: los extremos pegados, el resto repartido. Es la primitiva en vivo."</em></p>
             <p><em>"Y abajo el theme switcher. Cuatro botones con cuatro acentos distintos: Indigo, Esmeralda, Ámbar, Rojo. Cada uno cambia una sola variable CSS, y toda la página — el header, los botones, los enlaces, los bordes — se actualiza al instante. Ese es el patrón que querés que tu código tenga siempre."</em></p>
           </aside>
         </section>
@@ -702,7 +706,7 @@ h1, h2 { font-family: 'Georgia', serif; }</code></pre>
                 "Convertí el <strong>&lt;main&gt;</strong> en un <strong>grid</strong> de 3 columnas con <strong>gap</strong> 24px. Definí variables: <code>--bg: #0f172a</code>, <code>--text: #e2e8f0</code>, <code>--accent: #f59e0b</code>. El <strong>&lt;button&gt;</strong> primario: <strong>padding</strong> 12px 20px, <strong>border-radius</strong> 8px, fondo <code>var(--accent)</code>."
               </p>
               <p style="font-size: 0.7em; color: var(--accent); margin-top: 12px;">
-                Layout, modelo de caja, color y variables — las cuatro perillas nombradas.
+                Layout, modelo de caja, color y variables — las cuatro primitivas nombradas.
               </p>
             </div>
           </div>
