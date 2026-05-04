@@ -579,37 +579,22 @@
               <pre style="margin: 0; font-size: 0.55em; box-shadow: none; width: 100%; max-width: 100%; box-sizing: border-box;"><code class="language-html" data-trim>&lt;button class="apretado"&gt;Aceptar&lt;/button&gt;
 &lt;button class="estandar"&gt;Aceptar&lt;/button&gt;
 &lt;button class="generoso"&gt;Aceptar&lt;/button&gt;</code></pre>
-              <p style="font-size: 0.55em; color: var(--text-muted); margin: 8px 0 4px; text-align: center;">Resultado — el mismo botón con tres ajustes:</p>
-              <div style="background: var(--bg-primary); padding: 6px; border-radius: 4px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; align-items: start;">
-                <div style="text-align: center;">
-                  <button style="background: transparent; color: var(--accent); padding: 2px 6px; margin: 0; border: 1px solid var(--accent); border-radius: 2px; font-size: 0.65em; cursor: default;">Aceptar</button>
-                  <div style="font-size: 0.45em; color: var(--text-muted); margin: 3px 0 2px;">apretado</div>
-                  <pre style="margin: 0; font-size: 0.4em; box-shadow: none; text-align: left; padding: 4px; background: var(--bg-secondary);"><code class="language-css" data-trim>.apretado {
-  padding: 2px 6px;
-  margin: 0;
-  border: 1px solid;
-  border-radius: 2px;
-}</code></pre>
+              <p style="font-size: 0.55em; color: var(--text-muted); margin: 8px 0 4px; text-align: center;">Resultado — los tres botones uno arriba del otro. <em>El espacio entre ellos lo da el <strong style="color: #f59e0b;">margin</strong>.</em></p>
+              <div style="background: var(--bg-primary); padding: 8px 10px; border-radius: 4px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <button style="background: transparent; color: var(--accent); padding: 2px 6px; margin: 0; border: 1px solid var(--accent); border-radius: 2px; font-size: 0.6em; cursor: default; flex: 0 0 auto;">Aceptar</button>
+                  <span style="font-size: 0.45em; color: var(--text-muted); flex: 0 0 auto; min-width: 60px;">apretado</span>
+                  <pre style="margin: 0; font-size: 0.4em; box-shadow: none; text-align: left; padding: 4px 6px; background: var(--bg-secondary); flex: 1; min-width: 0;"><code class="language-css" data-trim>.apretado { padding: 2px 6px; margin: 0; border: 1px solid; border-radius: 2px; }</code></pre>
                 </div>
-                <div style="text-align: center;">
-                  <button style="background: transparent; color: var(--accent); padding: 8px 14px; margin: 4px 0; border: 1px solid var(--accent); border-radius: 4px; font-size: 0.65em; cursor: default;">Aceptar</button>
-                  <div style="font-size: 0.45em; color: var(--text-muted); margin: 3px 0 2px;">estándar</div>
-                  <pre style="margin: 0; font-size: 0.4em; box-shadow: none; text-align: left; padding: 4px; background: var(--bg-secondary);"><code class="language-css" data-trim>.estandar {
-  padding: 8px 14px;
-  margin: 4px 0;
-  border: 1px solid;
-  border-radius: 4px;
-}</code></pre>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <button style="background: transparent; color: var(--accent); padding: 8px 14px; margin: 4px 0; border: 1px solid var(--accent); border-radius: 4px; font-size: 0.6em; cursor: default; flex: 0 0 auto;">Aceptar</button>
+                  <span style="font-size: 0.45em; color: var(--text-muted); flex: 0 0 auto; min-width: 60px;">estándar</span>
+                  <pre style="margin: 0; font-size: 0.4em; box-shadow: none; text-align: left; padding: 4px 6px; background: var(--bg-secondary); flex: 1; min-width: 0;"><code class="language-css" data-trim>.estandar { padding: 8px 14px; margin: 4px 0; border: 1px solid; border-radius: 4px; }</code></pre>
                 </div>
-                <div style="text-align: center;">
-                  <button style="background: transparent; color: var(--accent); padding: 16px 28px; margin: 10px 0; border: 3px solid var(--accent); border-radius: 8px; font-size: 0.65em; cursor: default;">Aceptar</button>
-                  <div style="font-size: 0.45em; color: var(--text-muted); margin: 3px 0 2px;">generoso</div>
-                  <pre style="margin: 0; font-size: 0.4em; box-shadow: none; text-align: left; padding: 4px; background: var(--bg-secondary);"><code class="language-css" data-trim>.generoso {
-  padding: 16px 28px;
-  margin: 10px 0;
-  border: 3px solid;
-  border-radius: 8px;
-}</code></pre>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <button style="background: transparent; color: var(--accent); padding: 16px 28px; margin: 10px 0; border: 3px solid var(--accent); border-radius: 8px; font-size: 0.6em; cursor: default; flex: 0 0 auto;">Aceptar</button>
+                  <span style="font-size: 0.45em; color: var(--text-muted); flex: 0 0 auto; min-width: 60px;">generoso</span>
+                  <pre style="margin: 0; font-size: 0.4em; box-shadow: none; text-align: left; padding: 4px 6px; background: var(--bg-secondary); flex: 1; min-width: 0;"><code class="language-css" data-trim>.generoso { padding: 16px 28px; margin: 10px 0; border: 3px solid; border-radius: 8px; }</code></pre>
                 </div>
               </div>
               <p style="font-size: 0.6em; color: var(--accent); margin-top: 8px; text-align: center;">
@@ -620,9 +605,9 @@
           <aside class="notes">
             <p><u>Box model. La caja como unidad universal del CSS. Dos palabras clave para dirigir la respiración de la página: padding y margin.</u></p>
             <p><em>"Todo elemento HTML es una caja. No 'casi todo': todo. Cada caja tiene cuatro capas concéntricas, como una cebolla. Adentro de todo está el contenido — el texto, la imagen, lo que sea. Alrededor del contenido, padding: el espacio interno entre el contenido y el borde. Después border, el borde mismo. Y afuera de todo, margin: el espacio externo que separa esta caja de las que la rodean."</em></p>
-            <p><em>"A la derecha tenemos tres botones con el mismo texto 'Aceptar', cada uno con una clase distinta: apretado, estandar y generoso. Mirá la diferencia abajo de cada uno."</em></p>
-            <p><em>"El apretado tiene padding chico de 2 por 6 píxeles, sin margin, border fino, esquinas casi rectas — clickeable pero incómodo, le falta aire. El estándar es el del medio: padding 8 por 14, margin 4 arriba y abajo, border de 1 píxel, esquinas redondeadas — los valores razonables que vas a usar el 80% del tiempo. El generoso tiene padding grande de 16 por 28, margin de 10, border de 3 píxeles, radius más amplio — el botón pesa visualmente, atrae la atención, lo usás cuando es la acción principal de la página."</em></p>
-            <p><em>"El contenido es idéntico en los tres: la palabra 'Aceptar'. Lo único que cambia son las cuatro capas del box model. Esa es toda la primitiva."</em></p>
+            <p><em>"A la derecha tenemos tres botones con el mismo texto 'Aceptar', uno arriba del otro. Cada uno tiene una clase distinta: apretado, estándar y generoso. La idea de stackearlos es que el espacio que ven entre ellos es el margin trabajando en vivo."</em></p>
+            <p><em>"El apretado tiene padding chico de 2 por 6 píxeles, sin margin, border fino. Como su margin es cero, está pegado al siguiente. El estándar tiene padding razonable, margin de 4 píxeles arriba y abajo — fíjense que entre el apretado y el estándar ya hay un poco de aire, ese aire es el margin. El generoso tiene padding grande, margin de 10 píxeles arriba y abajo, y border más grueso — la separación con el estándar es visiblemente mayor por el margin."</em></p>
+            <p><em>"El contenido es idéntico en los tres: la palabra 'Aceptar'. Lo único que cambia son las cuatro capas del box model. Padding adentro, border alrededor, margin entre cajas. Esa es toda la primitiva."</em></p>
             <p><em>"La diferencia entre una página apretada y una que respira se decide en padding y margin. Sin esos dos nombres, vas a decirle a la IA 'dale más aire' y la IA va a tirar al azar — a veces padding, a veces margin, a veces line-height. Con esos dos nombres, el cambio es exacto."</em></p>
           </aside>
         </section>
