@@ -705,34 +705,42 @@ p  { font-family: system-ui, sans-serif; }</code></pre>
 
             <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary); min-width: 0; padding: 10px;">
               <h3 style="color: var(--accent-secondary); margin-bottom: 4px; font-size: 0.95em;">Color</h3>
-              <p style="font-size: 0.62em; margin-bottom: 6px;">Una paleta minimalista: 4 tonos. Las propiedades son <code>background</code> y <code>color</code>.</p>
-              <pre style="margin: 0; font-size: 0.5em; box-shadow: none;"><code class="language-html" data-trim>&lt;button class="cta"&gt;Aceptar&lt;/button&gt;</code></pre>
-              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none;"><code class="language-css" data-trim>.cta {
-  background: #f59e0b;
-  color: #0f172a;
-}</code></pre>
+              <p style="font-size: 0.6em; margin-bottom: 6px;">Definir una paleta y respetarla en todo el sitio es práctica estándar. Las propiedades son <code>background</code> y <code>color</code>.</p>
+              <pre style="margin: 0; font-size: 0.5em; box-shadow: none;"><code class="language-html" data-trim>&lt;div class="card"&gt;
+  &lt;h3&gt;Bienvenido&lt;/h3&gt;
+  &lt;p class="meta"&gt;Hace 2 días&lt;/p&gt;
+  &lt;button class="cta"&gt;Aceptar&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none;"><code class="language-css" data-trim>.card { background: #0f172a; color: #e2e8f0; }
+.meta { color: #94a3b8; }
+.cta  { background: #f59e0b; color: #0f172a; }</code></pre>
               <p style="font-size: 0.5em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">Resultado:</p>
-              <div style="background: var(--bg-primary); padding: 10px; border-radius: 4px; text-align: center;">
-                <button style="background: #f59e0b; color: #0f172a; padding: 6px 14px; border: none; border-radius: 4px; font-size: 0.7em; font-weight: 600; cursor: default;">Aceptar</button>
+              <div style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 6px;">
+                <div style="font-size: 0.85em; font-weight: 600; margin-bottom: 2px;">Bienvenido</div>
+                <div style="color: #94a3b8; font-size: 0.6em; margin-bottom: 6px;">Hace 2 días</div>
+                <button style="background: #f59e0b; color: #0f172a; padding: 4px 12px; border: none; border-radius: 4px; font-size: 0.65em; font-weight: 600; cursor: default;">Aceptar</button>
               </div>
-              <p style="font-size: 0.45em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">La paleta entera con 4 tonos:</p>
-              <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+              <p style="font-size: 0.45em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">La paleta del curso (4 tonos):</p>
+              <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 6px;">
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #0f172a; width: 36px; height: 36px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.45em; color: var(--text-muted);">fondo</span>
+                  <div style="background: #0f172a; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
+                  <span style="font-size: 0.4em; color: var(--text-muted);">#0f172a</span>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #e2e8f0; width: 36px; height: 36px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.45em; color: var(--text-muted);">texto</span>
+                  <div style="background: #e2e8f0; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
+                  <span style="font-size: 0.4em; color: var(--text-muted);">#e2e8f0</span>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #f59e0b; width: 36px; height: 36px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.45em; color: var(--text-muted);">acento</span>
+                  <div style="background: #f59e0b; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
+                  <span style="font-size: 0.4em; color: var(--text-muted);">#f59e0b</span>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #94a3b8; width: 36px; height: 36px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.45em; color: var(--text-muted);">muted</span>
+                  <div style="background: #94a3b8; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
+                  <span style="font-size: 0.4em; color: var(--text-muted);">#94a3b8</span>
                 </div>
+              </div>
+              <div style="text-align: center;">
+                <a href="https://coolors.co/0f172a-e2e8f0-f59e0b-94a3b8" target="_blank" rel="noopener" style="font-size: 0.5em; color: var(--accent); text-decoration: underline;">Ver esta paleta en coolors.co →</a>
               </div>
             </div>
 
@@ -745,7 +753,9 @@ p  { font-family: system-ui, sans-serif; }</code></pre>
             <p><u>Tipografía y color, las dos decisiones que cubre la tercera primitiva. Cada card sigue el patrón HTML → CSS → resultado.</u></p>
             <p><em>"La tercera primitiva agrupa tipografía y color, las dos cosas que más afectan la sensación general de un sitio."</em></p>
             <p><em>"Tipografía. Arrancamos por el cómo: en CSS, la propiedad que define qué fuente usar se llama font-family. Le decís a una regla — apuntando a una etiqueta o a una clase — qué familia tipográfica aplicar al texto que renderiza ese elemento. Mirá el card de la izquierda: en el HTML hay un h1 y un p; en el CSS hay dos reglas, una para cada etiqueta, y cada una le pide su propia font-family. Con eso en la mano, vienen las dos opciones que tenés para diseñar una página. La primera: usar una sola fuente sans-serif para todo el sitio, simple y limpia, sin distinción entre títulos y cuerpo. La segunda: combinar una serif para los títulos y una sans para el cuerpo, lo que se usa cuando querés un poco más de personalidad — es lo que muestra este ejemplo. Abajo se ve el resultado: Georgia, una serif clásica, en el título; system-ui, la sans del sistema operativo, en el cuerpo. El título con personalidad, el cuerpo limpio. Por qué importa nombrar font-family en el prompt: si decís 'algo elegante' y nada más, la IA puede tirar Comic Sans irónicamente y vos no la frenaste."</em></p>
-            <p><em>"Color. Las dos propiedades que controlan el color de un elemento en CSS son background, que pinta el fondo, y color, que pinta el texto. Aplicás cualquiera de las dos a una regla apuntando a una etiqueta o a una clase. Mirá el card de la derecha: en el HTML hay un button con la clase cta. En el CSS, la regla punto-cta le pide background ámbar — el hex efe-cinco-nueve-e-cero-be — y color del texto casi negro. Abajo, el botón renderizado: fondo ámbar, texto oscuro, el acento del curso. Con eso en la mano, la estrategia: una paleta minimalista de cuatro tonos suele alcanzar para todo un sitio — fondo, texto, acento y un muted para texto secundario. La paleta del curso está abajo como referencia."</em></p>
+            <p><em>"Color. Antes de meternos en el código, una idea de fondo: en cualquier sitio profesional, el equipo elige una paleta de pocos colores y la respeta en cada elemento de la página. No se inventan colores nuevos cada vez que se agrega un botón o un encabezado — los colores se eligen al principio y se reutilizan. Eso es lo que da identidad visual coherente."</em></p>
+            <p><em>"Ahora el cómo. Las dos propiedades que controlan el color de un elemento en CSS son background, que pinta el fondo, y color, que pinta el texto. Aplicás cualquiera a una regla apuntando a una etiqueta o a una clase. Mirá el card de la derecha: en el HTML hay un div con la clase card, que adentro tiene un h3 de bienvenida, un p con la clase meta para texto secundario, y un button con la clase cta. En el CSS, cada regla usa uno o dos hex de la paleta: punto-card usa el fondo cero-efe-uno-siete-dos-a y el texto principal e-dos-e-ocho-efe-cero. Punto-meta usa el muted nueve-cuatro-a-tres-be-ocho para que el 'Hace 2 días' se note menos que el título. Y punto-cta usa el acento ámbar efe-cinco-nueve-e-cero-be de fondo y el texto oscuro encima."</em></p>
+            <p><em>"El resultado, abajo, son los cuatro colores de la paleta trabajando juntos en un mismo bloque: fondo oscuro, título claro, meta gris, botón ámbar. La paleta del curso está debajo como referencia, con los hex completos. Y abajo de todo, un link a coolors.co que abre esta misma paleta en el navegador — útil cuando estás eligiendo o ajustando colores."</em></p>
             <p><em>"La regla de cierre: nombrá la fuente y los códigos hex en el prompt. Si pedís 'que se vea moderno', la IA inventa una paleta genérica — esta vez ámbar, la próxima rosa, no sabés. Si pedís fondo cero-efe-uno-siete-dos-a, texto e-dos-e-ocho-efe-cero, acento efe-cinco-nueve-e-cero-be, obtenés exactamente eso. Vago es lotería; específico es determinismo."</em></p>
           </aside>
         </section>
