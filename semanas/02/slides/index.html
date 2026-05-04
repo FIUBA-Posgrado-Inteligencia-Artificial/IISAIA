@@ -579,8 +579,8 @@
               <pre style="margin: 0; font-size: 0.55em; box-shadow: none; width: 100%; max-width: 100%; box-sizing: border-box;"><code class="language-html" data-trim>&lt;button class="apretado"&gt;Aceptar&lt;/button&gt;
 &lt;button class="estandar"&gt;Aceptar&lt;/button&gt;
 &lt;button class="generoso"&gt;Aceptar&lt;/button&gt;</code></pre>
-              <p style="font-size: 0.55em; color: var(--text-muted); margin: 8px 0 4px; text-align: center;">Resultado — pares de botones idénticos. Mirá el tamaño (<strong style="color: #10b981;">padding</strong>), el grosor del borde (<strong style="color: #ef4444;">border</strong>) y el espacio entre hermanos (<strong style="color: #f59e0b;">margin</strong>):</p>
-              <div style="background: var(--bg-primary); padding: 10px; border-radius: 4px;">
+              <p class="fragment fade-in" data-fragment-index="1" style="font-size: 0.55em; color: var(--text-muted); margin: 8px 0 4px; text-align: center;">Resultado — pares de botones idénticos. Mirá el tamaño (<strong style="color: #10b981;">padding</strong>), el grosor del borde (<strong style="color: #ef4444;">border</strong>) y el espacio entre hermanos (<strong style="color: #f59e0b;">margin</strong>):</p>
+              <div class="fragment fade-in" data-fragment-index="1" style="background: var(--bg-primary); padding: 10px; border-radius: 4px;">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
                   <div style="flex: 0 0 auto;">
                     <button style="display: block; background: transparent; color: var(--accent); padding: 2px 6px; margin: 0; border: 1px solid var(--accent); border-radius: 2px; font-size: 0.55em; cursor: default;">Aceptar</button>
@@ -612,9 +612,11 @@
             </div>
           </div>
           <aside class="notes">
-            <p><u>Box model. La caja como unidad universal del CSS. Dos palabras clave para dirigir la respiración de la página: padding y margin.</u></p>
+            <p><strong>Explicar el diagrama y el HTML primero. Después un click revela el ejemplo de pares.</strong></p>
+            <p><u>Box model. La caja como unidad universal del CSS. El ejemplo aparece con un click para no abrumar mientras se introduce el concepto.</u></p>
             <p><em>"Todo elemento HTML es una caja. No 'casi todo': todo. Cada caja tiene cuatro capas concéntricas, como una cebolla. Adentro de todo está el contenido — el texto, la imagen, lo que sea. Alrededor del contenido, padding: el espacio interno entre el contenido y el borde. Después border, el borde mismo. Y afuera de todo, margin: el espacio externo que separa esta caja de las que la rodean."</em></p>
-            <p><em>"A la derecha tenemos tres filas, una por cada clase: apretado, estándar y generoso. Para que se vea bien qué hace el margin, en cada fila puse dos botones idénticos uno arriba del otro. Y en cada fila los tres valores del box model — padding, border y margin — son distintos, así que pueden ver las tres capas trabajando al mismo tiempo."</em></p>
+            <p><em>"Y arriba en el código tenemos el patrón HTML: tres botones, cada uno con una clase distinta — apretado, estándar y generoso. Cada clase va a tener una regla CSS con valores distintos para esas cuatro capas. Vamos a verlas en concreto."</em></p>
+            <p><em>"Para que se vea bien qué hace cada capa, en cada fila puse dos botones idénticos uno arriba del otro. Y en cada fila los tres valores del box model — padding, border y margin — son distintos, así que pueden ver las tres capas trabajando al mismo tiempo."</em></p>
             <p><em>"Apretado: padding chico de 2 por 6, border de 1 píxel, esquinas casi rectas. El botón sale chico, casi sin aire interno. Y como el margin es cero, los dos hermanos están pegados — sin ningún espacio entre ellos."</em></p>
             <p><em>"Estándar: padding razonable de 8 por 14, border de 1 píxel, esquinas suaves. El botón es más grande, cómodo de leer y clickear. Margin de 8 píxeles, así que entre los dos hermanos aparece un espacio claro."</em></p>
             <p><em>"Generoso: padding grande de 14 por 24, border de 3 píxeles, esquinas más redondeadas. El botón pesa visualmente, atrae la atención. Margin de 20 píxeles, y la separación entre hermanos es notoriamente más grande que en estándar."</em></p>
