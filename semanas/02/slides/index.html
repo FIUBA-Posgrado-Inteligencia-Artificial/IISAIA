@@ -688,68 +688,104 @@
         <section>
           <h2>Primitiva 3 — Tipografía y color</h2>
           <div class="comparison-2col" style="margin-top: 12px;">
-            <div class="bg-secondary-card fragment fade-in" data-fragment-index="1" style="border-left: 4px solid var(--accent);">
-              <h3 style="color: var(--accent); margin-bottom: 8px;">Tipografía</h3>
-              <p style="font-size: 0.72em;">Una decisión binaria: una sola sans para todo, o una pareja <em>heading + body</em> (serif para títulos, sans para cuerpo).</p>
-              <p style="font-size: 0.72em; color: var(--text-muted); margin-top: 8px;">La propiedad es <code>font-family</code>.</p>
-              <pre style="margin-top: 8px; font-size: 0.4em; box-shadow: none;"><code class="language-css" data-trim>body { font-family: 'Inter', sans-serif; }
-h1, h2 { font-family: 'Georgia', serif; }</code></pre>
-            </div>
-            <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary);">
-              <h3 style="color: var(--accent-secondary); margin-bottom: 8px;">Color</h3>
-              <p style="font-size: 0.72em;">Una paleta minimalista: cuatro tonos suelen alcanzar. Fondo, texto, acento, opcional acento secundario.</p>
-              <div class="palette" style="margin: 12px 0 0;">
-                <div class="swatch" style="background: #0f172a; width: 60px; height: 60px;">fondo</div>
-                <div class="swatch" style="background: #e2e8f0; color: #0f172a; width: 60px; height: 60px;">texto</div>
-                <div class="swatch" style="background: #f59e0b; width: 60px; height: 60px;">acento</div>
-                <div class="swatch" style="background: #94a3b8; color: #0f172a; width: 60px; height: 60px;">muted</div>
+
+            <div class="bg-secondary-card fragment fade-in" data-fragment-index="1" style="border-left: 4px solid var(--accent); min-width: 0; padding: 10px;">
+              <h3 style="color: var(--accent); margin-bottom: 4px; font-size: 0.95em;">Tipografía</h3>
+              <p style="font-size: 0.62em; margin-bottom: 6px;">Una sola sans, o una pareja serif heading + sans body. La propiedad es <code>font-family</code>.</p>
+              <pre style="margin: 0; font-size: 0.5em; box-shadow: none;"><code class="language-html" data-trim>&lt;h1&gt;Título&lt;/h1&gt;
+&lt;p&gt;Cuerpo del texto.&lt;/p&gt;</code></pre>
+              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none;"><code class="language-css" data-trim>h1 { font-family: 'Georgia', serif; }
+p  { font-family: system-ui, sans-serif; }</code></pre>
+              <p style="font-size: 0.5em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">Resultado:</p>
+              <div style="background: var(--bg-primary); padding: 10px; border-radius: 4px;">
+                <div style="font-family: 'Georgia', serif; font-size: 1.1em; color: var(--text-primary); margin-bottom: 4px;">Título</div>
+                <div style="font-family: system-ui, sans-serif; font-size: 0.7em; color: var(--text-muted);">Cuerpo del texto, en otra fuente.</div>
               </div>
             </div>
+
+            <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary); min-width: 0; padding: 10px;">
+              <h3 style="color: var(--accent-secondary); margin-bottom: 4px; font-size: 0.95em;">Color</h3>
+              <p style="font-size: 0.62em; margin-bottom: 6px;">Una paleta minimalista: 4 tonos. Las propiedades son <code>background</code> y <code>color</code>.</p>
+              <pre style="margin: 0; font-size: 0.5em; box-shadow: none;"><code class="language-html" data-trim>&lt;button class="cta"&gt;Aceptar&lt;/button&gt;</code></pre>
+              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none;"><code class="language-css" data-trim>.cta {
+  background: #f59e0b;
+  color: #0f172a;
+}</code></pre>
+              <p style="font-size: 0.5em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">Resultado:</p>
+              <div style="background: var(--bg-primary); padding: 10px; border-radius: 4px; text-align: center;">
+                <button style="background: #f59e0b; color: #0f172a; padding: 6px 14px; border: none; border-radius: 4px; font-size: 0.7em; font-weight: 600; cursor: default;">Aceptar</button>
+              </div>
+              <p style="font-size: 0.45em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">La paleta entera con 4 tonos:</p>
+              <div class="palette" style="margin: 0; gap: 6px; flex-wrap: wrap;">
+                <div class="swatch" style="background: #0f172a; width: 40px; height: 40px; font-size: 0.4em;">fondo</div>
+                <div class="swatch" style="background: #e2e8f0; color: #0f172a; width: 40px; height: 40px; font-size: 0.4em;">texto</div>
+                <div class="swatch" style="background: #f59e0b; width: 40px; height: 40px; font-size: 0.4em;">acento</div>
+                <div class="swatch" style="background: #94a3b8; color: #0f172a; width: 40px; height: 40px; font-size: 0.4em;">muted</div>
+              </div>
+            </div>
+
           </div>
-          <p class="fragment fade-in" data-fragment-index="3" style="margin-top: 16px; font-size: 0.75em; color: var(--text-muted); text-align: center; max-width: 36em; margin-left: auto; margin-right: auto;">
-            Nombrá la fuente y los hex. Si pedís "una página moderna", la IA inventa una paleta genérica. Si pedís <code>#0f172a</code> + <code>#e2e8f0</code> + <code>#f59e0b</code>, obtenés exactamente eso.
+          <p class="fragment fade-in" data-fragment-index="3" style="margin-top: 10px; font-size: 0.65em; color: var(--text-muted); text-align: center; max-width: 38em; margin-left: auto; margin-right: auto;">
+            Nombrá la fuente y los hex. <em>"Hacelo moderno"</em> es lotería; <code>#0f172a + #e2e8f0 + #f59e0b</code> es determinismo.
           </p>
           <aside class="notes">
             <p><strong>Revelar Tipografía (click 1). Revelar Color (click 2). Revelar la nota inferior (click 3).</strong></p>
-            <p><u>Tipografía y color, las dos decisiones que cubre la tercera primitiva. Ambas se nombran con valores concretos para evitar adivinanzas.</u></p>
+            <p><u>Tipografía y color, las dos decisiones que cubre la tercera primitiva. Cada card sigue el patrón HTML → CSS → resultado.</u></p>
             <p><em>"La tercera primitiva agrupa tipografía y color, las dos cosas que más afectan la sensación general de un sitio."</em></p>
-            <p><em>"Tipografía: la decisión cabe en dos opciones. Una sola sans para todo el sitio, simple y limpia. O una pareja: una serif para los títulos y una sans para el cuerpo, lo que se usa cuando querés más personalidad. La propiedad CSS es font-family. Importa nombrarla porque si decís 'algo elegante', la IA puede tirar Comic Sans en sentido irónico, no se sabe."</em></p>
-            <p><em>"Color: una paleta de cuatro tonos suele alcanzar para todo el curso. Un color de fondo, un color de texto que contraste con el fondo, un acento para botones y links, y opcionalmente un acento secundario o un tono muted para texto secundario. Cuatro hex; con eso ya tenés un sistema visual."</em></p>
-            <p><em>"Y la regla práctica de cierre: nombrá la fuente y los códigos hex. Si pedís 'que se vea moderno', la IA inventa una paleta genérica. Si pedís fondo cero-efe-uno-siete-dos-a, texto e-dos-e-ocho-efe-cero, acento efe-cinco-nueve-e-cero-be, obtenés exactamente eso. La diferencia entre dirigir y rezar."</em></p>
+            <p><em>"Tipografía. La decisión cabe en dos opciones: una sola sans para todo el sitio, simple y limpia, o una pareja heading + body — serif para títulos, sans para cuerpo, cuando querés más personalidad. Mirá el card de la izquierda. En el HTML hay un h1 y un p. En el CSS, la regla h1 le pide font-family Georgia; la regla p le pide system-ui sans. El resultado, abajo, son las dos fuentes lado a lado: el título con personalidad, el cuerpo limpio. La propiedad CSS es font-family. Importa nombrarla porque si decís 'algo elegante', la IA puede tirar Comic Sans irónicamente, no sabés."</em></p>
+            <p><em>"Color. Una paleta minimalista de cuatro tonos suele alcanzar: fondo, texto, acento y un muted para texto secundario. Mirá el card de la derecha. En el HTML hay un button con la clase cta. En el CSS, la regla punto-cta le pide background ámbar y color del texto casi negro, oscuro. El resultado, abajo, es el botón ámbar renderizado — el acento del curso. Y debajo, la paleta entera de cuatro tonos como referencia."</em></p>
+            <p><em>"La regla de cierre: nombrá la fuente y los códigos hex en el prompt. Si pedís 'que se vea moderno', la IA inventa una paleta genérica — esta vez ámbar, la próxima rosa, no sabés. Si pedís fondo cero-efe-uno-siete-dos-a, texto e-dos-e-ocho-efe-cero, acento efe-cinco-nueve-e-cero-be, obtenés exactamente eso. Vago es lotería; específico es determinismo."</em></p>
           </aside>
         </section>
 
         <!-- §3.5: Variables CSS — la primitiva del LLM -->
         <section>
           <h2>Primitiva 4 — Variables CSS</h2>
-          <p style="margin-top: 8px; font-size: 0.85em; color: var(--accent); text-align: center;">La primitiva del LLM.</p>
-          <div class="comparison-2col" style="margin-top: 12px;">
-            <div class="bg-code-card fragment fade-in" data-fragment-index="1">
-              <p style="font-size: 0.7em; color: var(--text-muted); margin-bottom: 8px;">Hardcodeado en cada lugar</p>
-              <pre style="margin: 0; font-size: 0.65em; box-shadow: none;"><code class="language-css" data-trim>.btn { background: #6366f1; }
-.link { color: #6366f1; }
-.badge { border: 1px solid #6366f1; }</code></pre>
-              <p style="font-size: 0.65em; color: var(--text-muted); margin-top: 8px;">Cambiar el acento: la IA busca y reemplaza N ocurrencias. Riesgo de romper algo.</p>
+          <p style="margin-top: 4px; font-size: 0.78em; color: var(--accent); text-align: center;">La primitiva del LLM.</p>
+          <div style="margin-top: 12px;">
+            <pre style="margin: 0; font-size: 0.55em; box-shadow: none;"><code class="language-html" data-trim>&lt;button class="btn"&gt;Aceptar&lt;/button&gt;
+&lt;a class="link"&gt;Saber más&lt;/a&gt;
+&lt;span class="badge"&gt;Nuevo&lt;/span&gt;</code></pre>
+            <pre style="margin: 6px 0 0; font-size: 0.55em; box-shadow: none;"><code class="language-css" data-trim>:root { --color-accent: ???; }
+.btn   { background: var(--color-accent); color: #fff; }
+.link  { color: var(--color-accent); }
+.badge { border: 1px solid var(--color-accent); color: var(--color-accent); }</code></pre>
+          </div>
+
+          <p class="fragment fade-in" data-fragment-index="1" style="margin-top: 14px; font-size: 0.6em; color: var(--text-muted); text-align: center;">
+            Una sola variable, tres elementos. Cambiar el valor de <code>--color-accent</code> reviste todo:
+          </p>
+          <div class="fragment fade-in" data-fragment-index="1" style="background: var(--bg-primary); padding: 10px; border-radius: 4px; margin-top: 6px;">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
+              <code style="flex: 0 0 auto; font-size: 0.55em; min-width: 170px;">--color-accent: #6366f1</code>
+              <button style="background: #6366f1; color: #fff; padding: 4px 12px; border: none; border-radius: 4px; font-size: 0.65em; cursor: default;">Aceptar</button>
+              <a style="color: #6366f1; font-size: 0.7em; text-decoration: underline;">Saber más</a>
+              <span style="border: 1px solid #6366f1; color: #6366f1; padding: 2px 8px; border-radius: 10px; font-size: 0.6em;">Nuevo</span>
             </div>
-            <div class="bg-code-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent);">
-              <p style="font-size: 0.7em; color: var(--accent); margin-bottom: 8px;">Con variables CSS</p>
-              <pre style="margin: 0; font-size: 0.65em; box-shadow: none;"><code class="language-css" data-trim>:root { --color-accent: #6366f1; }
-.btn { background: var(--color-accent); }
-.link { color: var(--color-accent); }
-.badge { border: 1px solid var(--color-accent); }</code></pre>
-              <p style="font-size: 0.65em; color: var(--accent); margin-top: 8px;">Cambiar el acento: una sola línea. Cero riesgo.</p>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
+              <code style="flex: 0 0 auto; font-size: 0.55em; min-width: 170px;">--color-accent: #10b981</code>
+              <button style="background: #10b981; color: #fff; padding: 4px 12px; border: none; border-radius: 4px; font-size: 0.65em; cursor: default;">Aceptar</button>
+              <a style="color: #10b981; font-size: 0.7em; text-decoration: underline;">Saber más</a>
+              <span style="border: 1px solid #10b981; color: #10b981; padding: 2px 8px; border-radius: 10px; font-size: 0.6em;">Nuevo</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <code style="flex: 0 0 auto; font-size: 0.55em; min-width: 170px;">--color-accent: #f59e0b</code>
+              <button style="background: #f59e0b; color: #fff; padding: 4px 12px; border: none; border-radius: 4px; font-size: 0.65em; cursor: default;">Aceptar</button>
+              <a style="color: #f59e0b; font-size: 0.7em; text-decoration: underline;">Saber más</a>
+              <span style="border: 1px solid #f59e0b; color: #f59e0b; padding: 2px 8px; border-radius: 10px; font-size: 0.6em;">Nuevo</span>
             </div>
           </div>
-          <p class="fragment fade-in" data-fragment-index="3" style="margin-top: 16px; font-size: 0.78em; text-align: center; max-width: 38em; margin-left: auto; margin-right: auto;">
-            Una variable es <span style="color: var(--accent);">un punto de entrada</span>. Demo.html lo lleva al extremo: una sola variable controla toda la paleta del sitio.
+
+          <p class="fragment fade-in" data-fragment-index="2" style="margin-top: 12px; font-size: 0.65em; text-align: center; max-width: 38em; margin-left: auto; margin-right: auto;">
+            Sin variables: cambiar el acento son <strong>N reemplazos de hex</strong> con riesgo de romper algo. Con variables: <strong>una línea</strong>.
           </p>
           <aside class="notes">
-            <p><strong>Revelar Hardcodeado (click 1). Revelar Variables (click 2). Revelar la nota inferior (click 3).</strong></p>
-            <p><u>Variables CSS como punto de entrada que la IA puede modificar limpiamente. Conexión directa con el theme switcher de demo.html.</u></p>
-            <p><em>"La cuarta primitiva es la más importante para trabajar con IA. Las variables CSS, también llamadas custom properties. Se declaran en :root con dos guiones adelante del nombre, y se usan con var(nombre) en cualquier regla."</em></p>
-            <p><em>"Mirá el contraste a la izquierda. El color hex está hardcodeado en cada regla — tres lugares, podrían ser veinte. Si querés cambiar el acento a verde, la IA tiene que buscar veinte ocurrencias del hex y reemplazarlas a mano. Cada reemplazo es un riesgo: ¿y si ese hex también se usa para otra cosa? Se va a romper."</em></p>
-            <p><em>"A la derecha, una sola variable centraliza el color. Cambiar el acento es cambiar una línea. Cero ambigüedad, cero riesgo. Por eso la llamo 'la primitiva del LLM': es el patrón que hace que las modificaciones futuras sean baratas."</em></p>
-            <p><em>"En la próxima slide vamos a abrir demo.html y ver esto en vivo. Tiene un theme switcher: cuatro botones que cambian una sola variable, y toda la página se reviste."</em></p>
+            <p><strong>Explicar el HTML y la regla CSS con la variable. Después un click revela el demo de tres acentos. Otro click revela la moraleja.</strong></p>
+            <p><u>Variables CSS: la primitiva más alta para trabajar con IA. El demo de tres filas muestra el efecto cascada — cambiar UNA línea revierte todo.</u></p>
+            <p><em>"La cuarta primitiva es la más importante para trabajar con IA. Las variables CSS, también llamadas custom properties. Se declaran en raíz, dentro de :root, con dos guiones adelante del nombre. Y se usan con var(nombre-de-la-variable) en cualquier regla."</em></p>
+            <p><em>"Arriba tenemos el patrón. Tres elementos en HTML: un button, un enlace, y un badge — un span pequeño que diría algo como 'Nuevo'. En el CSS, una variable --color-accent definida en :root, y tres reglas que la usan: el botón la usa de fondo, el enlace de color de texto, el badge de color de borde y de texto. El valor de la variable está vacío por ahora — es justamente lo que vamos a variar."</em></p>
+            <p><em>"Click. Acá tienen tres filas, una por cada valor de --color-accent. La fila de arriba: indigo. Botón con fondo indigo, link en indigo, badge con borde indigo. La del medio: esmeralda. Botón verde, link verde, badge verde. La de abajo: ámbar. Todo en ámbar. Lo único que cambia entre filas es la primera línea del CSS: el valor de --color-accent. Tres elementos, una sola variable, todo enganchado."</em></p>
+            <p><em>"Ese es el patrón que hace que las modificaciones futuras sean baratas. Sin variables, cambiar el acento son N reemplazos del hex en cada regla, con riesgo de romper algo si el mismo hex se usaba para otra cosa. Con variables, una línea cambia todo. Por eso la llamo 'la primitiva del LLM' — es lo que más le facilita el trabajo a la IA cuando tiene que iterar tu código."</em></p>
           </aside>
         </section>
 
