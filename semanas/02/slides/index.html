@@ -1198,51 +1198,7 @@ btn.addEventListener('click', () =&gt; {
           </aside>
         </section>
 
-        <!-- §5.3: Cuándo se rompe -->
-        <section>
-          <h2>Cuándo se rompe el single-file</h2>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.75em; margin-top: 14px;">
-            <thead>
-              <tr>
-                <th style="text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--text-muted); width: 28%;">Síntoma</th>
-                <th style="text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--text-muted);">Solución</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="fragment fade-in" data-fragment-index="1">
-                <td style="padding: 8px 12px; font-weight: 600;">El archivo pasa las 1000 líneas</td>
-                <td style="padding: 8px 12px;">Leerlo se vuelve doloroso. Conviene partirlo en archivos por área (CSS afuera, JS afuera).</td>
-              </tr>
-              <tr class="fragment fade-in" data-fragment-index="2">
-                <td style="padding: 8px 12px; font-weight: 600;">Hay backend</td>
-                <td style="padding: 8px 12px;">El single-file solo cubre el cliente. Para servidor, semana 3 introduce el equivalente: <em>single-file server</em>.</td>
-              </tr>
-              <tr class="fragment fade-in" data-fragment-index="3">
-                <td style="padding: 8px 12px; font-weight: 600;">Necesitás dependencias pesadas</td>
-                <td style="padding: 8px 12px;">Editor de texto rico, motor 3D, librería gigante: traerlas vía CDN (una línea de <code>&lt;script&gt;</code>) o pasar a multi-archivo.</td>
-              </tr>
-              <tr class="fragment fade-in" data-fragment-index="4">
-                <td style="padding: 8px 12px; font-weight: 600;">Trabajás en equipo</td>
-                <td style="padding: 8px 12px;">Resolver conflictos de merge sobre un único archivo gigante es un infierno. Archivos separados ganan por arrastre.</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="fragment fade-in" data-fragment-index="5" style="margin-top: 18px; font-size: 0.78em; text-align: center; color: var(--accent);">
-            El single-file es <em>default</em>, no <em>dogma</em>.
-          </p>
-          <aside class="notes">
-            <p><strong>Cinco clicks: una fila por click, después la línea de cierre.</strong></p>
-            <p><u>Los límites honestos del single-file. La regla práctica al final: usalo por defecto, no como religión.</u></p>
-            <p><em>"Hay que ser honesto: el single-file no es universal, y conviene saber sus límites para no usarlo donde estorba."</em></p>
-            <p><em>"Primer síntoma. Cuando el archivo pasa las mil líneas, leerlo se vuelve doloroso — para vos y para la IA. Acá conviene partirlo, separar el CSS en su archivo, el JS en otro. Volver a multi-archivo."</em></p>
-            <p><em>"Segundo. Hay backend. El single-file que vimos solo cubre el lado del cliente, lo que el navegador renderiza. Cuando tu app necesita un servidor con base de datos y autenticación, no entra todo en un .html. La próxima clase introduce el equivalente del lado servidor: single-file server, todo en un script de Python. Mismo principio, otro lado."</em></p>
-            <p><em>"Tercero. Necesitás una dependencia pesada — un editor de texto rico, un motor 3D, una librería con miles de líneas. Hay dos salidas: traerla vía CDN, una línea de script tag que apunta a un servidor público que sirve la librería; o aceptar que el proyecto creció y pasarlo a multi-archivo."</em></p>
-            <p><em>"Cuarto. Trabajás en equipo. Si dos personas tocan el mismo archivo gigante al mismo tiempo, el merge es un infierno. Archivos separados, donde cada persona toca su componente o su módulo, ganan por arrastre."</em></p>
-            <p><em>"Conclusión: el single-file es el default razonable para esta clase y para los TPs que dependan de un LLM gratuito. No es dogma. Cuando alguno de estos cuatro síntomas aparece, partís. Pero hasta entonces, no inventes carpetas."</em></p>
-          </aside>
-        </section>
-
-        <!-- §5.4: Demo single-file en demo.html -->
+        <!-- §5.3: Demo single-file en demo.html -->
         <section>
           <h2>Single-file en vivo</h2>
           <div style="margin-top: 24px; text-align: center;">
@@ -1259,7 +1215,7 @@ btn.addEventListener('click', () =&gt; {
           </aside>
         </section>
 
-        <!-- §5.5: Cómo le pedís single-file a una IA -->
+        <!-- §5.4: Cómo le pedís single-file a una IA -->
         <section>
           <h2>Cómo le pedís single-file a una IA</h2>
           <div class="comparison-2col" style="margin-top: 12px; align-items: stretch;">
