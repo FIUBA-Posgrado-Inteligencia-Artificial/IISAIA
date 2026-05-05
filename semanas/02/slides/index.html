@@ -943,13 +943,17 @@ p  { font-family: system-ui, sans-serif; }</code></pre>
           <p style="margin-top: 32px; font-size: 0.95em; text-align: center; max-width: 32em; margin-left: auto; margin-right: auto;">
             Cuando una página <em>hace algo</em>, hay un triángulo de tres conceptos en juego al mismo tiempo.
           </p>
+          <p style="margin-top: 8px; font-size: 0.7em; text-align: center; color: var(--text-muted); max-width: 34em; margin-left: auto; margin-right: auto; font-style: italic;">
+            Como en CSS: pocos nombres, mucha cobertura.
+          </p>
           <p class="fragment fade-in" style="margin-top: 16px; font-size: 0.85em; text-align: center; color: var(--text-muted); max-width: 30em; margin-left: auto; margin-right: auto;">
             Empecemos por el caso más simple posible: un click. Un número que cambia.
           </p>
           <aside class="notes">
             <p><strong>Después de la frase principal, revelar la pregunta de transición con un click.</strong></p>
             <p><u>Apertura de §4. Capas 3 y 4 activas — comportamiento y estado son la misma sección porque van juntos.</u></p>
-            <p><em>"Una página estática se entiende sola: hay HTML, lo dibuja el navegador, listo. Pero en cuanto pasa cualquier otra cosa cuando el usuario interactúa, ya sea un click que suma uno, un input que filtra una lista, o un botón que cambia el tema, entran tres piezas en juego al mismo tiempo. Comportamiento y estado van pegados — por eso son una sola sección."</em></p>
+            <p><em>"Una página estática se entiende sola: hay HTML, lo dibuja el navegador, listo. Pero en cuanto pasa cualquier otra cosa cuando el usuario interactúa — un click que suma uno, un input que filtra una lista, un botón que cambia el tema — entran tres piezas en juego al mismo tiempo. Comportamiento y estado van pegados, por eso son una sola sección."</em></p>
+            <p><em>"Y la idea de fondo es la misma que vimos en CSS. Allá dijimos: el lenguaje es enorme, pero alcanza con cuatro primitivas para empezar a dirigir a la IA. Acá pasa lo mismo con JavaScript — es un lenguaje gigantesco — pero alcanza con tres conceptos. Pocos nombres, mucha cobertura."</em></p>
             <p><em>"Antes de nombrar las tres piezas, vamos al caso más simple posible: un click, un número que cambia. Lo que cualquier app dinámica del mundo hace en su forma más reducida."</em></p>
           </aside>
         </section>
@@ -1006,17 +1010,17 @@ btn.addEventListener('click', () =&gt; {
               <p style="font-size: 0.55em; color: var(--text-muted); margin-top: 6px;">El <code>listener</code> escucha; el <em>handler</em> responde.</p>
             </div>
           </div>
-          <p class="fragment fade-in" data-fragment-index="4" style="margin-top: 14px; font-size: 0.7em; color: var(--text-muted); text-align: center; max-width: 38em; margin-left: auto; margin-right: auto;">
-            Tres palabras separadas. Lo difícil es ver cómo se mueven juntas.
+          <p class="fragment fade-in" data-fragment-index="4" style="margin-top: 14px; font-size: 0.7em; color: var(--text-muted); text-align: center; max-width: 40em; margin-left: auto; margin-right: auto;">
+            Tres palabras — el equivalente dinámico de las cuatro primitivas del CSS. Lo difícil es ver cómo se mueven <em>juntas</em>.
           </p>
           <aside class="notes">
             <p><strong>Revelar los tres conceptos en orden, uno por click. Cuarto click revela la línea de cierre que arma la próxima slide.</strong></p>
             <p><u>Las tres entidades del triángulo dinámico, cada una con un fragmento de código que la materializa.</u></p>
             <p><em>"Tres conceptos. Cada uno tiene una forma concreta en código JavaScript — los nombro y muestro."</em></p>
             <p><em>"Estado. El dato que la página recuerda. En código es simplemente una variable de JavaScript: let count igual a cero. Vive en memoria, no en pantalla. Es invisible hasta que alguien decide dibujarlo. Cualquier app dinámica tiene estado: el contador, los items de una todo list, el modo dark o light, el usuario logueado, qué pestaña está activa."</em></p>
-            <p><em>"DOM, que en inglés significa Document Object Model. El HTML, pero vivo. Cuando el navegador parsea el archivo HTML, construye un árbol de nodos en memoria — uno por etiqueta. JavaScript puede agarrar cualquiera de esos nodos y cambiarlo. Mirá los dos snippets del card. Arriba, el HTML: un span con id 'count' que arranca mostrando cero. Abajo, el JavaScript: querySelector busca ese mismo span por su id — el numeral count en JS apunta al id count del HTML — y cambiamos su textContent a uno. Esa mutación cambia lo que el usuario ve sin necesidad de recargar la página."</em></p>
+            <p><em>"DOM, que en inglés significa Document Object Model. El HTML, pero vivo. Cuando el navegador parsea el archivo HTML, construye un árbol de nodos en memoria — uno por etiqueta. JavaScript puede agarrar cualquiera de esos nodos y cambiarlo. Mirá los dos snippets del card. Arriba, el HTML: un span con id 'count' que arranca mostrando cero. Abajo, el JavaScript: querySelector busca ese mismo span por su id — el numeral count en JS apunta al id count del HTML — y cambiamos su textContent a uno. Notá el paralelo con CSS: allá apuntábamos a un elemento con punto-clase; acá apuntamos con numeral-id. Mismo principio — agarrá un elemento del HTML — pero CSS lo hace declarativamente al cargar la página, mientras que JavaScript lo hace en tiempo de ejecución, cuando vos querés."</em></p>
             <p><em>"Eventos. La voz del usuario. Click, tecla, scroll, input — cualquier cosa que el usuario hace genera un evento. addEventListener registra una función que se va a ejecutar cuando ese evento ocurra. La suscripción se llama listener; la función que se ejecuta cuando llega el evento se llama handler."</em></p>
-            <p><em>"Tres palabras juntas — estado, DOM, eventos — son las que la IA necesita escuchar para no inventar atajos malos. Pero por separado todavía no dicen mucho. Lo difícil viene ahora: cómo se conectan en el tiempo, una después de la otra. Eso es lo que muestra la próxima slide."</em></p>
+            <p><em>"Tres palabras — estado, DOM, eventos — son el equivalente dinámico de las cuatro primitivas del CSS. En CSS aprendimos cuatro nombres para dirigir a la IA en lo visual; acá necesitamos tres para dirigirla en lo interactivo. Pero por separado todavía no dicen mucho. Lo difícil viene ahora: cómo se conectan en el tiempo, una después de la otra. Eso es lo que muestra la próxima slide."</em></p>
           </aside>
         </section>
 
@@ -1062,7 +1066,9 @@ btn.addEventListener('click', () =&gt; {
           </p>
           <aside class="notes">
             <p><u>La frase ancla de §4. Repetir despacio, sin apuro.</u></p>
-            <p><em>"Quedate con esta frase, porque es la que va a hacer que pidas bien las cosas. El estado es la verdad. El DOM es el reflejo. Si te olvidás de actualizar uno de los dos, la pantalla miente. Cuando le pidas a la IA cualquier cosa interactiva, esta es la palabra que tenés que poner en el prompt: estado. Si nombrás el estado, la IA lo separa del DOM. Si no lo nombrás, lo confunde con el DOM, y eso te explota la primera vez que querés mostrar el mismo dato en dos lugares."</em></p>
+            <p><em>"Quedate con esta frase, porque es la que va a hacer que pidas bien las cosas. El estado es la verdad. El DOM es el reflejo. Si te olvidás de actualizar uno de los dos, la pantalla miente."</em></p>
+            <p><em>"Es exactamente la misma relación que vimos en CSS: la regla manda, el render obedece. Cambiás la regla, cambia lo que el navegador dibuja, pero no al revés. Acá pasa lo mismo, en clave dinámica: el estado manda, el DOM obedece. Cambiás el estado, mutás el DOM, y el usuario ve el cambio. Pero si tocás solo el DOM y no el estado, la próxima vez que el código rendericé el dato, la pantalla vuelve a mentir."</em></p>
+            <p><em>"Cuando le pidas a la IA cualquier cosa interactiva, esta es la palabra que tenés que poner en el prompt: estado. Si nombrás el estado, la IA lo separa del DOM. Si no lo nombrás, lo confunde con el DOM, y eso te explota la primera vez que querés mostrar el mismo dato en dos lugares."</em></p>
           </aside>
         </section>
 
@@ -1116,6 +1122,7 @@ btn.addEventListener('click', () =&gt; {
             <p><em>"Pero el vocabulario te paga por las mismas tres razones de siempre. Determinismo: el prompt vago es lotería. Esta vez la IA usó una variable; la próxima puede usar el atributo data-count del DOM, o una variable global, o pegar el número como contenido y leerlo desde ahí. Pedile algo más raro — 'un timer que se pausa', 'un toggle que recuerda su estado entre cargas' — y la variabilidad explota."</em></p>
             <p><em>"Iteración: tu próximo prompt va a ser 'cuando llegue a 10, deshabilitá el botón'. Si la IA puso el contador en un atributo del DOM y vos no nombraste 'estado', tiene que adivinar dónde está el dato. Si nombraste estado count, no hay ambigüedad."</em></p>
             <p><em>"Auditoría: leer el código que devuelve la IA es la mitad del trabajo del supervisor. Si tenés en la cabeza estado, evento, listener, y mutación del DOM, podés escanear el código y verificar las cuatro piezas en segundos. Sin esos nombres, leés un bloque opaco."</em></p>
+            <p><em>"Y el patrón general lo cerramos como en CSS y en HTML: cuando le pedís cualquier cosa interactiva a la IA, nombrá las palabras. Allá teníamos grid, padding, variables. Acá tenemos estado, listener, evento, mutación de DOM. Mismo principio, distintos sustantivos."</em></p>
             <p><em>"Próxima capa, la última de la anatomía: cómo metemos todo esto en un solo archivo."</em></p>
           </aside>
         </section>
