@@ -988,9 +988,10 @@ let count = 0;</code></pre>
               <p style="font-size: 0.55em; color: var(--text-muted); margin-top: 6px;">Es invisible hasta que alguien lo dibuja.</p>
             </div>
             <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary); min-width: 0; padding: 10px;">
-              <h3 style="color: var(--accent-secondary); font-size: 0.95em; margin-bottom: 6px;">DOM</h3>
+              <h3 style="color: var(--accent-secondary); font-size: 0.95em; margin-bottom: 6px;">DOM <span style="color: var(--text-muted); font-weight: 400; font-size: 0.85em;">(Document Object Model)</span></h3>
               <p style="font-size: 0.65em; margin-bottom: 8px;">El HTML, pero <em>vivo</em>. Un árbol de nodos en memoria que JavaScript puede mutar.</p>
-              <pre style="margin: 0; font-size: 0.55em; box-shadow: none;"><code class="language-javascript" data-trim>// Buscar un nodo y cambiarlo
+              <pre style="margin: 0 0 4px; font-size: 0.55em; box-shadow: none;"><code class="language-html" data-trim>&lt;span id="count"&gt;0&lt;/span&gt;</code></pre>
+              <pre style="margin: 0; font-size: 0.55em; box-shadow: none;"><code class="language-javascript" data-trim>// Buscar ese nodo y cambiarlo
 const span = document.querySelector('#count');
 span.textContent = '1';</code></pre>
               <p style="font-size: 0.55em; color: var(--text-muted); margin-top: 6px;">Mutarlo cambia la pantalla sin recargar.</p>
@@ -1013,7 +1014,7 @@ btn.addEventListener('click', () =&gt; {
             <p><u>Las tres entidades del triángulo dinámico, cada una con un fragmento de código que la materializa.</u></p>
             <p><em>"Tres conceptos. Cada uno tiene una forma concreta en código JavaScript — los nombro y muestro."</em></p>
             <p><em>"Estado. El dato que la página recuerda. En código es simplemente una variable de JavaScript: let count igual a cero. Vive en memoria, no en pantalla. Es invisible hasta que alguien decide dibujarlo. Cualquier app dinámica tiene estado: el contador, los items de una todo list, el modo dark o light, el usuario logueado, qué pestaña está activa."</em></p>
-            <p><em>"DOM, Document Object Model. El HTML, pero vivo. Cuando el navegador parsea el archivo HTML, construye un árbol de nodos en memoria — uno por etiqueta. JavaScript puede agarrar cualquiera de esos nodos y cambiarlo. Acá: querySelector busca el span con id count, y cambiamos su textContent a uno. Esa mutación cambia lo que el usuario ve sin necesidad de recargar la página."</em></p>
+            <p><em>"DOM, que en inglés significa Document Object Model. El HTML, pero vivo. Cuando el navegador parsea el archivo HTML, construye un árbol de nodos en memoria — uno por etiqueta. JavaScript puede agarrar cualquiera de esos nodos y cambiarlo. Mirá los dos snippets del card. Arriba, el HTML: un span con id 'count' que arranca mostrando cero. Abajo, el JavaScript: querySelector busca ese mismo span por su id — el numeral count en JS apunta al id count del HTML — y cambiamos su textContent a uno. Esa mutación cambia lo que el usuario ve sin necesidad de recargar la página."</em></p>
             <p><em>"Eventos. La voz del usuario. Click, tecla, scroll, input — cualquier cosa que el usuario hace genera un evento. addEventListener registra una función que se va a ejecutar cuando ese evento ocurra. La suscripción se llama listener; la función que se ejecuta cuando llega el evento se llama handler."</em></p>
             <p><em>"Tres palabras juntas — estado, DOM, eventos — son las que la IA necesita escuchar para no inventar atajos malos. Pero por separado todavía no dicen mucho. Lo difícil viene ahora: cómo se conectan en el tiempo, una después de la otra. Eso es lo que muestra la próxima slide."</em></p>
           </aside>
