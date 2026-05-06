@@ -1518,7 +1518,39 @@ Reemplazá todos los hardcodeados por estas variables.</code></pre>
           </aside>
         </section>
 
-        <!-- §7.2: Constraints y entregable -->
+        <!-- §7.2: El tema — Bad UI -->
+        <section>
+          <h2>Tema: <span style="color: var(--accent);">Bad UI</span></h2>
+          <p style="font-size: 0.85em; margin: 8px auto 12px; max-width: 44em;">
+            Construir <strong>la peor versión posible</strong> de algo común. <em>Funcional</em>, pero diseñado para frustrar al usuario.
+          </p>
+          <p style="font-size: 0.7em; color: var(--text-muted); margin: 0 auto 16px; max-width: 44em;">
+            Inspirado en <a href="https://www.reddit.com/r/badUIbattles/" target="_blank" rel="noopener" style="color: var(--accent);">r/badUIbattles</a> — una comunidad que pelea por inventar las interfaces más horribles posibles.
+          </p>
+          <div style="max-width: 46em; margin: 0 auto;">
+            <p style="font-size: 0.75em; color: var(--text-muted); margin-bottom: 10px;">Para que se inspiren — algunas joyitas del género:</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 0.7em; color: var(--text-muted); margin-bottom: 18px;">
+              <div>· Slider de volumen que es un laberinto.</div>
+              <div>· Botón "Aceptar" que escapa del cursor.</div>
+              <div>· Selector de fecha por sumar y restar números.</div>
+              <div>· Calculadora con teclas que se intercambian solas.</div>
+              <div>· Captcha que pide elegir el píxel exacto.</div>
+              <div>· Login donde la contraseña se chequea letra por letra.</div>
+            </div>
+          </div>
+          <div style="max-width: 44em; margin: 0 auto; padding: 14px 18px; background: var(--bg-secondary); border-radius: 6px; border-left: 4px solid var(--accent);">
+            <p style="font-size: 0.78em; margin: 0;"><strong>El reto:</strong> que sea verdaderamente terrible — pero verdaderamente <em>funcional</em>. La interfaz puede frustrar; el código tiene que andar.</p>
+          </div>
+          <aside class="notes">
+            <p><u>Tema de la actividad: bad UI. Inspirado en r/badUIbattles. Diseño intencionalmente espantoso, pero funcional.</u></p>
+            <p><em>"El tema de la actividad es bad UI. La idea es construir la peor versión posible de algo común — funcional, pero diseñada para frustrar al usuario. Es un género en internet con su propia comunidad: r/badUIbattles, en Reddit. Si quieren inspiración, ese link tiene mil ejemplos."</em></p>
+            <p><em>"Algunas joyitas del género para que se hagan una idea: un slider de volumen que en realidad es un laberinto que tenés que recorrer con el mouse. Un botón Aceptar que escapa del cursor antes de que lo clickees. Un selector de fecha donde para elegir 'hoy' tenés que hacer cuentas matemáticas. Una calculadora cuyas teclas se intercambian solas cada cinco segundos. Un captcha que te pide identificar el píxel exacto donde está la letra. Un login que valida la contraseña letra por letra y te avisa cuando una está mal."</em></p>
+            <p><em>"Por qué es interesante pedagógicamente: para hacer bad UI a propósito tenés que entender qué hace una buena UI. Y para que sea funcional, tenés que dominar el ciclo evento-estado-DOM que vimos en §4. Es un buen ejercicio que se ve fácil pero usa todo lo de hoy."</em></p>
+            <p><em>"El reto es claro: que sea verdaderamente terrible — pero verdaderamente funcional. La interfaz puede frustrar al usuario al máximo; el código tiene que andar sin romperse. Si rompe, no cuenta como bad UI, cuenta como bug."</em></p>
+          </aside>
+        </section>
+
+        <!-- §7.3: Constraints y entregable -->
         <section>
           <h2>Constraints y entregable</h2>
           <div class="comparison-2col" style="margin-top: 14px; align-items: stretch;">
@@ -1540,36 +1572,18 @@ Reemplazá todos los hardcodeados por estas variables.</code></pre>
               </ul>
             </div>
           </div>
-          <aside class="notes">
-            <p><u>Constraints técnicos + qué hay que entregar. El prompts.md es el registro del proceso, no solo el producto.</u></p>
-            <p><em>"Constraints: un solo archivo index.html. Cero build tools, cero archivos separados, cero dependencias externas — single-file, como vimos. Una sola conversación de ChatGPT Canvas, así toda la historia queda en un solo hilo."</em></p>
-            <p><em>"Entregable: un repositorio público en GitHub con tres archivos. El index.html con el artefacto funcional. Un prompts punto md donde dejan la secuencia de prompts que usaron, en orden, con una anotación breve por cada uno explicando qué intentaban lograr — esto es el registro del proceso, tan importante como el producto. Y un README punto md con descripción corta: qué es, quién lo construyó, qué funcionó y qué no."</em></p>
-          </aside>
-        </section>
-
-        <!-- §7.3: Cierre + presentación -->
-        <section>
-          <h2>Para arrancar</h2>
-          <div style="max-width: 42em; margin: 14px auto 0;">
-            <p style="font-size: 0.85em; margin-bottom: 14px;">Pueden inventar lo que quieran si entra en una página. Algunas chispas:</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 0.7em; color: var(--text-muted); margin-bottom: 18px;">
-              <div>· Página de aterrizaje para un producto ficticio</div>
-              <div>· Herramienta de un solo uso (Pomodoro, paleta de colores, calculadora)</div>
-              <div>· Mini-juego (dice roller, memory match, idle clicker)</div>
-              <div>· Off-the-wall: cualquier artefacto raro que entre en un archivo</div>
-            </div>
+          <div style="max-width: 44em; margin: 18px auto 0; padding: 12px 16px; background: var(--bg-secondary); border-radius: 6px; border-left: 4px solid var(--accent);">
+            <p style="font-size: 0.75em; margin: 0;"><strong>Cuando muestren su trabajo:</strong> el artefacto andando, y una decisión de prompt que les enseñó algo — un éxito o un fracaso, los dos sirven.</p>
           </div>
-          <div style="max-width: 42em; margin: 0 auto; padding: 14px 18px; background: var(--bg-secondary); border-radius: 6px; border-left: 4px solid var(--accent);">
-            <p style="font-size: 0.78em; margin: 0;"><strong>Cuando muestren su trabajo:</strong> el artefacto andando, y una decisión de prompt que les enseñó algo — un éxito o un fracaso, los dos sirven.</p>
-          </div>
-          <p style="margin-top: 22px; font-size: 0.85em; text-align: center; color: var(--accent);">
-            Suerte construyendo.
+          <p style="margin-top: 18px; font-size: 0.85em; text-align: center; color: var(--accent);">
+            Suerte construyendo la peor UI posible.
           </p>
           <aside class="notes">
-            <p><u>Cierre. Galería de ideas + qué mostrar cuando llegue el momento.</u></p>
-            <p><em>"Pueden inventar lo que quieran si entra en una página. Algunas ideas para arrancar: una página de aterrizaje para un producto ficticio, una herramienta de un solo uso como un Pomodoro o una paleta de colores, un mini-juego como un dice roller o un memory match, o cualquier artefacto raro que se les ocurra. No es asignación, es chispa."</em></p>
-            <p><em>"Cuando llegue el momento de mostrar el trabajo, dos cosas alcanzan: el artefacto andando, y una decisión de prompt que les enseñó algo. Un éxito o un fracaso — los dos sirven. La decisión es lo más interesante de contar; el artefacto se ve solo."</em></p>
-            <p><em>"Suerte construyendo."</em></p>
+            <p><u>Constraints técnicos + qué hay que entregar + cierre. El prompts.md es el registro del proceso, no solo el producto.</u></p>
+            <p><em>"Constraints: un solo archivo index.html. Cero build tools, cero archivos separados, cero dependencias externas — single-file, como vimos. Una sola conversación de ChatGPT Canvas, así toda la historia queda en un solo hilo."</em></p>
+            <p><em>"Entregable: un repositorio público en GitHub con tres archivos. El index.html con el artefacto funcional. Un prompts punto md donde dejan la secuencia de prompts que usaron, en orden, con una anotación breve por cada uno explicando qué intentaban lograr — esto es el registro del proceso, tan importante como el producto. Y un README punto md con descripción corta: qué es, quién lo construyó, qué funcionó y qué no."</em></p>
+            <p><em>"Cuando llegue el momento de mostrar el trabajo, dos cosas alcanzan: el artefacto andando — torturando a quien lo use — y una decisión de prompt que les enseñó algo. Un éxito o un fracaso — los dos sirven. La decisión es lo más interesante de contar; el artefacto se ve solo."</em></p>
+            <p><em>"Suerte construyendo la peor UI posible."</em></p>
           </aside>
         </section>
 
