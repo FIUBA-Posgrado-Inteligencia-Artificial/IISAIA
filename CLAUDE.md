@@ -15,7 +15,6 @@ Presentaciones HTML (reveal.js) para un curso de 8 semanas.
 | `shared/templates/` | Template base de reveal.js para todas las semanas |
 | `shared/patterns/` | HTML snippet library, one per recurring slide pattern |
 | `semanas/NN/` | Contenido de cada semana (notas, slides, imagenes) |
-| `semanas/NN/CONTEXT.md` | Contrato de la semana: inputs, proceso, outputs |
 | `semanas/NN/source_material/` | Material fuente para generar slides (index.md + contenido) |
 | `semanas/NN/slides/` | Presentacion reveal.js generada |
 | `semanas/NN/img/` | Imagenes de la semana |
@@ -41,7 +40,7 @@ Presentaciones HTML (reveal.js) para un curso de 8 semanas.
 | Animation contract + reuse policy | `tools/skills/slide-generation/animation-pattern.md` |
 | Spine schema (for Phase 1) | `tools/skills/slide-generation/spine-template.md` |
 | Change theme or styling | `_config/theme/` |
-| Set up a new week's directory | `shared/CONTEXT.md` + `programa.md` |
+| Set up a new week's directory | `programa.md` + `shared/templates/week-template.html` |
 | Understand weekly topics | `programa.md` (schedule table at bottom) |
 
 ## Git Workflow
