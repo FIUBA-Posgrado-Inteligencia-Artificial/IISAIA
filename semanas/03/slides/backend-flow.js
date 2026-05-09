@@ -27,19 +27,19 @@ function initBackendFlow(opts) {
   var container = document.getElementById(opts.containerId);
   if (!container) return;
 
-  var REQUEST_PAYLOAD = '{ "title": "Bibliografia" }';
+  var REQUEST_PAYLOAD = '{ "title": "Comprar pan" }';
 
   var STEPS = {
     1: {
       key: 'http',
       title: 'HTTP — el protocolo',
-      desc: 'Apenas la request llega, HTTP la desempaca: lee el method (POST), el path (/projects/4/tasks), los headers (metadatos) y el body (el contenido). Es lo mismo que pasa cuando entrás a una página web — solo que acá lo hace el servidor con tu pedido.',
-      code: 'POST /projects/4/tasks  HTTP/1.1\nHost: api.example.com\nContent-Type: application/json\n\n{ "title": "Bibliografia" }'
+      desc: 'Apenas la request llega, HTTP la desempaca: lee el method (POST), el path (/projects/4/tasks), los headers (metadatos) y el body (el contenido). Hasta acá no hay lógica de aplicación, solo saber qué llegó.',
+      code: 'POST /projects/4/tasks  HTTP/1.1\nHost: api.example.com\nContent-Type: application/json\n\n{ "title": "Comprar pan" }'
     },
     2: {
       key: 'rest',
       title: 'REST — el estilo',
-      desc: 'REST piensa en sustantivos, no en acciones. Lee la URL y reconoce el recurso solicitado: tasks (las tareas) dentro de projects/4. La acción viaja en el method (POST = crear), no en el path.',
+      desc: 'REST (REpresentational State Transfer) modela recursos — cosas concretas como tareas, proyectos o usuarios — no verbos. Lee la URL y reconoce qué cosa estás tocando: tasks dentro de projects/4. La acción la lleva el method (POST = crear), no el path.',
       code: 'recurso : tasks\nparent  : projects/4\nformato : JSON'
     },
     3: {
@@ -58,7 +58,7 @@ function initBackendFlow(opts) {
       key: 'response',
       title: 'Response 2xx — éxito',
       desc: 'La base aceptó. El handler arma una response con el objeto recién creado y status 201. Como cuando un servidor web te devuelve la página que pediste — pero el contenido acá es JSON estructurado, listo para que el cliente lo consuma.',
-      code: 'status: 200 OK\nContent-Type: application/json\n\n{ "id": 17,\n  "title": "Bibliografia",\n  "project_id": 4,\n  "due_date": null }'
+      code: 'status: 200 OK\nContent-Type: application/json\n\n{ "id": 17,\n  "title": "Comprar pan",\n  "project_id": 4,\n  "due_date": null }'
     },
     '5-error': {
       key: 'errores',
@@ -75,7 +75,7 @@ function initBackendFlow(opts) {
   var CLIENT_RESPONSES = {
     success: {
       status: '200 OK',
-      body: '{\n  "id": 17,\n  "title": "Bibliografia",\n  "project_id": 4,\n  "due_date": null\n}'
+      body: '{\n  "id": 17,\n  "title": "Comprar pan",\n  "project_id": 4,\n  "due_date": null\n}'
     },
     error: {
       status: '500 Internal Server Error',

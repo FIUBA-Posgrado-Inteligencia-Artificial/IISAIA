@@ -401,8 +401,8 @@
     <aside class="notes">
       <p><strong>Click en "Avanzar" 6 veces para recorrer el ciclo. En el paso 4 (Datos) el componente tira el dado: 70% éxito (verde) / 30% error (rojo). "Reiniciar" vuelve al inicio y re-tira el dado.</strong></p>
       <p><u>Diagrama interactivo del ciclo cliente-servidor-cliente. 5 de las 6 piezas (HTTP, REST, Endpoints, Datos, Errores) viven dentro del servidor. Salto al stack local NO aparece — es la bisagra a la próxima clase, no parte del request lifecycle. Sigue listado en la espejo card §1.2.</u></p>
-      <p><em>"Si alguna vez usaste internet, ya entendés cómo funciona una API REST — porque la web entera está armada así. Cuando abrís el navegador y vas a una URL, lo que estás haciendo, sin pensarlo, es mandar un GET a un servidor que vive en algún lugar del mundo. El servidor te contesta con HTML, y el navegador lo dibuja. Una request a una API es lo mismo, pero en vez de HTML te llega JSON. Acá tenemos el diagrama: cliente a la izquierda — tu navegador, tu app, lo que sea — y servidor a la derecha con sus piezas adentro. Voy avanzando para mostrarles el ciclo entero."</em></p>
-      <p><em>"Click. El cliente arma un POST (porque queremos crear una tarea nueva) y la request viaja por la red hasta el servidor. La primera pieza que toca, ya del lado del servidor, es HTTP — el protocolo. Su trabajo en este paso es desempacar el pedido: leer el method, el path, los headers (metadatos), y el body (el contenido). Hasta acá no hay lógica de aplicación, solo entender qué llegó."</em></p>
+      <p><em>"En la slide anterior dijimos que el rol no cambia, lo que cambia es el terreno. Bueno, este es el terreno. Mirá el diagrama: a la izquierda el cliente — tu navegador, tu app, lo que sea — y a la derecha el servidor, con sus piezas adentro. Una request viaja del cliente al servidor, recorre las piezas, y vuelve. Voy avanzando paso a paso para mostrarles el ciclo entero, desde que el cliente arma el pedido hasta que recibe la respuesta de vuelta."</em></p>
+      <p><em>"Click. El cliente arma un pedido HTTP con method POST (porque quiere crear una tarea nueva) y la request viaja por la red hasta el servidor. Como ambos hablan HTTP, el servidor entiende lo que le llega: desempaca el pedido, lee el method (POST), el path (/projects/4/tasks), los headers (metadatos: dominio, tipo de contenido) y el body (el contenido). Hasta acá no hay lógica de aplicación; solo saber qué llegó."</em></p>
       <p><em>"Click. REST no es un protocolo — es un estilo arquitectónico, una convención sobre cómo nombrar las cosas. Lo importante de REST es esto: piensa en sustantivos, no en acciones. El recurso es 'tasks' (las tareas), no 'borrar-tarea'. La URL nombra qué cosa estás tocando — tasks dentro de projects/4 — y el method (POST, GET, DELETE) dice qué le hacés a ese qué."</em></p>
       <p><em>"Click. Endpoints. El servidor tiene una tabla de routes declaradas — POST barra projects barra id barra tasks, GET barra projects, etcétera — y acá hace match. Encuentra el handler, que es la función que se compromete a atender este pedido bajo un contrato: qué espera de input, qué promete de output, qué status codes puede devolver. Esto último — el contrato — es el átomo que vamos a desarmar en detalle en la sección cuatro."</em></p>
       <p><em>"Click. Datos. El handler ejecuta el INSERT contra la base. Y acá está el momento de la verdad, porque la base tiene sus propias reglas (foreign keys, NOT NULL, unique constraints) y puede aceptar la escritura o rechazarla. El componente tira el dado: setenta por ciento la base acepta, treinta por ciento rechaza."</em></p>
@@ -927,7 +927,7 @@ Content-Type: application/json
 
   <!-- §3.1: Section opener — roadmap activa "REST" -->
   <section>
-    <h2>Pieza 2 — REST</h2>
+    <h2>Pieza 2 — REST <span style="color: var(--text-muted); font-size: 0.55em; font-weight: 400; letter-spacing: 0.04em;">(REpresentational State Transfer)</span></h2>
     <div class="piece-roadmap active-2">
       <div class="pipe-node" data-piece="1">
         <div class="pipe-label">HTTP</div>
@@ -1033,7 +1033,7 @@ Content-Type: application/json
   <section>
     <h2>Todo es un recurso</h2>
     <p style="font-size: 0.78em; color: var(--text-muted); text-align: center; max-width: 38em; margin: 6px auto 18px;">
-      REST piensa en <strong>cosas</strong>, no en acciones. Todo lo que la API expone es un sustantivo.
+      REST modela <strong>cosas</strong>, no acciones. Todo lo que la API expone es un recurso concreto.
     </p>
     <div style="display: flex; flex-direction: column; gap: 10px; max-width: 38em; margin: 0 auto;">
       <div class="bg-secondary-card" style="display: flex; align-items: center; gap: 18px; padding: 12px 18px;">
@@ -1055,7 +1055,7 @@ Content-Type: application/json
     <aside class="notes">
       <p><strong>Leer las tres formas de URL en pantalla. Click para revelar el mantra de cierre.</strong></p>
       <p><u>La idea central de REST. Tres formas de URL — colección, item, recurso anidado — y el mantra que separa method de URL.</u></p>
-      <p><em>"La idea central de REST cabe en una sola frase, y vale la pena aprenderla así: REST piensa en cosas, no en acciones. Todo lo que la API expone es un recurso — un sustantivo. Un proyecto, una tarea, un usuario, un mensaje. Las URLs nombran esos sustantivos. Eso es lo que descarta barra borrar-tarea (un verbo metido en la URL) y deja barra tasks barra diecisiete (un sustantivo, identificable, ubicable)."</em></p>
+      <p><em>"La idea central de REST cabe en una sola frase, y vale la pena aprenderla así: REST modela cosas, no acciones. Todo lo que la API expone es un recurso — algo concreto. Un proyecto, una tarea, un usuario, un mensaje. Las URLs nombran esas cosas. Eso es lo que descarta barra borrar-tarea (un verbo metido en la URL) y deja barra tasks barra diecisiete (una cosa identificable, ubicable)."</em></p>
       <p><em>"Los recursos vienen en dos formas, más una variante. Una colección es el conjunto entero: barra projects significa 'todos los proyectos'. Un item es uno solo: barra projects barra cuatro es 'el proyecto cuatro'. Y si un recurso solamente tiene sentido dentro de otro, anidás: barra projects barra cuatro barra tasks barra diecisiete es 'la tarea diecisiete del proyecto cuatro'. Tres formas, mismo principio: la URL es un camino que nombra cosas."</em></p>
       <p><em>"Y acá está la regla que conviene memorizar. El method dice qué hacer; la URL dice sobre qué. GET barra projects barra cuatro lee el proyecto cuatro. DELETE barra projects barra cuatro lo borra. PUT barra projects barra cuatro lo reemplaza. La URL no cambia según la acción — el sustantivo es el mismo. La acción viaja siempre en el method. Si te encontrás escribiendo una URL con un verbo adentro (borrar, crear, actualizar), algo está mal."</em></p>
     </aside>
