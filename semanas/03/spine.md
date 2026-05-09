@@ -10,7 +10,7 @@
 **What students walk away knowing:**
 - El rol "supervisor arquitectónico" sobrevive al cambio de capa; lo que cambia es el vocabulario.
 - Tres cosas distintas pasan al mover el código del navegador al servidor: la persistencia (los errores quedan escritos), los contratos (cliente y servidor son dos programas que se hablan), la lectura de la respuesta (códigos, JSON, logs).
-- El mapa de la clase: HTTP → REST → rutas/contratos → datos → errores → bisagra a local.
+- El mapa de la clase: HTTP → REST → rutas/contratos → datos → errores → bisagra al stack local.
 **Animations / interactive:** None new. Considerar reutilizar `pipeline-roadmap` (semana 01) para mostrar el arco de las 6 piezas y volver a iluminarlas al abrir cada sección.
 **Slide budget:** 5–6
 

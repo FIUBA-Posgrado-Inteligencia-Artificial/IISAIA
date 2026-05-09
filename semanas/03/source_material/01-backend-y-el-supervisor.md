@@ -31,7 +31,7 @@ El resto de la semana la vamos a pasar desarmando seis piezas. Una frase por pie
 3. **Rutas y contratos** — la unidad mínima dictable: verbo + ruta + entrada + salida + códigos.
 4. **Datos** — cómo se persiste, relaciones vs. documentos.
 5. **Errores y observabilidad** — leer fallas como parte de supervisar.
-6. **Bisagra a local** — por qué el navegador ya no alcanza, qué herramienta abre la siguiente clase.
+6. **Bisagra al stack local** — por qué el navegador ya no alcanza, qué herramienta abre la siguiente clase.
 
 Cada archivo siguiente desarma una de estas piezas. El orden tampoco es arbitrario: primero el protocolo, encima el estilo, encima la unidad que vas a dictar, después los datos que esa unidad mueve, después cómo se ven las cosas cuando se rompen, y al final la bisagra hacia la próxima semana.
 
