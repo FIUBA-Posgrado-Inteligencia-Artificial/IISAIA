@@ -172,119 +172,236 @@
     </aside>
   </section>
 
-  <!-- §1.4: Roadmap interactivo — request paso a paso a través de las seis piezas -->
+  <!-- §1.4: Anatomía de una request — flujo cliente-servidor-cliente paso a paso -->
   <section>
     <style>
-      .s14-grid {
-        display: grid;
-        grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.4fr);
-        gap: 28px;
-        align-items: start;
-        margin: 8px auto 0;
-        max-width: 1080px;
+      .s14-stage {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin: 0 auto;
+        max-width: 1200px;
         text-align: left;
       }
-      .s14-pipeline { display: flex; flex-direction: column; align-items: center; gap: 0; }
-      .s14-node {
+      .s14-architecture {
+        display: grid;
+        grid-template-columns: 150px 100px 1fr;
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      /* Cliente block */
+      .s14-client {
         background: var(--bg-secondary);
         border: 1px solid #2a3a5a;
         border-radius: 10px;
-        padding: 8px 14px;
-        min-width: 150px;
+        padding: 12px 12px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
-        transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, opacity 0.3s, color 0.3s;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .s14-client.is-waiting { border-color: var(--accent); box-shadow: 0 0 18px rgba(100,255,218,0.3); }
+      .s14-client.is-success { border-color: #10b981; box-shadow: 0 0 22px rgba(16,185,129,0.4); }
+      .s14-client.is-error   { border-color: #ef4444; box-shadow: 0 0 22px rgba(239,68,68,0.4); }
+      .s14-client-icon { color: var(--text-muted); margin-bottom: 4px; transition: color 0.3s; }
+      .s14-client.is-waiting .s14-client-icon { color: var(--accent); }
+      .s14-client.is-success .s14-client-icon { color: #10b981; }
+      .s14-client.is-error   .s14-client-icon { color: #ef4444; }
+      .s14-client-label { font-weight: 700; font-size: 0.75em; color: var(--text-primary); }
+      .s14-client-sub { color: var(--text-muted); font-size: 0.5em; }
+      .s14-client-payload { margin-top: 8px; width: 100%; border-top: 1px solid #2a3a5a; padding-top: 6px; }
+      .s14-client-payload-label {
+        font-size: 0.45em; color: var(--text-muted);
+        letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 3px;
+      }
+      .s14-mono-mini {
+        font-family: var(--font-mono); font-size: 0.45em;
+        color: var(--text-primary); line-height: 1.5; word-break: break-all;
+      }
+      .s14-client-response {
+        background: #07070d; border: 1px solid #1a1a2e; border-radius: 4px;
+        padding: 5px 7px; margin: 4px 0 0;
+        font-size: 0.42em; font-family: var(--font-mono); color: var(--text-primary);
+        max-height: 70px; overflow-y: auto; box-shadow: none;
+      }
+      .s14-client-response code { background: transparent; padding: 0; color: inherit; }
+
+      /* Arrows column between cliente and server */
+      .s14-arrows {
+        display: flex; flex-direction: column;
+        justify-content: center; gap: 28px;
+        padding: 18px 4px;
+      }
+      .s14-arrow-row { display: flex; align-items: center; gap: 4px; }
+      .s14-arrow-line {
+        flex: 1; height: 2px; background: #3a4a6a;
+        position: relative; transition: background 0.3s;
+      }
+      .s14-arrow-line::after {
+        content: ""; position: absolute; right: -1px; top: 50%;
+        transform: translateY(-50%);
+        border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+        border-left: 7px solid #3a4a6a; transition: border-left-color 0.3s;
+      }
+      .s14-arrow-line.s14-arrow-line-rev::after {
+        right: auto; left: -1px;
+        border-left: none; border-right: 7px solid #3a4a6a;
+        transition: border-right-color 0.3s;
+      }
+      .s14-arrow-label {
+        font-family: var(--font-mono); font-size: 0.42em;
+        color: var(--text-muted); letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .s14-arrow-row.is-active .s14-arrow-line { background: var(--accent); }
+      .s14-arrow-row.is-active .s14-arrow-line::after { border-left-color: var(--accent); }
+      .s14-arrow-row.is-active .s14-arrow-line.s14-arrow-line-rev::after { border-right-color: var(--accent); }
+      .s14-arrow-row.is-active.is-success .s14-arrow-line { background: #10b981; }
+      .s14-arrow-row.is-active.is-success .s14-arrow-line::after { border-left-color: #10b981; }
+      .s14-arrow-row.is-active.is-success .s14-arrow-line.s14-arrow-line-rev::after { border-right-color: #10b981; }
+      .s14-arrow-row.is-active.is-error .s14-arrow-line { background: #ef4444; }
+      .s14-arrow-row.is-active.is-error .s14-arrow-line::after { border-left-color: #ef4444; }
+      .s14-arrow-row.is-active.is-error .s14-arrow-line.s14-arrow-line-rev::after { border-right-color: #ef4444; }
+
+      /* Server box */
+      .s14-server {
+        background: rgba(20, 25, 50, 0.4);
+        border: 1px dashed #3a4a6a;
+        border-radius: 12px;
+        padding: 16px 16px 14px;
         position: relative;
       }
-      .s14-node-icon { display: block; margin: 0 auto 4px; color: var(--text-muted); transition: color 0.3s; }
-      .s14-node-label { font-weight: 700; font-size: 0.78em; color: var(--text-primary); letter-spacing: 0.02em; }
-      .s14-node-sub { color: var(--text-muted); font-size: 0.55em; margin-top: 1px; }
+      .s14-server-label {
+        position: absolute; top: -10px; left: 16px;
+        background: var(--bg-primary); padding: 0 8px;
+        font-size: 0.5em; color: var(--text-muted);
+        letter-spacing: 0.1em; text-transform: uppercase;
+      }
+      .s14-pipeline-top {
+        display: flex; align-items: stretch; justify-content: center;
+        gap: 4px; flex-wrap: nowrap;
+      }
+      .s14-pipeline-fork { width: 100%; max-width: 380px; margin: 4px auto 0; }
+      .s14-fork-svg { width: 100%; height: 36px; display: block; }
+      .s14-pipeline-bottom {
+        display: grid; grid-template-columns: 1fr 1fr 1fr;
+        align-items: stretch; justify-items: center;
+        gap: 4px; max-width: 380px; margin: 0 auto;
+      }
+
+      /* Inline horizontal arrow between pipeline nodes */
+      .s14-h-arrow {
+        align-self: center; width: 14px; height: 2px;
+        background: #5a6a8a; position: relative; flex-shrink: 0;
+      }
+      .s14-h-arrow::after {
+        content: ""; position: absolute; right: -1px; top: 50%;
+        transform: translateY(-50%);
+        border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+        border-left: 6px solid #5a6a8a;
+      }
+
+      /* Pipeline node (shared between top and bottom rows) */
+      .s14-node {
+        background: var(--bg-secondary);
+        border: 1px solid #2a3a5a;
+        border-radius: 8px;
+        padding: 6px 10px 6px;
+        text-align: center;
+        transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, opacity 0.3s, color 0.3s;
+        min-width: 100px;
+      }
+      .s14-node-icon { display: block; margin: 0 auto 2px; color: var(--text-muted); transition: color 0.3s; }
+      .s14-node-label { font-weight: 700; font-size: 0.7em; color: var(--text-primary); letter-spacing: 0.02em; }
+      .s14-node-sub { color: var(--text-muted); font-size: 0.5em; margin-top: 1px; }
       .s14-node.is-visited { border-color: rgba(100, 255, 218, 0.35); }
       .s14-node.is-visited .s14-node-icon { color: rgba(100, 255, 218, 0.6); }
       .s14-node.is-active {
         border-color: var(--accent);
-        box-shadow: 0 0 22px rgba(100, 255, 218, 0.45);
+        box-shadow: 0 0 18px rgba(100, 255, 218, 0.5);
         transform: translateY(-2px);
       }
       .s14-node.is-active .s14-node-icon { color: var(--accent); }
-      .s14-node.is-active.is-success {
+      .s14-node.is-success {
         border-color: #10b981;
-        box-shadow: 0 0 26px rgba(16, 185, 129, 0.55);
+        box-shadow: 0 0 22px rgba(16, 185, 129, 0.55);
       }
-      .s14-node.is-active.is-success .s14-node-icon { color: #10b981; }
-      .s14-node.is-active.is-error {
+      .s14-node.is-success .s14-node-icon { color: #10b981; }
+      .s14-node.is-error {
         border-color: #ef4444;
-        box-shadow: 0 0 26px rgba(239, 68, 68, 0.55);
+        box-shadow: 0 0 22px rgba(239, 68, 68, 0.55);
       }
-      .s14-node.is-active.is-error .s14-node-icon { color: #ef4444; }
+      .s14-node.is-error .s14-node-icon { color: #ef4444; }
       .s14-node.is-dimmed { opacity: 0.3; }
-
-      .s14-arrow { width: 2px; height: 18px; background: var(--text-muted); position: relative; }
-      .s14-arrow::after {
-        content: ""; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
-        border-left: 5px solid transparent; border-right: 5px solid transparent;
-        border-top: 7px solid var(--text-muted);
-      }
-      .s14-fork { width: 220px; height: 26px; position: relative; margin-top: 2px; }
-      .s14-fork::before, .s14-fork::after {
-        content: ""; position: absolute; top: 0; width: 2px; height: 24px;
-        background: var(--text-muted); transform-origin: top center;
-      }
-      .s14-fork::before { left: 25%; transform: rotate(-18deg); }
-      .s14-fork::after  { right: 25%; transform: rotate(18deg); }
-      .s14-branch-row {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-        margin-top: 6px; width: 100%; max-width: 360px;
-      }
       .s14-branch-node { min-width: 0; }
 
+      /* Detail panel below architecture */
       .s14-detail {
         background: var(--bg-secondary);
         border-left: 3px solid var(--accent);
         border-radius: 0 8px 8px 0;
-        padding: 14px 18px;
-        min-height: 280px;
+        padding: 12px 18px;
+        min-height: 130px;
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 18px;
+        align-items: start;
       }
+      .s14-detail-left { min-width: 0; }
       .s14-detail-meta {
         font-family: var(--font-mono); color: var(--text-muted);
-        font-size: 0.55em; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px;
+        font-size: 0.5em; letter-spacing: 0.06em;
+        text-transform: uppercase; margin-bottom: 4px;
       }
-      .s14-detail-title { color: var(--accent); font-size: 0.95em; font-weight: 700; margin: 0 0 10px; }
-      .s14-detail-desc { color: var(--text-primary); font-size: 0.65em; line-height: 1.55; margin-bottom: 12px; }
+      .s14-detail-title { color: var(--accent); font-size: 0.9em; font-weight: 700; margin: 0 0 6px; }
+      .s14-detail-desc { color: var(--text-primary); font-size: 0.6em; line-height: 1.5; margin: 0; }
       .s14-detail-code {
-        background: #07070d; border: 1px solid #1a1a2e; border-radius: 6px;
-        padding: 10px 14px; font-family: var(--font-mono); font-size: 0.5em;
+        background: #07070d; border: 1px solid #1a1a2e;
+        border-radius: 6px; padding: 8px 12px;
+        font-family: var(--font-mono); font-size: 0.45em;
         line-height: 1.55; color: var(--text-primary); margin: 0;
-        max-height: 150px; overflow-y: auto; box-shadow: none;
+        max-height: 120px; overflow-y: auto; box-shadow: none;
+        align-self: stretch;
       }
       .s14-detail-code code { background: transparent; padding: 0; color: var(--text-primary); }
 
-      .s14-controls { display: flex; align-items: center; gap: 14px; justify-content: center; margin-top: 18px; }
+      /* Controls */
+      .s14-controls {
+        display: flex; align-items: center; gap: 14px;
+        justify-content: center; margin-top: 12px;
+      }
       .s14-button {
         background: var(--accent); color: var(--bg-primary); border: 0;
-        padding: 8px 22px; border-radius: 6px; font-family: var(--font-mono);
-        font-size: 0.62em; font-weight: 700; letter-spacing: 0.04em; cursor: pointer;
+        padding: 8px 22px; border-radius: 6px;
+        font-family: var(--font-mono); font-size: 0.6em;
+        font-weight: 700; letter-spacing: 0.04em; cursor: pointer;
         transition: transform 0.15s, opacity 0.15s;
       }
       .s14-button:hover:not(:disabled) { transform: translateY(-1px); }
       .s14-button:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
       .s14-button-ghost { background: transparent; color: var(--text-muted); border: 1px solid #2a3a5a; }
       .s14-button-ghost:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
-      .s14-progress { font-family: var(--font-mono); font-size: 0.58em; color: var(--text-muted); min-width: 8em; }
+      .s14-progress {
+        font-family: var(--font-mono); font-size: 0.55em;
+        color: var(--text-muted); min-width: 14em;
+      }
       .s14-progress.success { color: #10b981; }
       .s14-progress.error { color: #ef4444; }
     </style>
 
-    <h2 style="margin-bottom: 4px;">La anatomía del backend en seis piezas</h2>
+    <h2 style="margin-bottom: 8px;">Anatomía de una request</h2>
 
     <div id="s14-backend-flow"></div>
 
     <aside class="notes">
-      <p><strong>Botón "Avanzar" recorre los pasos uno por uno. En el paso 4 (Datos) el componente tira el dado: 70% éxito (verde) / 30% error (rojo). "Reiniciar" empieza de nuevo y vuelve a tirar.</strong></p>
-      <p><u>Roadmap interactivo paso-a-paso. Cada nodo es una pieza que se desarma en su sección; el panel de la derecha muestra qué pasa exactamente en ese paso. La animación cierra el espejo: el rol no cambia, lo que cambia es el terreno y el vocabulario.</u></p>
-      <p><em>"El resto de la clase la vamos a pasar desarmando seis piezas. Cada una es una palabra que vas a usar para dictarle a la IA qué construir y para leer lo que devuelve."</em></p>
-      <p><em>"Antes de meternos pieza por pieza, miremos el ciclo entero. Voy avanzando paso a paso, ustedes leen el panel de la derecha."</em></p>
-      <p><em>"HTTP recibe el pedido. REST decide cómo se nombra el recurso. Endpoints rutea contra el contrato. Datos consulta la base. Y ahí pasa una de dos cosas: o sale verde por Salto y termina con un 200, o sale rojo por Errores y termina con un 500. Los dos caminos los vamos a leer en sus secciones."</em></p>
-      <p><em>"Vamos a volver a este mapa al inicio de cada sección, ahí lo van a ver con la pieza activa marcada."</em></p>
+      <p><strong>Botón "Avanzar" recorre los 6 pasos. En el paso 4 (Datos) el componente tira el dado: 70% éxito (verde) / 30% error (rojo). El paso 6 cierra el ciclo: el cliente recibe la response.</strong></p>
+      <p><u>Diagrama interactivo del ciclo cliente-servidor-cliente. Cinco de las seis piezas (HTTP, REST, Endpoints, Datos, Errores) viven dentro del servidor. Salto al stack local NO está acá — es la bisagra a la próxima clase, no parte del request lifecycle. Aparece listada en la espejo card §1.2.</u></p>
+      <p><em>"Una request no nace en el servidor. Nace en el cliente — tu navegador, tu app, lo que sea. Y termina ahí también: la response vuelve. Lo que pasa en el medio es lo que vamos a desarmar pieza por pieza el resto de la clase."</em></p>
+      <p><em>"Voy a avanzar paso a paso. El cliente arma un POST. La request entra al servidor por HTTP. REST identifica el recurso. Endpoints encuentra el handler. Datos consulta la base. Y ahí pasa una de dos cosas."</em></p>
+      <p><em>"O la base aceptó, el servidor arma una response 200, y vuelve al cliente. O la base rechazó, queda registro en el log de Errores, y vuelve un 500. Los dos caminos son legítimos; los dos los vamos a leer durante el curso."</em></p>
+      <p><em>"Vamos a volver a este mapa al inicio de cada sección — ahí lo van a ver con la pieza activa marcada."</em></p>
     </aside>
   </section>
 
