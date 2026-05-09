@@ -132,19 +132,6 @@
      ============================================================ -->
 <section>
 
-  <!-- §1.1: Hook — la pregunta incómoda -->
-  <section>
-    <p class="big-question">
-      Si una IA puede levantar un servidor en treinta segundos,<br>
-      <span class="accent">¿para qué seguís aprendiendo qué es un POST?</span>
-    </p>
-    <aside class="notes">
-      <p><strong>Dejar la pregunta en pantalla 5–10 segundos sin responder.</strong></p>
-      <p><u>Hook de la clase. Versión backend de la pregunta de la semana pasada.</u></p>
-      <p><em>"Empezamos otra vez con una pregunta tramposa, ahora del lado del servidor. Si Claude te genera una API con cinco rutas en un prompt, ¿qué sentido tiene aprender qué es un POST, una ruta, una respuesta? La pregunta incomoda porque parece honesta. La respuesta corta es la misma que la semana pasada: el cuello de botella nunca fue la sintaxis, es la decisión. Y ahora la decisión vive en un servidor, que es un terreno distinto. La diferencia es lo que vamos a desarmar hoy."</em></p>
-    </aside>
-  </section>
-
   <!-- §1.2: Mismo rol, otro terreno — el espejo con semana 02 -->
   <section>
     <h2>Mismo rol, otro terreno</h2>
@@ -180,33 +167,6 @@
       <p><em>"La semana pasada nombramos las cinco capas del frontend para dirigir lo que la IA escribe en el navegador: estructura, estilo, comportamiento, estado, empaque. Ese vocabulario te dejaba auditar lo que el modelo te tiraba en HTML, CSS y JavaScript."</em></p>
       <p><em>"Esta clase hacemos lo mismo del otro lado. Seis piezas: HTTP, REST, rutas y contratos, datos, errores y el salto al stack local. Cada una es una palabra que vas a necesitar para especificarle a la IA qué construir, y para leer lo que devuelve sin tragártelo."</em></p>
       <p><em>"Pero fijate en lo que no cambia: el rol. Sos supervisor arquitectónico también del lado del servidor. La IA implementa; vos decidís el contrato. Lo único que cambia es el terreno."</em></p>
-    </aside>
-  </section>
-
-  <!-- §1.3: Tres cosas que cambian al mudar al servidor -->
-  <section>
-    <h2>Qué cambia cuando el código deja el navegador</h2>
-    <div class="consequence-row">
-      <div class="bg-secondary-card fragment fade-in">
-        <h3>1 — Persistencia</h3>
-        <p>El bug ya no se evapora con un refresh. Queda escrito en la base, multiplicado por cada usuario que pasó por la ruta rota.</p>
-      </div>
-      <div class="bg-secondary-card fragment fade-in">
-        <h3>2 — Contratos cliente-servidor</h3>
-        <p>Son dos programas que se hablan por la red. Si vos no escribís el contrato, la IA lo improvisa y te enterás cuando algo se rompe.</p>
-      </div>
-      <div class="bg-secondary-card fragment fade-in">
-        <h3>3 — Leer la respuesta</h3>
-        <p>Códigos de estado, cuerpos JSON y logs son tan importantes como leer el código. Si no mirás la respuesta, le creés a la IA en lugar de a la máquina.</p>
-      </div>
-    </div>
-    <aside class="notes">
-      <p><strong>Revelar las tres tarjetas en orden, una por click.</strong></p>
-      <p><u>Las tres consecuencias concretas de mover el código al servidor. Ancla el "por qué" del vocabulario que viene.</u></p>
-      <p><em>"Mudar el código del navegador al servidor mueve tres cosas al mismo tiempo, y conviene verlas por separado."</em></p>
-      <p><em>"Primero, la persistencia. En el frontend un error es efímero: el usuario refresca la pestaña y el estado malo desaparece. En el backend no. Un bug que escribe datos incorrectos los deja escritos. Mañana, cuando vuelvas a leer la base, ese error sigue ahí."</em></p>
-      <p><em>"Segundo, los contratos se vuelven reales. Frontend y backend son dos programas distintos que se hablan por la red, y solamente se entienden si están de acuerdo en qué se pide y qué se devuelve. La IA puede inventarte un endpoint que el cliente no sabe consumir. Si vos no podés escribir el contrato, alguien lo improvisa por vos."</em></p>
-      <p><em>"Y tercero, leer la respuesta se vuelve tan importante como leer el código. Acá entran los códigos de estado, los cuerpos JSON y los logs del servidor. Si el modelo te dice que ya quedó funcionando pero la respuesta trae un error, y vos no sabés mirar la respuesta, le estás creyendo a la IA en lugar de a la máquina. Para hacer estas tres cosas bien, necesitás vocabulario."</em></p>
     </aside>
   </section>
 

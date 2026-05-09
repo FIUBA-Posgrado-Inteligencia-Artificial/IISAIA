@@ -4,15 +4,13 @@
 
 ## Section 1: Backend y el supervisor arquitectónico
 **Source material:** `source_material/01-backend-y-el-supervisor.md`
-**Through-line:** El rol de supervisor arquitectónico no cambia entre frontend y backend; lo que cambia es el terreno. Mover el código del navegador al servidor cambia tres cosas (persistencia, contratos cliente-servidor, lectura de respuesta) y para hacer las tres bien hace falta vocabulario nuevo.
-**Hook:** Si una IA puede levantar un servidor en treinta segundos, ¿por qué seguimos aprendiendo qué es un POST? El cuello de botella no es la sintaxis, es la decisión — y ahora la decisión vive en un servidor.
+**Through-line:** El rol de supervisor arquitectónico no cambia entre frontend y backend; lo que cambia es el terreno. Esta sección establece la simetría con semana 02 y da el mapa de las seis piezas que se desarman en el resto de la clase.
 **Key analogy:** El espejo de la semana 02. Frontend ↔ backend como las dos mitades simétricas de la misma habilidad: nombrar piezas para dirigir a una IA.
 **What students walk away knowing:**
 - El rol "supervisor arquitectónico" sobrevive al cambio de capa; lo que cambia es el vocabulario.
-- Tres cosas distintas pasan al mover el código del navegador al servidor: la persistencia (los errores quedan escritos), los contratos (cliente y servidor son dos programas que se hablan), la lectura de la respuesta (códigos, JSON, logs).
 - El mapa de la clase: HTTP → REST → rutas/contratos → datos → errores → salto al stack local.
 **Animations / interactive:** None new. Considerar reutilizar `pipeline-roadmap` (semana 01) para mostrar el arco de las 6 piezas y volver a iluminarlas al abrir cada sección.
-**Slide budget:** 5–6
+**Slide budget:** 3 slides (espejo → roadmap → disclaimer). Sin hook ni "tres cosas que cambian": ambos pre-cargan vocabulario backend que el alumno todavía no tiene; cada consecuencia (persistencia, contratos, leer la respuesta) se motiva en su propia sección más adelante.
 
 ## Section 2: Cliente, servidor y HTTP
 **Source material:** `source_material/02-cliente-servidor-y-http.md`

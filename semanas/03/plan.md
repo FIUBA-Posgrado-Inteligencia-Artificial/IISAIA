@@ -32,14 +32,14 @@ Implementation plan derived from `spine.md`. Through-line A (espejo backend de s
 
 **Subagent dispatch.** Inputs: spine §1 entry, source `01-backend-y-el-supervisor.md`, semana 02 §1 as shape reference.
 
-**Slide arc (5–6 slides):**
-1. Hook: la pregunta incómoda (`big-question` style, semana 02 §1.1 shape but rephrased for backend). "Si una IA puede levantar un servidor en treinta segundos, ¿para qué seguís aprendiendo qué es un POST?"
-2. Mismo rol, otro terreno — `comparison-2col`: Frontend (semana 02) ↔ Backend (semana 03). Esto materializa la analogía clave.
-3. Tres cosas que cambian al mover el código del navegador al servidor — `consequence-row` con tres cards: persistencia / contratos / leer la respuesta. Cada una con un ejemplo concreto del source.
-4. Roadmap de las seis piezas — `piece-roadmap` con seis nodos, fragmentos para revelarlos uno por uno + arrow.
-5. A qué prestamos atención hoy — `comparison-2col`: lo que NO es / lo que SÍ es. Cierra con la frase del source: "Volvé al rol cuando dudes: sos supervisor arquitectónico también del lado del servidor."
+**Slide arc (3 slides):**
+1. Mismo rol, otro terreno — `comparison-2col`: Frontend (semana 02) ↔ Backend (semana 03). Esto materializa la analogía clave y abre la sección.
+2. Roadmap de las seis piezas — `piece-roadmap` con seis nodos, fragmentos para revelarlos uno por uno + arrow.
+3. A qué prestamos atención hoy — `comparison-2col`: lo que NO es / lo que SÍ es. Cierra con la frase del source: "Volvé al rol cuando dudes: sos supervisor arquitectónico también del lado del servidor."
 
-**Patterns:** title-slide is owned by Task 0. §1 uses inline `big-question` (define in scoped style block), `comparison-2col`, three-card `consequence-row` (existing `.bg-secondary-card`).
+NB: omitido un hook tipo big-question (era redundante con la pregunta de semana 02) y omitida una slide de "tres cosas que cambian" (pre-cargaba vocabulario backend antes de que el alumno tuviera contexto). Cada una de esas tres consecuencias se motiva en su sección propia más adelante.
+
+**Patterns:** title-slide is owned by Task 0. §1 uses `comparison-2col` and the page-level `.piece-roadmap` helper.
 
 **Animations:** none new.
 
