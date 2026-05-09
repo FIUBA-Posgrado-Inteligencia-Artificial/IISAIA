@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="../../../node_modules/reveal.js/plugin/highlight/monokai.css">
   <link rel="stylesheet" href="../../../_config/theme/custom.css">
   <link rel="stylesheet" href="../../../_config/theme/components.css">
+  <!-- CDNs for §1.4 interactive backend-flow simulation -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { corePlugins: { preflight: false } };</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     /* Safety net for dense slides */
     .reveal .slides > section,
@@ -137,7 +142,7 @@
     <h2>Mismo rol, otro terreno</h2>
     <div class="comparison-2col">
       <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted);">
-        <h3 style="color: var(--text-muted);">Frontend (semana 02)</h3>
+        <h3 style="color: var(--text-muted);">Frontend</h3>
         <p style="font-size: 0.78em; line-height: 1.6; margin: 0;">
           Estructura<br>
           Estilo<br>
@@ -147,7 +152,7 @@
         </p>
       </div>
       <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent);">
-        <h3 style="color: var(--accent);">Backend (esta clase)</h3>
+        <h3 style="color: var(--accent);">Backend</h3>
         <p style="font-size: 0.78em; line-height: 1.6; margin: 0;">
           HTTP<br>
           REST<br>
@@ -170,55 +175,316 @@
     </aside>
   </section>
 
-  <!-- §1.4: Roadmap — seis piezas -->
+  <!-- §1.4: Roadmap interactivo — simulación de un request a través de las seis piezas -->
   <section>
-    <h2>La anatomía del backend en seis piezas</h2>
-    <div class="piece-roadmap">
-      <div class="pipe-node fragment" data-piece="1">
-        <div class="pipe-label">HTTP</div>
-        <div class="pipe-sub">protocolo</div>
+    <style>
+      .s14-stage { width: 100%; max-width: 980px; margin: 6px auto 0; }
+      .s14-nodes-wrap { position: relative; padding: 4px 0; }
+      .s14-nodes {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+        align-items: stretch;
+      }
+      .s14-node {
+        background: var(--bg-secondary);
+        border: 1px solid #2a3a5a;
+        border-radius: 12px;
+        padding: 12px 8px 10px;
+        text-align: center;
+        transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+        position: relative;
+        z-index: 1;
+      }
+      .s14-icon {
+        width: 22px; height: 22px;
+        margin: 0 auto 6px;
+        color: var(--text-muted);
+        transition: color 0.3s;
+      }
+      .s14-icon svg { width: 22px; height: 22px; stroke: currentColor; }
+      .s14-label {
+        font-weight: 700;
+        font-size: 0.78em;
+        color: var(--text-primary);
+        letter-spacing: 0.02em;
+      }
+      .s14-sub {
+        color: var(--text-muted);
+        font-size: 0.58em;
+        margin-top: 2px;
+      }
+      .s14-node.active-cyan {
+        border-color: var(--accent);
+        box-shadow: 0 0 22px rgba(100, 255, 218, 0.45);
+        transform: translateY(-3px);
+      }
+      .s14-node.active-cyan .s14-icon { color: var(--accent); }
+      .s14-node.active-green {
+        border-color: #10b981;
+        box-shadow: 0 0 28px rgba(16, 185, 129, 0.55);
+        transform: translateY(-3px) scale(1.04);
+      }
+      .s14-node.active-green .s14-icon { color: #10b981; }
+      .s14-node.active-red {
+        border-color: #ef4444;
+        box-shadow: 0 0 28px rgba(239, 68, 68, 0.55);
+        transform: translateY(-3px) scale(1.04);
+      }
+      .s14-node.active-red .s14-icon { color: #ef4444; }
+      .s14-dot {
+        position: absolute;
+        width: 18px; height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 18px var(--accent), 0 0 36px rgba(100,255,218,0.4);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 3;
+        top: 0; left: 0;
+      }
+      .s14-dot.green {
+        background: #10b981;
+        box-shadow: 0 0 18px #10b981, 0 0 36px rgba(16,185,129,0.4);
+      }
+      .s14-dot.red {
+        background: #ef4444;
+        box-shadow: 0 0 18px #ef4444, 0 0 36px rgba(239,68,68,0.4);
+      }
+      .s14-control {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        justify-content: center;
+        margin: 14px 0 8px;
+      }
+      .s14-button {
+        background: var(--accent);
+        color: var(--bg-primary);
+        border: 0;
+        padding: 8px 22px;
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.62em;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: transform 0.15s, opacity 0.15s;
+      }
+      .s14-button:hover { transform: translateY(-1px); }
+      .s14-button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+      .s14-status {
+        font-family: var(--font-mono);
+        font-size: 0.58em;
+        color: var(--text-muted);
+        min-width: 14em;
+      }
+      .s14-status.success { color: #10b981; }
+      .s14-status.error { color: #ef4444; }
+      .s14-terminal {
+        background: #07070d;
+        border: 1px solid #1a1a2e;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-family: var(--font-mono);
+        font-size: 0.5em;
+        line-height: 1.55;
+        max-height: 110px;
+        overflow-y: auto;
+        text-align: left;
+      }
+      .s14-line { color: var(--text-muted); padding: 0; white-space: pre-wrap; word-break: break-word; }
+      .s14-line.cyan { color: var(--accent); }
+      .s14-line.success { color: #10b981; }
+      .s14-line.error { color: #ef4444; }
+      .s14-line.dim { color: #4a5470; }
+    </style>
+
+    <h2 class="!mb-2">La anatomía del backend en seis piezas</h2>
+
+    <div class="s14-stage">
+      <div class="s14-nodes-wrap">
+        <div class="s14-nodes">
+          <div class="s14-node" data-node="http">
+            <i data-lucide="globe" class="s14-icon"></i>
+            <div class="s14-label">HTTP</div>
+            <div class="s14-sub">protocolo</div>
+          </div>
+          <div class="s14-node" data-node="rest">
+            <i data-lucide="git-fork" class="s14-icon"></i>
+            <div class="s14-label">REST</div>
+            <div class="s14-sub">estilo</div>
+          </div>
+          <div class="s14-node" data-node="endpoints">
+            <i data-lucide="plug-zap" class="s14-icon"></i>
+            <div class="s14-label">Endpoints</div>
+            <div class="s14-sub">contract</div>
+          </div>
+          <div class="s14-node" data-node="datos">
+            <i data-lucide="database" class="s14-icon"></i>
+            <div class="s14-label">Datos</div>
+            <div class="s14-sub">memoria</div>
+          </div>
+          <div class="s14-node" data-node="errores">
+            <i data-lucide="alert-triangle" class="s14-icon"></i>
+            <div class="s14-label">Errores</div>
+            <div class="s14-sub">leer fallas</div>
+          </div>
+          <div class="s14-node" data-node="salto">
+            <i data-lucide="terminal-square" class="s14-icon"></i>
+            <div class="s14-label">Salto</div>
+            <div class="s14-sub">al stack</div>
+          </div>
+        </div>
+        <div class="s14-dot" id="s14-dot"></div>
       </div>
-      <span class="pipe-arrow fragment">→</span>
-      <div class="pipe-node fragment" data-piece="2">
-        <div class="pipe-label">REST</div>
-        <div class="pipe-sub">estilo</div>
+
+      <div class="s14-control">
+        <button class="s14-button" id="s14-trigger" type="button">Simular Petición</button>
+        <span class="s14-status" id="s14-status">listo</span>
       </div>
-      <span class="pipe-arrow fragment">→</span>
-      <div class="pipe-node fragment" data-piece="3">
-        <div class="pipe-label">Endpoints</div>
-        <div class="pipe-sub">contract</div>
-      </div>
-      <span class="pipe-arrow fragment">→</span>
-      <div class="pipe-node fragment" data-piece="4">
-        <div class="pipe-label">Datos</div>
-        <div class="pipe-sub">memoria</div>
-      </div>
-      <span class="pipe-arrow fragment">→</span>
-      <div class="pipe-node fragment" data-piece="5">
-        <div class="pipe-label">Errores</div>
-        <div class="pipe-sub">leer fallas</div>
-      </div>
-      <span class="pipe-arrow fragment">→</span>
-      <div class="pipe-node fragment" data-piece="6">
-        <div class="pipe-label">Salto</div>
-        <div class="pipe-sub">al stack</div>
+
+      <div class="s14-terminal" id="s14-terminal">
+        <div class="s14-line dim">$ awaiting request...</div>
       </div>
     </div>
-    <p class="fragment fade-in" style="font-size: 0.75em; color: var(--text-muted); text-align: center; margin-top: 16px;">
-      Cada archivo siguiente desarma una pieza. Vamos a volver a este mapa al inicio de cada sección.
-    </p>
+
     <aside class="notes">
-      <p><strong>Construir el mapa pieza por pieza con clicks. Cada nodo + flecha aparece en orden. Último click revela la nota inferior.</strong></p>
-      <p><u>Roadmap de las seis piezas. Mapa al que se vuelve al inicio de §§2–7, ahí con .active-N para iluminar la sección activa.</u></p>
-      <p><em>"El resto de la clase la vamos a pasar desarmando seis piezas. Una frase por pieza, lo justo para anclarte."</em></p>
-      <p><em>"HTTP: el protocolo de pedido y respuesta entre cliente y servidor."</em></p>
-      <p><em>"REST: el estilo arquitectónico que organiza esos pedidos alrededor de recursos."</em></p>
-      <p><em>"Endpoints: la unidad mínima dictable. Method, path, entrada, salida, códigos."</em></p>
-      <p><em>"Datos: la memoria del servidor — relational o document, qué se persiste y cómo."</em></p>
-      <p><em>"Errores: leer fallas como parte de supervisar, no como el momento de pánico."</em></p>
-      <p><em>"Y el salto: por qué el navegador ya no alcanza, y qué herramienta abre la próxima clase."</em></p>
-      <p><em>"El orden no es arbitrario: primero el protocolo, encima el estilo, encima la unidad que vas a dictar, después los datos que esa unidad mueve, después cómo se ven las cosas cuando se rompen, y al final el salto hacia la próxima semana. Vamos a volver a este mapa cada vez."</em></p>
+      <p><strong>Click en "Simular Petición". El paquete recorre las seis piezas; en Datos se tira el dado. 70% sale 200 OK, 30% sale 500.</strong></p>
+      <p><u>Roadmap interactivo. Cada nodo es una pieza que se desarma en su propia sección; el flujo simula una request entera. La animación cierra el espejo: el rol no cambia, lo que cambia es el terreno y el vocabulario.</u></p>
+      <p><em>"El resto de la clase la vamos a pasar desarmando seis piezas. Cada una es una palabra que vas a usar para dictarle a la IA qué construir y para leer lo que devuelve."</em></p>
+      <p><em>"Antes de meternos pieza por pieza, miremos el ciclo entero. Click en simular petición."</em></p>
+      <p><em>"HTTP recibe el pedido. REST decide cómo se nombra el recurso. Endpoints rutea contra el contrato. Datos consulta la base. Y ahí pasa una de dos cosas: o sale verde y termina con un 200, o sale rojo y termina con un 500. Los dos caminos son legítimos; los dos los vamos a leer durante el curso."</em></p>
+      <p><em>"Vamos a volver a este mapa al inicio de cada sección, ahí lo van a ver con la pieza activa marcada."</em></p>
     </aside>
+
+    <script>
+      (function () {
+        function init() {
+          if (typeof lucide !== 'undefined') {
+            try { lucide.createIcons(); } catch (e) { /* noop */ }
+          }
+          var trigger = document.getElementById('s14-trigger');
+          var status = document.getElementById('s14-status');
+          var dot = document.getElementById('s14-dot');
+          var terminal = document.getElementById('s14-terminal');
+          var nodesWrap = document.querySelector('.s14-nodes-wrap');
+          if (!trigger || !dot || !terminal || !nodesWrap) return;
+          if (typeof gsap === 'undefined') {
+            trigger.disabled = true;
+            status.textContent = 'gsap no cargó';
+            return;
+          }
+
+          var allNodes = ['http', 'rest', 'endpoints', 'datos', 'errores', 'salto'];
+
+          function appendLine(text, cls) {
+            var line = document.createElement('div');
+            line.className = 's14-line ' + (cls || '');
+            line.textContent = text;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+          }
+
+          function reset() {
+            terminal.innerHTML = '';
+            appendLine('$ awaiting request...', 'dim');
+            allNodes.forEach(function (n) {
+              var el = document.querySelector('.s14-node[data-node="' + n + '"]');
+              if (el) el.classList.remove('active-cyan', 'active-green', 'active-red');
+            });
+            dot.classList.remove('green', 'red');
+            gsap.set(dot, { opacity: 0 });
+          }
+
+          function nodeCenter(name) {
+            var el = document.querySelector('.s14-node[data-node="' + name + '"]');
+            var wrapRect = nodesWrap.getBoundingClientRect();
+            var rect = el.getBoundingClientRect();
+            return {
+              x: rect.left - wrapRect.left + rect.width / 2 - 9,
+              y: rect.top - wrapRect.top + rect.height / 2 - 9,
+            };
+          }
+
+          function play() {
+            reset();
+            trigger.disabled = true;
+            status.textContent = 'corriendo...';
+            status.className = 's14-status';
+
+            var success = Math.random() < 0.70;
+
+            var tl = gsap.timeline({
+              onComplete: function () {
+                trigger.disabled = false;
+                status.textContent = success ? 'último: 200 OK' : 'último: 500 ERROR';
+                status.className = 's14-status ' + (success ? 'success' : 'error');
+              },
+            });
+
+            var startPos = nodeCenter('http');
+            gsap.set(dot, { x: startPos.x, y: startPos.y, opacity: 0 });
+            tl.to(dot, { opacity: 1, duration: 0.2 });
+            tl.call(function () {
+              appendLine('> POST /projects/4/tasks  HTTP/1.1', 'cyan');
+            });
+
+            var linear = ['http', 'rest', 'endpoints', 'datos'];
+            var labels = {
+              http: 'HTTP        | parsing headers, host, content-type',
+              rest: 'REST        | recurso reconocido: /projects/4/tasks',
+              endpoints: 'Endpoints   | match -> POST /projects/{id}/tasks',
+              datos: 'Datos       | INSERT INTO tasks (title, project_id) ...'
+            };
+
+            linear.forEach(function (n) {
+              var pos = nodeCenter(n);
+              tl.to(dot, { x: pos.x, y: pos.y, duration: 0.55, ease: 'power2.inOut' }, '+=0.1');
+              tl.call(function () {
+                document.querySelector('.s14-node[data-node="' + n + '"]').classList.add('active-cyan');
+                appendLine('  ' + labels[n], 'cyan');
+              });
+              tl.to({}, { duration: 0.18 });
+            });
+
+            tl.call(function () {
+              if (success) {
+                appendLine('  Datos       | 1 row inserted', 'success');
+                dot.classList.add('green');
+              } else {
+                appendLine('  Datos       | IntegrityError: NOT NULL constraint failed', 'error');
+                dot.classList.add('red');
+              }
+            });
+
+            var finalNode = success ? 'salto' : 'errores';
+            var finalPos = nodeCenter(finalNode);
+            tl.to(dot, { x: finalPos.x, y: finalPos.y, duration: 0.7, ease: 'power2.inOut' }, '+=0.3');
+            tl.call(function () {
+              var el = document.querySelector('.s14-node[data-node="' + finalNode + '"]');
+              el.classList.add(success ? 'active-green' : 'active-red');
+              if (success) {
+                appendLine('  Salto       | response prepared, headers set', 'success');
+                appendLine('< 200 OK    | { "id": 17, "title": "Bibliografia", ... }', 'success');
+              } else {
+                appendLine('  Errores     | writing stack trace to log', 'error');
+                appendLine('< 500 Internal Server Error', 'error');
+              }
+            });
+            tl.to(dot, { opacity: 0, duration: 0.5 }, '+=0.7');
+          }
+
+          trigger.addEventListener('click', play);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
   </section>
 
   <!-- §1.5: A qué prestamos atención hoy -->
