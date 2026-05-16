@@ -3634,7 +3634,949 @@
       <!-- /§7 -->
 
       <!-- ===== §8 — Rules y auto memory ===== -->
-      <!-- INJECT_SECTION_8 -->
+      <style>
+/* Scoped styles for §8 only */
+
+/* Opener wrap */
+.s8-opener-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 24px auto 0;
+  max-width: 640px;
+}
+.s8-opener-sublabel {
+  font-size: 0.65em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.s8-opener-question {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.7;
+  font-style: italic;
+}
+.s8-opener-question em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Generic focus card */
+.s8-focus-card {
+  max-width: 700px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 28px 34px;
+  text-align: left;
+}
+.s8-focus-card p {
+  font-size: 0.86em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+}
+.s8-focus-card p:last-child { margin: 0; }
+
+/* Rules directory structure card */
+.s8-dir-card {
+  max-width: 680px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-dir-tree {
+  background: var(--bg-code);
+  border-radius: 8px;
+  padding: 20px 28px;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  line-height: 2;
+  color: var(--accent);
+}
+.s8-dir-tree .dim { color: var(--text-muted); }
+.s8-dir-tree .acc2 { color: var(--accent-secondary); }
+.s8-dir-props {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.s8-dir-prop {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 13px 16px;
+}
+.s8-dir-prop-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 5px;
+}
+.s8-dir-prop-val {
+  font-size: 0.7em;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.s8-dir-prop-val code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+
+/* Confusión común card */
+.s8-confusion-card {
+  max-width: 680px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-confusion-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(130, 170, 255, 0.07);
+  border: 1px solid rgba(130, 170, 255, 0.3);
+  border-radius: 8px 8px 0 0;
+  padding: 12px 20px;
+}
+.s8-confusion-label {
+  font-size: 0.6em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-secondary);
+  font-weight: 700;
+}
+.s8-confusion-body {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(130, 170, 255, 0.2);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 18px 20px;
+}
+.s8-confusion-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.s8-confusion-col {
+  flex: 1;
+  min-width: 0;
+}
+.s8-confusion-tool {
+  font-size: 0.62em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.s8-confusion-name {
+  font-size: 0.8em;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-bottom: 6px;
+}
+.s8-confusion-name.cc { color: var(--accent); }
+.s8-confusion-name.cursor { color: var(--accent-secondary); }
+.s8-confusion-desc {
+  font-size: 0.68em;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.s8-confusion-sep {
+  width: 1px;
+  background: #2a3a5a;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+.s8-confusion-callout {
+  font-size: 0.66em;
+  color: var(--accent-secondary);
+  background: rgba(130, 170, 255, 0.06);
+  border: 1px solid rgba(130, 170, 255, 0.2);
+  border-radius: 7px;
+  padding: 12px 16px;
+  line-height: 1.65;
+}
+
+/* No-frontmatter slide */
+.s8-nofm-wrap {
+  max-width: 700px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-nofm-row {
+  display: flex;
+  gap: 14px;
+}
+.s8-nofm-card {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+.s8-nofm-card-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.s8-nofm-card-val {
+  font-size: 0.72em;
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+.s8-nofm-card-val code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s8-nofm-eq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+.s8-nofm-callout {
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 7px;
+  padding: 13px 18px;
+  font-size: 0.7em;
+  color: var(--accent);
+  line-height: 1.65;
+}
+
+/* Path-scoped rule card */
+.s8-pathscoped-wrap {
+  max-width: 720px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-frontmatter-block {
+  background: var(--bg-code);
+  border-radius: 8px;
+  padding: 20px 28px;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  line-height: 1.9;
+}
+.s8-frontmatter-block .yaml-key { color: var(--accent-secondary); }
+.s8-frontmatter-block .yaml-val { color: var(--accent); }
+.s8-frontmatter-block .yaml-delim { color: var(--text-muted); }
+.s8-frontmatter-block .yaml-body { color: #a8c8a0; }
+.s8-pathscoped-callout {
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+  border-radius: 7px;
+  padding: 14px 20px;
+  font-size: 0.74em;
+  color: var(--accent);
+  line-height: 1.65;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Globs grid */
+.s8-globs-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-globs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.s8-glob-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.s8-glob-pattern {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.s8-glob-desc {
+  font-size: 0.67em;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.s8-globs-trigger {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 7px;
+  padding: 13px 18px;
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s8-globs-trigger strong { color: var(--text-primary); }
+
+/* Comparison card for §7 vs §8 */
+.s8-cmp-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-cmp-card {
+  flex: 1;
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.s8-cmp-card.always {
+  background: rgba(130, 170, 255, 0.06);
+  border: 1px solid rgba(130, 170, 255, 0.25);
+}
+.s8-cmp-card.conditional {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+}
+.s8-cmp-card-label {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.s8-cmp-card.always .s8-cmp-card-label { color: var(--accent-secondary); }
+.s8-cmp-card.conditional .s8-cmp-card-label { color: var(--accent); }
+.s8-cmp-card-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.s8-cmp-card-body {
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.s8-cmp-payoff {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  padding: 13px 20px;
+  font-size: 0.72em;
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+
+/* Auto memory cards */
+.s8-automem-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s8-who-row {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+}
+.s8-who-card {
+  flex: 1;
+  border-radius: 8px;
+  padding: 18px 22px;
+  text-align: center;
+}
+.s8-who-card.manual {
+  background: rgba(130, 170, 255, 0.06);
+  border: 1px solid rgba(130, 170, 255, 0.25);
+}
+.s8-who-card.auto {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+}
+.s8-who-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
+}
+.s8-who-card.manual .s8-who-label { color: var(--accent-secondary); }
+.s8-who-card.auto .s8-who-label { color: var(--accent); }
+.s8-who-tool {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.s8-who-desc {
+  font-size: 0.66em;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.s8-who-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+.s8-automem-key {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  padding: 13px 20px;
+  font-size: 0.72em;
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+/* Auto memory mechanics */
+.s8-mechanics-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.s8-mech-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.s8-mech-row:first-child .s8-mech-key { border-radius: 8px 0 0 0; }
+.s8-mech-row:first-child .s8-mech-val { border-radius: 0 8px 0 0; }
+.s8-mech-row:last-child .s8-mech-key { border-radius: 0 0 0 8px; border-bottom: 1px solid #2a3a5a; }
+.s8-mech-row:last-child .s8-mech-val { border-radius: 0 0 8px 0; border-bottom: 1px solid #2a3a5a; }
+.s8-mech-key {
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-bottom: none;
+  border-right: none;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s8-mech-key-text {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent-secondary);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+}
+.s8-mech-val {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-bottom: none;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+}
+.s8-mech-val-text {
+  font-size: 0.7em;
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+.s8-mech-val-text code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.93em;
+}
+
+/* Tricotomía slide caption */
+.s8-tricotomia-caption {
+  max-width: 680px;
+  margin: 18px auto 0;
+  font-size: 0.68em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.75;
+}
+.s8-tricotomia-caption strong { color: var(--text-primary); }
+
+/* Cierre bridge */
+.s8-close-card {
+  max-width: 660px;
+  margin: 28px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 28px 36px;
+  text-align: center;
+}
+.s8-close-main {
+  font-size: 0.84em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+.s8-close-bridge {
+  font-size: 0.76em;
+  color: var(--text-muted);
+  line-height: 1.75;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 18px;
+  margin: 0;
+}
+.s8-close-bridge em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Demo wrap */
+.s8-demo-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+</style>
+
+<!-- §8.1 · Opener — lens-tracker aterriza en CONTEXTO -->
+<section>
+  <h2>¿Loop o contexto? Contexto.</h2>
+
+  <div class="s8-opener-wrap">
+    <div class="lens-tracker on-context">
+      <div class="pole pole-loop">LOOP</div>
+      <div class="lens-sep">↔</div>
+      <div class="pole pole-context">CONTEXTO</div>
+    </div>
+    <p class="s8-opener-sublabel">condicional · autocurado</p>
+    <p class="s8-opener-question">
+      ¿Y si una instrucción pudiera estar en el contexto
+      <em>solo cuando hace falta</em>,
+      y no ocupar espacio el resto del tiempo?
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el tracker — CONTEXTO iluminado, igual que en §7. Leer el sublabel. Pausa. Leer la pregunta en voz alta, despacio.</strong></p>
+    <p><u>Slide de apertura de §8. El tracker ya es conocido — no hay que explicarlo, solo señalarlo. El sublabel "condicional · autocurado" anuncia los dos rótulos de la tricotomía que §8 cierra. La pregunta de cierre de §7 se retoma acá como hook directo.</u></p>
+    <p><em>"La pregunta-lente aterriza otra vez en contexto. Y el sublabel ya dice de qué va esta sección: condicional y autocurado. Los dos rótulos de la tricotomía que §4 plantó y que todavía no cerramos."</em></p>
+    <p><em>"Y volvemos con la pregunta con la que terminó §7: ¿y si una instrucción pudiera estar en el contexto solo cuando hace falta, y no ocupar espacio el resto del tiempo? §7 dijo que era posible. §8 lo muestra."</em></p>
+  </aside>
+</section>
+
+<!-- §8.2 · .claude/rules/ — instrucciones modulares -->
+<section>
+  <h2>.claude/rules/ — instrucciones en archivos separados</h2>
+
+  <div class="s8-dir-card">
+    <div class="s8-dir-tree">
+      .claude/<br>
+      <span class="dim">├── CLAUDE.md</span><br>
+      <span class="acc2">└── rules/</span><br>
+      <span style="padding-left:1.4em;" class="acc2">├── backend/</span><br>
+      <span style="padding-left:2.8em;">└── <span style="color:var(--accent);">api-design.md</span></span><br>
+      <span style="padding-left:1.4em;" class="acc2">├── testing/</span><br>
+      <span style="padding-left:2.8em;">└── <span style="color:var(--accent);">integration.md</span></span><br>
+      <span style="padding-left:1.4em;">└── <span style="color:var(--accent);">deploy.md</span></span>
+    </div>
+
+    <div class="s8-dir-props">
+      <div class="s8-dir-prop">
+        <span class="s8-dir-prop-label">Descubrimiento</span>
+        <span class="s8-dir-prop-val">Recursivo dentro de <code>.claude/rules/</code>. Subdirectorios tan profundos como necesités.</span>
+      </div>
+      <div class="s8-dir-prop">
+        <span class="s8-dir-prop-label">Alcance de usuario</span>
+        <span class="s8-dir-prop-val"><code>~/.claude/rules/</code> para reglas que aplican a todos tus proyectos. Se cargan antes que las del proyecto.</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el árbol de directorios. Nombrar los subdirectorios en voz alta. Mencionar el alcance de usuario.</strong></p>
+    <p><u>Slide de estructura de .claude/rules/. El árbol muestra la organización modular concretamente. Los dos props cubren los dos aspectos operativos clave: descubrimiento recursivo y reglas a nivel de usuario. No hay listas de items — el árbol visual hace ese trabajo.</u></p>
+    <p><em>"Además de CLAUDE.md, Claude Code tiene un mecanismo de instrucciones en archivos separados. Cualquier archivo .md dentro de .claude/rules/ se trata como una regla independiente."</em></p>
+    <p><em>"El descubrimiento es recursivo: podés organizar subdirectorios — rules/backend/, rules/testing/, rules/deploy/ — y Claude los encuentra igual. No necesitás registrar nada, solo poner el archivo ahí."</em></p>
+    <p><em>"Y también existe ~/.claude/rules/ a nivel de usuario: reglas que aplican a todos tus proyectos, cargadas antes que las del proyecto actual. Mismo mecanismo, alcance más amplio."</em></p>
+  </aside>
+</section>
+
+<!-- §8.3 · Sin frontmatter = siempre cargado + confusión común .cursorrules -->
+<section>
+  <h2>Sin frontmatter: igual que CLAUDE.md, ventaja solo organizativa</h2>
+
+  <div class="s8-confusion-card">
+    <div class="s8-nofm-wrap" style="margin: 0 0 14px;">
+      <div class="s8-nofm-row">
+        <div class="s8-nofm-card">
+          <span class="s8-nofm-card-label">Regla sin frontmatter</span>
+          <span class="s8-nofm-card-val"><code>.claude/rules/testing.md</code> sin cabecera YAML. Se carga al arranque, en cada sesión, como texto plano.</span>
+        </div>
+        <div class="s8-nofm-eq">≡</div>
+        <div class="s8-nofm-card">
+          <span class="s8-nofm-card-label">Costo en contexto</span>
+          <span class="s8-nofm-card-val">Idéntico a CLAUDE.md: siempre presente, siempre pagando tokens. La ventaja es organizativa, no en contexto.</span>
+        </div>
+      </div>
+      <div class="s8-nofm-callout">
+        Un archivo por tema en vez de un monolito — eso es lo que ganás sin frontmatter. Nada más.
+      </div>
+    </div>
+
+    <div class="s8-confusion-header">
+      <span class="s8-confusion-label">Confusión común</span>
+    </div>
+    <div class="s8-confusion-body">
+      <div class="s8-confusion-row">
+        <div class="s8-confusion-col">
+          <span class="s8-confusion-tool">Claude Code</span>
+          <div class="s8-confusion-name cc">.claude/rules/</div>
+          <div class="s8-confusion-desc">Mecanismo nativo de Claude Code. Archivos .md con o sin frontmatter. Soporta path-scoped rules.</div>
+        </div>
+        <div class="s8-confusion-sep"></div>
+        <div class="s8-confusion-col">
+          <span class="s8-confusion-tool">Cursor</span>
+          <div class="s8-confusion-name cursor">.cursorrules</div>
+          <div class="s8-confusion-desc">Sistema propio de Cursor. No es compatible con Claude Code. Si un tutorial los mezcla, está confundiendo las herramientas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer la comparación de la mitad superior. Pausa. Señalar la sección "Confusión común" y comparar las dos columnas.</strong></p>
+    <p><u>Slide en dos partes: la mitad superior cubre la equivalencia con CLAUDE.md (ventaja solo organizativa); la mitad inferior desmitifica la confusión .cursorrules. Ambas ideas van juntas porque comparten el mismo punto conceptual: no mezclar lo que es nativo con lo que no.</u></p>
+    <p><em>"Una regla sin frontmatter se comporta exactamente igual que CLAUDE.md: entra al contexto al arrancar la sesión, en cada sesión, con o sin relevancia para la tarea. El costo en contexto es idéntico."</em></p>
+    <p><em>"Lo que ganás es organización: un archivo por tema en vez de un monolito. testing.md, api-design.md, deploy.md — más fácil de mantener. Pero en tokens, igual."</em></p>
+    <p><em>"Y una aclaración que vale la pena porque aparece en muchos tutoriales: .claude/rules/ es el mecanismo nativo de Claude Code. No es .cursorrules. Cursor tiene su propio sistema con ese nombre, y no son compatibles. Si leés un tutorial que los mezcla, lo está confundiendo con otra herramienta."</em></p>
+  </aside>
+</section>
+
+<!-- §8.4 · Path-scoped rules — el frontmatter paths: -->
+<section>
+  <h2>Path-scoped rules: el frontmatter que lo cambia todo</h2>
+
+  <div class="s8-pathscoped-wrap">
+    <div class="bg-code-card s8-frontmatter-block">
+      <span class="yaml-delim">---</span><br>
+      <span class="yaml-key">paths</span>:<br>
+      &nbsp;&nbsp;- <span class="yaml-val">"src/api/**/*.ts"</span><br>
+      <span class="yaml-delim">---</span><br><br>
+      <span class="yaml-body">Cuando trabajés con archivos de la API, asegurate de que cada endpoint
+      tenga un comentario JSDoc con su método HTTP y ruta completa.
+      Nunca uses `any` en los tipos de request o response.</span>
+    </div>
+
+    <div class="s8-pathscoped-callout">
+      No entra al arranque. Entra cuando Claude toca un archivo que matchea el glob.<br>
+      Cero contexto hasta entonces — y solo si el glob matchea.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el bloque YAML — leer las tres líneas despacio. Leer el callout con énfasis en "cero contexto hasta entonces".</strong></p>
+    <p><u>Slide de path-scoped rules. El bloque de código muestra la sintaxis real del frontmatter con un ejemplo concreto de instrucción de API. El callout captura la propiedad esencial: cero costo de contexto hasta el trigger. El contraste con §8.3 (sin frontmatter = siempre cargado) es la diferencia conceptual central.</u></p>
+    <p><em>"El cambio viene cuando le agregás frontmatter. Con el campo paths: y un glob, la regla deja de cargarse al arranque."</em></p>
+    <p><em>"Esta regla de API, por ejemplo, no está en el contexto cuando empezás la sesión. No ocupa ni un token. Si la sesión transcurre entera trabajando en el frontend, esta regla nunca aparece."</em></p>
+    <p><em>"En el momento en que Claude toca un archivo dentro de src/api/ — que lo lee, que lo modifica — la regla entra. Y las instrucciones que define pasan a estar disponibles exactamente cuando son relevantes."</em></p>
+    <p><em>"Eso es lo que frontmatter habilita: cero contexto hasta que hace falta."</em></p>
+  </aside>
+</section>
+
+<!-- §8.5 · Globs soportados -->
+<section>
+  <h2>Globs soportados y cómo se dispara el trigger</h2>
+
+  <div class="s8-globs-wrap">
+    <div class="s8-globs-grid">
+      <div class="s8-glob-card">
+        <span class="s8-glob-pattern">**/*.ts</span>
+        <span class="s8-glob-desc">Todos los archivos .ts del árbol, en cualquier directorio.</span>
+      </div>
+      <div class="s8-glob-card">
+        <span class="s8-glob-pattern">src/**/*</span>
+        <span class="s8-glob-desc">Todo lo que esté bajo src/, sin importar la extensión ni la profundidad.</span>
+      </div>
+      <div class="s8-glob-card">
+        <span class="s8-glob-pattern">*.md</span>
+        <span class="s8-glob-desc">Archivos Markdown en la raíz del proyecto — sin descender a subdirectorios.</span>
+      </div>
+      <div class="s8-glob-card">
+        <span class="s8-glob-pattern">src/**/*.{ts,tsx}</span>
+        <span class="s8-glob-desc">TypeScript y TypeScript con JSX bajo src/. Expansión de llaves estándar.</span>
+      </div>
+    </div>
+
+    <div class="s8-globs-trigger">
+      <strong>El trigger es leer un archivo que matchee</strong> — no cualquier operación de herramienta,
+      sino específicamente el acceso a ese archivo. Si Claude propone un plan pero no toca el archivo todavía, la regla no entra.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cuatro tarjetas de globs. Leer el trigger-box despacio, con énfasis en "no cualquier herramienta".</strong></p>
+    <p><u>Slide de globs. Los cuatro ejemplos son los que aparecen en el source material, organizados en grid en vez de lista. El trigger-box al pie cierra una ambigüedad que suele surgir: el trigger no es el modelo "hablar de" un archivo, sino acceder a él.</u></p>
+    <p><em>"Los globs que acepta el campo paths: son estándar. **/*.ts para todo TypeScript del árbol. src/**/* para todo lo de esa carpeta. *.md para markdown en la raíz. Y expansión de llaves para combinar extensiones."</em></p>
+    <p><em>"Un detalle que vale precisar: el trigger es leer el archivo. No 'mencionar' el archivo, no 'razonar sobre' él. Si Claude escribe un plan que incluye editar un archivo de la API pero todavía no lo tocó, la regla no entró. Entra cuando accede al archivo."</em></p>
+  </aside>
+</section>
+
+<!-- §8.6 · La diferencia con §7, precisa -->
+<section>
+  <h2>CLAUDE.md vs path-scoped: el costo diferido</h2>
+
+  <div class="s8-cmp-wrap">
+    <div class="comparison-2col">
+      <div class="s8-cmp-card always">
+        <span class="s8-cmp-card-label">CLAUDE.md (§7)</span>
+        <div class="s8-cmp-card-title">Siempre cargado</div>
+        <div class="s8-cmp-card-body">
+          Cuesta contexto en cada sesión, con o sin relevancia para la tarea del momento.
+          Si el CLAUDE.md tiene instrucciones de API y estás trabajando en el frontend toda la sesión:
+          esas instrucciones están ahí, ocupando espacio, sin ser usadas.
+        </div>
+      </div>
+      <div class="s8-cmp-card conditional">
+        <span class="s8-cmp-card-label">Path-scoped rule</span>
+        <div class="s8-cmp-card-title">Cero hasta que es relevante</div>
+        <div class="s8-cmp-card-body">
+          No ocupa contexto al arranque. Entra cuando Claude toca un archivo que matchea el glob.
+          Si la sesión no toca esa área del codebase, la regla nunca aparece — costo cero.
+        </div>
+      </div>
+    </div>
+
+    <div class="s8-cmp-payoff">
+      Para instrucciones que solo aplican a una parte del codebase, ese costo diferido es exactamente lo que querés.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer las dos columnas en paralelo — señalar "cuesta siempre" vs "cero hasta". Leer el payoff al final.</strong></p>
+    <p><u>Slide de comparación directa. El .comparison-2col pone las dos propiedades en tensión visual. El payoff cierra con la prescripción práctica: path-scoped para instrucciones de área específica.</u></p>
+    <p><em>"La diferencia con §7 es precisa. CLAUDE.md siempre cuesta contexto — con o sin relevancia para lo que estás haciendo ahora. Si tenés instrucciones de API y estás en el frontend toda la sesión, esas instrucciones están ahí igual. Pagadas. Sin ser usadas."</em></p>
+    <p><em>"Una path-scoped rule es lo opuesto: cero contexto hasta que es relevante. Si la sesión no toca esa área, la regla no existe desde el punto de vista del contexto."</em></p>
+    <p><em>"Para instrucciones que solo aplican a una parte del codebase — las convenciones de la API, los criterios de los tests de integración, las reglas del sistema de autenticación — ese costo diferido es exactamente lo que querés."</em></p>
+  </aside>
+</section>
+
+<!-- §8.7 · section-divider — Demo D8 -->
+<section class="section-divider">
+  <h2>Demo D8 · La rule condicional</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Una instrucción que entra al contexto solo cuando toca los archivos correctos. El movimiento es medible en pantalla.</p>
+
+  <aside class="notes">
+    <p><u>Divider de demo. El objetivo de D8 es hacer observable el mecanismo condicional — no teórico. La regla existe, se puede ver que no está cargada, y se puede ver cuándo aparece.</u></p>
+    <p><em>"Vamos al demo. Vamos a crear una regla que no está cargada. Y vamos a ver exactamente cuándo aparece."</em></p>
+  </aside>
+</section>
+
+<!-- §8.8 · Demo D8 beats — clickable-steps -->
+<section>
+  <h2>D8 · Tres beats: la rule condicional</h2>
+
+  <div class="s8-demo-wrap">
+    <div id="s8-d8-steps"></div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Setup: .claude/rules/api.md creada con frontmatter paths: ["src/api/**"]. Claude Code abierto en el proyecto. /memory (o /context) disponible para mostrar fuentes cargadas. Click recorre los 3 beats.</strong></p>
+    <p><u>Beat 1 — qué mirar: ejecutar /memory. La regla api.md NO aparece en la lista de fuentes de instrucción cargadas. El archivo existe en disco — simplemente no está en el contexto. Beat 2 — qué mirar: pedir a Claude que mejore el README.md. Volver a ejecutar /memory. La regla sigue ausente — trabajar en README no disparó el trigger porque el glob no matchea. Beat 3 — qué mirar: pedir a Claude que lea o modifique src/api/users.ts. Ejecutar /memory. La regla api.md ahora aparece cargada. Si Claude generó código, debería incluir los comentarios // [METHOD] /ruta que la regla prescribía. Plan B si /memory no muestra el detalle: demostrar por comportamiento. Pedir edición fuera de src/api/ — Claude no agrega el comentario. Pedir edición dentro de src/api/ — Claude sí lo agrega. El trigger condicional se demuestra por efecto.</u></p>
+    <p><em>"Beat 1. La regla existe en .claude/rules/api.md con el frontmatter paths: src/api/**. Ejecuto /memory. Miren la lista de fuentes cargadas. La regla no está. El archivo está en el directorio — pero no en el contexto."</em></p>
+    <p><em>"Beat 2. Le pido a Claude que mejore el README.md. Trabajó. Tocó un archivo. Vuelvo a ejecutar /memory. Sigue sin estar cargada. README no matchea src/api/**, así que el trigger no se disparó."</em></p>
+    <p><em>"Beat 3. Ahora le pido que lea src/api/users.ts. Vuelvo a ejecutar /memory. Ahí está. Apareció cuando fue relevante. Costó cero contexto hasta ese momento. Eso es lo que CLAUDE.md no puede hacer."</em></p>
+  </aside>
+</section>
+
+<!-- §8.9 · Auto memory — quién lo escribe -->
+<section>
+  <h2>Auto memory: la diferencia no es dónde, es quién</h2>
+
+  <div class="s8-automem-wrap">
+    <div class="s8-who-row">
+      <div class="s8-who-card manual">
+        <span class="s8-who-label">CLAUDE.md</span>
+        <div class="s8-who-tool">Lo escribís vos</div>
+        <div class="s8-who-desc">Decidís qué instrucciones van ahí. Editás el archivo manualmente. El agente lo lee.</div>
+      </div>
+      <div class="s8-who-sep">vs</div>
+      <div class="s8-who-card auto">
+        <span class="s8-who-label">Auto memory</span>
+        <div class="s8-who-tool">Lo escribe Claude</div>
+        <div class="s8-who-desc">El agente observa correcciones, preferencias y descubrimientos a lo largo de las sesiones, y decide qué vale la pena recordar. Sin que vos toques ningún archivo.</div>
+      </div>
+    </div>
+
+    <div class="s8-automem-key">
+      La diferencia con CLAUDE.md no es dónde vive el archivo — es quién lo escribe.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer las dos tarjetas en paralelo — "lo escribís vos" vs "lo escribe Claude". Pausa. Leer la línea de cierre.</strong></p>
+    <p><u>Slide de introducción a auto memory. La comparación 2col es suficiente para el punto central: la distinción no es técnica sino de agencia — quién toma la decisión de qué persistir. El resto de los detalles va en el slide siguiente.</u></p>
+    <p><em>"Hay un segundo sistema de memoria, completamente distinto de CLAUDE.md. Y la diferencia no está en dónde vive el archivo."</em></p>
+    <p><em>"CLAUDE.md lo escribís vos. Decidís qué va, cómo está redactado, qué se actualiza. El agente lo lee."</em></p>
+    <p><em>"La auto memory la escribe Claude. A lo largo de las sesiones, el agente observa correcciones, preferencias, descubrimientos — qué gestor de paquetes usa el proyecto, qué error se repitió y cómo se resolvió, qué convención de nombrado preferís — y decide qué vale la pena recordar. Sin que vos lo pidás. Sin que editás ningún archivo."</em></p>
+    <p><em>"La diferencia con CLAUDE.md no es dónde vive el archivo. Es quién lo escribe."</em></p>
+  </aside>
+</section>
+
+<!-- §8.10 · Cómo funciona auto memory -->
+<section>
+  <h2>Cómo funciona auto memory</h2>
+
+  <div class="s8-mechanics-wrap">
+    <div class="s8-mech-row">
+      <div class="s8-mech-key"><span class="s8-mech-key-text">Dónde vive</span></div>
+      <div class="s8-mech-val"><span class="s8-mech-val-text"><code>~/.claude/projects/&lt;project&gt;/memory/</code> — local a tu máquina. No viaja al repositorio, no se comparte con el equipo. Un directorio por git repo; si usás worktrees, todos comparten la misma carpeta.</span></div>
+    </div>
+    <div class="s8-mech-row">
+      <div class="s8-mech-key"><span class="s8-mech-key-text">Estructura</span></div>
+      <div class="s8-mech-val"><span class="s8-mech-val-text"><code>MEMORY.md</code> funciona como índice principal. Archivos de tema opcionales se generan por área. Claude los escribe y actualiza solo.</span></div>
+    </div>
+    <div class="s8-mech-row">
+      <div class="s8-mech-key"><span class="s8-mech-key-text">Límite de carga</span></div>
+      <div class="s8-mech-val"><span class="s8-mech-val-text">Las primeras <strong>200 líneas o 25 KB</strong> de <code>MEMORY.md</code> entran al contexto al inicio de cada sesión — lo que se alcance primero. Los archivos de tema se cargan bajo demanda, cuando son relevantes.</span></div>
+    </div>
+    <div class="s8-mech-row">
+      <div class="s8-mech-key"><span class="s8-mech-key-text">Cómo auditar</span></div>
+      <div class="s8-mech-val"><span class="s8-mech-val-text"><code>/memory</code> lista los archivos de instrucción cargados y da acceso a la carpeta de memoria. Desde ahí podés activar, desactivar, editar o borrar lo que Claude guardó.</span></div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cuatro filas de arriba hacia abajo. Remarcar "local a tu máquina, no viaja al repo" en la primera. Enfatizar los números de límite. Nombrar /memory como la forma de auditar.</strong></p>
+    <p><u>Slide de mecánica de auto memory. Layout de tabla sin ser una lista: cuatro filas con clave a la izquierda y valor a la derecha. Cubre los cuatro aspectos operativos que un alumno necesita para usar el sistema: dónde está, qué estructura tiene, qué límites de carga aplican, y cómo auditarlo.</u></p>
+    <p><em>"¿Dónde vive? En ~/.claude/projects/nombre-del-proyecto/memory/. Es local a tu máquina — no está en el repositorio, no se comparte con tu equipo."</em></p>
+    <p><em>"La estructura es simple: un MEMORY.md como índice principal, y archivos de tema opcionales por área. Claude los crea y los actualiza solo."</em></p>
+    <p><em>"El límite de carga: las primeras 200 líneas o 25 KB de MEMORY.md entran al contexto al inicio de cada sesión. Los archivos de tema se cargan bajo demanda, cuando son relevantes para la tarea."</em></p>
+    <p><em>"Y para auditar qué recuerda Claude: /memory. Lista lo que está cargado, da acceso a la carpeta. Podés leer el MEMORY.md, editarlo, borrarlo. No es una caja negra — es markdown plano."</em></p>
+  </aside>
+</section>
+
+<!-- §8.11 · La tricotomía cerrada (2 de 3) -->
+<section>
+  <h2>La tricotomía: dos de tres cerrados</h2>
+
+  <div class="tricotomia show-2">
+    <div class="tcell thead">Rótulo</div>
+    <div class="tcell thead">Mecanismo</div>
+    <div class="tcell thead">Cuándo paga contexto</div>
+    <div class="trow-1"><div class="tcell">Siempre cargado</div><div class="tcell">CLAUDE.md y @import</div><div class="tcell">arranque de cada sesión, siempre</div></div>
+    <div class="trow-2"><div class="tcell">Condicional</div><div class="tcell">path-scoped rules</div><div class="tcell">al tocar un archivo que matchea</div></div>
+    <div class="trow-3"><div class="tcell">Autocurado</div><div class="tcell">se completa en §9</div><div class="tcell">—</div></div>
+  </div>
+
+  <p class="s8-tricotomia-caption">
+    <strong>Lo que siempre aplica</strong> → CLAUDE.md.
+    <strong>Lo que aplica a un área</strong> → path-scoped rule.
+    <strong>Lo que el agente descubre solo</strong> → auto memory.
+    La tercera fila se completa en §9.<br>
+    Mecanismo equivocado = pagás contexto de más, o la instrucción no está cuando la tarea la necesita.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar la tabla — filas 1 y 2 iluminadas, fila 3 en teaser. Leer el caption de corrido. Enfatizar la consecuencia del mecanismo equivocado al final.</strong></p>
+    <p><u>Slide de cierre de la tricotomía para §8. La tabla .tricotomia show-2 viene de §4 — mismo visual, ahora con las filas 1 y 2 completas y la fila 3 en estado teaser. La caption opera como resumen prescriptivo: no es taxonomía para clasificar, es guía operacional para elegir.</u></p>
+    <p><em>"El adelanto de §4 decía que cualquier estrategia de contexto cae en uno de tres rótulos. Ahora tenemos dos completos."</em></p>
+    <p><em>"Siempre cargado: CLAUDE.md. Todo lo que el agente necesita en cada sesión sin excepción. Costo constante; presencia garantizada."</em></p>
+    <p><em>"Condicional: path-scoped rules. Lo que aplica solo a ciertas áreas del codebase. Costo cero hasta que es relevante; entra cuando hace falta."</em></p>
+    <p><em>"Y auto memory cierra ese segundo rótulo desde el otro lado: el agente descubre solo qué recordar. La fila 3 se completa en §9."</em></p>
+    <p><em>"La consecuencia práctica de esta tabla es concreta: usar el mecanismo equivocado tiene un costo. O pagás contexto que no necesitabas pagar, o la instrucción no está cuando la tarea la necesita."</em></p>
+  </aside>
+</section>
+
+<!-- §8.12 · section-divider — Demo D9 -->
+<section class="section-divider">
+  <h2>Demo D9 · Auto memory</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">CLAUDE.md lo escribiste vos. Esto lo escribe Claude. No editaste ningún archivo.</p>
+
+  <aside class="notes">
+    <p><u>Divider de demo. D9 muestra el mecanismo opuesto al condicional: la memoria que nadie configuró explícitamente. La frase del subtítulo es la intro para el aula del source material — se puede leer directamente.</u></p>
+    <p><em>"Vamos a D9. CLAUDE.md lo escribiste vos. Esto lo escribe Claude. No editaste ningún archivo."</em></p>
+  </aside>
+</section>
+
+<!-- §8.13 · Demo D9 beats — clickable-steps -->
+<section>
+  <h2>D9 · Tres beats: auto memory</h2>
+
+  <div class="s8-demo-wrap">
+    <div id="s8-d9-steps"></div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Setup: sesión activa en Claude Code, proyecto que usa npm. Ningún CLAUDE.md menciona el gestor de paquetes. Click recorre los 3 beats.</strong></p>
+    <p><u>Beat 1 — qué mirar: corregirle a Claude una propuesta de yarn — responder "En este proyecto usamos npm, no yarn. Siempre." Observar si aparece el indicador "Writing memory" en la respuesta. No siempre es visible con ese texto exacto según la versión; la sesión debería mostrar alguna señal de escritura. Beat 2 — qué mirar: cerrar la sesión, abrir una nueva en el mismo directorio. Pedir algo que induciría el error — "cómo instalo las dependencias" — o pedir que agregue una dependencia. Claude responde con npm, no yarn, sin que nadie lo haya puesto en ningún archivo. Beat 3 — qué mirar: ejecutar /memory y navegar a ~/.claude/projects/proyecto/memory/. Abrir MEMORY.md. El contenido real muestra la preferencia de npm sobre yarn. Plan B si la auto memory no se dispara en vivo: tener una sesión anterior donde la memoria sí se escribió. Abrir /memory y mostrar ese MEMORY.md preparado. El punto — que el archivo existe, es editable, fue escrito por Claude — se sostiene igual con un archivo de sesión previa.</u></p>
+    <p><em>"Beat 1. Tengo una sesión activa. Claude me propone yarn install. Le digo: en este proyecto usamos npm, no yarn. Siempre. Miren la respuesta — ¿aparece alguna indicación de que está guardando algo?"</em></p>
+    <p><em>"Beat 2. Cierro la sesión. Abro una nueva en el mismo directorio. No toqué ningún CLAUDE.md, no escribí ninguna regla. Le pregunto cómo instalar las dependencias. Respondió con npm. No yarn. No se lo dije yo en este momento; lo recordó solo."</em></p>
+    <p><em>"Beat 3. Ejecuto /memory y navego hasta la carpeta de memoria. Acá está el MEMORY.md. Markdown plano. Lo podés leer, editar o borrar. No es una caja negra: es un archivo como cualquier otro — solo que lo escribió Claude, no yo."</em></p>
+  </aside>
+</section>
+
+<!-- §8.14 · Cierre + bridge a §9 -->
+<section>
+  <h2>Condicional y autocurado — lo que viene en §9</h2>
+
+  <div class="s8-close-card">
+    <p class="s8-close-main">
+      Dos propiedades que CLAUDE.md no tiene: la condicionalidad — una instrucción que entra al contexto solo cuando es relevante — y el autocurado — un sistema que acumula aprendizajes sin intervención del supervisor.
+    </p>
+    <p class="s8-close-bridge">
+      Las skills llevan lo condicional <em>un paso más lejos</em>: no instrucciones que aparecen cuando tocás ciertos archivos, sino un procedimiento completo que el agente invoca cuando la tarea lo requiere. §9.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el párrafo principal despacio. Pausa. Leer el bridge — dejar la frase "un paso más lejos" como gancho antes de pasar.</strong></p>
+    <p><u>Slide de cierre de §8 y puente a §9. El párrafo principal consolida las dos propiedades nuevas que aparecieron en §8. El bridge conecta con la tercera fila de la tricotomía, que §9 completa con las skills.</u></p>
+    <p><em>"§8 abrió con una pregunta: ¿puede una instrucción estar en el contexto solo cuando hace falta? La respuesta es sí. Path-scoped rules: cero contexto hasta que matchea el glob. Auto memory: el agente escribe sus propios aprendizajes y los trae a la próxima sesión."</em></p>
+    <p><em>"Dos cosas que CLAUDE.md no tiene. Y que juntas cubren los dos rótulos que §4 había plantado: condicional y autocurado."</em></p>
+    <p><em>"§9 lleva la idea de condicional un paso más lejos. No instrucciones que aparecen por archivo — un procedimiento completo que el agente invoca cuando la tarea lo requiere. Eso son las skills."</em></p>
+  </aside>
+</section>
       <!-- /§8 -->
 
       <!-- ===== §9 — Skills y slash commands ===== -->
@@ -3806,6 +4748,45 @@
       title: 'Beat 3 — /memory: la lista real de fuentes',
       summary: 'Se ejecuta /memory para ver la lista de archivos de instrucción cargados con sus rutas.',
       example: '/memory → la jerarquía no es un diagrama. Esta es la lista real de fuentes cargadas en esta sesión: usuario, proyecto, local si existe. Cada ruta, cada nivel, efectivamente presente en la ventana.'
+    }
+  ]});
+</script>
+
+  <!-- init §8 -->
+<script>
+  initClickableSteps({containerId: 's8-d8-steps', steps: [
+    {
+      title: 'Beat 1 — La regla existe, pero no está cargada',
+      summary: 'Se crea .claude/rules/api.md con frontmatter paths: ["src/api/**"]. Se ejecuta /memory.',
+      example: '/memory → la regla api.md NO aparece en la lista de fuentes de instrucción cargadas. El archivo está en disco — pero no en el contexto. Cero tokens hasta que matchee.'
+    },
+    {
+      title: 'Beat 2 — Tocar un archivo que no matchea',
+      summary: 'Se le pide a Claude que mejore el README.md. Volver a ejecutar /memory.',
+      example: '/memory → la regla sigue ausente. Claude trabajó, tocó un archivo, pero README.md no matchea src/api/**. El trigger no se disparó. Sigue costando cero.'
+    },
+    {
+      title: 'Beat 3 — Tocar un archivo que sí matchea',
+      summary: 'Se le pide a Claude que lea o modifique src/api/users.ts. Volver a ejecutar /memory.',
+      example: '/memory → la regla api.md ahora aparece cargada. Y el código generado incluye los comentarios // [METHOD] /ruta que la regla prescribía. Apareció cuando fue relevante. Eso es lo que CLAUDE.md no puede hacer.'
+    }
+  ]});
+
+  initClickableSteps({containerId: 's8-d9-steps', steps: [
+    {
+      title: 'Beat 1 — La corrección que Claude recuerda',
+      summary: 'En una sesión activa, Claude propone yarn install. Se le corrige: "En este proyecto usamos npm, no yarn. Siempre."',
+      example: 'Observar la respuesta — ¿aparece alguna señal de escritura de memoria? No siempre es visible como "Writing memory" según la versión, pero la sesión puede mostrar algún indicador. La corrección fue recibida.'
+    },
+    {
+      title: 'Beat 2 — Nueva sesión, misma corrección aplicada',
+      summary: 'Se cierra la sesión y se abre una nueva en el mismo directorio. No se tocó ningún CLAUDE.md ni ninguna regla.',
+      example: 'Preguntar cómo instalar las dependencias. Claude responde con npm, no yarn. No se lo dijiste en este momento, no está en ningún archivo de instrucción manual. Lo recordó solo — lo escribió él.'
+    },
+    {
+      title: 'Beat 3 — Abrir la carpeta de memoria',
+      summary: 'Se ejecuta /memory y se navega hasta ~/.claude/projects/<project>/memory/. Se abre MEMORY.md.',
+      example: 'MEMORY.md muestra la preferencia de npm sobre yarn, posiblemente con contexto adicional. Markdown plano, editable, borrable. No es una caja negra: es un archivo como cualquier otro. Solo que lo escribió Claude.'
     }
   ]});
 </script>
