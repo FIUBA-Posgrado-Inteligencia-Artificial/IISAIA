@@ -170,29 +170,39 @@
       padding-left: calc(var(--spacing-sm) - 3px);
     }
 
-    /* show-1: trow-1 rotulo at full strength, other cells in trow-1 dimmed;
-               trow-2 and trow-3 stay at default (0.25) */
-    .tricotomia.show-1 .trow-1 .tcell {
+    /* show-1 (§4 teaser): the three rotulos visible, mechanisms blank.
+       All first cells lit; columns 2-3 dimmed across every row. */
+    .tricotomia.show-1 .trow-1 .tcell:first-child,
+    .tricotomia.show-1 .trow-2 .tcell:first-child,
+    .tricotomia.show-1 .trow-3 .tcell:first-child {
       opacity: 1;
       background: var(--bg-secondary);
-    }
-    .tricotomia.show-1 .trow-1 .tcell:first-child {
       color: var(--accent);
       border-left: 3px solid var(--accent-secondary);
       padding-left: calc(var(--spacing-sm) - 3px);
     }
-    .tricotomia.show-1 .trow-1 .tcell:not(:first-child) {
+    .tricotomia.show-1 .trow-1 .tcell:not(:first-child),
+    .tricotomia.show-1 .trow-2 .tcell:not(:first-child),
+    .tricotomia.show-1 .trow-3 .tcell:not(:first-child) {
       opacity: 0.3;
     }
 
-    /* show-2: trow-1 and trow-2 fully lit; trow-3 stays dimmed */
+    /* show-2 (§8): rows 1-2 fully lit; row 3 only its rotulo lit */
     .tricotomia.show-2 .trow-1 .tcell,
     .tricotomia.show-2 .trow-2 .tcell {
       opacity: 1;
       background: var(--bg-secondary);
     }
+    .tricotomia.show-2 .trow-3 .tcell:first-child {
+      opacity: 1;
+      background: var(--bg-secondary);
+    }
+    .tricotomia.show-2 .trow-3 .tcell:not(:first-child) {
+      opacity: 0.3;
+    }
     .tricotomia.show-2 .trow-1 .tcell:first-child,
-    .tricotomia.show-2 .trow-2 .tcell:first-child {
+    .tricotomia.show-2 .trow-2 .tcell:first-child,
+    .tricotomia.show-2 .trow-3 .tcell:first-child {
       color: var(--accent);
       border-left: 3px solid var(--accent-secondary);
       padding-left: calc(var(--spacing-sm) - 3px);

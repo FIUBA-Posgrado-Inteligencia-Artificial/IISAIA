@@ -1,16 +1,14 @@
 // Build helper (removed at finishing). Deterministically regenerates
-// semanas/04/slides/index.html from the pristine Task-0 scaffold (git
-// commit e3ba024) + the _section-N.html fragments. Run from anywhere:
-//   node semanas/04/slides/_assemble.mjs
-import { execSync } from 'node:child_process';
+// semanas/04/slides/index.html from _scaffold.html (the editable Task-0
+// scaffold + shared helpers) + the _section-N.html fragments. Run from
+// anywhere:  node semanas/04/slides/_assemble.mjs
 import { readFileSync, existsSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const DIR = dirname(fileURLToPath(import.meta.url));
-const SCAFFOLD_REF = 'e3ba024:semanas/04/slides/index.html';
 
-let html = execSync(`git show ${SCAFFOLD_REF}`, { encoding: 'utf8' });
+let html = readFileSync(join(DIR, '_scaffold.html'), 'utf8');
 
 // 1. Wire the animation source files (after notes.js, before the inline init script).
 const notesTag = '<script src="../../../node_modules/reveal.js/plugin/notes/notes.js"></script>';
