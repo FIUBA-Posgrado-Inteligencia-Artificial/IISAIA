@@ -1,0 +1,413 @@
+<style>
+/* Scoped styles for §6 only */
+.s6-hook-card {
+  max-width: 680px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 28px 34px;
+  text-align: left;
+}
+.s6-hook-card .s6-hook-main {
+  font-size: 0.88em;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin: 0 0 18px;
+}
+.s6-hook-card .s6-hook-reveal {
+  font-size: 0.96em;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  line-height: 1.5;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 16px;
+}
+
+/* Loop + mapping layout */
+.s6-loop-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 20px auto 0;
+  align-items: start;
+}
+.s6-map-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s6-map-row {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.s6-map-phase {
+  font-size: 0.6em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.s6-map-value {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.s6-map-detail {
+  font-size: 0.64em;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+  line-height: 1.5;
+}
+.s6-map-note {
+  max-width: 800px;
+  margin: 16px auto 0;
+  font-size: 0.68em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* 4-piece grid */
+.s6-pieces-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 740px;
+  margin: 20px auto 0;
+}
+.s6-piece-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 18px 20px;
+}
+.s6-piece-card .s6-piece-label {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 5px;
+}
+.s6-piece-card .s6-piece-name {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 7px;
+}
+.s6-piece-card .s6-piece-desc {
+  font-size: 0.66em;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+.s6-piece-sub {
+  max-width: 740px;
+  margin: 16px auto 0;
+  font-size: 0.7em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Lens-tracker slide */
+.s6-lens-wrap {
+  max-width: 680px;
+  margin: 28px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.s6-lens-question {
+  font-size: 1.0em;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.55;
+  max-width: 600px;
+}
+.s6-lens-question em {
+  color: var(--accent);
+  font-style: normal;
+}
+.s6-lens-explain {
+  font-size: 0.68em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0;
+}
+
+/* Preview flow */
+.s6-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  max-width: 820px;
+  margin: 24px auto 0;
+}
+.s6-preview-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+}
+.s6-preview-card .s6-prev-sec {
+  font-size: 0.55em;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.s6-preview-card .s6-prev-title {
+  font-size: 0.66em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.s6-preview-card .s6-prev-tag {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  align-self: center;
+  margin-top: 4px;
+}
+.s6-prev-tag.tag-context {
+  background: rgba(130, 170, 255, 0.12);
+  color: var(--accent-secondary);
+  border: 1px solid rgba(130, 170, 255, 0.3);
+}
+.s6-prev-tag.tag-loop {
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(100, 255, 218, 0.3);
+}
+.s6-preview-sub {
+  max-width: 820px;
+  margin: 16px auto 0;
+  font-size: 0.7em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+</style>
+
+<!-- §6.1 · section-divider — costura Parte 1 / Parte 2 -->
+<section class="section-divider">
+  <h2>Parte 2 — Claude Code</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">El loop que describiste en §2 tiene nombre propio y pantalla.</p>
+
+  <aside class="notes">
+    <p><u>Seam fuerte entre Parte 1 y Parte 2. Los §1–§5 nunca nombraron Claude Code. Este slide es el primer momento en que aparece el nombre — deliberadamente, después de haber construido todo el marco conceptual sin él. La pausa acá es intencional: dejar que el título caiga solo antes de hablar.</u></p>
+    <p><em>"Parte 2. Todo lo que construimos en la primera parte — el loop, las tools, la ventana finita, los modos de falla — lo aprendimos sin nombrar ninguna herramienta. Ahora sí lo nombramos."</em></p>
+  </aside>
+</section>
+
+<!-- §6.2 · Hook — la revelación -->
+<section>
+  <h2>El loop del §2 ya tenía nombre</h2>
+
+  <div class="s6-hook-card">
+    <p class="s6-hook-main">
+      Lo que describimos en §2 como pensar → actuar → observar no era un diagrama abstracto.
+      Era la descripción de algo real. Cuando Claude Code trabaja en tu repo, no está
+      "pensando en cómo ayudarte". Está ejecutando vueltas de un loop que ya conocés.
+    </p>
+    <p class="s6-hook-reveal fragment">
+      Podés abrirlo ahora mismo en la terminal y dejar corriendo. El desafío la primera vez
+      no es entender qué hace — ya lo sabés. Es identificar en qué fase está.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el card superior. Pausa. Click para el fragment. Leer la línea de reveal despacio — es el momento de peso.</strong></p>
+    <p><u>Slide de hook y revelación. El fragment retrasa la segunda parte para que la primera caiga antes. No hay diagrama acá — la sorpresa es verbal. El tono es: "ya lo tenías enfrente".</u></p>
+    <p><em>"En §2 introdujimos el loop como concepto: pensar, actuar, observar, repetir hasta una condición de corte. Lo vimos con un trace de pytest. Lo animamos. Era abstracto — podría ser cualquier agente."</em></p>
+    <p><em>"No era abstracto. Era la descripción de Claude Code."</em></p>
+    <p><em>"Podés abrirlo ahora mismo en la terminal. Le das una tarea, la salida empieza a correr, y lo que ves no es una respuesta: es el loop ejecutándose en tiempo real. El desafío la primera vez no es entender qué hace — eso ya lo sabés. Es aprender a reconocer en qué fase está cuando lo mirás."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 · La pantalla mapeada al loop — animación cc -->
+<section>
+  <h2>La pantalla es el loop expuesto</h2>
+
+  <div class="s6-loop-wrap">
+    <div id="s6-loop-cc"></div>
+    <div class="s6-map-list">
+      <div class="s6-map-row">
+        <span class="s6-map-phase">Pensar</span>
+        <span class="s6-map-value">Texto razonando</span>
+        <span class="s6-map-detail">El modelo formula la próxima acción a partir del contexto acumulado. No es una respuesta para vos.</span>
+      </div>
+      <div class="s6-map-row">
+        <span class="s6-map-phase">Actuar</span>
+        <span class="s6-map-value">Edit · Bash · Read · Write</span>
+        <span class="s6-map-detail">Una tool call con nombre, argumentos y archivo o comando. Algo en el entorno cambia.</span>
+      </div>
+      <div class="s6-map-row">
+        <span class="s6-map-phase">Observar</span>
+        <span class="s6-map-value">Resultado</span>
+        <span class="s6-map-detail">La salida del comando, el contenido leído, el error del proceso. Entra al contexto y alimenta la próxima vuelta.</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="s6-map-note">No es un log de actividad: es el loop expuesto, vuelta por vuelta.</p>
+
+  <aside class="notes">
+    <p><strong>Señalar la animación a la izquierda — dejar que cicle una vuelta antes de pasar a las columnas de la derecha. Recorrer las tres filas de arriba hacia abajo.</strong></p>
+    <p><u>Slide de mapeo. La animación mode 'cc' muestra los tres nodos con sublabels de herramientas reales. Las filas de la derecha son el mapping literal pantalla → loop. No hay lista — son cards estructurados.</u></p>
+    <p><em>"Cuando abrís Claude Code y le das una tarea, lo primero que aparece es texto del modelo razonando. No es una respuesta para vos: es el modelo formulando la próxima acción en función de lo que tiene en contexto. Eso es pensar."</em></p>
+    <p><em>"Después aparece una tool call. Edit, Bash, Read, Write — el nombre de la herramienta, los argumentos, el archivo o el comando. Algo en el entorno cambia. Eso es actuar."</em></p>
+    <p><em>"Después aparece el resultado: la salida del comando, el contenido del archivo, el error. Esa información nueva entra al contexto y alimenta la próxima vuelta. Eso es observar."</em></p>
+    <p><em>"La pantalla no es un log de actividad. Es el loop expuesto, vuelta por vuelta. Pensar, actuar, observar, repetir. Exactamente como lo viste en §2."</em></p>
+  </aside>
+</section>
+
+<!-- §6.4 · Las 4 piezas con herramienta concreta -->
+<section>
+  <h2>Las 4 piezas, con nombre propio</h2>
+
+  <div class="s6-pieces-grid">
+    <div class="s6-piece-card">
+      <span class="s6-piece-label">Pieza 1 — LLM</span>
+      <div class="s6-piece-name">Claude</div>
+      <p class="s6-piece-desc">Decide qué hacer en cada vuelta a partir del contexto acumulado: tarea original, historial, última observación.</p>
+    </div>
+    <div class="s6-piece-card">
+      <span class="s6-piece-label">Pieza 2 — Loop</span>
+      <div class="s6-piece-name">El motor que no para</div>
+      <p class="s6-piece-desc">Claude Code no se detiene después de la primera respuesta. Sigue hasta que el objetivo se cumple o una condición de corte lo detiene.</p>
+    </div>
+    <div class="s6-piece-card">
+      <span class="s6-piece-label">Pieza 3 — Tools</span>
+      <div class="s6-piece-name">Edit · Bash · Read · Write</div>
+      <p class="s6-piece-desc">Las manos del agente. Sin ellas el LLM razonaría sobre qué hacer en tu repo pero no podría tocar nada.</p>
+    </div>
+    <div class="s6-piece-card">
+      <span class="s6-piece-label">Pieza 4 — Entorno</span>
+      <div class="s6-piece-name">Tu repo real</div>
+      <p class="s6-piece-desc">Cuando corre <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--accent);">npm test</code>, los tests corren de verdad. No es una simulación.</p>
+    </div>
+  </div>
+
+  <p class="s6-piece-sub">El mismo diagrama del §2, con una herramienta concreta detrás de cada pieza.</p>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cuatro piezas por nombre. Pausa en "Entorno" — enfatizar "de verdad". Leer la línea de cierre despacio.</strong></p>
+    <p><u>Slide de mapeo de 4 piezas. Grid 2×2. El §2 definió LLM + loop + tools + entorno; este slide ancla las cuatro piezas a sus equivalentes concretos en Claude Code. La línea final reitera la costura.</u></p>
+    <p><em>"El §2 definió un agente como cuatro piezas. Las cuatro aparecen en Claude Code."</em></p>
+    <p><em>"El LLM es Claude. Decide qué hacer en cada vuelta a partir de todo lo que tiene en contexto: la tarea original, el historial de la sesión, la última observación."</em></p>
+    <p><em>"El loop es el motor. Claude Code no para después de la primera respuesta. Sigue. Eso es lo que lo convierte en algo que termina tareas en lugar de describirlas."</em></p>
+    <p><em>"Las tools son las manos: Edit, Bash, Read, Write. Sin ellas el LLM razonaría brillantemente sobre qué habría que hacer, pero no podría tocar nada."</em></p>
+    <p><em>"El entorno es tu repo real, tu terminal, tu filesystem. No una simulación. Cuando Claude Code ejecuta npm test, los tests corren de verdad. Lo que el agente observa y modifica es tuyo."</em></p>
+    <p><em>"El mismo diagrama del §2. Con una herramienta concreta detrás de cada pieza."</em></p>
+  </aside>
+</section>
+
+<!-- §6.5 · La pregunta-lente — intro al lens-tracker -->
+<section>
+  <h2>La pregunta que lleva toda la parte 2</h2>
+
+  <div class="s6-lens-wrap">
+    <p class="s6-lens-question">
+      ¿Esto actúa sobre <em>cómo corre el loop</em>,<br>
+      o sobre <em>qué hay en el contexto</em> cuando el loop arranca?
+    </p>
+
+    <div class="lens-tracker">
+      <div class="pole pole-loop">LOOP</div>
+      <div class="lens-sep">↔</div>
+      <div class="pole pole-context">CONTEXTO</div>
+    </div>
+
+    <p class="s6-lens-explain">
+      Este visual abre cada sección de la parte 2. En cada una aterriza en un polo — contexto (§7–§10) o loop (§11).
+      Por ahora ninguno está activo: la pregunta todavía está abierta.
+      Llevala a cada sección y las conexiones se hacen solas.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer la pregunta central en voz alta. Pausa. Señalar el tracker — "ninguno iluminado todavía". Leer la explicación al pie.</strong></p>
+    <p><u>Slide de introducción al tracker. El .lens-tracker está en estado neutral (sin clase .on-loop ni .on-context — ambos polos dimmed). Es el primer momento que aparece; todas las secciones siguientes lo reusan con un polo iluminado. Sin demo en §6 — el tracker se introduce solo.</u></p>
+    <p><em>"El resto de la clase recorre las decisiones de diseño de Claude Code una por una. Y todas responden la misma pregunta."</em></p>
+    <p><em>"¿Esto actúa sobre cómo corre el loop, o sobre qué hay en el contexto cuando el loop arranca?"</em></p>
+    <p><em>"Este visual — el tracker loop/contexto — va a abrir cada sección de la parte 2. En cada una va a aterrizar en un polo. Por ahora no aterriza en ninguno: la pregunta está abierta."</em></p>
+    <p><em>"Llevá esa pregunta a cada sección. No como un ejercicio — como el organizador real. Si sabés dónde aterriza cada feature, el mapa de Claude Code se arma solo."</em></p>
+  </aside>
+</section>
+
+<!-- §6.6 · Lo que viene — preview §7–§11 -->
+<section>
+  <h2>El mapa de lo que viene</h2>
+
+  <div class="s6-preview-grid">
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§7</span>
+      <span class="s6-prev-title">CLAUDE.md jerárquico</span>
+      <span class="s6-prev-tag tag-context">Contexto</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§8</span>
+      <span class="s6-prev-title">Rules y auto memory</span>
+      <span class="s6-prev-tag tag-context">Contexto</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§9</span>
+      <span class="s6-prev-title">Skills y slash commands</span>
+      <span class="s6-prev-tag tag-context">Contexto</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§10</span>
+      <span class="s6-prev-title">Sub-agents</span>
+      <span class="s6-prev-tag tag-context">Contexto</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§11</span>
+      <span class="s6-prev-title">Plan mode y control</span>
+      <span class="s6-prev-tag tag-loop">Loop</span>
+    </div>
+  </div>
+
+  <p class="s6-preview-sub">Llevá esa pregunta a cada sección y las conexiones se hacen solas.</p>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cinco tarjetas de izquierda a derecha. Pausa en §11 — señalar que es el único que aterriza en "loop". Leer la línea de cierre.</strong></p>
+    <p><u>Slide de preview de la parte 2. Grid de 5 tarjetas — una por sección — cada una con su etiqueta loop/contexto. No es una lista: es el mapa visual que el alumno puede usar como referencia durante el resto de la clase. El único flip a loop es §11 — hecho visible acá como anticipo.</u></p>
+    <p><em>"Este es el mapa de lo que viene. Cinco secciones, cada una con su respuesta a la pregunta-lente."</em></p>
+    <p><em>"§7, CLAUDE.md jerárquico: contexto. Texto tuyo que entra a la ventana antes del primer mensaje, en cada sesión."</em></p>
+    <p><em>"§8, Rules y auto memory: contexto. Instrucciones condicionales y la memoria que el agente se escribe solo."</em></p>
+    <p><em>"§9, Skills y slash commands: contexto. Un procedimiento completo que no ocupa tokens hasta que lo invocás."</em></p>
+    <p><em>"§10, Sub-agents: contexto. Un loop entero aislado en su propia ventana — solo vuelve el resultado."</em></p>
+    <p><em>"§11, Plan mode y control del loop: loop. El primero — y el único — de la parte 2 que aterriza en el otro polo. Eso es deliberado y es el hook de §11."</em></p>
+    <p><em>"Llevá la pregunta a cada sección. Las conexiones se hacen solas."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§6-START -->
+<script>
+  initFourLoop({ containerId: 's6-loop-cc', mode: 'cc' });
+</script>
+<!-- INIT-SCRIPTS-§6-END -->
