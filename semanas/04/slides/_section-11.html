@@ -1,0 +1,956 @@
+<style>
+/* Scoped styles for §11 only */
+
+/* Opener wrap */
+.s11-opener-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 22px auto 0;
+  max-width: 640px;
+}
+.s11-opener-flip-label {
+  font-size: 0.63em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.s11-opener-hook {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+  line-height: 1.7;
+}
+.s11-opener-sub {
+  font-size: 0.78em;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.75;
+  font-style: italic;
+}
+.s11-opener-sub em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Generic focus card */
+.s11-focus-card {
+  max-width: 700px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 26px 34px;
+  text-align: left;
+}
+.s11-focus-card p {
+  font-size: 0.85em;
+  line-height: 1.82;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+}
+.s11-focus-card p:last-child { margin: 0; }
+.s11-focus-card .s11-key-line {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--accent);
+  border-top: 1px solid #2a3a5a;
+  padding-top: 14px;
+  margin-top: 4px;
+}
+
+/* Comparison axis card */
+.s11-axis-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s11-axis-cols {
+  display: flex;
+  gap: 14px;
+}
+.s11-axis-col {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+.s11-axis-col.loop-col {
+  border-left: 3px solid var(--accent);
+}
+.s11-axis-col.ctx-col {
+  border-left: 3px solid var(--accent-secondary);
+}
+.s11-axis-col-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 7px;
+}
+.s11-axis-col-title {
+  font-size: 0.82em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.s11-axis-col-title.sec { color: var(--accent-secondary); }
+.s11-axis-col-body {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  line-height: 1.68;
+}
+.s11-axis-col-body strong { color: var(--text-primary); }
+.s11-axis-sep-line {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 7px;
+  padding: 12px 20px;
+  font-size: 0.73em;
+  color: var(--accent);
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Plan mode anim + def note */
+.s11-planmode-wrap {
+  max-width: 720px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s11-anim-container {
+  min-height: 220px;
+}
+.s11-def-note {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  padding: 16px 22px;
+  font-size: 0.74em;
+  color: var(--text-muted);
+  line-height: 1.72;
+}
+.s11-def-note strong { color: var(--text-primary); }
+.s11-def-note em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Por qué importa — two cards */
+.s11-why-wrap {
+  max-width: 700px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s11-why-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 20px 26px;
+}
+.s11-why-card-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 7px;
+}
+.s11-why-card-body {
+  font-size: 0.8em;
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+.s11-why-card-body em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.s11-why-callout {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+  border-radius: 7px;
+  padding: 13px 22px;
+  font-size: 0.76em;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Gate anim + def note */
+.s11-gate-wrap {
+  max-width: 720px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s11-gate-def-note {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 7px;
+  padding: 16px 22px;
+  font-size: 0.74em;
+  color: var(--text-muted);
+  line-height: 1.72;
+}
+.s11-gate-def-note strong { color: var(--text-primary); }
+.s11-gate-def-note em {
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Dial de autonomía */
+.s11-dial-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.s11-dial-spectrum {
+  display: flex;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #2a3a5a;
+}
+.s11-dial-zone {
+  flex: 1;
+  padding: 18px 16px;
+  text-align: center;
+}
+.s11-dial-zone.low {
+  background: rgba(100, 255, 218, 0.07);
+  border-right: 1px solid #2a3a5a;
+}
+.s11-dial-zone.mid {
+  background: rgba(100, 255, 218, 0.04);
+  border-right: 1px solid #2a3a5a;
+}
+.s11-dial-zone.high {
+  background: rgba(130, 170, 255, 0.07);
+}
+.s11-dial-zone-label {
+  font-size: 0.52em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.s11-dial-zone-title {
+  font-size: 0.76em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.s11-dial-zone.low .s11-dial-zone-title { color: var(--accent); }
+.s11-dial-zone.mid .s11-dial-zone-title { color: var(--text-primary); }
+.s11-dial-zone.high .s11-dial-zone-title { color: var(--accent-secondary); }
+.s11-dial-zone-desc {
+  font-size: 0.66em;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.s11-dial-arrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+.s11-dial-arrow-end {
+  font-size: 0.68em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.s11-dial-arrow-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), var(--accent-secondary));
+  margin: 0 10px;
+  position: relative;
+}
+.s11-dial-arrow-line::after {
+  content: '▶';
+  position: absolute;
+  right: -6px;
+  top: -7px;
+  font-size: 0.75em;
+  color: var(--accent-secondary);
+}
+.s11-dial-note {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 13px 22px;
+  font-size: 0.73em;
+  color: var(--text-muted);
+  line-height: 1.65;
+  text-align: center;
+}
+.s11-dial-note em {
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Formalización del rol */
+.s11-rol-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s11-rol-cols {
+  display: flex;
+  gap: 14px;
+}
+.s11-rol-col {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+.s11-rol-col.audit-col {
+  border-left: 3px solid #3a4a6a;
+  opacity: 0.88;
+}
+.s11-rol-col.super-col {
+  border-left: 3px solid var(--accent);
+}
+.s11-rol-col-label {
+  font-size: 0.54em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 7px;
+}
+.s11-rol-col-title {
+  font-size: 0.82em;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+.s11-rol-col.audit-col .s11-rol-col-title { color: var(--text-muted); }
+.s11-rol-col.super-col .s11-rol-col-title { color: var(--accent); }
+.s11-rol-col-body {
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.68;
+}
+.s11-rol-col-body strong { color: var(--text-primary); }
+.s11-rol-callout {
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 7px;
+  padding: 13px 22px;
+  font-size: 0.74em;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Hooks y MCP cards */
+.s11-tools-wrap {
+  max-width: 720px;
+  margin: 26px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s11-tools-cols {
+  display: flex;
+  gap: 14px;
+}
+.s11-tool-card {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+.s11-tool-card.hook-card {
+  border-top: 3px solid var(--accent);
+}
+.s11-tool-card.mcp-card {
+  border-top: 3px solid var(--accent-secondary);
+}
+.s11-tool-card-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.s11-tool-card.hook-card .s11-tool-card-title { color: var(--accent); }
+.s11-tool-card.mcp-card .s11-tool-card-title { color: var(--accent-secondary); }
+.s11-tool-card-body {
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.s11-tool-card-body strong { color: var(--text-primary); }
+.s11-tool-card-body code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.92em;
+}
+.s11-tools-coda {
+  background: rgba(130, 170, 255, 0.05);
+  border: 1px solid rgba(130, 170, 255, 0.2);
+  border-radius: 7px;
+  padding: 12px 20px;
+  font-size: 0.72em;
+  color: var(--accent-secondary);
+  text-align: center;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Demo wrap */
+.s11-demo-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+
+/* Master table */
+.s11-table-wrap {
+  max-width: 720px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.s11-table-header {
+  display: flex;
+  background: var(--bg-code);
+  border-bottom: 1px solid #2a3a5a;
+  padding: 10px 0;
+}
+.s11-table-cell {
+  flex: 1;
+  padding: 0 20px;
+  font-size: 0.6em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+}
+.s11-table-row {
+  display: flex;
+  border-bottom: 1px solid #2a3a5a;
+  align-items: stretch;
+}
+.s11-table-row:last-child { border-bottom: none; }
+.s11-table-row.ctx-row { background: rgba(130, 170, 255, 0.04); }
+.s11-table-row.loop-row { background: rgba(100, 255, 218, 0.05); }
+.s11-table-td {
+  flex: 1;
+  padding: 11px 20px;
+  font-size: 0.68em;
+  line-height: 1.55;
+  color: var(--text-muted);
+  border-right: 1px solid #2a3a5a;
+}
+.s11-table-td:last-child { border-right: none; }
+.s11-table-td code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+.s11-table-td.ctx-pill { color: var(--accent-secondary); font-weight: 700; }
+.s11-table-td.loop-pill { color: var(--accent); font-weight: 700; }
+.s11-table-coda {
+  margin-top: 14px;
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 7px;
+  padding: 13px 22px;
+  font-size: 0.76em;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Bridge card */
+.s11-bridge-card {
+  max-width: 660px;
+  margin: 30px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 32px 40px;
+  text-align: center;
+}
+.s11-bridge-main {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.75;
+  margin: 0 0 18px;
+}
+.s11-bridge-sub {
+  font-size: 0.74em;
+  color: var(--text-muted);
+  line-height: 1.8;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 16px;
+  margin: 0;
+}
+.s11-bridge-sub em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+</style>
+
+<!-- §11.1 · Opener — lens-tracker FLIPS a LOOP (primer flip de toda la parte 2) -->
+<section>
+  <h2>El eje cambia — por primera vez en la parte 2.</h2>
+
+  <div class="s11-opener-wrap">
+    <div class="lens-tracker on-loop">
+      <div class="pole pole-loop">LOOP</div>
+      <div class="lens-sep">↔</div>
+      <div class="pole pole-context">CONTEXTO</div>
+    </div>
+    <p class="s11-opener-flip-label">primer flip a loop en toda la parte 2</p>
+    <p class="s11-opener-hook">Hasta acá, todo aterrizó en contexto. Hoy la pregunta cambia.</p>
+    <p class="s11-opener-sub">
+      §7, §8, §9, §10 — cuatro secciones, una sola pregunta: ¿qué entra al agente?<br>
+      §11 pregunta algo diferente: <em>¿cuánto le dejás hacer antes de mirar?</em>
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el tracker — LOOP iluminado por primera vez en toda la parte 2. No decir nada todavía. Dejar que el visual hable. Pausa de dos segundos. Después leer la línea principal.</strong></p>
+    <p><u>Opener de §11. Este es el primer y único flip a LOOP en toda la parte 2 — dejar que el visual hable antes de las palabras. El flip es deliberado y es el hook de la sección. El sublabel y la pregunta refuerzan el momento, pero el tracker lo dice primero.</u></p>
+    <p><em>"Miren el tracker."</em></p>
+    <p><em>"Por primera vez en toda la parte 2, aterrizó en LOOP. §7, §8, §9, §10 — cuatro secciones seguidas en CONTEXTO. Esta es la primera vez que cambia."</em></p>
+    <p><em>"La pregunta que recorrió §7 a §10 era siempre la misma: ¿qué entra al agente? ¿Qué cargás? ¿Cuándo? ¿En qué forma? Eso es gestionar contexto."</em></p>
+    <p><em>"§11 pregunta algo diferente. No qué entra. Cuánto le dejás hacer antes de mirar. Eso es gestionar autonomía. Y es lo que separa esta sección de todo lo que vimos desde §6."</em></p>
+  </aside>
+</section>
+
+<!-- §11.2 · Gestionar contexto vs gestionar autonomía -->
+<section>
+  <h2>Dos preguntas distintas, dos ejes de control</h2>
+
+  <div class="s11-axis-wrap">
+    <div class="s11-axis-cols">
+      <div class="s11-axis-col ctx-col">
+        <span class="s11-axis-col-label">§7–§10 — contexto</span>
+        <div class="s11-axis-col-title sec">¿Qué entra al agente?</div>
+        <div class="s11-axis-col-body">
+          <strong>CLAUDE.md</strong> — qué cargás siempre.<br>
+          <strong>Rules</strong> — qué cargás por archivo.<br>
+          <strong>Skills</strong> — qué cargás por invocación.<br>
+          <strong>Sub-agents</strong> — qué carga una ventana separada que muere sola.<br><br>
+          El agente toma todas las decisiones una vez que el contexto está cargado.
+        </div>
+      </div>
+      <div class="s11-axis-col loop-col">
+        <span class="s11-axis-col-label">§11 — loop</span>
+        <div class="s11-axis-col-title">¿Cuánto le dejás hacer?</div>
+        <div class="s11-axis-col-body">
+          <strong>Plan mode</strong> — el agente propone antes de actuar; vos aprobás.<br>
+          <strong>Permisos</strong> — gate antes de cada acción que deja huella.<br><br>
+          La pregunta no es qué sabe el agente cuando arranca — es cuándo entra el supervisor
+          en el proceso.
+        </div>
+      </div>
+    </div>
+    <div class="s11-axis-sep-line">
+      Eso separa esta sección de todo lo que vimos desde §6.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la columna derecha — contexto — y nombrar cada mecanismo rápido. Girar a la columna izquierda — loop — y marcar el cambio de pregunta. Leer la línea de cierre.</strong></p>
+    <p><u>Slide de contraste conceptual. Las dos columnas materializan la diferencia de eje. No es una comparación de herramientas — es una comparación de preguntas. La columna de loop tiene deliberadamente menos ítems: la simplicidad refuerza el cambio.</u></p>
+    <p><em>"§7 a §10 responden variaciones de la misma pregunta: ¿qué entra al agente? CLAUDE.md — lo que cargás siempre. Rules — lo que cargás por archivo. Skills — lo que cargás cuando hace falta. Sub-agents — lo que carga una ventana que muere sola. Cuatro mecanismos distintos, una sola pregunta de fondo."</em></p>
+    <p><em>"§11 responde otra pregunta. No qué sabe el agente cuando arranca. Cuánto le dejás hacer antes de que el supervisor entre. Eso no afecta el contexto — afecta el loop. Plan mode y permisos no cambian qué entra a la ventana; cambian dónde y cuándo el proceso se detiene."</em></p>
+    <p><em>"Eso separa esta sección de todo lo que vimos desde §6."</em></p>
+  </aside>
+</section>
+
+<!-- §11.3 · Plan mode — animación mode:'planmode' -->
+<section>
+  <h2>Plan mode: un alto deliberado entre pensar y actuar</h2>
+
+  <div class="s11-planmode-wrap">
+    <div class="s11-anim-container">
+      <div id="s11-loop-planmode"></div>
+    </div>
+    <div class="s11-def-note">
+      El agente construye un plan — qué va a hacer, en qué orden, qué herramientas va a usar —
+      y te lo presenta. Vos <em>aprobás, corregís o rechazás</em>.
+      Recién después ejecuta.<br><br>
+      <strong>No es un resumen a posteriori.</strong>
+      Es un alto deliberado entre el "pensar" y el "actuar",
+      con espacio explícito para que el supervisor entre en el medio.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la animación — el gate visible entre PENSAR y ACTUAR. Señalar ACTUAR/OBSERVAR dimmed. Leer la nota de definición énfasis en "aprobás, corregís o rechazás".</strong></p>
+    <p><u>Slide de plan mode. La animación en modo 'planmode' hace visible la pausa antes de la primera acción. ACTUAR/OBSERVAR aparecen dimmed porque todavía no ejecutó nada. La nota cierra la definición con la frase clave: no es a posteriori.</u></p>
+    <p><em>"Sin plan mode, el agente pasa de pensar a actuar sin pedirte permiso. Le diste la tarea, eligió la primera acción, y cuando te diste cuenta ya tocó tres archivos."</em></p>
+    <p><em>"Plan mode interrumpe eso. Ven en la animación: hay un gate entre PENSAR y ACTUAR. El agente arma el plan — qué va a hacer, en qué orden, qué herramientas — y se lo presenta al supervisor. ACTUAR y OBSERVAR siguen ahí, pero dimmed. El loop está detenido, esperando."</em></p>
+    <p><em>"Vos decidís: aprobás, corregís o rechazás. Recién cuando aprobás el loop sigue. No es un resumen a posteriori — es un alto deliberado, con espacio explícito para que el supervisor entre en el medio."</em></p>
+  </aside>
+</section>
+
+<!-- §11.4 · Por qué importa — callback §5 deriva de objetivo -->
+<section>
+  <h2>La defensa más barata contra la deriva</h2>
+
+  <div class="s11-why-wrap">
+    <div class="s11-why-card">
+      <span class="s11-why-card-label">Callback §5 — deriva de objetivo</span>
+      <div class="s11-why-card-body">
+        El agente empieza en A. La tarea es llegar a B. A la décima iteración está en D.
+        Cuando eso pasa <em>después de que ya escribió archivos</em>, el costo de corregirlo sube —
+        el loop acumuló consecuencias en el camino.<br><br>
+        Si el plan muestra que el agente ya entiende mal la tarea antes de tocar nada,
+        corregís <em>ahí</em>. Cero archivos modificados. Cero consecuencias acumuladas.
+      </div>
+    </div>
+    <div class="s11-why-callout">
+      Plan mode es la defensa más barata contra la deriva: entrás antes de que el loop actúe.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el párrafo de la tarjeta con pausa en "después de que ya escribió archivos". Dejar respira la segunda parte. Leer el callout como cierre.</strong></p>
+    <p><u>Slide de justificación. La tarjeta conecta plan mode con la deriva de objetivo del §5 — el callback hace que el beneficio sea concreto, no abstracto. El callout formula la tesis en una línea.</u></p>
+    <p><em>"Recordá §5: deriva de objetivo. El agente empieza entendiendo bien la tarea, pero a la décima iteración está haciendo algo distinto. No porque el modelo sea malo — porque el loop acumuló pequeñas desviaciones que se compusieron."</em></p>
+    <p><em>"Cuando eso pasa después de que ya escribió archivos, el costo de corregirlo sube. Tenés que ver qué cambió, deshacer lo que no querías, entender hasta dónde llegó."</em></p>
+    <p><em>"Plan mode corta ese camino antes de que empiece. Si el plan muestra que el agente ya está entendiéndote mal — que quiere tocar archivos que no debería, en un orden que no tiene sentido — lo corregís ahí. Cero archivos modificados. La corrección es barata porque llegó antes de la primera acción."</em></p>
+    <p><em>"Plan mode es la defensa más barata contra la deriva: entrás antes de que el loop actúe."</em></p>
+  </aside>
+</section>
+
+<!-- §11.5 · Permisos — animación mode:'gate' -->
+<section>
+  <h2>Permisos: gate por herramienta, antes de cada acción</h2>
+
+  <div class="s11-gate-wrap">
+    <div class="s11-anim-container">
+      <div id="s11-loop-gate"></div>
+    </div>
+    <div class="s11-gate-def-note">
+      Antes de ejecutar una herramienta que actúa sobre el mundo — escribe un archivo,
+      corre un comando, llama a una API — el runtime puede pedirte confirmación. Un <em>gate</em>.
+      Aprobás o cancelás esa acción específica.<br><br>
+      Callback §3 — leer vs. escribir: <strong>leer = reversible, gate no necesario</strong>;
+      escribir / ejecutar = puede no serlo, <em>gate ahí</em>.
+      El criterio de fondo: ¿qué tan costoso es deshacer si se equivoca?
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la animación — el gate sobre la flecha que sale de ACTUAR. Señalar los chips: "leer = sin gate" (dim) y "escribir = gate" (lit). Leer la nota énfasis en el criterio de fondo.</strong></p>
+    <p><u>Slide de permisos. La animación en modo 'gate' muestra el gate a nivel de herramienta — distinto de plan mode que actúa a nivel de tarea. La nota conecta con la distinción leer/escribir del §3 y formula el criterio de decisión.</u></p>
+    <p><em>"Plan mode trabaja a nivel de la tarea completa: el agente propone el plan antes de empezar. Los permisos trabajan a nivel de cada herramienta, dentro del loop que ya está corriendo."</em></p>
+    <p><em>"Ven en la animación: hay un gate en la flecha que sale de ACTUAR. El chip 'leer = sin gate' está dimmed — leer es reversible, si el agente leyó un archivo que no debía, no pasó nada. El chip 'escribir = gate' está iluminado — ahí el runtime pide confirmación antes de que la acción se ejecute."</em></p>
+    <p><em>"El criterio de fondo siempre es el mismo que plantamos en §3: ¿qué tan costoso es deshacer si se equivoca? En las acciones reversibles, el costo de una confirmación innecesaria supera el beneficio. En las que dejan huella, el gate vale."</em></p>
+  </aside>
+</section>
+
+<!-- §11.6 · El dial de autonomía (KEY ANALOGY) -->
+<section>
+  <h2>El dial de autonomía: ajustalo según reversibilidad</h2>
+
+  <div class="s11-dial-wrap">
+    <div class="s11-dial-spectrum">
+      <div class="s11-dial-zone low">
+        <span class="s11-dial-zone-label">tarea reversible</span>
+        <div class="s11-dial-zone-title">más autonomía</div>
+        <div class="s11-dial-zone-desc">
+          Refactorizar lógica interna, agregar tests, limpiar imports.
+          Si el agente se equivoca, revertís. El costo es bajo.
+        </div>
+      </div>
+      <div class="s11-dial-zone mid">
+        <span class="s11-dial-zone-label">tarea de impacto mixto</span>
+        <div class="s11-dial-zone-title">plan mode</div>
+        <div class="s11-dial-zone-desc">
+          Cambios que tocan múltiples módulos o integran servicios.
+          Plan mode antes de empezar: aprobás el alcance antes de que el loop actúe.
+        </div>
+      </div>
+      <div class="s11-dial-zone high">
+        <span class="s11-dial-zone-label">consecuencias persistentes</span>
+        <div class="s11-dial-zone-title">plan mode + gate</div>
+        <div class="s11-dial-zone-desc">
+          Base de datos, config de producción, cualquier cosa que no se deshace.
+          Callback semana 3: el backend persiste — un bug que escribe datos incorrectos los deja escritos.
+        </div>
+      </div>
+    </div>
+    <div class="s11-dial-arrow-row">
+      <span class="s11-dial-arrow-end">reversible</span>
+      <div class="s11-dial-arrow-line"></div>
+      <span class="s11-dial-arrow-end">persistente</span>
+    </div>
+    <div class="s11-dial-note">
+      No hay un nivel correcto para todos los casos.
+      El dial lo ajustás vos — según <em>cuánto cuesta deshacer</em> si el agente se equivoca.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la zona verde — reversible, autonomía alta. Señalar la zona central — plan mode. Señalar la zona azul — consecuencias persistentes, plan mode + gate. Leer el callback semana 3. Leer la nota al final.</strong></p>
+    <p><u>Slide de la analogía central — el dial. El espectro visual hace concreto el criterio de ajuste. La zona derecha ancla el callback de semana 3 (el backend persiste) como ejemplo de consecuencias persistentes. La nota cierra con la formulación del criterio.</u></p>
+    <p><em>"El dial de autonomía no tiene una posición correcta universal. Tiene un criterio para ajustarlo."</em></p>
+    <p><em>"Si la tarea es reversible — refactorizar lógica interna, agregar tests, limpiar imports — más autonomía tiene sentido. Si el agente se equivoca, revertís con git. El costo es bajo. El dial puede estar abierto."</em></p>
+    <p><em>"Si la tarea tiene consecuencias persistentes, el cálculo cambia. Recordá lo que vimos la semana pasada: el backend persiste. Un bug que escribe datos incorrectos a la base de datos los deja escritos — multiplicado por cada usuario que pasa por ahí antes de que te des cuenta. Cuando el agente trabaja sobre código que toca la base de datos, o sobre archivos de configuración de producción, el dial se cierra: plan mode antes de empezar, gate en cada escritura."</em></p>
+    <p><em>"No hay un nivel de autonomía correcto. Hay un criterio: ¿cuánto cuesta deshacer si se equivoca? Eso es lo que ajusta el dial."</em></p>
+  </aside>
+</section>
+
+<!-- §11.7 · La formalización del rol — comparison-2col -->
+<section>
+  <h2>La formalización del rol de supervisor</h2>
+
+  <div class="s11-rol-wrap">
+    <div class="s11-rol-cols">
+      <div class="s11-rol-col audit-col">
+        <span class="s11-rol-col-label">revisión al final</span>
+        <div class="s11-rol-col-title">Auditoría</div>
+        <div class="s11-rol-col-body">
+          Mirás la salida cuando el loop terminó. Evaluás si el resultado es correcto.
+          Si hay un error, el loop ya acumuló consecuencias — archivos modificados,
+          decisiones tomadas, trabajo que tal vez hay que deshacer.
+          <br><br>
+          No es supervisión: es revisión posterior. El supervisor llega cuando el loop ya actuó.
+        </div>
+      </div>
+      <div class="s11-rol-col super-col">
+        <span class="s11-rol-col-label">entrar antes de la primera acción</span>
+        <div class="s11-rol-col-title">Supervisión</div>
+        <div class="s11-rol-col-body">
+          Mirás el plan antes de que el loop actúe. Aprobás o corregís.
+          Monitoreás en las acciones que no se deshacen.
+          El supervisor entra <strong>en el proceso</strong>, no solo al final.<br><br>
+          La diferencia no es cuánto revisás — es <strong>cuándo</strong> entrás.
+        </div>
+      </div>
+    </div>
+    <div class="s11-rol-callout">
+      No es solo leer la salida: es decidir cuándo entrás al proceso.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la columna izquierda — auditoría. Señalar la columna derecha — supervisión. Subrayar "cuándo" con pausa. Leer el callout.</strong></p>
+    <p><u>Slide de la formalización del rol. La comparación materializa una distinción que aparece en §5 pero acá adquiere nombre propio: auditoría vs. supervisión. El callout formula el rol del supervisor en una línea.</u></p>
+    <p><em>"§5 lo dijo de una manera: la revisión al final es auditoría, no supervisión. Acá podemos ser más precisos."</em></p>
+    <p><em>"Auditoría: llegás cuando el loop terminó. Mirás si el resultado es correcto. Si hay un error, el loop ya actuó — archivos modificados, decisiones irreversibles, trabajo que tal vez hay que deshacer por completo."</em></p>
+    <p><em>"Supervisión: entrás antes de la primera acción. Aprobás el plan. En las acciones que no se deshacen, el gate te da la oportunidad de cancelar antes de que ocurran. El supervisor no lee el output — el supervisor está en el proceso."</em></p>
+    <p><em>"La diferencia no es cuánto revisás. Es cuándo entrás. Eso es lo que plan mode y los permisos le dan al supervisor: un punto de entrada antes de que el loop actúe."</em></p>
+  </aside>
+</section>
+
+<!-- §11.8 · Hooks y MCP, al pasar -->
+<section>
+  <h2>Hooks y MCP — dos herramientas más, al pasar</h2>
+
+  <div class="s11-tools-wrap">
+    <div class="s11-tools-cols">
+      <div class="s11-tool-card hook-card">
+        <div class="s11-tool-card-title">Hooks</div>
+        <div class="s11-tool-card-body">
+          Scripts de shell que el runtime ejecuta en eventos del ciclo de vida —
+          antes de una herramienta, después de una herramienta, al inicio o al cierre de sesión.<br><br>
+          La diferencia con <code>CLAUDE.md</code> es de naturaleza:
+          <code>CLAUDE.md</code> es contexto — instrucciones que el modelo lee
+          <strong>y puede ignorar en deriva</strong>.
+          Un hook es <strong>ejecución real</strong>: si el hook bloquea la herramienta,
+          la herramienta no corre, sin importar lo que el modelo haya decidido.
+        </div>
+      </div>
+      <div class="s11-tool-card mcp-card">
+        <div class="s11-tool-card-title">MCP — Model Context Protocol</div>
+        <div class="s11-tool-card-body">
+          Un protocolo para conectar herramientas externas al agente — bases de datos, APIs,
+          servicios propios — como si fueran tools nativas del loop.<br><br>
+          Actúa sobre <strong>qué puede hacer</strong> el agente, no sobre cuándo lo hace.
+          Amplía el set de herramientas disponibles en el loop,
+          sin cambiar la mecánica de plan mode ni de permisos.
+        </div>
+      </div>
+    </div>
+    <div class="s11-tools-coda">
+      Se ven en otra clase.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la tarjeta izquierda — Hooks — enfatizar la distinción con CLAUDE.md. Señalar la tarjeta derecha — MCP — subrayar "qué puede hacer, no cuándo". Leer la coda en tono casual.</strong></p>
+    <p><u>Slide de herramientas adicionales, deliberadamente breve. Dos tarjetas compactas, sin listas. El punto es nombrarlas con suficiente precisión para que no se confundan, no enseñarlas en profundidad.</u></p>
+    <p><em>"Hay dos herramientas más que vale la pena nombrar aunque no entren en el alcance de hoy."</em></p>
+    <p><em>"Hooks: scripts de shell que el runtime ejecuta en eventos concretos del ciclo de vida del agente — antes de que corra una herramienta, después, al inicio de sesión. La diferencia con CLAUDE.md es de naturaleza. CLAUDE.md es contexto: instrucciones que el modelo lee y puede ignorar si está en deriva. Un hook es ejecución real. Si el hook bloquea la herramienta, la herramienta no corre — sin importar lo que el modelo haya decidido. No es contexto. Es control de ejecución."</em></p>
+    <p><em>"MCP — Model Context Protocol: un protocolo para conectar herramientas externas al agente. Bases de datos, APIs, servicios propios — como si fueran tools nativas. Actúa sobre qué puede hacer el agente, no sobre cuándo. No cambia plan mode ni los permisos. Amplía el set de herramientas."</em></p>
+    <p><em>"Los dos se ven en otra clase."</em></p>
+  </aside>
+</section>
+
+<!-- §11.9 · section-divider — Demo D7 -->
+<section class="section-divider">
+  <h2>Demo D7 · Plan mode como freno</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">El objetivo es ver el loop detenido deliberadamente — el supervisor entrando entre pensar y actuar.</p>
+
+  <aside class="notes">
+    <p><u>Divider de demo D7. El frame correcto para este demo: no es demostrar que el agente falla o que plan mode evita errores. Es demostrar que el supervisor puede entrar antes de la primera acción. El resultado puede ser correcto en ambos casos — lo que cambia es si el supervisor estuvo en el proceso.</u></p>
+    <p><em>"Vamos al demo. Este demo es de coreografía, no de concepto. El objetivo no es demostrar que el agente se equivoca sin plan mode — puede que no se equivoque. El objetivo es ver el loop detenido antes de tocar un archivo, con el supervisor en el medio."</em></p>
+  </aside>
+</section>
+
+<!-- §11.10 · Demo D7 beats — clickable-steps -->
+<section>
+  <h2>D7 · Tres beats: el supervisor en el proceso</h2>
+
+  <div class="s11-demo-wrap">
+    <div id="s11-demo-steps"></div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Setup: repo de demo con archivos Python con imports desordenados (puede ser el mismo de semanas anteriores). Claude Code abierto. Click recorre los 3 beats.</strong></p>
+    <p><u>Beat 1 — qué mirar: dar la tarea sin plan mode: "reorganizá los imports del proyecto". Dejar que el agente arranque. Señalar las ediciones que aparecen en el workspace — archivos que el agente eligió modificar, el orden que eligió. El punto no es que el resultado sea malo: es que el agente tomó todas esas decisiones antes de mostrártelas. Beat 2 — qué mirar: misma tarea con plan mode habilitado. El plan que presenta el agente — qué archivos piensa tocar, en qué orden, qué convención va a aplicar. El workspace no cambió. Cero ediciones. El loop está detenido entre pensar y actuar. Beat 3 — qué mirar: leer el plan con el curso. Identificar algo para corregir — por ejemplo, el agente quiere tocar los archivos de tests, pero solo queremos los módulos de negocio. Corregir antes de aprobar. El plan corregido ejecutándose acotado. Plan B si Beat 1 sale limpio por azar: cambiar la tarea por algo con más superficie — "reorganizá todos los archivos del proyecto por dominio, mové los tests a una carpeta separada y actualizá los imports". Mantenerlo en el repo de demo para que sea reversible con `git checkout .`, pero la aparente destructividad hace visible la diferencia entre tener el plan antes y no tenerlo.</u></p>
+    <p><em>"Beat 1. Sin freno. Le doy la tarea a Claude Code sin plan mode: 'reorganizá los imports del proyecto'. Dejo que arranque. Miren dónde toca, en qué orden, qué decidió. El agente tomó todas esas decisiones antes de mostrármelas."</em></p>
+    <p><em>"Beat 2. Misma tarea, plan mode habilitado. Ahora propone primero. Miren: no tocó nada todavía. El workspace está igual. El loop está detenido entre pensar y actuar, esperando."</em></p>
+    <p><em>"Beat 3. Leo el plan con ustedes. Encuentro algo para corregir — dice que va a tocar los archivos de tests también, y yo solo quiero los módulos de negocio. Corrijo antes de aprobar. Acá entro yo, entre pensar y actuar. Eso es controlar el loop."</em></p>
+  </aside>
+</section>
+
+<!-- §11.11 · Cierre parte 2 — master table "dos cosas, no quince" -->
+<section>
+  <h2>El cierre de la parte 2 — dos cosas, no quince</h2>
+
+  <div class="s11-table-wrap">
+    <div class="s11-table-header">
+      <div class="s11-table-cell" style="flex:2">Herramienta</div>
+      <div class="s11-table-cell" style="flex:1">Actúa sobre</div>
+    </div>
+    <div class="s11-table-row ctx-row">
+      <div class="s11-table-td" style="flex:2"><code>CLAUDE.md</code> jerárquico <span style="color:var(--text-muted); font-size:0.88em;">(§7)</span></div>
+      <div class="s11-table-td ctx-pill" style="flex:1">Contexto — instrucciones que entran a la ventana</div>
+    </div>
+    <div class="s11-table-row ctx-row">
+      <div class="s11-table-td" style="flex:2">Rules y auto-memory <span style="color:var(--text-muted); font-size:0.88em;">(§8)</span></div>
+      <div class="s11-table-td ctx-pill" style="flex:1">Contexto — qué se preserva entre sesiones</div>
+    </div>
+    <div class="s11-table-row ctx-row">
+      <div class="s11-table-td" style="flex:2">Skills y slash commands <span style="color:var(--text-muted); font-size:0.88em;">(§9)</span></div>
+      <div class="s11-table-td ctx-pill" style="flex:1">Contexto — procedimientos reutilizables sin inundar</div>
+    </div>
+    <div class="s11-table-row ctx-row">
+      <div class="s11-table-td" style="flex:2">Sub-agents <span style="color:var(--text-muted); font-size:0.88em;">(§10)</span></div>
+      <div class="s11-table-td ctx-pill" style="flex:1">Contexto — aísla el contexto de un loop entero para que el ruido no llegue al padre</div>
+    </div>
+    <div class="s11-table-row loop-row">
+      <div class="s11-table-td" style="flex:2">Plan mode <span style="color:var(--text-muted); font-size:0.88em;">(§11)</span></div>
+      <div class="s11-table-td loop-pill" style="flex:1">Loop — separa "pensar" de "actuar" para que el supervisor entre en el medio</div>
+    </div>
+    <div class="s11-table-row loop-row">
+      <div class="s11-table-td" style="flex:2">Permisos <span style="color:var(--text-muted); font-size:0.88em;">(§11)</span></div>
+      <div class="s11-table-td loop-pill" style="flex:1">Loop — gate antes de cada acción que actúa sobre el mundo</div>
+    </div>
+  </div>
+  <div class="s11-table-coda">
+    No son quince features sueltas. Son dos cosas — el loop y el contexto — y formas de entrar al proceso.
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar cada fila mientras se lee. Las cuatro filas de CONTEXTO en azul tenue — nombrar la sección de origen. Las dos filas de LOOP en verde — remarcar que son las primeras en esa columna. Pausa larga antes de la coda.</strong></p>
+    <p><u>Slide de cierre de la parte 2. La tabla es el payoff del dispositivo lente-tracker que recorrió §7 a §11. El patron visual importa: cuatro filas de CONTEXTO, dos de LOOP — el peso refleja la estructura de la parte 2. La coda es la tesis del through-line expresada en su forma más directa.</u></p>
+    <p><em>"Durante la parte 2 vimos muchas herramientas. La tentación es memorizarlas como una lista de features. Pero si usaron la lente que propusimos en §6, ya ven algo diferente."</em></p>
+    <p><em>"CLAUDE.md — contexto. Rules y auto-memory — contexto. Skills — contexto. Sub-agents — contexto. Cuatro secciones, cuatro formas distintas de actuar sobre lo mismo: lo que entra a la ventana del agente."</em></p>
+    <p><em>"Plan mode — loop. Permisos — loop. Dos mecanismos que actúan sobre cuándo y cómo el supervisor entra al proceso. No sobre qué sabe el agente — sobre cuánto le dejás hacer."</em></p>
+    <p><em>"No son quince features sueltas. Son dos cosas — el loop y el contexto — y formas de entrar al proceso. Si aparece una herramienta que no conocen, la pregunta es siempre la misma: ¿actúa sobre el loop o sobre el contexto?"</em></p>
+  </aside>
+</section>
+
+<!-- §11.12 · Bridge a §12 -->
+<section>
+  <h2>Hoy terminamos de armar el runtime — §12 es el para qué</h2>
+
+  <div class="s11-bridge-card">
+    <p class="s11-bridge-main">
+      Parte 1 — el modelo: cómo piensa, cómo predice, qué significa que "razone".<br>
+      Semanas 2–3 — el rol: supervisor arquitectónico del frontend y del backend.<br>
+      Parte 2 de hoy — el runtime: el loop, el contexto, y las herramientas para actuar sobre cada uno.
+    </p>
+    <p class="s11-bridge-sub">
+      Lo que falta no es otra herramienta.
+      Es el <em>para qué</em>. ¿Qué construís con todo esto?
+      ¿Cómo articulás modelo + rol + runtime en un proyecto real, de principio a fin?<br><br>
+      Eso es <em>§12</em>.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer las tres líneas del párrafo principal con cadencia — una pausa entre cada una. Pausa larga antes del párrafo del bridge. Leer "§12" al final con énfasis tranquilo, sin grandilocuencia.</strong></p>
+    <p><u>Slide de bridge a §12. El párrafo principal hace el arco completo del curso visible en tres líneas. El bridge formula la pregunta que §12 responde. El tono es de apertura, no de cierre dramático — §12 es el paso siguiente, no una revelación.</u></p>
+    <p><em>"Miremos qué armamos. En la parte 1 de hoy entendieron el modelo — cómo piensa, cómo predice, qué significa que 'razone' sobre un problema. En semanas 2 y 3 entendieron el rol — supervisor arquitectónico del frontend, supervisor del backend, con un vocabulario para dictar en lugar de reaccionar. En la parte 2 de hoy entendieron el runtime — el loop, el contexto, y las herramientas para actuar sobre cada uno."</em></p>
+    <p><em>"Lo que falta no es otra herramienta. Tenemos el modelo. Tenemos el rol. Tenemos el runtime. Lo que falta es el para qué. ¿Qué construís con todo esto junto? ¿Cómo agarrás modelo + rol + runtime y los usás al mismo tiempo en un proyecto real, de principio a fin?"</em></p>
+    <p><em>"Eso es §12."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§11-START -->
+<script>
+  initFourLoop({containerId: 's11-loop-planmode', mode: 'planmode'});
+  initFourLoop({containerId: 's11-loop-gate', mode: 'gate'});
+  initClickableSteps({containerId: 's11-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Sin plan mode: el agente actúa',
+      summary: 'Tarea: "reorganizá los imports del proyecto". Sin plan mode habilitado. Dejar que el agente arranque sin intervención y señalar las ediciones que aparecen en el workspace.',
+      example: 'Qué mirar: los archivos que el agente eligió modificar, el orden que eligió, las decisiones que tomó antes de mostrártelas. El punto no es que el resultado sea malo — es que el agente tomó todas esas decisiones solo, antes de que pudieras mirar. Plan B si el resultado sale limpio por azar: cambiar la tarea por "reorganizá todos los archivos del proyecto por dominio, mové los tests a una carpeta separada y actualizá los imports" — mantenerlo reversible con `git checkout .`.'
+    },
+    {
+      title: 'Beat 2 — Con plan mode: propone primero',
+      summary: 'Misma tarea, plan mode habilitado. El agente presenta el plan — qué archivos piensa tocar, en qué orden, qué convención de imports va a aplicar.',
+      example: 'Qué mirar: el workspace no cambió — cero ediciones. El loop está detenido entre "pensar" y "actuar", esperando. Todo lo que el agente haría está visible antes de que lo haga.'
+    },
+    {
+      title: 'Beat 3 — Corrección antes de aprobar',
+      summary: 'Leer el plan con el curso. Encontrar algo para corregir — el agente quiere tocar también archivos de tests; nosotros solo queremos los módulos de negocio. Corregir antes de aprobar.',
+      example: 'Qué mirar: el plan corregido ejecutándose acotado — solo los archivos aprobados, con la convención pedida. La diferencia respecto al Beat 1 no es solo el resultado: es que el supervisor estuvo en el proceso desde antes de la primera acción.'
+    }
+  ]});
+</script>
+<!-- INIT-SCRIPTS-§11-END -->
