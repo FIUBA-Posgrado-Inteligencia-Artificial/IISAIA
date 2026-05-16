@@ -1213,7 +1213,479 @@
       <!-- /§2 -->
 
       <!-- ===== §3 — Tools: las manos del agente ===== -->
-      <!-- INJECT_SECTION_3 -->
+      <style>
+/* Scoped styles for §3 only */
+.s3-chat-s1 {
+  max-width: 620px;
+  margin: 18px auto 0;
+}
+.s3-chat-s1 .s3-mechanism-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 0;
+}
+.s3-step-box {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 10px 14px;
+  text-align: center;
+  flex: 1;
+}
+.s3-step-box .s3-step-label {
+  font-size: 0.58em;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin: 0 0 4px;
+}
+.s3-step-box .s3-step-text {
+  font-size: 0.68em;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+  font-family: var(--font-mono);
+}
+.s3-arrow-h {
+  font-size: 1.1em;
+  color: var(--text-muted);
+  padding: 0 6px;
+  flex-shrink: 0;
+}
+.s3-result-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 8px;
+}
+.s3-result-box {
+  flex: 1;
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 9px 14px;
+}
+.s3-result-box .s3-result-label {
+  font-size: 0.56em;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #ffcb6b;
+  margin: 0 0 3px;
+}
+.s3-result-box p {
+  font-size: 0.65em;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.5;
+  font-family: var(--font-mono);
+}
+
+/* Loop mapping card for §3 */
+.s3-loop-wrap {
+  margin: 14px auto 0;
+  max-width: 720px;
+}
+.s3-mapping {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  max-width: 700px;
+  margin: 14px auto 0;
+}
+.s3-map-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 12px 14px;
+  text-align: center;
+}
+.s3-map-card .s3-map-phase {
+  font-size: 0.6em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 4px;
+}
+.s3-map-card .s3-map-phase.actuar { color: var(--accent-secondary); }
+.s3-map-card .s3-map-phase.observar { color: #ffcb6b; }
+.s3-map-card .s3-map-phase.pensar { color: var(--accent); }
+.s3-map-card .s3-map-call {
+  font-family: var(--font-mono);
+  font-size: 0.64em;
+  color: var(--accent-secondary);
+  background: var(--bg-code);
+  border-radius: 4px;
+  padding: 4px 7px;
+  display: block;
+  margin: 0 0 5px;
+}
+.s3-map-card p {
+  font-size: 0.6em;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Accumulation diagram */
+.s3-accum {
+  max-width: 640px;
+  margin: 18px auto 0;
+}
+.s3-accum-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+.s3-accum-label {
+  width: 100px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+.s3-accum-bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.s3-accum-bar {
+  height: 28px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+.s3-accum-bar span {
+  font-size: 0.6em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.s3-accum-bar.fill-sm { width: 30%; }
+.s3-accum-bar.fill-md { width: 55%; border-color: var(--accent-secondary); }
+.s3-accum-bar.fill-lg { width: 78%; border-color: #ffcb6b; }
+.s3-accum-bar.fill-xl { width: 95%; border-color: #e74c3c; background: rgba(231,76,60,0.08); }
+.s3-accum-note {
+  text-align: right;
+  font-size: 0.6em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 6px;
+}
+</style>
+
+<!-- §3.1 · Hook — callback semana 1 -->
+<section>
+  <h2>¿Se acuerdan del token especial?</h2>
+
+  <div class="s3-chat-s1">
+    <div class="s3-mechanism-row">
+      <div class="s3-step-box">
+        <div class="s3-step-label">S1 — mecanismo</div>
+        <p class="s3-step-text">token especial<br>↓<br>pausa la generación</p>
+      </div>
+      <div class="s3-arrow-h">→</div>
+      <div class="s3-step-box">
+        <p class="s3-step-text" style="color:var(--accent-secondary);">búsqueda web<br>ejecuta</p>
+      </div>
+      <div class="s3-arrow-h">→</div>
+      <div class="s3-step-box">
+        <p class="s3-step-text" style="color:#ffcb6b;">resultado<br>vuelve al contexto</p>
+      </div>
+    </div>
+
+    <div class="s3-result-row" style="margin-top:12px;">
+      <div class="s3-result-box" style="border-color:var(--accent);flex-grow:0;flex-basis:auto;">
+        <div class="s3-result-label">Conclusión de S1</div>
+        <p>Eso era una tool.</p>
+      </div>
+    </div>
+
+    <p class="fragment fade-in" style="margin:20px 0 0;text-align:center;font-size:0.9em;color:var(--accent);font-style:italic;">
+      Hoy lo mismo, pero las manos llegan más lejos.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Apuntar al diagrama de izquierda a derecha. Pausa antes del click. Click revela la línea final.</strong></p>
+    <p><u>Slide de apertura de §3. Callback concreto a S1 — reconstruye el mecanismo que los alumnos ya vieron. No es recapitulación decorativa: es el punto de anclaje para mostrar que la mecánica no cambió.</u></p>
+    <p><em>"¿Se acuerdan de la semana 1? El modelo emitía un token especial. El programa lo detectaba, pausaba la generación, hacía la búsqueda web, y pegaba el texto recuperado de vuelta en el contexto. El modelo seguía desde ahí."</em></p>
+    <p><em>"Eso tenía nombre. Eso era una tool. El mecanismo que vieron entonces — llamada estructurada, runtime ejecuta, resultado al contexto — es el mismo que estamos por ver hoy. Con una diferencia."</em></p>
+    <p><em>"Hoy las manos llegan más lejos."</em></p>
+  </aside>
+</section>
+
+<!-- §3.2 · La analogía clave — Tools = las manos del agente -->
+<section>
+  <h2>Tools — las manos del agente</h2>
+
+  <div class="bg-secondary-card" style="max-width:560px;margin:24px auto 0;padding:32px 36px;text-align:center;border-color:var(--accent);">
+    <p style="font-size:1.05em;font-weight:700;color:var(--text-primary);margin:0 0 16px;line-height:1.5;">
+      Sin manos, el agente razona sobre lo que haría.<br>
+      <span style="color:var(--text-muted);">Pero no toca nada.</span>
+    </p>
+    <p style="font-size:0.76em;color:var(--text-muted);margin:0;line-height:1.6;border-top:1px solid #2a3a5a;padding-top:16px;">
+      Las tools son el puente entre el razonamiento y el entorno real.<br>
+      El agente existe en las dos orillas al mismo tiempo — piensa acá, actúa allá.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el card completo. Sin apresurar — la analogía necesita espacio para aterrizar.</strong></p>
+    <p><u>Slide de una sola idea. No hay lista, no hay comparación. El card fuerza el foco en la imagen central antes de entrar al detalle técnico.</u></p>
+    <p><em>"Antes de ver el mecanismo otra vez, quedémonos un segundo con la imagen. Las tools son las manos del agente. Sin manos, el agente puede razonar — puede formular hipótesis, puede describir los pasos que seguiría, puede deducir qué habría que hacer. Pero no toca nada."</em></p>
+    <p><em>"El agente vive en dos lugares al mismo tiempo: piensa acá, en la ventana de contexto, con tokens y probabilidades. Actúa allá, en el entorno real, con archivos y procesos y respuestas HTTP. Las tools son ese puente. Sin ellas, el agente no cruza."</em></p>
+  </aside>
+</section>
+
+<!-- §3.3 · Recontextualizar — S1 vs. hoy -->
+<section>
+  <h2>De consultar a modificar</h2>
+
+  <div class="comparison-2col" style="margin-top:18px;align-items:stretch;">
+    <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
+      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 10px;">Semana 1</p>
+      <p style="font-size:0.8em;font-weight:700;color:var(--accent-secondary);margin:0 0 10px;">buscar web</p>
+      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
+        Refrescar el conocimiento. Una consulta. El modelo no cambia nada en el mundo — lee la respuesta y sigue.
+      </p>
+      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
+        No modifica el entorno.
+      </p>
+    </div>
+    <div class="bg-secondary-card" style="border-color:var(--accent);display:flex;flex-direction:column;">
+      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 10px;">Hoy</p>
+      <p style="font-size:0.8em;font-weight:700;color:var(--accent);margin:0 0 10px;">leer / escribir / ejecutar / correr tests</p>
+      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
+        El set se amplió. La mecánica es idéntica: llamada estructurada → runtime ejecuta → resultado al contexto.
+      </p>
+      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
+        Modifica el entorno.
+      </p>
+    </div>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:18px;font-size:0.8em;color:var(--accent);font-style:italic;">
+    La mecánica no cambió. Lo que cambió es que ahora modifica.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar columna izquierda, luego derecha. Click revela la línea de cierre — decirla con intención.</strong></p>
+    <p><u>Recontextualización. El punto no es listar tools: es que la distinción consulta/modifica es lo que cambia el juego.</u></p>
+    <p><em>"En la semana 1, la herramienta tenía un rol muy acotado: refrescar el conocimiento. El agente hacía una consulta y leía. No cambiaba nada."</em></p>
+    <p><em>"Un agente de código tiene un set más amplio: leer archivos, escribir archivos, ejecutar comandos, correr tests. El modelo sigue emitiendo la llamada estructurada. El runtime la sigue ejecutando. El resultado sigue entrando al contexto. La mecánica no cambió — ni un detalle."</em></p>
+    <p><em>"Lo que cambió es que ahora el agente no solo consulta el mundo. Lo modifica. Eso cambia todo lo que viene a continuación."</em></p>
+  </aside>
+</section>
+
+<!-- §3.4 · El ciclo de una tool ES el loop -->
+<section>
+  <h2>El ciclo de una tool es el loop</h2>
+
+  <div class="s3-loop-wrap">
+    <div id="s3-loop-tool"></div>
+  </div>
+
+  <div class="s3-mapping">
+    <div class="s3-map-card">
+      <div class="s3-map-phase actuar">Actuar</div>
+      <code class="s3-map-call">read_file("src/index.ts")</code>
+      <p>La llamada estructurada. El modelo la emite — no texto libre, sino nombre de tool y parámetros.</p>
+    </div>
+    <div class="s3-map-card">
+      <div class="s3-map-phase observar">Observar</div>
+      <code class="s3-map-call">→ contenido del archivo</code>
+      <p>El runtime ejecutó y devolvió el resultado. No lo inventó el modelo: lo produjo el entorno.</p>
+    </div>
+    <div class="s3-map-card">
+      <div class="s3-map-phase pensar">Pensar</div>
+      <code class="s3-map-call">próximo paso</code>
+      <p>La observación entra al contexto. El agente la usa para formular el próximo movimiento.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la animación primero. Después recorrer las tres tarjetas de izquierda a derecha, nombrando cada fase.</strong></p>
+    <p><u>Slide central de §3. La animación en modo 'tool' ilumina actuar + observar, dims pensar. Las tarjetas mapean 1:1 la fase del loop con la pieza concreta de la tool.</u></p>
+    <p><em>"El ciclo de una tool mapea exactamente al loop del §2. Cada vez que el agente usa una herramienta, sigue las mismas tres fases."</em></p>
+    <p><em>"Actuar: el modelo emite una llamada estructurada. No texto libre — un nombre de tool y parámetros concretos. Algo como read_file con su argumento. Observar: el runtime intercepta esa llamada, la ejecuta fuera del modelo, y devuelve el resultado. Ese resultado no lo inventó el modelo — lo produjo el entorno. Pensar: esa observación entra al contexto y el agente la usa para decidir qué hacer en la próxima vuelta."</em></p>
+    <p><em>"No son cosas distintas. El loop y el ciclo de la tool son el mismo mecanismo visto desde dos ángulos."</em></p>
+  </aside>
+</section>
+
+<!-- §3.5 · La observación vuelve al contexto -->
+<section>
+  <h2>La observación no desaparece</h2>
+
+  <div class="s3-accum">
+    <div class="s3-accum-row">
+      <div class="s3-accum-label">prompt</div>
+      <div class="s3-accum-bar-wrap">
+        <div class="s3-accum-bar fill-sm"><span>objetivo inicial</span></div>
+      </div>
+    </div>
+    <div class="s3-accum-row">
+      <div class="s3-accum-label">+ razonamiento</div>
+      <div class="s3-accum-bar-wrap">
+        <div class="s3-accum-bar fill-md"><span>pensar vuelta 1</span></div>
+      </div>
+    </div>
+    <div class="s3-accum-row">
+      <div class="s3-accum-label">+ read_file</div>
+      <div class="s3-accum-bar-wrap">
+        <div class="s3-accum-bar fill-lg" style="border-color:#ffcb6b;"><span style="color:#ffcb6b;">800 líneas — acá, en la ventana</span></div>
+      </div>
+    </div>
+    <div class="s3-accum-row">
+      <div class="s3-accum-label">+ npm test</div>
+      <div class="s3-accum-bar-wrap">
+        <div class="s3-accum-bar fill-xl"><span>output de tests + nueva ronda</span></div>
+      </div>
+    </div>
+    <p class="s3-accum-note">el contexto crece; las observaciones quedan</p>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:20px;font-size:0.78em;color:var(--accent-secondary);font-style:italic;">
+    No es un recuerdo vago del preentrenamiento: son datos directamente disponibles. Qué implica eso, lo vemos en §4.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar cada barra mientras se nombra. La barra de read_file es el momento clave — decir "800 líneas, acá, en la ventana" despacio. Click para el bridge.</strong></p>
+    <p><u>Semilla del §4. El diagrama de acumulación es solo CSS — sin JS. Muestra visualmente que el contexto crece con cada observación.</u></p>
+    <p><em>"Hay algo que conviene ver explícito porque tiene consecuencias que vemos en §4."</em></p>
+    <p><em>"Cuando el agente lee un archivo, ese archivo no desaparece después de que lo procesó. Queda en el contexto, como parte de la historia de la sesión. Si leyó un archivo de 800 líneas, esas 800 líneas están acá, disponibles para el próximo razonamiento. No es que el agente 'recuerda' vagamente el archivo desde el preentrenamiento — lo tiene en acceso directo."</em></p>
+    <p><em>"Y eso aplica a todo: el output de npm test entró. La respuesta HTTP entró. El directorio listado entró. Vuelta a vuelta, el contexto crece. Qué implica ese crecimiento y cómo gestionarlo, es §4."</em></p>
+  </aside>
+</section>
+
+<!-- §3.6 · Cada herramienta cuesta -->
+<section>
+  <h2>Observar no es gratis</h2>
+
+  <div class="bg-secondary-card" style="max-width:600px;margin:20px auto 0;padding:26px 30px;">
+    <p style="font-size:0.82em;color:var(--text-primary);line-height:1.7;margin:0 0 18px;">
+      <code style="font-family:var(--font-mono);color:var(--accent-secondary);background:var(--bg-code);padding:2px 6px;border-radius:3px;">npm test</code> entra.<br>
+      La respuesta HTTP de una API entra.<br>
+      El directorio listado entra.
+    </p>
+    <p style="font-size:0.75em;color:var(--text-muted);line-height:1.65;margin:0;border-top:1px solid #2a3a5a;padding-top:16px;">
+      A medida que el loop itera, el contexto crece. Cada observación ocupa espacio, y ese espacio tiene un límite. La observación no es gratuita.
+    </p>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:20px;font-size:0.85em;color:var(--accent);font-style:italic;">
+    Qué pasa cuando ese límite se acerca — §4.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Leer la lista del card en voz alta, marcando el ritmo. Click para la línea de §4.</strong></p>
+    <p><u>Refuerzo de la semilla del §4 antes de pasar al contraste leer/escribir. El punto es simple: cada tool que se ejecuta tiene costo en contexto.</u></p>
+    <p><em>"Cada tool que el agente ejecuta agrega su resultado al contexto. npm test corre y el output de la suite entra. Hacés un request HTTP y la respuesta entra. Listás un directorio y el árbol de archivos entra."</em></p>
+    <p><em>"Esto no es un defecto ni una rareza — es cómo funciona la working memory del agente. Tiene que tener disponible lo que observó para razonar sobre ello. Pero eso significa que cada observación ocupa espacio. Y ese espacio tiene un límite."</em></p>
+    <p><em>"Qué pasa cuando el límite se acerca, y cómo el agente lo gestiona, es exactamente lo que vemos en §4. Por ahora la conclusión es simple: la observación no es gratuita."</em></p>
+  </aside>
+</section>
+
+<!-- §3.7 · Leer vs. escribir -->
+<section>
+  <h2>Leer vs. escribir — el riesgo no es simétrico</h2>
+
+  <div class="comparison-2col" style="margin-top:18px;align-items:stretch;">
+    <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
+      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 10px;">Leer</p>
+      <p style="font-size:0.78em;font-weight:700;color:var(--accent-secondary);margin:0 0 10px;">reversible</p>
+      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
+        Leer un archivo, listar un directorio, llamar un endpoint de solo lectura. El entorno no cambió. El peor caso: llenó el contexto con información irrelevante.
+      </p>
+      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
+        Puede intentar otra lectura.
+      </p>
+    </div>
+    <div class="bg-secondary-card" style="border-color:#e74c3c;display:flex;flex-direction:column;">
+      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:#e74c3c;margin:0 0 10px;">Escribir / ejecutar</p>
+      <p style="font-size:0.78em;font-weight:700;color:#e74c3c;margin:0 0 10px;">puede no ser reversible</p>
+      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
+        Editar un archivo, correr <code style="font-family:var(--font-mono);font-size:0.9em;background:var(--bg-code);padding:1px 4px;border-radius:3px;">git commit</code>, borrar un directorio, llamar un endpoint que muta estado. El entorno quedó en un estado diferente al esperado.
+      </p>
+      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
+        No hay deshacer automático.
+      </p>
+    </div>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:16px;font-size:0.78em;color:var(--text-muted);font-style:italic;">
+    El supervisor mira más las que actúan sobre el mundo. Qué pasa cuando esa revisión falla — §5.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar columna izquierda, luego derecha. El ejemplo de git commit y borrar directorio son los que aterrizan. Click para el bridge a §5.</strong></p>
+    <p><u>Distinción clave del §3 — referenciada de nuevo en §11. Las dos columnas no son igual de largas pedagógicamente: la derecha necesita más peso. No agregar listas — el contraste vive en la estructura visual.</u></p>
+    <p><em>"No todas las tools tienen el mismo peso cuando algo sale mal. Hay una distinción que conviene tener presente desde ahora."</em></p>
+    <p><em>"Una tool que lee no cambia el estado del entorno. Si el agente leyó el archivo equivocado, lo peor que pasó es que llenó el contexto con ruido. Puede intentar otra lectura."</em></p>
+    <p><em>"Una tool que escribe o ejecuta modifica el entorno. Un archivo sobreescrito sin backup. Un git commit que avanzó el historial. Un endpoint que procesó algo. Puede que sea recuperable; puede que no. No hay deshacer automático."</em></p>
+    <p><em>"Por eso el supervisor presta más atención a las tools que actúan sobre el mundo. Qué pasa cuando esa revisión falla o no existe, lo vemos en §5."</em></p>
+  </aside>
+</section>
+
+<!-- §3.8 · section-divider — Demo -->
+<section class="section-divider">
+  <h2>Demo · La observación entra al contexto</h2>
+
+  <aside class="notes">
+    <p><u>Slide de transición. Anuncia el demo y da un segundo de preparación.</u></p>
+    <p><em>"Vimos el mecanismo en el diagrama. Ahora lo vemos en vivo: la observación de una tool entrando al contexto como working memory, en tiempo real."</em></p>
+  </aside>
+</section>
+
+<!-- §3.9 · Demo beats — clickable-steps -->
+<section>
+  <h2>La observación entra al contexto — 3 beats</h2>
+
+  <div id="s3-demo-steps" style="margin-top:18px;"></div>
+
+  <aside class="notes">
+    <p><strong>Demo en vivo. Click recorre los 3 beats. Tarea: "Leé package.json y decime qué scripts tiene definidos."</strong></p>
+    <p><u>Beat 1: observar la tool call antes de cualquier texto · Beat 2: apuntar al bloque de observación — el contenido del archivo en el contexto · Beat 3: si hay /context mostrarlo; si no, apuntar al bloque de tool output y nombrarlo. Plan B: si no coopera, apuntar al bloque de tool output directamente y decir "esto es la observación" — el punto pedagógico vive en ese bloque, no en la métrica.</u></p>
+    <p><em>"Antes de responder no sabe nada de ese archivo. Fijense qué hace primero."</em></p>
+    <p><em>"Eso que entró ahí es exactamente el 'pegar el resultado en el contexto' de la semana 1. La working memory se acaba de refrescar. El modelo no lo estaba recordando: lo tiene acá, directo."</em></p>
+    <p><em>"No es gratis. Lo que leyó, lo está cargando. El archivo entero entró a la working memory. Si el archivo tuviera 800 líneas, serían 800 líneas ahí."</em></p>
+  </aside>
+</section>
+
+<!-- §3.10 · Cierre del demo + bridge a §4 -->
+<section>
+  <h2>Cada acción deja rastro en el contexto</h2>
+
+  <div class="bg-secondary-card" style="max-width:600px;margin:20px auto 0;padding:26px 30px;">
+    <p style="font-size:0.85em;line-height:1.65;color:var(--text-primary);margin:0 0 18px;">
+      Cada vez que el agente actúa, la observación entra al contexto.<br>
+      <span style="color:var(--text-muted);font-size:0.9em;">Vieron cómo el contenido del archivo apareció ahí, disponible, antes de que el modelo respondiera.</span>
+    </p>
+    <p style="font-size:0.82em;line-height:1.65;color:var(--text-muted);margin:0;border-top:1px solid #2a3a5a;padding-top:16px;">
+      Las tools son cómo el agente toca el mundo.<br>
+      El contexto es donde el agente recuerda qué tocó.
+    </p>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:22px;font-size:0.9em;color:var(--accent);font-style:italic;">
+    Ese contexto tiene un tamaño. Qué implica ese tamaño — §4.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Dejar que el card se lea. Click para el bridge a §4.</strong></p>
+    <p><u>Cierre de §3. Ancla lo que acaban de ver en el demo y planta el hilo hacia §4. Las tools y el contexto quedan como dos conceptos conectados.</u></p>
+    <p><em>"Vieron el mecanismo en vivo. El agente recibió la tarea, emitió la llamada a la tool, y antes de producir ninguna respuesta el contenido del archivo ya estaba en el contexto. Disponible, directo — no como un recuerdo vago."</em></p>
+    <p><em>"Las tools son cómo el agente toca el mundo. El contexto es donde el agente recuerda qué tocó — qué leyó, qué ejecutó, qué observó en cada vuelta del loop. Esas dos piezas están conectadas."</em></p>
+    <p><em>"Y ese contexto tiene un tamaño. Cuando el loop itera muchas veces, cuando el agente ejecuta muchas tools, ese espacio se llena. Qué implica que se llene, y cómo se gestiona, es §4."</em></p>
+  </aside>
+</section>
       <!-- /§3 -->
 
       <!-- ===== §4 — La ventana de contexto es finita ===== -->
@@ -1298,6 +1770,31 @@
         title: 'Beat 3 — La corrección es otra vuelta',
         summary: 'Identificar el momento en que algo falló y el agente lo detectó, volvió a pensar, y tomó una acción correctiva — todo dentro del mismo loop.',
         example: 'Qué mirar: la corrección no fue una respuesta nueva. El agente actualizó su hipótesis con lo que observó y siguió. No empezó de cero.'
+      }
+    ]
+  });
+</script>
+
+  <!-- init §3 -->
+<script>
+  initFourLoop({ containerId: 's3-loop-tool', mode: 'tool' });
+  initClickableSteps({
+    containerId: 's3-demo-steps',
+    steps: [
+      {
+        title: 'Beat 1 — Leer package.json',
+        summary: 'Dar la tarea: "Leé package.json y decime qué scripts tiene definidos." Observar qué hace el agente antes de producir cualquier texto de respuesta.',
+        example: 'Qué mirar: la llamada a la tool de lectura aparece primero — el agente emite la acción antes de responder. Ese es el "actuar" del loop.'
+      },
+      {
+        title: 'Beat 2 — Señalar el bloque de observación',
+        summary: 'Apuntar al bloque de tool output en el transcript — el contenido del archivo tal como lo devolvió el runtime, visible antes de la respuesta del modelo.',
+        example: 'Qué mirar: el contenido del archivo está ahora en el contexto. El modelo no lo estaba recordando: lo tiene acá, directo. Eso es la working memory.'
+      },
+      {
+        title: 'Beat 3 — Tamaño vs. contexto total',
+        summary: 'Si la versión soporta /context, mostrarlo. Si no, apuntar al bloque de tool output y nombrarlo. Plan B: "esto es la observación" alcanza.',
+        example: 'Qué mirar: el tamaño del output de la tool en relación al contexto. Primer indicio de la presión que vemos en §4.'
       }
     ]
   });
