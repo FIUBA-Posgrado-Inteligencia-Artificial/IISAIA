@@ -1,0 +1,542 @@
+<style>
+/* Scoped styles for §9 only */
+
+/* Opener wrap */
+.s9-opener-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 24px auto 0;
+  max-width: 640px;
+}
+.s9-opener-sublabel {
+  font-size: 0.65em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.s9-opener-question {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.7;
+  font-style: italic;
+}
+.s9-opener-question em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Generic focus card */
+.s9-focus-card {
+  max-width: 700px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 28px 34px;
+  text-align: left;
+}
+.s9-focus-card p {
+  font-size: 0.86em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+}
+.s9-focus-card p:last-child { margin: 0; }
+.s9-focus-card .s9-highlight {
+  color: var(--accent);
+  font-weight: 700;
+  font-style: normal;
+}
+.s9-focus-card .s9-key-line {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 16px;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 14px;
+}
+
+/* Skill anatomy two-card layout */
+.s9-meta-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s9-meta-row {
+  display: flex;
+  gap: 14px;
+}
+.s9-meta-card {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.s9-meta-card.accent-left {
+  border-left: 3px solid var(--accent);
+}
+.s9-meta-card.accent-left-sec {
+  border-left: 3px solid var(--accent-secondary);
+}
+.s9-meta-card-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.s9-meta-card-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.s9-meta-card-title.sec { color: var(--accent-secondary); }
+.s9-meta-card-body {
+  font-size: 0.68em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s9-meta-card-body code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s9-meta-card-body .sec-code {
+  color: var(--accent-secondary);
+}
+.s9-meta-moment {
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-size: 0.7em;
+  color: var(--accent);
+  line-height: 1.65;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Comparison wrap */
+.s9-cmp-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s9-cmp-card {
+  flex: 1;
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.s9-cmp-card.skill-side {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+}
+.s9-cmp-card.cmd-side {
+  background: rgba(130, 170, 255, 0.06);
+  border: 1px solid rgba(130, 170, 255, 0.25);
+}
+.s9-cmp-card-label {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.s9-cmp-card.skill-side .s9-cmp-card-label { color: var(--accent); }
+.s9-cmp-card.cmd-side .s9-cmp-card-label { color: var(--accent-secondary); }
+.s9-cmp-card-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.s9-cmp-card-body {
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.s9-cmp-card-body code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+.s9-cmp-card.skill-side .s9-cmp-card-body code { color: var(--accent); }
+.s9-cmp-card.cmd-side .s9-cmp-card-body code { color: var(--accent-secondary); }
+.s9-cmp-note {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-size: 0.68em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s9-cmp-note strong { color: var(--text-primary); }
+
+/* Build-class command card */
+.s9-cmd-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s9-cmd-code-block {
+  background: var(--bg-code);
+  border-radius: 8px;
+  padding: 22px 28px;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  line-height: 1.85;
+}
+.s9-cmd-comment { color: var(--text-muted); }
+.s9-cmd-path { color: var(--accent-secondary); }
+.s9-cmd-content { color: var(--accent); }
+.s9-cmd-callout {
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+  border-radius: 7px;
+  padding: 14px 20px;
+  font-size: 0.74em;
+  color: var(--accent);
+  line-height: 1.65;
+  font-weight: 600;
+  text-align: center;
+}
+.s9-cmd-sep-note {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 7px;
+  padding: 13px 20px;
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s9-cmd-sep-note strong { color: var(--text-primary); }
+
+/* Tricotomía caption */
+.s9-tricotomia-caption {
+  max-width: 680px;
+  margin: 18px auto 0;
+  font-size: 0.68em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.75;
+}
+.s9-tricotomia-caption strong { color: var(--text-primary); }
+
+/* Demo wrap */
+.s9-demo-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+
+/* Cierre card */
+.s9-close-card {
+  max-width: 660px;
+  margin: 28px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 28px 36px;
+  text-align: center;
+}
+.s9-close-main {
+  font-size: 0.84em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+.s9-close-bridge {
+  font-size: 0.76em;
+  color: var(--text-muted);
+  line-height: 1.75;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 18px;
+  margin: 0;
+}
+.s9-close-bridge em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+</style>
+
+<!-- §9.1 · Opener — lens-tracker aterriza en CONTEXTO, hilo de §8 -->
+<section>
+  <h2>¿Loop o contexto? Contexto — un paso más lejos.</h2>
+
+  <div class="s9-opener-wrap">
+    <div class="lens-tracker on-context">
+      <div class="pole pole-loop">LOOP</div>
+      <div class="lens-sep">↔</div>
+      <div class="pole pole-context">CONTEXTO</div>
+    </div>
+    <p class="s9-opener-sublabel">condicional por invocación</p>
+    <p class="s9-opener-question">
+      ¿Puede el contexto condicional ir más lejos?
+      Una path-scoped rule entra por archivo.
+      Un procedimiento completo
+      <em>no matchea ningún path.</em>
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el tracker — CONTEXTO iluminado igual que en §8. Leer el sublabel. Leer la pregunta despacio, con pausa antes de la línea final.</strong></p>
+    <p><u>Opener de §9. El tracker es el dispositivo recurrente — no necesita explicación, solo señalarlo. La pregunta retoma exactamente donde §8 terminó: la condicionalidad por archivo ya está cubierta; ahora la pregunta es si el mecanismo puede abarcar algo que no es un archivo.</u></p>
+    <p><em>"El tracker otra vez en CONTEXTO. Tres secciones seguidas aterrizando acá. Y el sublabel dice algo nuevo: condicional por invocación."</em></p>
+    <p><em>"§8 cerró con una pregunta: ¿puede el contexto condicional ir más lejos? Una path-scoped rule entra cuando tocás ciertos archivos. Funciona perfecto para instrucciones de área. Pero hay algo que no matchea ningún path: un procedimiento completo — cómo se genera un slide, cómo se toma una transcripción de YouTube y se convierte en material de clase, cómo se audita un PR. Para eso existen las skills."</em></p>
+  </aside>
+</section>
+
+<!-- §9.2 · Qué es una skill -->
+<section>
+  <h2>Una skill: un procedimiento completo, no una instrucción suelta</h2>
+
+  <div class="s9-focus-card">
+    <p>
+      Una skill empaqueta un flujo de trabajo repetible con <span class="s9-highlight">fases, verificaciones y anti-patterns definidos</span>. No es una instrucción suelta ni una preferencia de estilo: es una capacidad completa sobre cómo ejecutar un tipo de tarea.
+    </p>
+    <p>
+      La diferencia respecto a las path-scoped rules es conceptual antes que técnica. Una path-scoped rule lleva instrucciones que se activan por contexto de archivo. Una skill lleva un <em>procedimiento</em> que se activa por invocación o por relevancia de tarea.
+    </p>
+    <p class="s9-key-line">
+      No cargada al arranque. Cero tokens hasta que la invocás.<br>
+      Lo que no usás, no pagás.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el primer párrafo enfatizando "fases, verificaciones, anti-patterns". Leer el segundo párrafo distinguiendo el trigger. Leer la línea clave al final con pausa antes de "Lo que no usás, no pagás."</strong></p>
+    <p><u>Slide de definición. Un solo concepto: qué es una skill. El contraste con path-scoped rules es el hilo que conecta con §8. La línea de cierre es la afirmación de diseño central — no un detalle técnico, sino la filosofía que justifica el mecanismo.</u></p>
+    <p><em>"¿Qué es una skill? No es un prompt largo. No es un bloque de instrucciones pegado en CLAUDE.md. Es un procedimiento completo: fases, pasos de verificación, anti-patterns explícitos. Una capacidad completa sobre cómo hacer algo."</em></p>
+    <p><em>"La diferencia con las path-scoped rules no es técnica. Es conceptual. Una path-scoped rule trae instrucciones cuando tocás ciertos archivos. Una skill trae un procedimiento cuando la invocás, o cuando Claude determina que la tarea lo requiere."</em></p>
+    <p><em>"Y el punto que más importa en términos de contexto: una skill no existe para la sesión hasta que se necesita. No carga al arranque. No ocupa un solo token. Lo que no usás, no pagás."</em></p>
+  </aside>
+</section>
+
+<!-- §9.3 · El ejemplo meta: tools/skills/slide-generation/ -->
+<section>
+  <h2>El ejemplo más concreto: la skill que generó esta clase</h2>
+
+  <div class="s9-meta-wrap">
+    <div class="s9-meta-row">
+      <div class="s9-meta-card accent-left">
+        <span class="s9-meta-card-label">tools/skills/slide-generation/</span>
+        <div class="s9-meta-card-title">La skill que armó este deck</div>
+        <div class="s9-meta-card-body">
+          Su <code>SKILL.md</code> describe cuatro fases explícitas:<br>
+          <strong style="color:var(--accent);">Spine</strong> (esqueleto didáctico) →
+          <strong style="color:var(--accent);">Plan</strong> (tareas de implementación) →
+          <strong style="color:var(--accent);">Execute</strong> (slides sección por sección, con checklists) →
+          <strong style="color:var(--accent);">Verify/Finish</strong>.<br><br>
+          Incluye un checkpoint duro: no se genera HTML sin que se revise y apruebe el <code>spine.md</code>. Lista anti-patterns explícitos — qué no hacer, qué no saltear.
+        </div>
+      </div>
+      <div class="s9-meta-card accent-left-sec">
+        <span class="s9-meta-card-label">tools/skills/yt-transcript-to-md/</span>
+        <div class="s9-meta-card-title sec">Otra skill, otra tarea</div>
+        <div class="s9-meta-card-body">
+          Toma una transcripción de YouTube y la convierte en material estructurado de clase. Dos procedimientos completamente distintos, dos skills distintas.<br><br>
+          Cuando <code class="sec-code">slide-generation</code> está activa, <code class="sec-code">yt-transcript-to-md</code> no ocupa un solo token. Y viceversa.
+        </div>
+      </div>
+    </div>
+    <div class="s9-meta-moment">
+      Momento meta: lo que estás mirando ahora mismo fue generado por esa skill.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la tarjeta izquierda — nombrar las cuatro fases en voz alta. Mencionar el checkpoint duro. Señalar la tarjeta derecha — subrayar que son dos procedimientos distintos y que nunca cargan juntas. Leer el callout meta al final.</strong></p>
+    <p><u>Slide del ejemplo concreto y meta. Dos tarjetas: la skill de este curso y otra skill del mismo repo, distintas. El callout de cierre es el momento meta del que habla el spine — nombrar que este deck fue generado por slide-generation es una demostración del argumento en acto.</u></p>
+    <p><em>"El ejemplo más concreto está en este mismo repositorio. tools/skills/slide-generation/ es la skill que construyó las clases que estás viendo. Su SKILL.md define cuatro fases: Spine primero, el esqueleto didáctico; luego Plan, las tareas de implementación; luego Execute, escribir los slides sección por sección con checklists; y finalmente Verify y Finish."</em></p>
+    <p><em>"Tiene un checkpoint duro en medio: no se genera ningún HTML hasta que el spine.md fue revisado y aprobado. Y lista anti-patterns explícitos. Qué no hacer, qué no saltear, qué no inventar."</em></p>
+    <p><em>"El repo tiene otra skill también: yt-transcript-to-md. Hace algo completamente distinto — convierte transcripciones de YouTube en material de clase. Dos skills, dos procedimientos. Cuando una está activa, la otra no existe en el contexto. Cero tokens."</em></p>
+    <p><em>"Y el momento meta: lo que estás mirando ahora mismo — este deck — fue generado por esa skill."</em></p>
+  </aside>
+</section>
+
+<!-- §9.4 · Skill ≠ slash command -->
+<section>
+  <h2>Skill ≠ slash command</h2>
+
+  <div class="s9-cmp-wrap">
+    <div class="comparison-2col">
+      <div class="s9-cmp-card skill-side">
+        <span class="s9-cmp-card-label">Skill</span>
+        <div class="s9-cmp-card-title">La capacidad / el procedimiento</div>
+        <div class="s9-cmp-card-body">
+          Define fases, verificaciones, anti-patterns. Tiene su propio <code>SKILL.md</code>. Vive en <code>tools/skills/</code> o en <code>~/.claude/skills/</code>.<br><br>
+          No es un atajo — es el conocimiento completo sobre cómo ejecutar ese tipo de tarea.
+        </div>
+      </div>
+      <div class="s9-cmp-card cmd-side">
+        <span class="s9-cmp-card-label">Slash command</span>
+        <div class="s9-cmp-card-title">El disparador / el acceso directo</div>
+        <div class="s9-cmp-card-body">
+          Un archivo <code>.claude/commands/nombre.md</code>. Una acción frecuente con nombre corto.<br><br>
+          Puede invocar una skill — pero no necesariamente. <code>/memory</code> y <code>/context</code> no invocan ninguna skill. Son shortcuts puros.
+        </div>
+      </div>
+    </div>
+    <div class="s9-cmp-note">
+      <strong>La relación no es 1:1.</strong> Algunos slash commands invocan skills; otros no. Una skill puede existir sin que ningún slash command la llame directamente.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar las dos columnas — leerlas en paralelo. Dar el ejemplo de /memory y /context como shortcuts sin skill. Leer la nota de cierre.</strong></p>
+    <p><u>Slide de distinción conceptual. Las dos columnas ponen en tensión los dos mecanismos. La nota al pie corrige el error más común: asumir que skill y slash command son lo mismo o que van siempre juntos.</u></p>
+    <p><em>"La distinción importa porque se confunde fácil. Una skill es la capacidad — el procedimiento completo, con fases, verificaciones, anti-patterns. Un slash command es el disparador — un nombre corto para una acción frecuente."</em></p>
+    <p><em>"Algunos slash commands invocan skills. Pero no todos. /memory te muestra qué tiene cargado Claude — no hay ninguna skill de por medio. /context te da el estado de la sesión — tampoco hay skill. Son shortcuts directos, sin procedimiento definido detrás."</em></p>
+    <p><em>"La relación no es uno a uno. La distinción no es solo nomenclatura: es la diferencia entre dónde vive el conocimiento y cómo se lo llama."</em></p>
+  </aside>
+</section>
+
+<!-- §9.5 · /build-class como ejemplo — la separación no es cosmética -->
+<section>
+  <h2>/build-class: el comando que no sabe de fases</h2>
+
+  <div class="s9-cmd-wrap">
+    <div class="bg-code-card s9-cmd-code-block">
+      <span class="s9-cmd-comment"># .claude/commands/build-class.md</span><br><br>
+      <span class="s9-cmd-content">"El usuario quiere construir slides para la semana actual.</span><br>
+      <span class="s9-cmd-content">&nbsp;El directorio de trabajo debe ser semanas/NN/.</span><br>
+      <span class="s9-cmd-content">&nbsp;Invocá la skill <span style="color:var(--accent); font-weight:700;">slide-generation</span>."</span>
+    </div>
+    <div class="s9-cmd-callout">
+      Eso es todo. El slash command no sabe nada de fases, de spine, de checklists, de checkpoints duros.
+    </div>
+    <div class="s9-cmd-sep-note">
+      <strong>La separación no es cosmética.</strong> Si mañana cambia el pipeline de generación de slides, actualizás la skill — no el comando. El comando sigue siendo una línea. El procedimiento completo vive donde corresponde.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el bloque de código despacio, como si fuera el contenido real del archivo. Leer el callout. Enfatizar "la separación no es cosmética" y la idea de dónde vive el procedimiento.</strong></p>
+    <p><u>Slide del ejemplo concreto de slash command. El bloque de código muestra el contenido real de build-class.md — breve a propósito. El contraste con las cuatro fases de la skill que se vieron en el slide anterior es el punto conceptual central.</u></p>
+    <p><em>"Mirá el contenido real de .claude/commands/build-class.md. Es literalmente una línea. No sabe nada de fases. No sabe que hay un spine.md que aprobar antes de generar HTML. No sabe de los checklists de revisión."</em></p>
+    <p><em>"Solo sabe que tiene que invocar la skill slide-generation. El procedimiento completo vive ahí."</em></p>
+    <p><em>"Y eso no es accidental. La separación no es cosmética. Si mañana cambia el pipeline — si se agrega una fase de revisión, si cambia el orden de los pasos, si aparece un nuevo tipo de slide — actualizás la skill. El comando sigue siendo una línea. El que lo usa no nota el cambio."</em></p>
+  </aside>
+</section>
+
+<!-- §9.6 · La tabla que ordena todo — tricotomía completa show-3 -->
+<section>
+  <h2>La tabla que ordena todo — tricotomía completa</h2>
+
+  <div class="tricotomia show-3">
+    <div class="tcell thead">Rótulo</div>
+    <div class="tcell thead">Mecanismo</div>
+    <div class="tcell thead">Cuándo paga contexto</div>
+    <div class="trow-1"><div class="tcell">Siempre cargado</div><div class="tcell">CLAUDE.md y @import</div><div class="tcell">arranque de cada sesión, siempre</div></div>
+    <div class="trow-2"><div class="tcell">Condicional</div><div class="tcell">path-scoped rules · skills</div><div class="tcell">al tocar un archivo / al invocar</div></div>
+    <div class="trow-3"><div class="tcell">Autocurado</div><div class="tcell">auto memory</div><div class="tcell">entre sesiones, lo cura el sistema</div></div>
+  </div>
+
+  <p class="s9-tricotomia-caption">
+    La pregunta que los ordena: <strong>¿cuándo paga contexto?</strong><br>
+    Una skill cae en "condicional" igual que las path-scoped rules — mismo rótulo, trigger distinto: archivo que matchea vs. procedimiento que se invoca. El resultado en contexto es el mismo: cero hasta que hace falta. Esto cierra el adelanto del §4.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar la tabla — las tres filas iluminadas. Leer el caption. Remarcar que la fila 2 ahora dice "path-scoped rules · skills" — el punto de que comparten el rótulo condicional. Nombrar el adelanto del §4.</strong></p>
+    <p><u>Slide del payoff de la tricotomía. La tabla es el mismo visual de §4 y §8, ahora con show-3 y las tres filas completas. La fila 2 muestra explícitamente que skill y path-scoped rule comparten el rótulo "condicional" con triggers distintos. Este es el cierre del dispositivo pedagógico de tres tiempos anunciado en la spine.</u></p>
+    <p><em>"La pregunta que los ordena es siempre la misma: ¿cuándo paga contexto? Con esa pregunta, los tres mecanismos se ubican solos."</em></p>
+    <p><em>"CLAUDE.md: al arranque, siempre, sin excepción. Path-scoped rules y skills: condicional — pero con triggers distintos. Una entra cuando tocás un archivo que matchea el glob; la otra entra cuando la invocás o cuando la tarea la requiere. El resultado en términos de contexto es idéntico: cero hasta que hace falta, exactamente cuando hace falta."</em></p>
+    <p><em>"Y auto memory en la tercera fila: entre sesiones, lo cura el sistema. El agente escribe, vos auditás."</em></p>
+    <p><em>"Esta tabla la plantó §4. §8 cerró dos filas. §9 cierra la tercera. Si ahora les preguntan cómo funciona cualquier feature de Claude Code, tienen la pregunta correcta: ¿cuándo paga contexto?"</em></p>
+  </aside>
+</section>
+
+<!-- §9.7 · section-divider — Demo D6 -->
+<section class="section-divider">
+  <h2>Demo D6 · La skill on-demand</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">La skill existe en el repo. No está en el contexto. No existe, para esta sesión, hasta que la pidamos.</p>
+
+  <aside class="notes">
+    <p><u>Divider de demo D6. El objetivo es hacer visible el momento exacto en que una skill entra al contexto. El subtítulo es la intro para el aula del source material — se puede leer directamente. El demo tiene un momento meta posible: la skill que se invoca es la que generó este deck.</u></p>
+    <p><em>"Vamos al demo. Hay una skill instalada en este repo. No está en el contexto. No existe, para esta sesión, hasta que la pidamos. Vamos a ver exactamente cuándo aparece."</em></p>
+  </aside>
+</section>
+
+<!-- §9.8 · Demo D6 beats — clickable-steps -->
+<section>
+  <h2>D6 · Tres beats: la skill on-demand</h2>
+
+  <div class="s9-demo-wrap">
+    <div id="s9-demo-steps"></div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Setup: Claude Code abierto en el repo del curso. /context (o /memory) disponible para mostrar fuentes cargadas. Click recorre los 3 beats.</strong></p>
+    <p><u>Beat 1 — qué mirar: ejecutar /context o /memory. La skill slide-generation NO aparece en la lista de fuentes de instrucción cargadas. Solo están CLAUDE.md y las reglas activas. El archivo existe en tools/skills/ — simplemente no está en el contexto de esta sesión. Beat 2 — qué mirar: escribir /build-class o pedirle a Claude explícitamente que genere slides para la semana actual. La skill entra en el momento de la invocación. Si /context muestra fuentes, debería listar slide-generation. Si no da ese detalle, el indicador es el comportamiento: Claude empieza a pedir el spine, carga _config/slide-conventions.md, sigue el pipeline — cosas que no haría sin la skill presente. Momento meta posible: la skill que se invoca es la que generó este mismo deck. Beat 3 — qué mirar: cerrar con el mapa completo de los tres mecanismos. Plan B si /context no da el detalle: abrir una sesión sin invocar nada y pedirle a Claude que revise un archivo cualquiera — no debería ejecutar fases de slide-generation ni pedir spine. Luego invocar /build-class y mostrar que ahora sí ejecuta las fases del pipeline, hace el checkpoint de spine, carga las convenciones. La presencia de la skill se demuestra por su efecto, no por la lista de fuentes.</u></p>
+    <p><em>"Beat 1. Abro una sesión nueva en el directorio del repo. Ejecuto /context. Miren qué está cargado: CLAUDE.md, las reglas activas. La skill slide-generation no aparece. El archivo existe en tools/skills/. Para esta sesión, no existe."</em></p>
+    <p><em>"Beat 2. Escribo /build-class. Recién ahora paga su lugar. Si miran el comportamiento de Claude — empieza a pedir el spine, carga las convenciones de slide, sigue el pipeline de cuatro fases. Eso no lo haría sin la skill. Apareció exactamente cuando la pedí. Por cierto: la skill que acaban de ver entrar al contexto es la que generó este deck."</em></p>
+    <p><em>"Beat 3. El mapa completo: una path-scoped rule entra cuando tocás cierto archivo. Una skill, cuando la pedís. CLAUDE.md, siempre. Tres formas de actuar sobre el contexto. La tricotomía que §4 plantó, ahora cerrada."</em></p>
+  </aside>
+</section>
+
+<!-- §9.9 · Cierre + bridge a §10 -->
+<section>
+  <h2>Del procedimiento al loop — lo que viene en §10</h2>
+
+  <div class="s9-close-card">
+    <p class="s9-close-main">
+      Las skills aíslan un <em style="color:var(--accent); font-style:normal; font-weight:700;">procedimiento</em> del resto del contexto. No instrucciones dispersas, sino un objeto de conocimiento completo sobre cómo hacer algo — que no existe para la sesión hasta que se necesita.
+    </p>
+    <p class="s9-close-bridge">
+      §10 aísla algo más grande: un <em>loop entero</em>. Un sub-agente con su propia ventana de contexto que nace, trabaja y muere — devolviendo solo el resultado al supervisor. Es la misma lógica de siempre — aislar del contexto lo que no se necesita ahora — aplicada a la unidad más grande: el agente mismo.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el párrafo principal — remarcar "procedimiento" como la unidad de aislamiento. Pausa. Leer el bridge con énfasis en "loop entero" como la escala mayor.</strong></p>
+    <p><u>Cierre de §9 y puente a §10. El párrafo principal consolida qué aislan las skills. El bridge conecta con la lógica escalada de los sub-agentes: misma idea de aislamiento, unidad mayor. La frase "la misma lógica de siempre" ancla la continuidad del hilo conceptual de la parte 2.</u></p>
+    <p><em>"Las skills aíslan un procedimiento. No instrucciones sueltas — un procedimiento completo, con fases y verificaciones, que no existe para la sesión hasta que se invoca. Eso es lo que vimos."</em></p>
+    <p><em>"§10 escala la misma lógica. No aislar un procedimiento del contexto — aislar un loop entero. Un sub-agente tiene su propia ventana, su propio ciclo pensar-actuar-observar, su propia instancia. Puede leer cincuenta archivos, razonar miles de tokens — todo en su ventana. Al supervisor le vuelve solo el resultado."</em></p>
+    <p><em>"Es la misma pregunta de siempre: ¿cuándo paga contexto? Y la misma respuesta: solo cuando hace falta. Pero aplicada a la unidad más grande del sistema: el agente mismo."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§9-START -->
+<script>
+  initClickableSteps({containerId: 's9-demo-steps', steps: [
+    {
+      title: 'Beat 1 — La skill existe, pero la sesión no la conoce',
+      summary: 'Sesión nueva en el directorio del repo. Se ejecuta /context (o /memory) para mostrar fuentes cargadas.',
+      example: '/context → solo aparecen CLAUDE.md y las reglas activas. La skill slide-generation no está en la lista. El archivo existe en tools/skills/ — para esta sesión, no existe. Cero tokens.'
+    },
+    {
+      title: 'Beat 2 — Invocar la skill',
+      summary: 'Se escribe /build-class o se le pide a Claude explícitamente que genere slides para la semana actual.',
+      example: 'La skill entra en el momento de la invocación. Indicador por comportamiento: Claude empieza a pedir el spine, carga _config/slide-conventions.md, sigue las cuatro fases del pipeline — cosas que no haría sin la skill presente. Momento meta: la skill que entró al contexto es la que generó este deck.'
+    },
+    {
+      title: 'Beat 3 — El mapa completo de los tres mecanismos',
+      summary: 'Cierre con la tricotomía visible: path-scoped rule / skill / CLAUDE.md.',
+      example: 'Una path-scoped rule entra cuando tocás cierto archivo. Una skill, cuando la pedís. CLAUDE.md, siempre. Tres formas de actuar sobre el contexto — la tricotomía de §4 ahora cerrada.'
+    }
+  ]});
+</script>
+<!-- INIT-SCRIPTS-§9-END -->
