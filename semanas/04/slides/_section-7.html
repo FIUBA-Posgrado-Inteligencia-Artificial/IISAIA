@@ -1,0 +1,663 @@
+<style>
+/* Scoped styles for §7 only */
+
+/* Opener lens wrap */
+.s7-opener-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 24px auto 0;
+  max-width: 640px;
+}
+.s7-opener-sublabel {
+  font-size: 0.65em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.s7-opener-line {
+  font-size: 0.82em;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Single focused card */
+.s7-focus-card {
+  max-width: 680px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 28px 34px;
+  text-align: left;
+}
+.s7-focus-card p {
+  font-size: 0.86em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+.s7-focus-card p:last-child {
+  margin: 0;
+}
+.s7-focus-card .s7-focus-callout {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--accent);
+  border-top: 1px solid #2a3a5a;
+  padding-top: 16px;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* Jerarquía — cascade layout */
+.s7-hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 760px;
+  margin: 20px auto 0;
+}
+.s7-hier-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.s7-hier-level {
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.s7-hier-row:first-child .s7-hier-level {
+  border-radius: 8px 0 0 0;
+}
+.s7-hier-row:last-child .s7-hier-level {
+  border-radius: 0 0 0 8px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s7-hier-level-num {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.s7-hier-level-name {
+  font-size: 0.62em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  text-align: center;
+  line-height: 1.3;
+}
+.s7-hier-content {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-bottom: none;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+}
+.s7-hier-row:first-child .s7-hier-content {
+  border-radius: 0 8px 0 0;
+}
+.s7-hier-row:last-child .s7-hier-content {
+  border-radius: 0 0 8px 0;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s7-hier-title {
+  font-size: 0.74em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.s7-hier-paths {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.s7-hier-use {
+  font-size: 0.6em;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.s7-hier-note {
+  max-width: 760px;
+  margin: 12px auto 0;
+  font-size: 0.64em;
+  color: var(--text-muted);
+  text-align: right;
+  font-style: italic;
+}
+
+/* Orden de carga — flow diagram */
+.s7-load-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  max-width: 560px;
+  margin: 20px auto 0;
+}
+.s7-load-node {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 11px 22px;
+  text-align: center;
+  width: 100%;
+}
+.s7-load-node.root {
+  border-color: var(--accent-secondary);
+}
+.s7-load-node.cwd {
+  border-color: var(--accent);
+}
+.s7-load-label {
+  font-size: 0.62em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  display: block;
+}
+.s7-load-path {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.s7-load-arrow {
+  color: var(--text-muted);
+  font-size: 1.1em;
+  line-height: 1;
+  padding: 3px 0;
+}
+.s7-load-warning {
+  max-width: 560px;
+  margin: 14px auto 0;
+  background: rgba(130, 170, 255, 0.07);
+  border: 1px solid rgba(130, 170, 255, 0.25);
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-size: 0.66em;
+  color: var(--accent-secondary);
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* @import card */
+.s7-import-wrap {
+  max-width: 700px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.s7-import-syntax {
+  background: var(--bg-code);
+  border-radius: 8px;
+  padding: 20px 26px;
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  color: var(--accent);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+.s7-import-props {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.s7-import-prop {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 14px 18px;
+}
+.s7-import-prop-label {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 5px;
+}
+.s7-import-prop-val {
+  font-size: 0.7em;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.s7-import-callout {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.25);
+  border-radius: 7px;
+  padding: 14px 20px;
+  font-size: 0.72em;
+  color: var(--accent);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.55;
+}
+
+/* Repo vivo */
+.s7-repo-wrap {
+  max-width: 700px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s7-repo-path {
+  background: var(--bg-code);
+  border-radius: 7px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.76em;
+  color: var(--accent);
+  text-align: center;
+}
+.s7-repo-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.s7-repo-item {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 13px 16px;
+}
+.s7-repo-item-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+.s7-repo-item-val {
+  font-size: 0.68em;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+.s7-repo-connect {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  padding: 14px 20px;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s7-repo-connect strong {
+  color: var(--text-primary);
+}
+
+/* Demo beats */
+.s7-demo-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+
+/* Cierre */
+.s7-close-card {
+  max-width: 660px;
+  margin: 28px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 28px 36px;
+  text-align: center;
+}
+.s7-close-main {
+  font-size: 0.84em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+.s7-close-bridge {
+  font-size: 0.76em;
+  color: var(--text-muted);
+  line-height: 1.75;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 18px;
+  margin: 0;
+}
+.s7-close-bridge em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+</style>
+
+<!-- §7.1 · Opener — lens-tracker aterriza en CONTEXTO -->
+<section>
+  <h2>¿Loop o contexto? Contexto.</h2>
+
+  <div class="s7-opener-wrap">
+    <div class="lens-tracker on-context">
+      <div class="pole pole-loop">LOOP</div>
+      <div class="lens-sep">↔</div>
+      <div class="pole pole-context">CONTEXTO</div>
+    </div>
+    <p class="s7-opener-sublabel">siempre cargado</p>
+    <p class="s7-opener-line">CLAUDE.md es la primera herramienta de contexto de la parte 2.<br>Texto tuyo, inyectado en la ventana antes del primer mensaje, en cada sesión.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el tracker — CONTEXTO iluminado. Leer el sublabel en voz alta. Pausa breve antes de continuar.</strong></p>
+    <p><u>Slide de apertura de §7. Es el primer uso del tracker con un polo iluminado: CONTEXTO. La sub-etiqueta "siempre cargado" es el rótulo de la tricotomía que se plantó en §4. No hay hook narrativo separado — el tracker es el dispositivo de apertura.</u></p>
+    <p><em>"La pregunta-lente aterriza: contexto. Y la variante específica dentro del contexto es 'siempre cargado'. Cada sesión de Claude Code, antes de que escribás una sola instrucción, el agente ya leyó algo. Eso es CLAUDE.md. Vamos a ver cómo funciona, qué niveles tiene, y qué cuesta."</em></p>
+  </aside>
+</section>
+
+<!-- §7.2 · CLAUDE.md = siempre cargado -->
+<section>
+  <h2>CLAUDE.md es texto tuyo en la ventana desde el arranque</h2>
+
+  <div class="s7-focus-card">
+    <p>
+      Antes de que escribas el primer mensaje de una sesión, Claude ya leyó un conjunto de archivos de texto plano.
+      Esos archivos son los <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">CLAUDE.md</code>,
+      y su contenido aparece inyectado en la ventana de contexto desde el primer intercambio.
+      No hay prompts implícitos ni magia: es texto tuyo, cargado automáticamente, siempre.
+    </p>
+    <p>
+      La consecuencia directa de esa propiedad: todo lo que ponés ahí ocupa contexto en cada sesión, sin excepción —
+      sin importar si esa instrucción tiene algo que ver con la tarea del momento.
+    </p>
+    <p class="s7-focus-callout">
+      Todo lo que ponés en CLAUDE.md cuesta contexto siempre → es la herramienta más directa para moldear el comportamiento, y la que más disciplina exige.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer los dos párrafos del card. Pausa antes del callout. Leer el callout despacio — es la tesis central de §7.</strong></p>
+    <p><u>Slide de concepto central. Un solo card con la definición operativa de CLAUDE.md y su consecuencia en contexto. El callout acuñado resume la dualidad: poder máximo, costo constante. Conecta explícitamente con la tricotomía del §4 ("siempre cargado").</u></p>
+    <p><em>"No hay nada escondido acá. Es texto tuyo. Lo escribís vos, lo lee Claude al arrancar la sesión, entra a la ventana de contexto y queda ahí. Antes de tu primer mensaje."</em></p>
+    <p><em>"La propiedad es simple y tiene una consecuencia que vale la pena remarcar: todo lo que ponés ahí cuesta contexto en cada sesión. Con relevancia para la tarea del momento, o sin ella. El costo es constante."</em></p>
+    <p><em>"Eso hace a CLAUDE.md la herramienta más directa que tenés para moldear el comportamiento del agente de manera persistente — y también la que exige más disciplina sobre qué escribís. Porque lo que ponés ahí siempre paga."</em></p>
+  </aside>
+</section>
+
+<!-- §7.3 · La jerarquía — 4 niveles -->
+<section>
+  <h2>Cuatro niveles, de lo más amplio a lo más específico</h2>
+
+  <div class="s7-hierarchy">
+    <div class="s7-hier-row">
+      <div class="s7-hier-level">
+        <span class="s7-hier-level-num">Nivel 1</span>
+        <span class="s7-hier-level-name">Managed policy</span>
+      </div>
+      <div class="s7-hier-content">
+        <span class="s7-hier-title">Política organizacional — instalada por el administrador</span>
+        <span class="s7-hier-paths">macOS: <code style="font-family:var(--font-mono);">/Library/Application Support/ClaudeCode/CLAUDE.md</code><br>Linux/WSL: <code style="font-family:var(--font-mono);">/etc/claude-code/CLAUDE.md</code>&nbsp;&nbsp;·&nbsp;&nbsp;Windows: <code style="font-family:var(--font-mono);">C:\Program Files\ClaudeCode\CLAUDE.md</code></span>
+        <span class="s7-hier-use">El usuario no puede excluirlo. Compliance y estándares de seguridad de la organización.</span>
+      </div>
+    </div>
+    <div class="s7-hier-row">
+      <div class="s7-hier-level">
+        <span class="s7-hier-level-num">Nivel 2</span>
+        <span class="s7-hier-level-name">Usuario</span>
+      </div>
+      <div class="s7-hier-content">
+        <span class="s7-hier-title">Preferencias personales — todos los proyectos</span>
+        <span class="s7-hier-paths"><code style="font-family:var(--font-mono);">~/.claude/CLAUDE.md</code></span>
+        <span class="s7-hier-use">Estilo de respuesta, idioma de comentarios, convenciones propias. No se comparte con el equipo.</span>
+      </div>
+    </div>
+    <div class="s7-hier-row">
+      <div class="s7-hier-level">
+        <span class="s7-hier-level-num">Nivel 3</span>
+        <span class="s7-hier-level-name">Proyecto</span>
+      </div>
+      <div class="s7-hier-content">
+        <span class="s7-hier-title">Instrucciones del equipo — versionadas con el código</span>
+        <span class="s7-hier-paths"><code style="font-family:var(--font-mono);">./CLAUDE.md</code>&nbsp;&nbsp;o&nbsp;&nbsp;<code style="font-family:var(--font-mono)">./.claude/CLAUDE.md</code></span>
+        <span class="s7-hier-use">Arquitectura, convenciones, workflows, restricciones del dominio. Lo leen todos los que trabajan en el repo.</span>
+      </div>
+    </div>
+    <div class="s7-hier-row">
+      <div class="s7-hier-level">
+        <span class="s7-hier-level-num">Nivel 4</span>
+        <span class="s7-hier-level-name">Local</span>
+      </div>
+      <div class="s7-hier-content">
+        <span class="s7-hier-title">Personal dentro del proyecto — no viaja al repo</span>
+        <span class="s7-hier-paths"><code style="font-family:var(--font-mono);">./CLAUDE.local.md</code>&nbsp;&nbsp;(en <code style="font-family:var(--font-mono);">.gitignore</code>)</span>
+        <span class="s7-hier-use">Rutas de tu máquina, configuraciones locales, experimentos temporales.</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="s7-hier-note">↑ más amplio &nbsp;&nbsp;&nbsp;&nbsp; más específico ↓</p>
+
+  <aside class="notes">
+    <p><strong>Recorrer los cuatro niveles de arriba hacia abajo. Remarcar el "no puede excluirlo" en Nivel 1. Pausa en Nivel 4 — mencionar el .gitignore.</strong></p>
+    <p><u>Slide de jerarquía. Layout en cascada tipo tabla — cuatro filas, cada una con nivel a la izquierda y contenido a la derecha. No hay lista: el diseño visual ya comunica la jerarquía. El gradiente de "más amplio a más específico" va de arriba hacia abajo.</u></p>
+    <p><em>"CLAUDE.md no es un solo archivo. Es un sistema de cuatro niveles. De lo más amplio a lo más específico."</em></p>
+    <p><em>"Nivel 1: la política organizacional. La instala un administrador en la máquina. El usuario no puede quitarla. Es el nivel de compliance — estándares que aplican a todos los proyectos, sin importar quién sea el desarrollador."</em></p>
+    <p><em>"Nivel 2: el usuario. Tus preferencias personales, que seguís en todos los proyectos. Solo las leés vos — no viajan al equipo."</em></p>
+    <p><em>"Nivel 3: el proyecto. La raíz del repo, versionada con el código. Lo que cualquier persona que trabaje en ese repositorio necesita saber: arquitectura, convenciones, workflows."</em></p>
+    <p><em>"Nivel 4: el local. Personal dentro del proyecto. Rutas de tu máquina, configuraciones que no querés en el repo. Agregalo al gitignore."</em></p>
+  </aside>
+</section>
+
+<!-- §7.4 · Orden de carga — concatenación -->
+<section>
+  <h2>Caminata hacia arriba: concatenación, no sobreescritura</h2>
+
+  <div class="s7-load-flow">
+    <div class="s7-load-node root">
+      <span class="s7-load-label">Primero en cargarse</span>
+      <span class="s7-load-path">/ (raíz del sistema) → managed policy</span>
+    </div>
+    <div class="s7-load-arrow">↓</div>
+    <div class="s7-load-node">
+      <span class="s7-load-label">Nivel 2</span>
+      <span class="s7-load-path">~/.claude/CLAUDE.md</span>
+    </div>
+    <div class="s7-load-arrow">↓</div>
+    <div class="s7-load-node">
+      <span class="s7-load-label">Nivel 3</span>
+      <span class="s7-load-path">./CLAUDE.md · ./.claude/CLAUDE.md</span>
+    </div>
+    <div class="s7-load-arrow">↓</div>
+    <div class="s7-load-node cwd">
+      <span class="s7-load-label">Último en cargarse · más específico</span>
+      <span class="s7-load-path">./CLAUDE.local.md (si existe)</span>
+    </div>
+  </div>
+
+  <div class="s7-load-warning">
+    Las contradicciones entre niveles no producen un error: producen comportamiento impredecible.<br>
+    Revisá y limpiá las instrucciones que se pisarían.
+  </div>
+
+  <aside class="notes">
+    <p><strong>Recorrer el flujo de arriba hacia abajo. Enfatizar "concatenación, no sobreescritura" con la voz. Leer el warning despacio.</strong></p>
+    <p><u>Slide de orden de carga. El flujo vertical muestra la dirección de la caminata: desde la raíz del sistema hacia el directorio de trabajo. El mecanismo es concatenación — todos los niveles entran al contexto, en orden. El warning en azul enfatiza la consecuencia práctica de las contradicciones.</u></p>
+    <p><em>"Claude no elige uno de los cuatro niveles. Los combina todos. El mecanismo es una caminata hacia arriba en el árbol de directorios desde donde estás trabajando — recolecta cada CLAUDE.md que encuentra en el camino hacia la raíz."</em></p>
+    <p><em>"El orden va de más amplio a más específico: primero lo que está cerca de la raíz del sistema, último lo que está más cerca de tu directorio de trabajo. Y el resultado es concatenación: todos entran al contexto, uno después del otro."</em></p>
+    <p><em>"La consecuencia práctica de eso: si el nivel de usuario dice 'respondé en inglés' y el nivel de proyecto dice 'respondé en español', ambas instrucciones entran al contexto. Claude puede resolverlas a favor de una u otra, o de la que leyó último. No da un error — da comportamiento impredecible. Revisá lo que se pisaría."</em></p>
+  </aside>
+</section>
+
+<!-- §7.5 · @import — organiza pero no ahorra contexto -->
+<section>
+  <h2>@import organiza — pero no ahorra ni un token</h2>
+
+  <div class="s7-import-wrap">
+    <div class="s7-import-syntax">@ruta/al/archivo</div>
+
+    <div class="s7-import-props">
+      <div class="s7-import-prop">
+        <span class="s7-import-prop-label">Resolución de ruta</span>
+        <span class="s7-import-prop-val">Relativa al archivo que contiene el import, o absoluta. Recursivo hasta 5 niveles de profundidad.</span>
+      </div>
+      <div class="s7-import-prop">
+        <span class="s7-import-prop-label">Caso de uso típico</span>
+        <span class="s7-import-prop-val">Un archivo por tema (<200 líneas). Importar un <code style="font-family:var(--font-mono);">AGENTS.md</code> compartido entre repos.</span>
+      </div>
+      <div class="s7-import-prop">
+        <span class="s7-import-prop-label">Comentarios HTML</span>
+        <span class="s7-import-prop-val">Los bloques <code style="font-family:var(--font-mono);">&lt;!-- … --&gt;</code> se eliminan antes de inyectar — podés anotar para mantenedores sin gastar tokens.</span>
+      </div>
+      <div class="s7-import-prop">
+        <span class="s7-import-prop-label">Tamaño recomendado</span>
+        <span class="s7-import-prop-val">Menos de 200 líneas por archivo. Archivos más largos tienden a reducir la adherencia a las instrucciones.</span>
+      </div>
+    </div>
+
+    <div class="s7-import-callout">
+      Los archivos importados se expanden e inyectan igual que el CLAUDE.md que los referencia.<br>
+      Dividir en varios archivos ayuda con la organización — no reduce el costo en contexto.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la sintaxis arriba. Recorrer los cuatro props. Leer el callout en voz alta y dejar caer.</strong></p>
+    <p><u>Slide de @import. La sintaxis aparece prominente arriba. Los cuatro props cubren: resolución, caso de uso, truco de comentarios HTML, guía de tamaño. El callout cierra con el punto más confundido: @import no ahorra contexto.</u></p>
+    <p><em>"Un CLAUDE.md puede referenciar otros archivos con @ruta/al/archivo. La ruta puede ser relativa o absoluta; los imports son recursivos hasta 5 niveles."</em></p>
+    <p><em>"El caso de uso más frecuente es organización: un archivo por tema, más fácil de mantener, no más de 200 líneas por archivo — los archivos más largos tienden a reducir qué tanto el agente respeta las instrucciones que contienen."</em></p>
+    <p><em>"Un detalle útil: los comentarios HTML — los bloques entre corchetes — se eliminan antes de que el contenido se inyecte. Podés anotar el archivo para otros mantenedores sin gastar tokens."</em></p>
+    <p><em>"Y el punto que más se confunde: @import no ahorra contexto. Los archivos importados se expanden e inyectan exactamente igual que el CLAUDE.md que los referencia. Dividir en varios archivos te ayuda a mantener el archivo — no reduce ni un token el costo en la ventana."</em></p>
+  </aside>
+</section>
+
+<!-- §7.6 · Este repo como ejemplo vivo -->
+<section>
+  <h2>Este repo como ejemplo vivo</h2>
+
+  <div class="s7-repo-wrap">
+    <div class="s7-repo-path">/Users/enzo/Documents/IISAIA/CLAUDE.md</div>
+
+    <div class="s7-repo-items">
+      <div class="s7-repo-item">
+        <span class="s7-repo-item-label">Qué define</span>
+        <span class="s7-repo-item-val">Tabla de rutas del repositorio — qué vive dónde y para qué.</span>
+      </div>
+      <div class="s7-repo-item">
+        <span class="s7-repo-item-label">Routing table</span>
+        <span class="s7-repo-item-val">Mapa de tareas a archivos: "para editar slides de la semana N, ir a semanas/NN/slides/".</span>
+      </div>
+      <div class="s7-repo-item">
+        <span class="s7-repo-item-label">Convenciones git</span>
+        <span class="s7-repo-item-val">Feature branches, nunca commitear directo a main. Compartidas por todos los que trabajan en el repo.</span>
+      </div>
+    </div>
+
+    <div class="s7-repo-connect">
+      Cuando abrís Claude Code en este directorio, ese CLAUDE.md entra completo a la ventana antes de tu primer mensaje.
+      El agente ya sabe que las slides están en <code style="font-family:var(--font-mono);color:var(--accent);">semanas/NN/slides/</code>,
+      que los patrones reutilizables están en <code style="font-family:var(--font-mono);color:var(--accent);">shared/patterns/</code>,
+      y que nunca se commitea directo a <code style="font-family:var(--font-mono);color:var(--accent);">main</code>.
+      <strong>No se lo dijiste vos en ese momento; lo encontró en el archivo.</strong>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la ruta arriba — "este es el CLAUDE.md que estamos usando ahora mismo". Recorrer los tres items. Leer el párrafo de conexión con énfasis en "no se lo dijiste vos".</strong></p>
+    <p><u>Slide del ejemplo vivo. Ancla la jerarquía a algo concreto y presente: el Nivel 3 (proyecto) de este repo. No es un ejemplo inventado — es el archivo que está cargado en la sesión actual mientras se ve esta clase. Conecta de vuelta al "siempre cargado" del §7.2.</u></p>
+    <p><em>"Nivel 3 — instrucciones de proyecto. El CLAUDE.md en la raíz de este repositorio es una instancia concreta de eso. No define preferencias personales ni políticas de organización: define lo que cualquier persona que trabaje en este repo necesita saber para no adivinar la estructura."</em></p>
+    <p><em>"Tiene una tabla de rutas: qué vive dónde, para qué. Tiene un routing table que mapea tareas a archivos. Tiene las convenciones de git del equipo."</em></p>
+    <p><em>"Y cuando abrís Claude Code en este directorio, ese archivo entra completo a la ventana antes de tu primer mensaje. El agente ya sabe todo eso. No se lo dijiste vos en ese momento; lo encontró en el archivo."</em></p>
+    <p><em>"Eso es 'siempre cargado' en la práctica."</em></p>
+  </aside>
+</section>
+
+<!-- §7.7 · section-divider — Demo D3 -->
+<section class="section-divider">
+  <h2>Demo D3 · La ventana antes y después</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Hacer visible que CLAUDE.md ocupa contexto desde el arranque — y que la jerarquía es real.</p>
+
+  <aside class="notes">
+    <p><u>Divider de demo. Pausa breve. El objetivo de D3 es hacer la diferencia de contexto medible y observable — no teórica.</u></p>
+    <p><em>"Vamos al demo. El objetivo es hacer visible algo que hasta ahora fue verbal: que CLAUDE.md efectivamente ocupa contexto desde el arranque, y que la jerarquía que acabamos de ver no es un diagrama de documentación — es real y medible."</em></p>
+  </aside>
+</section>
+
+<!-- §7.8 · Demo beats — clickable-steps D3 -->
+<section>
+  <h2>D3 · Tres beats: la ventana antes y después</h2>
+
+  <div class="s7-demo-wrap">
+    <div id="s7-demo-steps"></div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Setup: Claude Code abierto en un directorio vacío para Beat 1; CLAUDE.md preparado para agregar en Beat 2. Click recorre los 3 beats.</strong></p>
+    <p><u>Beat 1 — qué mirar: el tamaño del contexto base, sin instrucciones de proyecto — la ventana existe, casi vacía de configuración nuestra. Beat 2 — qué mirar: el delta de contexto atribuible al CLAUDE.md; las instrucciones que escribimos aparecen antes del primer intercambio. Beat 3 — qué mirar: los niveles efectivamente cargados con sus rutas — usuario, proyecto, local si existe. Plan B si /context no está disponible: usar /memory solo para mostrar la lista de archivos cargados; narrar "todo lo que ven en esta lista entró a la ventana antes de este mensaje".</u></p>
+    <p><em>"Beat 1. Directorio vacío, sin ningún CLAUDE.md. Ejecuto /context. Esto es lo que carga de entrada, sin instrucciones nuestras. La ventana existe, pero está casi vacía de configuración nuestra."</em></p>
+    <p><em>"Beat 2. Agrego un CLAUDE.md con algunas instrucciones — convenciones de nombrado, una regla de estilo, la estructura del directorio. Reinicio la sesión. Vuelvo a ejecutar /context. Mismo repo, una sesión nueva. Miren qué cambió antes de que yo pida nada."</em></p>
+    <p><em>"Beat 3. Ejecuto /memory. La jerarquía no es un dibujo. Esta es la lista real de fuentes de instrucción cargadas en esta sesión — con sus rutas."</em></p>
+  </aside>
+</section>
+
+<!-- §7.9 · Cierre + bridge a §8 -->
+<section>
+  <h2>Siempre cargado — y lo que viene después</h2>
+
+  <div class="s7-close-card">
+    <p class="s7-close-main">
+      CLAUDE.md está siempre en la ventana. Con relevancia para la tarea del momento, o sin ella.
+      Es el mecanismo más directo y también el menos selectivo: cada sesión, cada tarea, costo constante.
+    </p>
+    <p class="s7-close-bridge">
+      ¿Y si una instrucción pudiera estar en el contexto <em>solo cuando hace falta</em>,
+      y no ocupar espacio el resto del tiempo?<br>
+      Eso es §8.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el párrafo principal despacio. Pausa. Leer el bridge — la pregunta tiene que quedar flotando antes de pasar.</strong></p>
+    <p><u>Slide de cierre de §7 y puente a §8. El párrafo principal consolida la propiedad central: siempre cargado, costo constante. El bridge planta la pregunta que abre §8 — el mismo cierre que usó el source material. Conciso, sin recap.</u></p>
+    <p><em>"CLAUDE.md está siempre en la ventana. Con relevancia para la tarea del momento, o sin ella. Cada sesión. Costo constante. Es la herramienta más directa para moldear el comportamiento — y la menos selectiva."</em></p>
+    <p><em>"Eso lleva a una pregunta natural: ¿y si una instrucción pudiera estar en el contexto solo cuando hace falta, y no ocupar espacio el resto del tiempo? ¿Es posible eso?"</em></p>
+    <p><em>"Sí. Y eso es exactamente lo que vamos a ver en §8."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§7-START -->
+<script>
+  initClickableSteps({containerId: 's7-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Sin CLAUDE.md: /context',
+      summary: 'Directorio vacío, sin ningún CLAUDE.md de proyecto. Se ejecuta /context.',
+      example: '/context → ventana base, casi vacía de instrucciones nuestras. El tamaño del contexto refleja solo las instrucciones del sistema; no hay instrucciones de proyecto, de usuario local, ni de organización en este directorio.'
+    },
+    {
+      title: 'Beat 2 — Con CLAUDE.md: el delta',
+      summary: 'Se agrega un CLAUDE.md con convenciones, se reinicia la sesión y se vuelve a ejecutar /context.',
+      example: '/context → mismo repo, nueva sesión. El delta de contexto es atribuible al CLAUDE.md. Las instrucciones que escribimos aparecen antes del primer intercambio — antes de que pidamos nada.'
+    },
+    {
+      title: 'Beat 3 — /memory: la lista real de fuentes',
+      summary: 'Se ejecuta /memory para ver la lista de archivos de instrucción cargados con sus rutas.',
+      example: '/memory → la jerarquía no es un diagrama. Esta es la lista real de fuentes cargadas en esta sesión: usuario, proyecto, local si existe. Cada ruta, cada nivel, efectivamente presente en la ventana.'
+    }
+  ]});
+</script>
+<!-- INIT-SCRIPTS-§7-END -->
