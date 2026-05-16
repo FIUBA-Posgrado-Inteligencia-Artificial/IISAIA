@@ -1,0 +1,644 @@
+<style>
+/* Scoped styles for §2 only */
+.s2-trace {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.s2-trace-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.s2-trace-phase {
+  width: 88px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  font-size: 0.6em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+.s2-trace-phase.pensar { color: var(--accent); }
+.s2-trace-phase.actuar { color: var(--accent-secondary); }
+.s2-trace-phase.observar { color: #ffcb6b; }
+.s2-trace-connector {
+  width: 2px;
+  background: #2a3a5a;
+  flex-shrink: 0;
+  position: relative;
+}
+.s2-trace-connector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.s2-trace-row:first-child .s2-trace-connector::before { background: var(--accent); }
+.s2-trace-row:nth-child(3) .s2-trace-connector::before { background: var(--accent-secondary); }
+.s2-trace-row:nth-child(5) .s2-trace-connector::before { background: #ffcb6b; }
+.s2-trace-row:nth-child(7) .s2-trace-connector::before { background: var(--accent); }
+.s2-trace-row:nth-child(9) .s2-trace-connector::before { background: var(--accent-secondary); }
+.s2-trace-row:nth-child(11) .s2-trace-connector::before { background: #ffcb6b; }
+.s2-trace-body {
+  padding: 6px 0 6px 14px;
+  flex: 1;
+}
+.s2-trace-body p {
+  margin: 0;
+  font-size: 0.68em;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+.s2-trace-body code {
+  font-family: var(--font-mono);
+  background: var(--bg-code);
+  padding: 0 5px;
+  border-radius: 3px;
+  font-size: 0.95em;
+  color: var(--accent-secondary);
+}
+.s2-trace-gap {
+  height: 8px;
+  margin-left: 88px;
+  width: 2px;
+  background: #2a3a5a;
+}
+.s2-trace-close {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Four-piece pipeline for §2 */
+.s2-four-pipe {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: start;
+  gap: 0;
+  margin: 18px 0 6px;
+}
+.s2-pipe-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-muted);
+  border-radius: 8px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.s2-pipe-card h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+.s2-pipe-card .s2-aporta {
+  font-size: 0.6em;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.s2-pipe-card .s2-falta {
+  font-size: 0.58em;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 6px;
+  margin-top: 2px;
+}
+.s2-pipe-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  color: var(--text-muted);
+  font-size: 1.2em;
+  padding-top: 30px;
+}
+.s2-pipe-close {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.72em;
+  color: var(--accent-secondary);
+  font-style: italic;
+}
+
+/* Condiciones de corte cards */
+.s2-corte-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.s2-corte-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-muted);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.s2-corte-card h3 {
+  font-size: 0.72em;
+  font-weight: 700;
+  margin: 0 0 5px;
+  color: var(--accent);
+}
+.s2-corte-card.ideal h3 { color: #27ae60; }
+.s2-corte-card.limit h3 { color: var(--accent-secondary); }
+.s2-corte-card.human h3 { color: #ffcb6b; }
+.s2-corte-card.fail h3 { color: #e74c3c; }
+.s2-corte-card p {
+  font-size: 0.62em;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.s2-corte-close {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Loop anim container sizing */
+.s2-loop-wrap {
+  margin: 18px auto 0;
+  max-width: 720px;
+}
+
+/* Phase definition card */
+.s2-phase-card {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 20px 28px;
+  max-width: 580px;
+  margin: 18px auto 0;
+  border-left: 3px solid var(--accent);
+}
+.s2-phase-card.actuar { border-left-color: var(--accent-secondary); }
+.s2-phase-card.observar { border-left-color: #ffcb6b; }
+.s2-phase-card h3 {
+  font-size: 0.78em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+.s2-phase-card.actuar h3 { color: var(--accent-secondary); }
+.s2-phase-card.observar h3 { color: #ffcb6b; }
+.s2-phase-card p {
+  font-size: 0.74em;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+.s2-phase-card .s2-produces {
+  font-size: 0.66em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 8px;
+  margin-top: 4px;
+}
+</style>
+
+<!-- §2.1 · Hook — "Arreglá el bug." -->
+<section>
+  <h2>"Arreglá el bug."</h2>
+
+  <div class="bg-secondary-card" style="max-width:580px;margin:20px auto 0;padding:28px 32px;text-align:center;">
+    <p style="font-size:1.05em;color:var(--text-primary);margin:0 0 8px;line-height:1.5;">
+      Una sola línea. Sin stack trace. Sin contexto.<br>
+      <span style="color:var(--text-muted);font-size:0.85em;">¿Por qué eso no alcanza para que el agente termine?</span>
+    </p>
+
+    <p class="fragment fade-in" style="margin:22px 0 0;font-size:0.82em;color:var(--text-muted);line-height:1.6;border-top:1px solid #2a3a5a;padding-top:18px;">
+      Porque el modelo todavía no vio el error.<br>
+      No sabe qué stack trace aparece cuando corrés los tests.<br>
+      Le pediste que arregle algo que no puede ver.
+    </p>
+
+    <p class="fragment fade-in" style="margin:16px 0 0;font-size:0.9em;color:var(--accent);font-style:italic;">
+      Una respuesta en ese momento sería una apuesta.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Abrir con la pregunta en pantalla. Pausa. Esperar que alguno intente responder mentalmente. Primer click revela el por qué. Segundo click cierra.</strong></p>
+    <p><u>Slide de apertura de sección. La pregunta es genuina — no retórica. La respuesta la da el alumno mentalmente antes de verla.</u></p>
+    <p><em>"'Arreglá el bug.' Una sola línea. Le diste eso al agente. ¿Por qué no alcanza?"</em></p>
+    <p><em>"Porque el modelo todavía no vio el error. No sabe qué stack trace aparece cuando corrés los tests, no sabe si el problema está en la función que escribió o en el test que la invoca. Le pediste que arregle algo que no puede ver todavía. La respuesta que te daría en ese momento sería una apuesta — y las apuestas son caras cuando el que actúa sobre tu repo es el agente, no vos."</em></p>
+    <p><em>"Entonces ¿qué hace? No da una respuesta. Entra en un loop."</em></p>
+  </aside>
+</section>
+
+<!-- §2.2 · No da una respuesta: entra en un loop -->
+<section>
+  <h2>No da una respuesta: entra en un loop</h2>
+
+  <div class="s2-loop-wrap">
+    <div id="s2-loop-intro"></div>
+  </div>
+
+  <p style="text-align:center;margin-top:18px;font-size:0.78em;color:var(--text-muted);font-style:italic;">
+    La firma de la semana. Todo lo que sigue actúa sobre este ciclo.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Dejar que la animación cargue antes de hablar. Señalar el ciclo y las salidas con el puntero.</strong></p>
+    <p><u>Primera aparición de la animación bespoke del loop. Modo intro: ciclo completo, sin fase resaltada. Las 4 condiciones de corte aparecen como salidas del ciclo.</u></p>
+    <p><em>"La diferencia entre un chat que sugiere y un agente que resuelve no está en qué modelo corre adentro. Está en esto: el agente no da una respuesta única. Entra en un loop."</em></p>
+    <p><em>"Tres fases que se repiten — pensar, actuar, observar — con un arco de vuelta. Y cuatro salidas posibles, que son las condiciones de corte: cuándo el loop decide que terminó. Este ciclo es la firma de la semana. Todo lo que veamos — las herramientas, los features de Claude Code — va a actuar sobre alguna parte de este diagrama."</em></p>
+  </aside>
+</section>
+
+<!-- §2.3 · Pensar -->
+<section>
+  <h2>Pensar — formular el próximo paso</h2>
+
+  <div class="s2-loop-wrap">
+    <div id="s2-loop-pensar"></div>
+  </div>
+
+  <div class="s2-phase-card" style="margin-top:14px;">
+    <h3>Pensar</h3>
+    <p>El agente razona sobre el estado actual: qué sabe, qué le falta saber, qué hipótesis tiene. No es pensamiento lineal — es el modelo formulando el próximo paso en función de lo que observó antes.</p>
+    <p class="s2-produces">Produce: una decisión sobre qué acción tomar a continuación.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el nodo "pensar" iluminado. Leer la definición en voz alta; no parafrasear — es densa a propósito.</strong></p>
+    <p><u>Slide de definición de fase 1. La animación resalta pensar; el card lo define con precisión. La línea "produce" ancla la utilidad de la fase.</u></p>
+    <p><em>"La primera fase se llama pensar. El agente recibe lo que hay en su contexto — el objetivo original, lo que observó en la vuelta anterior, la historia de lo que hizo — y razona sobre eso."</em></p>
+    <p><em>"No es lineal: no sigue un script. El modelo formula cuál es el próximo paso útil dado todo lo que sabe en ese momento. Qué hipótesis tiene, qué le falta ver, qué tiene sentido probar ahora. Lo que produce esta fase es una decisión: qué acción viene a continuación."</em></p>
+  </aside>
+</section>
+
+<!-- §2.4 · Actuar -->
+<section>
+  <h2>Actuar — usar una herramienta</h2>
+
+  <div class="s2-loop-wrap">
+    <div id="s2-loop-actuar"></div>
+  </div>
+
+  <div class="s2-phase-card actuar" style="margin-top:14px;">
+    <h3>Actuar</h3>
+    <p>El agente usa una herramienta: corre un comando, edita un archivo, llama a una API, lee un directorio. La acción produce un efecto en el entorno.</p>
+    <p class="s2-produces">Produce: un cambio en el entorno — algo que antes no era verdad, ahora lo es.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el nodo "actuar" iluminado. Enfatizar la palabra "herramienta" — conectar con §3 sin adelantar.</strong></p>
+    <p><u>Slide de definición de fase 2. La animación resalta actuar. La distinción clave: actuar no es "escribir" — es invocar una herramienta que toca el entorno real.</u></p>
+    <p><em>"La segunda fase es actuar. Y acá hay algo importante: actuar no significa 'escribir texto'. Significa invocar una herramienta. Correr un comando en la terminal, editar un archivo, hacer una llamada HTTP, leer un directorio."</em></p>
+    <p><em>"La herramienta produce un efecto en el entorno. Algo que antes no era verdad, ahora lo es. El archivo tiene una línea nueva. El test corrió. El servidor respondió. Las tools en detalle las vemos en la siguiente sección — por ahora lo que importa es que actuar siempre toca algo concreto fuera del modelo."</em></p>
+  </aside>
+</section>
+
+<!-- §2.5 · Observar -->
+<section>
+  <h2>Observar — leer el resultado</h2>
+
+  <div class="s2-loop-wrap">
+    <div id="s2-loop-observar"></div>
+  </div>
+
+  <div class="s2-phase-card observar" style="margin-top:14px;">
+    <h3>Observar</h3>
+    <p>El agente lee el resultado de la acción: el output del comando, el contenido del archivo, la respuesta HTTP. Eso nuevo entra a su contexto y alimenta la próxima vuelta de pensar.</p>
+    <p class="s2-produces">Produce: información nueva en el contexto — el insumo de la siguiente vuelta.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el nodo "observar" iluminado. La frase "entra a su contexto" es semilla del §4 — decirla con intención pero sin desarrollar.</strong></p>
+    <p><u>Slide de definición de fase 3. La animación resalta observar. La conexión con el contexto se planta aquí; florecerá en §4.</u></p>
+    <p><em>"Tercera fase: observar. El agente lee el resultado de lo que acaba de hacer. El output del comando, el contenido del archivo, el código HTTP de la respuesta. Todo eso entra a su contexto."</em></p>
+    <p><em>"Y eso es clave: no es que el agente 'vio' el resultado y lo olvidó. Lo que observa queda en la ventana, disponible para el próximo pensar. Eso es lo que hace que cada vuelta del loop sepa más que la anterior. Y después repite — hasta que una condición de corte decide que terminó. ¿Qué se ve cuando el loop completo trabaja sobre un problema real?"</em></p>
+  </aside>
+</section>
+
+<!-- §2.6 · El trace concreto — pytest -->
+<section>
+  <h2>El loop en acto — pytest</h2>
+
+  <div class="s2-trace">
+    <div class="s2-trace-row">
+      <div class="s2-trace-phase pensar">pensar</div>
+      <div class="s2-trace-connector"></div>
+      <div class="s2-trace-body">
+        <p>Veo el código, la consola vacía. No sé si los tests corren ni de qué fallan. Necesito correr el suite primero.</p>
+      </div>
+    </div>
+    <div class="s2-trace-gap"></div>
+    <div class="s2-trace-row">
+      <div class="s2-trace-phase actuar">actuar</div>
+      <div class="s2-trace-connector"></div>
+      <div class="s2-trace-body">
+        <p>Ejecuta <code>pytest</code>.</p>
+      </div>
+    </div>
+    <div class="s2-trace-gap"></div>
+    <div class="s2-trace-row">
+      <div class="s2-trace-phase observar">observar</div>
+      <div class="s2-trace-connector"></div>
+      <div class="s2-trace-body">
+        <p>Dos tests fallan. <code>AssertionError: expected 200, got 404</code>. El path del endpoint tiene un slash de más.</p>
+      </div>
+    </div>
+    <div class="s2-trace-gap"></div>
+    <div class="s2-trace-row">
+      <div class="s2-trace-phase pensar">pensar</div>
+      <div class="s2-trace-connector"></div>
+      <div class="s2-trace-body">
+        <p>Ya sé qué falla y dónde. Corrijo el path en el router.</p>
+      </div>
+    </div>
+    <div class="s2-trace-gap"></div>
+    <div class="s2-trace-row">
+      <div class="s2-trace-phase actuar">actuar</div>
+      <div class="s2-trace-connector"></div>
+      <div class="s2-trace-body">
+        <p>Edita el router: cambia <code>/tasks//</code> por <code>/tasks/</code>.</p>
+      </div>
+    </div>
+    <div class="s2-trace-gap"></div>
+    <div class="s2-trace-row">
+      <div class="s2-trace-phase observar">observar</div>
+      <div class="s2-trace-connector"></div>
+      <div class="s2-trace-body">
+        <p>Corre los tests de nuevo. Pasan los dos. El tercero también. Suite verde.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="s2-trace-close">Tres vueltas: identificó, corrigió, confirmó.</p>
+
+  <aside class="notes">
+    <p><strong>Leer el trace despacio, señalando cada fase con el puntero. Hacer pausa en el observar de la vuelta 1 — esa línea cambia todo lo que sigue.</strong></p>
+    <p><u>Trace de 6 pasos sobre el ejemplo pytest del source material. Cada fase tiene su color. Sin animación JS — el puntero del docente navega el trace.</u></p>
+    <p><em>"Veámoslo concreto. La tarea: 'hacé que pasen los tests'. El agente no tiene información de partida — solo el objetivo."</em></p>
+    <p><em>"Primera vuelta: pensar — no sé nada todavía, necesito correr el suite. Actuar — ejecuta pytest. Observar — dos fallos, AssertionError expected 200 got 404, el path tiene un slash de más. Esa observación entró al contexto."</em></p>
+    <p><em>"Segunda vuelta: pensar — ya sé qué es y dónde está. Actuar — edita el router. Observar — suite verde. Condición de corte: objetivo alcanzado."</em></p>
+    <p><em>"Tres vueltas. La primera no resolvió nada: identificó. La segunda corrigió. La tercera confirmó. Un agente que devuelve un texto después del primer prompt no completó ninguna de esas vueltas — te delegó el trabajo a vos."</em></p>
+  </aside>
+</section>
+
+<!-- §2.7 · ReAct — el patrón tiene nombre -->
+<section>
+  <h2>ReAct — razonar y actuar entrelazados</h2>
+
+  <div class="comparison-2col" style="margin-top:20px;align-items:stretch;">
+    <div class="bg-secondary-card" style="display:flex;flex-direction:column;justify-content:center;">
+      <p style="font-size:0.65em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 8px;">Intuición incorrecta</p>
+      <p style="font-size:0.82em;color:var(--text-primary);margin:0 0 10px;line-height:1.5;">
+        Pensar primero, terminar,<br>después pasar a actuar.
+      </p>
+      <p style="font-size:0.68em;color:var(--text-muted);font-style:italic;margin:0;line-height:1.5;">
+        Como si fueran fases secuenciales:<br>planificación → ejecución.
+      </p>
+    </div>
+    <div class="bg-secondary-card" style="border-color:var(--accent);display:flex;flex-direction:column;justify-content:center;">
+      <p style="font-size:0.65em;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 8px;">Lo que pasa en realidad</p>
+      <p style="font-size:0.82em;color:var(--text-primary);margin:0 0 10px;line-height:1.5;">
+        Pensar → actuar → observar → pensar → actuar → observar…
+      </p>
+      <p style="font-size:0.68em;color:var(--text-muted);font-style:italic;margin:0;line-height:1.5;">
+        Cada observación actualiza el razonamiento.<br>
+        Pensar y actuar se <em>alternan</em>, vuelta a vuelta.
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-code-card fragment fade-in" style="max-width:560px;margin:16px auto 0;padding:14px 20px;text-align:center;">
+    <p style="margin:0;font-size:0.72em;color:var(--text-muted);">
+      El nombre: <strong style="color:var(--accent);font-family:var(--font-mono);">ReAct</strong> — Reasoning and Acting.<br>
+      Lo importante no es el nombre: es que captura que las dos cosas se entremezclan.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la columna izquierda primero. Click para revelar el panel de código con el nombre.</strong></p>
+    <p><u>Comparación 2-col entre la intuición incorrecta y lo que pasa realmente. El término ReAct aparece al final, después de que el concepto ya está claro.</u></p>
+    <p><em>"Hay una intuición incorrecta que es muy común: pensar primero, terminar de razonar, y después actuar. Como si fueran fases separadas, primero la planificación y después la ejecución."</em></p>
+    <p><em>"Lo que pasa en realidad es que se alternan vuelta a vuelta. El agente piensa un poco, actúa, observa qué pasó, y eso cambia qué piensa a continuación. El razonamiento no es una fase que termina: está activo a lo largo de todo el proceso, informado por cada observación."</em></p>
+    <p><em>"Este patrón tiene nombre: ReAct, de Reasoning and Acting entrelazados. Lo importante del nombre no es memorizarlo — es que captura exactamente eso: pensar y actuar no son etapas, son una alternancia continua."</em></p>
+  </aside>
+</section>
+
+<!-- §2.8 · Un agente = LLM + loop + tools + entorno -->
+<section>
+  <h2>Un agente son cuatro piezas</h2>
+
+  <div class="s2-four-pipe">
+    <div class="s2-pipe-card">
+      <h3>LLM</h3>
+      <p class="s2-aporta">Decide. En cada vuelta recibe el contexto y determina qué hacer.</p>
+      <p class="s2-falta">Sin él: no hay razonamiento, el loop no sabe a dónde ir.</p>
+    </div>
+    <div class="s2-pipe-sep">+</div>
+    <div class="s2-pipe-card">
+      <h3>loop</h3>
+      <p class="s2-aporta">Hace que el LLM itere. Convierte un generador de texto en algo que termina tareas.</p>
+      <p class="s2-falta">Sin él: una respuesta y para.</p>
+    </div>
+    <div class="s2-pipe-sep">+</div>
+    <div class="s2-pipe-card">
+      <h3>tools</h3>
+      <p class="s2-aporta">Las manos del agente. Editar archivos, correr comandos, llamar servicios.</p>
+      <p class="s2-falta">Sin ellas: razona sobre lo que haría, pero no toca nada.</p>
+    </div>
+    <div class="s2-pipe-sep">+</div>
+    <div class="s2-pipe-card">
+      <h3>entorno</h3>
+      <p class="s2-aporta">Lo que el agente observa y modifica: tu repo, tu terminal, tu filesystem.</p>
+      <p class="s2-falta">Sin él: razona en el vacío, nada que observar.</p>
+    </div>
+  </div>
+
+  <p class="s2-pipe-close fragment fade-in">Cuando algo no funciona como esperás: ¿cuál de las cuatro piezas está fallando?</p>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cuatro tarjetas izquierda a derecha. Para en cada "sin él" — esa línea es el diagnóstico. Click para la pregunta final.</strong></p>
+    <p><u>Cuatro cards en pipeline horizontal. Cada una tiene qué aporta y qué falla si falta. La pregunta de cierre planta el hábito de diagnóstico.</u></p>
+    <p><em>"Un agente son cuatro piezas, y las cuatro son necesarias en conjunto. Sacale una y deja de funcionar de formas específicas."</em></p>
+    <p><em>"El LLM decide: recibe el contexto y determina qué hacer. El loop hace que itere: sin loop, el LLM da una respuesta y para. Las tools son las manos: sin ellas puede razonar sobre lo que haría pero no hace nada. El entorno es la realidad sobre la que actúa: sin entorno no hay nada que observar ni nada que cambiar."</em></p>
+    <p><em>"La pregunta que te conviene tener siempre lista: cuando algo no funciona como esperás, ¿cuál de las cuatro está fallando? Es el punto de partida del diagnóstico."</em></p>
+  </aside>
+</section>
+
+<!-- §2.9 · Por qué un loop y no una respuesta -->
+<section>
+  <h2>Loop vs. respuesta</h2>
+
+  <div class="comparison-2col" style="margin-top:20px;align-items:stretch;">
+    <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
+      <p style="font-size:0.65em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 10px;">Chat</p>
+      <p style="font-size:0.82em;font-weight:700;color:var(--accent-secondary);margin:0 0 12px;">pregunta → respuesta</p>
+      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 12px;">
+        Vos aportás input. El modelo devuelve output. La sesión puede seguir, pero cada vuelta es independiente. El modelo no actúa entre respuestas — esperás vos.
+      </p>
+      <p style="font-size:0.68em;color:var(--text-muted);font-style:italic;margin:0 0 0;margin-top:auto;">
+        "Arreglá el bug" → descripción de cómo podría arreglarse.
+      </p>
+    </div>
+    <div class="bg-secondary-card" style="border-color:var(--accent);display:flex;flex-direction:column;">
+      <p style="font-size:0.65em;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 10px;">Agente</p>
+      <p style="font-size:0.82em;font-weight:700;color:var(--accent);margin:0 0 12px;">objetivo → loop hasta lograrlo</p>
+      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 12px;">
+        Vos aportás el objetivo. El modelo actúa, observa, corrige, sigue. La sesión no termina hasta que el objetivo se cumple o algo lo interrumpe.
+      </p>
+      <p style="font-size:0.68em;color:var(--text-muted);font-style:italic;margin:0;margin-top:auto;">
+        "Arreglá el bug" → secuencia de acciones que termina con el bug arreglado.
+      </p>
+    </div>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:18px;font-size:0.8em;color:var(--accent);font-style:italic;">
+    El valor entregado no es información sobre el problema: es el problema resuelto.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar cada columna al mencionarla. El contraste de los itálicos de abajo es central — leerlos despacio. Click para la línea de cierre.</strong></p>
+    <p><u>Comparación 2-col entre chat y agente. Los itálicos muestran el mismo input ("arreglá el bug") produciendo outputs radicalmente distintos.</u></p>
+    <p><em>"Para entender por qué el loop importa, comparalo con el modelo que ya conocés. En el chat: pregunta, respuesta. Cada vuelta es independiente. El modelo no actúa entre una respuesta y la siguiente — eso lo hacés vos."</em></p>
+    <p><em>"En el agente: objetivo, loop hasta lograrlo. El modelo actúa, observa, corrige, sigue. La sesión no termina hasta que el objetivo se cumple o algo lo interrumpe."</em></p>
+    <p><em>"La diferencia no es cosmética. El mismo input — 'arreglá el bug' — produce outputs completamente distintos. En el chat, te devuelve una descripción de cómo podría arreglarse. En el agente, te devuelve el bug arreglado. El valor entregado no es información sobre el problema: es el problema resuelto."</em></p>
+  </aside>
+</section>
+
+<!-- §2.10 · Condiciones de corte -->
+<section>
+  <h2>Condiciones de corte</h2>
+
+  <div class="s2-loop-wrap" style="margin-bottom:0;">
+    <div id="s2-loop-corte"></div>
+  </div>
+
+  <div class="s2-corte-grid" style="margin-top:14px;">
+    <div class="s2-corte-card ideal">
+      <h3>Objetivo alcanzado</h3>
+      <p>El estado del entorno coincide con lo pedido. Los tests pasan, el endpoint responde 200. Condición ideal.</p>
+    </div>
+    <div class="s2-corte-card limit">
+      <h3>Límite de pasos</h3>
+      <p>Se alcanzó el techo configurado sin resolver el objetivo. El agente reporta qué hizo y hasta dónde llegó.</p>
+    </div>
+    <div class="s2-corte-card human">
+      <h3>Pide ayuda</h3>
+      <p>El agente no puede continuar sin input humano — falta un secreto, no tiene permiso, hay ambigüedad. El loop se suspende.</p>
+    </div>
+    <div class="s2-corte-card fail">
+      <h3>Falla no recuperable</h3>
+      <p>El agente detecta un estado del que no sabe cómo salir. Para y reporta.</p>
+    </div>
+  </div>
+
+  <p class="s2-corte-close fragment fade-in">Sin condición de corte, el loop da vueltas. Qué pasa cuando se descontrola, lo vemos en §5.</p>
+
+  <aside class="notes">
+    <p><strong>Señalar la animación primero — el loop en modo neutro. Después recorrer las cuatro tarjetas. Click para el adelanto de §5.</strong></p>
+    <p><u>Animación en modo intro (sin fase resaltada) + cuatro cards con código de color. El adelanto de §5 se planta con intención pero sin desarrollar.</u></p>
+    <p><em>"Para que el loop funcione, tiene que saber cuándo parar. Sin condición de corte, el loop no termina — o peor, termina de maneras que no querías."</em></p>
+    <p><em>"En la práctica aparecen cuatro: objetivo alcanzado — la ideal, el estado del entorno coincide con lo pedido. Límite de pasos — hay un techo configurado y se alcanzó sin resolver. El agente pide ayuda — encontró algo que no puede resolver solo y llama a un humano. Y falla no recuperable — detecta un estado del que no sabe salir y para."</em></p>
+    <p><em>"La condición de corte no es un detalle de implementación. Es lo que separa un agente que trabaja de un agente que da vueltas. Qué pasa exactamente cuando el loop se descontrola lo vemos en §5."</em></p>
+  </aside>
+</section>
+
+<!-- §2.11 · section-divider — Demo · El loop desnudo -->
+<section class="section-divider">
+  <h2>Demo · El loop desnudo</h2>
+
+  <aside class="notes">
+    <p><u>Slide de transición. Sin contenido adicional — el título anuncia el demo y da un segundo de preparación al docente.</u></p>
+    <p><em>"Vimos el loop en un diagrama, lo vimos en un trace de texto. Ahora lo vemos correr en vivo, vuelta por vuelta."</em></p>
+  </aside>
+</section>
+
+<!-- §2.12 · Demo beats — clickable-steps -->
+<section>
+  <h2>El loop desnudo — 3 beats</h2>
+
+  <div id="s2-demo-steps" style="margin-top:18px;"></div>
+
+  <aside class="notes">
+    <p><strong>Beat 1: Dar la tarea. "Agregá un endpoint GET /health que devuelva {'status': 'ok'} y probá que responde." Decir en voz alta: "No le pedí que escriba código. Le pedí un resultado. Miren cómo se las arregla." Qué mirar: el agente empieza a razonar antes de editar nada — eso es pensar.</strong></p>
+    <p><strong>Beat 2: Narrar cada fase en voz alta mientras aparece en pantalla. "Esto es pensar… esto es actuar, está editando el archivo del router… esto es observar, está leyendo la respuesta del servidor." Señalar con el puntero. Qué mirar: el agente no terminó cuando escribió el código — corrió el servidor, hizo el request, leyó el resultado.</strong></p>
+    <p><strong>Beat 3: Señalar el momento en que algo no salió bien a la primera. Decir: "Ahí. Falló, lo vio, y volvió a entrar al loop. Eso es lo que vos hacías a mano." Qué mirar: la corrección es una vuelta más del loop, no una respuesta nueva. El agente no empezó de cero — actualizó su hipótesis con lo que observó y siguió.</strong></p>
+    <p><u>Plan B: si la tarea se resuelve en un solo turno sin error, pedir el mismo endpoint sin especificar el shape del JSON para forzar al menos una iteración de verificación. Si el entorno no está disponible, narrar sobre una grabación previa, nombrando las fases en voz alta mientras corre el video.</u></p>
+  </aside>
+</section>
+
+<!-- §2.13 · Cierre del demo + bridge a §4 -->
+<section>
+  <h2>El loop opera sobre algo finito</h2>
+
+  <div class="bg-secondary-card" style="max-width:600px;margin:20px auto 0;padding:26px 30px;">
+    <p style="font-size:0.85em;line-height:1.65;color:var(--text-primary);margin:0 0 18px;">
+      Cada vuelta del loop produjo información nueva.<br>
+      Esa información fue a algún lado — al contexto del agente.
+    </p>
+    <p style="font-size:0.82em;line-height:1.65;color:var(--text-muted);margin:0;border-top:1px solid #2a3a5a;padding-top:16px;">
+      El contexto tiene un tamaño, un límite, y una estructura propia.<br>
+      Gestionar ese espacio es la otra mitad de entender cómo funciona un agente.
+    </p>
+  </div>
+
+  <p class="fragment fade-in" style="text-align:center;margin-top:22px;font-size:0.9em;color:var(--accent);font-style:italic;">
+    El loop opera sobre algo finito: el contexto. Eso es §4.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Dejar que el card se lea. Click para revelar el bridge a §4.</strong></p>
+    <p><u>Slide de cierre de sección. Ancla lo que acaban de ver (el loop en acto) y planta el hilo hacia §4 (la ventana de contexto).</u></p>
+    <p><em>"Vieron el loop correr. Cada vuelta, el agente observó algo y eso entró a su contexto. La primera vuelta el agente no sabía nada. La tercera ya sabía que los tests pasaban y el objetivo estaba cumplido."</em></p>
+    <p><em>"Esa información fue acumulándose en algún lugar. Ese lugar se llama contexto, tiene un tamaño fijo, y cuando se llena, algo tiene que ceder. El loop es el esqueleto. Pero opera sobre algo concreto y finito. Eso lo vemos en §4."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§2-START -->
+<script>
+  initFourLoop({ containerId: 's2-loop-intro', mode: 'intro' });
+  initFourLoop({ containerId: 's2-loop-pensar', mode: 'intro', phase: 'pensar' });
+  initFourLoop({ containerId: 's2-loop-actuar', mode: 'intro', phase: 'actuar' });
+  initFourLoop({ containerId: 's2-loop-observar', mode: 'intro', phase: 'observar' });
+  initFourLoop({ containerId: 's2-loop-corte', mode: 'intro' });
+  initClickableSteps({
+    containerId: 's2-demo-steps',
+    steps: [
+      {
+        title: 'Beat 1 — Tarea verificable',
+        summary: 'Dar al agente un objetivo concreto y verificable. Observar la primera fase de razonamiento antes de cualquier acción.',
+        example: 'Qué mirar: el agente empieza a razonar antes de editar nada — reconocé eso como "pensar". La primera acción visible es actuar.'
+      },
+      {
+        title: 'Beat 2 — Narrar las fases',
+        summary: 'Nombrar en voz alta cada fase mientras aparece en pantalla: pensar → actuar → observar. Señalar con el puntero la correspondencia con el diagrama.',
+        example: 'Qué mirar: el agente no terminó cuando escribió el código. Siguió — corrió el servidor, hizo el request, leyó el resultado. Eso es el loop completo.'
+      },
+      {
+        title: 'Beat 3 — La corrección es otra vuelta',
+        summary: 'Identificar el momento en que algo falló y el agente lo detectó, volvió a pensar, y tomó una acción correctiva — todo dentro del mismo loop.',
+        example: 'Qué mirar: la corrección no fue una respuesta nueva. El agente actualizó su hipótesis con lo que observó y siguió. No empezó de cero.'
+      }
+    ]
+  });
+</script>
+<!-- INIT-SCRIPTS-§2-END -->
