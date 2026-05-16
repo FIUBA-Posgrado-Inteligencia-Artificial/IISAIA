@@ -1,0 +1,591 @@
+<style>
+/* Scoped styles for §10 only */
+
+/* Opener wrap */
+.s10-opener-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 24px auto 0;
+  max-width: 640px;
+}
+.s10-opener-sublabel {
+  font-size: 0.65em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.s10-opener-question {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.7;
+  font-style: italic;
+}
+.s10-opener-question em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Focus card */
+.s10-focus-card {
+  max-width: 700px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 28px 34px;
+  text-align: left;
+}
+.s10-focus-card p {
+  font-size: 0.86em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+}
+.s10-focus-card p:last-child { margin: 0; }
+.s10-focus-card .s10-highlight {
+  color: var(--accent);
+  font-weight: 700;
+  font-style: normal;
+}
+.s10-focus-card .s10-key-line {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 16px;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 14px;
+}
+
+/* Hook scenario card */
+.s10-scenario-card {
+  max-width: 680px;
+  margin: 28px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 30px 38px;
+  text-align: center;
+}
+.s10-scenario-card p {
+  font-size: 0.88em;
+  line-height: 1.85;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+.s10-scenario-card p:last-child { margin: 0; }
+.s10-scenario-card .s10-reveal-line {
+  font-size: 0.92em;
+  font-weight: 700;
+  color: var(--accent);
+  border-top: 1px solid #2a3a5a;
+  padding-top: 20px;
+}
+.s10-scenario-card em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Sub-agent animation wrapper */
+.s10-anim-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.s10-anim-container {
+  min-height: 220px;
+}
+.s10-def-note {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  padding: 16px 22px;
+  font-size: 0.74em;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.s10-def-note strong { color: var(--text-primary); }
+.s10-def-note em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Protection cards grid */
+.s10-protection-grid {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s10-protection-row {
+  display: flex;
+  gap: 14px;
+}
+.s10-protection-card {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.s10-protection-card.accent-left {
+  border-left: 3px solid var(--accent);
+}
+.s10-protection-card.accent-sec {
+  border-left: 3px solid var(--accent-secondary);
+}
+.s10-protection-card-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.s10-protection-card-title {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.s10-protection-card-title.sec { color: var(--accent-secondary); }
+.s10-protection-card-body {
+  font-size: 0.7em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s10-protection-callout {
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 7px;
+  padding: 13px 20px;
+  font-size: 0.72em;
+  color: var(--accent);
+  line-height: 1.65;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Parallelization two-col */
+.s10-parallel-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s10-parallel-cols {
+  display: flex;
+  gap: 14px;
+}
+.s10-parallel-col {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.s10-parallel-col-label {
+  font-size: 0.56em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 8px;
+}
+.s10-parallel-col-body {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.s10-parallel-col-body strong { color: var(--text-primary); }
+.s10-parallel-note {
+  background: rgba(130, 170, 255, 0.06);
+  border: 1px solid rgba(130, 170, 255, 0.25);
+  border-radius: 7px;
+  padding: 13px 20px;
+  font-size: 0.72em;
+  color: var(--accent-secondary);
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+/* Cost card */
+.s10-cost-wrap {
+  max-width: 700px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s10-cost-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 24px 30px;
+}
+.s10-cost-card-label {
+  font-size: 0.58em;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 8px;
+}
+.s10-cost-card-body {
+  font-size: 0.8em;
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+.s10-cost-card-body em {
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 700;
+}
+.s10-cost-principle {
+  background: rgba(130, 170, 255, 0.06);
+  border: 1px solid rgba(130, 170, 255, 0.25);
+  border-radius: 7px;
+  padding: 14px 22px;
+  font-size: 0.74em;
+  color: var(--accent-secondary);
+  line-height: 1.7;
+  font-weight: 600;
+}
+
+/* Demo wrap */
+.s10-demo-wrap {
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+
+/* Cierre card */
+.s10-close-card {
+  max-width: 660px;
+  margin: 28px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 28px 36px;
+  text-align: center;
+}
+.s10-close-main {
+  font-size: 0.84em;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+.s10-close-bridge {
+  font-size: 0.76em;
+  color: var(--text-muted);
+  line-height: 1.75;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 18px;
+  margin: 0;
+}
+.s10-close-bridge em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.s10-close-bridge .bridge-loop {
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 700;
+}
+</style>
+
+<!-- §10.1 · Opener — lens-tracker aterriza en CONTEXTO, sub-label "aísla el contexto de un loop entero" -->
+<section>
+  <h2>¿Loop o contexto? Contexto — aislar el loop entero.</h2>
+
+  <div class="s10-opener-wrap">
+    <div class="lens-tracker on-context">
+      <div class="pole pole-loop">LOOP</div>
+      <div class="lens-sep">↔</div>
+      <div class="pole pole-context">CONTEXTO</div>
+    </div>
+    <p class="s10-opener-sublabel">aísla el contexto de un loop entero</p>
+    <p class="s10-opener-question">
+      §9 aisló un procedimiento. ¿Qué pasa cuando el trabajo de exploración
+      que acumula el agente
+      <em>nunca llega al contexto del padre?</em>
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el tracker — CONTEXTO iluminado, cuarta sección seguida acá. Leer el sublabel. Leer la pregunta con pausa antes de la línea final.</strong></p>
+    <p><u>Opener de §10. El tracker es el dispositivo recurrente — no necesita explicación, solo señalarlo. La pregunta retoma exactamente donde §9 terminó: las skills aíslan un procedimiento; §10 escala eso al loop entero.</u></p>
+    <p><em>"El tracker otra vez en CONTEXTO. Cuatro secciones seguidas aterrizando acá. El sublabel dice algo más grande que todo lo anterior: aísla el contexto de un loop entero."</em></p>
+    <p><em>"§9 nos mostró que una skill puede aislar un procedimiento — cero tokens hasta que se invoca. Pero un procedimiento son instrucciones. ¿Qué pasa cuando lo que queremos aislar no son las instrucciones sino el trabajo de exploración que el agente acumula mientras ejecuta? Eso es §10."</em></p>
+  </aside>
+</section>
+
+<!-- §10.2 · Hook — el escenario de autenticación -->
+<section>
+  <h2>El escenario: cuarenta archivos, una sola pregunta</h2>
+
+  <div class="s10-scenario-card">
+    <p>
+      Le pedís a Claude Code que encuentre dónde se maneja la autenticación en un repo mediano.
+      Para responder bien, tiene que buscar en carpetas, rastrear imports, abrir módulos de configuración.
+      Cuarenta archivos, fácil.
+    </p>
+    <p>
+      Según §4, el contexto es finito — cada token que entra compite con los que ya están.
+      Según §5, esa inundación de texto técnico hace que el modelo razone peor: envenenás la ventana
+      con ruido que no tiene que ver con el trabajo que viene.
+    </p>
+    <p class="s10-reveal-line fragment">
+      ¿Qué pasaría si todo lo que leyó para responder eso viviera en <em>otra ventana</em>,
+      y al terminar te diera solo el resultado?
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer los dos primeros párrafos despacio. Pausa larga antes del fragment. Click para revelar la pregunta. Dejar que la pregunta respire.</strong></p>
+    <p><u>Hook narrativo de §10. Los dos primeros párrafos plantan el problema con callbacks explícitos a §4 (contexto finito) y §5 (envenenar). El fragment es la pregunta que todo el resto de §10 responde.</u></p>
+    <p><em>"Imaginá esta situación. Le pedís a Claude Code que encuentre dónde se maneja la autenticación en un repo mediano. No es un repo pequeño: tiene carpetas, archivos de configuración, imports cruzados. Para responder bien tiene que abrir cosas, leer, rastrear. Cuarenta archivos, sin esfuerzo."</em></p>
+    <p><em>"Ya vimos qué pasa con eso. §4: la ventana es finita, cada token que entra ocupa un lugar que no se recupera. §5: cuando el agente lee tanto que su propio contexto lo confunde — logs, archivos de auth, trazas repetidas — llamamos a eso envenenar el contexto."</em></p>
+    <p><em>"La pregunta que quiero que tengan en la cabeza antes de seguir:"</em></p>
+    <p><em>"¿Qué pasaría si todo lo que leyó para responder eso viviera en otra ventana, y al terminar te diera solo el resultado?"</em></p>
+  </aside>
+</section>
+
+<!-- §10.3 · Qué es un sub-agent — animación mode:'subagent' -->
+<section>
+  <h2>Qué es un sub-agent</h2>
+
+  <div class="s10-anim-wrap">
+    <div class="s10-anim-container">
+      <div id="s10-loop-subagent"></div>
+    </div>
+    <div class="s10-def-note">
+      <strong>El mismo LLM + loop + tools + entorno</strong> — instanciado aparte, para una tarea acotada,
+      con una <em>ventana propia que nace y muere con la tarea</em>.
+      Al padre vuelve solo el resultado: la respuesta, el archivo producido, el diagnóstico.
+      No el contexto. No lo que leyó en el camino.<br><br>
+      No es "otra IA". Es la misma lógica de siempre, aislada para una tarea acotada.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar el ciclo principal a la izquierda — el agente padre. Señalar el ciclo secundario a la derecha — el sub-agent, con su propia ventana. Señalar el chip "resultado" en la flecha de retorno. Leer la nota de definición.</strong></p>
+    <p><u>Slide de definición del sub-agent. La animación en modo 'subagent' muestra visualmente la idea central: dos instancias del mismo loop, una devuelve solo el resultado. La nota refuerza la definición con los cuatro componentes del §2.</u></p>
+    <p><em>"Un sub-agent no es una segunda IA. No es un empleado distinto ni un modelo diferente. Es la misma cosa de siempre — el mismo LLM, el mismo tipo de loop, las mismas herramientas — pero instanciada aparte."</em></p>
+    <p><em>"Lo que ven a la derecha en la animación es un loop completo: pensar, actuar, observar, repetir, como cualquier loop. Pero ese loop tiene su propia ventana. Nace cuando la tarea empieza. Muere cuando la tarea termina."</em></p>
+    <p><em>"Lo que viaja de vuelta al padre — el chip de resultado en la flecha — es solo eso: el resultado. No lo que leyó. No su razonamiento interno. No los cuarenta archivos que abrió. Un párrafo. El contexto del padre creció lo mínimo."</em></p>
+  </aside>
+</section>
+
+<!-- §10.4 · Por qué protege el contexto — callback §4 y §5 -->
+<section>
+  <h2>Por qué protege el contexto</h2>
+
+  <div class="s10-protection-grid">
+    <div class="s10-protection-row">
+      <div class="s10-protection-card accent-left">
+        <span class="s10-protection-card-label">Callback §4 — contexto finito</span>
+        <div class="s10-protection-card-title">El problema: cada token compite</div>
+        <div class="s10-protection-card-body">
+          La sub-tarea puede leer cincuenta archivos, generar mil tokens de razonamiento,
+          ejecutar diez llamadas a herramientas. Todo eso consume ventana — si ocurre en el padre.
+        </div>
+      </div>
+      <div class="s10-protection-card accent-sec">
+        <span class="s10-protection-card-label">Callback §5 — envenenar el contexto</span>
+        <div class="s10-protection-card-title sec">El modo de falla: ruido que confunde</div>
+        <div class="s10-protection-card-body">
+          Cuarenta archivos de auth, imports rastreados, líneas descartadas.
+          Todo eso sigue en la ventana del padre después de la búsqueda — y lo confunde para lo que viene.
+        </div>
+      </div>
+    </div>
+    <div class="s10-protection-card" style="background:var(--bg-secondary); border:1px solid #2a3a5a; border-radius:8px; padding:18px 20px;">
+      <span class="s10-protection-card-label">Qué hace el sub-agent</span>
+      <div class="s10-protection-card-body" style="font-size:0.78em; color:var(--text-primary); line-height:1.75;">
+        Todo eso vive en la ventana del sub-agent. Cuando termina, esa ventana desaparece.
+        Al padre llega un párrafo con el resultado. El contexto del padre creció lo mínimo.
+      </div>
+    </div>
+    <div class="s10-protection-callout">
+      Es la única forma de hacer tareas exploratorias sin degradar al agente que tiene que seguir trabajando después.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la tarjeta izquierda — callback §4. Señalar la tarjeta derecha — callback §5. Señalar la tarjeta central — la solución. Leer el callout al final.</strong></p>
+    <p><u>Slide de justificación conceptual. Dos tarjetas anclan el problema en lo ya visto. Una tercera muestra lo que hace el sub-agent. El callout es la afirmación más fuerte de la sección — no un detalle de implementación, sino una tesis.</u></p>
+    <p><em>"Para entender por qué los sub-agents importan, hay que recordar dos cosas que ya vimos. §4: el contexto es finito. Cada token que entra ocupa un lugar que no se recupera. Si la exploración ocurre en el padre, ese costo lo paga el padre."</em></p>
+    <p><em>"§5: cuando el padre lee demasiado — cuarenta archivos, imports cruzados, líneas que no importan — su propio contexto lo confunde. Llamamos a eso envenenar el contexto. No es un fallo del modelo. Es un fallo de diseño: pusiste en la ventana cosas que no deberían estar."</em></p>
+    <p><em>"El sub-agent corta ese camino de raíz. Todo lo que explora vive en su ventana. Cuando termina, esa ventana desaparece. Al padre llega un párrafo. No cincuenta archivos. No el razonamiento intermedio. Un párrafo."</em></p>
+    <p><em>"Esa afirmación final vale la pena leerla despacio: es la única forma de hacer tareas exploratorias sin degradar al agente que tiene que seguir trabajando después."</em></p>
+  </aside>
+</section>
+
+<!-- §10.5 · Paralelización — beneficio secundario -->
+<section>
+  <h2>Paralelización: real, pero secundaria</h2>
+
+  <div class="s10-parallel-wrap">
+    <div class="s10-parallel-cols">
+      <div class="s10-parallel-col">
+        <span class="s10-parallel-col-label">Cómo funciona</span>
+        <div class="s10-parallel-col-body">
+          Porque cada sub-agent tiene su propia ventana, varios pueden correr al mismo tiempo
+          sobre sub-tareas independientes.<br><br>
+          <strong>Auth + base de datos + capa de API</strong> — tres búsquedas que no se pisan entre sí,
+          tres sub-agents corriendo en paralelo, un padre que integra cuando todas terminan.
+        </div>
+      </div>
+      <div class="s10-parallel-col" style="border-left: 3px solid var(--accent);">
+        <span class="s10-parallel-col-label">El orden de prioridades</span>
+        <div class="s10-parallel-col-body">
+          La velocidad es un beneficio real. Pero no es el motivo principal para usar sub-agents.<br><br>
+          El motivo principal es que el <strong>ruido de exploración no entre en el contexto del agente
+          que tiene que pensar después</strong>. La paralelización es consecuencia, no causa.
+        </div>
+      </div>
+    </div>
+    <div class="s10-parallel-note">
+      El diseño correcto empieza por la pregunta de contexto, no por la de velocidad.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Señalar la columna izquierda — el mecanismo de paralelización. Señalar la columna derecha — el orden de prioridades. Leer la nota de cierre.</strong></p>
+    <p><u>Slide de beneficio secundario. La columna izquierda describe el mecanismo real. La columna derecha corrige el error más común: pensar que los sub-agents son principalmente una herramienta de velocidad. La nota de cierre ancla el criterio de diseño.</u></p>
+    <p><em>"Hay un beneficio adicional que vale la pena nombrar porque es real: la paralelización. Porque cada sub-agent tiene su propia ventana, varios pueden correr al mismo tiempo. Si necesitás analizar auth, base de datos y capa de API por separado, y las tres búsquedas no se pisan, podés lanzarlas en paralelo. El padre integra cuando todas terminan."</em></p>
+    <p><em>"Pero quiero que quede claro el orden de prioridades. La razón principal para usar sub-agents no es la velocidad. Es que el ruido de exploración no entre en el contexto del agente que tiene que pensar después. La paralelización es consecuencia del diseño, no el motivo del diseño."</em></p>
+    <p><em>"Si arrancás eligiendo sub-agents porque son más rápidos, vas a elegir mal cuándo usarlos. Si arrancás preguntando qué debería estar en el contexto del padre y qué no, vas a elegir bien."</em></p>
+  </aside>
+</section>
+
+<!-- §10.6 · El costo — callback §5 supervisión -->
+<section>
+  <h2>El costo: el padre ve el resumen, no el razonamiento</h2>
+
+  <div class="s10-cost-wrap">
+    <div class="s10-cost-card">
+      <span class="s10-cost-card-label">Lo que ganás y lo que perdés en la misma operación</span>
+      <div class="s10-cost-card-body">
+        El padre no ve cómo el sub-agent llegó al resultado. Ve el resumen, no el razonamiento.
+        Eso es exactamente lo que hace que el contexto no crezca — y también es lo que requiere
+        que <em>leas el resultado con criterio</em>.<br><br>
+        Si el sub-agent dice "la autenticación está en <code style="font-family:var(--font-mono); color:var(--accent); font-size:0.9em;">auth/middleware.py</code> y usa JWT",
+        tenés que poder decidir si ese resultado es coherente con lo que sabés del proyecto.
+      </div>
+    </div>
+    <div class="s10-cost-principle">
+      Callback §5: la delegación no te exime de supervisar.<br>
+      El trabajo del padre es leer el resultado, evaluar si tiene sentido, y actuar sobre él —
+      no asumirlo correcto porque lo generó un loop.<br>
+      El punto no es desconfiar siempre: es que delegar no es dejar de mirar.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el cuerpo de la tarjeta con pausa en "leas el resultado con criterio". Leer el callout enfatizando la última frase: "delegar no es dejar de mirar".</strong></p>
+    <p><u>Slide del costo. La tarjeta principal presenta la pérdida de visibilidad como el precio simétrico del beneficio de contexto. El callout conecta explícitamente con §5 — el supervisor sigue siendo necesario, la autonomía no lo elimina.</u></p>
+    <p><em>"El mismo mecanismo que protege el contexto del padre introduce un costo. El padre no ve el razonamiento. No ve qué archivos abrió el sub-agent, ni cuáles descartó, ni qué interpretaciones intermedias generó. Ve el resultado."</em></p>
+    <p><em>"Eso es una consecuencia directa de lo que hace que los sub-agents sean útiles. No es un bug: es el diseño. Pero exige algo del padre — y de vos, supervisando al padre."</em></p>
+    <p><em>"§5 lo dijo de otra manera: 'no le creés a la IA, le creés a la máquina'. Acá la formulación es: leés el resultado, evaluás si es coherente con lo que sabés del proyecto, y actuás sobre él. No lo asumís correcto porque lo generó un loop."</em></p>
+    <p><em>"Delegar no es dejar de mirar. Es cambiar dónde mirás."</em></p>
+  </aside>
+</section>
+
+<!-- §10.7 · section-divider — Demo D5 -->
+<section class="section-divider">
+  <h2>Demo D5 · El sub-agent aísla</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">El dispositivo es <code style="font-family:var(--font-mono);">/context</code> antes y después — el mismo número cuenta la historia.</p>
+
+  <aside class="notes">
+    <p><u>Divider de demo D5. El dispositivo central del demo es /context: muestra el tamaño actual del contexto en números concretos. Se hace la misma búsqueda dos veces — una inline, una delegada a sub-agent — y el delta es el argumento.</u></p>
+    <p><em>"Vamos al demo. El objetivo de este demo es visible y medible: Claude Code tiene un comando, /context, que muestra el tamaño actual del contexto. Vamos a hacer la misma búsqueda exploratoria dos veces — una en línea, otra delegada a un sub-agent — y vamos a mirar el número."</em></p>
+  </aside>
+</section>
+
+<!-- §10.8 · Demo D5 beats — clickable-steps -->
+<section>
+  <h2>D5 · Tres beats: misma búsqueda, dos ventanas</h2>
+
+  <div class="s10-demo-wrap">
+    <div id="s10-demo-steps"></div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Setup: dos sesiones nuevas de Claude Code abiertas en un repo con volumen. /context disponible para mostrar el tamaño del contexto después de cada búsqueda. Click recorre los 3 beats.</strong></p>
+    <p><u>Beat 1 — qué mirar: ejecutar la búsqueda inline directamente ("encontrá dónde se maneja la autenticación en todo el repo"). Dejar que el agente trabaje: busca archivos, los abre, los lee. Cuando termina, ejecutar /context. El número que importa es el delta respecto al inicio de sesión — no el absoluto, sino cuánto creció. Beat 2 — qué mirar: misma búsqueda, sesión nueva, pero esta vez pedida con delegación explícita ("usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado"). Cuando el padre recibe el resultado, ejecutar /context. El número de contexto en esta sesión debe ser significativamente menor que en Beat 1, aunque el resultado sea el mismo. Beat 3 — qué mirar: el resultado es el mismo en ambas sesiones; el delta de contexto no lo es. Ese contraste es el argumento. Plan B si comparar /context en vivo no coopera: cambiar a dos transcripts preparados — uno de sesión inline con contexto inflado al final (señalar el número), otro de sesión con sub-agent con contexto casi sin cambios seguido del resultado devuelto. El argumento es el mismo; la fuente de evidencia cambia de live a grabado.</u></p>
+    <p><em>"Beat 1. Sesión nueva. Le pido directamente: 'encontrá dónde se maneja la autenticación en todo el repo'. Dejo que el agente trabaje. Abre archivos, rastrea imports, descarta carpetas. Cuando termina, /context. Miren el número."</em></p>
+    <p><em>"Beat 2. Sesión nueva. Misma tarea, distinto pedido: 'usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado'. El sub-agent corre su loop en su propia ventana. Cuando el padre recibe el resultado, /context. El número es significativamente menor. Mismo resultado, fracción del costo."</em></p>
+    <p><em>"Beat 3. Mismo resultado en ambas sesiones. El archivo, la línea, el método. Pero el contexto del padre en el Beat 2 creció lo mínimo. Todo lo que el sub-agent exploró vivió en su ventana y desapareció al terminar. El agente principal sigue con una ventana limpia."</em></p>
+  </aside>
+</section>
+
+<!-- §10.9 · Cierre + bridge a §11 -->
+<section>
+  <h2>La unidad más grande aislada — y lo que cambia en §11</h2>
+
+  <div class="s10-close-card">
+    <p class="s10-close-main">
+      Los sub-agents aíslan la unidad más grande: el <em>loop entero</em>.
+      Lo que el sub-agent explora y descarta nunca llega al padre.
+      Es la misma lógica de §7, §8, §9 — actuar sobre el contexto para que el agente
+      no se ahogue en ruido — aplicada ahora al agente mismo.
+    </p>
+    <p class="s10-close-bridge">
+      Hasta acá, todo actuó sobre <em>qué entra</em> al contexto o sobre cómo se estructura.
+      §11 cambia de eje: ya no la pregunta es qué entra al agente, sino
+      <span class="bridge-loop">cuánto le dejás hacer antes de mirar</span>.
+      El tracker va a hacer algo que no hizo en toda la parte 2: flippear a LOOP.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el párrafo principal — remarcar "el loop entero" como la escala final de aislamiento. Pausa. Leer el bridge enfatizando "cambia de eje" y el flip visual del tracker que viene.</strong></p>
+    <p><u>Cierre de §10 y puente a §11. El párrafo principal consolida el arco de §7–§10 como variaciones del mismo principio de aislamiento de contexto, escalando de instrucción a procedimiento a loop entero. El bridge anticipa el flip del tracker a LOOP — el primer flip de toda la parte 2 — que es el hook central de §11.</u></p>
+    <p><em>"La misma lógica que recorre §7, §8, §9 y §10 es siempre la misma: actuar sobre el contexto para que el agente no se ahogue en ruido. CLAUDE.md elige qué cargar siempre. Las path-scoped rules, qué cargar por archivo. Las skills, qué cargar por invocación. Y los sub-agents aislan la unidad más grande de todas: el loop entero."</em></p>
+    <p><em>"§11 cambia algo. No en el argumento — en el eje. Todo lo que vimos desde §7 responde la misma pregunta: ¿qué entra al contexto del agente? §11 responde otra: ¿cuánto le dejás hacer al agente antes de que tengas que mirar?"</em></p>
+    <p><em>"Y el tracker, que en toda la parte 2 aterrizó en CONTEXTO, va a hacer algo nuevo. La primera vez que lo ven en LOOP es el hook de §11."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§10-START -->
+<script>
+  initFourLoop({containerId: 's10-loop-subagent', mode: 'subagent'});
+  initClickableSteps({containerId: 's10-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Búsqueda inline (sin sub-agent)',
+      summary: 'Sesión nueva. Pedido directo: "encontrá dónde se maneja la autenticación en todo el repo". El agente busca archivos, los abre, rastrea imports. Al terminar, /context.',
+      example: '/context después de la búsqueda — el delta respecto al inicio de sesión muestra todo lo que el agente leyó. Los cuarenta archivos que abrió, los imports que rastreó, las líneas que descartó — todo sigue en la ventana. Ese es el precio de la búsqueda inline.'
+    },
+    {
+      title: 'Beat 2 — La misma búsqueda delegada a un sub-agent',
+      summary: 'Sesión nueva. Pedido con delegación explícita: "usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado". Al recibir el resultado, /context.',
+      example: '/context en esta sesión — número significativamente menor que en Beat 1. Mismo resultado: el archivo, la línea, el método. Pero todo lo que el sub-agent leyó vivió en su ventana y desapareció. Plan B si /context no muestra delta visible en vivo: dos transcripts preparados — uno de sesión inline con contexto inflado, otro de sesión con sub-agent con contexto casi sin cambios.'
+    },
+    {
+      title: 'Beat 3 — Mismo resultado, fracción del costo',
+      summary: 'Contraste final entre los dos números de /context: mismo resultado entregado, delta de contexto opuesto.',
+      example: '"Mismo resultado, una fracción del costo de contexto. Eso es aislar. La exploración pasó, su ruido no entró. El agente principal sigue con una ventana limpia."'
+    }
+  ]});
+</script>
+<!-- INIT-SCRIPTS-§10-END -->
