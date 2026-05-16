@@ -41,7 +41,7 @@ Hay un segundo sistema de memoria, completamente distinto de CLAUDE.md. La difer
 
 CLAUDE.md lo escribís vos. La memoria automática la escribe Claude.
 
-A lo largo de las sesiones, Claude Code observa correcciones, preferencias y descubrimientos — qué gestor de paquetes usa el proyecto, cómo se corren los tests, qué convención de nombrado preferís, qué error se repitió y cómo se resolvió — y decide qué vale la pena recordar. Sin que vos lo pedís, lo guarda. En la próxima sesión, ese aprendizaje ya está disponible.
+A lo largo de las sesiones, Claude Code observa correcciones, preferencias y descubrimientos — qué gestor de paquetes usa el proyecto, cómo se corren los tests, qué convención de nombrado preferís, qué error se repitió y cómo se resolvió — y decide qué vale la pena recordar. Sin que vos lo pidas, lo guarda. En la próxima sesión, ese aprendizaje ya está disponible.
 
 El almacenamiento vive en `~/.claude/projects/<project>/memory/`. Hay un archivo principal `MEMORY.md` que funciona como índice, y archivos de tema opcionales. Claude genera uno por cada git repo; si trabajás con worktrees, todos comparten la misma carpeta de memoria. Es local a tu máquina — no viaja al repositorio, no se comparte con el equipo.
 

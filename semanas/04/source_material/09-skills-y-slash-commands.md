@@ -91,6 +91,6 @@ Ese mapa es la tricotomía de §8, ahora completa con el tercer mecanismo.
 
 ## Cierre
 
-Las skills aíslan un *procedimiento* del resto del contexto. No instructions dispersas — un objeto de conocimiento completo sobre cómo hacer algo, que no existe para la sesión hasta que se necesita.
+Las skills aíslan un *procedimiento* del resto del contexto. No instrucciones dispersas, sino un objeto de conocimiento completo sobre cómo hacer algo, que no existe para la sesión hasta que se necesita.
 
 En §10 vamos a ver algo distinto: no un procedimiento aislado del contexto, sino un *loop completo* corriendo separado del loop principal. Los sub-agentes no solo protegen contexto: ejecutan trabajo en paralelo, en su propia ventana, y devuelven resultados al supervisor. Es la misma lógica que venimos viendo — aislar del contexto lo que no se necesita ahora — pero aplicada a la unidad más grande: el agente mismo.

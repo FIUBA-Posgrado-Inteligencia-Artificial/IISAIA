@@ -96,7 +96,7 @@ Qué hago: narrar en voz alta cada fase mientras aparece en pantalla, nombrándo
 
 Qué digo: *"Fijense que el agente no terminó cuando escribió el código. Siguió: corrió el servidor, hizo el request, leyó el resultado. Eso es el loop completo."*
 
-Qué mirar: la correspondencia exacta entre lo que aparece en pantalla y el diagrama pensar → actuar → observar. Señalar con el cursor cada fase mientras ocurre.
+Qué mirar: la correspondencia exacta entre lo que aparece en pantalla y el diagrama pensar → actuar → observar. Señalar con el puntero cada fase mientras ocurre.
 
 **Beat 3.**
 
