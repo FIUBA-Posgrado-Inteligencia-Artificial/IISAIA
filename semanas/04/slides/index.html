@@ -226,7 +226,372 @@
       </section>
 
       <!-- ===== §1 — De escribir a actuar ===== -->
-      <!-- INJECT_SECTION_1 -->
+<style>
+/* Scoped styles for §1 only */
+.s1-loop-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0 auto;
+  max-width: 680px;
+}
+.s1-loop-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  justify-content: center;
+}
+.s1-loop-row.reverse {
+  flex-direction: row-reverse;
+}
+.s1-loop-step {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-muted);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 0.72em;
+  text-align: center;
+  min-width: 130px;
+}
+.s1-loop-step strong {
+  display: block;
+  color: var(--accent);
+  font-size: 1.05em;
+  margin-bottom: 2px;
+}
+.s1-loop-step span {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+.s1-loop-h-arrow {
+  color: var(--text-muted);
+  font-size: 1.3em;
+  padding: 0 6px;
+  line-height: 1;
+}
+.s1-loop-v-arrow {
+  color: var(--text-muted);
+  font-size: 1.1em;
+  text-align: left;
+  width: 100%;
+  padding-left: 28px;
+  line-height: 1;
+}
+.s1-loop-v-arrow.right {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 28px;
+}
+.s1-loop-back {
+  color: var(--accent);
+  font-style: italic;
+  font-size: 0.72em;
+  border: 1px dashed var(--accent);
+  border-radius: 6px;
+  padding: 6px 14px;
+  min-width: 130px;
+  text-align: center;
+}
+.s1-hook-close {
+  margin-top: 28px;
+  font-size: 1.1em;
+  color: var(--accent);
+  font-style: italic;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* Paradigm card headers */
+.s1-paradigm-label {
+  font-size: 0.65em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.s1-paradigm-title {
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  margin-bottom: 10px;
+}
+.s1-paradigm-title.right-col {
+  color: var(--accent);
+}
+.s1-paradigm-body {
+  font-size: 0.72em;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+.s1-closer {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 0.78em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Map boxes */
+.s1-map-pair {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  justify-content: center;
+  margin: 8px 0 4px;
+}
+.s1-map-box {
+  flex: 1;
+  max-width: 340px;
+}
+.s1-map-box h3 {
+  color: var(--accent);
+  font-size: 1.3em;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+}
+.s1-map-box p {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.s1-map-line {
+  text-align: center;
+  font-size: 0.76em;
+  color: var(--accent-secondary);
+  font-style: italic;
+  margin-top: 18px;
+}
+</style>
+
+<!-- §1.1 · Hook — la rueda copy-paste -->
+<section>
+  <h2>La rueda que vos corrías</h2>
+
+  <div class="s1-loop-diagram">
+    <!-- Top row: Error → copiar → chat -->
+    <div class="s1-loop-row">
+      <div class="s1-loop-step">
+        <strong>Error</strong>
+        <span>500 en el endpoint</span>
+      </div>
+      <div class="s1-loop-h-arrow">→</div>
+      <div class="s1-loop-step">
+        <strong>Copiar</strong>
+        <span>seleccionar, ⌘C</span>
+      </div>
+      <div class="s1-loop-h-arrow">→</div>
+      <div class="s1-loop-step">
+        <strong>Chat</strong>
+        <span>pegar, preguntar</span>
+      </div>
+    </div>
+
+    <!-- Right side arrow going down -->
+    <div class="s1-loop-v-arrow right">↓</div>
+
+    <!-- Bottom row (reversed): correr ← pegar ← código -->
+    <div class="s1-loop-row reverse">
+      <div class="s1-loop-step">
+        <strong>Correr</strong>
+        <span>nuevo 500 distinto</span>
+      </div>
+      <div class="s1-loop-h-arrow">←</div>
+      <div class="s1-loop-step">
+        <strong>Pegar</strong>
+        <span>al editor, guardar</span>
+      </div>
+      <div class="s1-loop-h-arrow">←</div>
+      <div class="s1-loop-step">
+        <strong>Código</strong>
+        <span>IA genera el bloque</span>
+      </div>
+    </div>
+
+    <!-- Left side arrow going back up — closes the loop -->
+    <div class="s1-loop-v-arrow">↑&nbsp;&nbsp;&nbsp;<span style="color:var(--accent);font-size:0.85em">volvé al chat</span></div>
+
+    <!-- Loop label -->
+    <div class="s1-loop-back">↺ &nbsp; vuelta a empezar</div>
+  </div>
+
+  <p class="s1-hook-close fragment fade-in">
+    "Vos eras el que corría el loop."
+  </p>
+
+  <aside class="notes">
+    <p><strong>Dejar que el diagrama hable 5 segundos antes de hablar. Revelar la línea final con un click.</strong></p>
+    <p><u>Diagrama cíclico de 6 pasos que reproduce la rueda copy-paste manual del alumno. Sin texto explicativo — la estructura visual hace el argumento.</u></p>
+    <p><em>"Pensá en la última vez que le pediste a una IA que te arreglara un endpoint. Copiaste el error, lo pegaste en el chat, la IA te devolvió código, lo pegaste en tu editor, corriste el servidor, viste un 500 distinto, y volviste al chat. Cada vuelta de esa rueda la hacías vos: leías la salida, decidías qué llevar de vuelta al modelo, ejecutabas el próximo paso."</em></p>
+    <p><em>"Esto no es un defecto del modelo — es cómo funciona el paradigma más básico. La IA escribía. Vos corrías el loop."</em></p>
+  </aside>
+</section>
+
+<!-- §1.2 · Lo que cambia — la IA ahora actúa -->
+<section>
+  <h2>Lo que cambia: la IA actúa</h2>
+
+  <div class="bg-secondary-card" style="max-width:620px;margin:16px auto 0;padding:28px 32px;">
+    <p style="color:var(--text-muted);margin:0 0 14px;text-transform:uppercase;letter-spacing:0.07em;font-size:0.6em;">Hoy</p>
+    <p style="font-size:1.0em;line-height:1.6;margin:0 0 18px;">
+      El agente escribe un fragmento, llama una herramienta para correrlo, lee la salida, detecta el error, escribe la corrección, vuelve a correr.<br>
+      <strong style="color:var(--accent)">Sin que vos intervengas en cada vuelta.</strong>
+    </p>
+    <p style="font-size:0.78em;color:var(--text-muted);line-height:1.55;margin:0;border-top:1px solid #2a3a5a;padding-top:14px;">
+      Tiene acceso al sistema de archivos, puede llamar comandos, puede leer resultados.
+      No te describe lo que habría que hacer: <em>lo hace.</em>
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Slide de un solo concepto: la diferencia no es que el modelo sea mejor, sino que ahora cierra el ciclo él solo. No hay lista; la tarjeta lleva una sola idea grande.</u></p>
+    <p><em>"Entonces ¿qué cambia? No es que la IA escriba mejor o genere más código de una vez. Eso no sería un cambio de paradigma — sería más de lo mismo. Lo que cambia es quién ejecuta el ciclo."</em></p>
+    <p><em>"El agente escribe, llama una herramienta, lee la salida, detecta el error, corrige, vuelve a correr. Sin que vos intervengas en cada vuelta. La IA tiene acceso al sistema de archivos, puede correr comandos, puede leer resultados. No te describe lo que habría que hacer: lo hace. Eso suena a un detalle técnico, pero cambia completamente la relación entre vos y la herramienta."</em></p>
+  </aside>
+</section>
+
+<!-- §1.3 · Dos paradigmas -->
+<section>
+  <h2>Dos paradigmas, no dos versiones</h2>
+
+  <div class="comparison-2col" style="margin-top:18px;">
+    <div class="bg-secondary-card">
+      <p class="s1-paradigm-label">Paradigma 1</p>
+      <p class="s1-paradigm-title">La IA sugiere,<br>vos conducís</p>
+      <p class="s1-paradigm-body">
+        El modelo completa una línea, propone un bloque, ofrece una alternativa. Vos abrís el archivo, aceptás o rechazás la sugerencia, ejecutás el test.
+        <br><br>
+        La IA opera en modo reactivo: responde cuando la invocás. Vos manejás el flujo.
+      </p>
+    </div>
+    <div class="bg-secondary-card">
+      <p class="s1-paradigm-label">Paradigma 2</p>
+      <p class="s1-paradigm-title right-col">El agente planifica<br>y ejecuta en loop</p>
+      <p class="s1-paradigm-body">
+        Recibe un objetivo, arma un plan, ejecuta pasos, observa resultados, ajusta y sigue.
+        <br><br>
+        La IA conduce el flujo; vos supervisás el proceso. El modelo no espera que le traigas el error: va a buscarlo.
+      </p>
+    </div>
+  </div>
+
+  <p class="s1-closer fragment fade-in">
+    El LLM debajo puede ser el mismo. Lo que cambia es la arquitectura encima.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Señalar cada columna al mencionarla. Click para revelar el cierre.</strong></p>
+    <p><u>Comparación 2 columnas: no versiones mejor/peor, sino arquitecturas distintas. El LLM puede ser idéntico — lo que cambia es la capa encima.</u></p>
+    <p><em>"Hay dos formas en que una IA puede colaborar con código, y vale la pena verlas como paradigmas distintos, no como versiones mejores y peores de lo mismo."</em></p>
+    <p><em>"En el primero, la IA sugiere y vos conducís. Autocomplete, chat — el flujo lo manejás vos. En el segundo, el agente planifica y ejecuta en un loop. Recibe un objetivo, arma un plan, itera. El modelo no espera que le traigas el error: va a buscarlo."</em></p>
+    <p><em>"El punto clave, y esto es lo que más cuesta internalizar: el LLM debajo puede ser exactamente el mismo. Lo que cambia es la arquitectura encima."</em></p>
+  </aside>
+</section>
+
+<!-- §1.4 · Por qué necesitás un modelo mental nuevo -->
+<section>
+  <h2>Proponer no es actuar</h2>
+
+  <div class="comparison-2col" style="margin-top:18px;">
+    <div class="bg-secondary-card">
+      <p class="s1-paradigm-label">Chat</p>
+      <p class="s1-paradigm-title">El modelo alucina<br>una función inexistente</p>
+      <p class="s1-paradigm-body">
+        Copiás el código.<br>
+        No compila.<br>
+        Lo notás.
+        <br><br>
+        <span style="color:var(--accent)">El daño: ninguno.</span><br>
+        Solo tiempo perdido.
+      </p>
+    </div>
+    <div class="bg-secondary-card" style="border-color:#e74c3c;">
+      <p class="s1-paradigm-label" style="color:#e74c3c;">Agente</p>
+      <p class="s1-paradigm-title" style="color:#e74c3c;">El modelo alucina<br>un comando de borrado</p>
+      <p class="s1-paradigm-body">
+        El agente lo ejecuta.<br>
+        Los archivos se van.<br>
+        Lo notás después.
+        <br><br>
+        <span style="color:#e74c3c">El daño: real.</span><br>
+        El entorno ya cambió.
+      </p>
+    </div>
+  </div>
+
+  <p class="s1-closer fragment fade-in">
+    "La diferencia entre proponer y actuar no es cosmética."
+  </p>
+
+  <aside class="notes">
+    <p><strong>Dejar que los alumnos lean las dos columnas. Pausa antes del click.</strong></p>
+    <p><u>Comparación que ancla el riesgo del salto de paradigma. El rojo de la columna agente es deliberado — único uso de color de alerta en la sección.</u></p>
+    <p><em>"Si traés el modelo mental del chat al agente, vas a tener problemas. En el chat, el peor caso es que el modelo alucine una función que no existe: copiás el código, no compila, lo notás. Cero daño, solo tiempo."</em></p>
+    <p><em>"En el agente, el modelo puede alucinar un comando de borrado de archivos — y ejecutarlo. No hay copia intermedia, no hay momento de revisión. El entorno ya cambió."</em></p>
+    <p><em>"La diferencia entre proponer y actuar no es cosmética. Esto requiere un modelo mental distinto, y eso es exactamente lo que construimos hoy."</em></p>
+  </aside>
+</section>
+
+<!-- §1.5 · El mapa de la clase -->
+<section>
+  <h2>El mapa de la clase</h2>
+
+  <div class="s1-map-pair">
+    <div class="s1-map-box bg-secondary-card">
+      <h3>El loop</h3>
+      <p>
+        Qué ciclo ejecuta el agente, qué pasa en cada vuelta, y cómo sabe cuándo parar.
+        Sin entender el loop, no podés anticipar qué hace el agente cuando algo sale mal.
+      </p>
+    </div>
+    <div class="s1-map-box bg-secondary-card">
+      <h3>El contexto</h3>
+      <p>
+        El agente trabaja con lo que tiene en su ventana. Eso define qué puede recordar, qué puede razonar, y por qué se pierde en tareas largas.
+      </p>
+    </div>
+  </div>
+
+  <p class="s1-map-line fragment fade-in">
+    Todo lo que sigue actúa sobre uno de los dos.
+  </p>
+
+  <aside class="notes">
+    <p><u>Dos cajas de igual peso — sin jerarquía visual entre ellas. Son los dos conceptos que estructuran toda la clase. La línea de cierre se revela sola para que aterrice.</u></p>
+    <p><em>"Dirigir un agente bien requiere entender exactamente dos cosas. La primera es el loop: qué ciclo ejecuta el agente, qué pasa en cada vuelta, cómo sabe cuándo parar. Si no lo entendés, no podés anticipar qué hace cuando algo sale mal, y algo siempre sale mal."</em></p>
+    <p><em>"La segunda es el contexto: el agente no tiene un estado interno que persiste. Trabaja con lo que tiene en su ventana. Eso define qué puede recordar, qué puede razonar, por qué se pierde en tareas largas."</em></p>
+    <p><em>"Estas dos cajas son el mapa de toda la clase. Todo lo que viene — cada herramienta, cada patrón, cada feature — actúa sobre una de las dos."</em></p>
+  </aside>
+</section>
+
+<!-- §1.6 · Cierre — el rol que ya tenés + lo que se agrega -->
+<section>
+  <h2>El rol que ya tenés</h2>
+
+  <div class="bg-secondary-card" style="max-width:640px;margin:16px auto 0;padding:28px 32px;">
+    <p style="font-size:0.78em;color:var(--text-muted);line-height:1.65;margin:0 0 18px;">
+      El rol que aprendiste en las semanas anteriores no desaparece.
+      Seguís siendo supervisor. Lo que cambia es que ahora supervisás un proceso autónomo en lugar de editar texto.
+      El vocabulario que tenés — especificación, contratos, decisiones arquitectónicas — sigue siendo tu herramienta principal.
+    </p>
+    <p style="font-size:0.78em;color:var(--text-muted);line-height:1.65;margin:0;border-top:1px solid #2a3a5a;padding-top:14px;">
+      Lo que se agrega: el loop y el contexto.
+    </p>
+  </div>
+
+  <p class="fragment fade-in" style="margin-top:28px;font-size:1.05em;color:var(--accent);text-align:center;font-style:italic;">
+    "Hoy no aprendés una herramienta; aprendés la máquina que vas a dirigir el resto del curso."
+  </p>
+
+  <aside class="notes">
+    <p><strong>La última línea se revela con un click. Pausa larga después — dejar que cierre.</strong></p>
+    <p><u>Slide de cierre de sección. Ancla la continuidad (el rol supervisor de S2–S3 sobrevive) y enuncia claramente qué se agrega. La línea final es la tesis del día.</u></p>
+    <p><em>"Para terminar: el rol que construiste en las semanas anteriores no desaparece. Seguís siendo supervisor. Lo que cambia es que ahora supervisás un proceso autónomo. El vocabulario que ya tenés — especificación, contratos, decisiones arquitectónicas — sigue siendo tu herramienta principal. Lo que se agrega son estos dos conceptos: el loop y el contexto."</em></p>
+    <p><em>"Hoy no aprendés una herramienta. Aprendés la máquina que vas a dirigir el resto del curso."</em></p>
+  </aside>
+</section>
       <!-- /§1 -->
 
       <!-- ===== §2 — El loop: pensar, actuar, observar ===== -->
@@ -281,6 +646,8 @@
   <script src="../../../node_modules/reveal.js/dist/reveal.js"></script>
   <script src="../../../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
   <script src="../../../node_modules/reveal.js/plugin/notes/notes.js"></script>
+  <script src="four-loop-anim.js"></script>
+  <script src="clickable-steps.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
