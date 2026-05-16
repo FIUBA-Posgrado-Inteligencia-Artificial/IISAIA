@@ -375,7 +375,7 @@
   margin-top: 18px;
 }
 </style>
-
+<section>
 <!-- §1.1 · Hook — la rueda copy-paste -->
 <section>
   <h2>La rueda que vos corrías</h2>
@@ -602,6 +602,7 @@
     <p><em>"Hoy no aprendés una herramienta. Aprendés la máquina que vas a dirigir el resto del curso."</em></p>
   </aside>
 </section>
+</section>
       <!-- /§1 -->
 
       <!-- ===== §2 — El loop: pensar, actuar, observar ===== -->
@@ -825,7 +826,7 @@
   margin-top: 4px;
 }
 </style>
-
+<section>
 <!-- §2.1 · Hook — "Arreglá el bug." -->
 <section>
   <h2>"Arreglá el bug."</h2>
@@ -1220,6 +1221,7 @@
     <p><em>"Esa información fue acumulándose en algún lugar. Ese lugar se llama contexto, tiene un tamaño fijo, y cuando se llena, algo tiene que ceder. El loop es el esqueleto. Pero opera sobre algo concreto y finito. Eso lo vemos en §4."</em></p>
   </aside>
 </section>
+</section>
       <!-- /§2 -->
 
       <!-- ===== §3 — Tools: las manos del agente ===== -->
@@ -1390,7 +1392,7 @@
   margin-top: 6px;
 }
 </style>
-
+<section>
 <!-- §3.1 · Hook — callback semana 1 -->
 <section>
   <h2>¿Se acuerdan del token especial?</h2>
@@ -1696,6 +1698,7 @@
     <p><em>"Y ese contexto tiene un tamaño. Cuando el loop itera muchas veces, cuando el agente ejecuta muchas tools, ese espacio se llena. Qué implica que se llene, y cómo se gestiona, es §4."</em></p>
   </aside>
 </section>
+</section>
       <!-- /§3 -->
 
       <!-- ===== §4 — La ventana de contexto es finita ===== -->
@@ -1828,7 +1831,7 @@
   padding-top: 14px;
 }
 </style>
-
+<section>
 <!-- §4.1 · Hook -->
 <section>
   <h2>¿Por qué el agente "olvidó"?</h2>
@@ -2187,6 +2190,7 @@
     <p><em>"Pero antes de entrar a esas herramientas, falta una pieza de la parte 1. Un agente que actúa puede fallar de maneras que uno que solo escribe no puede. Los modos de falla nuevos — eso es §5."</em></p>
   </aside>
 </section>
+</section>
       <!-- /§4 -->
 
       <!-- ===== §5 — Cuando el agente falla ===== -->
@@ -2382,7 +2386,7 @@
   line-height: 1.5;
 }
 </style>
-
+<section>
 <!-- §5.1 · Opener-hook — el contraste que arma §5 -->
 <section>
   <h2>La falla que deja rastro</h2>
@@ -2576,6 +2580,7 @@
     <p><em>"Todo lo que sigue actúa sobre el loop o sobre el contexto."</em></p>
     <p><em>"Cada feature de la herramienta que vamos a abrir en la parte 2 — sin excepción — es una respuesta a alguno de los problemas que acabamos de nombrar. No son features sueltas en una lista. Son palancas sobre las dos cosas que ya conocen."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§5 -->
 
@@ -2793,7 +2798,7 @@
   line-height: 1.6;
 }
 </style>
-
+<section>
 <!-- §6.1 · section-divider — costura Parte 1 / Parte 2 -->
 <section class="section-divider">
   <h2>Parte 2 — Claude Code</h2>
@@ -2986,6 +2991,7 @@
     <p><em>"§11, Plan mode y control del loop: loop. El primero — y el único — de la parte 2 que aterriza en el otro polo. Eso es deliberado y es el hook de §11."</em></p>
     <p><em>"Llevá la pregunta a cada sección. Las conexiones se hacen solas."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§6 -->
 
@@ -3341,7 +3347,7 @@
   font-weight: 700;
 }
 </style>
-
+<section>
 <!-- §7.1 · Opener — lens-tracker aterriza en CONTEXTO -->
 <section>
   <h2>¿Loop o contexto? Contexto.</h2>
@@ -3630,6 +3636,7 @@
     <p><em>"Eso lleva a una pregunta natural: ¿y si una instrucción pudiera estar en el contexto solo cuando hace falta, y no ocupar espacio el resto del tiempo? ¿Es posible eso?"</em></p>
     <p><em>"Sí. Y eso es exactamente lo que vamos a ver en §8."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§7 -->
 
@@ -4178,7 +4185,7 @@
   margin: 24px auto 0;
 }
 </style>
-
+<section>
 <!-- §8.1 · Opener — lens-tracker aterriza en CONTEXTO -->
 <section>
   <h2>¿Loop o contexto? Contexto.</h2>
@@ -4577,6 +4584,7 @@
     <p><em>"§9 lleva la idea de condicional un paso más lejos. No instrucciones que aparecen por archivo — un procedimiento completo que el agente invoca cuando la tarea lo requiere. Eso son las skills."</em></p>
   </aside>
 </section>
+</section>
       <!-- /§8 -->
 
       <!-- ===== §9 — Skills y slash commands ===== -->
@@ -4862,7 +4870,7 @@
   font-weight: 700;
 }
 </style>
-
+<section>
 <!-- §9.1 · Opener — lens-tracker aterriza en CONTEXTO, hilo de §8 -->
 <section>
   <h2>¿Loop o contexto? Contexto — un paso más lejos.</h2>
@@ -5099,6 +5107,7 @@
     <p><em>"§10 escala la misma lógica. No aislar un procedimiento del contexto — aislar un loop entero. Un sub-agente tiene su propia ventana, su propio ciclo pensar-actuar-observar, su propia instancia. Puede leer cincuenta archivos, razonar miles de tokens — todo en su ventana. Al supervisor le vuelve solo el resultado."</em></p>
     <p><em>"Es la misma pregunta de siempre: ¿cuándo paga contexto? Y la misma respuesta: solo cuando hace falta. Pero aplicada a la unidad más grande del sistema: el agente mismo."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§9 -->
 
@@ -5416,7 +5425,7 @@
   font-weight: 700;
 }
 </style>
-
+<section>
 <!-- §10.1 · Opener — lens-tracker aterriza en CONTEXTO, sub-label "aísla el contexto de un loop entero" -->
 <section>
   <h2>¿Loop o contexto? Contexto — aislar el loop entero.</h2>
@@ -5670,6 +5679,7 @@
     <p><em>"§11 cambia algo. No en el argumento — en el eje. Todo lo que vimos desde §7 responde la misma pregunta: ¿qué entra al contexto del agente? §11 responde otra: ¿cuánto le dejás hacer al agente antes de que tengas que mirar?"</em></p>
     <p><em>"Y el tracker, que en toda la parte 2 aterrizó en CONTEXTO, va a hacer algo nuevo. La primera vez que lo ven en LOOP es el hook de §11."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§10 -->
 
@@ -6210,7 +6220,7 @@
   font-weight: 700;
 }
 </style>
-
+<section>
 <!-- §11.1 · Opener — lens-tracker FLIPS a LOOP (primer flip de toda la parte 2) -->
 <section>
   <h2>El eje cambia — por primera vez en la parte 2.</h2>
@@ -6605,6 +6615,7 @@
     <p><em>"Lo que falta no es otra herramienta. Tenemos el modelo. Tenemos el rol. Tenemos el runtime. Lo que falta es el para qué. ¿Qué construís con todo esto junto? ¿Cómo agarrás modelo + rol + runtime y los usás al mismo tiempo en un proyecto real, de principio a fin?"</em></p>
     <p><em>"Eso es §12."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§11 -->
 
@@ -7003,7 +7014,7 @@
   font-style: normal;
 }
 </style>
-
+<section>
 <!-- §12.1 · Hook — las tres cosas -->
 <section>
   <h2>Cuatro semanas. Tres cosas. Todo al mismo tiempo.</h2>
@@ -7289,6 +7300,7 @@
     <p><em>"No son herramientas separadas. Son el mismo supervisor trabajando en distintas capas al mismo tiempo."</em></p>
     <p><em>"Eso es todo. Nos vemos en el trabajo final."</em></p>
   </aside>
+</section>
 </section>
       <!-- /§12 -->
 

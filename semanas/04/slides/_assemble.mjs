@@ -40,7 +40,20 @@ for (let n = 1; n <= 12; n++) {
     console.error(`WARN: marker for §${n} not found`);
     continue;
   }
-  html = html.split(marker).join(frag.trim());
+  // Group this section's slides into a reveal.js vertical stack so the
+  // deck is 2D like semana 01-03: left/right between sections, up/down
+  // within a section. Hoist the leading scoped <style> out of the wrapper
+  // (it applies globally regardless of DOM position; reveal ignores
+  // non-<section> children of .slides for navigation).
+  frag = frag.trim();
+  let styleBlock = '';
+  const sm = frag.match(/^\s*<style>[\s\S]*?<\/style>\s*/);
+  if (sm) {
+    styleBlock = sm[0].trim() + '\n';
+    frag = frag.slice(sm[0].length).trim();
+  }
+  const wrapped = `${styleBlock}<section>\n${frag}\n</section>`;
+  html = html.split(marker).join(wrapped);
 }
 
 // 3. Insert collected init scripts after the Reveal.initialize block.
