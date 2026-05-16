@@ -89,7 +89,7 @@ Ese mapa es la tricotomía de §8, ahora completa con el tercer mecanismo.
 
 ---
 
-## Cierre
+## Cierre: del procedimiento al loop
 
 Las skills aíslan un *procedimiento* del resto del contexto. No instrucciones dispersas, sino un objeto de conocimiento completo sobre cómo hacer algo, que no existe para la sesión hasta que se necesita.
 

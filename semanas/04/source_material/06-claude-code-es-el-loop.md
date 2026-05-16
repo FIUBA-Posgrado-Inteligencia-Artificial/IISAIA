@@ -37,8 +37,8 @@ Las cuatro piezas. El mismo diagrama del §2, con una herramienta concreta detr�
 El resto de la clase recorre las decisiones de diseño de Claude Code una por una. Pero todas responden la misma pregunta: ¿esto actúa sobre cómo corre el loop, o sobre qué hay en el contexto cuando el loop arranca?
 
 - **§7 — CLAUDE.md jerárquico**: memoria persistente que entra al contexto antes de que el loop empiece.
-- **§8 — Rules y auto memory**: cómo el agente puede actualizar su propio contexto entre sesiones.
-- **§9 — Skills y slash commands**: herramientas definidas por el usuario que amplían el conjunto de tools.
+- **§8 — Rules y auto memory**: instrucciones condicionales que entran al contexto solo cuando son relevantes, y la memoria que el agente se escribe solo entre sesiones.
+- **§9 — Skills y slash commands**: capacidades invocables on-demand que no ocupan contexto hasta que se necesitan.
 - **§10 — Sub-agents**: loops dentro del loop; el agente delega vueltas a agentes especializados.
 - **§11 — Plan mode y control**: mecanismos para pausar el loop, revisar antes de actuar, retomar con contexto intacto.
 

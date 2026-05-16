@@ -57,7 +57,7 @@ El **loop** es pensar → actuar → observar → repetir. El **contexto** es lo
 | `CLAUDE.md` jerárquico (§7) | Contexto — instrucciones que entran a la ventana |
 | Rules y auto-memory (§8) | Contexto — qué se preserva entre sesiones |
 | Skills y slash commands (§9) | Contexto — procedimientos reutilizables sin inundar |
-| Sub-agents (§10) | Loop — aísla un loop entero para no contaminar el contexto del padre |
+| Sub-agents (§10) | Contexto — aísla el contexto de un loop entero para que el ruido no llegue al padre |
 | Plan mode (§11) | Loop — separa "pensar" de "actuar" para que el supervisor entre en el medio |
 | Permisos (§11) | Loop — gate antes de cada acción que actúa sobre el mundo |
 

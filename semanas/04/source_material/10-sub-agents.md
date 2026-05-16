@@ -70,7 +70,7 @@ Si el delta no es lo suficientemente visible en tiempo real, o el demo de sub-ag
 
 ---
 
-## Cierre
+## Cierre: aislar la unidad más grande
 
 Los sub-agents aíslan el contexto entre loops: lo que el sub-agent explora y descarta nunca llega al padre. Es la misma lógica que vimos en §7 y §9 — actuar sobre el contexto para que el agente no se ahogue en ruido — pero aplicada a la unidad más grande: el loop entero.
 

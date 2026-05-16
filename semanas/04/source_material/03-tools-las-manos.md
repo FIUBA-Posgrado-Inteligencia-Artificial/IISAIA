@@ -42,7 +42,7 @@ Una tool que lee — lee un archivo, lista un directorio, corre una búsqueda, l
 
 Una tool que escribe — edita un archivo, corre `git commit`, borra un directorio, llama un endpoint que muta estado — modifica el entorno. Si esa acción fue incorrecta, el entorno quedó en un estado diferente al esperado. Puede que sea recuperable; puede que no. Un archivo sobreescrito sin backup, un comando que eliminó datos, una API que procesó un pago — no hay "deshacer" automático.
 
-Esta distinción es lo que hace que el supervisor preste más atención a las tools que actúan sobre el mundo. Cuando el agente lee, el riesgo es bajo; cuando escribe o ejecuta, cada acción merece revisión antes de confirmar. Qué pasa cuando esa revisión falla o no existe, lo vemos en detalle en el §5 y en el §11.
+Esta distinción es lo que hace que el supervisor preste más atención a las tools que actúan sobre el mundo. Cuando el agente lee, el riesgo es bajo; cuando escribe o ejecuta, cada acción merece revisión antes de confirmar. Qué pasa cuando esa revisión falla o no existe, lo vemos en detalle en el §5.
 
 ## Mini-demo en vivo: la observación entra al contexto
 

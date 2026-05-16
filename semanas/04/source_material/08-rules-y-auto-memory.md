@@ -49,7 +49,7 @@ El mecanismo de carga tiene un límite concreto: las primeras **200 líneas o 25
 
 Para auditar qué recuerda Claude, el comando es `/memory`. Lista los archivos de instrucción cargados en la sesión — CLAUDE.md, rules, archivos locales — y da acceso a la carpeta de memoria automática. También desde ahí podés activar o desactivar el sistema. Si le decís explícitamente "recordá que en este proyecto usamos `npm`, no `yarn`", Claude lo guarda. Si la sesión terminó y no lo pediste pero Claude aprendió algo relevante por tus correcciones, puede igualmente guardarlo solo.
 
-Un punto operativo importante: el sistema requiere Claude Code v2.1.59 o posterior.
+Un punto operativo: auto memory es relativamente reciente, así que si no lo ves disponible, verificá que tu versión de Claude Code esté actualizada.
 
 ## La tricotomía (cierre del adelanto del §4)
 
@@ -61,7 +61,7 @@ El mapa queda así:
 
 - **Siempre cargado** — CLAUDE.md y `@import`. Lo que el agente necesita en cada sesión, sin excepción: arquitectura del proyecto, convenciones globales, restricciones que nunca cambian. Costo constante; presencia garantizada.
 - **Condicional** — Path-scoped rules (y las skills, que veremos en §9). Lo que aplica solo a ciertas áreas del codebase. Costo cero hasta que es relevante; entra cuando hace falta y no antes.
-- **Autocurado** — Auto memory. El agente detecta aprendizajes relevantes y los guarda él mismo. No es el supervisor quien decide cada vez qué persistir; el sistema lo hace.
+- **Autocurado** — Auto memory. Es exactamente lo que §4 anticipó con este rótulo: el sistema detecta aprendizajes, correcciones y preferencias mientras trabaja y los conserva entre sesiones por su cuenta. No es el supervisor quien decide cada vez qué persistir ni lo escribe a mano; el sistema lo hace.
 
 Esto no es taxonomía por el gusto de clasificar. §4 decía que "gestionar el contexto es la habilidad central" de quien dirige agentes de manera efectiva. La tricotomía es exactamente esa habilidad hecha operacional: saber en qué categoría cae cada instrucción, y usar el mecanismo que corresponde.
 

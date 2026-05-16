@@ -53,7 +53,7 @@ Cuando pensamos en cómo mantener la ventana en buen estado a lo largo de una se
 
 - **Siempre cargado**: hay información que el agente necesita en cada vuelta del loop, sin excepción. Esa información se carga al inicio y se mantiene disponible siempre, porque quitarla crearía context rot garantizado.
 - **Condicional**: hay información que solo es relevante para ciertas tareas. Cargarla todo el tiempo gasta espacio; no cargarla cuando hace falta genera errores. La estrategia condicional la trae cuando la necesita y la deja afuera cuando no.
-- **Autocurado**: el propio agente tiene instrucciones para reconocer cuándo el contexto se está degradando y actuar: resumir, descartar, pedir un reset. El curado no lo hace el supervisor cada vez; lo hace el sistema.
+- **Autocurado**: hay información que el propio sistema decide conservar por su cuenta — aprendizajes, correcciones, preferencias que descubre mientras trabaja — y la mantiene disponible entre sesiones sin que el supervisor tenga que escribirla ni curarla a mano cada vez. El curado lo hace el sistema, no vos.
 
 Este adelanto es intencional. Las tres estrategias se hacen concretas en la parte 2 de la clase, y el §8 cierra explícitamente este preview con herramientas y ejemplos específicos. Por ahora alcanza con tener los tres rótulos en la cabeza: **siempre cargado**, **condicional**, **autocurado**.
 
