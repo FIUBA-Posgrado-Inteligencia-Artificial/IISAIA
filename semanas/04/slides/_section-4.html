@@ -126,6 +126,58 @@
   border-top: 1px solid #2a3a5a;
   padding-top: 14px;
 }
+
+/* C3 — Slide A: fill + numbers layout */
+.s4-fill-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 28px;
+  align-items: center;
+  max-width: 900px;
+  margin: 22px auto 0;
+}
+.s4-fill-anim {
+  display: flex;
+  justify-content: center;
+}
+.s4-token-annotations {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.s4-token-anno {
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+}
+.s4-token-anno-val {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  color: var(--accent);
+  font-weight: 700;
+}
+.s4-token-anno-label {
+  display: block;
+  font-size: 0.65em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* C3 — Slide B: fill final + rot layout */
+.s4-rot-with-fill {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 2.2fr;
+  gap: 28px;
+  align-items: start;
+  max-width: 920px;
+  margin: 22px auto 0;
+}
+.s4-rot-fill-anchor {
+  display: flex;
+  justify-content: center;
+}
 </style>
 
 <!-- §4.1 · Hook -->
@@ -187,58 +239,36 @@
   </aside>
 </section>
 
-<!-- §4.3 · El loop llena la ventana -->
+<!-- §4.3 · Slide A consolidado: fill + números como anotaciones reveladas -->
 <section>
   <h2>El loop llena la ventana</h2>
 
-  <div id="s4-loop-fill" style="margin:20px auto 0;max-width:740px;"></div>
+  <div class="s4-fill-layout">
+    <div id="s4-loop-fill" class="s4-fill-anim"></div>
 
-  <p style="text-align:center;margin-top:16px;font-size:0.72em;color:var(--text-muted);font-style:italic;">
-    cada vuelta deposita tokens — pensamiento, llamada, respuesta, todo se apila
-  </p>
-
-  <aside class="notes">
-    <p><strong>Dejar correr la animación una vuelta completa antes de hablar.</strong></p>
-    <p><u>Slide de animación — mode:'fill'. La barra de contexto va creciendo con cada ciclo del loop. El caption debajo es el único texto.</u></p>
-    <p><em>"Fijense en la barra de la ventana de contexto. Cada vuelta del loop agrega tokens. Un pensamiento del modelo: tokens. Una llamada a herramienta: tokens. La respuesta de esa herramienta: tokens. Todo se apila."</em></p>
-    <p><em>"¿Por qué se apila? Porque el modelo necesita el historial completo para saber dónde está y qué hacer en la próxima vuelta. Si no viera lo que hizo antes, cada vuelta sería un arranque en frío."</em></p>
-    <p><em>"Una sesión de trabajo real no tiene una vuelta: tiene cien, doscientas. Pensá en cuarenta minutos construyendo una feature. El agente leyó el esquema de la base de datos, revisó tres archivos de configuración, ejecutó los tests, leyó la salida de error, propuso un fix, volvió a correr los tests. Ese recorrido toca fácilmente treinta o cuarenta archivos más todas las observaciones intermedias. Todo eso vive en la ventana."</em></p>
-  </aside>
-</section>
-
-<!-- §4.4 · Cuánto es eso — números concretos -->
-<section>
-  <h2>¿Cuánto es eso en la práctica?</h2>
-
-  <div class="s4-token-numbers">
-    <div class="s4-token-row">
-      <div class="s4-token-card">
-        <span class="s4-token-val">300 líneas</span>
-        <p>archivo de código típico con comentarios</p>
+    <div class="s4-token-annotations">
+      <div class="s4-token-anno fragment" data-fill="20">
+        <span class="s4-token-anno-val">300 líneas ≈ 1.5–2.5k tokens</span>
+        <span class="s4-token-anno-label">un archivo típico</span>
       </div>
-      <div class="s4-token-card s4-warn">
-        <span class="s4-token-val">1.5–2.5k tokens</span>
-        <p>lo que ocupa ese archivo en el contexto</p>
+      <div class="s4-token-anno fragment" data-fill="60">
+        <span class="s4-token-anno-val">20 archivos ≈ 30–50k tokens</span>
+        <span class="s4-token-anno-label">solo en observaciones</span>
       </div>
-      <div class="s4-token-card">
-        <span class="s4-token-val">~200k tokens</span>
-        <p>ventana de contexto útil en modelos actuales</p>
-      </div>
-    </div>
-    <div class="s4-token-row">
-      <div class="s4-token-card s4-alert" style="grid-column: span 3;">
-        <span class="s4-token-val">20 archivos → 30–50k tokens solo en observaciones</span>
-        <p>sin contar pensamientos del modelo, logs de herramientas ni el contexto inicial. En una sesión larga, la ventana se consume más rápido de lo que intuís.</p>
+      <div class="s4-token-anno fragment" data-fill="95">
+        <span class="s4-token-anno-val">ventana útil ≈ 200k tokens</span>
+        <span class="s4-token-anno-label">una sesión larga la consume</span>
       </div>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las tres tarjetas superiores izquierda a derecha. Énfasis en la tarjeta roja — leerla despacio.</strong></p>
-    <p><u>Slide de datos concretos. El objetivo es hacer tangible la presión que el loop ejerce sobre la ventana. Los números son del material fuente — no aproximados ni inventados.</u></p>
-    <p><em>"Pongámosle números para que no quede abstracto. Un archivo de código de tamaño mediano — 300 líneas con comentarios — ocupa entre 1.500 y 2.500 tokens. Los modelos actuales tienen ventanas que rondan los 200.000 tokens. Parece mucho."</em></p>
-    <p><em>"Pero leé veinte archivos de ese tamaño — y en una sesión real leés veinte archivos sin darte cuenta — y ya gastaste entre 30.000 y 50.000 tokens solo en observaciones. Sin contar los pensamientos del modelo. Sin contar los logs de herramientas. Sin contar el contexto inicial que cargaste al empezar."</em></p>
-    <p><em>"La ventana se consume más rápido de lo que intuís. Ese es el punto."</em></p>
+    <p><strong>Slide A consolidado: el bar fill arranca casi vacío. Cada press abajo revela una anotación numérica Y crece el bar al porcentaje correspondiente (20% / 60% / 95%) — animación de ~600ms. Tres reveals = tres números visibles + bar lleno al 95% al final.</strong></p>
+    <p><u>Reemplaza dos slides previos (§4.3 fill animation + §4.4 token-numbers table). Los números son ahora anotaciones sobre la barra animada, no una tabla aparte.</u></p>
+    <p><em>"Fijense en la barra de la ventana de contexto. Arranca casi vacía. Cada vuelta del loop agrega tokens. Un pensamiento del modelo: tokens. Una llamada a herramienta: tokens. La respuesta de esa herramienta: tokens. Todo se apila."</em></p>
+    <p><em>"Pongámosle números: un archivo de código de tamaño mediano — 300 líneas con comentarios — ocupa entre 1.500 y 2.500 tokens. Parece chico."</em></p>
+    <p><em>"Pero leé veinte archivos de ese tamaño — y en una sesión real leés veinte archivos sin darte cuenta — y ya gastaste entre 30.000 y 50.000 tokens solo en observaciones. Sin contar los pensamientos del modelo. Sin contar los logs de herramientas."</em></p>
+    <p><em>"Los modelos actuales tienen ventanas que rondan los 200.000 tokens. En una sesión larga, la ventana se consume más rápido de lo que intuís. Ese es el punto."</em></p>
   </aside>
 </section>
 
@@ -268,27 +298,31 @@
   </aside>
 </section>
 
-<!-- §4.6 · Context rot — el mecanismo -->
+<!-- §4.6 · Slide B consolidado: fill final + context rot diagram -->
 <section>
   <h2>Context rot — cómo ocurre</h2>
 
-  <div class="s4-rot-diagram">
-    <div class="s4-rot-layer obs-heavy">
-      <span>observación vuelta 35 — output de tests (2.1k tokens)</span>
-      <span class="s4-rot-tag">reciente · pesa</span>
-    </div>
-    <div class="s4-rot-layer obs">
-      <span>observación vuelta 28 — lectura de config.yml</span>
-      <span class="s4-rot-tag">medio · pesa menos</span>
-    </div>
-    <div class="s4-rot-layer obs">
-      <span>observación vuelta 14 — respuesta del endpoint</span>
-      <span class="s4-rot-tag">lejano</span>
-    </div>
-    <div class="s4-rot-arrow">↓ sepultada</div>
-    <div class="s4-rot-layer buried">
-      <span>instrucción original — "no uses dependencias externas"</span>
-      <span class="s4-rot-tag">enterrada · casi invisible</span>
+  <div class="s4-rot-with-fill">
+    <div id="s4-rot-fill-final" class="s4-rot-fill-anchor"></div>
+
+    <div class="s4-rot-diagram">
+      <div class="s4-rot-layer obs-heavy">
+        <span>observación vuelta 35 — output de tests (2.1k tokens)</span>
+        <span class="s4-rot-tag">reciente · pesa</span>
+      </div>
+      <div class="s4-rot-layer obs">
+        <span>observación vuelta 28 — lectura de config.yml</span>
+        <span class="s4-rot-tag">medio · pesa menos</span>
+      </div>
+      <div class="s4-rot-layer obs">
+        <span>observación vuelta 14 — respuesta del endpoint</span>
+        <span class="s4-rot-tag">lejano</span>
+      </div>
+      <div class="s4-rot-arrow">↓ sepultada</div>
+      <div class="s4-rot-layer buried">
+        <span>instrucción original — "no uses dependencias externas"</span>
+        <span class="s4-rot-tag">enterrada · casi invisible</span>
+      </div>
     </div>
   </div>
 
@@ -297,8 +331,8 @@
   </p>
 
   <aside class="notes">
-    <p><strong>Señalar desde abajo hacia arriba — la instrucción enterrada primero, luego las capas encima.</strong></p>
-    <p><u>Diagrama de capas — solo CSS, sin JS. La instrucción original queda abajo, visualmente desvanecida. Las observaciones recientes arriba, con más color y peso visual. El efecto del "enterrado" lo da la opacidad y el estilo de borde.</u></p>
+    <p><strong>Señalar el bar lleno a la izquierda — es el estado de salida del slide anterior, "venimos de ahí". Después señalar desde abajo hacia arriba en el rot diagram — la instrucción enterrada primero, luego las capas encima.</strong></p>
+    <p><u>Slide B consolidado: el bar lleno a la izquierda ancla el contexto (venimos de "la ventana se llenó"). El rot diagram a la derecha muestra qué pasa adentro de esa ventana llena. Diagrama de capas — solo CSS, sin JS. La instrucción original queda abajo, visualmente desvanecida. Las observaciones recientes arriba, con más color y peso visual.</u></p>
     <p><em>"Context rot es el nombre del fenómeno que todo supervisor de agentes encuentra tarde o temprano, y que conviene conocer antes de que te sorprenda."</em></p>
     <p><em>"El mecanismo es así: diste una instrucción al inicio de la sesión. El agente la ejecutó bien las primeras veces. Pero después de muchas vueltas, algo cambia. El modelo empieza a ignorarla. Propone soluciones que la contradicen."</em></p>
     <p><em>"Lo que pasó es esto: la instrucción original quedó sepultada bajo cientos de líneas de observaciones. El modelo puede ver todo lo que está en la ventana — pero no todo lo que ve pesa igual cuando genera la respuesta siguiente. Las observaciones recientes dominan. La instrucción del principio, enterrada bajo logs y outputs, perdió peso. La señal se diluyó en el ruido."</em></p>
@@ -489,7 +523,39 @@
 
 <!-- INIT-SCRIPTS-§4-START -->
 <script>
-  initFourLoop({ containerId: 's4-loop-fill', mode: 'fill' });
+  // C3 — Slide A: fill anim, fragment-driven fillPercent
+  if (document.getElementById('s4-loop-fill')) {
+    initFourLoop({ containerId: 's4-loop-fill', mode: 'fill', fillPercent: 10 });
+  }
+
+  // C3 — Slide B: fill final at 95%
+  if (document.getElementById('s4-rot-fill-final')) {
+    initFourLoop({ containerId: 's4-rot-fill-final', mode: 'fill', fillPercent: 95 });
+  }
+
+  // Sync fill percent with fragments on slide A
+  Reveal.on('fragmentshown', function(e) {
+    if (e.fragment.dataset && e.fragment.dataset.fill) {
+      var pct = parseInt(e.fragment.dataset.fill, 10);
+      if (!isNaN(pct) && document.getElementById('s4-loop-fill')) {
+        updateFourLoop({ containerId: 's4-loop-fill', mode: 'fill', fillPercent: pct });
+      }
+    }
+  });
+
+  Reveal.on('fragmenthidden', function(e) {
+    if (e.fragment.dataset && e.fragment.dataset.fill) {
+      if (!document.getElementById('s4-loop-fill')) return;
+      // Recalculate from the highest still-visible data-fill annotation
+      var annos = document.querySelectorAll('.s4-token-anno.visible[data-fill]');
+      var maxPct = 10;
+      annos.forEach(function(el) {
+        var p = parseInt(el.dataset.fill, 10);
+        if (!isNaN(p) && p > maxPct) maxPct = p;
+      });
+      updateFourLoop({ containerId: 's4-loop-fill', mode: 'fill', fillPercent: maxPct });
+    }
+  });
   initClickableSteps({ containerId: 's4-demo-steps', steps: [
     {
       title: 'Beat 1 — Plantar la instrucción',
