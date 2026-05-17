@@ -299,11 +299,11 @@
 </section>
 
 <!-- §4.6 · Slide B consolidado: fill final + context rot diagram -->
-<section>
+<section data-loop-mode="fill" data-loop-fill="95">
   <h2>Context rot — cómo ocurre</h2>
 
   <div class="s4-rot-with-fill">
-    <div id="s4-rot-fill-final" class="s4-rot-fill-anchor"></div>
+    <div class="s4-rot-fill-anchor" style="min-height:240px;"></div>
 
     <div class="s4-rot-diagram">
       <div class="s4-rot-layer obs-heavy">
@@ -502,14 +502,9 @@
 
 <!-- INIT-SCRIPTS-§4-START -->
 <script>
-  // C3 — Slide A: fill anim, fragment-driven fillPercent
+  // C3 — Slide A: fill anim, fragment-driven fillPercent (kept local)
   if (document.getElementById('s4-loop-fill')) {
     initFourLoop({ containerId: 's4-loop-fill', mode: 'fill', fillPercent: 10 });
-  }
-
-  // C3 — Slide B: fill final at 95%
-  if (document.getElementById('s4-rot-fill-final')) {
-    initFourLoop({ containerId: 's4-rot-fill-final', mode: 'fill', fillPercent: 95 });
   }
 
   // Sync fill percent with fragments on slide A
