@@ -288,15 +288,13 @@
 </section>
 
 <!-- §2.2 · No da una respuesta: entra en un loop -->
-<section>
+<section data-loop-mode="intro">
   <h2>No da una respuesta: entra en un loop</h2>
 
-  <div class="s2-loop-wrap">
-    <div id="s2-loop-intro"></div>
-  </div>
+  <div class="s2-loop-wrap" style="min-height:240px;"></div>
 
   <p style="text-align:center;margin-top:18px;font-size:0.78em;color:var(--text-muted);font-style:italic;">
-    La firma de la semana. Todo lo que sigue actúa sobre este ciclo.
+    Todo lo que sigue actúa sobre este ciclo.
   </p>
 
   <aside class="notes">
@@ -536,12 +534,10 @@
 </section>
 
 <!-- §2.10 · Condiciones de corte -->
-<section>
+<section data-loop-mode="intro">
   <h2>Condiciones de corte</h2>
 
-  <div class="s2-loop-wrap" style="margin-bottom:0;">
-    <div id="s2-loop-corte"></div>
-  </div>
+  <div class="s2-loop-wrap" style="margin-bottom:0;min-height:240px;"></div>
 
   <div class="s2-corte-grid" style="margin-top:14px;">
     <div class="s2-corte-card ideal">
@@ -627,8 +623,7 @@
 
 <!-- INIT-SCRIPTS-§2-START -->
 <script>
-  initFourLoop({ containerId: 's2-loop-intro', mode: 'intro' });
-  // C1 — consolidated phase slide
+  // C1 — consolidated phase slide (kept local: fragment-driven phase changes)
   if (document.getElementById('s2-loop-phases')) {
     initFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: 'pensar' });
   }
@@ -657,7 +652,6 @@
     updateFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: phase });
   });
 
-  initFourLoop({ containerId: 's2-loop-corte', mode: 'intro' });
   initClickableSteps({
     containerId: 's2-demo-steps',
     steps: [
