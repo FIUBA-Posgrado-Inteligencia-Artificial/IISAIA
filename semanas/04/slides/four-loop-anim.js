@@ -571,17 +571,24 @@
     var container = document.getElementById(opts.containerId);
     if (!container) return;
 
-    var mode = opts.mode || 'intro';
-
     // Inject shared CSS once
     if (typeof document !== 'undefined') {
       injectStyles();
     }
 
+    // Create instance up front so render() can read live state from it.
+    var inst = {
+      containerId: opts.containerId,
+      opts: opts,           // keep original opts so update can merge over them
+      render: null
+    };
+
     function render() {
-      var renderer = modeMap[mode] || renderIntro;
-      renderer(container, opts);
+      var currentOpts = inst.opts;
+      var renderer = modeMap[currentOpts.mode] || renderIntro;
+      renderer(container, currentOpts);
     }
+    inst.render = render;
 
     // Initial render
     render();
@@ -596,11 +603,7 @@
     }
 
     // Track instance (scoped — no globals leaked beyond this array)
-    allInstances.push({
-      containerId: opts.containerId,
-      opts: opts,           // guardar opts originales para merge en update
-      render: render
-    });
+    allInstances.push(inst);
   }
 
   function updateFourLoop(updateOpts) {
