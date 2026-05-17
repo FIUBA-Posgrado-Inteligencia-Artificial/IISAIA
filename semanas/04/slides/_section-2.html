@@ -217,6 +217,30 @@
   padding-top: 8px;
   margin-top: 4px;
 }
+/* C1 — consolidated phase slide: prevent vertical jump between fragments */
+.s2-h2-phase {
+  min-height: 1.6em;
+  margin-bottom: 0.4em;
+}
+.s2-phase-card-stage {
+  min-height: 180px;
+}
+/* Stack the three h2 variants so only the current-visible one shows in flow */
+.s2-h2-phase.fragment.current-visible {
+  /* Reveal handles visibility via .visible / .current-fragment classes;
+     this only needs to ensure they layer at the same position. */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0;
+}
+/* Wrap container for the h2 stack so position:absolute children have a relative parent */
+.s2-h2-stack {
+  position: relative;
+  min-height: 1.6em;
+  margin-bottom: 0.4em;
+}
 </style>
 
 <!-- §2.1 · Hook — "Arreglá el bug." -->
@@ -269,69 +293,40 @@
   </aside>
 </section>
 
-<!-- §2.3 · Pensar -->
+<!-- §2.3 · Tres fases (consolidado: Pensar / Actuar / Observar) -->
 <section>
-  <h2>Pensar — formular el próximo paso</h2>
-
-  <div class="s2-loop-wrap">
-    <div id="s2-loop-pensar"></div>
+  <div class="s2-h2-stack">
+    <h2 data-phase-h2="pensar" class="s2-h2-phase">Pensar — formular el próximo paso</h2>
+    <h2 data-phase-h2="actuar" class="s2-h2-phase fragment current-visible">Actuar — usar una herramienta</h2>
+    <h2 data-phase-h2="observar" class="s2-h2-phase fragment current-visible">Observar — leer el resultado</h2>
   </div>
 
-  <div class="s2-phase-card" style="margin-top:14px;">
+  <div class="s2-loop-wrap">
+    <div id="s2-loop-phases"></div>
+  </div>
+
+  <div class="s2-phase-card s2-phase-card-stage" data-phase-card="pensar">
     <h3>Pensar</h3>
     <p>El agente razona sobre el estado actual: qué sabe, qué le falta saber, qué hipótesis tiene. No es pensamiento lineal — es el modelo formulando el próximo paso en función de lo que observó antes.</p>
     <p class="s2-produces">Produce: una decisión sobre qué acción tomar a continuación.</p>
   </div>
-
-  <aside class="notes">
-    <p><strong>Señalar el nodo "pensar" iluminado. Leer la definición en voz alta; no parafrasear — es densa a propósito.</strong></p>
-    <p><u>Slide de definición de fase 1. La animación resalta pensar; el card lo define con precisión. La línea "produce" ancla la utilidad de la fase.</u></p>
-    <p><em>"La primera fase se llama pensar. El agente recibe lo que hay en su contexto — el objetivo original, lo que observó en la vuelta anterior, la historia de lo que hizo — y razona sobre eso."</em></p>
-    <p><em>"No es lineal: no sigue un script. El modelo formula cuál es el próximo paso útil dado todo lo que sabe en ese momento. Qué hipótesis tiene, qué le falta ver, qué tiene sentido probar ahora. Lo que produce esta fase es una decisión: qué acción viene a continuación."</em></p>
-  </aside>
-</section>
-
-<!-- §2.4 · Actuar -->
-<section>
-  <h2>Actuar — usar una herramienta</h2>
-
-  <div class="s2-loop-wrap">
-    <div id="s2-loop-actuar"></div>
-  </div>
-
-  <div class="s2-phase-card actuar" style="margin-top:14px;">
+  <div class="s2-phase-card s2-phase-card-stage actuar fragment current-visible" data-phase-card="actuar">
     <h3>Actuar</h3>
     <p>El agente usa una herramienta: corre un comando, edita un archivo, llama a una API, lee un directorio. La acción produce un efecto en el entorno.</p>
     <p class="s2-produces">Produce: un cambio en el entorno — algo que antes no era verdad, ahora lo es.</p>
   </div>
-
-  <aside class="notes">
-    <p><strong>Señalar el nodo "actuar" iluminado. Enfatizar la palabra "herramienta" — conectar con §3 sin adelantar.</strong></p>
-    <p><u>Slide de definición de fase 2. La animación resalta actuar. La distinción clave: actuar no es "escribir" — es invocar una herramienta que toca el entorno real.</u></p>
-    <p><em>"La segunda fase es actuar. Y acá hay algo importante: actuar no significa 'escribir texto'. Significa invocar una herramienta. Correr un comando en la terminal, editar un archivo, hacer una llamada HTTP, leer un directorio."</em></p>
-    <p><em>"La herramienta produce un efecto en el entorno. Algo que antes no era verdad, ahora lo es. El archivo tiene una línea nueva. El test corrió. El servidor respondió. Las tools en detalle las vemos en la siguiente sección — por ahora lo que importa es que actuar siempre toca algo concreto fuera del modelo."</em></p>
-  </aside>
-</section>
-
-<!-- §2.5 · Observar -->
-<section>
-  <h2>Observar — leer el resultado</h2>
-
-  <div class="s2-loop-wrap">
-    <div id="s2-loop-observar"></div>
-  </div>
-
-  <div class="s2-phase-card observar" style="margin-top:14px;">
+  <div class="s2-phase-card s2-phase-card-stage observar fragment current-visible" data-phase-card="observar">
     <h3>Observar</h3>
     <p>El agente lee el resultado de la acción: el output del comando, el contenido del archivo, la respuesta HTTP. Eso nuevo entra a su contexto y alimenta la próxima vuelta de pensar.</p>
     <p class="s2-produces">Produce: información nueva en el contexto — el insumo de la siguiente vuelta.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar el nodo "observar" iluminado. La frase "entra a su contexto" es semilla del §4 — decirla con intención pero sin desarrollar.</strong></p>
-    <p><u>Slide de definición de fase 3. La animación resalta observar. La conexión con el contexto se planta aquí; florecerá en §4.</u></p>
-    <p><em>"Tercera fase: observar. El agente lee el resultado de lo que acaba de hacer. El output del comando, el contenido del archivo, el código HTTP de la respuesta. Todo eso entra a su contexto."</em></p>
-    <p><em>"Y eso es clave: no es que el agente 'vio' el resultado y lo olvidó. Lo que observa queda en la ventana, disponible para el próximo pensar. Eso es lo que hace que cada vuelta del loop sepa más que la anterior. Y después repite — hasta que una condición de corte decide que terminó. ¿Qué se ve cuando el loop completo trabaja sobre un problema real?"</em></p>
+    <p><strong>Cada press abajo cambia simultáneamente h2, fase iluminada en la animación, y card. Tres estados; entrar al slide ya es el primer estado (pensar). Señalar el nodo iluminado en cada estado.</strong></p>
+    <p><u>Slide consolidado de las tres fases del loop. Reemplaza tres slides previos (Pensar/Actuar/Observar). La animación persiste; solo cambia la fase iluminada. El card de abajo se reemplaza también (no se acumula).</u></p>
+    <p><em>"La primera fase se llama pensar. El agente recibe lo que hay en su contexto — el objetivo original, lo que observó en la vuelta anterior, la historia de lo que hizo — y razona sobre eso. No es lineal: no sigue un script. El modelo formula cuál es el próximo paso útil dado todo lo que sabe en ese momento. Qué hipótesis tiene, qué le falta ver, qué tiene sentido probar ahora. Lo que produce esta fase es una decisión: qué acción viene a continuación."</em></p>
+    <p><em>"La segunda fase es actuar. Y acá hay algo importante: actuar no significa 'escribir texto'. Significa invocar una herramienta. Correr un comando en la terminal, editar un archivo, hacer una llamada HTTP, leer un directorio. La herramienta produce un efecto en el entorno. Algo que antes no era verdad, ahora lo es. El archivo tiene una línea nueva. El test corrió. El servidor respondió. Las tools en detalle las vemos en la siguiente sección — por ahora lo que importa es que actuar siempre toca algo concreto fuera del modelo."</em></p>
+    <p><em>"Tercera fase: observar. El agente lee el resultado de lo que acaba de hacer. El output del comando, el contenido del archivo, el código HTTP de la respuesta. Todo eso entra a su contexto. Y eso es clave: no es que el agente 'vio' el resultado y lo olvidó. Lo que observa queda en la ventana, disponible para el próximo pensar. Eso es lo que hace que cada vuelta del loop sepa más que la anterior. Y después repite — hasta que una condición de corte decide que terminó. ¿Qué se ve cuando el loop completo trabaja sobre un problema real?"</em></p>
   </aside>
 </section>
 
@@ -617,9 +612,35 @@
 <!-- INIT-SCRIPTS-§2-START -->
 <script>
   initFourLoop({ containerId: 's2-loop-intro', mode: 'intro' });
-  initFourLoop({ containerId: 's2-loop-pensar', mode: 'intro', phase: 'pensar' });
-  initFourLoop({ containerId: 's2-loop-actuar', mode: 'intro', phase: 'actuar' });
-  initFourLoop({ containerId: 's2-loop-observar', mode: 'intro', phase: 'observar' });
+  // C1 — consolidated phase slide
+  if (document.getElementById('s2-loop-phases')) {
+    initFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: 'pensar' });
+  }
+
+  Reveal.on('fragmentshown', function(e) {
+    var phase = e.fragment.dataset.phaseH2 || e.fragment.dataset.phaseCard;
+    if (phase && document.getElementById('s2-loop-phases')) {
+      updateFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: phase });
+    }
+  });
+
+  Reveal.on('fragmenthidden', function(e) {
+    // On going back: figure out what the highest still-visible h2 phase is and apply.
+    if (!document.getElementById('s2-loop-phases')) return;
+    // Only react if the hidden fragment was one of ours (avoid touching other sections' fragments)
+    if (!e.fragment.dataset.phaseH2 && !e.fragment.dataset.phaseCard) return;
+    var visibleH2s = document.querySelectorAll('.s2-h2-phase.fragment.visible.current-visible');
+    var lastVisible = visibleH2s[visibleH2s.length - 1];
+    // The base h2 (without .fragment) is always conceptually visible at the start
+    var phase;
+    if (lastVisible && lastVisible.dataset.phaseH2) {
+      phase = lastVisible.dataset.phaseH2;
+    } else {
+      phase = 'pensar';
+    }
+    updateFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: phase });
+  });
+
   initFourLoop({ containerId: 's2-loop-corte', mode: 'intro' });
   initClickableSteps({
     containerId: 's2-demo-steps',
