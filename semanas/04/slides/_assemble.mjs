@@ -57,11 +57,19 @@ for (let n = 1; n <= 12; n++) {
 }
 
 // 3. Insert collected init scripts after the Reveal.initialize block.
+// Use a regex so we tolerate CRLF line endings on Windows checkouts of the
+// scaffold; otherwise the literal-string match silently no-ops and we ship
+// an index.html with zero init scripts.
 if (initBlocks.length) {
-  html = html.replace(
-    '  </script>\n</body>',
+  const injected = html.replace(
+    /  <\/script>\r?\n<\/body>/,
     '  </script>\n\n' + initBlocks.join('\n\n') + '\n</body>'
   );
+  if (injected === html) {
+    console.error('ERROR: failed to inject init blocks — injection marker not found in scaffold');
+    process.exit(1);
+  }
+  html = injected;
 }
 
 const out = join(DIR, 'index.html');

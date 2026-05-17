@@ -7320,5 +7320,271 @@
       plugins: [RevealHighlight, RevealNotes]
     });
   </script>
+
+  <!-- init §2 -->
+<script>
+  initFourLoop({ containerId: 's2-loop-intro', mode: 'intro' });
+  // C1 — consolidated phase slide
+  if (document.getElementById('s2-loop-phases')) {
+    initFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: 'pensar' });
+  }
+
+  Reveal.on('fragmentshown', function(e) {
+    var phase = e.fragment.dataset.phaseH2 || e.fragment.dataset.phaseCard;
+    if (phase && document.getElementById('s2-loop-phases')) {
+      updateFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: phase });
+    }
+  });
+
+  Reveal.on('fragmenthidden', function(e) {
+    // On going back: figure out what the highest still-visible h2 phase is and apply.
+    if (!document.getElementById('s2-loop-phases')) return;
+    // Only react if the hidden fragment was one of ours (avoid touching other sections' fragments)
+    if (!e.fragment.dataset.phaseH2 && !e.fragment.dataset.phaseCard) return;
+    var visibleH2s = document.querySelectorAll('.s2-h2-phase.fragment.visible.current-visible');
+    var lastVisible = visibleH2s[visibleH2s.length - 1];
+    // The base h2 (without .fragment) is always conceptually visible at the start
+    var phase;
+    if (lastVisible && lastVisible.dataset.phaseH2) {
+      phase = lastVisible.dataset.phaseH2;
+    } else {
+      phase = 'pensar';
+    }
+    updateFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: phase });
+  });
+
+  initFourLoop({ containerId: 's2-loop-corte', mode: 'intro' });
+  initClickableSteps({
+    containerId: 's2-demo-steps',
+    steps: [
+      {
+        title: 'Beat 1 — Tarea verificable',
+        summary: 'Dar al agente un objetivo concreto y verificable. Observar la primera fase de razonamiento antes de cualquier acción.',
+        example: 'Qué mirar: el agente empieza a razonar antes de editar nada — reconocé eso como "pensar". La primera acción visible es actuar.'
+      },
+      {
+        title: 'Beat 2 — Narrar las fases',
+        summary: 'Nombrar en voz alta cada fase mientras aparece en pantalla: pensar → actuar → observar. Señalar con el puntero la correspondencia con el diagrama.',
+        example: 'Qué mirar: el agente no terminó cuando escribió el código. Siguió — corrió el servidor, hizo el request, leyó el resultado. Eso es el loop completo.'
+      },
+      {
+        title: 'Beat 3 — La corrección es otra vuelta',
+        summary: 'Identificar el momento en que algo falló y el agente lo detectó, volvió a pensar, y tomó una acción correctiva — todo dentro del mismo loop.',
+        example: 'Qué mirar: la corrección no fue una respuesta nueva. El agente actualizó su hipótesis con lo que observó y siguió. No empezó de cero.'
+      }
+    ]
+  });
+</script>
+
+  <!-- init §3 -->
+<script>
+  initFourLoop({ containerId: 's3-loop-tool', mode: 'tool' });
+  initClickableSteps({
+    containerId: 's3-demo-steps',
+    steps: [
+      {
+        title: 'Beat 1 — Leer package.json',
+        summary: 'Dar la tarea: "Leé package.json y decime qué scripts tiene definidos." Observar qué hace el agente antes de producir cualquier texto de respuesta.',
+        example: 'Qué mirar: la llamada a la tool de lectura aparece primero — el agente emite la acción antes de responder. Ese es el "actuar" del loop.'
+      },
+      {
+        title: 'Beat 2 — Señalar el bloque de observación',
+        summary: 'Apuntar al bloque de tool output en el transcript — el contenido del archivo tal como lo devolvió el runtime, visible antes de la respuesta del modelo.',
+        example: 'Qué mirar: el contenido del archivo está ahora en el contexto. El modelo no lo estaba recordando: lo tiene acá, directo. Eso es la working memory.'
+      },
+      {
+        title: 'Beat 3 — Tamaño vs. contexto total',
+        summary: 'Si la versión soporta /context, mostrarlo. Si no, apuntar al bloque de tool output y nombrarlo. Plan B: "esto es la observación" alcanza.',
+        example: 'Qué mirar: el tamaño del output de la tool en relación al contexto. Primer indicio de la presión que vemos en §4.'
+      }
+    ]
+  });
+</script>
+
+  <!-- init §4 -->
+<script>
+  initFourLoop({ containerId: 's4-loop-fill', mode: 'fill' });
+  initClickableSteps({ containerId: 's4-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Plantar la instrucción',
+      summary: 'Abrir sesión nueva (o con historial cargado). Dar la instrucción: "De ahora en más terminá cada respuesta con la palabra LISTO." Trabajar en algo real varios minutos.',
+      example: 'Qué mirar: las primeras 2–3 respuestas terminan con LISTO. La instrucción está en la cima del contexto y pesa.'
+    },
+    {
+      title: 'Beat 2 — Context rot en acto',
+      summary: 'Continuar la sesión con más archivos, más herramientas, más idas y vueltas. Hacer una pregunta normal sin mencionar la instrucción. Mostrar la respuesta.',
+      example: 'Qué mirar: la respuesta ya no termina con LISTO. La instrucción no "se olvidó" — quedó enterrada bajo cientos de líneas de observaciones. La señal se perdió.'
+    },
+    {
+      title: 'Beat 3 — Qué sobrevive a /compact',
+      summary: 'Ejecutar /compact. Esperar el resumen del historial. Hacer una pregunta y mostrar la respuesta. Señalar qué persistió y qué no.',
+      example: 'Qué mirar: la instrucción de chat no reapareció. El CLAUDE.md del proyecto sí se re-inyectó automáticamente. Lo que está en archivo persiste; lo dicho al pasar, no. Plan B: si el context rot tardó demasiado en aparecer, usar transcripción guardada. El beat de /compact siempre en vivo.'
+    },
+    {
+      title: 'Beat 4 — Cierre del demo',
+      summary: 'Sintetizar el contraste: instrucción de chat vs. CLAUDE.md. Una línea de cierre para la parte 2.',
+      example: '"Lo que vive en un archivo persiste; lo que dijiste al pasar, no. Tené eso en la cabeza toda la parte 2."'
+    }
+  ] });
+</script>
+
+  <!-- init §5 -->
+<script>
+  initClickableSteps({ containerId: 's5-modes', steps: [
+    {
+      title: 'Loop infinito',
+      summary: 'Sin una condición de corte efectiva, el agente da vueltas. El objetivo estaba mal especificado, el límite no se configuró, o el agente sobreestima su progreso. El loop sigue: gasta contexto, ejecuta acciones, modifica el entorno. No converge.',
+      example: 'Conexión con §2: las cuatro condiciones de corte (objetivo alcanzado / límite de pasos / el agente pide ayuda / falla no recuperable) — cuando ninguna se cumple, el loop no para solo.'
+    },
+    {
+      title: 'Deriva de objetivo',
+      summary: 'El agente arranca con tu tarea y termina haciendo otra que consideró mejor. Empezó a arreglar el bug del endpoint, notó una inconsistencia en el esquema, y decidió refactorizar primero. La tarea original no está; el modelo de datos cambió.',
+      example: 'Desde adentro del loop no parece un error: el agente siguió algo que le pareció relevante. El problema se ve desde afuera, cuando revisás el resultado.'
+    },
+    {
+      title: 'Alucinar tools o resultados',
+      summary: 'El agente puede afirmar que ejecutó un comando que no ejecutó, o reportar una salida distinta de la real. El loop sigue sobre esa premisa falsa — varias vueltas, con acciones reales construidas sobre algo que nunca pasó.',
+      example: 'Conexión con S1: la alucinación que aprendiste en la semana 1 ahora actúa. La confianza del modelo no cambió; lo que cambió es que ahora actúa sobre ella.'
+    },
+    {
+      title: 'Envenenar el propio contexto',
+      summary: 'El agente ejecuta algo que produce una salida enorme — un log de dos mil líneas, un stack trace con cincuenta frames — y esa salida entra sin procesar. El modelo razona desde ese contexto degradado: señales importantes pierden contra ruido masivo.',
+      example: 'Conexión con §4: el context rot era deterioro pasivo con el tiempo. Este modo lo precipita activamente con una sola acción.'
+    }
+  ] });
+  initFourLoop({ containerId: 's5-loop-infinite', mode: 'infinite' });
+  initFourLoop({ containerId: 's5-loop-drift', mode: 'drift' });
+</script>
+
+  <!-- init §6 -->
+<script>
+  initFourLoop({ containerId: 's6-loop-cc', mode: 'cc' });
+</script>
+
+  <!-- init §7 -->
+<script>
+  initClickableSteps({containerId: 's7-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Sin CLAUDE.md: /context',
+      summary: 'Directorio vacío, sin ningún CLAUDE.md de proyecto. Se ejecuta /context.',
+      example: '/context → ventana base, casi vacía de instrucciones nuestras. El tamaño del contexto refleja solo las instrucciones del sistema; no hay instrucciones de proyecto, de usuario local, ni de organización en este directorio.'
+    },
+    {
+      title: 'Beat 2 — Con CLAUDE.md: el delta',
+      summary: 'Se agrega un CLAUDE.md con convenciones, se reinicia la sesión y se vuelve a ejecutar /context.',
+      example: '/context → mismo repo, nueva sesión. El delta de contexto es atribuible al CLAUDE.md. Las instrucciones que escribimos aparecen antes del primer intercambio — antes de que pidamos nada.'
+    },
+    {
+      title: 'Beat 3 — /memory: la lista real de fuentes',
+      summary: 'Se ejecuta /memory para ver la lista de archivos de instrucción cargados con sus rutas.',
+      example: '/memory → la jerarquía no es un diagrama. Esta es la lista real de fuentes cargadas en esta sesión: usuario, proyecto, local si existe. Cada ruta, cada nivel, efectivamente presente en la ventana.'
+    }
+  ]});
+</script>
+
+  <!-- init §8 -->
+<script>
+  initClickableSteps({containerId: 's8-d8-steps', steps: [
+    {
+      title: 'Beat 1 — La regla existe, pero no está cargada',
+      summary: 'Se crea .claude/rules/api.md con frontmatter paths: ["src/api/**"]. Se ejecuta /memory.',
+      example: '/memory → la regla api.md NO aparece en la lista de fuentes de instrucción cargadas. El archivo está en disco — pero no en el contexto. Cero tokens hasta que matchee.'
+    },
+    {
+      title: 'Beat 2 — Tocar un archivo que no matchea',
+      summary: 'Se le pide a Claude que mejore el README.md. Volver a ejecutar /memory.',
+      example: '/memory → la regla sigue ausente. Claude trabajó, tocó un archivo, pero README.md no matchea src/api/**. El trigger no se disparó. Sigue costando cero.'
+    },
+    {
+      title: 'Beat 3 — Tocar un archivo que sí matchea',
+      summary: 'Se le pide a Claude que lea o modifique src/api/users.ts. Volver a ejecutar /memory.',
+      example: '/memory → la regla api.md ahora aparece cargada. Y el código generado incluye los comentarios // [METHOD] /ruta que la regla prescribía. Apareció cuando fue relevante. Eso es lo que CLAUDE.md no puede hacer.'
+    }
+  ]});
+
+  initClickableSteps({containerId: 's8-d9-steps', steps: [
+    {
+      title: 'Beat 1 — La corrección que Claude recuerda',
+      summary: 'En una sesión activa, Claude propone yarn install. Se le corrige: "En este proyecto usamos npm, no yarn. Siempre."',
+      example: 'Observar la respuesta — ¿aparece alguna señal de escritura de memoria? No siempre es visible como "Writing memory" según la versión, pero la sesión puede mostrar algún indicador. La corrección fue recibida.'
+    },
+    {
+      title: 'Beat 2 — Nueva sesión, misma corrección aplicada',
+      summary: 'Se cierra la sesión y se abre una nueva en el mismo directorio. No se tocó ningún CLAUDE.md ni ninguna regla.',
+      example: 'Preguntar cómo instalar las dependencias. Claude responde con npm, no yarn. No se lo dijiste en este momento, no está en ningún archivo de instrucción manual. Lo recordó solo — lo escribió él.'
+    },
+    {
+      title: 'Beat 3 — Abrir la carpeta de memoria',
+      summary: 'Se ejecuta /memory y se navega hasta ~/.claude/projects/<project>/memory/. Se abre MEMORY.md.',
+      example: 'MEMORY.md muestra la preferencia de npm sobre yarn, posiblemente con contexto adicional. Markdown plano, editable, borrable. No es una caja negra: es un archivo como cualquier otro. Solo que lo escribió Claude.'
+    }
+  ]});
+</script>
+
+  <!-- init §9 -->
+<script>
+  initClickableSteps({containerId: 's9-demo-steps', steps: [
+    {
+      title: 'Beat 1 — La skill existe, pero la sesión no la conoce',
+      summary: 'Sesión nueva en el directorio del repo. Se ejecuta /context (o /memory) para mostrar fuentes cargadas.',
+      example: '/context → solo aparecen CLAUDE.md y las reglas activas. La skill slide-generation no está en la lista. El archivo existe en tools/skills/ — para esta sesión, no existe. Cero tokens.'
+    },
+    {
+      title: 'Beat 2 — Invocar la skill',
+      summary: 'Se escribe /build-class o se le pide a Claude explícitamente que genere slides para la semana actual.',
+      example: 'La skill entra en el momento de la invocación. Indicador por comportamiento: Claude empieza a pedir el spine, carga _config/slide-conventions.md, sigue las cuatro fases del pipeline — cosas que no haría sin la skill presente. Momento meta: la skill que entró al contexto es la que generó este deck.'
+    },
+    {
+      title: 'Beat 3 — El mapa completo de los tres mecanismos',
+      summary: 'Cierre con la tricotomía visible: path-scoped rule / skill / CLAUDE.md.',
+      example: 'Una path-scoped rule entra cuando tocás cierto archivo. Una skill, cuando la pedís. CLAUDE.md, siempre. Tres formas de actuar sobre el contexto — la tricotomía de §4 ahora cerrada.'
+    }
+  ]});
+</script>
+
+  <!-- init §10 -->
+<script>
+  initFourLoop({containerId: 's10-loop-subagent', mode: 'subagent'});
+  initClickableSteps({containerId: 's10-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Búsqueda inline (sin sub-agent)',
+      summary: 'Sesión nueva. Pedido directo: "encontrá dónde se maneja la autenticación en todo el repo". El agente busca archivos, los abre, rastrea imports. Al terminar, /context.',
+      example: '/context después de la búsqueda — el delta respecto al inicio de sesión muestra todo lo que el agente leyó. Los cuarenta archivos que abrió, los imports que rastreó, las líneas que descartó — todo sigue en la ventana. Ese es el precio de la búsqueda inline.'
+    },
+    {
+      title: 'Beat 2 — La misma búsqueda delegada a un sub-agent',
+      summary: 'Sesión nueva. Pedido con delegación explícita: "usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado". Al recibir el resultado, /context.',
+      example: '/context en esta sesión — número significativamente menor que en Beat 1. Mismo resultado: el archivo, la línea, el método. Pero todo lo que el sub-agent leyó vivió en su ventana y desapareció. Plan B si /context no muestra delta visible en vivo: dos transcripts preparados — uno de sesión inline con contexto inflado, otro de sesión con sub-agent con contexto casi sin cambios.'
+    },
+    {
+      title: 'Beat 3 — Mismo resultado, fracción del costo',
+      summary: 'Contraste final entre los dos números de /context: mismo resultado entregado, delta de contexto opuesto.',
+      example: '"Mismo resultado, una fracción del costo de contexto. Eso es aislar. La exploración pasó, su ruido no entró. El agente principal sigue con una ventana limpia."'
+    }
+  ]});
+</script>
+
+  <!-- init §11 -->
+<script>
+  initFourLoop({containerId: 's11-loop-planmode', mode: 'planmode'});
+  initFourLoop({containerId: 's11-loop-gate', mode: 'gate'});
+  initClickableSteps({containerId: 's11-demo-steps', steps: [
+    {
+      title: 'Beat 1 — Sin plan mode: el agente actúa',
+      summary: 'Tarea: "reorganizá los imports del proyecto". Sin plan mode habilitado. Dejar que el agente arranque sin intervención y señalar las ediciones que aparecen en el workspace.',
+      example: 'Qué mirar: los archivos que el agente eligió modificar, el orden que eligió, las decisiones que tomó antes de mostrártelas. El punto no es que el resultado sea malo — es que el agente tomó todas esas decisiones solo, antes de que pudieras mirar. Plan B si el resultado sale limpio por azar: cambiar la tarea por "reorganizá todos los archivos del proyecto por dominio, mové los tests a una carpeta separada y actualizá los imports" — mantenerlo reversible con `git checkout .`.'
+    },
+    {
+      title: 'Beat 2 — Con plan mode: propone primero',
+      summary: 'Misma tarea, plan mode habilitado. El agente presenta el plan — qué archivos piensa tocar, en qué orden, qué convención de imports va a aplicar.',
+      example: 'Qué mirar: el workspace no cambió — cero ediciones. El loop está detenido entre "pensar" y "actuar", esperando. Todo lo que el agente haría está visible antes de que lo haga.'
+    },
+    {
+      title: 'Beat 3 — Corrección antes de aprobar',
+      summary: 'Leer el plan con el curso. Encontrar algo para corregir — el agente quiere tocar también archivos de tests; nosotros solo queremos los módulos de negocio. Corregir antes de aprobar.',
+      example: 'Qué mirar: el plan corregido ejecutándose acotado — solo los archivos aprobados, con la convención pedida. La diferencia respecto al Beat 1 no es solo el resultado: es que el supervisor estuvo en el proceso desde antes de la primera acción.'
+    }
+  ]});
+</script>
 </body>
 </html>
