@@ -1523,12 +1523,10 @@
 </section>
 
 <!-- §3.4 · El ciclo de una tool ES el loop -->
-<section>
+<section data-loop-mode="tool">
   <h2>El ciclo de una tool es el loop</h2>
 
-  <div class="s3-loop-wrap">
-    <div id="s3-loop-tool"></div>
-  </div>
+  <div class="s3-loop-wrap" style="min-height:240px;"></div>
 
   <div class="s3-mapping">
     <div class="s3-map-card">
@@ -7431,7 +7429,6 @@
 
   <!-- init §3 -->
 <script>
-  initFourLoop({ containerId: 's3-loop-tool', mode: 'tool' });
   initClickableSteps({
     containerId: 's3-demo-steps',
     steps: [
