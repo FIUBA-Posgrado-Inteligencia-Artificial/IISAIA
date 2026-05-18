@@ -484,11 +484,11 @@
     </div>
 
     <div class="s4-rot-diagram">
-      <div class="s4-rot-layer obs-heavy fragment fade-in" data-fragment-index="2">
+      <div class="s4-rot-layer obs-heavy fragment fade-in" data-fragment-index="2" data-rot-fill="85">
         <span>observación vuelta 35 — output de tests (2.1k tokens)</span>
         <span class="s4-rot-tag">reciente · pesa</span>
       </div>
-      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="2">
+      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="2" data-rot-fill="85">
         <span>observación vuelta 28 — lectura de config.yml</span>
         <span class="s4-rot-tag">medio · pesa menos</span>
       </div>
@@ -651,30 +651,29 @@
     }
   });
 
-  // §4.5 — Context rot bar, grows with each layer/callout fragment.
+  // §4.5 — Context rot bar. On any rot-fill fragment change, recompute the
+  // bar height from ALL currently-visible rot-fill fragments. Robust to
+  // multiple fragments sharing a data-fragment-index and to event ordering.
+  function s4RecomputeRotBar(excluding) {
+    var bar = document.getElementById('s4-rot-bar-fill');
+    if (!bar) return;
+    var visibles = document.querySelectorAll('.fragment.visible[data-rot-fill]');
+    var maxPct = 25;
+    visibles.forEach(function(el) {
+      if (el === excluding) return;
+      var p = parseInt(el.dataset.rotFill, 10);
+      if (!isNaN(p) && p > maxPct) maxPct = p;
+    });
+    bar.style.height = maxPct + '%';
+  }
   Reveal.on('fragmentshown', function(e) {
     if (e.fragment.dataset && e.fragment.dataset.rotFill) {
-      var pct = parseInt(e.fragment.dataset.rotFill, 10);
-      var bar = document.getElementById('s4-rot-bar-fill');
-      if (!isNaN(pct) && bar) bar.style.height = pct + '%';
+      s4RecomputeRotBar(null);
     }
   });
-
   Reveal.on('fragmenthidden', function(e) {
     if (e.fragment.dataset && e.fragment.dataset.rotFill) {
-      var bar = document.getElementById('s4-rot-bar-fill');
-      if (!bar) return;
-      // Recalculate from the highest still-visible data-rot-fill element,
-      // excluding the one that's currently hiding (its .visible class may
-      // not be removed yet when this event fires).
-      var visibles = document.querySelectorAll('.fragment.visible[data-rot-fill]');
-      var maxPct = 25;
-      visibles.forEach(function(el) {
-        if (el === e.fragment) return;
-        var p = parseInt(el.dataset.rotFill, 10);
-        if (!isNaN(p) && p > maxPct) maxPct = p;
-      });
-      bar.style.height = maxPct + '%';
+      s4RecomputeRotBar(e.fragment);
     }
   });
 
