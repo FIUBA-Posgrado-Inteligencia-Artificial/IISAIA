@@ -406,6 +406,18 @@
   font-style: italic;
   max-width: 720px;
 }
+.s2-react-loop-host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Reserve vertical space for the scaled animation (≈140px natural × 1.45 ≈ 200px). */
+  height: 220px;
+  margin: 14px 0 0;
+}
+#s2-react-loop {
+  transform: scale(1.45);
+  transform-origin: center top;
+}
 </style>
 
 <!-- §2.1 · Bridge desde §1 — tool use single-turn (no agentic) -->
@@ -440,7 +452,7 @@
 </section>
 
 <!-- §2.2 · ReAct: cuando una tool no alcanza -->
-<section data-loop-mode="intro">
+<section>
   <h2>ReAct: cuando una tool no alcanza</h2>
 
   <p class="s2-react-lede">
@@ -448,9 +460,11 @@
     <strong>observa</strong> el resultado, y decide la próxima acción. Vuelta a vuelta, hasta una condición de corte.
   </p>
 
-  <div class="s2-loop-wrap" style="min-height:240px;"></div>
+  <div class="s2-react-loop-host fragment fade-in" data-fragment-index="1">
+    <div id="s2-react-loop"></div>
+  </div>
 
-  <div class="s2-react-contrast">
+  <div class="s2-react-contrast fragment fade-in" data-fragment-index="2">
     <div class="s2-react-card prev">
       <span class="s2-react-card-label">antes — una vuelta</span>
       <p>El LLM usa una tool dentro de su respuesta y termina. El modelo no decide qué hacer con el resultado.</p>
@@ -461,13 +475,15 @@
     </div>
   </div>
 
-  <p class="s2-react-thesis">Todo lo que sigue actúa sobre este ciclo.</p>
+  <p class="s2-react-thesis fragment fade-in" data-fragment-index="3">Todo lo que sigue actúa sobre este ciclo.</p>
 
   <aside class="notes">
-    <p><strong>Dejar que la animación cargue antes de hablar. Arrancar reenganchando con el cierre del slide anterior ("muchas tareas no se resuelven en una vuelta"). Señalar el ciclo y los cuatro chips de salida — son las condiciones de corte que vemos en detalle más adelante.</strong></p>
-    <p><u>Introducción de ReAct como la siguiente arquitectura del programa externo: en lugar de UN round con tool, el LLM puede iterar — pensar, actuar (tool), observar el resultado, pensar de nuevo, actuar otra vez, hasta resolver la tarea. Primera aparición de la animación bespoke del loop. El contraste con la single-turn del slide anterior está en los dos cards de abajo.</u></p>
-    <p><em>"Y acá está la arquitectura que resuelve eso. Tomá una tarea como 'arreglá el bug en mi backend': una sola tool no alcanza. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, proponer un cambio, correr los tests de nuevo. Cinco, diez tools encadenadas, y entre cada una el modelo tiene que pensar qué hacer a continuación según lo que observó."</em></p>
-    <p><em>"Esa arquitectura tiene nombre: ReAct, de Reasoning + Acting entrelazados. El programa externo da un paso más sobre lo del slide anterior: en lugar de una sola respuesta con tools dentro, entra en un loop. Tres fases que se repiten — pensar, actuar, observar — con cuatro salidas posibles que son las condiciones de corte: cuándo el loop decide que terminó. Este ciclo es la firma de la semana. Todo lo que veamos después va a actuar sobre alguna parte de este diagrama."</em></p>
+    <p><strong>Cuatro estados, tres reveals: arranca con título y lede, después aparecen animación → cards de contraste → thesis. Bridge con el slide anterior en el primer em.</strong></p>
+    <p><u>Introducción de ReAct como la siguiente arquitectura del programa externo: en lugar de UN round con tool, el LLM puede iterar — pensar, actuar (tool), observar el resultado, pensar de nuevo, actuar otra vez, hasta resolver la tarea. Animación local (no usa el overlay del part1-loop) para poder revelarla progresivamente.</u></p>
+    <p><em>"Y acá está la arquitectura que resuelve eso. Tomá una tarea como 'arreglá el bug en mi backend': una sola tool no alcanza. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, proponer un cambio, correr los tests de nuevo. Cinco, diez tools encadenadas, y entre cada una el modelo tiene que pensar qué hacer a continuación según lo que observó. Esa arquitectura tiene un nombre — ReAct, de Reasoning + Acting entrelazados — y se ve así."</em></p>
+    <p><em>"El programa externo entra en un loop. Tres fases que se alternan vuelta a vuelta: el LLM piensa, actúa con una tool, observa el resultado, y eso alimenta la próxima vuelta de pensar. Y abajo del ciclo hay cuatro chips: son las condiciones de corte — cuándo el programa decide que el loop terminó. Las vamos a ver en detalle más adelante, pero adelanto: objetivo alcanzado, límite de pasos, el agente pide ayuda, falla no recuperable."</em></p>
+    <p><em>"El contraste con el slide anterior. Antes — una sola vuelta. El LLM usaba la tool, generaba la respuesta, terminaba. Ahora — múltiples vueltas. Después de cada observación, el modelo decide qué hacer a continuación. Esa decisión es lo que lo hace agente: no solo usa tools, las orquesta según lo que va viendo."</em></p>
+    <p><em>"Este ciclo es la firma de la semana. Todo lo que veamos después — el contexto, las fallas, Claude Code, plan mode, sub-agents — va a actuar sobre alguna parte de este diagrama. Vale la pena tenerlo en la cabeza."</em></p>
   </aside>
 </section>
 
@@ -756,6 +772,11 @@
   // C1 — consolidated phase slide (kept local: fragment-driven phase changes)
   if (document.getElementById('s2-loop-phases')) {
     initFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: 'pensar' });
+  }
+
+  // §2.2 — ReAct intro (local mount so the animation can fade in with a fragment)
+  if (document.getElementById('s2-react-loop')) {
+    initFourLoop({ containerId: 's2-react-loop', mode: 'intro' });
   }
 
   Reveal.on('fragmentshown', function(e) {

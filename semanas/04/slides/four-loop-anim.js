@@ -243,7 +243,6 @@
     // Return arc
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     // Exit chips
     html += exitChipsHtml(false);
@@ -271,7 +270,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(true);
     html += '</div>';
@@ -293,7 +291,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:354px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 354, arcHeight: 34, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += '</div>';
@@ -338,7 +335,6 @@
     // Thick pulsing return arc
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: true, thick: true, pulse: true });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--accent);font-family:var(--font-mono);font-weight:700;">repetir</span>';
     html += '</div>';
     // All exit chips dimmed
     html += exitChipsHtml(true);
@@ -371,7 +367,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += caption('arrancó en A, terminó en otra');
@@ -398,7 +393,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += caption('actúa sobre una premisa falsa');
@@ -422,7 +416,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:354px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 354, arcHeight: 34, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += '</div>';
@@ -466,7 +459,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: true });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--accent);font-family:var(--font-mono);font-weight:700;">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += '</div>';
@@ -496,7 +488,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:310px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 310, arcHeight: 30, lit: false });
-    html += '<span style="position:absolute;bottom:1px;left:50%;transform:translateX(-50%);font-size:0.58em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += '</div>';
 
@@ -518,7 +509,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:260px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 260, arcHeight: 26, lit: false });
-    html += '<span style="position:absolute;bottom:1px;left:50%;transform:translateX(-50%);font-size:0.56em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += '</div>';
 
@@ -569,7 +559,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:420px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 420, arcHeight: 36, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += '</div>';
@@ -614,7 +603,6 @@
     html += '</div>';
     html += '<div style="margin-top:2px;position:relative;width:366px;">';
     html += arrowSvg({ returnArc: true, arcWidth: 366, arcHeight: 36, lit: false });
-    html += '<span style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:0.6em;color:var(--text-muted);font-family:var(--font-mono);">repetir</span>';
     html += '</div>';
     html += exitChipsHtml(false);
     html += caption('gate antes de cada acción que actúa sobre el mundo');
