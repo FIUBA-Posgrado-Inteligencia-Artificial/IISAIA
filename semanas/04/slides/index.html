@@ -373,45 +373,60 @@
 }
 
 /* S1 recap — LLM evolution (predict token → loop → self-terminating) */
-.s1-recap-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  max-width: 760px;
-  margin: 18px auto 0;
+.s1-recap-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 1180px;
+  margin: 14px auto 0;
 }
 .s1-recap-stage {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 12px 18px 14px;
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .s1-recap-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.6em;
+  font-size: 0.58em;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  text-align: center;
 }
-.s1-recap-flow {
+.s1-recap-pipe {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+}
+.s1-recap-io {
+  font-family: var(--font-mono);
+  font-size: 0.6em;
+  color: var(--text-muted);
+  text-align: center;
+}
+.s1-recap-arrow {
+  color: var(--text-muted);
+  font-size: 0.95em;
+  line-height: 1;
 }
 .s1-recap-box {
   background: var(--bg-code);
   border: 1px solid var(--text-muted);
   border-radius: 6px;
-  padding: 7px 14px;
-  font-size: 0.72em;
+  padding: 6px 12px;
+  font-size: 0.7em;
   color: var(--text-primary);
   font-family: var(--font-mono);
-  min-width: 90px;
   text-align: center;
+  min-width: 70px;
 }
 .s1-recap-box.llm {
   border-color: var(--accent);
@@ -422,75 +437,107 @@
   border-color: var(--accent-secondary);
   color: var(--accent-secondary);
 }
-.s1-recap-arrow {
-  color: var(--text-muted);
-  font-size: 1.1em;
+.s1-recap-runtime {
+  border: 1px dashed var(--accent-secondary);
+  border-radius: 7px;
+  padding: 8px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: rgba(130,170,255,0.04);
 }
-.s1-recap-loopback {
-  margin-top: 6px;
-  text-align: center;
-  font-size: 0.65em;
-  color: var(--accent);
-  font-style: italic;
-}
-.s1-recap-loopback .key {
-  color: var(--text-primary);
-  font-style: normal;
+.s1-recap-runtime-label {
   font-family: var(--font-mono);
+  font-size: 0.52em;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.s1-recap-runtime-rule {
+  font-size: 0.6em;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+.s1-recap-runtime-rule code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s1-recap-caption {
+  margin: 10px 0 0;
+  font-size: 0.62em;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.5;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 8px;
 }
 </style>
 <section>
-<!-- §1.1 · Callback S1 — el LLM ya era un loop -->
+<!-- §1.1 · Callback S1 — el programa que envuelve al LLM -->
 <section>
-  <h2>De un token al siguiente: el loop ya estaba ahí</h2>
+  <h2>El LLM y el programa que lo controla</h2>
 
-  <div class="s1-recap-stack">
-    <!-- Stage 1: single-shot prediction -->
+  <div class="s1-recap-cols">
+    <!-- Stage 1: single-shot, no runtime -->
     <div class="s1-recap-stage">
-      <span class="s1-recap-label">1 · predecir el próximo token</span>
-      <div class="s1-recap-flow">
-        <div class="s1-recap-box">texto de entrada</div>
-        <div class="s1-recap-arrow">→</div>
+      <span class="s1-recap-label">1 · predecir un token</span>
+      <div class="s1-recap-pipe">
+        <div class="s1-recap-io">texto de entrada</div>
+        <div class="s1-recap-arrow">↓</div>
         <div class="s1-recap-box llm">LLM</div>
-        <div class="s1-recap-arrow">→</div>
-        <div class="s1-recap-box">próximo token</div>
+        <div class="s1-recap-arrow">↓</div>
+        <div class="s1-recap-io">próximo token</div>
       </div>
+      <p class="s1-recap-caption">Una sola predicción. No hace falta nada afuera.</p>
     </div>
 
-    <!-- Stage 2: loop with external cutoff -->
+    <!-- Stage 2: external runtime with max_tokens cutoff -->
     <div class="s1-recap-stage fragment fade-in">
-      <span class="s1-recap-label">2 · generar tokens hasta el tope</span>
-      <div class="s1-recap-flow">
-        <div class="s1-recap-box">entrada + tokens ya generados</div>
-        <div class="s1-recap-arrow">→</div>
-        <div class="s1-recap-box llm">LLM</div>
-        <div class="s1-recap-arrow">→</div>
-        <div class="s1-recap-box">próximo token</div>
+      <span class="s1-recap-label">2 · loop con tope externo</span>
+      <div class="s1-recap-pipe">
+        <div class="s1-recap-io">texto de entrada</div>
+        <div class="s1-recap-arrow">↓</div>
+        <div class="s1-recap-runtime">
+          <span class="s1-recap-runtime-label">programa externo</span>
+          <div class="s1-recap-box llm">LLM</div>
+          <p class="s1-recap-runtime-rule">↺ reenvía la salida a la entrada<br>corta al llegar a <code>max_tokens</code></p>
+        </div>
+        <div class="s1-recap-arrow">↓</div>
+        <div class="s1-recap-io">respuesta completa</div>
       </div>
-      <p class="s1-recap-loopback">↺ la salida se agrega a la entrada · corta al llegar al tope <span class="key">max_tokens</span></p>
+      <p class="s1-recap-caption">El LLM no decide parar — un programa afuera cuenta tokens.</p>
     </div>
 
-    <!-- Stage 3: model emits end-of-generation token -->
+    <!-- Stage 3: external runtime watches for end-of-text token -->
     <div class="s1-recap-stage fragment fade-in">
-      <span class="s1-recap-label">3 · el modelo decide cuándo termina</span>
-      <div class="s1-recap-flow">
-        <div class="s1-recap-box">entrada + tokens ya generados</div>
-        <div class="s1-recap-arrow">→</div>
-        <div class="s1-recap-box llm">LLM</div>
-        <div class="s1-recap-arrow">→</div>
-        <div class="s1-recap-box end-tok">&lt;END&gt;</div>
+      <span class="s1-recap-label">3 · el modelo señala el fin</span>
+      <div class="s1-recap-pipe">
+        <div class="s1-recap-io">texto de entrada</div>
+        <div class="s1-recap-arrow">↓</div>
+        <div class="s1-recap-runtime">
+          <span class="s1-recap-runtime-label">programa externo</span>
+          <div class="s1-recap-box llm">LLM</div>
+          <p class="s1-recap-runtime-rule">↺ reenvía la salida a la entrada<br>corta si el LLM emite <code>&lt;END&gt;</code></p>
+        </div>
+        <div class="s1-recap-arrow">↓</div>
+        <div class="s1-recap-io">respuesta completa</div>
       </div>
-      <p class="s1-recap-loopback">↺ mismo loop · el modelo emite un token especial que detiene la generación</p>
+      <p class="s1-recap-caption">El programa sigue afuera. El LLM aprende a emitir la señal de fin.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Tres reveals progresivos. Cada uno suma una pieza al loop. El tercero deja al alumno con la idea de que el LLM ya tenía un loop interno — el de hoy es un loop afuera del LLM.</strong></p>
-    <p><u>Callback a S1. Refresca tres pasos: predicción single-shot, loop con cutoff externo (max_tokens), loop con cutoff emitido por el propio modelo. Visualmente, las tres son cajas y flechas — el mismo idioma que usa el resto del deck. Prepara la analogía: el loop ya estaba adentro del modelo; hoy vamos a ver el loop afuera.</u></p>
-    <p><em>"Antes de empezar §1, un refresco de la semana 1. La unidad básica del modelo es esta: le pasás un texto, te devuelve el próximo token. Una sola predicción, single-shot."</em></p>
-    <p><em>"Lo que vimos después es que esa predicción se mete en un loop. Cada token generado se concatena a la entrada y el modelo predice el siguiente. El loop corta cuando se alcanza un tope explícito — max_tokens, configurado desde afuera. Esa es la primera versión de cómo un modelo de chat te entrega una respuesta completa."</em></p>
-    <p><em>"La versión madura es esta: el modelo, durante su entrenamiento, aprende a emitir un token especial — un end-of-text — que el sistema interpreta como 'terminé'. El loop corta cuando el propio modelo decide que terminó, no cuando se acaba el presupuesto. El loop es el mismo; lo que cambió es quién dice basta."</em></p>
-    <p><em>"Tengan esto en la cabeza para lo que sigue: ya conocen un loop, el de adentro del LLM. En esta clase abrimos el zoom y vemos el loop afuera — un loop que envuelve al LLM y le da capacidades nuevas."</em></p>
+    <p><strong>Tres columnas, dos reveals. Énfasis en el recuadro "programa externo" — esa caja es la idea nueva que prepara §2 (loop · tools · entorno alrededor del LLM).</strong></p>
+    <p><u>Callback a S1. Refresca tres pasos: predicción single-shot, loop con cutoff externo (max_tokens), loop con cutoff emitido por el propio modelo. La novedad respecto a S1 es que dibujamos explícitamente el programa que envuelve al LLM — anticipa la arquitectura del agente.</u></p>
+    <p><em>"Antes de empezar §1, un refresco de la semana 1. La unidad básica del modelo es esta: le pasás un texto, te devuelve el próximo token. Una sola predicción. No hace falta nada más alrededor."</em></p>
+    <p><em>"Lo que vimos después es que esa predicción se mete en un loop. Y acá empieza algo importante: el loop no lo corre el LLM. Lo corre un programa afuera — la rutina del provider, del SDK, del runtime — que toma la salida del LLM, la concatena a la entrada, le vuelve a pedir el próximo token, y corta cuando se alcanza un tope explícito como max_tokens. Esa caja punteada es lo nuevo que tienen que ver."</em></p>
+    <p><em>"La versión madura es esta: el LLM, durante su entrenamiento, aprende a emitir un token especial — end-of-text — que el programa afuera interpreta como 'terminé'. El loop es el mismo, el programa afuera es el mismo. Lo que cambió es quién dice basta: ahora la señal viene de adentro del LLM, pero quien la lee y detiene la generación sigue siendo el programa afuera."</em></p>
+    <p><em>"Tengan ese recuadro en la cabeza para lo que sigue. La semana 4 entera trata sobre cómo evoluciona ese programa afuera del LLM. Empezó con 'cuenta tokens'. Va a terminar siendo un agente."</em></p>
   </aside>
 </section>
 
