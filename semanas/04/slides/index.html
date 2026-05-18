@@ -299,18 +299,16 @@
   padding: 0 6px;
   line-height: 1;
 }
-.s1-loop-v-arrow {
+.s1-loop-v-arrows {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 4px 28px;
   color: var(--text-muted);
   font-size: 1.1em;
-  text-align: left;
-  width: 100%;
-  padding-left: 28px;
   line-height: 1;
-}
-.s1-loop-v-arrow.right {
-  text-align: right;
-  padding-left: 0;
-  padding-right: 28px;
+  box-sizing: border-box;
 }
 /* Paradigm card headers */
 .s1-paradigm-label {
@@ -398,8 +396,11 @@
       </div>
     </div>
 
-    <!-- Right side arrow going down -->
-    <div class="s1-loop-v-arrow right">↓</div>
+    <!-- Vertical arrows between rows: ↑ on left closes loop (Código→Error), ↓ on right continues (Chat→Correr) -->
+    <div class="s1-loop-v-arrows">
+      <span>↑</span>
+      <span>↓</span>
+    </div>
 
     <!-- Bottom row (reversed): correr ← pegar ← código -->
     <div class="s1-loop-row reverse">
@@ -418,9 +419,6 @@
         <span>IA genera el bloque</span>
       </div>
     </div>
-
-    <!-- Left side arrow going back up — closes the loop -->
-    <div class="s1-loop-v-arrow">↑</div>
   </div>
 
   <aside class="notes">
