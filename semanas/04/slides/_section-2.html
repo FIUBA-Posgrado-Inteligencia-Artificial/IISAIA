@@ -411,18 +411,6 @@
   transform: scale(1.4);
   transform-origin: center top;
 }
-/* §2.10 — Condiciones de corte: local mount so it doesn't collide with the cards below. */
-.s2-corte-loop-host {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 180px;
-  margin: 8px 0 0;
-}
-#s2-corte-loop {
-  transform: scale(1.1);
-  transform-origin: center top;
-}
 </style>
 
 <!-- §2.1 · Bridge desde §1 — tool use single-turn (no agentic) -->
@@ -643,10 +631,6 @@
 <section>
   <h2>Condiciones de corte</h2>
 
-  <div class="s2-corte-loop-host">
-    <div id="s2-corte-loop"></div>
-  </div>
-
   <div class="s2-corte-grid">
     <div class="s2-corte-card ideal">
       <h3>Objetivo alcanzado</h3>
@@ -666,12 +650,10 @@
     </div>
   </div>
 
-  <p class="s2-corte-close fragment fade-in">Sin condición de corte, el loop da vueltas.</p>
-
   <aside class="notes">
-    <p><strong>Señalar primero las cuatro chips de salida en la animación (esas son las condiciones que vamos a abrir), después recorrer las cuatro tarjetas. Click final para la línea de cierre.</strong></p>
-    <p><u>Slide de cierre de §2. La animación en modo intro reaparece para que la lectura sea: "el loop tiene cuatro salidas posibles; cada card detalla una". El cierre planta sin desarrollar: lo que pasa cuando ninguna se cumple es §5.</u></p>
-    <p><em>"Cerramos el loop con la pregunta que lo hace operativo: ¿cuándo termina? El diagrama lo sugiere desde el principio — hay cuatro chips de salida. Cada uno es una condición distinta."</em></p>
+    <p><strong>Recorrer las cuatro tarjetas. Slide de cierre de §2.</strong></p>
+    <p><u>Slide de cierre de §2. Cuatro cards con las condiciones de corte que ya se habían anunciado en los chips de la animación al introducir ReAct; acá se desarrollan.</u></p>
+    <p><em>"Cerramos el loop con la pregunta que lo hace operativo: ¿cuándo termina? Ya lo adelantaron los cuatro chips de salida del diagrama de ReAct. Acá los abrimos."</em></p>
     <p><em>"Objetivo alcanzado: la ideal. El estado del entorno coincide con lo pedido — los tests pasan, el endpoint responde 200, el archivo tiene la línea nueva. El agente reporta y termina. Límite de pasos: hay un techo configurado y se alcanzó sin resolver. El agente cuenta qué hizo y hasta dónde llegó. Pide ayuda: encontró algo que no puede resolver solo — falta un secreto, no tiene permiso, hay ambigüedad — y suspende el loop hasta que alguien intervenga. Falla no recuperable: detecta un estado del que no sabe cómo salir y para."</em></p>
     <p><em>"La condición de corte no es un detalle de implementación. Es lo que separa un agente que trabaja de un agente que da vueltas. Con esto cerramos el loop: tres fases, cuatro salidas, un programa externo que lo orquesta. Lo que pasa cuando ninguna de esas salidas se cumple — el loop infinito, la deriva, la alucinación que actúa — es uno de los temas que vienen más adelante. Por ahora, el esqueleto está armado."</em></p>
   </aside>
@@ -687,11 +669,6 @@
   // §2.2 — ReAct intro (local mount so the animation can fade in with a fragment)
   if (document.getElementById('s2-react-loop')) {
     initFourLoop({ containerId: 's2-react-loop', mode: 'intro' });
-  }
-
-  // §2.10 — Condiciones de corte (local mount so the cards below don't get covered by the overlay)
-  if (document.getElementById('s2-corte-loop')) {
-    initFourLoop({ containerId: 's2-corte-loop', mode: 'intro' });
   }
 
   Reveal.on('fragmentshown', function(e) {
