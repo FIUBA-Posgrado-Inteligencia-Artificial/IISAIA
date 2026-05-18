@@ -1263,7 +1263,7 @@
 <section>
   <div class="s2-h2-stack">
     <h2 data-phase-h2="pensar" class="s2-h2-phase">Pensar — formular el próximo paso</h2>
-    <h2 data-phase-h2="actuar" class="s2-h2-phase fragment current-visible" data-fragment-index="1">Actuar — usar una herramienta</h2>
+    <h2 data-phase-h2="actuar" class="s2-h2-phase fragment current-visible" data-fragment-index="1">Actuar — invocar herramientas</h2>
     <h2 data-phase-h2="observar" class="s2-h2-phase fragment current-visible" data-fragment-index="2">Observar — leer el resultado</h2>
   </div>
 
@@ -1279,7 +1279,7 @@
     </div>
     <div class="s2-phase-card s2-phase-card-stage actuar fragment current-visible" data-phase-card="actuar" data-fragment-index="1">
       <h3>Actuar</h3>
-      <p>El agente usa una herramienta: corre un comando, edita un archivo, llama a una API, lee un directorio. La acción produce un efecto en el entorno.</p>
+      <p>El agente invoca una o varias herramientas: corre comandos, edita archivos, llama APIs, lee directorios. Las acciones producen un efecto en el entorno.</p>
       <p class="s2-produces">Produce: un cambio en el entorno — algo que antes no era verdad, ahora lo es.</p>
     </div>
     <div class="s2-phase-card s2-phase-card-stage observar fragment current-visible" data-phase-card="observar" data-fragment-index="2">
@@ -1293,7 +1293,7 @@
     <p><strong>Cada press abajo cambia simultáneamente h2, fase iluminada en la animación, y card. Tres estados; entrar al slide ya es el primer estado (pensar). Señalar el nodo iluminado en cada estado.</strong></p>
     <p><u>Slide consolidado de las tres fases del loop. Reemplaza tres slides previos (Pensar/Actuar/Observar). La animación persiste; solo cambia la fase iluminada. El card de abajo se reemplaza también (no se acumula).</u></p>
     <p><em>"La primera fase se llama pensar. El agente recibe lo que hay en su contexto — el objetivo original, lo que observó en la vuelta anterior, la historia de lo que hizo — y razona sobre eso. No es lineal: no sigue un script. El modelo formula cuál es el próximo paso útil dado todo lo que sabe en ese momento. Qué hipótesis tiene, qué le falta ver, qué tiene sentido probar ahora. Lo que produce esta fase es una decisión: qué acción viene a continuación."</em></p>
-    <p><em>"La segunda fase es actuar. Y acá hay algo importante: actuar no significa 'escribir texto'. Significa invocar una herramienta. Correr un comando en la terminal, editar un archivo, hacer una llamada HTTP, leer un directorio. La herramienta produce un efecto en el entorno. Algo que antes no era verdad, ahora lo es. El archivo tiene una línea nueva. El test corrió. El servidor respondió. Las tools en detalle las vemos en la siguiente sección — por ahora lo que importa es que actuar siempre toca algo concreto fuera del modelo."</em></p>
+    <p><em>"La segunda fase es actuar. Y acá hay algo importante: actuar no significa 'escribir texto'. Significa invocar herramientas — una o varias en la misma vuelta. Correr un comando en la terminal, editar un archivo, hacer una llamada HTTP, leer un directorio. Las herramientas producen efectos en el entorno: algo que antes no era verdad, ahora lo es. El archivo tiene una línea nueva. El test corrió. El servidor respondió. Las tools en detalle las vemos en la siguiente sección — por ahora lo que importa es que actuar siempre toca algo concreto fuera del modelo."</em></p>
     <p><em>"Tercera fase: observar. El agente lee el resultado de lo que acaba de hacer. El output del comando, el contenido del archivo, el código HTTP de la respuesta. Todo eso entra a su contexto. Y eso es clave: no es que el agente 'vio' el resultado y lo olvidó. Lo que observa queda en la ventana, disponible para el próximo pensar. Eso es lo que hace que cada vuelta del loop sepa más que la anterior. Y después repite — hasta que una condición de corte decide que terminó. ¿Qué se ve cuando el loop completo trabaja sobre un problema real?"</em></p>
   </aside>
 </section>
