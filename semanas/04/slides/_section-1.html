@@ -117,18 +117,22 @@
 }
 
 /* S1 recap — LLM evolution (predict token → loop → SFT → RL) */
+.s1-recap-section h2 {
+  font-size: 1.3em;
+  margin-bottom: 6px;
+}
 .s1-recap-cols {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 8px;
   max-width: 1240px;
-  margin: 14px auto 0;
+  margin: 8px auto 0;
 }
 .s1-recap-stage {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 12px 14px 14px;
+  border-radius: 7px;
+  padding: 8px 10px 10px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -136,41 +140,41 @@
 .s1-recap-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.58em;
+  font-size: 0.5em;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   text-align: center;
 }
 .s1-recap-pipe {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   flex: 1;
 }
 .s1-recap-io {
   font-family: var(--font-mono);
-  font-size: 0.6em;
+  font-size: 0.52em;
   color: var(--text-muted);
   text-align: center;
 }
 .s1-recap-arrow {
   color: var(--text-muted);
-  font-size: 0.95em;
+  font-size: 0.78em;
   line-height: 1;
 }
 .s1-recap-box {
   background: var(--bg-code);
   border: 1px solid var(--text-muted);
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 0.7em;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.6em;
   color: var(--text-primary);
   font-family: var(--font-mono);
   text-align: center;
-  min-width: 70px;
+  min-width: 60px;
 }
 .s1-recap-box.llm {
   border-color: var(--accent);
@@ -183,27 +187,27 @@
 }
 .s1-recap-runtime {
   border: 1px dashed var(--accent-secondary);
-  border-radius: 7px;
-  padding: 8px 10px 10px;
+  border-radius: 6px;
+  padding: 6px 8px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: rgba(130,170,255,0.04);
 }
 .s1-recap-runtime-label {
   font-family: var(--font-mono);
-  font-size: 0.52em;
+  font-size: 0.46em;
   color: var(--accent-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .s1-recap-runtime-rule {
-  font-size: 0.6em;
+  font-size: 0.5em;
   color: var(--accent-secondary);
   text-align: center;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 .s1-recap-runtime-rule code {
   font-family: var(--font-mono);
@@ -211,20 +215,20 @@
   font-size: 0.95em;
 }
 .s1-recap-caption {
-  margin: 10px 0 0;
-  font-size: 0.62em;
+  margin: 6px 0 0;
+  font-size: 0.5em;
   color: var(--text-muted);
   text-align: center;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.4;
   border-top: 1px solid #2a3a5a;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
 /* Stage 4 — appears alone, full width, replaces the 3-col view */
 .s1-recap-body {
   position: relative;
-  min-height: 540px;
+  min-height: 460px;
 }
 .s1-recap-stage4 {
   position: absolute;
@@ -325,7 +329,7 @@
 </style>
 
 <!-- §1.1 · Callback S1 — el programa que envuelve al LLM -->
-<section>
+<section class="s1-recap-section">
   <h2>El LLM y el programa que lo controla</h2>
 
   <div class="s1-recap-body">
@@ -353,12 +357,12 @@
           <div class="s1-recap-runtime">
             <span class="s1-recap-runtime-label">programa externo</span>
             <div class="s1-recap-box llm">LLM</div>
-            <p class="s1-recap-runtime-rule">↺ reenvía la salida a la entrada<br>corta al llegar a <code>max_tokens</code></p>
+            <p class="s1-recap-runtime-rule">↺ reenvía la salida · corta al <code>max_tokens</code></p>
           </div>
           <div class="s1-recap-arrow">↓</div>
           <div class="s1-recap-io">texto de entrada + max_tokens</div>
         </div>
-        <p class="s1-recap-caption">El LLM no decide parar — un programa afuera cuenta tokens.</p>
+        <p class="s1-recap-caption">El LLM no decide parar — un programa cuenta tokens.</p>
       </div>
 
       <!-- Stage 3: program wraps input with role tokens; SFT-tuned LLM understands them -->
@@ -369,14 +373,14 @@
           <div class="s1-recap-arrow">↓</div>
           <div class="s1-recap-runtime">
             <span class="s1-recap-runtime-label">programa externo</span>
-            <p class="s1-recap-runtime-rule">envuelve el mensaje con tokens de rol: <code>&lt;|user|&gt;</code> antes del mensaje, <code>&lt;|assistant|&gt;</code> para pedir la respuesta</p>
+            <p class="s1-recap-runtime-rule">envuelve el mensaje: <code>&lt;|user|&gt;</code> antes, <code>&lt;|assistant|&gt;</code> para pedir respuesta</p>
             <div class="s1-recap-box llm">LLM + SFT</div>
-            <p class="s1-recap-runtime-rule">↺ reenvía la salida a la entrada<br>corta si el LLM emite <code>&lt;END&gt;</code></p>
+            <p class="s1-recap-runtime-rule">↺ reenvía la salida · corta si emite <code>&lt;END&gt;</code></p>
           </div>
           <div class="s1-recap-arrow">↓</div>
           <div class="s1-recap-io">respuesta completa</div>
         </div>
-        <p class="s1-recap-caption">Vía SFT el LLM aprendió un vocabulario especial: reconoce los marcadores de rol que el programa inserta, y emite la señal de fin.</p>
+        <p class="s1-recap-caption">Vía SFT el LLM aprendió vocabulario especial: roles + fin de respuesta.</p>
       </div>
 
       <!-- Stage 4: RL teaches the model to reason with thinking tokens; program filters them -->
@@ -387,14 +391,14 @@
           <div class="s1-recap-arrow">↓</div>
           <div class="s1-recap-runtime">
             <span class="s1-recap-runtime-label">programa externo</span>
-            <p class="s1-recap-runtime-rule">envuelve el mensaje con tokens de rol (igual que antes)</p>
+            <p class="s1-recap-runtime-rule">envuelve con tokens de rol (igual que antes)</p>
             <div class="s1-recap-box llm">LLM + SFT + RL</div>
-            <p class="s1-recap-runtime-rule">↺ corta si emite <code>&lt;END&gt;</code><br>filtra los tokens <code>&lt;thinking&gt;...&lt;/thinking&gt;</code> del output</p>
+            <p class="s1-recap-runtime-rule">↺ corta al <code>&lt;END&gt;</code> · filtra los <code>&lt;thinking&gt;</code> del output</p>
           </div>
           <div class="s1-recap-arrow">↓</div>
           <div class="s1-recap-io">respuesta final (sin pensamiento)</div>
         </div>
-        <p class="s1-recap-caption">RL entrena al modelo a razonar internamente antes de responder. El programa separa los tokens de pensamiento del mensaje final.</p>
+        <p class="s1-recap-caption">RL entrena al modelo a razonar antes de responder. El programa filtra el pensamiento.</p>
       </div>
     </div>
 
