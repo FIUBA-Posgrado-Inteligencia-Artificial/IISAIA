@@ -447,17 +447,17 @@
   <aside class="notes">
     <p><strong>Slide corto. La mecánica de tool call la conocen de S1 — no repetirla. El punto acá es ubicar las tools en el programa externo del §1 y marcar la diferencia con lo que viene: una vuelta vs múltiples vueltas.</strong></p>
     <p><u>Bridge entre §1 y ReAct. Ya saben qué es una tool y cómo funciona (S1). Lo que se agrega es ubicarlas como otra responsabilidad del programa externo y dejar claro que esto sigue siendo una sola respuesta del LLM — el contraste con ReAct es lo que importa.</u></p>
-    <p><em>"Las tools ya las conocen de la semana 1. La idea es la misma: el LLM emite un token de tool call — <code>&lt;search&gt;</code>, una llamada a calculadora, una lectura de archivo —, el programa lo detecta, ejecuta la tool, inyecta el resultado, el LLM sigue generando informado. Es otra responsabilidad del programa externo que venimos armando. Lo que importa subrayar es esto: esta es una sola vuelta del LLM. Una sola respuesta. El LLM usa la tool, termina con <code>&lt;END&gt;</code>, fin. No hay loop. Y muchas tareas reales no se resuelven en una sola vuelta."</em></p>
+    <p><em>"Las tools ya las conocen de la semana 1. La idea es la misma: el LLM emite un token de tool call — <code>&lt;search&gt;</code>, una llamada a calculadora, una lectura de archivo —, el programa lo detecta, ejecuta la tool, inyecta el resultado, el LLM sigue generando informado. Y una sola respuesta del LLM puede llamar varias tools — buscar dos cosas, leer un archivo y hacer una cuenta —, no es que esté limitado a una. Es otra responsabilidad del programa externo que venimos armando. Lo que importa subrayar es esto: aunque el LLM llame varias tools, sigue siendo una sola vuelta de generación. Termina con <code>&lt;END&gt;</code>, fin. No hay loop, no hay decisión nueva del modelo después de ver los resultados. Y muchas tareas reales necesitan exactamente eso: decidir qué hacer en base a lo observado."</em></p>
   </aside>
 </section>
 
-<!-- §2.2 · ReAct: cuando una tool no alcanza -->
+<!-- §2.2 · ReAct: cuando una vuelta no alcanza -->
 <section>
-  <h2>ReAct: cuando una tool no alcanza</h2>
+  <h2>ReAct: cuando una vuelta no alcanza</h2>
 
   <p class="s2-react-lede">
-    El programa externo entra en un loop: el LLM <strong>piensa</strong>, <strong>actúa</strong> con una tool,
-    <strong>observa</strong> el resultado, y decide la próxima acción. Vuelta a vuelta, hasta una condición de corte.
+    El programa externo entra en un loop: el LLM <strong>piensa</strong>, <strong>actúa</strong> usando tools,
+    <strong>observa</strong> los resultados, y decide la próxima acción. Vuelta a vuelta, hasta una condición de corte.
   </p>
 
   <div class="s2-react-loop-host fragment fade-in" data-fragment-index="1">
@@ -467,11 +467,11 @@
   <div class="s2-react-contrast fragment fade-in" data-fragment-index="2">
     <div class="s2-react-card prev">
       <span class="s2-react-card-label">antes — una vuelta</span>
-      <p>El LLM usa una tool dentro de su respuesta y termina. El modelo no decide qué hacer con el resultado.</p>
+      <p>El LLM puede llamar una o varias tools dentro de una sola respuesta y termina. El modelo no decide qué hacer con los resultados.</p>
     </div>
     <div class="s2-react-card now">
       <span class="s2-react-card-label">ahora — ReAct</span>
-      <p>Múltiples tools encadenadas. Después de cada observación, el LLM piensa de nuevo y elige el próximo paso.</p>
+      <p>Múltiples vueltas. Después de cada observación, el LLM piensa de nuevo y elige el próximo paso a partir de lo que vio.</p>
     </div>
   </div>
 
@@ -479,10 +479,10 @@
 
   <aside class="notes">
     <p><strong>Cuatro estados, tres reveals: arranca con título y lede, después aparecen animación → cards de contraste → thesis. Bridge con el slide anterior en el primer em.</strong></p>
-    <p><u>Introducción de ReAct como la siguiente arquitectura del programa externo: en lugar de UN round con tool, el LLM puede iterar — pensar, actuar (tool), observar el resultado, pensar de nuevo, actuar otra vez, hasta resolver la tarea. Animación local (no usa el overlay del part1-loop) para poder revelarla progresivamente.</u></p>
-    <p><em>"Y acá está la arquitectura que resuelve eso. Tomá una tarea como 'arreglá el bug en mi backend': una sola tool no alcanza. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, proponer un cambio, correr los tests de nuevo. Cinco, diez tools encadenadas, y entre cada una el modelo tiene que pensar qué hacer a continuación según lo que observó. Esa arquitectura tiene un nombre — ReAct, de Reasoning + Acting entrelazados — y se ve así."</em></p>
-    <p><em>"El programa externo entra en un loop. Tres fases que se alternan vuelta a vuelta: el LLM piensa, actúa con una tool, observa el resultado, y eso alimenta la próxima vuelta de pensar. Y abajo del ciclo hay cuatro chips: son las condiciones de corte — cuándo el programa decide que el loop terminó. Las vamos a ver en detalle más adelante, pero adelanto: objetivo alcanzado, límite de pasos, el agente pide ayuda, falla no recuperable."</em></p>
-    <p><em>"El contraste con el slide anterior. Antes — una sola vuelta. El LLM usaba la tool, generaba la respuesta, terminaba. Ahora — múltiples vueltas. Después de cada observación, el modelo decide qué hacer a continuación. Esa decisión es lo que lo hace agente: no solo usa tools, las orquesta según lo que va viendo."</em></p>
+    <p><u>Introducción de ReAct como la siguiente arquitectura del programa externo: en lugar de una respuesta con tools dentro, el LLM puede iterar — pensar, actuar (tools), observar el resultado, pensar de nuevo, actuar otra vez, hasta resolver la tarea. La diferencia con single-turn no es la cantidad de tools — un LLM puede llamar varias tools en una sola respuesta — sino la iteración: el modelo decide qué hacer entre vuelta y vuelta. Animación local (no usa el overlay del part1-loop) para poder revelarla progresivamente.</u></p>
+    <p><em>"Y acá está la arquitectura que resuelve eso. Tomá una tarea como 'arreglá el bug en mi backend': una sola vuelta no alcanza, por más tools que llame el modelo en esa vuelta. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, proponer un cambio, correr los tests de nuevo. La decisión de qué hacer en cada paso depende de lo que se observó en el anterior. Esa arquitectura tiene un nombre — ReAct, de Reasoning + Acting entrelazados — y se ve así."</em></p>
+    <p><em>"El programa externo entra en un loop. Tres fases que se alternan vuelta a vuelta: el LLM piensa, actúa usando tools, observa los resultados, y eso alimenta la próxima vuelta de pensar. Y abajo del ciclo hay cuatro chips: son las condiciones de corte — cuándo el programa decide que el loop terminó. Las vamos a ver en detalle más adelante, pero adelanto: objetivo alcanzado, límite de pasos, el agente pide ayuda, falla no recuperable."</em></p>
+    <p><em>"El contraste con el slide anterior. Antes — una sola vuelta del LLM, con una o varias tools llamadas dentro. Sin iteración: el modelo emite los tool calls, recibe los resultados, genera la respuesta final, termina. Ahora — múltiples vueltas. Después de cada observación, el modelo decide qué hacer a continuación. Esa decisión es lo que lo hace agente: no solo usa tools, las orquesta vuelta a vuelta según lo que va viendo."</em></p>
     <p><em>"Este ciclo es la firma de la semana. Todo lo que veamos después — el contexto, las fallas, Claude Code, plan mode, sub-agents — va a actuar sobre alguna parte de este diagrama. Vale la pena tenerlo en la cabeza."</em></p>
   </aside>
 </section>
