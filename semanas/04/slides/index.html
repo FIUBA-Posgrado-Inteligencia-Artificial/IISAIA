@@ -1228,6 +1228,10 @@
 <section>
   <h2>Un agente son cuatro piezas</h2>
 
+  <p style="text-align:center;margin:8px auto 0;max-width:780px;font-size:0.72em;color:var(--accent-secondary);font-style:italic;">
+    El programa que envolvía al LLM ahora se abre — cada pieza, necesaria.
+  </p>
+
   <div class="s2-four-pipe">
     <div class="s2-pipe-card">
       <h3>LLM</h3>
@@ -1259,49 +1263,9 @@
   <aside class="notes">
     <p><strong>Recorrer las cuatro tarjetas izquierda a derecha. Para en cada "sin él" — esa línea es el diagnóstico. Click para la pregunta final.</strong></p>
     <p><u>Cuatro cards en pipeline horizontal. Cada una tiene qué aporta y qué falla si falta. La pregunta de cierre planta el hábito de diagnóstico.</u></p>
-    <p><em>"Un agente son cuatro piezas, y las cuatro son necesarias en conjunto. Sacale una y deja de funcionar de formas específicas."</em></p>
+    <p><em>"Acuérdense del programa externo del §1 — esa caja punteada que envolvía al LLM y ya hacía un montón de cosas. Hasta acá la tratamos como un bloque. Ahora la abrimos: un agente son cuatro piezas, y las cuatro son necesarias en conjunto. Sacale una y deja de funcionar de formas específicas."</em></p>
     <p><em>"El LLM decide: recibe el contexto y determina qué hacer. El loop hace que itere: sin loop, el LLM da una respuesta y para. Las tools son las manos: sin ellas puede razonar sobre lo que haría pero no hace nada. El entorno es la realidad sobre la que actúa: sin entorno no hay nada que observar ni nada que cambiar."</em></p>
     <p><em>"La pregunta que te conviene tener siempre lista: cuando algo no funciona como esperás, ¿cuál de las cuatro está fallando? Es el punto de partida del diagnóstico."</em></p>
-  </aside>
-</section>
-
-<!-- §2.9 · Por qué un loop y no una respuesta -->
-<section>
-  <h2>Loop vs. respuesta</h2>
-
-  <div class="comparison-2col" style="margin-top:20px;align-items:stretch;">
-    <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
-      <p style="font-size:0.65em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 10px;">Chat</p>
-      <p style="font-size:0.82em;font-weight:700;color:var(--accent-secondary);margin:0 0 12px;">pregunta → respuesta</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 12px;">
-        Vos aportás input. El modelo devuelve output. La sesión puede seguir, pero cada vuelta es independiente. El modelo no actúa entre respuestas — esperás vos.
-      </p>
-      <p style="font-size:0.68em;color:var(--text-muted);font-style:italic;margin:0 0 0;margin-top:auto;">
-        "Arreglá el bug" → descripción de cómo podría arreglarse.
-      </p>
-    </div>
-    <div class="bg-secondary-card" style="border-color:var(--accent);display:flex;flex-direction:column;">
-      <p style="font-size:0.65em;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 10px;">Agente</p>
-      <p style="font-size:0.82em;font-weight:700;color:var(--accent);margin:0 0 12px;">objetivo → loop hasta lograrlo</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 12px;">
-        Vos aportás el objetivo. El modelo actúa, observa, corrige, sigue. La sesión no termina hasta que el objetivo se cumple o algo lo interrumpe.
-      </p>
-      <p style="font-size:0.68em;color:var(--text-muted);font-style:italic;margin:0;margin-top:auto;">
-        "Arreglá el bug" → secuencia de acciones que termina con el bug arreglado.
-      </p>
-    </div>
-  </div>
-
-  <p class="fragment fade-in" style="text-align:center;margin-top:18px;font-size:0.8em;color:var(--accent);font-style:italic;">
-    El valor entregado no es información sobre el problema: es el problema resuelto.
-  </p>
-
-  <aside class="notes">
-    <p><strong>Señalar cada columna al mencionarla. El contraste de los itálicos de abajo es central — leerlos despacio. Click para la línea de cierre.</strong></p>
-    <p><u>Comparación 2-col entre chat y agente. Los itálicos muestran el mismo input ("arreglá el bug") produciendo outputs radicalmente distintos.</u></p>
-    <p><em>"Para entender por qué el loop importa, comparalo con el modelo que ya conocés. En el chat: pregunta, respuesta. Cada vuelta es independiente. El modelo no actúa entre una respuesta y la siguiente — eso lo hacés vos."</em></p>
-    <p><em>"En el agente: objetivo, loop hasta lograrlo. El modelo actúa, observa, corrige, sigue. La sesión no termina hasta que el objetivo se cumple o algo lo interrumpe."</em></p>
-    <p><em>"La diferencia no es cosmética. El mismo input — 'arreglá el bug' — produce outputs completamente distintos. En el chat, te devuelve una descripción de cómo podría arreglarse. En el agente, te devuelve el bug arreglado. El valor entregado no es información sobre el problema: es el problema resuelto."</em></p>
   </aside>
 </section>
 
