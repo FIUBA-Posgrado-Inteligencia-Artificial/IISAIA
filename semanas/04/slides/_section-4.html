@@ -177,7 +177,7 @@
   margin-top: 4px;
 }
 
-/* §4.5 layout: small static bar (at 95%) on the left + rot diagram on the right */
+/* §4.5 layout: progressive bar on the left + rot diagram on the right */
 .s4-rot-with-fill {
   display: grid;
   grid-template-columns: auto 2.6fr;
@@ -185,6 +185,42 @@
   align-items: start;
   max-width: 900px;
   margin: 22px auto 0;
+}
+
+/* §4.5 — Contradicting-action callout (the symptom of context rot) */
+.s4-rot-contradiction {
+  max-width: 720px;
+  margin: 16px auto 0;
+  background: rgba(231, 76, 60, 0.08);
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  border-left: 4px solid #e74c3c;
+  border-radius: 7px;
+  padding: 12px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.s4-rot-contradiction-label {
+  font-family: var(--font-mono);
+  font-size: 0.58em;
+  color: #e74c3c;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.s4-rot-contradiction-code {
+  font-family: var(--font-mono);
+  background: var(--bg-code);
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: var(--text-primary);
+  font-size: 0.74em;
+  display: inline-block;
+  width: fit-content;
+}
+.s4-rot-contradiction-note {
+  font-size: 0.66em;
+  color: #e74c3c;
+  font-style: italic;
 }
 
 /* §4.5 — finite + structural */
@@ -442,9 +478,9 @@
   <div class="s4-rot-with-fill">
     <div class="s4-context-bar-wrap">
       <div class="s4-context-bar">
-        <div class="s4-context-bar-fill" style="height:95%;"></div>
+        <div class="s4-context-bar-fill" id="s4-rot-bar-fill" style="height:25%;"></div>
       </div>
-      <p class="s4-context-bar-label">ventana al 95%</p>
+      <p class="s4-context-bar-label">ventana de contexto</p>
     </div>
 
     <div class="s4-rot-diagram">
@@ -456,11 +492,11 @@
         <span>observación vuelta 28 — lectura de config.yml</span>
         <span class="s4-rot-tag">medio · pesa menos</span>
       </div>
-      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="1">
+      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="1" data-rot-fill="55">
         <span>observación vuelta 14 — respuesta del endpoint</span>
         <span class="s4-rot-tag">lejano</span>
       </div>
-      <div class="s4-rot-arrow fragment fade-in" data-fragment-index="2">↓ sepultada</div>
+      <div class="s4-rot-arrow fragment fade-in" data-fragment-index="2" data-rot-fill="85">↓ sepultada</div>
       <div class="s4-rot-layer buried">
         <span>instrucción original — "no uses dependencias externas"</span>
         <span class="s4-rot-tag">acá desde el inicio</span>
@@ -468,17 +504,24 @@
     </div>
   </div>
 
-  <p class="fragment fade-in" data-fragment-index="3" style="text-align:center;margin-top:16px;font-size:0.72em;color:var(--text-muted);font-style:italic;">
+  <div class="s4-rot-contradiction fragment fade-in" data-fragment-index="3" data-rot-fill="95">
+    <span class="s4-rot-contradiction-label">Vuelta 42 — el agente decide:</span>
+    <code class="s4-rot-contradiction-code">$ npm install express lodash axios</code>
+    <span class="s4-rot-contradiction-note">contradice "no uses dependencias externas" — la instrucción original perdió peso</span>
+  </div>
+
+  <p class="fragment fade-in" data-fragment-index="4" style="text-align:center;margin-top:14px;font-size:0.72em;color:var(--text-muted);font-style:italic;">
     la instrucción no desapareció — pero la señal se diluyó en el ruido
   </p>
 
   <aside class="notes">
-    <p><strong>Entry: solo la instrucción original en la base + bar al 95%. Press 1 revela la primera observación (vuelta 14). Press 2 revela las dos más recientes (28, 35) + la flecha "sepultada". Press 3 revela la línea de cierre.</strong></p>
-    <p><u>Cuatro estados, tres reveals: la instrucción original aparece sola al inicio (la pusiste vos, en el comienzo de la sesión). Después se acumulan observaciones, cada vez más recientes y pesadas, hasta que la instrucción queda enterrada. El cierre nombra lo que pasó.</u></p>
-    <p><em>"Empezamos con esto: diste una instrucción al inicio de la sesión — pongamos 'no uses dependencias externas'. Acá está, en la base de la ventana. El agente la leyó. Las primeras vueltas la ejecutó bien."</em></p>
-    <p><em>"Después el agente trabajó. Vuelta 14: hizo un request HTTP y la respuesta entró. Una observación encima de la instrucción original. No es mucho — todavía la instrucción se ve."</em></p>
-    <p><em>"Pero el agente siguió. Vuelta 28: leyó un config. Vuelta 35: corrió tests y el output (2.1k tokens) entró arriba de todo. Y acá pasa lo que importa: el modelo puede ver todo lo que está en la ventana — pero no todo lo que ve pesa igual cuando genera la respuesta siguiente. Las observaciones recientes dominan. La instrucción del principio, enterrada bajo logs y outputs más nuevos, perdió peso."</em></p>
-    <p><em>"Resultado: la instrucción no desapareció — sigue ahí, técnicamente en el contexto. Pero la señal se diluyó en el ruido. El modelo deja de respetarla. Eso es context rot."</em></p>
+    <p><strong>Cinco estados, cuatro reveals. La barra arranca al 25% (solo la instrucción inicial) y crece progresivamente — 55% al sumar la primera observación, 85% con el pile completo, 95% cuando el agente actúa contradiciendo la instrucción original. El último press trae la línea de cierre.</strong></p>
+    <p><u>El bar crece con cada operación que llena el contexto. El callout rojo es el síntoma concreto: el agente ignoró la instrucción original y actuó al revés. No es una respuesta mediocre — es una acción contradictoria que ya pasó.</u></p>
+    <p><em>"Empezamos con esto: diste una instrucción al inicio de la sesión — pongamos 'no uses dependencias externas'. Acá está, en la base de la ventana. La barra de contexto está casi vacía — la instrucción es lo único que ocupa espacio. El agente la leyó. Las primeras vueltas la respetó."</em></p>
+    <p><em>"Vuelta 14: el agente hizo un request HTTP y la respuesta entró al contexto. Una observación encima de la instrucción original. La barra creció — todavía hay margen, todavía la instrucción se ve."</em></p>
+    <p><em>"El agente siguió iterando. Vuelta 28: leyó un config. Vuelta 35: corrió tests y el output entró arriba de todo. La barra está al 85%. La instrucción original sigue ahí, técnicamente — pero ahora está sepultada bajo capas de outputs más nuevos."</em></p>
+    <p><em>"Y acá está el síntoma concreto. Vuelta 42: el agente decide instalar dependencias — exactamente lo que dijiste que no hiciera. Cuando generó esa decisión, miró el contexto y le pesó más el último error de tests que la instrucción del principio. No es que olvidó la instrucción: está en su working memory. Pero la señal se diluyó."</em></p>
+    <p><em>"Esa es la definición operativa de context rot: la instrucción no desapareció, pero la señal se diluyó en el ruido. El modelo deja de respetarla y vos lo descubrís cuando ya pasó."</em></p>
   </aside>
 </section>
 
@@ -602,6 +645,30 @@
       var maxPct = 10;
       annos.forEach(function(el) {
         var p = parseInt(el.dataset.fill, 10);
+        if (!isNaN(p) && p > maxPct) maxPct = p;
+      });
+      bar.style.height = maxPct + '%';
+    }
+  });
+
+  // §4.5 — Context rot bar, grows with each layer/callout fragment.
+  Reveal.on('fragmentshown', function(e) {
+    if (e.fragment.dataset && e.fragment.dataset.rotFill) {
+      var pct = parseInt(e.fragment.dataset.rotFill, 10);
+      var bar = document.getElementById('s4-rot-bar-fill');
+      if (!isNaN(pct) && bar) bar.style.height = pct + '%';
+    }
+  });
+
+  Reveal.on('fragmenthidden', function(e) {
+    if (e.fragment.dataset && e.fragment.dataset.rotFill) {
+      var bar = document.getElementById('s4-rot-bar-fill');
+      if (!bar) return;
+      // Recalculate from the highest still-visible data-rot-fill element. Default to 25% (initial).
+      var visibles = document.querySelectorAll('.fragment.visible[data-rot-fill]');
+      var maxPct = 25;
+      visibles.forEach(function(el) {
+        var p = parseInt(el.dataset.rotFill, 10);
         if (!isNaN(p) && p > maxPct) maxPct = p;
       });
       bar.style.height = maxPct + '%';
