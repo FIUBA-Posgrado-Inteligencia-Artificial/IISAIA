@@ -1711,41 +1711,6 @@
       <!-- ===== §4 — La ventana de contexto es finita ===== -->
       <style>
 /* Scoped styles for §4 only */
-.s4-token-numbers {
-  max-width: 660px;
-  margin: 20px auto 0;
-}
-.s4-token-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.s4-token-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 7px;
-  padding: 14px 16px;
-  text-align: center;
-}
-.s4-token-card .s4-token-val {
-  font-family: var(--font-mono);
-  font-size: 1.15em;
-  font-weight: 700;
-  color: var(--accent-secondary);
-  display: block;
-  margin-bottom: 5px;
-}
-.s4-token-card p {
-  font-size: 0.62em;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-.s4-token-card.s4-warn { border-color: #ffcb6b; }
-.s4-token-card.s4-warn .s4-token-val { color: #ffcb6b; }
-.s4-token-card.s4-alert { border-color: #e74c3c; background: rgba(231,76,60,0.06); }
-.s4-token-card.s4-alert .s4-token-val { color: #e74c3c; }
 
 /* Context rot diagram */
 .s4-rot-diagram {
@@ -1808,37 +1773,49 @@
   line-height: 1.55;
 }
 
-/* Tesis highlight */
-.s4-tesis-wrap {
-  max-width: 680px;
-  margin: 24px auto 0;
+/* §4.1 opener — definition + thesis */
+.s4-opener-def {
+  max-width: 700px;
+  margin: 22px auto 0;
   background: var(--bg-secondary);
-  border: 1px solid var(--accent);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
   border-radius: 10px;
-  padding: 30px 36px;
-  text-align: center;
+  padding: 22px 28px;
 }
-.s4-tesis-wrap .s4-tesis-line {
-  font-size: 1.0em;
-  font-weight: 700;
+.s4-opener-scope {
+  font-family: var(--font-mono);
+  font-size: 0.6em;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+}
+.s4-opener-def-body {
+  font-size: 0.86em;
   color: var(--text-primary);
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
 }
-.s4-tesis-wrap .s4-tesis-line em {
+.s4-opener-thesis {
+  max-width: 740px;
+  margin: 22px auto 0;
+  text-align: center;
+  font-size: 0.85em;
   color: var(--accent);
-  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5;
 }
-.s4-tesis-sub {
-  font-size: 0.72em;
+.s4-opener-thesis-sub {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.78em;
   color: var(--text-muted);
-  margin: 16px 0 0;
-  line-height: 1.65;
-  border-top: 1px solid #2a3a5a;
-  padding-top: 14px;
+  font-weight: normal;
+  font-style: italic;
 }
 
-/* C3 — Slide A: fill + numbers layout */
+/* Fill animation slide */
 .s4-fill-layout {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -1876,7 +1853,7 @@
   margin-top: 4px;
 }
 
-/* C3 — Slide B: fill final + rot layout */
+/* Context rot slide — fill final + rot */
 .s4-rot-with-fill {
   display: grid;
   grid-template-columns: minmax(0,1fr) 2.2fr;
@@ -1891,34 +1868,156 @@
   align-items: flex-start;
   min-height: 160px;
 }
+
+/* §4.5 — finite + structural */
+.s4-finite-wrap {
+  max-width: 760px;
+  margin: 24px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 10px;
+  padding: 24px 32px;
+  text-align: center;
+}
+.s4-finite-headline {
+  font-size: 0.96em;
+  color: var(--text-primary);
+  line-height: 1.55;
+  margin: 0 0 18px;
+  font-weight: 700;
+}
+.s4-finite-headline em {
+  color: var(--accent);
+  font-style: normal;
+}
+.s4-finite-sub {
+  font-size: 0.74em;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.65;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 14px;
+}
+.s4-finite-sub strong {
+  color: var(--accent-secondary);
+  font-weight: 700;
+}
+
+/* §4.6 — two operations */
+.s4-ops-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 940px;
+  margin: 20px auto 0;
+  align-items: stretch;
+}
+.s4-ops-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 10px;
+  padding: 18px 22px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.s4-ops-card.compact { border-left: 3px solid var(--accent-secondary); }
+.s4-ops-card.reset { border-left: 3px solid #ffcb6b; }
+.s4-ops-name {
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.s4-ops-card.compact .s4-ops-name { color: var(--accent-secondary); }
+.s4-ops-card.reset .s4-ops-name { color: #ffcb6b; }
+.s4-ops-tagline {
+  font-size: 0.66em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s4-ops-body {
+  font-size: 0.7em;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.s4-ops-foot {
+  font-size: 0.62em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #2a3a5a;
+  line-height: 1.55;
+}
+
+/* §4.7 — close */
+.s4-close-wrap {
+  max-width: 720px;
+  margin: 28px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 10px;
+  padding: 26px 32px;
+  text-align: center;
+}
+.s4-close-line {
+  font-size: 0.86em;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+.s4-close-line em {
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 700;
+}
+.s4-close-bridge {
+  font-size: 0.74em;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.65;
+  border-top: 1px solid #2a3a5a;
+  padding-top: 14px;
+}
+.s4-close-bridge em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
 </style>
 <section>
-<!-- §4.1 · Hook -->
+<!-- §4.1 · Context engineering — opener + thesis -->
 <section>
-  <h2>¿Por qué el agente "olvidó"?</h2>
+  <h2>Context engineering</h2>
 
-  <div class="bg-secondary-card" style="max-width:620px;margin:28px auto 0;padding:30px 36px;text-align:center;">
-    <p style="font-size:0.88em;color:var(--text-primary);line-height:1.65;margin:0 0 18px;">
-      ¿Por qué un agente que venía de maravilla de repente ignora lo que le pediste?<br>
-      ¿Por qué después de treinta herramientas empieza a girar en círculos?
-    </p>
-    <p class="fragment fade-in" style="font-size:0.82em;color:var(--accent);font-weight:700;margin:0;line-height:1.5;border-top:1px solid #2a3a5a;padding-top:16px;">
-      La respuesta no está en el modelo.<br>Está en el espacio donde el modelo trabaja.
+  <div class="s4-opener-def">
+    <p class="s4-opener-scope">alcance: una sesión completa</p>
+    <p class="s4-opener-def-body">
+      Controlar qué ve el modelo durante toda la tarea: <strong>qué se carga al principio</strong>, <strong>qué se mantiene</strong> cuando el loop itera, <strong>qué se descarta</strong> cuando se llena.
     </p>
   </div>
 
+  <p class="s4-opener-thesis fragment fade-in">
+    Quien dirige bien un agente no es el que escribe el mejor prompt:<br>es el que mantiene la ventana enfocada en lo que importa.
+    <span class="s4-opener-thesis-sub">Un prompt brillante no te salva si la ventana se llena de basura.</span>
+  </p>
+
   <aside class="notes">
-    <p><strong>Pausa larga antes del click. Dejar que la pregunta quede en el aire.</strong></p>
-    <p><u>Slide de apertura de §4. La pregunta está en el material fuente casi textual — usarla así, como la hará el instructor en vivo. El click no da una respuesta completa: planta la dirección.</u></p>
-    <p><em>"Arranco con dos preguntas que capaz les pasaron o que van a ver pasar pronto. Un agente que venía funcionando perfecto — lograba cosas, respetaba las restricciones, terminaba con LISTO como le pediste. Y de repente, como si nada, empieza a ignorar exactamente lo que pediste. ¿Por qué?"</em></p>
-    <p><em>"Segunda: después de treinta herramientas ejecutadas, el agente empieza a proponer cosas que ya hizo. Gira. ¿Por qué?"</em></p>
-    <p><em>"La respuesta no está en el modelo. El modelo no cambió entre la vuelta 5 y la vuelta 35. Lo que cambió es el espacio donde el modelo trabaja. Eso es lo que vemos en §4."</em></p>
+    <p><strong>Definir la disciplina primero. Pausa. Click revela la tesis — leerla despacio, con peso.</strong></p>
+    <p><u>Apertura de §4. Acabamos de definir las tres ingenierías en §3.3 — empezamos por el primer nivel nuevo, context engineering. La tesis vivía antes como slide propia; ahora es el cierre conceptual del opener.</u></p>
+    <p><em>"Empezamos por context engineering — el primer nivel después del prompt. Su alcance es una sesión completa, y su trabajo es controlar qué ve el modelo durante toda la tarea: qué se carga al principio, qué se mantiene cuando el loop itera vuelta a vuelta, qué se descarta cuando el espacio se llena."</em></p>
+    <p><em>"La tesis va a salir varias veces a lo largo de la clase pero conviene plantarla de entrada: quien dirige bien un agente no es el que escribe el mejor prompt — es el que mantiene la ventana enfocada en lo que importa. Un prompt brillante no te salva si a la vuelta cuarenta la ventana está llena de observaciones irrelevantes que tapan tus instrucciones. La habilidad central no es escribir instrucciones perfectas: es administrar el espacio donde el agente trabaja."</em></p>
   </aside>
 </section>
 
-<!-- §4.2 · La analogía clave — callback semana 1 -->
+<!-- §4.2 · Parámetros vs ventana — working memory -->
 <section>
-  <h2>Parámetros vs. ventana — lo que vio en S1</h2>
+  <h2>Parámetros vs. ventana</h2>
 
   <div class="comparison-2col" style="margin-top:20px;align-items:stretch;">
     <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
@@ -1938,21 +2037,20 @@
         Lo que está en el contexto, el modelo lo <em style="font-style:italic;color:var(--accent);">ve</em>. No lo recuerda — está ahí, disponible en tiempo real, token por token.
       </p>
       <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        El recurso que vas a aprender a administrar.
+        El recurso que vas a administrar.
       </p>
     </div>
   </div>
 
   <aside class="notes">
     <p><strong>Señalar columna izquierda. Pausa. Columna derecha — énfasis en "lo ve, no lo recuerda".</strong></p>
-    <p><u>Callback explícito a S1. La distinción ya la conocen — lo que cambia hoy es que se vuelve operativa: la ventana es el recurso a gestionar.</u></p>
-    <p><em>"Esto lo vimos en la semana 1 y hoy se vuelve central. Los parámetros del modelo son como algo que leíste hace un mes. Tenés una impresión vaga, podés razonar sobre ello, pero no podés citar con precisión."</em></p>
-    <p><em>"La ventana de contexto es distinta. Lo que está en la ventana, el modelo lo ve. No lo recuerda — lo tiene delante, disponible en tiempo real. Es su working memory, su memoria de trabajo activa."</em></p>
-    <p><em>"Hoy la ventana de contexto es el recurso que vas a aprender a administrar. Porque es finita — y esa finitud tiene consecuencias."</em></p>
+    <p><u>Callback explícito a S1. La distinción ya la conocen — lo que cambia ahora es que la ventana pasa a ser el recurso a gestionar deliberadamente.</u></p>
+    <p><em>"La distinción la vieron en la semana 1. Los parámetros del modelo son como algo que leíste hace un mes. Tenés una impresión vaga, podés razonar sobre ello, pero no podés citar con precisión."</em></p>
+    <p><em>"La ventana de contexto es distinta. Lo que está en la ventana, el modelo lo ve. No lo recuerda — lo tiene delante, disponible en tiempo real. Es su working memory, su memoria de trabajo activa. Y a partir de ahora es el recurso que tenés que administrar."</em></p>
   </aside>
 </section>
 
-<!-- §4.3 · Slide A consolidado: fill + números como anotaciones reveladas -->
+<!-- §4.3 · El loop llena la ventana -->
 <section>
   <h2>El loop llena la ventana</h2>
 
@@ -1976,42 +2074,39 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Slide A consolidado: el bar fill arranca casi vacío. Cada press abajo revela una anotación numérica Y crece el bar al porcentaje correspondiente (20% / 60% / 95%) — animación de ~600ms. Tres reveals = tres números visibles + bar lleno al 95% al final.</strong></p>
-    <p><u>Reemplaza dos slides previos (§4.3 fill animation + §4.4 token-numbers table). Los números son ahora anotaciones sobre la barra animada, no una tabla aparte.</u></p>
-    <p><em>"Fijense en la barra de la ventana de contexto. Arranca casi vacía. Cada vuelta del loop agrega tokens. Un pensamiento del modelo: tokens. Una llamada a herramienta: tokens. La respuesta de esa herramienta: tokens. Todo se apila."</em></p>
+    <p><strong>El bar fill arranca casi vacío. Cada press abajo revela una anotación numérica Y crece el bar al porcentaje correspondiente (20% / 60% / 95%) — animación de ~600ms. Tres reveals.</strong></p>
+    <p><u>Visualiza concretamente la presión que el loop ejerce sobre la ventana. Los números son del orden real (no fórmulas exactas).</u></p>
+    <p><em>"La ventana arranca casi vacía. Cada vuelta del loop agrega tokens. Un pensamiento del modelo: tokens. Una llamada a herramienta: tokens. La respuesta de esa herramienta: tokens. Todo se apila."</em></p>
     <p><em>"Pongámosle números: un archivo de código de tamaño mediano — 300 líneas con comentarios — ocupa entre 1.500 y 2.500 tokens. Parece chico."</em></p>
     <p><em>"Pero leé veinte archivos de ese tamaño — y en una sesión real leés veinte archivos sin darte cuenta — y ya gastaste entre 30.000 y 50.000 tokens solo en observaciones. Sin contar los pensamientos del modelo. Sin contar los logs de herramientas."</em></p>
-    <p><em>"Los modelos actuales tienen ventanas que rondan los 200.000 tokens. En una sesión larga, la ventana se consume más rápido de lo que intuís. Ese es el punto."</em></p>
+    <p><em>"Los modelos actuales tienen ventanas que rondan los 200.000 tokens. En una sesión larga, la ventana se consume más rápido de lo que intuís."</em></p>
   </aside>
 </section>
 
-<!-- §4.5 · Finita — propiedad estructural -->
+<!-- §4.4 · Finita por diseño — propiedad estructural -->
 <section>
   <h2>Finita por diseño, no por descuido</h2>
 
-  <div class="bg-secondary-card" style="max-width:600px;margin:28px auto 0;padding:30px 36px;text-align:center;">
-    <p style="font-size:0.88em;color:var(--text-primary);line-height:1.65;margin:0 0 20px;">
-      El techo existe. No es una ventana "grande":<br>es una ventana <em style="font-style:italic;color:var(--accent);">finita</em>.
+  <div class="s4-finite-wrap">
+    <p class="s4-finite-headline">
+      El techo existe.<br>
+      No es una ventana "grande": es una ventana <em>finita</em>.
     </p>
-    <p style="font-size:0.75em;color:var(--text-muted);line-height:1.65;margin:0 0 16px;border-top:1px solid #2a3a5a;padding-top:16px;">
-      Cuando se llena: <strong style="color:#ffcb6b;">cortar</strong> desde el inicio, <strong style="color:#ffcb6b;">resumir</strong>, o <strong style="color:#ffcb6b;">detenerse</strong>.<br>El sistema tiene que tomar una decisión — no el modelo.
-    </p>
-    <p style="font-size:0.72em;color:var(--text-muted);line-height:1.6;margin:0;">
-      Ventanas más grandes desplazan el límite. No lo eliminan.<br>
-      <span style="color:var(--accent-secondary);">Diseñar para ese límite es parte del trabajo.</span>
+    <p class="s4-finite-sub">
+      Ventanas más grandes <strong>desplazan</strong> el límite. No lo <strong>eliminan</strong>.<br>
+      Diseñar para ese límite es parte del trabajo de dirigir un agente.
     </p>
   </div>
 
   <aside class="notes">
     <p><strong>Leer el card sin apresurar. Énfasis en "desplazan, no eliminan".</strong></p>
-    <p><u>Slide de una sola idea. La finitud como propiedad estructural — no un bug, no algo que mejorarán en la próxima versión. El framing importa porque define la actitud del estudiante hacia el recurso.</u></p>
-    <p><em>"El techo existe. Y es importante decirlo sin rodeos: esto no es un defecto de diseño que van a corregir en la próxima versión del modelo. Es una propiedad estructural de cómo funcionan los transformers."</em></p>
-    <p><em>"Cuando el contexto acumulado supera el límite, el sistema tiene que tomar una decisión. Puede cortar desde el inicio — y perdés lo que estaba al principio. Puede resumir. Puede detenerse y avisarte."</em></p>
-    <p><em>"GPT-5 tiene ventana más grande. El próximo modelo también. Pero cada uno tiene un límite. Los modelos futuros van a desplazar el límite — no van a eliminarlo. Diseñar para ese límite, saber cuándo se acerca y qué hacer cuando llega, es parte del trabajo de dirigir un agente."</em></p>
+    <p><u>La finitud como propiedad estructural — no un bug, no algo que se va a resolver en la próxima versión. El framing define la actitud del estudiante hacia el recurso.</u></p>
+    <p><em>"Conviene decirlo sin rodeos: la ventana es finita no por descuido sino por diseño. Es una propiedad estructural de cómo funcionan los transformers, no un defecto que va a desaparecer en la próxima versión del modelo."</em></p>
+    <p><em>"Cada modelo nuevo ofrece ventanas más grandes — 200k, 500k, un millón. Eso desplaza el límite, no lo elimina. Cuando el contexto acumulado supera la ventana, el sistema tiene que tomar una decisión: cortar desde el inicio, resumir, o detenerse. Diseñar para ese límite es parte del trabajo, no algo a evitar."</em></p>
   </aside>
 </section>
 
-<!-- §4.6 · Slide B consolidado: fill final + context rot diagram -->
+<!-- §4.5 · Context rot — el mecanismo de degradación -->
 <section>
   <h2>Context rot — cómo ocurre</h2>
 
@@ -2046,15 +2141,15 @@
   </p>
 
   <aside class="notes">
-    <p><strong>Señalar el bar lleno a la izquierda — es el estado de salida del slide anterior, "venimos de ahí". Después señalar desde abajo hacia arriba en el rot diagram — la instrucción enterrada primero, luego las capas encima.</strong></p>
-    <p><u>Slide B consolidado: el bar lleno a la izquierda ancla el contexto (venimos de "la ventana se llenó"). El rot diagram a la derecha muestra qué pasa adentro de esa ventana llena. Diagrama de capas — solo CSS, sin JS. La instrucción original queda abajo, visualmente desvanecida. Las observaciones recientes arriba, con más color y peso visual.</u></p>
+    <p><strong>Señalar el bar lleno a la izquierda (venimos de "la ventana se llenó"). Después desde abajo hacia arriba en el rot diagram — la instrucción enterrada primero, después las capas encima.</strong></p>
+    <p><u>El bar lleno ancla el contexto (venimos del slide anterior). El rot diagram muestra qué pasa adentro de esa ventana llena: la instrucción original sobrevive pero perdió peso. La señal se diluye en el ruido reciente.</u></p>
     <p><em>"Context rot es el nombre del fenómeno que todo supervisor de agentes encuentra tarde o temprano, y que conviene conocer antes de que te sorprenda."</em></p>
-    <p><em>"El mecanismo es así: diste una instrucción al inicio de la sesión. El agente la ejecutó bien las primeras veces. Pero después de muchas vueltas, algo cambia. El modelo empieza a ignorarla. Propone soluciones que la contradicen."</em></p>
-    <p><em>"Lo que pasó es esto: la instrucción original quedó sepultada bajo cientos de líneas de observaciones. El modelo puede ver todo lo que está en la ventana — pero no todo lo que ve pesa igual cuando genera la respuesta siguiente. Las observaciones recientes dominan. La instrucción del principio, enterrada bajo logs y outputs, perdió peso. La señal se diluyó en el ruido."</em></p>
+    <p><em>"El mecanismo es éste: diste una instrucción al inicio de la sesión. El agente la ejecutó bien las primeras vueltas. Pero después de muchas iteraciones, algo cambia. El modelo empieza a ignorarla — propone soluciones que la contradicen, repite cosas que ya hizo, da respuestas más vagas."</em></p>
+    <p><em>"Lo que pasó es esto: la instrucción original quedó sepultada bajo cientos de líneas de observaciones recientes. El modelo puede ver todo lo que está en la ventana — pero no todo lo que ve pesa igual cuando genera la respuesta siguiente. Las observaciones recientes dominan. La instrucción del principio, enterrada bajo logs y outputs, perdió peso. La señal se diluyó en el ruido."</em></p>
   </aside>
 </section>
 
-<!-- §4.7 · Síntomas — cards, no lista -->
+<!-- §4.6 · Síntomas que reconoce un supervisor -->
 <section>
   <h2>Síntomas que reconoce un supervisor</h2>
 
@@ -2082,136 +2177,74 @@
   </p>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro cards en orden. Énfasis en la última línea — decirla despacio.</strong></p>
-    <p><u>Cuatro síntomas en grid 2×2. Sin listas — cada síntoma tiene su card con encabezado y descripción. La línea final invierte el framing: no es culpa del modelo.</u></p>
+    <p><strong>Recorrer los cuatro cards en orden. Énfasis en la línea de cierre — decirla despacio.</strong></p>
+    <p><u>Cuatro síntomas en grid 2×2. Sin listas — cada síntoma con encabezado y descripción. La línea final invierte el framing: no es culpa del modelo.</u></p>
     <p><em>"Si alguna vez vieron alguno de estos síntomas, ahora tienen el nombre de lo que estaban mirando."</em></p>
     <p><em>"El agente contradice una restricción que dieron explícitamente — 'no dependencias externas' y está instalando tres. El agente repite un bloque de trabajo que ya completó, como si no lo hubiera hecho. Las respuestas se vuelven genéricas donde antes eran precisas. Le preguntás por algo que estaba al inicio del contexto y no lo 'recuerda', aunque técnicamente está ahí."</em></p>
     <p><em>"Y acá viene lo importante: ninguno de estos síntomas significa que el modelo falló. Significa que la ventana está trabajando contra vos en vez de para vos. La diferencia importa porque cambia dónde mirás para resolver el problema."</em></p>
   </aside>
 </section>
 
-<!-- §4.8 · La tesis -->
+<!-- §4.7 · Las dos operaciones — compactar y resetear -->
 <section>
-  <h2>La tesis de esta clase</h2>
+  <h2>Las dos operaciones: compactar y resetear</h2>
 
-  <div class="s4-tesis-wrap">
-    <p class="s4-tesis-line">
-      Quien dirige un agente de manera efectiva<br>
-      no es el que escribe <em>mejores prompts de entrada</em>;<br>
-      es el que mantiene la ventana <em>enfocada en lo que importa</em>.
-    </p>
-    <p class="s4-tesis-sub">
-      Un prompt inicial brillante no te salva si la ventana se llena de basura.<br>
-      Un modelo capaz no te ayuda si su working memory está saturada de ruido.
-    </p>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Leer el card completo en voz alta, despacio. No agregar nada — dejar el silencio hacer el trabajo.</strong></p>
-    <p><u>Slide de tesis — el momento de mayor peso en §4 y en la clase completa. Sin animaciones, sin fragmentos, sin distracciones. Solo el enunciado.</u></p>
-    <p><em>"Dicho sin rodeos, esto es la tesis de hoy. Quien dirige un agente de manera efectiva no es el que escribe mejores prompts de entrada. Es el que mantiene la ventana enfocada en lo que importa."</em></p>
-    <p><em>"Un prompt inicial brillante no te salva si a la vuelta cuarenta la ventana está llena de observaciones irrelevantes que tapan tus instrucciones. Un modelo capaz no te ayuda si su working memory — esa ventana de contexto — está saturada de ruido."</em></p>
-    <p><em>"La habilidad central no es escribir instrucciones perfectas. Es administrar el espacio donde el agente trabaja. Eso es lo que vamos a desarrollar en todo lo que sigue."</em></p>
-  </aside>
-</section>
-
-<!-- §4.9 · Dos operaciones -->
-<section>
-  <h2>Dos operaciones para gestionar el contexto</h2>
-
-  <div class="comparison-2col" style="margin-top:20px;align-items:stretch;">
-    <div class="bg-secondary-card" style="display:flex;flex-direction:column;border-color:var(--accent-secondary);">
-      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent-secondary);margin:0 0 10px;">Compactación</p>
-      <p style="font-size:0.78em;font-weight:700;color:var(--accent-secondary);margin:0 0 10px;">resumir y soltar lastre</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.65;margin:0 0 auto;">
-        El historial acumulado se condensa en algo más denso. No se borra: se comprime. La señal se preserva — los detalles irrelevantes se descartan.
+  <div class="s4-ops-grid">
+    <div class="s4-ops-card compact">
+      <p class="s4-ops-name">Compactar</p>
+      <p class="s4-ops-tagline">resumir y soltar lastre</p>
+      <p class="s4-ops-body">
+        El historial acumulado se condensa en algo más denso. No se borra: se comprime. Se preserva la señal — los detalles irrelevantes se descartan.
       </p>
-      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        La sesión continúa con contexto aliviado.
+      <p class="s4-ops-foot">
+        La sesión continúa con contexto aliviado y la cadena de razonamiento intacta.
       </p>
     </div>
-    <div class="bg-secondary-card" style="display:flex;flex-direction:column;border-color:#ffcb6b;">
-      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:#ffcb6b;margin:0 0 10px;">Reset</p>
-      <p style="font-size:0.78em;font-weight:700;color:#ffcb6b;margin:0 0 10px;">empezar limpio</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.65;margin:0 0 auto;">
-        Contexto nuevo. Se carga solo lo necesario para la tarea siguiente — sin arrastrar el historial de la sesión anterior.
+    <div class="s4-ops-card reset">
+      <p class="s4-ops-name">Resetear</p>
+      <p class="s4-ops-tagline">empezar limpio</p>
+      <p class="s4-ops-body">
+        Contexto nuevo. Se carga solo lo necesario para la próxima tarea — sin arrastrar el historial. Tabla rasa deliberada.
       </p>
-      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        Empieza fresco, con solo lo que importa.
+      <p class="s4-ops-foot">
+        Pierde la conversación, pero arranca fresco con solo lo que importa.
       </p>
     </div>
   </div>
 
-  <p class="fragment fade-in" style="text-align:center;margin-top:18px;font-size:0.78em;color:var(--text-muted);font-style:italic;">
-    Ninguna mejor en abstracto. Cuándo usar cada una — eso es lo que desarrollamos en la parte 2.
+  <p class="fragment fade-in" style="text-align:center;margin-top:20px;font-size:0.76em;color:var(--text-muted);font-style:italic;">
+    Ninguna es mejor en abstracto. Toda estrategia de context engineering combina las dos según el estado del contexto y la tarea.
   </p>
 
   <aside class="notes">
     <p><strong>Señalar columna izquierda, luego derecha. Click revela la nota final.</strong></p>
-    <p><u>Las dos operaciones que cualquier estrategia de manejo de contexto implementa. No es un inventario de herramientas — son conceptos. Las herramientas concretas aparecen en la parte 2.</u></p>
-    <p><em>"Hay dos operaciones conceptuales que cualquier estrategia de manejo de contexto implementa de una forma u otra."</em></p>
-    <p><em>"La compactación: resumir el historial acumulado en algo más denso y soltarse del detalle que ya no aporta. No se borra — se condensa. La señal se preserva; el ruido se descarta. La sesión sigue, con contexto aliviado."</em></p>
-    <p><em>"El reset: empezar con contexto limpio, cargando solo lo que es necesario para la tarea siguiente, sin arrastrar todo el historial. Tabla rasa deliberada."</em></p>
-    <p><em>"Ninguna de las dos es mejor en abstracto. Cuándo usar cada una, cómo combinarlas, y qué cargar en un contexto limpio para que el agente tenga lo que necesita — eso es exactamente lo que desarrollamos en la parte 2."</em></p>
+    <p><u>Las dos operaciones conceptuales que cualquier estrategia de context engineering implementa. Agnósticas de herramienta — son patrones, no comandos específicos.</u></p>
+    <p><em>"Hay dos operaciones conceptuales que cualquier estrategia de context engineering implementa de alguna forma."</em></p>
+    <p><em>"La compactación: resumir el historial acumulado en algo más denso y soltarse del detalle que ya no aporta. No se borra — se condensa. La señal se preserva; el ruido se descarta. La sesión sigue, con contexto aliviado y la cadena de razonamiento intacta."</em></p>
+    <p><em>"El reset: empezar con contexto limpio, cargando solo lo necesario para la tarea siguiente. Perdés la conversación, pero arrancás fresco — tabla rasa deliberada."</em></p>
+    <p><em>"Ninguna es mejor en abstracto. Toda estrategia real combina las dos según el estado del contexto y la tarea: si vas a seguir el mismo hilo, compactás; si vas a empezar algo nuevo, reseteás cargando deliberadamente lo que vale la pena re-inyectar."</em></p>
   </aside>
 </section>
 
-<!-- §4.10 · Adelanto de la tricotomía — REMOVED (C4): los tres rótulos
-     se introducen directamente en §8 con la tricotomía ya rellenándose
-     en show-2. La semilla queda en speaker notes de §8. -->
-
-
-<!-- §4.11 · section-divider — Demo -->
-<section class="section-divider">
-  <h2>Demo · Context rot y qué sobrevive a /compact</h2>
-
-  <aside class="notes">
-    <p><u>Slide de transición. Da un segundo de preparación al instructor y señala al aula que viene demostración en vivo.</u></p>
-    <p><em>"Vamos a provocar context rot a propósito, en vivo. Y después vamos a ver qué pasa cuando el contexto se compacta — qué sobrevive y qué no."</em></p>
-  </aside>
-</section>
-
-<!-- §4.12 · Demo beats — clickable-steps -->
+<!-- §4.8 · Cierre + bridge al siguiente nivel -->
 <section>
-  <h2>Context rot y qué sobrevive a /compact — 4 beats</h2>
+  <h2>Context engineering, cerrado</h2>
 
-  <div id="s4-demo-steps" style="margin-top:18px;"></div>
-
-  <aside class="notes">
-    <p><strong>Demo en vivo. Click recorre los 4 beats. Setup: sesión nueva (o ya cargada con historial), instrucción "terminá cada respuesta con la palabra LISTO", trabajo real durante varios minutos, luego /compact.</strong></p>
-    <p><u>Beat 1 — Plantar la instrucción: abrir sesión, dar la instrucción LISTO, hacer trabajo real. Qué mirar: las primeras 2–3 respuestas terminan con LISTO. · Beat 2 — Context rot en acto: continuar la sesión con más archivos y herramientas, hacer una pregunta normal sin mencionar la instrucción, mostrar la respuesta. Qué mirar: la respuesta ya no termina con LISTO — la instrucción quedó sepultada. · Beat 3 — Qué sobrevive a /compact: ejecutar /compact, esperar el resumen, hacer una pregunta. Qué mirar: la instrucción de chat no reapareció; el CLAUDE.md sí se re-inyecta — lo que está en archivo persiste, lo que se dijo al pasar, no. · Beat 4 — Cierre: el contraste archivo vs. dicho al pasar. Plan B: si context rot no aparece en vivo (algunos modelos respetan bien instrucciones simples), mostrar el fenómeno sobre una transcripción guardada. El beat de /compact siempre en vivo — es rápido, repetible y el contraste es siempre visible.</u></p>
-    <p><em>"Antes de responder con LISTO, chequeen que la instrucción se cumple. Fijense las primeras dos o tres respuestas."</em></p>
-    <p><em>"No está roto. La instrucción quedó sepultada. Eso es context rot."</em></p>
-    <p><em>"Compactar es resumir y soltar lastre. Pero ojo qué sobrevive."</em></p>
-    <p><em>"Lo que vive en un archivo persiste; lo que dijiste al pasar, no. Tené eso en la cabeza toda la parte 2."</em></p>
-  </aside>
-</section>
-
-<!-- §4.13 · Cierre del demo + bridge a §5 -->
-<section>
-  <h2>Archivo vs. dicho al pasar</h2>
-
-  <div class="bg-secondary-card" style="max-width:620px;margin:24px auto 0;padding:28px 34px;">
-    <p style="font-size:0.86em;color:var(--text-primary);line-height:1.65;margin:0 0 18px;">
-      Lo que vive en un archivo persiste.<br>
-      <span style="color:var(--text-muted);">Lo dicho al pasar, en el chat, desaparece con el contexto.</span>
+  <div class="s4-close-wrap">
+    <p class="s4-close-line">
+      <em>Elegir qué entra a la ventana, mantener lo que sirve, soltar lo que pesa.</em>
     </p>
-    <p style="font-size:0.74em;color:var(--text-muted);line-height:1.65;margin:0;border-top:1px solid #2a3a5a;padding-top:16px;">
-      Esa idea atraviesa toda la parte 2.<br>
-      Es la razón por la que CLAUDE.md, las rules y la memoria del agente importan.
+    <p class="s4-close-bridge">
+      Esto cubre lo que ve el modelo dentro de una sesión.<br>
+      Pero el modelo opera sobre un entorno — y ese entorno también se diseña. <em>Ese es el siguiente nivel.</em>
     </p>
   </div>
 
-  <p class="fragment fade-in" style="text-align:center;margin-top:22px;font-size:0.82em;color:var(--accent-secondary);font-style:italic;">
-    Pero un agente que actúa puede fallar de maneras nuevas — §5.
-  </p>
-
   <aside class="notes">
-    <p><strong>Leer el card. Pausa. Click para el bridge a §5.</strong></p>
-    <p><u>Cierre de §4. La conclusión del demo se convierte en el hilo conector hacia la parte 2. El bridge a §5 es deliberadamente escueto — §5 tiene su propio hook.</u></p>
-    <p><em>"Lo que vieron en el demo tiene una conclusión simple y poderosa: lo que vive en un archivo persiste porque se re-inyecta en la ventana en cada sesión. Lo que dijiste al pasar, en el chat, vive solo mientras ese contexto existe."</em></p>
-    <p><em>"Esa idea atraviesa toda la parte 2. Es la razón por la que las herramientas que vemos — CLAUDE.md, las rules, la memoria del agente — no son decoración. Son el mecanismo para hacer que las instrucciones que importan sobrevivan."</em></p>
-    <p><em>"Pero antes de entrar a esas herramientas, falta una pieza de la parte 1. Un agente que actúa puede fallar de maneras que uno que solo escribe no puede. Los modos de falla nuevos — eso es §5."</em></p>
+    <p><strong>Leer la línea principal con peso. Pausa antes del bridge.</strong></p>
+    <p><u>Cierre de §4. Resume context engineering en una línea operativa y plantea el salto al nivel exterior — harness engineering. Sin meta-referencias al curso ni a números de sección.</u></p>
+    <p><em>"Context engineering, cerrado en una línea: elegir qué entra a la ventana, mantener lo que sirve, soltar lo que pesa. Esto cubre todo lo que el modelo ve dentro de una sesión — la primera capa de control sobre el agente."</em></p>
+    <p><em>"Pero hay una capa más. El modelo no opera en el aire: opera sobre un entorno con tools, archivos, comandos, permisos. Y ese entorno también se diseña. Cuando algo sale mal dentro del loop, las protecciones no vienen del prompt ni del contexto — vienen del entorno que armaste alrededor. Eso es el siguiente nivel, y es lo que viene a continuación."</em></p>
   </aside>
 </section>
 </section>
@@ -7413,17 +7446,17 @@
 
   <!-- init §4 -->
 <script>
-  // C3 — Slide A: fill anim, fragment-driven fillPercent (kept local)
+  // §4.3 — Fill anim, fragment-driven fillPercent
   if (document.getElementById('s4-loop-fill')) {
     initFourLoop({ containerId: 's4-loop-fill', mode: 'fill', fillPercent: 10 });
   }
 
-  // §4.6 — Slide B: rot diagram with fill at 95% (local mount, was overlay)
+  // §4.5 — Context rot with fill at 95% as anchor
   if (document.getElementById('s4-rot-loop')) {
     initFourLoop({ containerId: 's4-rot-loop', mode: 'fill', fillPercent: 95 });
   }
 
-  // Sync fill percent with fragments on slide A
+  // Sync fill percent with fragments on §4.3
   Reveal.on('fragmentshown', function(e) {
     if (e.fragment.dataset && e.fragment.dataset.fill) {
       var pct = parseInt(e.fragment.dataset.fill, 10);
@@ -7446,28 +7479,6 @@
       updateFourLoop({ containerId: 's4-loop-fill', mode: 'fill', fillPercent: maxPct });
     }
   });
-  initClickableSteps({ containerId: 's4-demo-steps', steps: [
-    {
-      title: 'Beat 1 — Plantar la instrucción',
-      summary: 'Abrir sesión nueva (o con historial cargado). Dar la instrucción: "De ahora en más terminá cada respuesta con la palabra LISTO." Trabajar en algo real varios minutos.',
-      example: 'Qué mirar: las primeras 2–3 respuestas terminan con LISTO. La instrucción está en la cima del contexto y pesa.'
-    },
-    {
-      title: 'Beat 2 — Context rot en acto',
-      summary: 'Continuar la sesión con más archivos, más herramientas, más idas y vueltas. Hacer una pregunta normal sin mencionar la instrucción. Mostrar la respuesta.',
-      example: 'Qué mirar: la respuesta ya no termina con LISTO. La instrucción no "se olvidó" — quedó enterrada bajo cientos de líneas de observaciones. La señal se perdió.'
-    },
-    {
-      title: 'Beat 3 — Qué sobrevive a /compact',
-      summary: 'Ejecutar /compact. Esperar el resumen del historial. Hacer una pregunta y mostrar la respuesta. Señalar qué persistió y qué no.',
-      example: 'Qué mirar: la instrucción de chat no reapareció. El CLAUDE.md del proyecto sí se re-inyectó automáticamente. Lo que está en archivo persiste; lo dicho al pasar, no. Plan B: si el context rot tardó demasiado en aparecer, usar transcripción guardada. El beat de /compact siempre en vivo.'
-    },
-    {
-      title: 'Beat 4 — Cierre del demo',
-      summary: 'Sintetizar el contraste: instrucción de chat vs. CLAUDE.md. Una línea de cierre para la parte 2.',
-      example: '"Lo que vive en un archivo persiste; lo que dijiste al pasar, no. Tené eso en la cabeza toda la parte 2."'
-    }
-  ] });
 </script>
 
   <!-- init §5 -->
