@@ -1435,264 +1435,275 @@
 
       <!-- ===== §3 — Tools: las manos del agente ===== -->
       <style>
-/* Scoped styles for §3 only */
-.s3-chat-s1 {
-  max-width: 620px;
-  margin: 18px auto 0;
+/* §3 — Las tres ingenierías */
+
+/* §3.1 — abanico de capacidades */
+.s3-fan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 980px;
+  margin: 20px auto 0;
 }
-.s3-chat-s1 .s3-mechanism-row {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  margin-bottom: 0;
-}
-.s3-step-box {
+.s3-fan-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
-  border-radius: 7px;
-  padding: 10px 14px;
-  text-align: center;
-  flex: 1;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px 18px;
 }
-.s3-step-box .s3-step-label {
-  font-size: 0.58em;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+.s3-fan-card strong {
+  display: block;
+  font-size: 0.78em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.s3-fan-card p {
+  margin: 0;
+  font-size: 0.66em;
   color: var(--text-muted);
-  margin: 0 0 4px;
+  line-height: 1.5;
 }
-.s3-step-box .s3-step-text {
+.s3-fan-foot {
+  text-align: center;
+  margin: 22px auto 0;
+  font-size: 0.72em;
+  color: var(--text-primary);
+  max-width: 760px;
+  line-height: 1.6;
+}
+.s3-fan-foot strong { color: var(--accent); }
+
+/* §3.2 — quote */
+.s3-quote-wrap {
+  max-width: 820px;
+  margin: 60px auto 0;
+  text-align: center;
+}
+.s3-quote-line {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.s3-quote-sub {
+  margin: 26px auto 0;
+  font-size: 0.78em;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 680px;
+}
+.s3-quote-punch {
+  margin: 22px auto 0;
+  font-size: 0.92em;
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* §3.3 — tres ingenierías */
+.s3-eng-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 1140px;
+  margin: 18px auto 0;
+}
+.s3-eng-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 10px;
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.s3-eng-card.prompt { border-left: 3px solid var(--text-muted); }
+.s3-eng-card.context { border-left: 3px solid var(--accent-secondary); }
+.s3-eng-card.harness { border-left: 3px solid var(--accent); }
+.s3-eng-title {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+.s3-eng-card.prompt .s3-eng-title { color: var(--text-muted); }
+.s3-eng-card.context .s3-eng-title { color: var(--accent-secondary); }
+.s3-eng-card.harness .s3-eng-title { color: var(--accent); }
+.s3-eng-scope {
+  font-size: 0.6em;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s3-eng-body {
   font-size: 0.68em;
   color: var(--text-primary);
-  margin: 0;
-  line-height: 1.4;
-  font-family: var(--font-mono);
+  line-height: 1.6;
+  margin: 0 0 12px;
 }
-.s3-arrow-h {
-  font-size: 1.1em;
-  color: var(--text-muted);
-  padding: 0 6px;
-  flex-shrink: 0;
-}
-.s3-result-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 8px;
-}
-.s3-result-box {
-  flex: 1;
-  background: var(--bg-code);
-  border: 1px solid #2a3a5a;
-  border-radius: 7px;
-  padding: 9px 14px;
-}
-.s3-result-box .s3-result-label {
-  font-size: 0.56em;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: #ffcb6b;
-  margin: 0 0 3px;
-}
-.s3-result-box p {
-  font-size: 0.65em;
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.5;
-  font-family: var(--font-mono);
-}
-
-/* Loop mapping card for §3 */
-.s3-loop-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  /* Reserve vertical space for the animation in tool mode (no exit chips, smaller). */
-  height: 160px;
-  margin: 14px auto 0;
-}
-#s3-tool-loop {
-  transform: scale(1.1);
-  transform-origin: center top;
-}
-.s3-mapping {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  max-width: 700px;
-  margin: 14px auto 0;
-}
-.s3-map-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 7px;
-  padding: 12px 14px;
-  text-align: center;
-}
-.s3-map-card .s3-map-phase {
-  font-size: 0.6em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  margin: 0 0 4px;
-}
-.s3-map-card .s3-map-phase.actuar { color: var(--accent-secondary); }
-.s3-map-card .s3-map-phase.observar { color: #ffcb6b; }
-.s3-map-card .s3-map-phase.pensar { color: var(--accent); }
-.s3-map-card .s3-map-call {
-  font-family: var(--font-mono);
-  font-size: 0.64em;
-  color: var(--accent-secondary);
-  background: var(--bg-code);
-  border-radius: 4px;
-  padding: 4px 7px;
-  display: block;
-  margin: 0 0 5px;
-}
-.s3-map-card p {
-  font-size: 0.6em;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* Accumulation diagram */
-.s3-accum {
-  max-width: 640px;
-  margin: 18px auto 0;
-}
-.s3-accum-row {
-  display: flex;
-  align-items: stretch;
-  gap: 10px;
-  margin-bottom: 7px;
-}
-.s3-accum-label {
-  width: 100px;
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 0.62em;
-  color: var(--accent-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 8px;
-}
-.s3-accum-bar-wrap {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-.s3-accum-bar {
-  height: 28px;
-  border-radius: 4px;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-}
-.s3-accum-bar span {
-  font-size: 0.6em;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-.s3-accum-bar.fill-sm { width: 30%; }
-.s3-accum-bar.fill-md { width: 55%; border-color: var(--accent-secondary); }
-.s3-accum-bar.fill-lg { width: 78%; border-color: #ffcb6b; }
-.s3-accum-bar.fill-xl { width: 95%; border-color: #e74c3c; background: rgba(231,76,60,0.08); }
-.s3-accum-note {
-  text-align: right;
+.s3-eng-eg {
   font-size: 0.6em;
   color: var(--text-muted);
   font-style: italic;
-  margin-top: 6px;
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #2a3a5a;
+  line-height: 1.55;
+}
+.s3-eng-tag {
+  display: block;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-style: normal;
+  margin-bottom: 4px;
+}
+.s3-eng-footer {
+  text-align: center;
+  margin: 22px auto 0;
+  font-size: 0.74em;
+  color: var(--text-muted);
+  max-width: 920px;
+  line-height: 1.6;
+}
+.s3-eng-footer em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
 }
 </style>
 <section>
-<!-- §3.1 · Leer vs. escribir — la distinción operativa que cambia el supervisor -->
+<!-- §3.1 · El abanico de capacidades que abre ReAct + tools -->
 <section>
-  <h2>Leer vs. escribir — el riesgo no es simétrico</h2>
+  <h2>Lo que abre el loop + tools</h2>
 
-  <div class="comparison-2col" style="margin-top:18px;align-items:stretch;">
-    <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
-      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 10px;">Leer</p>
-      <p style="font-size:0.78em;font-weight:700;color:var(--accent-secondary);margin:0 0 10px;">reversible</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
-        Leer un archivo, listar un directorio, llamar un endpoint de solo lectura. El entorno no cambió. El peor caso: llenó el contexto con información irrelevante.
-      </p>
-      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        Puede intentar otra lectura.
-      </p>
+  <div class="s3-fan-grid">
+    <div class="s3-fan-card">
+      <strong>Escribir código de cero</strong>
+      <p>desde un objetivo, sin que vos toques el editor</p>
     </div>
-    <div class="bg-secondary-card" style="border-color:#e74c3c;display:flex;flex-direction:column;">
-      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:#e74c3c;margin:0 0 10px;">Escribir / ejecutar</p>
-      <p style="font-size:0.78em;font-weight:700;color:#e74c3c;margin:0 0 10px;">puede no ser reversible</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
-        Editar un archivo, correr <code style="font-family:var(--font-mono);font-size:0.9em;background:var(--bg-code);padding:1px 4px;border-radius:3px;">git commit</code>, borrar un directorio, llamar un endpoint que muta estado. El entorno quedó en un estado diferente al esperado.
-      </p>
-      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        No hay deshacer automático.
-      </p>
+    <div class="s3-fan-card">
+      <strong>Correr y leer tests</strong>
+      <p>iterar sobre fallos sin intervención humana</p>
+    </div>
+    <div class="s3-fan-card">
+      <strong>Diagnosticar bugs</strong>
+      <p>logs, stack traces, hipótesis, fix, verificación</p>
+    </div>
+    <div class="s3-fan-card">
+      <strong>Refactorizar módulos</strong>
+      <p>cambios coordinados en varios archivos a la vez</p>
+    </div>
+    <div class="s3-fan-card">
+      <strong>Buscar y sintetizar docs</strong>
+      <p>traer información externa al contexto bajo demanda</p>
+    </div>
+    <div class="s3-fan-card">
+      <strong>Coordinar tools en cadena</strong>
+      <p>grep, edit, run, repeat — decisiones entre paso y paso</p>
     </div>
   </div>
 
-  <p class="fragment fade-in" style="text-align:center;margin-top:16px;font-size:0.78em;color:var(--text-muted);font-style:italic;">
-    El supervisor mira más las tools que actúan sobre el mundo.
+  <p class="s3-fan-foot">
+    Casi cualquier cosa que un developer hace en una terminal y un editor: <strong>el agente la puede hacer</strong>.
   </p>
 
   <aside class="notes">
-    <p><strong>Señalar columna izquierda, luego derecha. El ejemplo de git commit y borrar directorio son los que aterrizan. Click final para la línea del supervisor.</strong></p>
-    <p><u>Apertura de §3 — la distinción operativa más importante sobre tools. Referenciada después en los modos de falla y en plan mode. No agregar listas: el contraste vive en la estructura visual.</u></p>
-    <p><em>"Las tools ya las conocen — la mecánica de llamada estructurada / runtime ejecuta / resultado al contexto la vimos en S1 y la ubicamos en el programa externo de §2. Pero hay una distinción operativa que conviene tener presente desde ahora: no todas las tools tienen el mismo peso cuando algo sale mal."</em></p>
-    <p><em>"Una tool que lee no cambia el estado del entorno. Si el agente leyó el archivo equivocado, lo peor que pasó es que llenó el contexto con ruido. Puede intentar otra lectura."</em></p>
-    <p><em>"Una tool que escribe o ejecuta modifica el entorno. Un archivo sobreescrito sin backup. Un git commit que avanzó el historial. Un endpoint que procesó algo. Puede que sea recuperable; puede que no. No hay deshacer automático."</em></p>
-    <p><em>"Por eso el supervisor presta más atención a las tools que actúan sobre el mundo. Esta distinción la vamos a usar más adelante cuando veamos modos de falla y cuando hablemos de permisos."</em></p>
+    <p><strong>Recorrer las seis tarjetas en voz alta. Después pausa antes de la línea de cierre — dejar que aterrice el alcance real.</strong></p>
+    <p><u>Apertura de §3 con un cambio de enfoque: el loop y las tools no son piezas técnicas aisladas — combinadas abren un rango operativo enorme. Esto motiva las tres ingenierías que vienen.</u></p>
+    <p><em>"Cerramos §2 con el esqueleto del agente: el loop, las tres fases, las cuatro condiciones de corte. Quiero detenerme un momento en lo que ese esqueleto, combinado con tools que tocan tu filesystem y tu terminal, realmente habilita."</em></p>
+    <p><em>"Escribir código desde cero a partir de un objetivo. Correr los tests, leer los outputs, iterar. Diagnosticar bugs en producción. Refactorizar módulos completos con cambios coordinados. Traer documentación externa al contexto. Encadenar tools, decidiendo qué hacer entre cada paso. Casi cualquier cosa que un developer hace en su terminal y su editor — el agente la puede hacer."</em></p>
+    <p><em>"Y eso cambia la pregunta de la clase. Ya no es '¿cómo escribo un buen prompt?'. Es '¿cómo dirijo algo que puede hacer todo eso?'."</em></p>
   </aside>
 </section>
 
-<!-- §3.2 · La observación entra al contexto (cierre + semilla de §4) -->
+<!-- §3.2 · Gran poder, gran responsabilidad -->
 <section>
-  <h2>La observación no desaparece</h2>
+  <h2>Gran poder, gran responsabilidad</h2>
 
-  <div class="s3-accum">
-    <div class="s3-accum-row">
-      <div class="s3-accum-label">prompt</div>
-      <div class="s3-accum-bar-wrap">
-        <div class="s3-accum-bar fill-sm"><span>objetivo inicial</span></div>
-      </div>
-    </div>
-    <div class="s3-accum-row">
-      <div class="s3-accum-label">+ razonamiento</div>
-      <div class="s3-accum-bar-wrap">
-        <div class="s3-accum-bar fill-md"><span>pensar vuelta 1</span></div>
-      </div>
-    </div>
-    <div class="s3-accum-row">
-      <div class="s3-accum-label">+ read_file</div>
-      <div class="s3-accum-bar-wrap">
-        <div class="s3-accum-bar fill-lg" style="border-color:#ffcb6b;"><span style="color:#ffcb6b;">800 líneas — acá, en la ventana</span></div>
-      </div>
-    </div>
-    <div class="s3-accum-row">
-      <div class="s3-accum-label">+ npm test</div>
-      <div class="s3-accum-bar-wrap">
-        <div class="s3-accum-bar fill-xl"><span>output de tests + nueva ronda</span></div>
-      </div>
-    </div>
-    <p class="s3-accum-note">el contexto crece; las observaciones quedan</p>
+  <div class="s3-quote-wrap">
+    <p class="s3-quote-line">
+      Cuando un sistema puede modificar tu repo, ejecutar comandos<br>
+      y tomar decisiones por su cuenta…
+    </p>
+    <p class="s3-quote-sub fragment fade-in">
+      …lo que sale bien escala. Y lo que sale mal también.<br>
+      Un fix que se autoaplica vale por diez horas tuyas. Un <code style="font-family:var(--font-mono);color:#e74c3c;">rm</code> equivocado las cuesta.
+    </p>
+    <p class="s3-quote-punch fragment fade-in">
+      No alcanza con saber prompt engineering.
+    </p>
   </div>
 
-  <p class="fragment fade-in" style="text-align:center;margin-top:20px;font-size:0.78em;color:var(--accent-secondary);font-style:italic;">
-    No es un recuerdo vago del preentrenamiento: son datos directamente disponibles.
+  <aside class="notes">
+    <p><strong>Leer la primera línea con peso. Pausa. Click revela la línea media. Pausa. Click revela el punch line.</strong></p>
+    <p><u>Slide bisagra entre "lo que el agente puede hacer" (§3.1) y "las tres ingenierías" (§3.3). Establece que ese poder requiere una nueva disciplina más allá de escribir buenos prompts.</u></p>
+    <p><em>"El abanico del slide anterior tiene una contracara. Cuando un sistema puede modificar tu repositorio, ejecutar comandos, tomar decisiones por su cuenta — el peor caso ya no es una respuesta mediocre en un chat. El peor caso toca tu entorno real."</em></p>
+    <p><em>"Lo que sale bien escala — un fix automático vale por diez horas tuyas. Pero lo que sale mal también escala. Un 'rm' equivocado, un commit prematuro, un endpoint llamado en producción — son acciones que ya pasaron cuando las descubrís."</em></p>
+    <p><em>"Por eso prompt engineering — escribir el mejor mensaje al modelo — ya no alcanza. Necesitamos un set de herramientas conceptuales más amplio. Tres ingenierías que se suman."</em></p>
+  </aside>
+</section>
+
+<!-- §3.3 · Tres ingenierías -->
+<section>
+  <h2>Tres ingenierías para dirigir un agente</h2>
+
+  <div class="s3-eng-grid">
+    <div class="s3-eng-card prompt">
+      <p class="s3-eng-title">Prompt engineering</p>
+      <p class="s3-eng-scope">alcance: una interacción</p>
+      <p class="s3-eng-body">
+        Diseñar el mejor input al modelo: instrucciones, restricciones, ejemplos. Una sola vuelta de petición-respuesta.
+      </p>
+      <p class="s3-eng-eg">
+        <span class="s3-eng-tag">ya lo conocen</span>
+        Es lo que vienen practicando en las semanas anteriores.
+      </p>
+    </div>
+    <div class="s3-eng-card context">
+      <p class="s3-eng-title">Context engineering</p>
+      <p class="s3-eng-scope">alcance: una sesión</p>
+      <p class="s3-eng-body">
+        Controlar qué ve el modelo durante toda la tarea: qué se carga, qué se mantiene, qué se descarta. La ventana de contexto como recurso a gestionar.
+      </p>
+      <p class="s3-eng-eg">
+        <span class="s3-eng-tag">lo que viene</span>
+        Compactar, resetear, exponer información progresivamente.
+      </p>
+    </div>
+    <div class="s3-eng-card harness">
+      <p class="s3-eng-title">Harness engineering</p>
+      <p class="s3-eng-scope">alcance: múltiples sesiones</p>
+      <p class="s3-eng-body">
+        Diseñar el entorno completo: qué tools tiene, qué guardrails lo frenan, qué scripts deterministas usa, qué feedback loops cierran el ciclo.
+      </p>
+      <p class="s3-eng-eg">
+        <span class="s3-eng-tag">lo que viene</span>
+        Validación automática, permisos, scripts que el agente no puede saltar.
+      </p>
+    </div>
+  </div>
+
+  <p class="s3-eng-footer">
+    Los tres alcances se anidan: <em>prompt</em> ⊂ <em>context</em> ⊂ <em>harness</em>.
+    Lo que sigue de la clase abre los dos niveles que no conocían.
   </p>
 
   <aside class="notes">
-    <p><strong>Señalar cada barra mientras se nombra. La barra de read_file es el momento clave — decir "800 líneas, acá, en la ventana" despacio. Click para la línea final.</strong></p>
-    <p><u>Cierre de §3 y semilla del §4. El diagrama de acumulación es solo CSS — sin JS. Muestra visualmente que el contexto crece con cada observación. Las tools son cómo el agente toca el mundo; el contexto es donde el agente recuerda qué tocó.</u></p>
-    <p><em>"Hay algo del mecanismo de las tools que conviene ver explícito porque tiene consecuencias para lo que viene."</em></p>
-    <p><em>"Cuando el agente lee un archivo, ese archivo no desaparece después de procesarlo. Queda en el contexto, como parte de la historia de la sesión. Si leyó un archivo de 800 líneas, esas 800 líneas están acá, disponibles para el próximo razonamiento. No es que el agente 'recuerda' vagamente el archivo desde el preentrenamiento — lo tiene en acceso directo."</em></p>
-    <p><em>"Y eso aplica a todo: el output de npm test entró. La respuesta HTTP entró. El directorio listado entró. Vuelta a vuelta, el contexto crece. Las tools son cómo el agente toca el mundo; el contexto es donde el agente recuerda qué tocó. Y ese espacio tiene un tamaño — qué implica eso, viene a continuación."</em></p>
+    <p><strong>Recorrer las tres tarjetas izquierda a derecha. Énfasis en el alcance creciente — una interacción, una sesión, múltiples sesiones. Pausa en la última línea sobre el anidamiento.</strong></p>
+    <p><u>Slide marco del resto de §3–§5. Las tres ingenierías son alcances anidados: cualquier prompt vive dentro de una sesión, cualquier sesión vive dentro de un harness. El resto del deck (incluyendo toda la parte 2 con Claude Code) se va a poder ubicar en una de las tres categorías.</u></p>
+    <p><em>"Tres ingenierías que se diferencian por su alcance — el lapso de tiempo y el número de interacciones sobre las que operan."</em></p>
+    <p><em>"Prompt engineering: una sola interacción. Diseñar el mejor mensaje, las instrucciones, las restricciones, los ejemplos. Es lo que vienen practicando en las semanas anteriores. No desaparece — sigue siendo la base. Pero es solo el primer nivel."</em></p>
+    <p><em>"Context engineering: una sesión completa. La ventana de contexto pasa a ser un recurso a gestionar — qué se carga al principio, qué se mantiene cuando el loop itera, qué se descarta cuando se llena. Es una habilidad nueva que entra en juego apenas el agente trabaja sobre algo no trivial."</em></p>
+    <p><em>"Harness engineering: múltiples sesiones. Acá ya no estás pensando en un mensaje ni en una conversación — estás pensando en el entorno completo en que el agente opera. Qué tools tiene a disposición. Qué guardrails lo frenan cuando va a hacer algo riesgoso. Qué scripts deterministas se ejecutan que el modelo no puede saltar. Cómo se cierra el feedback loop cuando algo falla. Es donde vive la responsabilidad de la que hablamos en el slide anterior."</em></p>
+    <p><em>"Los tres alcances se anidan: cualquier prompt vive dentro de una sesión, cualquier sesión vive dentro de un harness. Lo que sigue de la clase abre los dos niveles nuevos. Y la parte 2 — Claude Code — va a llenar cada uno con features concretas."</em></p>
   </aside>
 </section>
 </section>
@@ -7399,7 +7410,7 @@
 </script>
 
   <!-- init §3 -->
-<!-- §3 has no JS animations or clickable-steps; the s3-accum visual is CSS-only. -->
+<!-- §3 has no JS animations or clickable-steps; layouts are CSS-only. -->
 
   <!-- init §4 -->
 <script>
