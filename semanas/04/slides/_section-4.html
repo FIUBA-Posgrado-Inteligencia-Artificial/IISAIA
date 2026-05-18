@@ -390,15 +390,15 @@
         <span class="s4-token-anno-label">solo en observaciones</span>
       </div>
       <div class="s4-token-anno fragment" data-fill="95">
-        <span class="s4-token-anno-val">ventana útil ≈ 200k tokens</span>
-        <span class="s4-token-anno-label">una sesión larga la consume</span>
+        <span class="s4-token-anno-val">ventana útil ≈ 1M tokens</span>
+        <span class="s4-token-anno-label">lo que los harness modernos te dan</span>
       </div>
     </div>
   </div>
 
   <p class="fragment fade-in" style="text-align:center;margin:18px auto 0;max-width:780px;font-size:0.74em;color:var(--accent);font-style:italic;line-height:1.55;">
     Cada token cuenta dos veces: <strong style="color:var(--accent);">ocupa lugar</strong> en la ventana y se <strong style="color:var(--accent);">factura en cada vuelta del loop</strong>.<br>
-    <span style="color:var(--text-muted);font-style:normal;font-size:0.92em;">50 vueltas con la ventana al 95% = ~10M tokens facturados solo en input.</span>
+    <span style="color:var(--text-muted);font-style:normal;font-size:0.92em;">50 vueltas con la ventana al 95% (~950k) = ~50M tokens facturados solo en input.</span>
   </p>
 
   <aside class="notes">
@@ -407,8 +407,8 @@
     <p><em>"La ventana arranca casi vacía. Cada vuelta del loop agrega tokens. Un pensamiento del modelo: tokens. Una llamada a herramienta: tokens. La respuesta de esa herramienta: tokens. Todo se apila."</em></p>
     <p><em>"Pongámosle números: un archivo de código de tamaño mediano — 300 líneas con comentarios — ocupa entre 1.500 y 2.500 tokens. Parece chico."</em></p>
     <p><em>"Pero leé veinte archivos de ese tamaño — y en una sesión real leés veinte archivos sin darte cuenta — y ya gastaste entre 30.000 y 50.000 tokens solo en observaciones. Sin contar los pensamientos del modelo. Sin contar los logs de herramientas."</em></p>
-    <p><em>"Los modelos actuales tienen ventanas que rondan los 200.000 tokens. En una sesión larga, la ventana se consume más rápido de lo que intuís."</em></p>
-    <p><em>"Y un detalle del que conviene tener conciencia desde temprano: cada token cuenta dos veces. Ocupa lugar — eso ya lo vimos — pero también se factura. Y se factura no una vez sino en cada llamada al modelo, porque cada vuelta del loop le manda al LLM el contexto completo. Si tu agente da cincuenta vueltas con la ventana al 95%, son 50 × 190.000 = unos 9 millones y medio de tokens facturados solo en input. Por eso context engineering no es solo una cuestión de calidad — también es de costo."</em></p>
+    <p><em>"Los harness modernos te ofrecen ventanas de hasta un millón de tokens. Parece mucho — y lo es. Pero en una sesión larga la ventana se consume más rápido de lo que intuís, sobre todo cuando el agente lee muchos archivos o ejecuta tools que devuelven outputs grandes."</em></p>
+    <p><em>"Y un detalle del que conviene tener conciencia desde temprano: cada token cuenta dos veces. Ocupa lugar — eso ya lo vimos — pero también se factura. Y se factura no una vez sino en cada llamada al modelo, porque cada vuelta del loop le manda al LLM el contexto completo. Si tu agente da cincuenta vueltas con la ventana al 95% de un millón, son 50 × 950.000 = unos 47 millones y medio de tokens facturados solo en input. Por eso context engineering no es solo una cuestión de calidad — también es de costo."</em></p>
   </aside>
 </section>
 
