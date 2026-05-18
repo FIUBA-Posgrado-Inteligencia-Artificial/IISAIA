@@ -751,16 +751,17 @@
       <span>↓</span>
     </div>
 
-    <!-- Bottom row (reversed): correr ← pegar -->
+    <!-- Bottom row (reversed): DOM [Pegar, ←, Correr] → visual [Correr, ←, Pegar].
+         Flow follows the ← arrows: Pegar (right) → Correr (left). -->
     <div class="s1-loop-row reverse">
-      <div class="s1-loop-step">
-        <strong>Correr</strong>
-        <span>nuevo 500 distinto</span>
-      </div>
-      <div class="s1-loop-h-arrow">←</div>
       <div class="s1-loop-step">
         <strong>Pegar</strong>
         <span>al editor, guardar</span>
+      </div>
+      <div class="s1-loop-h-arrow">←</div>
+      <div class="s1-loop-step">
+        <strong>Correr</strong>
+        <span>nuevo 500 distinto</span>
       </div>
     </div>
   </div>
