@@ -2339,141 +2339,218 @@
 
       <!-- ===== §5 — Cuando el agente falla ===== -->
       <style>
-/* Scoped styles for §5 only */
+/* Scoped styles for §5 — harness engineering */
 
-/* §5.1 opener — definition + thesis (mirrors §4 opener) */
-.s5-opener-def {
-  max-width: 720px;
-  margin: 22px auto 0;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent);
-  border-radius: 10px;
-  padding: 22px 28px;
-}
-.s5-opener-scope {
-  font-family: var(--font-mono);
-  font-size: 0.6em;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 10px;
-}
-.s5-opener-def-body {
-  font-size: 0.84em;
+/* §5.1 opener — horse metaphor */
+.s5-opener-etym {
+  max-width: 800px;
+  margin: 16px auto 0;
+  font-size: 0.78em;
   color: var(--text-primary);
+  text-align: center;
   line-height: 1.6;
+}
+.s5-opener-etym em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.s5-horse-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 820px;
+  margin: 18px auto 0;
+  align-items: end;
+}
+.s5-horse-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.s5-horse-card img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #2a3a5a;
+}
+.s5-horse-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   margin: 0;
 }
-.s5-opener-thesis {
-  max-width: 760px;
-  margin: 22px auto 0;
+.s5-horse-card.with .s5-horse-caption {
+  color: var(--accent);
+}
+.s5-horse-sub {
+  font-size: 0.6em;
+  color: var(--text-muted);
   text-align: center;
-  font-size: 0.92em;
+  line-height: 1.5;
+  margin: 0;
+  font-style: italic;
+  max-width: 280px;
+}
+.s5-opener-thesis {
+  max-width: 800px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 0.84em;
   color: var(--accent);
   font-weight: 700;
   line-height: 1.5;
 }
 .s5-opener-thesis-sub {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 0.78em;
   color: var(--text-muted);
   font-weight: normal;
   font-style: italic;
 }
 
-/* §5.4 — La respuesta del harness (grid of mechanisms) */
-.s5-harness-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  max-width: 900px;
-  margin: 20px auto 0;
+/* §5.2 — six dimensions grid */
+.s5-dim-intro {
+  text-align: center;
+  margin: 14px auto 0;
+  max-width: 760px;
+  font-size: 0.74em;
+  color: var(--text-muted);
+  font-style: italic;
 }
-.s5-harness-card {
+.s5-dim-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 1080px;
+  margin: 16px auto 0;
+}
+.s5-dim-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-left: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 14px 18px 16px;
+  padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
 }
-.s5-harness-card-title {
+.s5-dim-title {
   font-family: var(--font-mono);
-  font-size: 0.7em;
+  font-size: 0.74em;
   font-weight: 700;
   color: var(--accent);
-  margin: 0 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  margin: 0 0 8px;
 }
-.s5-harness-card-body {
+.s5-dim-body {
   font-size: 0.66em;
   color: var(--text-primary);
   line-height: 1.55;
-  margin: 0 0 10px;
-}
-.s5-harness-card-eg {
-  font-family: var(--font-mono);
-  font-size: 0.58em;
-  color: var(--text-muted);
-  background: var(--bg-code);
-  border-radius: 4px;
-  padding: 6px 10px;
-  margin: auto 0 0;
-  line-height: 1.5;
-}
-
-/* §5.5 supervisor — reframed */
-.s5-supervisor-wrap {
-  max-width: 800px;
-  margin: 20px auto 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.s5-supervisor-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 16px 20px;
-}
-.s5-supervisor-card.before { border-left: 3px solid var(--text-muted); }
-.s5-supervisor-card.after { border-left: 3px solid var(--accent); }
-.s5-supervisor-label {
-  font-family: var(--font-mono);
-  font-size: 0.58em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 8px;
-}
-.s5-supervisor-card.after .s5-supervisor-label { color: var(--accent); }
-.s5-supervisor-headline {
-  font-size: 0.82em;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 10px;
-  line-height: 1.45;
-}
-.s5-supervisor-body {
-  font-size: 0.66em;
-  color: var(--text-primary);
-  line-height: 1.6;
   margin: 0;
 }
-.s5-supervisor-foot {
-  text-align: center;
+
+/* §5.3 — frontier with context engineering */
+.s5-frontier-wrap {
+  max-width: 820px;
   margin: 18px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.s5-frontier-honesty {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--text-muted);
+  border-radius: 8px;
+  padding: 16px 22px;
   font-size: 0.78em;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.s5-frontier-honesty em {
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 700;
+}
+.s5-frontier-narrow {
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 22px;
+  font-size: 0.78em;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.s5-frontier-narrow strong {
   color: var(--accent);
+}
+.s5-frontier-narrow em {
+  color: var(--text-muted);
   font-style: italic;
-  max-width: 720px;
 }
 
-/* §5.6 cierre — tres ingenierías recap */
+/* §5.4 — harness en Claude Code */
+.s5-cc-intro {
+  text-align: center;
+  margin: 14px auto 0;
+  max-width: 800px;
+  font-size: 0.74em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.s5-cc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 1080px;
+  margin: 16px auto 0;
+}
+.s5-cc-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.s5-cc-feature {
+  font-family: var(--font-mono);
+  font-size: 0.76em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  margin: 0 0 6px;
+}
+.s5-cc-feature code {
+  color: var(--accent-secondary);
+  background: var(--bg-code);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.s5-cc-maps-to {
+  font-size: 0.62em;
+  color: var(--text-primary);
+  line-height: 1.55;
+  margin: 0;
+}
+.s5-cc-bridge {
+  text-align: center;
+  margin: 18px auto 0;
+  font-size: 0.76em;
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 700;
+  max-width: 800px;
+}
+
+/* §5.5 — tres ingenierías recap */
 .s5-eng-recap {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2541,233 +2618,168 @@
   padding-top: 10px;
   border-top: 1px solid #2a3a5a;
 }
-
-/* C2 — consolidated modes layout (kept for §5.3 clickable-steps slide) */
-.s5-c2-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  margin-top: 18px;
-}
-.s5-c2-chips {
-  width: 100%;
-  max-width: 920px;
-}
-.s5-c2-anim {
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.s5-c2-detail {
-  width: 100%;
-  max-width: 720px;
-  min-height: 90px;
-  padding: 14px 20px;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  border-left: 3px solid var(--text-muted);
-  text-align: left;
-}
-.s5-c2-detail h4 {
-  margin: 0 0 6px;
-  font-size: 0.78em;
-  color: var(--accent);
-}
-.s5-c2-detail p {
-  margin: 0;
-  font-size: 0.7em;
-  line-height: 1.55;
-  color: var(--text-primary);
-}
-.s5-c2-placeholder {
-  text-align: center;
-  color: var(--text-muted);
-  font-style: italic;
-  font-size: 0.7em;
-  margin: 0;
-}
 </style>
 <section>
-<!-- §5.1 · Harness engineering — opener + thesis -->
+<!-- §5.1 · Harness engineering — opener with horse metaphor -->
 <section>
   <h2>Harness engineering</h2>
 
-  <div class="s5-opener-def">
-    <p class="s5-opener-scope">alcance: múltiples sesiones</p>
-    <p class="s5-opener-def-body">
-      Diseñar el <strong>entorno</strong> donde el agente opera: qué <strong>tools</strong> tiene a disposición, qué <strong>guardrails</strong> lo frenan antes de actuar, qué <strong>scripts deterministas</strong> usa donde el modelo no debería decidir, qué <strong>feedback loops</strong> cierran el ciclo cuando algo falla.
-    </p>
+  <p class="s5-opener-etym">
+    "Harness" en inglés tiene varios significados. Uno muy concreto: el <em>arnés</em>
+    que se le pone al caballo para que pueda tirar de una carreta en la dirección que querés.
+  </p>
+
+  <div class="s5-horse-comparison">
+    <div class="s5-horse-card without">
+      <img src="../img/caballo-descontrolado.png" alt="Caballo descontrolado, sin arnés">
+      <p class="s5-horse-caption">Sin arnés</p>
+      <p class="s5-horse-sub">Potente. Libre. Pero su potencia no tira en ninguna dirección útil.</p>
+    </div>
+    <div class="s5-horse-card with">
+      <img src="../img/caballlo-harness.png" alt="Caballo con arnés tirando de una carreta">
+      <p class="s5-horse-caption">Con arnés</p>
+      <p class="s5-horse-sub">La misma potencia, canalizada — tira de tu carreta hacia donde querés.</p>
+    </div>
   </div>
 
   <p class="s5-opener-thesis fragment fade-in">
-    El problema no es el modelo: es el entorno.
-    <span class="s5-opener-thesis-sub">Diseñar sistemas que imposibiliten la falla — no solo instruir mejor.</span>
+    El harness es el andamiaje que canaliza al agente.
+    <span class="s5-opener-thesis-sub">Convierte poder bruto en trabajo dirigido.</span>
   </p>
 
   <aside class="notes">
-    <p><strong>Definir la disciplina primero. Pausa. Click revela la tesis — leerla despacio, con peso.</strong></p>
-    <p><u>Apertura de §5. Después de prompt y context, harness es el nivel exterior — el entorno completo en que el agente opera. La tesis es la idea-fuerza de la disciplina: cuando algo sale mal en un agente capaz, el problema casi siempre está afuera del modelo.</u></p>
-    <p><em>"Llegamos al tercer nivel: harness engineering. Su alcance es múltiples sesiones — ya no estás pensando en un mensaje ni en una conversación, estás pensando en el entorno completo. Cuatro piezas: qué tools tiene a disposición, qué guardrails lo frenan antes de hacer algo riesgoso, qué scripts deterministas se ejecutan donde el modelo no debería decidir, y qué feedback loops cierran el ciclo cuando algo falla."</em></p>
-    <p><em>"Y la tesis: el problema no es el modelo, es el entorno. Cuando un agente moderno con un buen prompt y buen context engineering falla en producción, la respuesta casi siempre no es 'cambiá el modelo'. Es: el entorno te dejó hacer algo que no debió poder hacer. Y la habilidad central de harness no es escribir mejor — es diseñar sistemas que imposibiliten la falla. Es lo que la próxima parte del curso va a llenar con features concretas."</em></p>
+    <p><strong>Mostrar las dos imágenes lado a lado. Pausa. Explicar la etimología y la metáfora. Click revela la tesis al pie.</strong></p>
+    <p><u>Opener de §5 con la metáfora del caballo. El término "harness" en inglés es polisémico; uno de sus significados literales es el arnés equino. El paralelo: el agente es potente como un caballo, y el harness es lo que canaliza esa potencia. La idea fuerza es positiva ("trabajo dirigido"), no defensiva ("evitar que pase algo malo").</u></p>
+    <p><em>"Harness — la palabra en inglés tiene varios significados, pero uno es muy concreto. El arnés es lo que se le pone al caballo para que pueda tirar de una carreta en la dirección que querés. Sin el arnés, el caballo tiene la misma potencia — pero esa potencia no se traduce en nada útil. Con el arnés, esa misma potencia tira hacia donde vos lo dirigís."</em></p>
+    <p><em>"Esa es la idea de harness engineering. El modelo es el caballo. Es potente. Solo, sin arnés, esa potencia no se traduce en trabajo dirigido. El harness es lo que canaliza al agente para que tire de tu carreta. Y diseñarlo es una disciplina con sus propias dimensiones — eso es lo que viene a continuación."</em></p>
   </aside>
 </section>
 
-<!-- §5.2 · Leer vs escribir — la asimetría que motiva el harness -->
+<!-- §5.2 · Las dimensiones del harness -->
 <section>
-  <h2>Leer vs. escribir — el riesgo no es simétrico</h2>
+  <h2>Las dimensiones del harness</h2>
 
-  <div class="comparison-2col" style="margin-top:18px;align-items:stretch;">
-    <div class="bg-secondary-card" style="display:flex;flex-direction:column;">
-      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:0 0 10px;">Leer</p>
-      <p style="font-size:0.78em;font-weight:700;color:var(--accent-secondary);margin:0 0 10px;">reversible</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
-        Leer un archivo, listar un directorio, llamar un endpoint de solo lectura. El entorno no cambió. El peor caso: llenó el contexto con información irrelevante.
-      </p>
-      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        Puede intentar otra lectura.
-      </p>
+  <p class="s5-dim-intro">Diseñar un harness es decidir, simultáneamente:</p>
+
+  <div class="s5-dim-grid">
+    <div class="s5-dim-card">
+      <p class="s5-dim-title">Estructurás el prompt</p>
+      <p class="s5-dim-body">Qué instrucciones de sistema le das, qué prioridades, qué tono. Lo que el modelo lee antes de hacer nada.</p>
     </div>
-    <div class="bg-secondary-card" style="border-color:#e74c3c;display:flex;flex-direction:column;">
-      <p style="font-size:0.62em;text-transform:uppercase;letter-spacing:0.08em;color:#e74c3c;margin:0 0 10px;">Escribir / ejecutar</p>
-      <p style="font-size:0.78em;font-weight:700;color:#e74c3c;margin:0 0 10px;">puede no ser reversible</p>
-      <p style="font-size:0.7em;color:var(--text-primary);line-height:1.6;margin:0 0 auto;">
-        Editar un archivo, correr <code style="font-family:var(--font-mono);font-size:0.9em;background:var(--bg-code);padding:1px 4px;border-radius:3px;">git commit</code>, borrar un directorio, llamar un endpoint que muta estado. El entorno quedó en un estado diferente al esperado.
-      </p>
-      <p style="font-size:0.64em;color:var(--text-muted);font-style:italic;margin:12px 0 0;border-top:1px solid #2a3a5a;padding-top:10px;">
-        No hay deshacer automático.
-      </p>
+    <div class="s5-dim-card">
+      <p class="s5-dim-title">Exponés tools</p>
+      <p class="s5-dim-body">Qué puede invocar el agente y qué no. El menú de manos a disposición — y lo que dejás afuera.</p>
     </div>
-  </div>
-
-  <p class="fragment fade-in" style="text-align:center;margin-top:16px;font-size:0.78em;color:var(--accent);font-style:italic;">
-    El harness mira más las tools que actúan sobre el mundo.
-  </p>
-
-  <aside class="notes">
-    <p><strong>Señalar columna izquierda, luego derecha. El ejemplo de git commit y borrar directorio son los que aterrizan. Click revela la línea de cierre.</strong></p>
-    <p><u>La asimetría reversible/no reversible es la motivación operativa del harness. Sin esta distinción, todas las tools parecerían iguales — con ella se justifica que algunas necesitan guardrails extra.</u></p>
-    <p><em>"Antes de ver los modos de falla y la respuesta del harness, una distinción que organiza todo lo que sigue: no todas las tools tienen el mismo peso cuando algo sale mal."</em></p>
-    <p><em>"Una tool que lee no cambia el estado del entorno. Si el agente leyó el archivo equivocado, lo peor que pasó es que llenó el contexto con ruido. Puede intentar otra lectura, retroceder, corregir."</em></p>
-    <p><em>"Una tool que escribe o ejecuta modifica el entorno. Un archivo sobreescrito sin backup. Un git commit que avanzó el historial. Un endpoint que procesó algo. Puede que sea recuperable, puede que no. No hay deshacer automático."</em></p>
-    <p><em>"Por eso el harness mira más las tools que actúan sobre el mundo. Donde el daño es reversible, el costo de equivocarse es tiempo; donde no lo es, el costo es el estado del entorno. Esta asimetría es lo que justifica los guardrails que vienen."</em></p>
-  </aside>
-</section>
-
-<!-- §5.3 · Cuatro modos de falla — clickable steps -->
-<section>
-  <h2>Cuatro modos de falla nuevos</h2>
-
-  <p style="text-align:center;margin:8px auto 0;max-width:820px;font-size:0.72em;color:var(--text-muted);font-style:italic;">
-    Lo que sale mal cuando el harness no te protege. Click cada modo para ver cómo se manifiesta.
-  </p>
-
-  <div class="s5-c2-layout">
-    <div id="s5-modes" class="s5-c2-chips"></div>
-    <div id="s5-loop" class="s5-c2-anim"></div>
-    <div id="s5-mode-detail" class="s5-c2-detail">
-      <p class="s5-c2-placeholder">Click un modo para ver cómo se manifiesta en el loop.</p>
+    <div class="s5-dim-card">
+      <p class="s5-dim-title">Cargás contexto</p>
+      <p class="s5-dim-body">Qué información tiene a mano cuando arranca y vuelta tras vuelta. Acá la frontera con context engineering se difumina.</p>
+    </div>
+    <div class="s5-dim-card">
+      <p class="s5-dim-title">Armás feedback loops</p>
+      <p class="s5-dim-body">Cómo el entorno le devuelve señal cuando algo no anda — tests rotos, logs, errores de tipo, builds fallidos.</p>
+    </div>
+    <div class="s5-dim-card">
+      <p class="s5-dim-title">Verificás outputs</p>
+      <p class="s5-dim-body">Linters, type-checkers, tests automáticos, contratos. Que no confíes ciego en lo que el modelo dice que hizo.</p>
+    </div>
+    <div class="s5-dim-card">
+      <p class="s5-dim-title">Descomponés tareas</p>
+      <p class="s5-dim-body">Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide ayuda.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Click cada modo en orden para ver título + summary + animación + detalle. Modos independientes — orden narrativo sugerido es loop infinito → deriva → alucinar → envenenar. Click la caja activa para deseleccionar.</strong></p>
-    <p><u>Slide consolidado: chips arriba, animación en el medio (cambia con cada click), detalle abajo. Los cuatro modos son las situaciones contra las que el harness está diseñado para proteger.</u></p>
-    <p><em>"Cuatro modos de falla que aparecen cuando el agente actúa y el harness no te protege. Cada uno está anclado a algo que ya vimos."</em></p>
-    <p><em>"Loop infinito: ninguna de las cuatro condiciones de corte del §2 se dispara. El loop no converge — gasta contexto, ejecuta acciones, modifica el entorno. El arco de la animación pulsa, ninguna salida se enciende."</em></p>
-    <p><em>"Deriva de objetivo: el agente arrancó con tu tarea y terminó en otra que consideró mejor. El objetivo A está tachado y derivó hacia otra tarea."</em></p>
-    <p><em>"Alucinar tools o resultados: la alucinación de S1 escala. Ahora el agente puede afirmar que ejecutó algo que no ejecutó. La animación: actuar y observar en rojo — tool inventada, resultado falso."</em></p>
-    <p><em>"Envenenar el propio contexto: la versión activa del context rot. Una salida enorme entra sin procesar y degrada el contexto. Los chips rojos representan ese ruido alimentándose."</em></p>
+    <p><strong>Recorrer las seis tarjetas. Cada una es una palanca. El harness es la combinación.</strong></p>
+    <p><u>Slide central de §5 — la definición operativa del harness. Seis dimensiones que un diseñador del harness decide en conjunto. No son independientes: las decisiones se cruzan. La tarjeta de "cargás contexto" admite la frontera con context engineering — eso es honesto y prepara el slide siguiente.</u></p>
+    <p><em>"Diseñar un harness es decidir, simultáneamente, seis cosas. No son etapas separadas — son seis decisiones que se cruzan."</em></p>
+    <p><em>"Una: cómo estructurás el prompt del sistema. Qué instrucciones le das al modelo antes de cualquier interacción, qué prioridades, qué tono. Dos: qué tools exponés. El menú de manos que tiene disponible, y — esto importa también — lo que deliberadamente dejás afuera. Tres: qué contexto cargás. Acá la frontera con context engineering se difumina, y eso es así: no son disciplinas separadas en lo operativo."</em></p>
+    <p><em>"Cuatro: cómo armás los feedback loops. Tests rotos que vuelven al contexto, errores de tipo que se inyectan, builds fallidos que generan un siguiente paso. Cinco: cómo verificás los outputs. Linters, type-checkers, tests, contratos — para no confiar ciego en lo que el modelo dice que hizo. Y seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención."</em></p>
+    <p><em>"Cada una es una palanca. El harness es cómo las combinás. Esa combinación es lo que diferencia un agente útil de uno que da vueltas."</em></p>
   </aside>
 </section>
 
-<!-- §5.4 · La respuesta del harness -->
+<!-- §5.3 · La frontera con context engineering -->
 <section>
-  <h2>La respuesta del harness</h2>
+  <h2>La frontera con context engineering</h2>
 
-  <p style="text-align:center;margin:8px auto 0;max-width:820px;font-size:0.72em;color:var(--text-muted);font-style:italic;">
-    Mecanismos que el entorno aporta para que esos modos no se manifiesten — o queden contenidos.
-  </p>
+  <div class="s5-frontier-wrap">
+    <div class="s5-frontier-honesty">
+      <p style="margin:0;">
+        Los límites son <em>difusos</em>. "Qué contexto cargás" es parte del harness <em>y</em> es lo que define context engineering. Hay solapamiento.
+      </p>
+    </div>
 
-  <div class="s5-harness-grid">
-    <div class="s5-harness-card">
-      <p class="s5-harness-card-title">Guardrails</p>
-      <p class="s5-harness-card-body">
-        Gates antes de cada acción riesgosa: la tool no se ejecuta hasta que un humano (o una regla) autoriza. El modelo propone, el harness dispone.
+    <div class="s5-frontier-narrow">
+      <p style="margin:0 0 10px;">
+        Algunos usan <strong>"harness"</strong> específicamente para el <strong>andamiaje de runtime</strong>:
+        el system prompt, las definiciones de las tools, la lógica de reintentos,
+        la orquestación de sub-agentes, los pasos de verificación.
       </p>
-      <p class="s5-harness-card-eg">Ej: permiso explícito antes de <code>rm</code>, antes de <code>git push</code>, antes de tocar producción.</p>
-    </div>
-    <div class="s5-harness-card">
-      <p class="s5-harness-card-title">Validación automática</p>
-      <p class="s5-harness-card-body">
-        Linters, type-checkers, tests, contratos. El modelo escribe, una verificación determinista chequea, y si falla se devuelve el error al loop.
+      <p style="margin:0;">
+        Eso, en esa lectura, es distinto del <em>modelo en sí</em> y de un <em>prompt suelto</em>.
+        Es la capa de scaffolding que envuelve a los dos.
       </p>
-      <p class="s5-harness-card-eg">Ej: cada edit corre <code>tsc</code> + tests; si rompe, el agente recibe el output y corrige.</p>
-    </div>
-    <div class="s5-harness-card">
-      <p class="s5-harness-card-title">Scripts deterministas</p>
-      <p class="s5-harness-card-body">
-        Operaciones críticas no se confían al modelo: se ejecutan por código. El agente puede pedir que corran, no puede improvisar la lógica.
-      </p>
-      <p class="s5-harness-card-eg">Ej: el deploy es un script versionado; el agente lo invoca, no lo reinventa cada vez.</p>
-    </div>
-    <div class="s5-harness-card">
-      <p class="s5-harness-card-title">Feedback loops</p>
-      <p class="s5-harness-card-body">
-        Señales del entorno que vuelven al contexto cuando algo no anda. Sin observación, el agente no se autocorrige; con la observación correcta, sí.
-      </p>
-      <p class="s5-harness-card-eg">Ej: CI roto inyecta el log de fallo; un endpoint 500 inyecta el stack trace.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las cuatro tarjetas izquierda a derecha. Énfasis en que cada una corresponde a un tipo de defensa contra los modos del slide anterior.</strong></p>
-    <p><u>Las cuatro respuestas del harness contra los modos de falla. Guardrails frenan acciones riesgosas; validación detecta errores antes de propagarlos; scripts deterministas evitan que el modelo improvise donde no debe; feedback loops aseguran que el agente vea cuando algo falló.</u></p>
-    <p><em>"Para cada modo de falla, el harness tiene una respuesta. Cuatro mecanismos que diseñás como parte del entorno — no son cosas que le pedís al modelo, son cosas que el entorno hace por su cuenta."</em></p>
-    <p><em>"Guardrails: gates antes de cada acción riesgosa. La tool no se ejecuta hasta que se autoriza — un humano clickea, o una regla del harness lo permite. El modelo propone la acción; el harness decide si pasa. Esto neutraliza la mayoría de los daños no reversibles."</em></p>
-    <p><em>"Validación automática: linters, type-checkers, tests, contratos. Después de cada edit, una verificación determinista corre. Si falla, el output va al contexto y el loop sigue corrigiendo. Es la diferencia entre 'el modelo dice que funciona' y 'la máquina lo verifica'."</em></p>
-    <p><em>"Scripts deterministas: las operaciones críticas — deploy, migración, llamadas a servicios externos — no se confían al modelo. Se ejecutan por código versionado. El agente puede pedir que corran, no puede improvisar la lógica cada vez. Esto neutraliza la deriva en partes sensibles."</em></p>
-    <p><em>"Feedback loops: el entorno le devuelve señales al agente cuando algo no anda. Tests rotos, builds fallidos, endpoints que devuelven 500. Sin esta retroalimentación, el agente no se autocorrige. Con ella, el loop converge."</em></p>
+    <p><strong>Leer las dos tarjetas en orden. La primera es la honestidad sobre el solape. La segunda da la lectura específica del harness como andamiaje runtime.</strong></p>
+    <p><u>Slide de honestidad disciplinaria. Reconoce que la división entre context y harness engineering no es limpia. La lectura más útil para Claude Code: harness = runtime scaffolding, distinto del modelo y de prompts sueltos.</u></p>
+    <p><em>"Una aclaración honesta antes de seguir: los límites entre context engineering y harness engineering son difusos. Qué contexto cargás es parte del harness, pero también es lo que define context engineering. Y hay un tercer término que algunos usan, 'agent engineering', que se pisa con los dos."</em></p>
+    <p><em>"La lectura que nos sirve para Claude Code es ésta: algunos usan harness específicamente para el andamiaje de runtime — el system prompt, las definiciones de tools, la lógica de reintentos, la orquestación de sub-agentes, los pasos de verificación. Visto así, harness es la capa de scaffolding que envuelve al modelo y a los prompts sueltos. No es el modelo, no es un prompt — es lo que los hace operativos como agente."</em></p>
+    <p><em>"En la parte 2 vamos a usar esa lectura. Cada feature de Claude Code que veamos va a ser una pieza de ese andamiaje."</em></p>
   </aside>
 </section>
 
-<!-- §5.5 · El supervisor diseña, no solo audita -->
+<!-- §5.4 · Harness en Claude Code -->
 <section>
-  <h2>El supervisor diseña el entorno</h2>
+  <h2>Harness en Claude Code</h2>
 
-  <div class="s5-supervisor-wrap">
-    <div class="s5-supervisor-card before">
-      <p class="s5-supervisor-label">Antes — modelo de chat</p>
-      <p class="s5-supervisor-headline">Auditor post-hoc</p>
-      <p class="s5-supervisor-body">
-        Revisás la respuesta antes de actuar. Si la sugerencia no sirve, la rechazás. El entorno no cambió.
-      </p>
+  <p class="s5-cc-intro">Cada dimensión del harness aparece en Claude Code como una feature concreta:</p>
+
+  <div class="s5-cc-grid">
+    <div class="s5-cc-card">
+      <p class="s5-cc-feature"><code>CLAUDE.md</code></p>
+      <p class="s5-cc-maps-to">System prompt + contexto que se carga al arrancar cada sesión.</p>
     </div>
-    <div class="s5-supervisor-card after">
-      <p class="s5-supervisor-label">Ahora — modelo agéntico</p>
-      <p class="s5-supervisor-headline">Diseñador del entorno</p>
-      <p class="s5-supervisor-body">
-        El agente ya actuó cuando lo mirás. La defensa que escala no es revisar más rápido — es diseñar guardrails, validaciones y scripts que lo frenen antes.
-      </p>
+    <div class="s5-cc-card">
+      <p class="s5-cc-feature">Slash commands custom</p>
+      <p class="s5-cc-maps-to">Prompts reutilizables y atajos a workflows definidos por vos.</p>
+    </div>
+    <div class="s5-cc-card">
+      <p class="s5-cc-feature">Servidores MCP</p>
+      <p class="s5-cc-maps-to">Qué tools exponés al agente — y qué tools deliberadamente dejás afuera.</p>
+    </div>
+    <div class="s5-cc-card">
+      <p class="s5-cc-feature">Sub-agent workflows</p>
+      <p class="s5-cc-maps-to">Descomposición de tareas en contextos aislados con sus propias herramientas.</p>
+    </div>
+    <div class="s5-cc-card">
+      <p class="s5-cc-feature">Hooks</p>
+      <p class="s5-cc-maps-to">Scripts que corren antes o después de cada tool call — verificación + feedback automáticos.</p>
+    </div>
+    <div class="s5-cc-card">
+      <p class="s5-cc-feature">Eval loops</p>
+      <p class="s5-cc-maps-to">¿Los cambios que hacés al harness realmente sirven? Medir, no suponer.</p>
     </div>
   </div>
 
-  <p class="s5-supervisor-foot fragment fade-in">
-    Revisar al final es auditoría — sigue siendo necesaria. Pero la supervisión vive en el harness.
+  <p class="s5-cc-bridge fragment fade-in">
+    La parte 2 los abre uno por uno.
   </p>
 
   <aside class="notes">
-    <p><strong>Señalar la tarjeta izquierda, después la derecha. Pausa antes del click final.</strong></p>
-    <p><u>El rol del supervisor evoluciona: del auditor post-hoc al diseñador del entorno. La auditoría no desaparece, pero deja de ser la línea principal de defensa cuando el agente actúa autónomamente.</u></p>
-    <p><em>"Una consecuencia importante: el rol del supervisor cambia cuando el agente actúa autónomamente."</em></p>
-    <p><em>"En el modelo de chat, el supervisor era un auditor post-hoc — revisaba la respuesta antes de hacer algo. Si no servía, la rechazaba. El entorno no cambiaba porque vos eras el cuello de botella entre la sugerencia y la acción."</em></p>
-    <p><em>"En el modelo agéntico no podés ser ese cuello de botella — el agente ya actuó cuando lo mirás. La defensa que escala no es revisar más rápido. Es diseñar el entorno: poner guardrails antes de las acciones riesgosas, validaciones automáticas que verifiquen cada cambio, scripts deterministas donde el modelo no debería decidir. Eso es lo que pasa antes de que el agente pueda romper algo."</em></p>
-    <p><em>"La auditoría sigue siendo necesaria — uno revisa lo que el agente hizo, no le cree a ciegas. Pero la supervisión real, la que evita daños, vive en el harness, no en la revisión final."</em></p>
+    <p><strong>Recorrer las seis tarjetas. Cada una es una pieza del harness en Claude Code. Pausa antes del click final.</strong></p>
+    <p><u>Slide de bridge a Parte 2. Mapea las seis dimensiones del harness a las features concretas de Claude Code. No es lista exhaustiva — son los puntos de palanca principales que la parte 2 va a abrir.</u></p>
+    <p><em>"En Claude Code, cada dimensión del harness aparece como una feature concreta. Repaso rápido."</em></p>
+    <p><em>"CLAUDE.md: el system prompt y el contexto que se carga al inicio de cada sesión. Es donde estructurás cómo Claude se presenta al problema. Slash commands custom: prompts reutilizables, atajos a workflows que vos definís — la dimensión de 'estructurás el prompt' llevada a comandos."</em></p>
+    <p><em>"Servidores MCP: qué tools tiene el agente a disposición. Conectás un MCP de base de datos, ahora puede consultar tu DB. No conectás un MCP de email, no puede mandar mails — y eso es deliberado. Sub-agent workflows: descomposición de tareas. Un agente que delega búsquedas a sub-agentes con contextos aislados."</em></p>
+    <p><em>"Hooks: scripts que corren antes o después de cada tool call. Acá vive la verificación automática y los feedback loops — linter después de un edit, tests después de un cambio, lo que sea. Eval loops: lo más sofisticado. Medir si los cambios que hacés al harness realmente sirven, en lugar de suponerlo."</em></p>
+    <p><em>"La parte 2 abre cada uno de estos en detalle. La pregunta de fondo, slide por slide, va a ser la misma: ¿en qué nivel del harness actúa esta feature?"</em></p>
   </aside>
 </section>
 
-<!-- §5.6 · Cierre Parte 1 — recap tres ingenierías + bridge a Parte 2 -->
+<!-- §5.5 · Cierre Parte 1 — recap tres ingenierías + bridge a Parte 2 -->
 <section>
   <h2>Tres niveles para dirigir un agente</h2>
 
@@ -2790,7 +2802,7 @@
       <p class="s5-eng-recap-title">Harness engineering</p>
       <p class="s5-eng-recap-scope">múltiples sesiones</p>
       <p class="s5-eng-recap-body">
-        Diseñar el entorno: tools, guardrails, scripts deterministas, feedback loops.
+        El andamiaje: prompt, tools, contexto, feedback, verificación, descomposición.
       </p>
     </div>
   </div>
@@ -2806,9 +2818,9 @@
 
   <aside class="notes">
     <p><strong>Recorrer las tres tarjetas izquierda a derecha. Pausa. Click revela el bridge a la Parte 2.</strong></p>
-    <p><u>Cierre de Parte 1. Las tres ingenierías quedaron definidas (§3) y desarrolladas (§4 y §5). El recap visual cierra el marco conceptual; el bridge prepara la Parte 2: Claude Code va a ser un caso concreto que llena cada nivel con features específicas.</u></p>
-    <p><em>"Cerramos la Parte 1 con las tres ingenierías ya definidas y desarrolladas. Prompt: una interacción. Context: una sesión. Harness: múltiples sesiones, el entorno completo."</em></p>
-    <p><em>"Lo que viene a continuación — la Parte 2 — es Claude Code. Y la propuesta es ésta: cada feature que vas a ver, sin excepción, llena uno de estos tres niveles. CLAUDE.md, las rules, las skills, los sub-agents, plan mode, los permisos. Cada uno actúa en prompt, context o harness."</em></p>
+    <p><u>Cierre de Parte 1. Las tres ingenierías quedaron definidas en §3.3 y desarrolladas en §4 y §5. El recap visual cierra el marco conceptual; el bridge prepara la Parte 2: Claude Code va a ser un caso concreto que llena cada nivel con features específicas.</u></p>
+    <p><em>"Cerramos la Parte 1 con las tres ingenierías. Prompt: una interacción. Context: una sesión. Harness: el andamiaje runtime que vimos en este §5 — prompt, tools, contexto, feedback, verificación, descomposición."</em></p>
+    <p><em>"Lo que viene a continuación — la Parte 2 — es Claude Code. Y la propuesta es ésta: cada feature que vas a ver, sin excepción, llena uno de estos tres niveles. CLAUDE.md, las rules, las skills, los sub-agents, plan mode, los permisos, los hooks. Cada uno actúa en prompt, context o harness."</em></p>
     <p><em>"Por eso la pregunta ya no es '¿qué hace esa feature?'. Es '¿en qué nivel actúa?'. Si sabés eso, sabés qué problema te resuelve y cuándo usarla. Ese es el lente que recorre toda la Parte 2."</em></p>
   </aside>
 </section>
@@ -7650,52 +7662,7 @@
 </script>
 
   <!-- init §5 -->
-<script>
-  // §5.3 — Cuatro modos de falla (clickable-steps + animation)
-  var s5C2ModeMap = [
-    { mode: 'infinite',    title: 'Loop infinito',         body: 'Conexión con §2: las cuatro condiciones de corte (objetivo alcanzado / límite de pasos / el agente pide ayuda / falla no recuperable). Cuando ninguna se cumple, el loop no para solo.' },
-    { mode: 'drift',       title: 'Deriva de objetivo',    body: 'Desde adentro del loop no parece un error — el agente siguió algo que le pareció relevante. El problema se ve desde afuera, cuando revisás el resultado.' },
-    { mode: 'hallucinate', title: 'Alucinar tools o resultados', body: 'Conexión con S1: la alucinación que aprendiste en la primera semana ahora actúa. La confianza del modelo no cambió; lo que cambió es que ahora actúa sobre ella.' },
-    { mode: 'poison',      title: 'Envenenar el propio contexto', body: 'Conexión con §4: el context rot era deterioro pasivo con el tiempo. Este modo lo precipita activamente con una sola acción.' }
-  ];
-
-  initClickableSteps({
-    containerId: 's5-modes',
-    steps: [
-      {
-        title: 'Loop infinito',
-        summary: 'Sin una condición de corte efectiva, el agente da vueltas. El objetivo estaba mal especificado, el límite no se configuró, o el agente sobreestima su progreso. El loop sigue: gasta contexto, ejecuta acciones, modifica el entorno. No converge.'
-      },
-      {
-        title: 'Deriva de objetivo',
-        summary: 'El agente arranca con tu tarea y termina haciendo otra que consideró mejor. Empezó a arreglar el bug del endpoint, notó una inconsistencia en el esquema, y decidió refactorizar primero. La tarea original no está; el modelo de datos cambió.'
-      },
-      {
-        title: 'Alucinar tools o resultados',
-        summary: 'El agente puede afirmar que ejecutó un comando que no ejecutó, o reportar una salida distinta de la real. El loop sigue sobre esa premisa falsa — varias vueltas, con acciones reales construidas sobre algo que nunca pasó.'
-      },
-      {
-        title: 'Envenenar el propio contexto',
-        summary: 'El agente ejecuta algo que produce una salida enorme — un log de dos mil líneas, un stack trace con cincuenta frames — y esa salida entra sin procesar. El modelo razona desde ese contexto degradado: señales importantes pierden contra ruido masivo.'
-      }
-    ],
-    onChange: function(idx) {
-      var detail = document.getElementById('s5-mode-detail');
-      if (idx < 0 || !s5C2ModeMap[idx]) {
-        if (window.updateFourLoop) window.updateFourLoop({ containerId: 's5-loop', mode: 'intro' });
-        if (detail) detail.innerHTML = '<p class="s5-c2-placeholder">Click un modo para ver cómo se manifiesta en el loop.</p>';
-        return;
-      }
-      var cfg = s5C2ModeMap[idx];
-      if (window.updateFourLoop) window.updateFourLoop({ containerId: 's5-loop', mode: cfg.mode });
-      if (detail) detail.innerHTML = '<h4>' + cfg.title + '</h4><p>' + cfg.body + '</p>';
-    }
-  });
-
-  if (document.getElementById('s5-loop')) {
-    initFourLoop({ containerId: 's5-loop', mode: 'intro' });
-  }
-</script>
+<!-- §5 no tiene animaciones JS ni clickable-steps — todo el contenido es CSS estático. -->
 
   <!-- init §6 -->
 <script>
