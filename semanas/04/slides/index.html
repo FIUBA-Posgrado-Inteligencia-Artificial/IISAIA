@@ -2639,27 +2639,27 @@
   <div class="s5-dim-grid">
     <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Estructurás el prompt</p>
-      <p class="s5-dim-body">Qué lee el modelo antes de hacer nada.</p>
+      <p class="s5-dim-body">Las instrucciones fijas: voz, prioridades, convenciones.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Exponés tools</p>
-      <p class="s5-dim-body">Qué herramientas tiene a disposición. Y cuáles no.</p>
+      <p class="s5-dim-body">Las acciones que puede tomar. El borde de lo que sabe hacer.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Cargás contexto</p>
-      <p class="s5-dim-body">Qué información ve, vuelta tras vuelta.</p>
+      <p class="s5-dim-body">La información variable que entra cada turno.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Armás feedback loops</p>
-      <p class="s5-dim-body">Cómo el entorno le devuelve señal cuando algo falla.</p>
+      <p class="s5-dim-body">El canal que devuelve resultados al modelo entre turnos.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Verificás outputs</p>
-      <p class="s5-dim-body">Linters, type-checkers, tests. No confiar ciego.</p>
+      <p class="s5-dim-body">El criterio externo de correctitud: contratos, tests, schemas.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Descomponés tareas</p>
-      <p class="s5-dim-body">Cuándo delega a un sub-agente o a un script.</p>
+      <p class="s5-dim-body">Cómo se rompe el problema en pasos o sub-agentes.</p>
     </div>
   </div>
 
@@ -2667,12 +2667,12 @@
     <p><strong>Entry: solo el título y la línea "decidir seis cosas". Cada click revela una tarjeta. Recorrerlas de a una con el comentario abajo.</strong></p>
     <p><u>Slide central de §5 — la definición operativa del harness. Seis dimensiones que un diseñador del harness decide en conjunto. No son independientes: las decisiones se cruzan. La tarjeta de "cargás contexto" admite la frontera con context engineering — eso es honesto y prepara el slide siguiente.</u></p>
     <p><em>"Diseñar un harness es decidir seis cosas. Las vamos viendo de a una."</em></p>
-    <p><em>"Una: cómo estructurás el prompt del sistema. Qué lee el modelo antes de hacer nada — instrucciones, prioridades, tono."</em></p>
-    <p><em>"Dos: qué tools exponés. El menú de herramientas que tiene a disposición. Y — esto importa también — lo que deliberadamente dejás afuera."</em></p>
-    <p><em>"Tres: qué contexto cargás. Acá la frontera con context engineering se difumina. Sobre eso hablamos en el slide siguiente."</em></p>
-    <p><em>"Cuatro: cómo armás los feedback loops. Tests rotos que vuelven al contexto, errores de tipo, builds fallidos. La señal del entorno cuando algo no anda."</em></p>
-    <p><em>"Cinco: cómo verificás los outputs. Linters, type-checkers, tests, contratos — para no confiar ciego en lo que el modelo dice que hizo."</em></p>
-    <p><em>"Seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención."</em></p>
+    <p><em>"Una: cómo estructurás el prompt del sistema. Las instrucciones fijas — la voz del modelo, las prioridades del diseñador, las convenciones del proyecto. Lo que persiste entre turnos sin cambiar."</em></p>
+    <p><em>"Dos: qué tools exponés. Las acciones que el agente puede tomar — y, deliberadamente, las que no. Ese borde define qué clase de agente es."</em></p>
+    <p><em>"Tres: qué contexto cargás. La información variable que entra cada turno — archivos leídos, resultados de búsquedas, salidas de comandos. Acá la frontera con context engineering se difumina; sobre eso hablamos en el slide siguiente."</em></p>
+    <p><em>"Cuatro: cómo armás los feedback loops. Esto es el cable de retorno — qué se hace después de cada acción del agente y qué resultado se le devuelve al modelo en el siguiente turno. El plumbing del loop."</em></p>
+    <p><em>"Cinco: cómo verificás los outputs. Esto es distinto del cable: es la vara. ¿Pasó el test? ¿Cumple el schema? ¿Compila contra el contrato? El criterio externo contra el que se mide lo que el modelo dice que hizo."</em></p>
+    <p><em>"Seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención. Cómo el problema grande se rompe en piezas."</em></p>
   </aside>
 </section>
 
