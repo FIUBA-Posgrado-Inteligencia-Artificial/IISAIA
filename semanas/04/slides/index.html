@@ -2634,42 +2634,45 @@
 <section>
   <h2>Las dimensiones del harness</h2>
 
-  <p class="s5-dim-intro">Diseñar un harness es decidir, simultáneamente:</p>
+  <p class="s5-dim-intro">Diseñar un harness es decidir seis cosas:</p>
 
   <div class="s5-dim-grid">
-    <div class="s5-dim-card">
+    <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Estructurás el prompt</p>
-      <p class="s5-dim-body">Qué instrucciones de sistema le das, qué prioridades, qué tono. Lo que el modelo lee antes de hacer nada.</p>
+      <p class="s5-dim-body">Qué lee el modelo antes de hacer nada.</p>
     </div>
-    <div class="s5-dim-card">
+    <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Exponés tools</p>
-      <p class="s5-dim-body">Qué puede invocar el agente y qué no. El menú de manos a disposición — y lo que dejás afuera.</p>
+      <p class="s5-dim-body">Qué manos tiene a disposición. Y cuáles no.</p>
     </div>
-    <div class="s5-dim-card">
+    <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Cargás contexto</p>
-      <p class="s5-dim-body">Qué información tiene a mano cuando arranca y vuelta tras vuelta. Acá la frontera con context engineering se difumina.</p>
+      <p class="s5-dim-body">Qué información ve, vuelta tras vuelta.</p>
     </div>
-    <div class="s5-dim-card">
+    <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Armás feedback loops</p>
-      <p class="s5-dim-body">Cómo el entorno le devuelve señal cuando algo no anda — tests rotos, logs, errores de tipo, builds fallidos.</p>
+      <p class="s5-dim-body">Cómo el entorno le devuelve señal cuando algo falla.</p>
     </div>
-    <div class="s5-dim-card">
+    <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Verificás outputs</p>
-      <p class="s5-dim-body">Linters, type-checkers, tests automáticos, contratos. Que no confíes ciego en lo que el modelo dice que hizo.</p>
+      <p class="s5-dim-body">Linters, type-checkers, tests. No confiar ciego.</p>
     </div>
-    <div class="s5-dim-card">
+    <div class="s5-dim-card fragment fade-in">
       <p class="s5-dim-title">Descomponés tareas</p>
-      <p class="s5-dim-body">Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide ayuda.</p>
+      <p class="s5-dim-body">Cuándo delega a un sub-agente o a un script.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las seis tarjetas. Cada una es una palanca. El harness es la combinación.</strong></p>
+    <p><strong>Entry: solo el título y la línea "decidir seis cosas". Cada click revela una tarjeta. Recorrerlas de a una con el comentario abajo.</strong></p>
     <p><u>Slide central de §5 — la definición operativa del harness. Seis dimensiones que un diseñador del harness decide en conjunto. No son independientes: las decisiones se cruzan. La tarjeta de "cargás contexto" admite la frontera con context engineering — eso es honesto y prepara el slide siguiente.</u></p>
-    <p><em>"Diseñar un harness es decidir, simultáneamente, seis cosas. No son etapas separadas — son seis decisiones que se cruzan."</em></p>
-    <p><em>"Una: cómo estructurás el prompt del sistema. Qué instrucciones le das al modelo antes de cualquier interacción, qué prioridades, qué tono. Dos: qué tools exponés. El menú de manos que tiene disponible, y — esto importa también — lo que deliberadamente dejás afuera. Tres: qué contexto cargás. Acá la frontera con context engineering se difumina, y eso es así: no son disciplinas separadas en lo operativo."</em></p>
-    <p><em>"Cuatro: cómo armás los feedback loops. Tests rotos que vuelven al contexto, errores de tipo que se inyectan, builds fallidos que generan un siguiente paso. Cinco: cómo verificás los outputs. Linters, type-checkers, tests, contratos — para no confiar ciego en lo que el modelo dice que hizo. Y seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención."</em></p>
-    <p><em>"Cada una es una palanca. El harness es cómo las combinás. Esa combinación es lo que diferencia un agente útil de uno que da vueltas."</em></p>
+    <p><em>"Diseñar un harness es decidir seis cosas. Las vamos viendo de a una."</em></p>
+    <p><em>"Una: cómo estructurás el prompt del sistema. Qué lee el modelo antes de hacer nada — instrucciones, prioridades, tono."</em></p>
+    <p><em>"Dos: qué tools exponés. El menú de manos que tiene a disposición. Y — esto importa también — lo que deliberadamente dejás afuera."</em></p>
+    <p><em>"Tres: qué contexto cargás. Acá la frontera con context engineering se difumina. Sobre eso hablamos en el slide siguiente."</em></p>
+    <p><em>"Cuatro: cómo armás los feedback loops. Tests rotos que vuelven al contexto, errores de tipo, builds fallidos. La señal del entorno cuando algo no anda."</em></p>
+    <p><em>"Cinco: cómo verificás los outputs. Linters, type-checkers, tests, contratos — para no confiar ciego en lo que el modelo dice que hizo."</em></p>
+    <p><em>"Seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención."</em></p>
   </aside>
 </section>
 
