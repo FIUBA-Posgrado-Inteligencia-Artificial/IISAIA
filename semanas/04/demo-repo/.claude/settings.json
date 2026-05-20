@@ -1,0 +1,33 @@
+{
+  "model": "claude-sonnet-4-6",
+  "env": {
+    "DEMO_BEARER_TOKEN": "changeme-in-real-env"
+  },
+  "includeCoAuthoredBy": true,
+  "cleanupPeriodDays": 30,
+  "permissions": {
+    "allow": [
+      "Bash(uv run pytest)",
+      "Bash(uv run pytest *)",
+      "Bash(uv run uvicorn *)",
+      "Bash(uv run python *)",
+      "Bash(uv sync)",
+      "Bash(uv sync *)",
+      "Read(./**)",
+      "Edit(./backend/**)",
+      "Edit(./frontend/**)",
+      "Edit(./tests/**)",
+      "Edit(./openapi.yaml)",
+      "WebFetch(domain:fastapi.tiangolo.com)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Bash(rm -rf *)",
+      "Bash(git push *)"
+    ],
+    "ask": [
+      "Bash(uv add *)",
+      "Bash(uv remove *)"
+    ]
+  }
+}

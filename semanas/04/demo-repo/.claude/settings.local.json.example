@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open http://localhost:8000)"
+    ]
+  }
+}
