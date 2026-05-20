@@ -958,17 +958,17 @@
   initClickableSteps({containerId: 's7-demo-steps', steps: [
     {
       title: 'Paso 1 — /memory: las fuentes cargadas',
-      summary: 'cd a una copia del demo-repo, abrir claude, ejecutar /memory.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li><li><strong>Terminal:</strong> <code>claude</code></li><li><strong>En Claude:</strong> <code>/memory</code></li><li><strong>Mirar:</strong> nivel user + project con paths completos</li></ul>',
       example: 'Aparecen las fuentes con sus paths completos: el nivel user (~/.claude/CLAUDE.md) y el nivel project (./CLAUDE.md del demo-repo). Cada una listada con su ruta. La jerarquía no es un diagrama — es esta lista real, en esta sesión.'
     },
     {
       title: 'Paso 2 — /context: el delta atribuible',
-      summary: 'Ejecutar /context si está disponible en la versión instalada.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> delta de contexto atribuible a CLAUDE.md (folder map, convenciones, workflow)</li></ul>',
       example: 'El folder map, las convenciones y el workflow del demo-repo aparecen ocupando espacio en la ventana desde el inicio. Todavía no pediste nada: ese costo ya está pagado. Es el delta que CLAUDE.md le inyecta a cada sesión.'
     },
     {
       title: 'Paso 3 — Auto memory: la carpeta paralela',
-      summary: 'Abrir ~/.claude/projects/<demo-repo-path>/memory/. Si existe MEMORY.md, abrirlo. Plan B abajo.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>File explorer:</strong> ir a <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code></li><li><strong>Si existe</strong> <code>MEMORY.md</code>: abrirlo</li><li><strong>Mirar:</strong> contraste con CLAUDE.md — esto lo escribió Claude, no vos</li></ul>',
       example: 'Este archivo lo escribió Claude, no vos. Si no aparece todavía, es porque Claude aún no aprendió nada que valga la pena guardar para esta carpeta — va a aparecer cuando lo haga.\n\nPLAN B (si /context no funciona en la versión instalada): sostener el punto con /memory solo. Narrar: "todo lo que ven en esta lista entró a la ventana antes de mi primer mensaje".'
     }
   ]});

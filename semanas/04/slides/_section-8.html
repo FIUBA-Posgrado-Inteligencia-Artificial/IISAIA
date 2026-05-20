@@ -884,17 +884,17 @@ Cuando trabajes con código del backend:
   initClickableSteps({containerId: 's8-demo-steps', steps: [
     {
       title: 'Paso 1 — La rule existe, pero no está cargada',
-      summary: 'Mostrar el árbol .claude/rules/ con los 4 archivos. Abrir api.md, señalar el frontmatter paths: ["backend/**/*.py"]. Ejecutar /memory sin tocar ningún archivo.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir árbol <code>.claude/rules/</code> — ver los 4 archivos</li><li><strong>Abrir</strong> <code>api.md</code>: señalar frontmatter <code>paths: ["backend/**/*.py"]</code></li><li><strong>En Claude:</strong> <code>/memory</code></li><li><strong>Mirar:</strong> <code>api.md</code> NO aparece en la lista</li></ul>',
       example: 'En la salida de /memory aparecen las rules siempre-cargadas (code-style.md, testing.md, security.md). api.md no aparece. Está en el disco — lo acabamos de abrir en VS Code — pero no en el contexto del agente. El frontmatter está haciendo su trabajo: no entró al arranque porque no se tocó ningún archivo que matchee el glob.'
     },
     {
       title: 'Paso 2 — Tocar un archivo que no matchea',
-      summary: 'Pedirle a Claude que lea frontend/index.html. Repetir /memory.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>frontend/index.html</code>"</li><li><strong>En Claude:</strong> <code>/memory</code></li><li><strong>Mirar:</strong> <code>api.md</code> sigue sin aparecer — no matchea el glob</li></ul>',
       example: 'api.md sigue ausente de la lista. El acceso a un archivo fuera del glob no activó el trigger. El agente trabajó, leyó contenido, pero no era un .py del backend — la rule path-scoped no entra. Esto es exactamente lo que prometía el slide de comparación: costo cero hasta que es relevante.'
     },
     {
       title: 'Paso 3 — Tocar un archivo que sí matchea',
-      summary: 'Pedirle a Claude que lea backend/routers/users.py. Repetir /memory. La línea de api.md ahora aparece.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>backend/routers/users.py</code>"</li><li><strong>En Claude:</strong> <code>/memory</code></li><li><strong>Mirar:</strong> <code>api.md</code> ahora SÍ aparece cargada</li></ul>',
       example: 'api.md ahora figura en la lista de rules cargadas. Costó cero contexto hasta este momento de la sesión. Si ahora le pido a Claude que edite el endpoint, las convenciones de la rule aplican: va a usar response_model explícito y va a proponer regenerar openapi.yaml.\n\nPLAN B (si /memory no muestra el detalle con suficiente granularidad): demostrar por comportamiento. Pedirle a Claude que edite un archivo cualquiera del frontend — no propone regenerar el openapi. Pedirle que toque backend/routers/users.py — ahora sí lo propone. El trigger condicional se ve por el efecto.'
     }
   ]});

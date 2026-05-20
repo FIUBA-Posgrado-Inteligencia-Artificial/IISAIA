@@ -873,17 +873,17 @@
   initClickableSteps({containerId: 's9-demo-steps', steps: [
     {
       title: 'Paso 1 — Los tres archivos abiertos en paralelo',
-      summary: 'En VS Code, paneles lado a lado: ~/.claude/settings.json (usuario), .claude/settings.json del demo-repo (proyecto) y .claude/settings.local.json (local) — o el .example si el local no existe en esta máquina. Recorrer qué campo va en cada uno y por qué.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir lado a lado <code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></li><li><strong>Narrar:</strong> qué campo va en cada nivel y por qué</li><li><strong>Mirar:</strong> tres niveles, tres responsabilidades</li></ul>',
       example: 'model en el proyecto porque todos los colaboradores deberían usar el mismo. DEMO_BEARER_TOKEN con placeholder en el proyecto, valor real en local. Los permisos de Bash(open http://localhost:8000) en local porque abrir el browser es una operación de tu máquina, sin sentido en un servidor de CI ni en la de otro colaborador. Tres niveles, tres responsabilidades.'
     },
     {
       title: 'Paso 2 — Cambiar el model y ver el efecto en próxima sesión',
-      summary: 'En .claude/settings.json del proyecto, cambiar "model" de claude-sonnet-4-6 a claude-haiku-4-5. Guardar. Cerrar Claude Code y abrir una sesión nueva — la barra inferior de la UI ahora muestra Haiku 4.5 en lugar de Sonnet 4.6. Revertir el cambio.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> editar <code>.claude/settings.json</code></li><li><strong>Cambiar</strong> <code>"model"</code> de <code>claude-sonnet-4-6</code> a <code>claude-haiku-4-5</code>, guardar</li><li><strong>Terminal:</strong> cerrar Claude Code y abrir sesión nueva</li><li><strong>Mirar:</strong> barra inferior muestra Haiku 4.5</li><li><strong>Revertir</strong> el cambio</li></ul>',
       example: 'Lo que mostramos no es el campo en sí — es la mecánica del runtime. Los settings se leen al arranque, no en caliente. Un cambio guardado mientras hay una sesión abierta no afecta esa sesión. Toma efecto la próxima vez que abrís Claude Code. El indicador del modelo en la UI es la forma más simple de verlo: cambia el archivo, abrís nueva sesión, el indicador refleja el cambio.'
     },
     {
       title: 'Paso 3 — El .gitignore lo confirma',
-      summary: 'Abrir el .gitignore del demo-repo. Buscar la línea .claude/settings.local.json. Correr git status con el archivo local presente — no aparece. git no lo trackea.',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.gitignore</code>, buscar línea <code>.claude/settings.local.json</code></li><li><strong>Terminal:</strong> <code>git status</code></li><li><strong>Mirar:</strong> el <code>.local.json</code> no aparece — git lo ignora</li></ul>',
       example: 'La convención no es opinable: ese archivo puede contener tokens reales, paths de tu máquina, permisos que solo tienen sentido en tu entorno. Si viajara al repo, contaminaría la config del equipo y podría exponer credenciales. Por eso el .gitignore lo lista desde el primer commit.\n\nPLAN B (si el demo se traba en algún paso): los tres archivos abiertos sostienen el argumento solos. Leer cada uno en voz alta — proyecto define la base compartida, local agrega lo específico de la máquina, usuario persiste entre proyectos. No hace falta ejecutar nada para que el punto quede claro: la convención es qué va dónde y por qué.'
     }
   ]});

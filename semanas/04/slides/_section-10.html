@@ -1,303 +1,472 @@
 <style>
 /* Scoped styles for §10 only */
 
-/* Opener wrap */
-.s10-opener-wrap {
+/* Heading override scoped to §10 slides */
+.reveal .slides .s10-slide { text-align: center; }
+.reveal .slides .s10-slide h2 {
+  font-size: 0.82em;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* --- Five-questions card (full + mini) — calibrated identically to §9 --- */
+.reveal .slides .s10-slide h2.s10-five-q-title {
+  font-size: 1.05em;
+  text-align: center;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.s10-five-q-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 900px;
+}
+.s10-five-q-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 6px;
+  padding: 9px 10px 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.s10-five-q-card.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+  border-left: 3px solid var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(100, 255, 218, 0.08);
+}
+.s10-five-q-num {
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.s10-five-q-card.is-active .s10-five-q-num {
+  color: var(--accent);
+}
+.s10-five-q-label {
+  font-size: 0.56em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.s10-five-q-hint {
+  font-size: 0.44em;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+/* Mini variant */
+.s10-five-q-grid.is-mini {
+  grid-template-columns: repeat(5, auto);
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0 auto 8px;
+}
+.s10-five-q-grid.is-mini .s10-five-q-card {
+  padding: 3px 9px;
+  border-radius: 999px;
+  border-left-width: 1px;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.s10-five-q-grid.is-mini .s10-five-q-card.is-active {
+  border-left: 1px solid var(--accent);
+}
+.s10-five-q-grid.is-mini .s10-five-q-num {
+  font-size: 0.42em;
+}
+.s10-five-q-grid.is-mini .s10-five-q-label {
+  font-size: 0.5em;
+}
+
+/* Qué es — bullet list (definición + callout) */
+.s10-qe-list {
+  list-style: disc;
+  display: inline-block;
+  text-align: left;
+  max-width: 720px;
+  margin: 16px auto 0;
+  padding-left: 36px;
+  font-size: 0.6em;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.s10-qe-list li {
+  padding-left: 6px;
+  margin-bottom: 10px;
+}
+.s10-qe-list li::marker { color: var(--accent); }
+.s10-qe-list strong { color: var(--text-primary); font-weight: 700; }
+.s10-qe-list code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s10-qe-list li.s10-qe-callout {
+  list-style: none;
+  margin-left: -32px;
+  margin-top: 10px;
+  background: rgba(100, 255, 218, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Jerarquía — cascade reusada de §9 (renombrada al prefijo s10-) */
+.s10-hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 820px;
+  margin: 10px auto 0;
+}
+.s10-hier-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.s10-hier-level {
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-right: none;
+  border-bottom: none;
+  padding: 7px 9px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
-  margin: 24px auto 0;
-  max-width: 640px;
+  justify-content: center;
+  gap: 2px;
 }
-.s10-opener-sublabel {
-  font-size: 0.65em;
+.s10-hier-row:first-child .s10-hier-level { border-radius: 8px 0 0 0; }
+.s10-hier-row:last-child .s10-hier-level {
+  border-radius: 0 0 0 8px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s10-hier-level-num {
+  font-size: 0.46em;
   font-family: var(--font-mono);
-  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin: 0;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
-.s10-opener-question {
-  font-size: 0.88em;
+.s10-hier-level-name {
+  font-size: 0.52em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  text-align: center;
+  line-height: 1.3;
+}
+.s10-hier-content {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-bottom: none;
+  padding: 7px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+}
+.s10-hier-row:first-child .s10-hier-content { border-radius: 0 8px 0 0; }
+.s10-hier-row:last-child .s10-hier-content {
+  border-radius: 0 0 8px 0;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s10-hier-title {
+  font-size: 0.58em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.s10-hier-paths {
+  font-size: 0.5em;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.s10-hier-use {
+  font-size: 0.48em;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: 1px;
+}
+.s10-hier-note {
+  display: inline-block;
+  max-width: 760px;
+  margin: 8px 0 0;
+  font-size: 0.5em;
   color: var(--text-muted);
   text-align: center;
-  margin: 0;
-  line-height: 1.7;
   font-style: italic;
+  line-height: 1.5;
 }
-.s10-opener-question em {
+.s10-hier-note strong { color: var(--text-primary); font-style: normal; }
+.s10-hier-note code {
+  font-family: var(--font-mono);
   color: var(--accent);
   font-style: normal;
-  font-weight: 700;
 }
 
-/* Focus card */
-.s10-focus-card {
+/* Logic table — §10.4 — y modes table — §10.9 */
+.s10-logic-wrap {
+  max-width: 880px;
+  margin: 10px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.s10-logic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.52em;
+  line-height: 1.5;
+}
+.s10-logic-table thead th {
+  background: var(--bg-code);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  padding: 7px 12px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s10-logic-table tbody td {
+  padding: 7px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid #1e2a48;
+  color: var(--text-muted);
+}
+.s10-logic-table tbody tr:last-child td { border-bottom: none; }
+.s10-logic-table td.s10-logic-cond {
+  color: var(--text-primary);
+  width: 56%;
+}
+.s10-logic-table td.s10-logic-cond code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.98em;
+}
+.s10-logic-table td.s10-logic-cond code.is-deny { color: #ff7676; }
+.s10-logic-table td.s10-logic-cond code.is-ask { color: var(--accent-secondary); }
+.s10-logic-table td.s10-logic-res {
+  font-weight: 700;
+  width: 44%;
+}
+.s10-logic-table td.s10-logic-res.is-blocked { color: #ff7676; }
+.s10-logic-table td.s10-logic-res.is-run { color: var(--accent); }
+.s10-logic-table td.s10-logic-res.is-ask { color: var(--accent-secondary); }
+.s10-logic-callout {
+  display: inline-block;
+  max-width: 760px;
+  margin: 10px 0 0;
+  background: rgba(255, 118, 118, 0.08);
+  border-left: 3px solid #ff7676;
+  border-radius: 4px;
+  padding: 7px 14px;
+  font-size: 0.52em;
+  color: var(--text-primary);
+  text-align: left;
+  line-height: 1.55;
+}
+.s10-logic-callout code {
+  font-family: var(--font-mono);
+  color: #ff7676;
+  font-size: 0.98em;
+}
+
+/* Sintaxis grande arriba + bullets de ejemplos */
+.s10-syntax {
+  display: inline-block;
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 10px 22px;
+  margin: 12px auto 0;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.s10-syntax .s10-syntax-tool { color: var(--text-primary); }
+.s10-syntax .s10-syntax-paren { color: var(--text-muted); }
+.s10-examples-list {
+  list-style: disc;
+  display: inline-block;
+  text-align: left;
+  max-width: 740px;
+  margin: 14px auto 0;
+  padding-left: 36px;
+  font-size: 0.55em;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.s10-examples-list li {
+  padding-left: 4px;
+  margin-bottom: 7px;
+}
+.s10-examples-list li::marker { color: var(--accent); }
+.s10-examples-list code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 1em;
+}
+.s10-examples-list strong { color: var(--text-primary); font-weight: 700; }
+
+/* Demo-repo matrix — bullets list (igual estructura que §9.6) */
+.s10-matrix-list {
+  list-style: disc;
+  display: inline-block;
+  text-align: left;
+  max-width: 820px;
+  margin: 12px auto 0;
+  padding-left: 36px;
+  font-size: 0.58em;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.s10-matrix-list li {
+  padding-left: 4px;
+  margin-bottom: 10px;
+}
+.s10-matrix-list strong { color: var(--text-primary); }
+.s10-matrix-list code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s10-matrix-list li.is-allow::marker { color: var(--accent); }
+.s10-matrix-list li.is-deny::marker { color: #ff7676; }
+.s10-matrix-list li.is-deny code { color: #ff7676; }
+.s10-matrix-list li.is-ask::marker { color: var(--accent-secondary); }
+.s10-matrix-list li.is-ask code { color: var(--accent-secondary); }
+
+/* /permissions in-session card */
+.s10-perm-card {
   max-width: 700px;
-  margin: 24px auto 0;
+  margin: 14px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-left: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 28px 34px;
+  padding: 14px 22px;
   text-align: left;
 }
-.s10-focus-card p {
-  font-size: 0.86em;
-  line-height: 1.8;
-  color: var(--text-primary);
-  margin: 0 0 14px;
-}
-.s10-focus-card p:last-child { margin: 0; }
-.s10-focus-card .s10-highlight {
+.s10-perm-card-title {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
   color: var(--accent);
-  font-weight: 700;
-  font-style: normal;
+  margin: 0 0 8px;
+  letter-spacing: 0.04em;
 }
-.s10-focus-card .s10-key-line {
-  font-size: 0.9em;
-  font-weight: 700;
-  color: var(--accent);
-  margin-top: 16px;
-  border-top: 1px solid #2a3a5a;
-  padding-top: 14px;
-}
-
-/* Hook scenario card */
-.s10-scenario-card {
-  max-width: 680px;
-  margin: 28px auto 0;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 30px 38px;
-  text-align: center;
-}
-.s10-scenario-card p {
-  font-size: 0.88em;
-  line-height: 1.85;
-  color: var(--text-primary);
-  margin: 0 0 20px;
-}
-.s10-scenario-card p:last-child { margin: 0; }
-.s10-scenario-card .s10-reveal-line {
-  font-size: 0.92em;
-  font-weight: 700;
-  color: var(--accent);
-  border-top: 1px solid #2a3a5a;
-  padding-top: 20px;
-}
-.s10-scenario-card em {
-  font-style: normal;
-  color: var(--accent);
-  font-weight: 700;
-}
-
-/* Sub-agent animation wrapper */
-.s10-anim-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.s10-anim-container {
-  min-height: 220px;
-}
-.s10-def-note {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent);
-  border-radius: 7px;
-  padding: 16px 22px;
-  font-size: 0.74em;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-.s10-def-note strong { color: var(--text-primary); }
-.s10-def-note em {
-  color: var(--accent);
-  font-style: normal;
-  font-weight: 700;
-}
-
-/* Protection cards grid */
-.s10-protection-grid {
-  max-width: 720px;
-  margin: 24px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.s10-protection-row {
-  display: flex;
-  gap: 14px;
-}
-.s10-protection-card {
-  flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 18px 20px;
-}
-.s10-protection-card.accent-left {
-  border-left: 3px solid var(--accent);
-}
-.s10-protection-card.accent-sec {
-  border-left: 3px solid var(--accent-secondary);
-}
-.s10-protection-card-label {
+.s10-perm-card-body {
   font-size: 0.56em;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 8px;
+}
+.s10-perm-card-body:last-child { margin-bottom: 0; }
+.s10-perm-card-body strong { color: var(--text-primary); }
+.s10-perm-card-body code {
   font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 6px;
-}
-.s10-protection-card-title {
-  font-size: 0.8em;
-  font-weight: 700;
   color: var(--accent);
-  margin-bottom: 8px;
-}
-.s10-protection-card-title.sec { color: var(--accent-secondary); }
-.s10-protection-card-body {
-  font-size: 0.7em;
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-.s10-protection-callout {
-  background: rgba(100, 255, 218, 0.05);
-  border: 1px solid rgba(100, 255, 218, 0.2);
-  border-radius: 7px;
-  padding: 13px 20px;
-  font-size: 0.72em;
-  color: var(--accent);
-  line-height: 1.65;
-  font-weight: 600;
-  text-align: center;
+  font-size: 0.95em;
 }
 
-/* Parallelization two-col */
-.s10-parallel-wrap {
-  max-width: 720px;
-  margin: 24px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.s10-parallel-cols {
-  display: flex;
-  gap: 14px;
-}
-.s10-parallel-col {
-  flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 18px 20px;
-}
-.s10-parallel-col-label {
+/* Gotchas list — §10.8 (bullets, igual idea que §9.7 pero como list, no cards) */
+.s10-gotchas-list {
+  list-style: disc;
+  display: inline-block;
+  text-align: left;
+  max-width: 780px;
+  margin: 14px auto 0;
+  padding-left: 36px;
   font-size: 0.56em;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.s10-gotchas-list li {
+  padding-left: 4px;
+  margin-bottom: 10px;
+}
+.s10-gotchas-list li::marker { color: var(--accent); }
+.s10-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
+.s10-gotchas-list code {
   font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 8px;
-}
-.s10-parallel-col-body {
-  font-size: 0.72em;
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-.s10-parallel-col-body strong { color: var(--text-primary); }
-.s10-parallel-note {
-  background: rgba(130, 170, 255, 0.06);
-  border: 1px solid rgba(130, 170, 255, 0.25);
-  border-radius: 7px;
-  padding: 13px 20px;
-  font-size: 0.72em;
-  color: var(--accent-secondary);
-  line-height: 1.65;
-  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.95em;
 }
 
-/* Cost card */
-.s10-cost-wrap {
-  max-width: 700px;
-  margin: 24px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.s10-cost-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent-secondary);
-  border-radius: 8px;
-  padding: 24px 30px;
-}
-.s10-cost-card-label {
-  font-size: 0.58em;
+/* Permission modes table — §10.9 */
+.s10-modes-table tbody td.s10-mode-name {
   font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 8px;
-}
-.s10-cost-card-body {
-  font-size: 0.8em;
-  color: var(--text-primary);
-  line-height: 1.8;
-}
-.s10-cost-card-body em {
-  color: var(--accent-secondary);
-  font-style: normal;
+  color: var(--accent);
   font-weight: 700;
+  white-space: nowrap;
+  width: 28%;
 }
-.s10-cost-principle {
-  background: rgba(130, 170, 255, 0.06);
-  border: 1px solid rgba(130, 170, 255, 0.25);
-  border-radius: 7px;
-  padding: 14px 22px;
-  font-size: 0.74em;
-  color: var(--accent-secondary);
-  line-height: 1.7;
-  font-weight: 600;
+.s10-modes-table tbody td.s10-mode-name.is-danger { color: #ff7676; }
+.s10-modes-table tbody td.s10-mode-name.is-future { color: var(--accent-secondary); }
+.s10-modes-table tbody td.s10-mode-what {
+  color: var(--text-muted);
+  width: 72%;
 }
+.s10-modes-table tbody td.s10-mode-what strong { color: var(--text-primary); }
+.s10-modes-table tbody td.s10-mode-what code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s10-modes-table tbody tr.is-danger td { background: rgba(255, 118, 118, 0.05); }
+.s10-modes-table tbody tr.is-future td { background: rgba(255, 200, 100, 0.04); }
 
 /* Demo wrap */
 .s10-demo-wrap {
-  max-width: 720px;
-  margin: 24px auto 0;
+  max-width: 760px;
+  margin: 16px auto 0;
 }
 
-/* Cierre card */
+/* Cierre */
 .s10-close-card {
-  max-width: 660px;
-  margin: 28px auto 0;
+  max-width: 740px;
+  margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 28px 36px;
+  padding: 16px 24px;
   text-align: center;
 }
 .s10-close-main {
-  font-size: 0.84em;
-  line-height: 1.8;
+  font-size: 0.64em;
+  line-height: 1.65;
   color: var(--text-primary);
-  margin: 0 0 20px;
+  margin: 0 0 12px;
 }
+.s10-close-main strong { color: var(--accent); }
 .s10-close-bridge {
-  font-size: 0.76em;
+  font-size: 0.56em;
   color: var(--text-muted);
-  line-height: 1.75;
+  line-height: 1.6;
   border-top: 1px solid #2a3a5a;
-  padding-top: 18px;
+  padding-top: 11px;
   margin: 0;
 }
 .s10-close-bridge em {
@@ -305,268 +474,437 @@
   font-style: normal;
   font-weight: 700;
 }
-.s10-close-bridge .bridge-loop {
-  color: var(--accent-secondary);
-  font-style: normal;
-  font-weight: 700;
+.s10-close-bridge code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
 }
 </style>
 
-<!-- §10.2 · Hook — el escenario de autenticación (tracker merged from former §10.1 opener) -->
-<section>
-  <div class="lens-tracker on-context" style="margin-bottom:14px;">
-    <div class="pole pole-context">CONTEXT</div>
-    <div class="lens-sep">↔</div>
-    <div class="pole pole-harness">HARNESS</div>
+<!-- §10.1 · Apertura — Tarjeta de 5 preguntas (full opener) -->
+<section class="s10-slide">
+  <h2 class="s10-five-q-title">Permisos</h2>
+
+  <ol class="s10-five-q-grid">
+    <li class="s10-five-q-card is-active">
+      <span class="s10-five-q-num">1</span>
+      <span class="s10-five-q-label">Qué es</span>
+      <span class="s10-five-q-hint">definición en una línea</span>
+    </li>
+    <li class="s10-five-q-card">
+      <span class="s10-five-q-num">2</span>
+      <span class="s10-five-q-label">Dónde vive</span>
+      <span class="s10-five-q-hint">paths / niveles</span>
+    </li>
+    <li class="s10-five-q-card">
+      <span class="s10-five-q-num">3</span>
+      <span class="s10-five-q-label">Cuándo se carga</span>
+      <span class="s10-five-q-hint">momento + trigger</span>
+    </li>
+    <li class="s10-five-q-card">
+      <span class="s10-five-q-num">4</span>
+      <span class="s10-five-q-label">Cómo se usa</span>
+      <span class="s10-five-q-hint">sintaxis + ejemplos</span>
+    </li>
+    <li class="s10-five-q-card">
+      <span class="s10-five-q-num">5</span>
+      <span class="s10-five-q-label">Qué confunde</span>
+      <span class="s10-five-q-hint">casos límite</span>
+    </li>
+  </ol>
+
+  <aside class="notes">
+    <p><strong>Misma apertura que las tres anteriores. No leer las preguntas — el título arriba ya nombra la sección. Ritmo rápido, plantilla ya internalizada. Marcar que esta sección es el zoom-in al campo que dejamos resaltado en §9.5.</strong></p>
+    <p><u>Apertura de §10. Cuarta vuelta con el mismo dispositivo: cinco preguntas, "Qué es" lit, título cambia. El título dice solo "Permisos" — el campo del que venimos. La continuidad con §9 es clara: dijimos que permissions era el campo más impactante de settings.json; ahora le dedicamos sección entera.</u></p>
+    <p><em>"Permisos. Cuarta vuelta con la misma plantilla."</em></p>
+    <p><em>"Lo dejamos resaltado en §9 con razón: la diferencia entre un agente que puede correr git push sin avisarte y uno que siempre pregunta vive en este sistema. Vamos a verlo con las cinco preguntas de siempre."</em></p>
+  </aside>
+</section>
+
+<!-- §10.2 · Qué es — definición + callout -->
+<section class="s10-slide">
+  <ol class="s10-five-q-grid is-mini">
+    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Reglas del runtime, evaluadas antes de cada tool call</h2>
+
+  <ul class="s10-qe-list">
+    <li><strong>Mecanismo que decide qué tools puede ejecutar el agente <em style="font-style:normal;color:var(--text-primary);">sin pedirte confirmación</em></strong>. No es una sugerencia: es la respuesta del runtime cuando Claude pide usar una tool.</li>
+    <li><strong>Se aplica antes de cada tool call</strong> — <code>Read</code>, <code>Edit</code>, <code>Write</code>, <code>Bash</code>, <code>WebFetch</code>. Si la regla bloquea, la tool no corre, sin importar lo que el modelo haya decidido.</li>
+    <li><strong>Es regla del runtime, no instrucción para Claude.</strong> El modelo no puede ignorarla, malinterpretarla, ni olvidarla en deriva — no la lee, la encuentra cuando ya es tarde.</li>
+    <li class="s10-qe-callout">→ Actúa sobre el loop, no sobre el contexto.</li>
+  </ul>
+
+  <aside class="notes">
+    <p><strong>Tres ítems con pausa entre cada uno. El tercero es el punto fuerte — marcar el contraste con CLAUDE.md. Pausa antes del callout. El callout es la línea a retener: permisos viven en el loop, no en la ventana de contexto.</strong></p>
+    <p><u>Slide de definición. Mini-strip con "Qué es" lit. Tres bullets + callout, mismo patrón que §8.2 y §9.2. Lo importante: marcar que permisos no son texto que el modelo lee — son un gate del runtime que el modelo encuentra cuando intenta ejecutar. La diferencia operativa con CLAUDE.md/rules es central para entender por qué existe este sistema.</u></p>
+    <p><em>"Primera pregunta. Qué es. La respuesta corta: el sistema de permisos es lo que el runtime usa para decidir qué tools puede ejecutar el agente sin pedirte confirmación. Antes de cada tool call — antes de leer un archivo, escribir uno, correr un comando Bash, hacer un fetch — el runtime evalúa las reglas configuradas y toma una decisión: ejecuta solo, pregunta, o bloquea."</em></p>
+    <p><em>"Aplica a toda tool: Read, Edit, Write, Bash, WebFetch. No hay excepciones. Si la regla bloquea, la tool no corre — sin importar lo que el modelo haya decidido. El gate está antes de la ejecución, no después."</em></p>
+    <p><em>"Y la propiedad importante: esto es regla del runtime, no instrucción para Claude. Una instrucción en CLAUDE.md le pide al modelo que sea cuidadoso — el modelo la lee, la puede ignorar, sobreescribir con contexto posterior, malinterpretar en deriva. Una regla de permisos no la lee: la encuentra cuando intenta ejecutar. No hay forma de saltearla desde adentro."</em></p>
+    <p><em>"El callout es la línea a retener: actúa sobre el loop, no sobre el contexto. Esa es la diferencia operativa con todo lo que vimos en §7 y §8. CLAUDE.md y rules llenan la ventana; permisos no entran a la ventana — están en otro plano."</em></p>
+  </aside>
+</section>
+
+<!-- §10.3 · Dónde vive — 4 niveles cascade + nota /permissions -->
+<section class="s10-slide">
+  <ol class="s10-five-q-grid is-mini">
+    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
+    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Dentro de <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">permissions</code> — los mismos cuatro niveles de §9</h2>
+
+  <div class="s10-hierarchy">
+    <div class="s10-hier-row">
+      <div class="s10-hier-level">
+        <span class="s10-hier-level-num">Nivel 1</span>
+        <span class="s10-hier-level-name">Managed</span>
+      </div>
+      <div class="s10-hier-content">
+        <span class="s10-hier-title">Política de la organización — fija el techo</span>
+        <span class="s10-hier-paths">administrado por la org (enterprise)</span>
+        <span class="s10-hier-use">Un <code style="font-family:var(--font-mono);">deny</code> acá no se levanta desde ningún nivel inferior.</span>
+      </div>
+    </div>
+    <div class="s10-hier-row">
+      <div class="s10-hier-level">
+        <span class="s10-hier-level-num">Nivel 2</span>
+        <span class="s10-hier-level-name">Local del proyecto</span>
+      </div>
+      <div class="s10-hier-content">
+        <span class="s10-hier-title">Tu copia personal — no se versiona</span>
+        <span class="s10-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.local.json</code> &nbsp;·&nbsp; va al <code style="font-family:var(--font-mono);">.gitignore</code></span>
+        <span class="s10-hier-use">Permisos puntuales que solo tienen sentido en tu entorno.</span>
+      </div>
+    </div>
+    <div class="s10-hier-row">
+      <div class="s10-hier-level">
+        <span class="s10-hier-level-num">Nivel 3</span>
+        <span class="s10-hier-level-name">Proyecto</span>
+      </div>
+      <div class="s10-hier-content">
+        <span class="s10-hier-title">Config compartida del repo — versionada</span>
+        <span class="s10-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.json</code> &nbsp;·&nbsp; commiteado</span>
+        <span class="s10-hier-use">La matriz base que aplica a todos los colaboradores.</span>
+      </div>
+    </div>
+    <div class="s10-hier-row">
+      <div class="s10-hier-level">
+        <span class="s10-hier-level-num">Nivel 4</span>
+        <span class="s10-hier-level-name">Usuario</span>
+      </div>
+      <div class="s10-hier-content">
+        <span class="s10-hier-title">Tu config personal — todos tus proyectos</span>
+        <span class="s10-hier-paths"><code style="font-family:var(--font-mono);">~/.claude/settings.json</code></span>
+        <span class="s10-hier-use">Defaults tuyos que viajan de un repo al otro.</span>
+      </div>
+    </div>
   </div>
-  <p style="text-align:center;font-size:0.62em;color:var(--text-muted);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin:0 0 14px;">aísla el contexto de un loop entero</p>
 
-  <h2>El escenario: cuarenta archivos, una sola pregunta</h2>
+  <p class="s10-hier-note">
+    Además del archivo: el comando <code>/permissions</code> ajusta la config <strong>durante una sesión activa</strong>, sin editar el JSON ni reiniciar.
+  </p>
 
-  <div class="s10-scenario-card">
-    <p>
-      Le pedís a Claude Code que encuentre dónde se maneja la autenticación en un repo mediano.
-      Para responder bien, tiene que buscar en carpetas, rastrear imports, abrir módulos de configuración.
-      Cuarenta archivos, fácil.
+  <aside class="notes">
+    <p><strong>Recorrer rápido — la jerarquía ya es conocida de §9. El énfasis está en que permisos vive dentro del campo permissions de cualquier nivel, no en un archivo aparte. Cerrar marcando la nota: /permissions es el escape hatch en vivo.</strong></p>
+    <p><u>Slide de jerarquía. La cascade es la misma de §9 — no la vamos a explicar de cero, vamos a reusarla. El twist es que las reglas de permisos viven dentro del campo permissions en cualquiera de los cuatro niveles. La nota de abajo introduce /permissions, que vuelve más adelante (§10.7).</u></p>
+    <p><em>"Segunda pregunta. Dónde vive. Y acá la respuesta es corta porque ya la dimos en §9: los mismos cuatro niveles, las mismas precedencias. Lo que cambia es que ahora miramos un campo específico — permissions — dentro de cada uno."</em></p>
+    <p><em>"Managed fija el techo: un deny en este nivel no se levanta desde abajo, ni en local, ni en proyecto, ni en usuario. Local del proyecto, en .claude/settings.local.json, gitignored — es donde van los permisos puntuales tuyos. Proyecto, en .claude/settings.json, commiteado — la matriz base que comparte el equipo. Usuario, en tu home, defaults personales."</em></p>
+    <p><em>"Y la nota de abajo: además del archivo, está el comando /permissions. Ajusta la config durante una sesión activa, sin que tengas que editar el JSON y reiniciar. Lo vamos a usar en el demo. Es el escape hatch en vivo cuando aparece un prompt y querés que no vuelva a aparecer."</em></p>
+  </aside>
+</section>
+
+<!-- §10.4 · Cuándo se evalúa — tabla de lógica + callout deny > allow -->
+<section class="s10-slide">
+  <ol class="s10-five-q-grid is-mini">
+    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
+    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Antes de cada tool call — cuatro condiciones, en orden</h2>
+
+  <div class="s10-logic-wrap">
+    <table class="s10-logic-table">
+      <thead>
+        <tr>
+          <th>Condición</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="s10-logic-cond">Matchea una regla <code class="is-deny">deny</code></td>
+          <td class="s10-logic-res is-blocked">Bloqueado — sin confirmación posible</td>
+        </tr>
+        <tr>
+          <td class="s10-logic-cond">No matchea <code class="is-deny">deny</code>, matchea <code>allow</code></td>
+          <td class="s10-logic-res is-run">Ejecuta sin preguntar</td>
+        </tr>
+        <tr>
+          <td class="s10-logic-cond">No matchea <code class="is-deny">deny</code>, no matchea <code>allow</code>, matchea <code class="is-ask">ask</code></td>
+          <td class="s10-logic-res is-ask">Pide confirmación</td>
+        </tr>
+        <tr>
+          <td class="s10-logic-cond">No matchea ninguna regla</td>
+          <td class="s10-logic-res is-ask">Pide confirmación (el default)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="s10-logic-callout">
+    <strong><code>deny</code> &gt; <code>allow</code>:</strong> si una operación matchea ambas listas a la vez — porque tenés un <code>allow</code> amplio y un <code>deny</code> más específico, o al revés — <code>deny</code> gana siempre. El orden lo garantiza el runtime, no el modelo.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cuatro filas de arriba a abajo. La cuarta — "no matchea ninguna" — es la que más confunde: el default es preguntar, no negar. Pausa en el callout: deny gana sobre allow, siempre.</strong></p>
+    <p><u>Slide de lógica de evaluación. Tabla de cuatro filas que cubre todas las combinaciones posibles. La cuarta fila importa: el comportamiento por defecto, sin reglas configuradas, es preguntar — no bloquear. El callout reafirma la precedencia de deny sobre allow, que es la garantía que hace que el sistema sea seguro: un deny es un piso que no podés perforar por accidente con un allow demasiado amplio.</u></p>
+    <p><em>"Tercera pregunta. Cuándo se evalúa. La respuesta: antes de cada tool call. El runtime aplica esta lógica en orden, fila por fila."</em></p>
+    <p><em>"Una. Si la operación matchea una regla de deny — bloqueado. Sin confirmación posible, sin opción a aprobar. La tool no corre."</em></p>
+    <p><em>"Dos. Si no matchea deny y matchea allow — ejecuta sin preguntar. Esto es lo que hace que el flujo sea fluido: los comandos que ya sabés que querés autorizar pasan sin interrumpirte."</em></p>
+    <p><em>"Tres. Si no matchea deny, no matchea allow, pero matchea ask — pide confirmación. Es el lugar intermedio: cosas que no querés bloquear, pero tampoco automatizar."</em></p>
+    <p><em>"Y cuatro, la que confunde más. Si no matchea ninguna regla — pide confirmación. El default no es denegar, es preguntar. Sin ninguna config, Claude pregunta antes de cada acción que toca el mundo. Eso puede volverse lento; el propósito de allow es eliminar los prompts donde ya sabés que querés autonomía."</em></p>
+    <p><em>"Y el callout, que vale la pena marcar: deny gana sobre allow. Siempre. Si tenés un Read general en allow — Read(./**) — y un Read específico en deny — Read(./.env) — el .env queda bloqueado. Esa precedencia es la garantía que hace que el sistema sea seguro: un deny es un piso que no se perfora por accidente."</em></p>
+  </aside>
+</section>
+
+<!-- §10.5 · Cómo se usa — sintaxis Tool(pattern) + ejemplos -->
+<section class="s10-slide">
+  <ol class="s10-five-q-grid is-mini">
+    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
+    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Sintaxis: <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">Tool(pattern)</code></h2>
+
+  <div class="s10-syntax">
+    <span class="s10-syntax-tool">Tool</span><span class="s10-syntax-paren">(</span>pattern<span class="s10-syntax-paren">)</span>
+  </div>
+
+  <ul class="s10-examples-list">
+    <li><code>Bash(uv run pytest)</code> — <strong>comando exacto</strong>; solo matchea esa línea sin argumentos.</li>
+    <li><code>Bash(uv run pytest *)</code> — <strong>wildcard de argumentos</strong>; cubre <code>uv run pytest tests/ -v</code> y variantes.</li>
+    <li><code>Edit(./backend/**)</code> — <strong>glob de path</strong>; cualquier archivo bajo <code>backend/</code>, recursivo.</li>
+    <li><code>Read(./.env)</code> — <strong>archivo específico</strong>; útil en <code>deny</code> para impedir lectura de credenciales.</li>
+    <li><code>WebFetch(domain:fastapi.tiangolo.com)</code> — <strong>dominio único</strong>; sintaxis especial para WebFetch.</li>
+  </ul>
+
+  <aside class="notes">
+    <p><strong>Mostrar la sintaxis grande arriba, después recorrer los cinco ejemplos. Cada uno enseña un sabor distinto de pattern: exacto, wildcard de args, glob de path, archivo específico, dominio. Marcar que el wildcard solo cubre argumentos del mismo comando, no comandos arbitrarios.</strong></p>
+    <p><u>Slide de sintaxis y ejemplos. La sintaxis es simple — Tool(pattern) — pero los patterns tienen sabores distintos que vale la pena distinguir. Comando exacto vs wildcard de args vs glob de path vs archivo único vs dominio. Cubre los casos que aparecen en el settings.json del demo-repo, que abrimos en el slide siguiente.</u></p>
+    <p><em>"Cuarta pregunta. Cómo se usa. La sintaxis es una línea: Tool, paréntesis, pattern, paréntesis. El tool puede ser Bash, Edit, Read, WebFetch, Write, entre otros. El pattern es donde está la riqueza."</em></p>
+    <p><em>"Primer ejemplo. Bash(uv run pytest) sin nada más — comando exacto. Solo matchea esa línea, sin argumentos. Si alguien le pasa flags al pytest, no matchea."</em></p>
+    <p><em>"Segundo. Bash(uv run pytest *), con asterisco al final — wildcard de argumentos. Esto cubre uv run pytest tests/test_users.py menos uve, uv run pytest -k auth, todas las variantes del mismo comando con argumentos. El asterisco no es total — matchea argumentos de ese comando, no comandos arbitrarios. Volvemos sobre eso en gotchas."</em></p>
+    <p><em>"Tercero. Edit(./backend/**), con doble asterisco — glob de path. Cualquier archivo bajo backend, recursivo. Es la forma de darle autonomía sobre una carpeta entera sin enumerar archivo por archivo."</em></p>
+    <p><em>"Cuarto. Read(./.env), un archivo específico. Es el caso típico de deny: un solo archivo, sin wildcards. La lista deny suele ser corta y específica."</em></p>
+    <p><em>"Y quinto. WebFetch(domain:fastapi.tiangolo.com), sintaxis especial — prefijo domain dos puntos. Limita el WebFetch a un dominio en particular. Cualquier otra URL pide confirmación."</em></p>
+  </aside>
+</section>
+
+<!-- §10.6 · La matriz del demo-repo — bullets sin mini-strip (zoom-in) -->
+<section class="s10-slide">
+  <h2>Las tres listas del demo-repo</h2>
+
+  <ul class="s10-matrix-list">
+    <li class="is-allow">
+      <strong><code>allow</code> — corre sin preguntar.</strong>
+      Comandos <code>uv</code> (<code>pytest</code>, <code>uvicorn</code>, <code>python</code>, <code>sync</code>), <code>Read(./**)</code>, <code>Edit</code> acotado a <code>backend/</code> · <code>frontend/</code> · <code>tests/</code> · <code>openapi.yaml</code>, <code>WebFetch</code> a un dominio.
+    </li>
+    <li class="is-deny">
+      <strong><code>deny</code> — bloqueado pase lo que pase.</strong>
+      <code>Read(./.env)</code> · <code>Bash(rm -rf *)</code> · <code>Bash(git push *)</code>. Operaciones costosas o irreversibles que <strong>no</strong> queremos dejar a un prompt.
+    </li>
+    <li class="is-ask">
+      <strong><code>ask</code> — pide confirmación cada vez.</strong>
+      <code>Bash(uv add *)</code> · <code>Bash(uv remove *)</code>. Reversibles, pero no triviales: humano en el loop antes de modificar dependencias.
+    </li>
+  </ul>
+
+  <aside class="notes">
+    <p><strong>Sin mini-strip — es zoom-in al archivo, no responde una pregunta nueva. Recorrer las tres listas de arriba a abajo. Detener en deny — leer las tres líneas. Detener en ask — explicar el criterio "reversible pero no trivial". El color rojo del bullet deny hace el contraste visible.</strong></p>
+    <p><u>Walkthrough del bloque permissions del settings.json del demo-repo. Tres bullets, una por lista, con la misma estructura que §9.6: lead phrase en strong, ejemplos en code, criterio al final. El color rojo en deny y secundario en ask hacen visible la jerarquía de riesgo. Esto baja la sintaxis del slide anterior a un archivo real que el alumno puede abrir.</u></p>
+    <p><em>"Vamos al archivo real. El bloque permissions completo del .claude/settings.json del demo-repo. Tres listas, las recorro de arriba a abajo."</em></p>
+    <p><em>"Allow. Lo que el runtime ejecuta sin preguntar nunca. Cuatro comandos uv — pytest, uvicorn para levantar el server, python directo, sync para resolver deps. Read del proyecto entero porque el agente tiene que poder leer cualquier código. Edit acotado: backend, frontend, tests, openapi.yaml — los lugares donde queremos que pueda modificar. Y un WebFetch a un solo dominio: la doc de FastAPI."</em></p>
+    <p><em>"Deny. Tres líneas chicas y críticas. Read del .env — Claude no lee credenciales nunca, sin importar lo que se le pida. Bash rm guion rf — bloqueado, porque un rm equivocado cuesta caro. Bash git push — bloqueado, porque un push accidental a una rama equivocada cuesta más caro todavía. Son operaciones costosas o irreversibles que no queremos dejar a un prompt de confirmación que se puede aceptar de apuro."</em></p>
+    <p><em>"Y ask. uv add y uv remove. El criterio: reversible, pero no trivial. Si el agente quiere agregar una dependencia nueva al proyecto, quiero enterarme antes — no porque sea irreversible, sino porque cambia el shape del proyecto. Humano en el loop, sin bloquearlo."</em></p>
+  </aside>
+</section>
+
+<!-- §10.7 · /permissions en vivo + dónde lo guarda -->
+<section class="s10-slide">
+  <ol class="s10-five-q-grid is-mini">
+    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
+    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2><code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">/permissions</code> — el escape hatch en vivo</h2>
+
+  <div class="s10-perm-card">
+    <p class="s10-perm-card-title">Comando interactivo, durante la sesión</p>
+    <p class="s10-perm-card-body">
+      Cuando aparece un prompt de confirmación que no querés ver más — o cuando querés agregar un <code>deny</code> sin reiniciar — <code>/permissions</code> abre un editor en línea que te deja agregar, quitar o mover entradas entre <code>allow</code> / <code>deny</code> / <code>ask</code>.
     </p>
-    <p>
-      Según §4, el contexto es finito — cada token que entra compite con los que ya están.
-      Según §5, esa inundación de texto técnico hace que el modelo razone peor: envenenás la ventana
-      con ruido que no tiene que ver con el trabajo que viene.
-    </p>
-    <p class="s10-reveal-line fragment">
-      ¿Qué pasaría si todo lo que leyó para responder eso viviera en <em>otra ventana</em>,
-      y al terminar te diera solo el resultado?
+    <p class="s10-perm-card-body">
+      <strong>Dónde lo guarda:</strong> por default escribe en <code>.claude/settings.local.json</code>. Eso es deliberado: los permisos puntuales de tu máquina <strong>no contaminan</strong> el <code>settings.json</code> que comparte el equipo. Si querés que un permiso sea compartido, lo movés al archivo del proyecto a mano.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar el tracker — CONTEXTO iluminado, cuarta sección seguida acá. Leer el sublabel ("aísla el contexto de un loop entero"). Después leer los dos primeros párrafos despacio. Pausa larga antes del fragment. Click para revelar la pregunta. Dejar que la pregunta respire.</strong></p>
-    <p><u>Hook narrativo de §10 con el tracker en la cabecera (cuarto aterrizaje seguido en CONTEXTO; el sublabel anuncia algo más grande que todo lo anterior). Los dos primeros párrafos plantan el problema con callbacks explícitos a §4 (contexto finito) y §5 (envenenar). El fragment es la pregunta que todo el resto de §10 responde.</u></p>
-    <p><em>"El tracker otra vez en CONTEXTO. Cuatro secciones seguidas aterrizando acá. El sublabel dice algo más grande que todo lo anterior: aísla el contexto de un loop entero. §9 nos mostró que una skill puede aislar un procedimiento — cero tokens hasta que se invoca. Pero un procedimiento son instrucciones. ¿Qué pasa cuando lo que queremos aislar no son las instrucciones sino el trabajo de exploración que el agente acumula mientras ejecuta? Eso es §10."</em></p>
-    <p><em>"Imaginá esta situación. Le pedís a Claude Code que encuentre dónde se maneja la autenticación en un repo mediano. No es un repo pequeño: tiene carpetas, archivos de configuración, imports cruzados. Para responder bien tiene que abrir cosas, leer, rastrear. Cuarenta archivos, sin esfuerzo."</em></p>
-    <p><em>"Ya vimos qué pasa con eso. §4: la ventana es finita, cada token que entra ocupa un lugar que no se recupera. §5: cuando el agente lee tanto que su propio contexto lo confunde — logs, archivos de auth, trazas repetidas — llamamos a eso envenenar el contexto."</em></p>
-    <p><em>"La pregunta que quiero que tengan en la cabeza antes de seguir:"</em></p>
-    <p><em>"¿Qué pasaría si todo lo que leyó para responder eso viviera en otra ventana, y al terminar te diera solo el resultado?"</em></p>
+    <p><strong>Marcar fuerte el detalle: por default escribe en local, no en el archivo del proyecto. Ese es el comportamiento que evita que cada colaborador contamine la config compartida con sus preferencias personales.</strong></p>
+    <p><u>Slide complementario a la sintaxis: cómo se manipula la config en caliente. /permissions es la respuesta al "tengo este prompt que no quiero ver más, no me hagas ir a editar el JSON y reiniciar". Detalle operativo central: escribe en local por default, no en el proyecto. Esa decisión es la que hace que el comando sea seguro de usar en un repo compartido sin pensar.</u></p>
+    <p><em>"Una pieza más del cómo se usa, importante porque la vamos a ver en el demo. El comando /permissions."</em></p>
+    <p><em>"Se invoca durante una sesión activa. Abre un editor en línea que te deja agregar, quitar o mover entradas entre las tres listas — allow, deny, ask. Cuando aparece un prompt de confirmación que no querés ver más, /permissions es el atajo: lo agregás al allow ahí mismo, sin tocar el JSON, sin reiniciar."</em></p>
+    <p><em>"Y el detalle operativo que vale la pena saber: por default escribe en .claude/settings.local.json — el archivo local, gitignored. No en el settings.json del proyecto. Eso es deliberado: los permisos puntuales de tu máquina no contaminan la config compartida del equipo. Si yo agrego un permiso para abrir el browser en mi máquina, ese permiso no viaja al repo de otro colaborador que está corriendo el código en un server sin display."</em></p>
+    <p><em>"Si querés que un permiso sea compartido por todo el equipo, lo movés al settings.json del proyecto a mano. La decisión de qué es personal y qué es compartido sigue siendo tuya — el comando elige el lado conservador por default."</em></p>
   </aside>
 </section>
 
-<!-- §10.3 · Qué es un sub-agent — animación mode:'subagent' -->
-<section>
-  <h2>Qué es un sub-agent</h2>
+<!-- §10.8 · Casos límite — 4 gotchas (bullets) -->
+<section class="s10-slide">
+  <ol class="s10-five-q-grid is-mini">
+    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
+    <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
+    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
+  </ol>
 
-  <div class="s10-anim-wrap">
-    <div class="s10-anim-container">
-      <div id="s10-loop-subagent"></div>
-    </div>
-    <div class="s10-def-note">
-      <strong>El mismo LLM + loop + tools + entorno</strong> — instanciado aparte, para una tarea acotada,
-      con una <em>ventana propia que nace y muere con la tarea</em>.
-      Al padre vuelve solo el resultado: la respuesta, el archivo producido, el diagnóstico.
-      No el contexto. No lo que leyó en el camino.<br><br>
-      No es "otra IA". Es la misma lógica de siempre, aislada para una tarea acotada.
-    </div>
+  <h2>Cuatro cosas que confunden de permisos</h2>
+
+  <ul class="s10-gotchas-list">
+    <li><strong><code>Bash(*)</code> no es wildcard total.</strong> No existe una entrada que le dé permiso para correr cualquier comando Bash. El asterisco matchea argumentos de un comando específico — <code>Bash(comando *)</code>, no <code>Bash(*)</code>. Para autonomía amplia en Bash, hay que ser explícito comando por comando.</li>
+    <li><strong>El default es preguntar, no denegar.</strong> Sin ninguna regla configurada, Claude pide confirmación antes de cada acción que toca el mundo. Eso suele ser lo que querés al arrancar — el propósito de <code>allow</code> es eliminar prompts donde ya decidiste dar autonomía.</li>
+    <li><strong>Los wildcards no atraviesan <code>;</code> ni <code>&amp;&amp;</code>.</strong> Si tenés <code>Bash(uv run pytest *)</code> en <code>allow</code>, eso <strong>no</strong> cubre <code>uv run pytest &amp;&amp; rm -rf .</code>. El runtime valida el comando exacto contra el pattern; no podés colar comandos por concatenación.</li>
+    <li><strong>Managed bloquea hacia abajo, sin escape.</strong> En un entorno corporativo, un admin puede fijar un <code>deny</code> en el nivel Managed que ningún proyecto ni usuario puede levantar. En proyectos personales no aplica; en equipos con políticas de seguridad, define el techo de lo posible.</li>
+  </ul>
+
+  <aside class="notes">
+    <p><strong>Recorrer los cuatro gotchas. La uno se nombra rápido — es el error más común al empezar a configurar. La dos invierte una expectativa razonable (la gente espera que el default sea seguro = denegar). La tres es el dato de seguridad: no hay forma de pasar comandos extra por encadenación. La cuatro es el límite enterprise.</strong></p>
+    <p><u>Slide de quinta pregunta. Cuatro confusiones en formato bullet list — siguen la regla refinada de bullets: items peer cortos, misma estructura, no necesitan visual estructurado. Es enumeración pura. La uno y la tres son los datos técnicos; la dos es la expectativa invertida; la cuatro es el límite que aparece solo en orgs.</u></p>
+    <p><em>"Quinta pregunta. Qué confunde. Cuatro cosas, en orden de frecuencia con que aparecen."</em></p>
+    <p><em>"Una. Bash con asterisco solo, Bash paréntesis asterisco paréntesis, no es un wildcard total. No existe una entrada que le dé al agente permiso para correr cualquier comando Bash sin restricciones. El asterisco matchea argumentos de un comando — Bash de comando espacio asterisco — no comandos arbitrarios. Para darle autonomía amplia en Bash, hay que ser explícito comando por comando: Bash de uv run pytest, Bash de git status, Bash de uv sync, cada uno por separado. Si intentás cubrir todo con Bash asterisco esperando que funcione, el comportamiento no va a ser el que esperás."</em></p>
+    <p><em>"Dos. El default es preguntar, no denegar. Esto invierte una expectativa razonable — uno asume que el sistema seguro arranca diciendo no a todo. Pero el default acá es preguntar, no negar. Sin ninguna regla configurada, Claude pide confirmación antes de cada acción que toca el mundo. Eso suele ser lo que querés al arrancar; el propósito de allow es eliminar prompts donde ya decidiste dar autonomía."</em></p>
+    <p><em>"Tres. Los wildcards no atraviesan punto y coma ni ampersand ampersand. Si tenés Bash de uv run pytest asterisco en allow, eso no cubre uv run pytest ampersand ampersand rm guion rf punto. El runtime valida el comando exacto contra el pattern; no podés colar comandos adicionales por concatenación. La inyección de comandos por encadenación no funciona — es un gate al nivel del comando completo, no del primer token."</em></p>
+    <p><em>"Cuatro. Managed bloquea hacia abajo, sin escape. Ya lo nombramos en el slide de dónde vive y vale la pena repetirlo: en un entorno corporativo, un admin puede fijar un deny en el nivel Managed que ningún proyecto ni usuario puede sobreescribir. Si tu organización bloqueó Bash de git push en el nivel Managed, no hay forma de habilitarlo desde el settings del proyecto. En proyectos personales no aparece; en equipos con políticas de seguridad, define el techo de lo posible."</em></p>
+  </aside>
+</section>
+
+<!-- §10.9 · Permission modes overlay — sin mini-strip (zoom-in a tema relacionado) -->
+<section class="s10-slide">
+  <h2>Permission modes: el dial de autonomía</h2>
+
+  <div class="s10-logic-wrap">
+    <table class="s10-logic-table s10-modes-table">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Qué hace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="s10-mode-name">default</td>
+          <td class="s10-mode-what">Aplica las listas <code>allow</code> / <code>deny</code> / <code>ask</code> normalmente — el modo del que venimos hablando toda la sección.</td>
+        </tr>
+        <tr>
+          <td class="s10-mode-name">acceptEdits</td>
+          <td class="s10-mode-what"><strong>Auto-acepta</strong> <code>Edit</code> y <code>Write</code> sin confirmación adicional. <code>Bash</code> y el resto siguen las listas normales. Útil cuando ya iteraste varias veces y querés que las ediciones fluyan.</td>
+        </tr>
+        <tr class="is-future">
+          <td class="s10-mode-name is-future">plan</td>
+          <td class="s10-mode-what">Solo lectura hasta que aprobás un plan. El agente lee, propone, y espera tu OK antes de ejecutar nada. Se desarrolla completo en <strong>§13</strong>.</td>
+        </tr>
+        <tr class="is-danger">
+          <td class="s10-mode-name is-danger">bypassPermissions</td>
+          <td class="s10-mode-what"><strong>Saltea todo</strong>, incluyendo <code>deny</code>. Existe para entornos automatizados con sandbox externo. Usarlo en desarrollo interactivo <strong>elimina todas las protecciones</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar el ciclo principal a la izquierda — el agente padre. Señalar el ciclo secundario a la derecha — el sub-agent, con su propia ventana. Señalar el chip "resultado" en la flecha de retorno. Leer la nota de definición.</strong></p>
-    <p><u>Slide de definición del sub-agent. La animación en modo 'subagent' muestra visualmente la idea central: dos instancias del mismo loop, una devuelve solo el resultado. La nota refuerza la definición con los cuatro componentes del §2.</u></p>
-    <p><em>"Un sub-agent no es una segunda IA. No es un empleado distinto ni un modelo diferente. Es la misma cosa de siempre — el mismo LLM, el mismo tipo de loop, las mismas herramientas — pero instanciada aparte."</em></p>
-    <p><em>"Lo que ven a la derecha en la animación es un loop completo: pensar, actuar, observar, repetir, como cualquier loop. Pero ese loop tiene su propia ventana. Nace cuando la tarea empieza. Muere cuando la tarea termina."</em></p>
-    <p><em>"Lo que viaja de vuelta al padre — el chip de resultado en la flecha — es solo eso: el resultado. No lo que leyó. No su razonamiento interno. No los cuarenta archivos que abrió. Un párrafo. El contexto del padre creció lo mínimo."</em></p>
+    <p><strong>Recorrer las cuatro filas. default es el conocido — no requiere explicación extra. acceptEdits y plan son los útiles. bypassPermissions es el peligroso; marcar fuerte que saltea deny también, y que solo tiene sentido cuando hay otra capa de seguridad afuera (un sandbox, un container aislado).</strong></p>
+    <p><u>Slide sobre permission modes. Sin mini-strip — es zoom-in a un tema relacionado pero distinto a las cinco preguntas. Tabla de los cuatro modes con tratamiento visual diferenciado: plan en color secundario porque vuelve en §13, bypassPermissions en rojo porque es el modo que requiere advertencia. Es overlay: los modes se eligen una vez al arrancar la sesión y modifican cómo se aplican las listas durante toda la sesión.</u></p>
+    <p><em>"Una pieza más antes de cerrar la sección. Hasta acá vimos las listas allow, deny y ask como el sistema completo. Falta un overlay encima de las listas: el permissionMode."</em></p>
+    <p><em>"El mode se elige una vez al arrancar la sesión — con un flag al iniciar, con el campo permissionMode en settings.json, o con Shift Tab durante la sesión. Modifica cómo se aplican las listas durante toda la sesión. Cuatro modos."</em></p>
+    <p><em>"Uno. default. Aplica las listas como las venimos viendo. Es el modo del que venimos hablando toda la sección — no requiere explicación extra."</em></p>
+    <p><em>"Dos. acceptEdits. Auto-acepta Edit y Write sin confirmación adicional. Bash y el resto siguen las listas normales. Es útil cuando ya iteraste varias veces con el agente, sabés que las ediciones van bien encaminadas, y querés que las ediciones fluyan sin que cada una requiera un OK. Modificás el archivo y seguís. No te ahorra los prompts de Bash — solo los de modificar archivos."</em></p>
+    <p><em>"Tres. plan. Y este lo vamos a ver completo en §13. La idea corta: el agente entra en modo solo-lectura. Lee, investiga, propone un plan. No ejecuta nada hasta que vos apruebes el plan. Es la pausa explícita entre pensar y actuar. Es uno de los dispositivos más potentes para tareas grandes — pero lo desarrollamos a fondo en su propia sección."</em></p>
+    <p><em>"Y cuatro. bypassPermissions. Y este requiere advertencia explícita: saltea todo. Allow, deny, ask, todo. Incluyendo deny. Si tenés Read de .env en deny y arrancás con bypassPermissions, Claude lo lee. Existe para entornos automatizados donde el código que lo invoca ya garantiza seguridad por otro mecanismo — un sandbox, un container aislado, un servidor donde no hay credenciales. Usarlo en desarrollo interactivo, en tu máquina, sobre tu repo real, elimina todas las protecciones que vimos en esta sección entera. No es un atajo: es desactivar el sistema."</em></p>
   </aside>
 </section>
 
-<!-- §10.4 · Por qué protege el contexto — callback §4 y §5 -->
-<section>
-  <h2>Por qué protege el contexto</h2>
-
-  <div class="s10-protection-grid">
-    <div class="s10-protection-row">
-      <div class="s10-protection-card accent-left">
-        <span class="s10-protection-card-label">Callback §4 — contexto finito</span>
-        <div class="s10-protection-card-title">El problema: cada token compite</div>
-        <div class="s10-protection-card-body">
-          La sub-tarea puede leer cincuenta archivos, generar mil tokens de razonamiento,
-          ejecutar diez llamadas a herramientas. Todo eso consume ventana — si ocurre en el padre.
-        </div>
-      </div>
-      <div class="s10-protection-card accent-sec">
-        <span class="s10-protection-card-label">Callback §5 — envenenar el contexto</span>
-        <div class="s10-protection-card-title sec">El modo de falla: ruido que confunde</div>
-        <div class="s10-protection-card-body">
-          Cuarenta archivos de auth, imports rastreados, líneas descartadas.
-          Todo eso sigue en la ventana del padre después de la búsqueda — y lo confunde para lo que viene.
-        </div>
-      </div>
-    </div>
-    <div class="s10-protection-card" style="background:var(--bg-secondary); border:1px solid #2a3a5a; border-radius:8px; padding:18px 20px;">
-      <span class="s10-protection-card-label">Qué hace el sub-agent</span>
-      <div class="s10-protection-card-body" style="font-size:0.78em; color:var(--text-primary); line-height:1.75;">
-        Todo eso vive en la ventana del sub-agent. Cuando termina, esa ventana desaparece.
-        Al padre llega un párrafo con el resultado. El contexto del padre creció lo mínimo.
-      </div>
-    </div>
-    <div class="s10-protection-callout">
-      Es la única forma de hacer tareas exploratorias sin degradar al agente que tiene que seguir trabajando después.
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Señalar la tarjeta izquierda — callback §4. Señalar la tarjeta derecha — callback §5. Señalar la tarjeta central — la solución. Leer el callout al final.</strong></p>
-    <p><u>Slide de justificación conceptual. Dos tarjetas anclan el problema en lo ya visto. Una tercera muestra lo que hace el sub-agent. El callout es la afirmación más fuerte de la sección — no un detalle de implementación, sino una tesis.</u></p>
-    <p><em>"Para entender por qué los sub-agents importan, hay que recordar dos cosas que ya vimos. §4: el contexto es finito. Cada token que entra ocupa un lugar que no se recupera. Si la exploración ocurre en el padre, ese costo lo paga el padre."</em></p>
-    <p><em>"§5: cuando el padre lee demasiado — cuarenta archivos, imports cruzados, líneas que no importan — su propio contexto lo confunde. Llamamos a eso envenenar el contexto. No es un fallo del modelo. Es un fallo de diseño: pusiste en la ventana cosas que no deberían estar."</em></p>
-    <p><em>"El sub-agent corta ese camino de raíz. Todo lo que explora vive en su ventana. Cuando termina, esa ventana desaparece. Al padre llega un párrafo. No cincuenta archivos. No el razonamiento intermedio. Un párrafo."</em></p>
-    <p><em>"Esa afirmación final vale la pena leerla despacio: es la única forma de hacer tareas exploratorias sin degradar al agente que tiene que seguir trabajando después."</em></p>
-  </aside>
-</section>
-
-<!-- §10.5 · Paralelización — beneficio secundario -->
-<section>
-  <h2>Paralelización: real, pero secundaria</h2>
-
-  <div class="s10-parallel-wrap">
-    <div class="s10-parallel-cols">
-      <div class="s10-parallel-col">
-        <span class="s10-parallel-col-label">Cómo funciona</span>
-        <div class="s10-parallel-col-body">
-          Porque cada sub-agent tiene su propia ventana, varios pueden correr al mismo tiempo
-          sobre sub-tareas independientes.<br><br>
-          <strong>Auth + base de datos + capa de API</strong> — tres búsquedas que no se pisan entre sí,
-          tres sub-agents corriendo en paralelo, un padre que integra cuando todas terminan.
-        </div>
-      </div>
-      <div class="s10-parallel-col" style="border-left: 3px solid var(--accent);">
-        <span class="s10-parallel-col-label">El orden de prioridades</span>
-        <div class="s10-parallel-col-body">
-          La velocidad es un beneficio real. Pero no es el motivo principal para usar sub-agents.<br><br>
-          El motivo principal es que el <strong>ruido de exploración no entre en el contexto del agente
-          que tiene que pensar después</strong>. La paralelización es consecuencia, no causa.
-        </div>
-      </div>
-    </div>
-    <div class="s10-parallel-note">
-      El diseño correcto empieza por la pregunta de contexto, no por la de velocidad.
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Señalar la columna izquierda — el mecanismo de paralelización. Señalar la columna derecha — el orden de prioridades. Leer la nota de cierre.</strong></p>
-    <p><u>Slide de beneficio secundario. La columna izquierda describe el mecanismo real. La columna derecha corrige el error más común: pensar que los sub-agents son principalmente una herramienta de velocidad. La nota de cierre ancla el criterio de diseño.</u></p>
-    <p><em>"Hay un beneficio adicional que vale la pena nombrar porque es real: la paralelización. Porque cada sub-agent tiene su propia ventana, varios pueden correr al mismo tiempo. Si necesitás analizar auth, base de datos y capa de API por separado, y las tres búsquedas no se pisan, podés lanzarlas en paralelo. El padre integra cuando todas terminan."</em></p>
-    <p><em>"Pero quiero que quede claro el orden de prioridades. La razón principal para usar sub-agents no es la velocidad. Es que el ruido de exploración no entre en el contexto del agente que tiene que pensar después. La paralelización es consecuencia del diseño, no el motivo del diseño."</em></p>
-    <p><em>"Si arrancás eligiendo sub-agents porque son más rápidos, vas a elegir mal cuándo usarlos. Si arrancás preguntando qué debería estar en el contexto del padre y qué no, vas a elegir bien."</em></p>
-  </aside>
-</section>
-
-<!-- §10.6 · El costo — callback §5 supervisión -->
-<section>
-  <h2>El costo: el padre ve el resumen, no el razonamiento</h2>
-
-  <div class="s10-cost-wrap">
-    <div class="s10-cost-card">
-      <span class="s10-cost-card-label">Lo que ganás y lo que perdés en la misma operación</span>
-      <div class="s10-cost-card-body">
-        El padre no ve cómo el sub-agent llegó al resultado. Ve el resumen, no el razonamiento.
-        Eso es exactamente lo que hace que el contexto no crezca — y también es lo que requiere
-        que <em>leas el resultado con criterio</em>.<br><br>
-        Si el sub-agent dice "la autenticación está en <code style="font-family:var(--font-mono); color:var(--accent); font-size:0.9em;">auth/middleware.py</code> y usa JWT",
-        tenés que poder decidir si ese resultado es coherente con lo que sabés del proyecto.
-      </div>
-    </div>
-    <div class="s10-cost-principle">
-      Callback §5: la delegación no te exime de supervisar.<br>
-      El trabajo del padre es leer el resultado, evaluar si tiene sentido, y actuar sobre él —
-      no asumirlo correcto porque lo generó un loop.<br>
-      El punto no es desconfiar siempre: es que delegar no es dejar de mirar.
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Leer el cuerpo de la tarjeta con pausa en "leas el resultado con criterio". Leer el callout enfatizando la última frase: "delegar no es dejar de mirar".</strong></p>
-    <p><u>Slide del costo. La tarjeta principal presenta la pérdida de visibilidad como el precio simétrico del beneficio de contexto. El callout conecta explícitamente con §5 — el supervisor sigue siendo necesario, la autonomía no lo elimina.</u></p>
-    <p><em>"El mismo mecanismo que protege el contexto del padre introduce un costo. El padre no ve el razonamiento. No ve qué archivos abrió el sub-agent, ni cuáles descartó, ni qué interpretaciones intermedias generó. Ve el resultado."</em></p>
-    <p><em>"Eso es una consecuencia directa de lo que hace que los sub-agents sean útiles. No es un bug: es el diseño. Pero exige algo del padre — y de vos, supervisando al padre."</em></p>
-    <p><em>"§5 lo dijo de otra manera: 'no le creés a la IA, le creés a la máquina'. Acá la formulación es: leés el resultado, evaluás si es coherente con lo que sabés del proyecto, y actuás sobre él. No lo asumís correcto porque lo generó un loop."</em></p>
-    <p><em>"Delegar no es dejar de mirar. Es cambiar dónde mirás."</em></p>
-  </aside>
-</section>
-
-<!-- §10.7 · section-divider — Demo D5 -->
+<!-- §10.10 · Demo · prompt → /permissions → repetir (section-divider + clickable-steps) -->
 <section class="section-divider">
-  <h2>Demo D5 · El sub-agent aísla</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">El dispositivo es <code style="font-family:var(--font-mono);">/context</code> antes y después — el mismo número cuenta la historia.</p>
-
-  <aside class="notes">
-    <p><u>Divider de demo D5. El dispositivo central del demo es /context: muestra el tamaño actual del contexto en números concretos. Se hace la misma búsqueda dos veces — una inline, una delegada a sub-agent — y el delta es el argumento.</u></p>
-    <p><em>"Vamos al demo. El objetivo de este demo es visible y medible: Claude Code tiene un comando, /context, que muestra el tamaño actual del contexto. Vamos a hacer la misma búsqueda exploratoria dos veces — una en línea, otra delegada a un sub-agent — y vamos a mirar el número."</em></p>
-  </aside>
-</section>
-
-<!-- §10.8 · Demo D5 beats — clickable-steps -->
-<section>
-  <h2>D5 · Tres beats: misma búsqueda, dos ventanas</h2>
+  <h2>Demo · prompt → <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">/permissions</code> → repetir</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Ver el ciclo completo: un comando que pregunta, una regla que lo libera, una regla que lo bloquea.</p>
 
   <div class="s10-demo-wrap">
     <div id="s10-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup: dos sesiones nuevas de Claude Code abiertas en un repo con volumen. /context disponible para mostrar el tamaño del contexto después de cada búsqueda. Click recorre los 3 beats.</strong></p>
-    <p><u>Beat 1 — qué mirar: ejecutar la búsqueda inline directamente ("encontrá dónde se maneja la autenticación en todo el repo"). Dejar que el agente trabaje: busca archivos, los abre, los lee. Cuando termina, ejecutar /context. El número que importa es el delta respecto al inicio de sesión — no el absoluto, sino cuánto creció. Beat 2 — qué mirar: misma búsqueda, sesión nueva, pero esta vez pedida con delegación explícita ("usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado"). Cuando el padre recibe el resultado, ejecutar /context. El número de contexto en esta sesión debe ser significativamente menor que en Beat 1, aunque el resultado sea el mismo. Beat 3 — qué mirar: el resultado es el mismo en ambas sesiones; el delta de contexto no lo es. Ese contraste es el argumento. Plan B si comparar /context en vivo no coopera: cambiar a dos transcripts preparados — uno de sesión inline con contexto inflado al final (señalar el número), otro de sesión con sub-agent con contexto casi sin cambios seguido del resultado devuelto. El argumento es el mismo; la fuente de evidencia cambia de live a grabado.</u></p>
-    <p><em>"Beat 1. Sesión nueva. Le pido directamente: 'encontrá dónde se maneja la autenticación en todo el repo'. Dejo que el agente trabaje. Abre archivos, rastrea imports, descarta carpetas. Cuando termina, /context. Miren el número."</em></p>
-    <p><em>"Beat 2. Sesión nueva. Misma tarea, distinto pedido: 'usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado'. El sub-agent corre su loop en su propia ventana. Cuando el padre recibe el resultado, /context. El número es significativamente menor. Mismo resultado, fracción del costo."</em></p>
-    <p><em>"Beat 3. Mismo resultado en ambas sesiones. El archivo, la línea, el método. Pero el contexto del padre en el Beat 2 creció lo mínimo. Todo lo que el sub-agent exploró vivió en su ventana y desapareció al terminar. El agente principal sigue con una ventana limpia."</em></p>
+    <p><strong>Setup antes del slide: terminal con cwd en una copia del demo-repo, en una sesión nueva. El .claude/settings.json del demo-repo, abierto en VS Code en una pestaña al lado, para mostrar los cambios que /permissions va escribiendo (en settings.local.json). Plan B en notes del último paso si algo falla en vivo.</strong></p>
+    <p><u>Demo de la sección. Tres pasos sobre la misma sesión, sin reiniciar. El primer paso muestra el comportamiento default cuando no hay regla; el segundo, allow agregado en vivo elimina el prompt; el tercero, deny agregado en vivo bloquea sin opción a confirmar. El objetivo es ver la diferencia entre ask y deny en pantalla, no contártela. Si el flujo en vivo falla, el Plan B sostiene el argumento leyendo las tres listas del settings.json — la lógica se sostiene sin ver el runtime ejecutarse.</u></p>
+    <p><em>"Vamos al demo. Tres pasos sobre una misma sesión, sin reiniciar. La idea es ver en pantalla el ciclo completo: un comando que pregunta, una regla que lo libera, una regla que lo bloquea."</em></p>
   </aside>
 </section>
 
-<!-- §10.9 · Cierre + bridge a §11 -->
-<section>
-  <h2>La unidad más grande aislada — y lo que cambia en §11</h2>
+<!-- §10.11 · Cierre + bridge a §11 -->
+<section class="s10-slide">
+  <h2>Reglas del runtime, deterministas, antes de cada tool call</h2>
 
   <div class="s10-close-card">
     <p class="s10-close-main">
-      Los sub-agents aíslan la unidad más grande: el <em>loop entero</em>.
-      Lo que el sub-agent explora y descarta nunca llega al padre.
-      Es la misma lógica de §7, §8, §9 — actuar sobre el contexto para que el agente
-      no se ahogue en ruido — aplicada ahora al agente mismo.
+      Los permisos son <strong>reglas del runtime</strong>, evaluadas <strong>antes de cada tool call</strong>. Tres listas — <code>allow</code> / <code>deny</code> / <code>ask</code> — y una precedencia: <code>deny</code> gana sobre <code>allow</code>. Una regla escrita acá <strong>no se ignora</strong> ni se reinterpreta. Es el contrato más duro que tenés sobre lo que el agente puede hacer.
     </p>
     <p class="s10-close-bridge">
-      Hasta acá, todo actuó sobre <em>qué entra</em> al contexto o sobre cómo se estructura.
-      §11 cambia de eje: ya no la pregunta es qué entra al agente, sino
-      <span class="bridge-loop">cuánto le dejás hacer antes de mirar</span>.
-      El tracker va a hacer algo que no hizo en toda la parte 2: flippear a LOOP.
+      Los permisos <em>limitan</em> qué tools usa el agente. Las skills hacen lo contrario: le dan procedimientos que no traía. El agente sabe correr comandos — las skills le enseñan <em>cuándo</em> y <em>en qué orden</em>.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal — remarcar "el loop entero" como la escala final de aislamiento. Pausa. Leer el bridge enfatizando "cambia de eje" y el flip visual del tracker que viene.</strong></p>
-    <p><u>Cierre de §10 y puente a §11. El párrafo principal consolida el arco de §7–§10 como variaciones del mismo principio de aislamiento de contexto, escalando de instrucción a procedimiento a loop entero. El bridge anticipa el flip del tracker a HARNESS — el primer flip de toda la parte 2 — que es el hook central de §11.</u></p>
-    <p><em>"La misma lógica que recorre §7, §8, §9 y §10 es siempre la misma: actuar sobre el contexto para que el agente no se ahogue en ruido. CLAUDE.md elige qué cargar siempre. Las path-scoped rules, qué cargar por archivo. Las skills, qué cargar por invocación. Y los sub-agents aislan la unidad más grande de todas: el loop entero."</em></p>
-    <p><em>"§11 cambia algo. No en el argumento — en el eje. Todo lo que vimos desde §7 responde la misma pregunta: ¿qué entra al contexto del agente? §11 responde otra: ¿cuánto le dejás hacer al agente antes de que tengas que mirar?"</em></p>
-    <p><em>"Y el tracker, que en toda la parte 2 aterrizó en CONTEXTO, va a hacer algo nuevo. La primera vez que lo ven en LOOP es el hook de §11."</em></p>
+    <p><strong>Leer el párrafo principal apoyando "reglas del runtime" y "antes de cada tool call" — las dos frases a retener. Pausa antes del bridge. Marcar el contraste limitar/dar con la voz.</strong></p>
+    <p><u>Cierre de §10 + bridge a §11. La línea principal consolida la propiedad central: permisos son gate del runtime, no instrucción para el modelo. El bridge a §11 abre el contraste estructural: §10 fue sobre acotar, §11 va a ser sobre extender. Las dos caras del mismo problema — qué puede hacer el agente.</u></p>
+    <p><em>"Cerramos §10. La propiedad central a retener: los permisos son reglas del runtime, evaluadas antes de cada tool call. Tres listas — allow, deny, ask — y una precedencia: deny gana sobre allow. Una regla escrita acá no se ignora ni se reinterpreta. Es el contrato más duro que tenés sobre lo que el agente puede hacer."</em></p>
+    <p><em>"Y el bridge a §11. Toda esta sección fue sobre limitar — sobre acotar qué tools usa el agente. La próxima sección hace lo contrario: las skills le dan procedimientos que no traía. El agente ya sabe correr comandos; las skills le enseñan cuándo correrlos y en qué orden. Son las dos caras del mismo problema — qué puede hacer el agente — atacadas desde lados opuestos. Limitamos por un lado, extendemos por el otro."</em></p>
   </aside>
 </section>
 
 <!-- INIT-SCRIPTS-§10-START -->
 <script>
-  initFourLoop({containerId: 's10-loop-subagent', mode: 'subagent'});
   initClickableSteps({containerId: 's10-demo-steps', steps: [
     {
-      title: 'Beat 1 — Búsqueda inline (sin sub-agent)',
-      summary: 'Sesión nueva. Pedido directo: "encontrá dónde se maneja la autenticación en todo el repo". El agente busca archivos, los abre, rastrea imports. Al terminar, /context.',
-      example: '/context después de la búsqueda — el delta respecto al inicio de sesión muestra todo lo que el agente leyó. Los cuarenta archivos que abrió, los imports que rastreó, las líneas que descartó — todo sigue en la ventana. Ese es el precio de la búsqueda inline.'
+      title: 'Paso 1 — Sin permiso: el prompt aparece',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en el demo-repo, sin <code>Bash(uv run pytest)</code> en allow</li><li><strong>En Claude:</strong> "corré los tests"</li><li><strong>Mirar:</strong> prompt "¿Permitir Bash uv run pytest?"</li><li><strong>Negar</strong> — Claude no ejecuta pero no rompe</li></ul>',
+      example: 'El punto del paso uno: el default no es bloquear, es preguntar. Y la negación no produjo un error — Claude recibe la denegación como respuesta, dice "no pude ejecutar el comando", y sigue funcionando. Sin reglas, cada acción que toca el mundo es una pregunta.'
     },
     {
-      title: 'Beat 2 — La misma búsqueda delegada a un sub-agent',
-      summary: 'Sesión nueva. Pedido con delegación explícita: "usando un sub-agent, encontrá dónde se maneja la autenticación y devolveme solo el resultado". Al recibir el resultado, /context.',
-      example: '/context en esta sesión — número significativamente menor que en Beat 1. Mismo resultado: el archivo, la línea, el método. Pero todo lo que el sub-agent leyó vivió en su ventana y desapareció. Plan B si /context no muestra delta visible en vivo: dos transcripts preparados — uno de sesión inline con contexto inflado, otro de sesión con sub-agent con contexto casi sin cambios.'
+      title: 'Paso 2 — /permissions agrega allow: pasa sin prompt',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code></li><li><strong>Agregar</strong> <code>Bash(uv run pytest)</code> a <code>allow</code> (escribe en <code>.local.json</code>)</li><li><strong>En Claude:</strong> "corré los tests" (de nuevo)</li><li><strong>Mirar:</strong> corre sin prompt</li><li><strong>VS Code:</strong> ver el diff en <code>.local.json</code> abierto al lado</li></ul>',
+      example: 'Lo importante no es solo que pase — es ver dónde escribió el cambio. /permissions tocó settings.local.json, no settings.json. La autonomía que yo le di a Claude en mi máquina no contamina la config del equipo. Misma tarea, mismo agente, distinto nivel de autonomía configurado, y el archivo compartido del repo intacto.'
     },
     {
-      title: 'Beat 3 — Mismo resultado, fracción del costo',
-      summary: 'Contraste final entre los dos números de /context: mismo resultado entregado, delta de contexto opuesto.',
-      example: '"Mismo resultado, una fracción del costo de contexto. Eso es aislar. La exploración pasó, su ruido no entró. El agente principal sigue con una ventana limpia."'
+      title: 'Paso 3 — /permissions agrega deny: bloqueado sin opción',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code></li><li><strong>Agregar</strong> <code>Read(./.env)</code> a <code>deny</code></li><li><strong>En Claude:</strong> "mostrame el contenido de <code>.env</code>"</li><li><strong>Mirar:</strong> bloqueado, sin prompt — Claude no puede rodearlo</li></ul>',
+      example: 'Acá se ve la diferencia entre ask y deny. Ask es un prompt — un humano puede aprobar. Deny es un muro — no hay prompt, no hay aprobación posible. Y Claude no puede pedirlo de otra forma, no puede argumentar, no puede insistir: el bloqueo es del runtime, no del modelo. El modelo simplemente recibe "tool no disponible" como respuesta.\n\nPLAN B (si el flujo en vivo no coopera): abrir el .claude/settings.json del demo-repo y leer las tres listas — allow, deny, ask — en voz alta. Para cada entrada, explicar qué cubre y por qué está en esa lista. El argumento no necesita que veas el runtime ejecutarse: la lógica de allow/deny/ask y la precedencia de deny se sostienen con la lectura.'
     }
   ]});
 </script>
