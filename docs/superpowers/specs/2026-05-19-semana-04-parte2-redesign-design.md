@@ -296,21 +296,33 @@ semanas/04/demo-repo/
     └── test_posts.py
 ```
 
-### Filosofía pedagógica clave
+### Mecánica del demo: Opción 1 (estado final committed + narrativa de construcción)
 
-**El repo arranca sin `.claude/`.** Cada sección agrega la pieza correspondiente:
+**El repo committed al repositorio del curso tiene el `.claude/` completo en estado final desde el inicio.** El framing pedagógico de "lo vamos construyendo sección a sección" vive **en los slides**, no en el estado real del disco.
 
-| Sección | Lo que agrega al `.claude/` del repo demo |
-|---------|-------------------------------------------|
+| Sección | Pieza que la sección presenta (ya existe en el repo committed) |
+|---------|-----------------------------------------------------------------|
 | §7  | `CLAUDE.md` raíz (instrucciones del proyecto) + referencia a `~/.claude/CLAUDE.md` que ya existe en la máquina del profesor |
 | §8  | `.claude/rules/code-style.md`, `testing.md`, `security.md` (siempre cargadas), `api.md` con `paths: ["backend/**/*.py"]` (condicional) |
 | §9  | `.claude/settings.json` (project) y `.claude/settings.local.json` (gitignore) — campos `model`, `env`, `hooks` chico |
-| §10 | Bloque `permissions` dentro del `.claude/settings.json` ya creado en §9 |
+| §10 | Bloque `permissions` dentro del `.claude/settings.json` |
 | §11 | Una skill chica + un slash command que la invoca |
 | §12 | Un sub-agent custom en `.claude/agents/researcher.md` (o se usa `Explore` built-in) |
 | §13 | Sin archivo nuevo — se usa `--permission-mode plan` al arranque y `Shift+Tab` durante la sesión |
 
-Al final del recorrido el repo demo tiene un `.claude/` completo y funcional, listo para que el profesor lo deje como referencia para los alumnos.
+Durante la clase, en cada sección el profesor:
+1. Muestra el archivo de la pieza en los slides (vía `code-walkthrough`) — la audiencia ve el contenido sin cambiar de share.
+2. Al final de la sección, una sola incursión a VS Code para abrir ese archivo (ya existente) y correr los comandos de verificación (`/memory`, `/context`, `/permissions`, etc.).
+
+No hay creación de archivos en vivo durante la clase. La narrativa "lo agregamos cuando empezamos a configurar este repo" la hacen los slides.
+
+### Ubicación del repo demo
+
+El repo demo se crea y se mantiene en `semanas/04/demo-repo/` dentro de este repositorio del curso — es la **fuente canónica** para mantenimiento y versionado.
+
+**Antes de cada clase**, el profesor copia el directorio fuera del repositorio del curso (a una carpeta independiente en su máquina) y lo abre desde esa ubicación en VS Code. Razón: aislar el repo demo del repo del curso así Claude Code no ve el `CLAUDE.md` ni la configuración del curso cuando está corriendo en el demo. Esto también permite que `git init` corra limpio en la copia.
+
+**Implicación operacional:** los slides nunca referencian la ruta `semanas/04/demo-repo/` literalmente. Las rutas mostradas en slides son relativas a la raíz del repo demo (e.g., `./CLAUDE.md`, `.claude/rules/api.md`).
 
 ### Decisiones que toma el plan de implementación
 
