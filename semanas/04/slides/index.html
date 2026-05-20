@@ -2963,10 +2963,11 @@
 /* Preview flow */
 .s6-preview-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  max-width: 820px;
+  max-width: 780px;
   margin: 24px auto 0;
+  justify-content: center;
 }
 .s6-preview-card {
   background: var(--bg-secondary);
@@ -2991,29 +2992,8 @@
   color: var(--text-primary);
   line-height: 1.4;
 }
-.s6-preview-card .s6-prev-tag {
-  font-size: 0.58em;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 3px 8px;
-  border-radius: 4px;
-  align-self: center;
-  margin-top: 4px;
-}
-.s6-prev-tag.tag-context {
-  background: rgba(130, 170, 255, 0.12);
-  color: var(--accent-secondary);
-  border: 1px solid rgba(130, 170, 255, 0.3);
-}
-.s6-prev-tag.tag-loop {
-  background: rgba(100, 255, 218, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(100, 255, 218, 0.3);
-}
 .s6-preview-sub {
-  max-width: 820px;
+  max-width: 780px;
   margin: 16px auto 0;
   font-size: 0.7em;
   color: var(--text-muted);
@@ -3146,112 +3126,192 @@
   </aside>
 </section>
 
-<!-- §6.6 · Lo que viene — preview §7–§11 -->
+<!-- §6.6 · Lo que viene — preview §7–§13 (7 piezas configurables) -->
 <section>
   <h2>El mapa de lo que viene</h2>
 
   <div class="s6-preview-grid">
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§7</span>
-      <span class="s6-prev-title">CLAUDE.md jerárquico</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">CLAUDE.md y memoria automática</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§8</span>
-      <span class="s6-prev-title">Rules y auto memory</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">Rules</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§9</span>
-      <span class="s6-prev-title">Skills y slash commands</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">settings.json</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§10</span>
-      <span class="s6-prev-title">Sub-agents</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">Permisos</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§11</span>
-      <span class="s6-prev-title">Plan mode y control</span>
-      <span class="s6-prev-tag tag-loop">Loop</span>
+      <span class="s6-prev-title">Skills y slash commands</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§12</span>
+      <span class="s6-prev-title">Sub-agents</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§13</span>
+      <span class="s6-prev-title">Plan mode y permission modes</span>
     </div>
   </div>
 
-  <p class="s6-preview-sub">Llevá esa pregunta a cada sección y las conexiones se hacen solas.</p>
+  <p class="s6-preview-sub">Cada sección abre con las mismas cinco preguntas — qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde.</p>
 
   <aside class="notes">
-    <p><strong>Recorrer las cinco tarjetas de izquierda a derecha. Pausa en §11 — señalar que es el único que aterriza en "loop". Leer la línea de cierre.</strong></p>
-    <p><u>Slide de preview de la parte 2. Grid de 5 tarjetas — una por sección — cada una con su etiqueta loop/contexto. No es una lista: es el mapa visual que el alumno puede usar como referencia durante el resto de la clase. El único flip a loop es §11 — hecho visible acá como anticipo.</u></p>
-    <p><em>"Este es el mapa de lo que viene. Cinco secciones, cada una con su respuesta a la pregunta-lente."</em></p>
-    <p><em>"§7, CLAUDE.md jerárquico: contexto. Texto tuyo que entra a la ventana antes del primer mensaje, en cada sesión."</em></p>
-    <p><em>"§8, Rules y auto memory: contexto. Instrucciones condicionales y la memoria que el agente se escribe solo."</em></p>
-    <p><em>"§9, Skills y slash commands: contexto. Un procedimiento completo que no ocupa tokens hasta que lo invocás."</em></p>
-    <p><em>"§10, Sub-agents: contexto. Un loop entero aislado en su propia ventana — solo vuelve el resultado."</em></p>
-    <p><em>"§11, Plan mode y control del loop: loop. El primero — y el único — de la parte 2 que aterriza en el otro polo. Eso es deliberado y es el hook de §11."</em></p>
-    <p><em>"Llevá la pregunta a cada sección. Las conexiones se hacen solas."</em></p>
+    <p><strong>Recorrer las siete tarjetas brevemente, sin leerlas una por una. Usar el slide para anunciar el alcance de la Parte 2, no para presentar cada feature.</strong></p>
+    <p><u>Slide de preview. Siete piezas configurables del runtime de Claude Code, una por sección. La taxonomía del slide no es "qué tipo de cosa es cada una" — es "anatomía". Cada sección recorre la misma plantilla: qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde. El demo va al final de cada sección, un único bloque.</u></p>
+    <p><em>"Lo que viene son siete piezas configurables del runtime. CLAUDE.md, rules, settings.json, permisos, skills, sub-agents, plan mode. Una por sección."</em></p>
+    <p><em>"Cada una con la misma plantilla — cinco preguntas. Qué es. Dónde vive. Cuándo se carga. Cómo se usa. Qué confunde. Y al cierre, un demo corto en VS Code."</em></p>
+    <p><em>"La promesa al final no es 'aprendiste siete features'. Es poder abrir cualquier proyecto con Claude Code instalado, mirar la carpeta .claude, y ubicar cada pieza. Saber qué archivo es responsable de qué."</em></p>
   </aside>
 </section>
 </section>
       <!-- /§6 -->
 
-      <!-- ===== §7 — CLAUDE.md jerárquico ===== -->
+      <!-- ===== §7 — CLAUDE.md y memoria automática ===== -->
       <style>
 /* Scoped styles for §7 only */
 
-/* Opener lens wrap */
-.s7-opener-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  margin: 24px auto 0;
-  max-width: 640px;
-}
-.s7-opener-sublabel {
-  font-size: 0.65em;
-  font-family: var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0;
-}
-.s7-opener-line {
+/* Heading override scoped to §7 slides (reveal default h2 is ~2em — too tall for dense slides) */
+.reveal .slides .s7-slide h2 {
   font-size: 0.82em;
-  color: var(--text-muted);
-  text-align: center;
-  margin: 0;
-  line-height: 1.6;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
-/* Single focused card */
+/* --- Five-questions card (full + mini) --- */
+.s7-five-q-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.48em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0 0 3px;
+}
+.s7-five-q-title {
+  font-size: 0.74em;
+  text-align: center;
+  margin: 0 0 12px;
+}
+.s7-five-q-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 900px;
+}
+.s7-five-q-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 6px;
+  padding: 9px 10px 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.s7-five-q-card.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+  border-left: 3px solid var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(100, 255, 218, 0.08);
+}
+.s7-five-q-num {
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.s7-five-q-card.is-active .s7-five-q-num {
+  color: var(--accent);
+}
+.s7-five-q-label {
+  font-size: 0.56em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.s7-five-q-hint {
+  font-size: 0.44em;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.s7-five-q-section-label {
+  margin: 14px auto 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.58em;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+/* Mini variant */
+.s7-five-q-grid.is-mini {
+  grid-template-columns: repeat(5, auto);
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0 auto 8px;
+}
+.s7-five-q-grid.is-mini .s7-five-q-card {
+  padding: 3px 9px;
+  border-radius: 999px;
+  border-left-width: 1px;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.s7-five-q-grid.is-mini .s7-five-q-card.is-active {
+  border-left: 1px solid var(--accent);
+}
+.s7-five-q-grid.is-mini .s7-five-q-num {
+  font-size: 0.42em;
+}
+.s7-five-q-grid.is-mini .s7-five-q-label {
+  font-size: 0.5em;
+}
+
+/* Single focused card (Qué es / Cierre) */
 .s7-focus-card {
   max-width: 680px;
-  margin: 24px auto 0;
+  margin: 14px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-left: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 28px 34px;
+  padding: 18px 24px;
   text-align: left;
 }
 .s7-focus-card p {
-  font-size: 0.86em;
-  line-height: 1.8;
+  font-size: 0.72em;
+  line-height: 1.6;
   color: var(--text-primary);
-  margin: 0 0 16px;
+  margin: 0 0 10px;
 }
 .s7-focus-card p:last-child {
   margin: 0;
 }
-.s7-focus-card .s7-focus-callout {
-  font-size: 0.88em;
+.s7-focus-callout {
+  font-size: 0.74em;
   font-weight: 700;
   color: var(--accent);
   border-top: 1px solid #2a3a5a;
-  padding-top: 16px;
+  padding-top: 12px;
   margin: 0;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 /* Jerarquía — cascade layout */
@@ -3259,12 +3319,12 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 760px;
-  margin: 20px auto 0;
+  max-width: 720px;
+  margin: 12px auto 0;
 }
 .s7-hier-row {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 90px 1fr;
   gap: 0;
   align-items: stretch;
 }
@@ -3273,30 +3333,27 @@
   border: 1px solid #2a3a5a;
   border-right: none;
   border-bottom: none;
-  border-radius: 0;
-  padding: 12px 14px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
 }
-.s7-hier-row:first-child .s7-hier-level {
-  border-radius: 8px 0 0 0;
-}
+.s7-hier-row:first-child .s7-hier-level { border-radius: 8px 0 0 0; }
 .s7-hier-row:last-child .s7-hier-level {
   border-radius: 0 0 0 8px;
   border-bottom: 1px solid #2a3a5a;
 }
 .s7-hier-level-num {
-  font-size: 0.58em;
+  font-size: 0.5em;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
 }
 .s7-hier-level-name {
-  font-size: 0.62em;
+  font-size: 0.54em;
   font-weight: 700;
   color: var(--accent-secondary);
   text-align: center;
@@ -3306,40 +3363,38 @@
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-bottom: none;
-  padding: 12px 18px;
+  padding: 8px 14px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   justify-content: center;
 }
-.s7-hier-row:first-child .s7-hier-content {
-  border-radius: 0 8px 0 0;
-}
+.s7-hier-row:first-child .s7-hier-content { border-radius: 0 8px 0 0; }
 .s7-hier-row:last-child .s7-hier-content {
   border-radius: 0 0 8px 0;
   border-bottom: 1px solid #2a3a5a;
 }
 .s7-hier-title {
-  font-size: 0.74em;
+  font-size: 0.64em;
   font-weight: 700;
   color: var(--text-primary);
 }
 .s7-hier-paths {
-  font-size: 0.58em;
+  font-size: 0.5em;
   font-family: var(--font-mono);
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 .s7-hier-use {
-  font-size: 0.6em;
+  font-size: 0.52em;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.45;
   margin-top: 2px;
 }
 .s7-hier-note {
-  max-width: 760px;
-  margin: 12px auto 0;
-  font-size: 0.64em;
+  max-width: 720px;
+  margin: 8px auto 0;
+  font-size: 0.54em;
   color: var(--text-muted);
   text-align: right;
   font-style: italic;
@@ -3351,25 +3406,21 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
-  max-width: 560px;
-  margin: 20px auto 0;
+  max-width: 520px;
+  margin: 12px auto 0;
 }
 .s7-load-node {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 7px;
-  padding: 11px 22px;
+  padding: 8px 18px;
   text-align: center;
   width: 100%;
 }
-.s7-load-node.root {
-  border-color: var(--accent-secondary);
-}
-.s7-load-node.cwd {
-  border-color: var(--accent);
-}
+.s7-load-node.root { border-color: var(--accent-secondary); }
+.s7-load-node.cwd { border-color: var(--accent); }
 .s7-load-label {
-  font-size: 0.62em;
+  font-size: 0.54em;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -3377,168 +3428,297 @@
   display: block;
 }
 .s7-load-path {
-  font-size: 0.72em;
+  font-size: 0.62em;
   font-weight: 700;
   color: var(--text-primary);
 }
 .s7-load-arrow {
   color: var(--text-muted);
-  font-size: 1.1em;
+  font-size: 0.9em;
   line-height: 1;
-  padding: 3px 0;
+  padding: 2px 0;
 }
 .s7-load-warning {
-  max-width: 560px;
-  margin: 14px auto 0;
+  max-width: 520px;
+  margin: 10px auto 0;
   background: rgba(130, 170, 255, 0.07);
   border: 1px solid rgba(130, 170, 255, 0.25);
   border-radius: 7px;
-  padding: 12px 18px;
-  font-size: 0.66em;
+  padding: 9px 16px;
+  font-size: 0.56em;
   color: var(--accent-secondary);
-  line-height: 1.65;
+  line-height: 1.55;
   text-align: center;
 }
 
-/* @import card */
-.s7-import-wrap {
-  max-width: 700px;
-  margin: 22px auto 0;
+/* Cómo se usa — tres decisiones independientes al escribir el archivo */
+.s7-howto-stack {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  max-width: 720px;
+  margin: 8px auto 0;
 }
-.s7-import-syntax {
-  background: var(--bg-code);
-  border-radius: 8px;
-  padding: 20px 26px;
-  font-family: var(--font-mono);
-  font-size: 0.84em;
-  color: var(--accent);
-  text-align: center;
-  letter-spacing: 0.03em;
-}
-.s7-import-props {
+.s7-howto-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
 }
-.s7-import-prop {
+.s7-howto-num {
+  background: var(--bg-code);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  color: var(--accent);
+  font-weight: 700;
+}
+.s7-howto-body {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 7px;
-  padding: 14px 18px;
+  padding: 8px 12px;
 }
-.s7-import-prop-label {
-  font-size: 0.58em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 5px;
-}
-.s7-import-prop-val {
-  font-size: 0.7em;
+.reveal .slides .s7-slide .s7-howto-h3 {
+  font-size: 0.84em;
+  font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.6;
+  margin: 0 0 5px;
+  line-height: 1.25;
+  text-transform: none;
+  letter-spacing: 0;
 }
-.s7-import-callout {
+.s7-howto-text {
+  font-size: 0.48em;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.s7-howto-text code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s7-howto-inline {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 6px;
+}
+.s7-howto-syntax {
+  background: var(--bg-code);
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.s7-howto-callout {
   background: rgba(100, 255, 218, 0.06);
-  border: 1px solid rgba(100, 255, 218, 0.25);
-  border-radius: 7px;
-  padding: 14px 20px;
-  font-size: 0.72em;
+  border-left: 2px solid var(--accent);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 0.48em;
   color: var(--accent);
   font-weight: 700;
-  text-align: center;
-  line-height: 1.55;
+  margin: 5px 0 0;
+  line-height: 1.4;
 }
 
-/* Repo vivo */
-.s7-repo-wrap {
-  max-width: 700px;
-  margin: 22px auto 0;
+/* Casos límite — 4 confusion cards grid (2×2) */
+.s7-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 820px;
+  margin: 12px auto 0;
+}
+.s7-case-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-top: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 6px;
+}
+.s7-case-tag {
+  font-family: var(--font-mono);
+  font-size: 0.46em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.s7-case-title {
+  font-size: 0.62em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.s7-case-body {
+  font-size: 0.52em;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.s7-case-body code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+
+/* Auto memory — sistema paralelo */
+.s7-auto-wrap {
+  max-width: 720px;
+  margin: 12px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s7-auto-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 16px 22px;
+}
+.s7-auto-lead {
+  font-size: 0.7em;
+  color: var(--text-primary);
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+.s7-auto-lead strong {
+  color: var(--accent-secondary);
+}
+.s7-auto-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.s7-auto-field {
+  background: var(--bg-code);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.s7-auto-field-label {
+  font-family: var(--font-mono);
+  font-size: 0.44em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.s7-auto-field-val {
+  font-size: 0.52em;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+.s7-auto-field-val code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s7-auto-cite {
+  text-align: right;
+  font-size: 0.5em;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin: 0;
+}
+.s7-auto-cite a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Repo vivo — demo-repo */
+.s7-repo-wrap {
+  max-width: 740px;
+  margin: 12px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .s7-repo-path {
   background: var(--bg-code);
   border-radius: 7px;
-  padding: 14px 20px;
+  padding: 9px 16px;
   font-family: var(--font-mono);
-  font-size: 0.76em;
+  font-size: 0.62em;
   color: var(--accent);
   text-align: center;
 }
-.s7-repo-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-.s7-repo-item {
-  background: var(--bg-secondary);
+.s7-repo-code {
+  background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 7px;
-  padding: 13px 16px;
-}
-.s7-repo-item-label {
-  font-size: 0.56em;
+  padding: 10px 14px;
   font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 4px;
-}
-.s7-repo-item-val {
-  font-size: 0.68em;
-  color: var(--text-primary);
+  font-size: 0.5em;
   line-height: 1.55;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  margin: 0;
 }
+.s7-repo-code .h { color: var(--accent-secondary); font-weight: 700; }
+.s7-repo-code .c { color: var(--text-muted); }
+.s7-repo-code .k { color: var(--accent); }
 .s7-repo-connect {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-left: 3px solid var(--accent);
   border-radius: 7px;
-  padding: 14px 20px;
-  font-size: 0.72em;
+  padding: 10px 16px;
+  font-size: 0.6em;
   color: var(--text-muted);
-  line-height: 1.65;
+  line-height: 1.55;
 }
-.s7-repo-connect strong {
-  color: var(--text-primary);
+.s7-repo-connect strong { color: var(--text-primary); }
+.s7-repo-connect code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
 }
 
-/* Demo beats */
+/* Demo steps wrap */
 .s7-demo-wrap {
   max-width: 720px;
-  margin: 24px auto 0;
+  margin: 16px auto 0;
 }
 
 /* Cierre */
 .s7-close-card {
-  max-width: 660px;
-  margin: 28px auto 0;
+  max-width: 640px;
+  margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 28px 36px;
+  padding: 18px 26px;
   text-align: center;
 }
 .s7-close-main {
-  font-size: 0.84em;
-  line-height: 1.8;
+  font-size: 0.72em;
+  line-height: 1.65;
   color: var(--text-primary);
-  margin: 0 0 20px;
+  margin: 0 0 14px;
 }
 .s7-close-bridge {
-  font-size: 0.76em;
+  font-size: 0.64em;
   color: var(--text-muted);
-  line-height: 1.75;
+  line-height: 1.6;
   border-top: 1px solid #2a3a5a;
-  padding-top: 18px;
+  padding-top: 12px;
   margin: 0;
 }
 .s7-close-bridge em {
@@ -3548,45 +3728,98 @@
 }
 </style>
 <section>
-<!-- §7.2 · CLAUDE.md = siempre cargado (tracker merged from former §7.1 opener) -->
-<section>
-  <div class="lens-tracker on-context" style="margin-bottom:14px;">
-    <div class="pole pole-context">CONTEXT</div>
-    <div class="lens-sep">↔</div>
-    <div class="pole pole-harness">HARNESS</div>
-  </div>
-  <p style="text-align:center;font-size:0.62em;color:var(--text-muted);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin:0 0 14px;">siempre cargado</p>
+<!-- §7.1 · Apertura — Tarjeta de 5 preguntas (full opener) -->
+<section class="s7-slide">
+  <p class="s7-five-q-eyebrow">Cada sección de Parte 2</p>
+  <h2 class="s7-five-q-title">Cinco preguntas, en este orden</h2>
+
+  <ol class="s7-five-q-grid">
+    <li class="s7-five-q-card is-active">
+      <span class="s7-five-q-num">1</span>
+      <span class="s7-five-q-label">Qué es</span>
+      <span class="s7-five-q-hint">definición en una línea</span>
+    </li>
+    <li class="s7-five-q-card">
+      <span class="s7-five-q-num">2</span>
+      <span class="s7-five-q-label">Dónde vive</span>
+      <span class="s7-five-q-hint">paths / niveles</span>
+    </li>
+    <li class="s7-five-q-card">
+      <span class="s7-five-q-num">3</span>
+      <span class="s7-five-q-label">Cuándo se carga</span>
+      <span class="s7-five-q-hint">momento + trigger</span>
+    </li>
+    <li class="s7-five-q-card">
+      <span class="s7-five-q-num">4</span>
+      <span class="s7-five-q-label">Cómo se usa</span>
+      <span class="s7-five-q-hint">sintaxis + ejemplos</span>
+    </li>
+    <li class="s7-five-q-card">
+      <span class="s7-five-q-num">5</span>
+      <span class="s7-five-q-label">Qué confunde</span>
+      <span class="s7-five-q-hint">casos límite</span>
+    </li>
+  </ol>
+
+  <p class="s7-five-q-section-label">§7 · CLAUDE.md y memoria automática</p>
+
+  <aside class="notes">
+    <p><strong>Presentar la tarjeta como dispositivo recurrente. No leer las cinco preguntas — son la guía visual. Anunciar la sección con el rótulo de abajo.</strong></p>
+    <p><u>Apertura de §7 y, a la vez, el dispositivo que abre las siete secciones de Parte 2. Cinco preguntas fijas, en orden fijo. Qué es / dónde vive / cuándo se carga / cómo se usa / qué confunde. En el opener las cinco están a la vista; durante la sección aparece arriba la versión mini con la pregunta activa iluminada.</u></p>
+    <p><em>"Cambio de tono. Las próximas siete secciones siguen todas la misma plantilla. Son siete piezas del runtime de Claude Code — CLAUDE.md, rules, settings.json, permisos, skills, sub-agents, plan mode — y a cada una le vamos a hacer las mismas cinco preguntas en el mismo orden."</em></p>
+    <p><em>"Qué es. Dónde vive. Cuándo se carga. Cómo se usa. Y qué confunde. Si al final de cada sección podés responder esas cinco, sabés operar la pieza. Si te falta alguna, la pieza te va a sorprender en algún momento."</em></p>
+    <p><em>"Arrancamos por la más visible — la que está más cerca del usuario y la que más se confunde con 'configurar' al agente. CLAUDE.md y su pariente cercano, la memoria automática."</em></p>
+  </aside>
+</section>
+
+<!-- §7.2 · Qué es — definición + propiedad central -->
+<section class="s7-slide">
+  <ol class="s7-five-q-grid is-mini">
+    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
+  </ol>
 
   <h2>CLAUDE.md es texto tuyo en la ventana desde el arranque</h2>
 
   <div class="s7-focus-card">
     <p>
-      Antes de que escribas el primer mensaje de una sesión, Claude ya leyó un conjunto de archivos de texto plano.
+      Antes de que escribas el primer mensaje de una sesión, Claude Code ya leyó un conjunto de archivos de texto plano.
       Esos archivos son los <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">CLAUDE.md</code>,
       y su contenido aparece inyectado en la ventana de contexto desde el primer intercambio.
-      No hay prompts implícitos ni magia: es texto tuyo, cargado automáticamente, siempre.
+      No hay prompts implícitos: es texto tuyo, cargado automáticamente, siempre.
     </p>
     <p>
-      La consecuencia directa de esa propiedad: todo lo que ponés ahí ocupa contexto en cada sesión, sin excepción —
-      sin importar si esa instrucción tiene algo que ver con la tarea del momento.
+      La consecuencia directa de esa propiedad: todo lo que ponés ahí ocupa contexto en cada sesión,
+      sin importar si la instrucción tiene algo que ver con la tarea del momento.
     </p>
     <p class="s7-focus-callout">
-      Todo lo que ponés en CLAUDE.md cuesta contexto siempre → es la herramienta más directa para moldear el comportamiento, y la que más disciplina exige.
+      CLAUDE.md cuesta contexto siempre → es la herramienta más directa para moldear el comportamiento, y la que más disciplina exige.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar el tracker — CONTEXTO iluminado. Leer el sublabel en voz alta. Pausa breve antes de continuar. Después leer los dos párrafos del card. Pausa antes del callout. Leer el callout despacio — es la tesis central de §7.</strong></p>
-    <p><u>Slide de concepto central con el tracker en la cabecera (CONTEXTO iluminado, sub-etiqueta "siempre cargado" — el rótulo de la tricotomía que se plantó en §4). Un solo card con la definición operativa de CLAUDE.md y su consecuencia en contexto. El callout acuñado resume la dualidad: poder máximo, costo constante.</u></p>
-    <p><em>"La pregunta-lente aterriza: contexto. Y la variante específica dentro del contexto es 'siempre cargado'. Cada sesión de Claude Code, antes de que escribás una sola instrucción, el agente ya leyó algo. Eso es CLAUDE.md. Vamos a ver cómo funciona, qué niveles tiene, y qué cuesta."</em></p>
-    <p><em>"No hay nada escondido acá. Es texto tuyo. Lo escribís vos, lo lee Claude al arrancar la sesión, entra a la ventana de contexto y queda ahí. Antes de tu primer mensaje."</em></p>
-    <p><em>"La propiedad es simple y tiene una consecuencia que vale la pena remarcar: todo lo que ponés ahí cuesta contexto en cada sesión. Con relevancia para la tarea del momento, o sin ella. El costo es constante."</em></p>
-    <p><em>"Eso hace a CLAUDE.md la herramienta más directa que tenés para moldear el comportamiento del agente de manera persistente — y también la que exige más disciplina sobre qué escribís. Porque lo que ponés ahí siempre paga."</em></p>
+    <p><strong>Señalar la mini tarjeta — "Qué es" iluminada. Leer los dos párrafos del card. Pausa antes del callout. Leer el callout despacio — es la tesis de §7.</strong></p>
+    <p><u>Slide de definición. Arriba la versión mini de las cinco preguntas con "Qué es" lit; abajo un solo card. Estructura: definición operativa en un párrafo, consecuencia en otro, callout con la propiedad central — "cuesta contexto siempre". La mini tarjeta queda visible toda la sección, alguien que entra tarde sabe en qué pregunta estamos.</u></p>
+    <p><em>"Empezamos por la primera pregunta. Qué es. La respuesta de una línea: CLAUDE.md son archivos markdown que Claude Code lee al arranque de cada sesión, antes de tu primer mensaje, y cuyo contenido aparece inyectado en la ventana de contexto."</em></p>
+    <p><em>"No hay nada escondido. Es texto que vos escribiste. Lo lee al arrancar, lo mete en la ventana, queda ahí. Antes de que digas hola."</em></p>
+    <p><em>"La propiedad que importa retener — y que vuelve durante toda la sección — es esta: todo lo que ponés en ese archivo cuesta contexto en cada sesión. Con relevancia para la tarea del día, o sin ella. El costo es constante."</em></p>
+    <p><em>"Por eso es la herramienta más directa que tenés para moldear el comportamiento del agente de manera persistente, y por eso mismo la que más disciplina exige sobre qué escribís ahí. Lo que ponés siempre paga."</em></p>
   </aside>
 </section>
 
-<!-- §7.3 · La jerarquía — 4 niveles -->
-<section>
+<!-- §7.3 · Dónde vive — jerarquía de 4 niveles -->
+<section class="s7-slide">
+  <ol class="s7-five-q-grid is-mini">
+    <li class="s7-five-q-card"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
+    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
+  </ol>
+
   <h2>Cuatro niveles, de lo más amplio a lo más específico</h2>
 
   <div class="s7-hierarchy">
@@ -3619,8 +3852,8 @@
       </div>
       <div class="s7-hier-content">
         <span class="s7-hier-title">Instrucciones del equipo — versionadas con el código</span>
-        <span class="s7-hier-paths"><code style="font-family:var(--font-mono);">./CLAUDE.md</code>&nbsp;&nbsp;o&nbsp;&nbsp;<code style="font-family:var(--font-mono)">./.claude/CLAUDE.md</code></span>
-        <span class="s7-hier-use">Arquitectura, convenciones, workflows, restricciones del dominio. Lo leen todos los que trabajan en el repo.</span>
+        <span class="s7-hier-paths"><code style="font-family:var(--font-mono);">./CLAUDE.md</code>&nbsp;&nbsp;o&nbsp;&nbsp;<code style="font-family:var(--font-mono);">./.claude/CLAUDE.md</code></span>
+        <span class="s7-hier-use">Folder map, convenciones, workflows, restricciones del dominio. Lo leen todos los que trabajan en el repo.</span>
       </div>
     </div>
     <div class="s7-hier-row">
@@ -3631,7 +3864,7 @@
       <div class="s7-hier-content">
         <span class="s7-hier-title">Personal dentro del proyecto — no viaja al repo</span>
         <span class="s7-hier-paths"><code style="font-family:var(--font-mono);">./CLAUDE.local.md</code>&nbsp;&nbsp;(en <code style="font-family:var(--font-mono);">.gitignore</code>)</span>
-        <span class="s7-hier-use">Rutas de tu máquina, configuraciones locales, experimentos temporales.</span>
+        <span class="s7-hier-use">Paths de tu máquina, configuraciones locales, experimentos temporales.</span>
       </div>
     </div>
   </div>
@@ -3639,19 +3872,27 @@
   <p class="s7-hier-note">↑ más amplio &nbsp;&nbsp;&nbsp;&nbsp; más específico ↓</p>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro niveles de arriba hacia abajo. Remarcar el "no puede excluirlo" en Nivel 1. Pausa en Nivel 4 — mencionar el .gitignore.</strong></p>
-    <p><u>Slide de jerarquía. Layout en cascada tipo tabla — cuatro filas, cada una con nivel a la izquierda y contenido a la derecha. No hay lista: el diseño visual ya comunica la jerarquía. El gradiente de "más amplio a más específico" va de arriba hacia abajo.</u></p>
-    <p><em>"CLAUDE.md no es un solo archivo. Es un sistema de cuatro niveles. De lo más amplio a lo más específico."</em></p>
-    <p><em>"Nivel 1: la política organizacional. La instala un administrador en la máquina. El usuario no puede quitarla. Es el nivel de compliance — estándares que aplican a todos los proyectos, sin importar quién sea el desarrollador."</em></p>
-    <p><em>"Nivel 2: el usuario. Tus preferencias personales, que seguís en todos los proyectos. Solo las leés vos — no viajan al equipo."</em></p>
-    <p><em>"Nivel 3: el proyecto. La raíz del repo, versionada con el código. Lo que cualquier persona que trabaje en ese repositorio necesita saber: arquitectura, convenciones, workflows."</em></p>
-    <p><em>"Nivel 4: el local. Personal dentro del proyecto. Rutas de tu máquina, configuraciones que no querés en el repo. Agregalo al gitignore."</em></p>
+    <p><strong>Recorrer los cuatro niveles de arriba hacia abajo. Marcar el "no puede excluirlo" en Nivel 1. Pausa en Nivel 4 — mencionar el .gitignore.</strong></p>
+    <p><u>Slide de jerarquía. Cuatro filas en cascada, nivel a la izquierda y contenido a la derecha. El diseño visual ya comunica la jerarquía — no hay lista. El gradiente "más amplio a más específico" baja de arriba hacia abajo.</u></p>
+    <p><em>"Segunda pregunta. Dónde vive. CLAUDE.md no es un archivo: es un sistema de cuatro niveles, de lo más amplio a lo más específico."</em></p>
+    <p><em>"Nivel 1, política organizacional. La instala un admin en la máquina; el usuario no la puede sacar. Es el nivel de compliance — estándares que aplican a todos los proyectos, sin importar quién desarrolla."</em></p>
+    <p><em>"Nivel 2, usuario. Tus preferencias personales, que te seguís en todos los proyectos. Solo las leés vos: no viajan al equipo."</em></p>
+    <p><em>"Nivel 3, proyecto. La raíz del repo, versionada con el código. Lo que cualquier persona que abra ese repo necesita saber para no adivinar la estructura: folder map, convenciones, workflows."</em></p>
+    <p><em>"Nivel 4, local. Personal dentro del proyecto. Paths de tu máquina, configuraciones que no querés en el repo. Lo agregás al gitignore — no viaja."</em></p>
   </aside>
 </section>
 
-<!-- §7.4 · Orden de carga — concatenación -->
-<section>
-  <h2>Caminata hacia arriba: concatenación, no sobreescritura</h2>
+<!-- §7.4 · Cuándo se carga — concatenación, no override -->
+<section class="s7-slide">
+  <ol class="s7-five-q-grid is-mini">
+    <li class="s7-five-q-card"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
+    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Caminata hacia arriba: concatenación, no override</h2>
 
   <div class="s7-load-flow">
     <div class="s7-load-node root">
@@ -3677,157 +3918,247 @@
 
   <div class="s7-load-warning">
     Las contradicciones entre niveles no producen un error: producen comportamiento impredecible.<br>
-    Revisá y limpiá las instrucciones que se pisarían.
+    Revisá y limpiá las instrucciones que se pisarían antes de que se note en una sesión.
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer el flujo de arriba hacia abajo. Enfatizar "concatenación, no sobreescritura" con la voz. Leer el warning despacio.</strong></p>
-    <p><u>Slide de orden de carga. El flujo vertical muestra la dirección de la caminata: desde la raíz del sistema hacia el directorio de trabajo. El mecanismo es concatenación — todos los niveles entran al contexto, en orden. El warning en azul enfatiza la consecuencia práctica de las contradicciones.</u></p>
-    <p><em>"Claude no elige uno de los cuatro niveles. Los combina todos. El mecanismo es una caminata hacia arriba en el árbol de directorios desde donde estás trabajando — recolecta cada CLAUDE.md que encuentra en el camino hacia la raíz."</em></p>
-    <p><em>"El orden va de más amplio a más específico: primero lo que está cerca de la raíz del sistema, último lo que está más cerca de tu directorio de trabajo. Y el resultado es concatenación: todos entran al contexto, uno después del otro."</em></p>
-    <p><em>"La consecuencia práctica de eso: si el nivel de usuario dice 'respondé en inglés' y el nivel de proyecto dice 'respondé en español', ambas instrucciones entran al contexto. Claude puede resolverlas a favor de una u otra, o de la que leyó último. No da un error — da comportamiento impredecible. Revisá lo que se pisaría."</em></p>
+    <p><strong>Recorrer el flujo de arriba hacia abajo. Enfatizar "concatenación, no override" con la voz. Leer el warning despacio.</strong></p>
+    <p><u>Slide de orden de carga. Flujo vertical: desde la raíz del sistema hacia el CWD. El mecanismo es concatenación — todos los niveles que aplican entran al contexto, en orden. El warning en azul aterriza la consecuencia práctica de las contradicciones. Los CLAUDE.md de subdirectorios no entran al arranque; se cargan bajo demanda cuando Claude lee archivos de ese subdir.</u></p>
+    <p><em>"Tercera pregunta. Cuándo se carga. Y acá viene el detalle que más sorprende: Claude no elige uno de los cuatro niveles, los combina todos. El mecanismo es una caminata hacia arriba en el árbol de directorios, desde donde estás trabajando, recolectando cada CLAUDE.md que se cruza en el camino."</em></p>
+    <p><em>"El orden va de más amplio a más específico: primero lo que está cerca de la raíz del sistema, último lo que está más cerca de tu directorio de trabajo. Y el resultado es concatenación, no override. Todos entran. Los CLAUDE.md que viven en subdirectorios del CWD no se cargan al arranque, ojo; se cargan bajo demanda cuando Claude lee un archivo que pertenece a ese subdir."</em></p>
+    <p><em>"La consecuencia práctica: si el nivel de usuario dice 'respondé en inglés' y el nivel de proyecto dice 'respondé en español', las dos instrucciones entran al contexto. Claude puede ir por una, por la otra, o por la que leyó último. No tira un error: tira comportamiento impredecible. Antes de que se note, revisá lo que se pisa entre niveles."</em></p>
   </aside>
 </section>
 
-<!-- §7.5 · @import — organiza pero no ahorra contexto -->
-<section>
-  <h2>@import organiza — pero no ahorra ni un token</h2>
+<!-- §7.5 · Cómo se usa — @import + comentarios HTML + tamaño -->
+<section class="s7-slide">
+  <ol class="s7-five-q-grid is-mini">
+    <li class="s7-five-q-card"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
+    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
+  </ol>
 
-  <div class="s7-import-wrap">
-    <div class="s7-import-syntax">@ruta/al/archivo</div>
+  <h2>Tres decisiones al escribir el archivo</h2>
 
-    <div class="s7-import-props">
-      <div class="s7-import-prop">
-        <span class="s7-import-prop-label">Resolución de ruta</span>
-        <span class="s7-import-prop-val">Relativa al archivo que contiene el import, o absoluta. Recursivo hasta 5 niveles de profundidad.</span>
-      </div>
-      <div class="s7-import-prop">
-        <span class="s7-import-prop-label">Caso de uso típico</span>
-        <span class="s7-import-prop-val">Un archivo por tema (<200 líneas). Importar un <code style="font-family:var(--font-mono);">AGENTS.md</code> compartido entre repos.</span>
-      </div>
-      <div class="s7-import-prop">
-        <span class="s7-import-prop-label">Comentarios HTML</span>
-        <span class="s7-import-prop-val">Los bloques <code style="font-family:var(--font-mono);">&lt;!-- … --&gt;</code> se eliminan antes de inyectar — podés anotar para mantenedores sin gastar tokens.</span>
-      </div>
-      <div class="s7-import-prop">
-        <span class="s7-import-prop-label">Tamaño recomendado</span>
-        <span class="s7-import-prop-val">Menos de 200 líneas por archivo. Archivos más largos tienden a reducir la adherencia a las instrucciones.</span>
+  <div class="s7-howto-stack">
+    <div class="s7-howto-row">
+      <span class="s7-howto-num">1</span>
+      <div class="s7-howto-body">
+        <h3 class="s7-howto-h3"><code style="font-family:var(--font-mono);color:var(--accent);">@import</code> &nbsp;— partir el archivo en varios</h3>
+        <div class="s7-howto-inline">
+          <span class="s7-howto-syntax">@ruta/al/archivo</span>
+          <p class="s7-howto-text">Path relativo al archivo que importa, o absoluto. Recursivo hasta 5 niveles.</p>
+        </div>
+        <p class="s7-howto-callout">No ahorra contexto: los importados se expanden e inyectan igual.</p>
       </div>
     </div>
 
-    <div class="s7-import-callout">
-      Los archivos importados se expanden e inyectan igual que el CLAUDE.md que los referencia.<br>
-      Dividir en varios archivos ayuda con la organización — no reduce el costo en contexto.
+    <div class="s7-howto-row">
+      <span class="s7-howto-num">2</span>
+      <div class="s7-howto-body">
+        <h3 class="s7-howto-h3">Comentarios HTML &nbsp;— anotar sin pagar tokens</h3>
+        <p class="s7-howto-text">Los bloques <code>&lt;!-- … --&gt;</code> se descartan antes de inyectar. Útil para notas a otros mantenedores del archivo.</p>
+      </div>
+    </div>
+
+    <div class="s7-howto-row">
+      <span class="s7-howto-num">3</span>
+      <div class="s7-howto-body">
+        <h3 class="s7-howto-h3">Tamaño &nbsp;— menos de 200 líneas por archivo</h3>
+        <p class="s7-howto-text">Archivos más largos tienden a reducir la adherencia del agente a las instrucciones que contienen.</p>
+      </div>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar la sintaxis arriba. Recorrer los cuatro props. Leer el callout en voz alta y dejar caer.</strong></p>
-    <p><u>Slide de @import. La sintaxis aparece prominente arriba. Los cuatro props cubren: resolución, caso de uso, truco de comentarios HTML, guía de tamaño. El callout cierra con el punto más confundido: @import no ahorra contexto.</u></p>
-    <p><em>"Un CLAUDE.md puede referenciar otros archivos con @ruta/al/archivo. La ruta puede ser relativa o absoluta; los imports son recursivos hasta 5 niveles."</em></p>
-    <p><em>"El caso de uso más frecuente es organización: un archivo por tema, más fácil de mantener, no más de 200 líneas por archivo — los archivos más largos tienden a reducir qué tanto el agente respeta las instrucciones que contienen."</em></p>
-    <p><em>"Un detalle útil: los comentarios HTML — los bloques entre corchetes — se eliminan antes de que el contenido se inyecte. Podés anotar el archivo para otros mantenedores sin gastar tokens."</em></p>
-    <p><em>"Y el punto que más se confunde: @import no ahorra contexto. Los archivos importados se expanden e inyectan exactamente igual que el CLAUDE.md que los referencia. Dividir en varios archivos te ayuda a mantener el archivo — no reduce ni un token el costo en la ventana."</em></p>
+    <p><strong>Recorrer las tres filas de arriba hacia abajo. En la 1, leer la sintaxis y dejar caer el callout. Las 2 y 3 son una línea cada una — no demorarlas.</strong></p>
+    <p><u>Slide de cómo se usa. Tres decisiones independientes al escribir el archivo: cómo partirlo, cómo anotarlo sin gastar tokens, qué tamaño tener. La primera tiene más peso visual porque es la más sustantiva — y porque el callout "no ahorra contexto" es lo que más se confunde y vuelve a aparecer en el slide de casos.</u></p>
+    <p><em>"Cuarta pregunta. Cómo se usa. Tres decisiones independientes cuando estás escribiendo el archivo, en orden de cuánto las usás."</em></p>
+    <p><em>"Una. @import. La sintaxis es arroba seguido del path. Sirve para partir el archivo en varios — un archivo por tema, más fácil de mantener. Path relativo al que importa, o absoluto; recursivo hasta cinco niveles. Lo importante a retener: @import no ahorra contexto. Los archivos importados se expanden y se inyectan exactamente igual que si los hubieras pegado en el CLAUDE.md principal. Te ayuda a mantener; no te ahorra ni un token."</em></p>
+    <p><em>"Dos. Comentarios HTML. Los bloques entre menor-signo-de-exclamación se descartan antes de que el contenido se inyecte. Es la única forma de anotar el archivo para vos o para otros mantenedores sin gastar tokens. Útil para dejar notas tipo 'no toques esto sin entender por qué está'."</em></p>
+    <p><em>"Tres. Tamaño. Recomendación de la doc oficial: menos de doscientas líneas por archivo. Más largo y el agente empieza a respetar menos lo que está escrito. Si necesitás más, usá @import para partir."</em></p>
   </aside>
 </section>
 
-<!-- §7.6 · Este repo como ejemplo vivo -->
-<section>
-  <h2>Este repo como ejemplo vivo</h2>
+<!-- §7.6 · Qué confunde — tres casos límite -->
+<section class="s7-slide">
+  <ol class="s7-five-q-grid is-mini">
+    <li class="s7-five-q-card"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
+    <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
+    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Cuatro cosas que confunden de CLAUDE.md</h2>
+
+  <div class="s7-cases-grid">
+    <div class="s7-case-card">
+      <span class="s7-case-tag">Caso 1</span>
+      <span class="s7-case-title">Contradicciones entre niveles no fallan: fallan callado</span>
+      <p class="s7-case-body">Si user dice "respondé en inglés" y project dice "en español", ambas entran al contexto. No hay error: hay comportamiento impredecible. Revisá lo que se pisa antes de notarlo en una sesión.</p>
+    </div>
+    <div class="s7-case-card">
+      <span class="s7-case-tag">Caso 2</span>
+      <span class="s7-case-title"><code>@import</code> ayuda a mantener, no ahorra contexto</span>
+      <p class="s7-case-body">El archivo importado se expande e inyecta igual que si estuviera pegado en el CLAUDE.md principal. Dividir en archivos chicos por tema mejora la mantenibilidad — no reduce ni un token el costo en la ventana.</p>
+    </div>
+    <div class="s7-case-card">
+      <span class="s7-case-tag">Caso 3</span>
+      <span class="s7-case-title">CLAUDE.md en subdirectorios: bajo demanda, no al arranque</span>
+      <p class="s7-case-body">Un <code>backend/CLAUDE.md</code> no entra al contexto al iniciar la sesión. Se inyecta cuando Claude toca cualquier archivo dentro de <code>backend/</code>. Útil en monorepos para que cada subdir pague contexto solo cuando se trabaja en él.</p>
+    </div>
+    <div class="s7-case-card">
+      <span class="s7-case-tag">Caso 4</span>
+      <span class="s7-case-title">Auto memory ≠ CLAUDE.md</span>
+      <p class="s7-case-body">Claude tiene una memoria automática separada que él mismo escribe. Vive en otra ruta, se carga distinto y la audita el mismo comando <code>/memory</code>. Es la del próximo slide — no la confundas con esta.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Recorrer las cuatro cards en zig-zag (arriba-izq, arriba-der, abajo-izq, abajo-der). En el caso 4 anunciar que el próximo slide lo desarrolla.</strong></p>
+    <p><u>Slide de casos límite — quinta pregunta. Cuatro confusiones empaquetadas, grid 2×2. Cada card tiene tag, título-tesis, y cuerpo corto. La cuarta es bridge interno: introduce la auto memory que el slide siguiente desarrolla. La tercera (subdir on-demand) anticipa el mecanismo path-scoped de §8 sin nombrarlo.</u></p>
+    <p><em>"Quinta pregunta. Qué confunde. Cuatro cosas, en orden de frecuencia con que las veo en clase."</em></p>
+    <p><em>"Una: las contradicciones entre niveles no fallan. Fallan callado. Si dos niveles dicen cosas distintas, las dos entran al contexto y Claude resuelve a favor de una u otra. No hay log de error, no hay warning. La única forma de detectarlo es notar el comportamiento raro y volver a revisar los archivos."</em></p>
+    <p><em>"Dos: @import no ahorra contexto. Lo repito porque genuinamente confunde — la gente parte el CLAUDE.md en seis archivos esperando achicar la ventana, y la ventana queda igual. Lo que ganás es mantenibilidad, no costo."</em></p>
+    <p><em>"Tres: los CLAUDE.md que ponés en subdirectorios no se cargan al arrancar la sesión. Si tenés un backend/CLAUDE.md, ese archivo no paga contexto hasta que Claude toca un archivo dentro de backend. Es ideal para monorepos: frontend/CLAUDE.md describe el stack de UI, backend/CLAUDE.md describe la API, y cada uno entra solo cuando hace falta. Es el mismo espíritu que las rules path-scoped que vamos a ver en la próxima sección."</em></p>
+    <p><em>"Y cuatro, la que más sorprende: hay otra memoria. Una que Claude se escribe solo, que vive en otra carpeta, y que se audita con el mismo comando. La gente la confunde con CLAUDE.md y termina debuggeando comportamientos que vienen de un archivo que nunca vio. Eso es el próximo slide."</em></p>
+  </aside>
+</section>
+
+<!-- §7.7 · Auto memory — el sistema paralelo -->
+<section class="s7-slide">
+  <h2>Auto memory: la memoria que Claude se escribe solo</h2>
+
+  <div class="s7-auto-wrap">
+    <div class="s7-auto-card">
+      <p class="s7-auto-lead">
+        Claude Code mantiene una <strong>memoria automática</strong> paralela a CLAUDE.md.
+        La diferencia clave: <strong>la escribe Claude, no vos</strong>. Cuando aprende algo durante una sesión —
+        una preferencia tuya, una convención del repo, un detalle que vale la pena recordar — lo guarda en este archivo
+        y queda disponible para las próximas sesiones.
+      </p>
+
+      <div class="s7-auto-grid">
+        <div class="s7-auto-field">
+          <span class="s7-auto-field-label">Qué es</span>
+          <span class="s7-auto-field-val">Archivo que Claude escribe automáticamente con lo que aprende sesión a sesión.</span>
+        </div>
+        <div class="s7-auto-field">
+          <span class="s7-auto-field-label">Dónde vive</span>
+          <span class="s7-auto-field-val"><code>~/.claude/projects/&lt;project-path&gt;/memory/MEMORY.md</code></span>
+        </div>
+        <div class="s7-auto-field">
+          <span class="s7-auto-field-label">Cuándo se carga</span>
+          <span class="s7-auto-field-val">Al arranque de cada sesión. Primeras <strong>200 líneas</strong> o <strong>25 KB</strong> — lo que llegue antes.</span>
+        </div>
+        <div class="s7-auto-field">
+          <span class="s7-auto-field-label">Cómo se audita</span>
+          <span class="s7-auto-field-val"><code>/memory</code> lo lista junto con los CLAUDE.md. Podés abrir el archivo y editarlo a mano si querés corregir lo que Claude guardó.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="s7-auto-cite">
+      Referencia: <a href="https://code.claude.com/docs/en/memory" target="_blank">code.claude.com/docs/en/memory</a>
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer el párrafo en negrita marcando "la escribe Claude, no vos". Recorrer las cuatro fields. Cerrar con el enlace al pie como referencia para consultar después.</strong></p>
+    <p><u>Slide nuevo. Desarrolla el tercer caso límite del slide anterior. Card central con un párrafo lead, debajo una grid 1×4 con las mismas cuatro preguntas operativas aplicadas al subsistema. La cita oficial al pie ancla el dato del límite de 200 líneas / 25 KB. Ojo: no es "Qué confunde" — esta no es la quinta pregunta. Es desarrollo del caso 3 de §7.6.</u></p>
+    <p><em>"Acá viene el subsistema que se confunde con CLAUDE.md. Auto memory. La diferencia clave entra primero: la escribe Claude, no la escribís vos. Cuando aprende algo durante una sesión — una preferencia tuya, una convención que descubrió en el repo, un detalle que vale la pena conservar — lo guarda en este archivo y la próxima sesión lo encuentra cargado."</em></p>
+    <p><em>"Las mismas cuatro preguntas operativas, aplicadas al subsistema. Dónde vive: en una carpeta tuya, no en el repo. La ruta es ~/.claude/projects/, el path del proyecto, memory/MEMORY.md. Es de tu máquina, no se versiona con el código."</em></p>
+    <p><em>"Cuándo se carga: al arranque, igual que CLAUDE.md. Pero con un límite distinto — primeras doscientas líneas o veinticinco kilobytes, lo que llegue antes. Eso significa que si el archivo crece mucho, el final no entra. Vale la pena revisarlo de vez en cuando."</em></p>
+    <p><em>"Y cómo se audita: el mismo comando, /memory. Lo lista junto con los CLAUDE.md de la sesión. Si Claude guardó algo que no querés que recuerde, abrís el archivo y lo editás a mano. Es texto plano. Está todo ahí, todo auditable. El enlace al pie es la doc oficial."</em></p>
+  </aside>
+</section>
+
+<!-- §7.8 · Demo-repo como ejemplo vivo -->
+<section class="s7-slide">
+  <h2>El demo-repo como instancia viva</h2>
 
   <div class="s7-repo-wrap">
-    <div class="s7-repo-path">/Users/enzo/Documents/IISAIA/CLAUDE.md</div>
+    <div class="s7-repo-path">./CLAUDE.md  (Nivel 3 — project)</div>
 
-    <div class="s7-repo-items">
-      <div class="s7-repo-item">
-        <span class="s7-repo-item-label">Qué define</span>
-        <span class="s7-repo-item-val">Tabla de rutas del repositorio — qué vive dónde y para qué.</span>
-      </div>
-      <div class="s7-repo-item">
-        <span class="s7-repo-item-label">Routing table</span>
-        <span class="s7-repo-item-val">Mapa de tareas a archivos: "para editar slides de la semana N, ir a semanas/NN/slides/".</span>
-      </div>
-      <div class="s7-repo-item">
-        <span class="s7-repo-item-label">Convenciones git</span>
-        <span class="s7-repo-item-val">Feature branches, nunca commitear directo a main. Compartidas por todos los que trabajan en el repo.</span>
-      </div>
-    </div>
+    <pre class="s7-repo-code"><span class="c">## Folder map</span>
+| `backend/main.py`          | Entry point de FastAPI (CORS + routers) |
+| `backend/routers/`         | Endpoints HTTP (`users.py`, `posts.py`) |
+| `backend/middleware/auth.py` | Dependency de auth bearer |
+
+<span class="c">## Convenciones</span>
+- Python 3.11+. Type hints obligatorios en funciones públicas.
+- Auth: bearer token leído de `DEMO_BEARER_TOKEN`. En tests, se setea `test-token`.
+
+<span class="c">## Workflow</span>
+- Cambios en endpoints → regenerar `openapi.yaml` con `uv run python scripts/export_openapi.py`.
+- Antes de un PR, correr `uv run pytest` y verificar que pasa.</pre>
 
     <div class="s7-repo-connect">
-      Cuando abrís Claude Code en este directorio, ese CLAUDE.md entra completo a la ventana antes de tu primer mensaje.
-      El agente ya sabe que las slides están en <code style="font-family:var(--font-mono);color:var(--accent);">semanas/NN/slides/</code>,
-      que los patrones reutilizables están en <code style="font-family:var(--font-mono);color:var(--accent);">shared/patterns/</code>,
-      y que nunca se commitea directo a <code style="font-family:var(--font-mono);color:var(--accent);">main</code>.
-      <strong>No se lo dijiste vos en ese momento; lo encontró en el archivo.</strong>
+      Cuando abrís Claude Code en este repo, ese archivo entra completo a la ventana antes de tu primer mensaje.
+      El agente ya sabe que los routers viven en <code>backend/routers/</code>,
+      que el bearer token se lee de la variable de entorno <code>DEMO_BEARER_TOKEN</code>,
+      y que después de tocar endpoints hay que regenerar el <code>openapi.yaml</code>.
+      <strong>Nada de eso lo dijiste vos en el chat; lo encontró en el archivo.</strong>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar la ruta arriba — "este es el CLAUDE.md que estamos usando ahora mismo". Recorrer los tres items. Leer el párrafo de conexión con énfasis en "no se lo dijiste vos".</strong></p>
-    <p><u>Slide del ejemplo vivo. Ancla la jerarquía a algo concreto y presente: el Nivel 3 (proyecto) de este repo. No es un ejemplo inventado — es el archivo que está cargado en la sesión actual mientras se ve esta clase. Conecta de vuelta al "siempre cargado" del §7.2.</u></p>
-    <p><em>"Nivel 3 — instrucciones de proyecto. El CLAUDE.md en la raíz de este repositorio es una instancia concreta de eso. No define preferencias personales ni políticas de organización: define lo que cualquier persona que trabaje en este repo necesita saber para no adivinar la estructura."</em></p>
-    <p><em>"Tiene una tabla de rutas: qué vive dónde, para qué. Tiene un routing table que mapea tareas a archivos. Tiene las convenciones de git del equipo."</em></p>
-    <p><em>"Y cuando abrís Claude Code en este directorio, ese archivo entra completo a la ventana antes de tu primer mensaje. El agente ya sabe todo eso. No se lo dijiste vos en ese momento; lo encontró en el archivo."</em></p>
-    <p><em>"Eso es 'siempre cargado' en la práctica."</em></p>
+    <p><strong>Señalar el path arriba — "este es el CLAUDE.md del demo-repo". Recorrer los tres bloques del fragmento (folder map, convenciones, workflow). Cerrar con el párrafo de conexión, énfasis en "no lo dijiste vos".</strong></p>
+    <p><u>Slide de ejemplo vivo. Ancla la jerarquía a algo concreto: el Nivel 3 del demo-repo que después se va a usar en el demo. Fragmento real del archivo, dividido en folder map / convenciones / workflow — los tres bloques que vamos a citar en vivo. La ruta arriba es relativa (./CLAUDE.md) porque el profesor copia el repo afuera antes de dictar.</u></p>
+    <p><em>"Hasta acá fue conceptual. Vamos a un archivo concreto. Este es el CLAUDE.md del demo-repo que vamos a usar en un minuto — una API de FastAPI con frontend chico. Es el Nivel 3 que vimos antes: project, versionado, lo lee cualquiera que abra ese repo."</em></p>
+    <p><em>"Cubre tres cosas. Un folder map que asocia paths con responsabilidades. Convenciones de código — Python con type hints, el bearer token leído de una variable de entorno y no hardcodeado. Y workflow — cómo regenerar el openapi cuando tocás endpoints, qué correr antes de un PR."</em></p>
+    <p><em>"Cuando abro Claude Code en este repo, ese archivo entra completo a la ventana antes de mi primer mensaje. El agente ya sabe que los routers viven en backend/routers, que el bearer token no se hardcodea, y que después de tocar un endpoint hay que regenerar el openapi.yaml. Nada de eso lo dije yo en el chat; lo encontró en el archivo. Eso es 'siempre cargado' en la práctica — y es lo que vamos a hacer visible ahora mismo."</em></p>
   </aside>
 </section>
 
-<!-- §7.7 · section-divider — Demo D3 -->
+<!-- §7.9 · Demo · /memory + /context (clickable-steps) -->
 <section class="section-divider">
-  <h2>Demo D3 · La ventana antes y después</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Hacer visible que CLAUDE.md ocupa contexto desde el arranque — y que la jerarquía es real.</p>
-
-  <aside class="notes">
-    <p><u>Divider de demo. Pausa breve. El objetivo de D3 es hacer la diferencia de contexto medible y observable — no teórica.</u></p>
-    <p><em>"Vamos al demo. El objetivo es hacer visible algo que hasta ahora fue verbal: que CLAUDE.md efectivamente ocupa contexto desde el arranque, y que la jerarquía que acabamos de ver no es un diagrama de documentación — es real y medible."</em></p>
-  </aside>
-</section>
-
-<!-- §7.8 · Demo beats — clickable-steps D3 -->
-<section>
-  <h2>D3 · Tres beats: la ventana antes y después</h2>
+  <h2>Demo · /memory + /context</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Hacer visible que CLAUDE.md ocupa contexto desde el arranque, y que la auto memory es un sistema distinto.</p>
 
   <div class="s7-demo-wrap">
     <div id="s7-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup: Claude Code abierto en un directorio vacío para Beat 1; CLAUDE.md preparado para agregar en Beat 2. Click recorre los 3 beats.</strong></p>
-    <p><u>Beat 1 — qué mirar: el tamaño del contexto base, sin instrucciones de proyecto — la ventana existe, casi vacía de configuración nuestra. Beat 2 — qué mirar: el delta de contexto atribuible al CLAUDE.md; las instrucciones que escribimos aparecen antes del primer intercambio. Beat 3 — qué mirar: los niveles efectivamente cargados con sus rutas — usuario, proyecto, local si existe. Plan B si /context no está disponible: usar /memory solo para mostrar la lista de archivos cargados; narrar "todo lo que ven en esta lista entró a la ventana antes de este mensaje".</u></p>
-    <p><em>"Beat 1. Directorio vacío, sin ningún CLAUDE.md. Ejecuto /context. Esto es lo que carga de entrada, sin instrucciones nuestras. La ventana existe, pero está casi vacía de configuración nuestra."</em></p>
-    <p><em>"Beat 2. Agrego un CLAUDE.md con algunas instrucciones — convenciones de nombrado, una regla de estilo, la estructura del directorio. Reinicio la sesión. Vuelvo a ejecutar /context. Mismo repo, una sesión nueva. Miren qué cambió antes de que yo pida nada."</em></p>
-    <p><em>"Beat 3. Ejecuto /memory. La jerarquía no es un dibujo. Esta es la lista real de fuentes de instrucción cargadas en esta sesión — con sus rutas."</em></p>
+    <p><strong>Setup antes del slide: terminal con cwd en una copia del demo-repo, Claude Code instalado. Una pestaña del file explorer apuntando a ~/.claude/projects/. Click recorre los tres pasos; en cada uno hablo en vivo, los notes acá son el guion mínimo.</strong></p>
+    <p><u>Demo de la sección. Tres pasos. Paso 1: /memory lista las fuentes cargadas, user y project con sus paths. Paso 2: /context muestra el delta atribuible a CLAUDE.md. Paso 3: navego a la carpeta de auto memory del demo-repo y abro MEMORY.md si existe — si no existe, explico que aparece cuando Claude aprende algo. El plan B vive en el paso 3 por si /context no coopera.</u></p>
+    <p><em>"Vamos al demo. Tres pasos. El objetivo es hacer visible algo que hasta acá fue verbal: CLAUDE.md ocupa contexto desde el arranque, y la auto memory es un sistema separado que vive en otro archivo."</em></p>
   </aside>
 </section>
 
-<!-- §7.9 · Cierre + bridge a §8 -->
-<section>
+<!-- §7.10 · Cierre + bridge a §8 -->
+<section class="s7-slide">
   <h2>Siempre cargado — y lo que viene después</h2>
 
   <div class="s7-close-card">
     <p class="s7-close-main">
       CLAUDE.md está siempre en la ventana. Con relevancia para la tarea del momento, o sin ella.
-      Es el mecanismo más directo y también el menos selectivo: cada sesión, cada tarea, costo constante.
+      Es el mecanismo más directo para moldear comportamiento y también el menos selectivo:
+      cada sesión, cada tarea, costo constante.
     </p>
     <p class="s7-close-bridge">
       ¿Y si una instrucción pudiera estar en el contexto <em>solo cuando hace falta</em>,
       y no ocupar espacio el resto del tiempo?<br>
-      Eso es §8.
+      Esa es la pregunta de §8.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal despacio. Pausa. Leer el bridge — la pregunta tiene que quedar flotando antes de pasar.</strong></p>
-    <p><u>Slide de cierre de §7 y puente a §8. El párrafo principal consolida la propiedad central: siempre cargado, costo constante. El bridge planta la pregunta que abre §8 — el mismo cierre que usó el source material. Conciso, sin recap.</u></p>
-    <p><em>"CLAUDE.md está siempre en la ventana. Con relevancia para la tarea del momento, o sin ella. Cada sesión. Costo constante. Es la herramienta más directa para moldear el comportamiento — y la menos selectiva."</em></p>
-    <p><em>"Eso lleva a una pregunta natural: ¿y si una instrucción pudiera estar en el contexto solo cuando hace falta, y no ocupar espacio el resto del tiempo? ¿Es posible eso?"</em></p>
-    <p><em>"Sí. Y eso es exactamente lo que vamos a ver en §8."</em></p>
+    <p><strong>Leer el párrafo principal despacio. Pausa antes del bridge. Leer el bridge — la pregunta tiene que quedar flotando antes de pasar.</strong></p>
+    <p><u>Cierre de §7 + bridge a §8. El párrafo principal consolida la propiedad central de la sección: siempre cargado, costo constante. El bridge planta la pregunta que abre Rules — instrucciones que pagan contexto solo cuando se activan por path. Conciso, sin recap de los slides anteriores.</u></p>
+    <p><em>"Cerramos. CLAUDE.md está siempre en la ventana. Con relevancia para la tarea del momento, o sin ella. Cada sesión. Costo constante. Es la herramienta más directa para moldear el comportamiento del agente — y la menos selectiva."</em></p>
+    <p><em>"Eso lleva a una pregunta natural: ¿y si una instrucción pudiera estar en el contexto solo cuando hace falta, y no ocupar espacio el resto del tiempo? ¿Existe algo así?"</em></p>
+    <p><em>"Sí. Y eso es exactamente lo que vamos a ver en la próxima sección."</em></p>
   </aside>
 </section>
 </section>
       <!-- /§7 -->
 
-      <!-- ===== §8 — Rules y auto memory ===== -->
+      <!-- ===== §8 — Rules (`.claude/rules/`) ===== -->
       <style>
 /* Scoped styles for §8 only */
 
@@ -4756,7 +5087,7 @@
 </section>
       <!-- /§8 -->
 
-      <!-- ===== §9 — Skills y slash commands ===== -->
+      <!-- ===== §9 — settings.json ===== -->
       <style>
 /* Scoped styles for §9 only */
 
@@ -5261,7 +5592,7 @@
 </section>
       <!-- /§9 -->
 
-      <!-- ===== §10 — Sub-agents ===== -->
+      <!-- ===== §10 — Permisos ===== -->
       <style>
 /* Scoped styles for §10 only */
 
@@ -5815,7 +6146,7 @@
 </section>
       <!-- /§10 -->
 
-      <!-- ===== §11 — Plan mode y control del loop ===== -->
+      <!-- ===== §11 — Skills y slash commands ===== -->
       <style>
 /* Scoped styles for §11 only */
 
@@ -6755,7 +7086,7 @@
 </section>
       <!-- /§11 -->
 
-      <!-- ===== §12 — El trabajo final ===== -->
+      <!-- ===== §12 — Sub-agents ===== -->
       <style>
 /* Scoped styles for §12 only */
 
@@ -7440,6 +7771,14 @@
 </section>
       <!-- /§12 -->
 
+      <!-- ===== §13 — Plan mode + permission modes ===== -->
+      <!-- INJECT_SECTION_13 -->
+      <!-- /§13 -->
+
+      <!-- ===== §14 — El trabajo final ===== -->
+      <!-- INJECT_SECTION_14 -->
+      <!-- /§14 -->
+
       <section class="section-divider"><h2>¿Preguntas?</h2></section>
 
     </div>
@@ -7649,19 +7988,19 @@
 <script>
   initClickableSteps({containerId: 's7-demo-steps', steps: [
     {
-      title: 'Beat 1 — Sin CLAUDE.md: /context',
-      summary: 'Directorio vacío, sin ningún CLAUDE.md de proyecto. Se ejecuta /context.',
-      example: '/context → ventana base, casi vacía de instrucciones nuestras. El tamaño del contexto refleja solo las instrucciones del sistema; no hay instrucciones de proyecto, de usuario local, ni de organización en este directorio.'
+      title: 'Paso 1 — /memory: las fuentes cargadas',
+      summary: 'cd a una copia del demo-repo, abrir claude, ejecutar /memory.',
+      example: 'Aparecen las fuentes con sus paths completos: el nivel user (~/.claude/CLAUDE.md) y el nivel project (./CLAUDE.md del demo-repo). Cada una listada con su ruta. La jerarquía no es un diagrama — es esta lista real, en esta sesión.'
     },
     {
-      title: 'Beat 2 — Con CLAUDE.md: el delta',
-      summary: 'Se agrega un CLAUDE.md con convenciones, se reinicia la sesión y se vuelve a ejecutar /context.',
-      example: '/context → mismo repo, nueva sesión. El delta de contexto es atribuible al CLAUDE.md. Las instrucciones que escribimos aparecen antes del primer intercambio — antes de que pidamos nada.'
+      title: 'Paso 2 — /context: el delta atribuible',
+      summary: 'Ejecutar /context si está disponible en la versión instalada.',
+      example: 'El folder map, las convenciones y el workflow del demo-repo aparecen ocupando espacio en la ventana desde el inicio. Todavía no pediste nada: ese costo ya está pagado. Es el delta que CLAUDE.md le inyecta a cada sesión.'
     },
     {
-      title: 'Beat 3 — /memory: la lista real de fuentes',
-      summary: 'Se ejecuta /memory para ver la lista de archivos de instrucción cargados con sus rutas.',
-      example: '/memory → la jerarquía no es un diagrama. Esta es la lista real de fuentes cargadas en esta sesión: usuario, proyecto, local si existe. Cada ruta, cada nivel, efectivamente presente en la ventana.'
+      title: 'Paso 3 — Auto memory: la carpeta paralela',
+      summary: 'Abrir ~/.claude/projects/<demo-repo-path>/memory/. Si existe MEMORY.md, abrirlo. Plan B abajo.',
+      example: 'Este archivo lo escribió Claude, no vos. Si no aparece todavía, es porque Claude aún no aprendió nada que valga la pena guardar para esta carpeta — va a aparecer cuando lo haga.\n\nPLAN B (si /context no funciona en la versión instalada): sostener el punto con /memory solo. Narrar: "todo lo que ven en esta lista entró a la ventana antes de mi primer mensaje".'
     }
   ]});
 </script>

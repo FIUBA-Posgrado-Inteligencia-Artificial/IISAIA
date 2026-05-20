@@ -21,7 +21,7 @@ html = html.replace(
 
 // 2. Splice each section fragment; collect its init <script> block.
 const initBlocks = [];
-for (let n = 1; n <= 12; n++) {
+for (let n = 1; n <= 14; n++) {
   const f = join(DIR, `_section-${n}.html`);
   const marker = `<!-- INJECT_SECTION_${n} -->`;
   if (!existsSync(f)) continue;

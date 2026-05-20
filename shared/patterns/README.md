@@ -18,6 +18,7 @@ All snippets assume `_config/theme/components.css` is loaded by the page.
 | Clickable steps | Multi-step explainer with click-to-reveal detail | `clickable-steps.html` | line 1895 ("Mitigación: enseñar a decir 'no sé'") |
 | Data table | Numerical comparison | `data-table.html` | line 1261 ("Mismo stack, otra escala") |
 | Metaphor pages | Concrete-domain metaphor (book pages) | `metaphor-pages.html` | line 2243 ("Del libro de texto a la práctica") |
+| Five-questions card | Opener for documentation-walkthrough sections (qué es / dónde vive / cuándo se carga / cómo se usa / qué confunde) — full + mini variants | `five-questions-card.html` | semanas/04 §7 (`_section-7.html`, slides 1 & 2) |
 
 ## Adding a new pattern
 

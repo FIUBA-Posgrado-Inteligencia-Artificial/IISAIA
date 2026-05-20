@@ -159,10 +159,11 @@
 /* Preview flow */
 .s6-preview-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  max-width: 820px;
+  max-width: 780px;
   margin: 24px auto 0;
+  justify-content: center;
 }
 .s6-preview-card {
   background: var(--bg-secondary);
@@ -187,29 +188,8 @@
   color: var(--text-primary);
   line-height: 1.4;
 }
-.s6-preview-card .s6-prev-tag {
-  font-size: 0.58em;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 3px 8px;
-  border-radius: 4px;
-  align-self: center;
-  margin-top: 4px;
-}
-.s6-prev-tag.tag-context {
-  background: rgba(130, 170, 255, 0.12);
-  color: var(--accent-secondary);
-  border: 1px solid rgba(130, 170, 255, 0.3);
-}
-.s6-prev-tag.tag-loop {
-  background: rgba(100, 255, 218, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(100, 255, 218, 0.3);
-}
 .s6-preview-sub {
-  max-width: 820px;
+  max-width: 780px;
   margin: 16px auto 0;
   font-size: 0.7em;
   color: var(--text-muted);
@@ -342,50 +322,49 @@
   </aside>
 </section>
 
-<!-- §6.6 · Lo que viene — preview §7–§11 -->
+<!-- §6.6 · Lo que viene — preview §7–§13 (7 piezas configurables) -->
 <section>
   <h2>El mapa de lo que viene</h2>
 
   <div class="s6-preview-grid">
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§7</span>
-      <span class="s6-prev-title">CLAUDE.md jerárquico</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">CLAUDE.md y memoria automática</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§8</span>
-      <span class="s6-prev-title">Rules y auto memory</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">Rules</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§9</span>
-      <span class="s6-prev-title">Skills y slash commands</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">settings.json</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§10</span>
-      <span class="s6-prev-title">Sub-agents</span>
-      <span class="s6-prev-tag tag-context">Contexto</span>
+      <span class="s6-prev-title">Permisos</span>
     </div>
     <div class="s6-preview-card">
       <span class="s6-prev-sec">§11</span>
-      <span class="s6-prev-title">Plan mode y control</span>
-      <span class="s6-prev-tag tag-loop">Loop</span>
+      <span class="s6-prev-title">Skills y slash commands</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§12</span>
+      <span class="s6-prev-title">Sub-agents</span>
+    </div>
+    <div class="s6-preview-card">
+      <span class="s6-prev-sec">§13</span>
+      <span class="s6-prev-title">Plan mode y permission modes</span>
     </div>
   </div>
 
-  <p class="s6-preview-sub">Llevá esa pregunta a cada sección y las conexiones se hacen solas.</p>
+  <p class="s6-preview-sub">Cada sección abre con las mismas cinco preguntas — qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde.</p>
 
   <aside class="notes">
-    <p><strong>Recorrer las cinco tarjetas de izquierda a derecha. Pausa en §11 — señalar que es el único que aterriza en "loop". Leer la línea de cierre.</strong></p>
-    <p><u>Slide de preview de la parte 2. Grid de 5 tarjetas — una por sección — cada una con su etiqueta loop/contexto. No es una lista: es el mapa visual que el alumno puede usar como referencia durante el resto de la clase. El único flip a loop es §11 — hecho visible acá como anticipo.</u></p>
-    <p><em>"Este es el mapa de lo que viene. Cinco secciones, cada una con su respuesta a la pregunta-lente."</em></p>
-    <p><em>"§7, CLAUDE.md jerárquico: contexto. Texto tuyo que entra a la ventana antes del primer mensaje, en cada sesión."</em></p>
-    <p><em>"§8, Rules y auto memory: contexto. Instrucciones condicionales y la memoria que el agente se escribe solo."</em></p>
-    <p><em>"§9, Skills y slash commands: contexto. Un procedimiento completo que no ocupa tokens hasta que lo invocás."</em></p>
-    <p><em>"§10, Sub-agents: contexto. Un loop entero aislado en su propia ventana — solo vuelve el resultado."</em></p>
-    <p><em>"§11, Plan mode y control del loop: loop. El primero — y el único — de la parte 2 que aterriza en el otro polo. Eso es deliberado y es el hook de §11."</em></p>
-    <p><em>"Llevá la pregunta a cada sección. Las conexiones se hacen solas."</em></p>
+    <p><strong>Recorrer las siete tarjetas brevemente, sin leerlas una por una. Usar el slide para anunciar el alcance de la Parte 2, no para presentar cada feature.</strong></p>
+    <p><u>Slide de preview. Siete piezas configurables del runtime de Claude Code, una por sección. La taxonomía del slide no es "qué tipo de cosa es cada una" — es "anatomía". Cada sección recorre la misma plantilla: qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde. El demo va al final de cada sección, un único bloque.</u></p>
+    <p><em>"Lo que viene son siete piezas configurables del runtime. CLAUDE.md, rules, settings.json, permisos, skills, sub-agents, plan mode. Una por sección."</em></p>
+    <p><em>"Cada una con la misma plantilla — cinco preguntas. Qué es. Dónde vive. Cuándo se carga. Cómo se usa. Qué confunde. Y al cierre, un demo corto en VS Code."</em></p>
+    <p><em>"La promesa al final no es 'aprendiste siete features'. Es poder abrir cualquier proyecto con Claude Code instalado, mirar la carpeta .claude, y ubicar cada pieza. Saber qué archivo es responsable de qué."</em></p>
   </aside>
 </section>
 
