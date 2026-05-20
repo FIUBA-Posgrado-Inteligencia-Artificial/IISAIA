@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>demo-repo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>demo-repo</h1>
+    <section>
+      <h2>Users</h2>
+      <ul id="user-list"></ul>
+      <form id="user-form">
+        <input name="name" placeholder="Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="token" placeholder="Bearer token">
+        <button type="submit">Create user</button>
+      </form>
+    </section>
+    <section>
+      <h2>Posts</h2>
+      <ul id="post-list"></ul>
+      <form id="post-form">
+        <input name="title" placeholder="Title" required>
+        <textarea name="body" placeholder="Body" required></textarea>
+        <input name="author_id" type="number" placeholder="Author ID" required>
+        <input name="token" placeholder="Bearer token">
+        <button type="submit">Create post</button>
+      </form>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
