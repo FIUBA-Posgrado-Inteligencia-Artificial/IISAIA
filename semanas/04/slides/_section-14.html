@@ -391,236 +391,258 @@
   color: var(--accent);
   font-style: normal;
 }
+
+/* §14.2 — Qué entregás (el repo) */
+.s14-entrega-wrap {
+  max-width: 740px;
+  margin: 14px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.s14-entrega-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+.s14-entrega-tag {
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+}
+.s14-entrega-body {
+  font-size: 0.6em;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+.s14-entrega-body strong { color: var(--text-primary); }
+.s14-entrega-features {
+  padding-left: 22px;
+  margin: 6px 0 0;
+  font-size: 0.58em;
+  line-height: 1.6;
+  color: var(--text-muted);
+  list-style: disc;
+}
+.s14-entrega-features li { padding-left: 4px; margin-bottom: 4px; }
+.s14-entrega-features li::marker { color: var(--accent); }
+.s14-entrega-features code,
+.s14-entrega-body code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s14-entrega-callout {
+  background: rgba(100, 255, 218, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 0.7em;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.55;
+  text-align: center;
+  max-width: 720px;
+}
+
+/* §14.3 — Cómo se mide */
+.s14-mide-wrap {
+  max-width: 740px;
+  margin: 14px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+.s14-mide-lead {
+  font-size: 0.74em;
+  color: var(--text-primary);
+  line-height: 1.65;
+  text-align: center;
+  margin: 0;
+}
+.s14-mide-list {
+  display: inline-block;
+  text-align: left;
+  max-width: 680px;
+  padding-left: 28px;
+  margin: 0;
+  font-size: 0.62em;
+  line-height: 1.65;
+  color: var(--text-muted);
+  list-style: disc;
+}
+.s14-mide-list li { padding-left: 4px; margin-bottom: 8px; }
+.s14-mide-list li::marker { color: var(--accent); }
+.s14-mide-list strong { color: var(--text-primary); }
+.s14-mide-list li.is-not::marker { color: #ff7676; }
+.s14-mide-list li.is-not strong { color: #ff7676; }
+.s14-mide-coda {
+  font-size: 0.72em;
+  color: var(--text-primary);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.55;
+  margin: 6px 0 0;
+  max-width: 680px;
+}
+.s14-mide-coda strong { color: var(--accent); font-style: normal; }
+
+/* Próximo paso — presentación 5 min */
+.s14-prox-wrap {
+  max-width: 720px;
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+.s14-prox-lead {
+  font-size: 0.78em;
+  color: var(--text-primary);
+  line-height: 1.65;
+  text-align: center;
+  margin: 0;
+}
+.s14-prox-lead strong { color: var(--accent); }
+.s14-prox-list {
+  display: inline-block;
+  text-align: left;
+  max-width: 640px;
+  padding-left: 36px;
+  margin: 6px 0;
+  font-size: 0.66em;
+  line-height: 1.7;
+  color: var(--text-muted);
+  list-style: disc;
+}
+.s14-prox-list li { padding-left: 4px; margin-bottom: 8px; }
+.s14-prox-list li::marker { color: var(--accent); }
+.s14-prox-list strong { color: var(--text-primary); }
+.s14-prox-cierre {
+  background: rgba(100, 255, 218, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 0.72em;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 6px 0 0;
+  line-height: 1.55;
+  text-align: center;
+}
 </style>
 
-<!-- §14.1 · Hook — las tres cosas -->
+<!-- §14.1 · Hook + arc — las tres cosas, al mismo tiempo -->
 <section>
   <h2>Cuatro semanas. Tres cosas. Todo al mismo tiempo.</h2>
 
   <div class="s12-hook-card">
-    <p class="s12-hook-card-main">
-      Hace cuatro semanas no sabías qué era un token.<br>
-      Hoy terminaste de armar tres cosas que, juntas, cambian cómo construís software.
-    </p>
     <div class="s12-hook-tres">
-      <div class="s12-hook-pieza">modelo</div>
-      <div class="s12-hook-pieza">rol / vocabulario</div>
-      <div class="s12-hook-pieza">runtime</div>
+      <div class="s12-hook-pieza">modelo · S1</div>
+      <div class="s12-hook-pieza">rol + vocabulario · S2–S3</div>
+      <div class="s12-hook-pieza">runtime · S4</div>
     </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Leer la línea principal despacio. Pausa entre las dos frases. Señalar los tres chips en orden mientras se nombran.</strong></p>
-    <p><u>Opener de §12. El hook viene textual de la fuente. Los tres chips anticipan la estructura de la próxima slide sin explicar nada todavía — funcionan como promesa visual del arco que se va a cerrar.</u></p>
-    <p><em>"Hace cuatro semanas no sabías qué era un token. No era ignorancia — era simplemente que eso no era parte de tu vocabulario todavía."</em></p>
-    <p><em>"Hoy es distinto. Hoy terminaste de armar tres cosas. Tres cosas que no funcionan bien por separado — que funcionan juntas. Un modelo que entendés. Un rol con el vocabulario para ejercerlo. Un runtime que podés controlar."</em></p>
-    <p><em>"§12 es el para qué de todo eso. El trabajo final es donde las tres se usan al mismo tiempo. Vamos a ver qué significa eso en concreto."</em></p>
-  </aside>
-</section>
-
-<!-- §14.2 · Las tres piezas — pipeline vertical con "sin ella, qué pasa" -->
-<section>
-  <h2>Las tres piezas — por qué cada una es necesaria</h2>
-
-  <div class="s12-pipeline-wrap">
-    <div class="s12-pipeline-row">
-      <div class="s12-pieza-box modelo-box">
-        <span class="s12-pieza-label">S1 — fundamentos</span>
-        <div class="s12-pieza-title">Modelo</div>
-        <div class="s12-pieza-sin">Sin él: el agente es una caja negra. No podés anticipar cuándo falla ni por qué.</div>
-      </div>
-    </div>
-    <div class="s12-pipeline-arrow-v">↓</div>
-    <div class="s12-pipeline-row">
-      <div class="s12-pieza-box rol-box">
-        <span class="s12-pieza-label">S2–S3 — vocabulario</span>
-        <div class="s12-pieza-title">Rol / vocabulario</div>
-        <div class="s12-pieza-sin">Sin él: aceptás lo primero que el modelo tira. No hay especificación sin vocabulario.</div>
-      </div>
-    </div>
-    <div class="s12-pipeline-arrow-v">↓</div>
-    <div class="s12-pipeline-row">
-      <div class="s12-pieza-box runtime-box">
-        <span class="s12-pieza-label">S4 — runtime</span>
-        <div class="s12-pieza-title">Runtime</div>
-        <div class="s12-pieza-sin">Sin él: el proyecto largo da vueltas. El contexto se fragmenta y el loop deriva.</div>
-      </div>
-    </div>
-    <div class="s12-pipeline-coda">
+    <p style="font-size:0.72em;color:var(--text-muted);line-height:1.6;margin:18px 0 0;text-align:center;font-style:italic;">
       El trabajo final es donde las tres se usan al mismo tiempo.
-    </div>
+    </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar cada pieza y leer su "sin ella" antes de pasar a la siguiente. Pausa larga antes de la coda.</strong></p>
-    <p><u>La estructura vertical hace visible que las tres piezas son necesarias, no intercambiables. El "sin ella, qué pasa" en cursiva ancla cada pieza a una consecuencia concreta — evita que suenen decorativas.</u></p>
-    <p><em>"La primera pieza es el modelo. La parte 1 de hoy. Cómo predice el siguiente token, qué es la ventana de contexto, por qué sin memoria entre sesiones el agente 'olvida'. Sin eso, el agente es una caja negra — no podés anticipar cuándo falla ni por qué, y empezás a trabajar por intuición."</em></p>
-    <p><em>"La segunda pieza es el rol y el vocabulario. Las semanas 2 y 3. Nombres para las partes: componentes, endpoints, contratos, status codes. Sin eso, el único movimiento disponible es aceptar o rechazar en bloque lo que el agente propone. No hay forma de corregir lo que no podés nombrar."</em></p>
-    <p><em>"La tercera pieza es el runtime. Toda la parte 2 de hoy. El loop, el contexto, y las herramientas para actuar sobre cada uno. Sin eso, el proyecto largo da vueltas — el contexto se fragmenta, el agente pierde el hilo, y las sesiones no se conectan."</em></p>
-    <p><em>"Las tres al mismo tiempo: eso es el trabajo final."</em></p>
+    <p><strong>Señalar los tres chips en orden. Pausa antes de la línea de cierre.</strong></p>
+    <p><u>Opener de §14. Las tres piezas del curso + el cierre operativo "el trabajo final las usa juntas". Setup para los slides que definen el trabajo final concretamente.</u></p>
+    <p><em>"Tres piezas en estas cuatro semanas. El modelo, semana 1 — cómo predice tokens, qué es la ventana de contexto. El rol y el vocabulario, semanas 2 y 3 — cómo dictar en lugar de aceptar lo primero que el agente devuelve. El runtime, hoy — cómo configurar y controlar el loop entero."</em></p>
+    <p><em>"Las tres no funcionan bien por separado — funcionan juntas. Y el trabajo final es exactamente el lugar donde las tres se usan al mismo tiempo. Vamos a ver qué significa eso en concreto."</em></p>
   </aside>
 </section>
 
-<!-- §14.3 · Qué vas a construir — la forma, no el contenido -->
+<!-- §14.2 · Qué entregás (el repo) -->
 <section>
-  <h2>La forma del proyecto — no el contenido</h2>
+  <h2>Qué entregás: el repo</h2>
 
-  <div class="s12-construir-wrap">
-    <div class="s12-forma-card">
-      <span class="s12-forma-tagline">lo que importa acá</span>
-      <div class="s12-forma-spec">
-        <span class="s12-forma-tag">frontend</span>
-        <span class="s12-forma-tag">+</span>
-        <span class="s12-forma-tag">backend</span>
-        <span class="s12-forma-tag">+</span>
-        <span class="s12-forma-tag">persistencia</span>
-      </div>
-      <div class="s12-forma-nota">
-        Un producto que corre en un servidor, con una interfaz para el usuario, que persiste datos.<br>
-        El dominio se define aparte — puede ser libre o semi-libre. Eso se comunica por separado.
-      </div>
+  <div class="s14-entrega-wrap">
+    <div class="s14-entrega-card">
+      <span class="s14-entrega-tag">Producto</span>
+      <p class="s14-entrega-body">
+        <strong>Backend:</strong> una API REST u otro estilo que tenga sentido para el dominio.<br>
+        <strong>Frontend:</strong> con o sin dependencias externas — vanilla, framework, lo que corresponda.<br>
+        <strong>Persistencia:</strong> base de datos, archivos, lo que el producto necesite.
+      </p>
     </div>
-    <div class="s12-construir-callout">
-      No vas a escribir este producto línea por línea. Lo vas a dirigir.
+    <div class="s14-entrega-card">
+      <span class="s14-entrega-tag">.claude/ — parte del producto, no andamiaje</span>
+      <p class="s14-entrega-body">
+        Los siete features que recorrimos hoy tienen que estar presentes y configurados con intención:
+      </p>
+      <ul class="s14-entrega-features">
+        <li><code>CLAUDE.md</code> con folder map y convenciones del proyecto</li>
+        <li><code>.claude/rules/</code> con al menos una rule path-scoped</li>
+        <li><code>.claude/settings.json</code> con <code>permissions</code> (<code>allow</code> / <code>deny</code> / <code>ask</code>) configurados</li>
+        <li>Al menos una skill propia + un slash command que la invoca</li>
+        <li>Sub-agent definido si la complejidad del proyecto lo justifica</li>
+        <li>Uso de plan mode durante el desarrollo (vivencia, no archivo)</li>
+      </ul>
     </div>
+    <p class="s14-entrega-callout">
+      El <code>.claude/</code> también es producto. Se entrega y se explica.
+    </p>
+    <p style="font-size:0.58em;color:var(--text-muted);text-align:center;margin:8px 0 0;font-style:italic;max-width:680px;">
+      Hasta tres personas o individual — vos elegís.
+    </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar los tres tags — frontend, backend, persistencia — como si se nombrara la forma de un edificio, no su decoración. Leer la nota de dominio en tono casual. Pausa antes del callout.</strong></p>
-    <p><u>Slide de definición de la forma. El punto central es que la forma activa exactamente las decisiones del curso — no se dice todavía, eso es la siguiente slide. Acá solo se planta la forma. La última línea es la tesis en una oración.</u></p>
-    <p><em>"La forma del proyecto son tres cosas: frontend, backend, persistencia. Algo que corre en un servidor, que tiene una interfaz para el usuario, que guarda estado entre sesiones."</em></p>
-    <p><em>"El dominio — de qué trata — se define aparte y lo van a saber por otro canal. Lo que importa hoy no es el tema: es la forma. Porque la forma implica exactamente las decisiones que aprendieron a tomar."</em></p>
-    <p><em>"Y la diferencia de fondo: no van a escribir este producto línea por línea. Lo van a dirigir. Eso cambia qué se evalúa, cómo se trabaja, y cuál es el producto real que terminan entregando."</em></p>
+    <p><strong>Recorrer las dos cards. En la primera, marcar la libertad de forma (backend cualquier estilo, frontend cualquier stack). En la segunda, leer los seis bullets terse — son los features de hoy, ahora obligatorios en el repo. Cerrar con el callout despacio.</strong></p>
+    <p><u>Slide central de §14. Define el entregable concreto. Dos cards: producto (con forma libre dentro de un marco) y .claude/ (con los features de hoy explícitos). El callout sella la idea: el .claude/ no es invisible — es parte del repo que se entrega y se explica.</u></p>
+    <p><em>"Lo que se entrega es un repo. Dos partes."</em></p>
+    <p><em>"La primera, el producto: un backend, un frontend, persistencia. El backend puede ser una API REST o no — si para tu dominio tiene sentido otro estilo, va. El frontend puede ser vanilla sin dependencias o usar un framework — depende del caso. La persistencia es lo que el producto necesite. No hay un stack obligatorio."</em></p>
+    <p><em>"La segunda parte es la carpeta .claude/. Y acá sí hay obligatoriedad: los siete features que recorrimos hoy tienen que estar presentes en el repo y usados con intención. CLAUDE.md con folder map. Al menos una rule path-scoped en .claude/rules/. settings.json con permisos configurados de verdad. Una skill propia con su slash command. Un sub-agent si la complejidad lo pide. Y uso de plan mode durante el desarrollo — eso último no es archivo, es práctica."</em></p>
+    <p><em>"El .claude/ no es andamiaje invisible. Es parte del producto que entregás. Se ve, se entiende y — como vamos a ver en la próxima — se explica el último día."</em></p>
   </aside>
 </section>
 
-<!-- §14.4 · Por qué conecta con todo — structured cards, no ul -->
+<!-- §14.3 · Cómo se mide — la presentación final -->
 <section>
-  <h2>Por qué conecta con todo lo del curso</h2>
+  <h2>Cómo se mide: el último día explicás</h2>
 
-  <div class="s12-conexion-wrap">
-    <div class="s12-conexion-card">
-      <div class="s12-conexion-card-label">S2 / S3<br>vocabulario</div>
-      <div class="s12-conexion-card-body">
-        Componentes, endpoints, contratos, status codes — <em>lo que te permite dictar</em>.
-        Si el agente devuelve una API que no pediste, necesitás las palabras para corregirla.
-        Sin vocabulario, el único movimiento es aceptar o rechazar en bloque.
-      </div>
-    </div>
-    <div class="s12-conexion-card">
-      <div class="s12-conexion-card-label">S4<br>context y harness</div>
-      <div class="s12-conexion-card-body">
-        Entran cuando el proyecto crece. CLAUDE.md persiste las decisiones de arquitectura entre sesiones.
-        Los sub-agents aíslan partes del loop. Plan mode muestra el plan antes de tocar nada.
-        En un proyecto real de varios archivos, <em>dejan de ser opcionales</em>.
-      </div>
-    </div>
-    <div class="s12-conexion-card">
-      <div class="s12-conexion-card-label">S3<br>supervisor</div>
-      <div class="s12-conexion-card-body">
-        El rol de supervisor mantiene la coherencia entre partes.
-        Si el frontend espera un campo y el backend devuelve otro, el agente no lo detecta solo.
-        Supervisar el contrato entre cliente y servidor es <em>exactamente</em> el rol de la semana 3.
-      </div>
-    </div>
-    <div class="s12-conexion-callout">
-      El trabajo final no examina si sabés sintaxis. Examina si sabés dirigir.
-    </div>
+  <div class="s14-mide-wrap">
+    <p class="s14-mide-lead">
+      En la presentación final, sobre el repo terminado:
+    </p>
+    <ul class="s14-mide-list">
+      <li><strong>El uso de cada feature de Claude Code:</strong> qué hay en tu <code>.claude/</code>, con qué intención lo pusiste, qué efecto tuvo durante el desarrollo.</li>
+      <li><strong>La estructura general del código:</strong> qué carpetas, qué módulos, qué contratos, qué responsabilidad tiene cada parte.</li>
+      <li class="is-not"><strong>No entrás en qué hace el código línea a línea.</strong> La presentación es de arquitectura y runtime, no de lógica.</li>
+    </ul>
+    <p class="s14-mide-coda">
+      <strong>Apropiación</strong> = poder dar cuenta de las decisiones, no haber escrito todas las líneas.
+    </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer cada tarjeta con el label visible — nombrar la semana de origen antes de leer el cuerpo. Pausa deliberada antes del callout.</strong></p>
-    <p><u>Slide de conexión entre piezas del curso y el proyecto. Tres tarjetas horizontales, cada una con el origen semana/sección en la etiqueta — hace que la conexión sea explícita y no declarativa. El callout cierra con la tesis de evaluación.</u></p>
-    <p><em>"El vocabulario de semanas 2 y 3 no era teoría. Era el instrumento para dictar. Si el agente devuelve una API con status codes distintos a los que pediste, necesitás las palabras exactas para corregirla. Sin vocabulario, no podés especificar — y sin especificación, el agente elige por defecto."</em></p>
-    <p><em>"El loop y la gestión del contexto de hoy entran cuando el proyecto crece. Un archivo, una sesión — eso no activa el problema. Pero un proyecto con frontend, backend y base de datos, que se extiende a lo largo de varias semanas: ahí el contexto se fragmenta, el agente pierde el hilo, y las herramientas de hoy se vuelven la diferencia entre un proyecto que avanza y uno que da vueltas."</em></p>
-    <p><em>"Y el rol de supervisor — semana 3 — se aplica literalmente: si el frontend espera un campo que el backend no devuelve, esa brecha no aparece sola en los tests. Alguien tiene que detectarla. Ese alguien sos vos."</em></p>
-    <p><em>"El trabajo final no examina si sabés sintaxis. Examina si sabés dirigir."</em></p>
+    <p><strong>Leer el lead. Recorrer los tres bullets — el primero (features) y el segundo (estructura) con énfasis, el tercero (lo que NO) con voz más baja y pausada. Cerrar con la coda apoyando "apropiación".</strong></p>
+    <p><u>Slide que define el criterio operativo de evaluación. La presentación final es la instancia donde se mide la apropiación. Los tres bullets dejan en claro qué entra y qué no entra: uso de features + estructura entran; código línea a línea, no. La coda formaliza el término.</u></p>
+    <p><em>"El último día de cursada presentan el trabajo final. Y en esa presentación tienen que hacer dos cosas — y no hacer una tercera."</em></p>
+    <p><em>"La primera: explicar cómo usaron cada feature de Claude Code en su repo. Qué pusieron en CLAUDE.md y por qué. Qué rules son path-scoped y qué glob las activa. Qué permisos configuraron y por qué eligieron esos. Qué skill armaron y qué problema resuelve. Si hay un sub-agent, qué aisla. Y cómo usaron plan mode mientras desarrollaban."</em></p>
+    <p><em>"La segunda: explicar la estructura general del código. Qué carpetas tiene el repo. Qué módulos hay. Qué responsabilidad tiene cada parte. Cuáles son los contratos entre frontend, backend y persistencia."</em></p>
+    <p><em>"Lo que no se hace: meterse en qué hace cada función línea a línea. La presentación es de arquitectura y de runtime — no es un walkthrough de código. Si en la presentación están explicando un if dentro de una función, se desviaron del foco."</em></p>
+    <p><em>"Y la palabra para resumir todo esto: apropiación. Que el producto sea tuyo aunque el agente haya escrito la mayoría de las líneas. Apropiación se mide por la capacidad de dar cuenta de las decisiones, no por cuántas líneas tipeaste con tu teclado."</em></p>
   </aside>
 </section>
 
-<!-- §14.5 · Qué se evalúa en espíritu — tres verbos -->
-<section>
-  <h2>Qué se evalúa — en espíritu</h2>
-
-  <div class="s12-eval-wrap">
-    <div class="s12-eval-card">
-      <div class="s12-eval-card-intro">
-        No es solo que funcione. Un producto que funciona pero cuyos caminos no podés explicar
-        no dice nada sobre tu rol como supervisor.
-        El término para esto es <strong>apropiación</strong>: que el producto sea tuyo aunque el agente
-        haya escrito la mayoría del código.
-      </div>
-      <div class="s12-eval-verbs">
-        <div class="s12-eval-verb">
-          <span class="s12-eval-verb-word">explicar</span>
-          <div class="s12-eval-verb-desc">por qué se tomaron las decisiones de arquitectura que se tomaron</div>
-        </div>
-        <div class="s12-eval-verb">
-          <span class="s12-eval-verb-word">corregir</span>
-          <div class="s12-eval-verb-desc">cuando el agente derivó o cuando el contrato entre partes se rompió</div>
-        </div>
-        <div class="s12-eval-verb">
-          <span class="s12-eval-verb-word">extender</span>
-          <div class="s12-eval-verb-desc">agregar algo al proyecto sin empezar de cero, gestionando el contexto acumulado</div>
-        </div>
-      </div>
-    </div>
-    <div class="s12-eval-nota">
-      Apropiación no se mide en cuántas líneas escribiste con el teclado.
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Leer el párrafo introductorio sin apurar — "apropiación" como palabra nueva, dejar que aterrice. Señalar cada verbo al nombrarlo. Leer la nota final como cierre tranquilo.</strong></p>
-    <p><u>Slide de la definición de evaluación en espíritu. Los tres verbos son el núcleo — están visualmente distintos para que se puedan señalar uno a uno. La introducción planta la palabra "apropiación" antes de que aparezcan los verbos. La nota al pie cierra con la negación de la métrica equivocada.</u></p>
-    <p><em>"Lo primero que van a sentir cuando vean el trabajo final es la tentación de medir si el producto funciona. Eso importa, pero no es suficiente. Un producto que funciona pero cuyos caminos no podés explicar no demuestra nada sobre tu rol como supervisor — demuestra que el agente funcionó, no que vos lo dirigiste."</em></p>
-    <p><em>"El término para lo que sí importa es apropiación. Que el producto sea tuyo aunque el agente haya escrito la mayoría del código. Apropiación se mide en tres verbos."</em></p>
-    <p><em>"Explicar: por qué estos endpoints, por qué esta estructura de datos, por qué este contrato entre cliente y servidor. Esas decisiones tienen que ser tuyas — no las que el agente eligió por defecto porque no especificaste."</em></p>
-    <p><em>"Corregir: cuando el agente derivó, cuando el contexto se fragmentó entre sesiones, cuando el frontend y el backend dejaron de hablar el mismo idioma — que puedas detectarlo y corregirlo."</em></p>
-    <p><em>"Extender: agregarle algo al proyecto sin empezar de cero. Gestionar el contexto acumulado de semanas anteriores para que el agente entienda la arquitectura antes de agregar la próxima feature."</em></p>
-    <p><em>"Eso es apropiación. No cuántas líneas escribiste."</em></p>
-  </aside>
-</section>
-
-<!-- §14.6 · Lo que NO se decide hoy — structured cards -->
-<section>
-  <h2>Lo que no se decide hoy</h2>
-
-  <div class="s12-nodecide-wrap">
-    <div class="s12-nodecide-grid">
-      <div class="s12-nodecide-card">
-        <div class="s12-nodecide-card-title">Equipos</div>
-        <div class="s12-nodecide-card-body">Si es grupal o individual, cómo se forman, de qué tamaño — se anuncia aparte.</div>
-      </div>
-      <div class="s12-nodecide-card">
-        <div class="s12-nodecide-card-title">Fechas y entregas</div>
-        <div class="s12-nodecide-card-body">El calendario de hitos, cuándo se entrega qué, si hay entregas parciales — se comunica por separado.</div>
-      </div>
-      <div class="s12-nodecide-card">
-        <div class="s12-nodecide-card-title">Dominio exacto</div>
-        <div class="s12-nodecide-card-body">Si el tema es libre, semi-libre o acotado a un conjunto de opciones — se define después.</div>
-      </div>
-      <div class="s12-nodecide-card">
-        <div class="s12-nodecide-card-title">Rúbrica formal</div>
-        <div class="s12-nodecide-card-body">Los criterios detallados, el peso de cada parte, Demo Day — se entregan en otro momento.</div>
-      </div>
-    </div>
-    <div class="s12-nodecide-coda">
-      Hoy es <em>el por qué y la forma</em>. Para que llegues a esa conversación con el marco ya puesto,
-      no empezando de cero.
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Señalar las cuatro tarjetas rápido — no leerlas en detalle, solo nombrar el tema. Leer la coda con pausa.</strong></p>
-    <p><u>Slide de lo administrativo pendiente. Las cuatro tarjetas en grid 2x2 son deliberadamente compactas — no es el centro de la clase. El tono es de clarificación, no de postergación. La coda formula el propósito de esta slide: que la conversación administrativa llegue cuando el marco ya está.</u></p>
-    <p><em>"Antes de cerrar, un momento de claridad sobre lo que no se define hoy."</em></p>
-    <p><em>"Equipos: si trabajan en grupos o solos, cómo se forman — lo anunciamos por otro canal. Fechas y entregas: el calendario exacto, si hay hitos intermedios — también por separado. Dominio: de qué trata el proyecto, qué opciones hay — se define después. Rúbrica formal: los criterios de evaluación con pesos concretos, el Demo Day — en otro momento."</em></p>
-    <p><em>"Lo que sí pasa hoy es el por qué y la forma. El propósito es que cuando llegue esa conversación administrativa — equipos, fechas, dominio, rúbrica — no la estén empezando desde cero. Ya tienen el marco. Ya saben qué examina el trabajo final y por qué tiene esa forma."</em></p>
-  </aside>
-</section>
-
-<!-- §14.7 · El arco — cierre del curso, lens-tracker neutral -->
+<!-- §14.4 · El arco completo — cierre del curso -->
 <section>
   <h2>El arco completo</h2>
 
