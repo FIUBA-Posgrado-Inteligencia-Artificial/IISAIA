@@ -5020,277 +5020,482 @@ Cuando trabajes con código del backend:
       <style>
 /* Scoped styles for §9 only */
 
-/* Opener wrap */
-.s9-opener-wrap {
+/* Heading override scoped to §9 slides (reveal default h2 ~2em — too tall for dense slides) */
+.reveal .slides .s9-slide { text-align: center; }
+.reveal .slides .s9-slide h2 {
+  font-size: 0.82em;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* --- Five-questions card (full + mini) — calibrated identically to §7/§8 --- */
+.reveal .slides .s9-slide h2.s9-five-q-title {
+  font-size: 1.05em;
+  text-align: center;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.s9-five-q-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 900px;
+}
+.s9-five-q-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 6px;
+  padding: 9px 10px 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.s9-five-q-card.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+  border-left: 3px solid var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(100, 255, 218, 0.08);
+}
+.s9-five-q-num {
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.s9-five-q-card.is-active .s9-five-q-num {
+  color: var(--accent);
+}
+.s9-five-q-label {
+  font-size: 0.56em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.s9-five-q-hint {
+  font-size: 0.44em;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+/* Mini variant */
+.s9-five-q-grid.is-mini {
+  grid-template-columns: repeat(5, auto);
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0 auto 8px;
+}
+.s9-five-q-grid.is-mini .s9-five-q-card {
+  padding: 3px 9px;
+  border-radius: 999px;
+  border-left-width: 1px;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.s9-five-q-grid.is-mini .s9-five-q-card.is-active {
+  border-left: 1px solid var(--accent);
+}
+.s9-five-q-grid.is-mini .s9-five-q-num {
+  font-size: 0.42em;
+}
+.s9-five-q-grid.is-mini .s9-five-q-label {
+  font-size: 0.5em;
+}
+
+/* Qué es — bulletpoint list para §9.2 */
+.s9-qe-list {
+  list-style: disc;
+  display: inline-block;
+  text-align: left;
+  max-width: 720px;
+  margin: 16px auto 0;
+  padding-left: 36px;
+  font-size: 0.62em;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.s9-qe-list li {
+  padding-left: 6px;
+  margin-bottom: 10px;
+}
+.s9-qe-list li::marker {
+  color: var(--accent);
+}
+.s9-qe-list strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+.s9-qe-list code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s9-qe-list li.s9-qe-callout {
+  list-style: none;
+  margin-left: -32px;
+  margin-top: 10px;
+  background: rgba(100, 255, 218, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Jerarquía — cascade layout (4 niveles para §9.3) */
+.s9-hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 820px;
+  margin: 10px auto 0;
+}
+.s9-hier-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.s9-hier-level {
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-right: none;
+  border-bottom: none;
+  padding: 7px 9px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
-  margin: 24px auto 0;
-  max-width: 640px;
+  justify-content: center;
+  gap: 2px;
 }
-.s9-opener-sublabel {
-  font-size: 0.65em;
-  font-family: var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0;
+.s9-hier-row:first-child .s9-hier-level { border-radius: 8px 0 0 0; }
+.s9-hier-row:last-child .s9-hier-level {
+  border-radius: 0 0 0 8px;
+  border-bottom: 1px solid #2a3a5a;
 }
-.s9-opener-question {
-  font-size: 0.88em;
-  color: var(--text-muted);
-  text-align: center;
-  margin: 0;
-  line-height: 1.7;
-  font-style: italic;
-}
-.s9-opener-question em {
-  color: var(--accent);
-  font-style: normal;
-  font-weight: 700;
-}
-
-/* Generic focus card */
-.s9-focus-card {
-  max-width: 700px;
-  margin: 24px auto 0;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
-  padding: 28px 34px;
-  text-align: left;
-}
-.s9-focus-card p {
-  font-size: 0.86em;
-  line-height: 1.8;
-  color: var(--text-primary);
-  margin: 0 0 14px;
-}
-.s9-focus-card p:last-child { margin: 0; }
-.s9-focus-card .s9-highlight {
-  color: var(--accent);
-  font-weight: 700;
-  font-style: normal;
-}
-.s9-focus-card .s9-key-line {
-  font-size: 0.9em;
-  font-weight: 700;
-  color: var(--accent);
-  margin-top: 16px;
-  border-top: 1px solid #2a3a5a;
-  padding-top: 14px;
-}
-
-/* Skill anatomy two-card layout */
-.s9-meta-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.s9-meta-row {
-  display: flex;
-  gap: 14px;
-}
-.s9-meta-card {
-  flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 18px 20px;
-}
-.s9-meta-card.accent-left {
-  border-left: 3px solid var(--accent);
-}
-.s9-meta-card.accent-left-sec {
-  border-left: 3px solid var(--accent-secondary);
-}
-.s9-meta-card-label {
-  font-size: 0.56em;
+.s9-hier-level-num {
+  font-size: 0.46em;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
-  display: block;
-  margin-bottom: 6px;
 }
-.s9-meta-card-title {
-  font-size: 0.78em;
+.s9-hier-level-name {
+  font-size: 0.52em;
   font-weight: 700;
-  font-family: var(--font-mono);
-  color: var(--accent);
-  margin-bottom: 8px;
+  color: var(--accent-secondary);
+  text-align: center;
+  line-height: 1.3;
 }
-.s9-meta-card-title.sec { color: var(--accent-secondary); }
-.s9-meta-card-body {
-  font-size: 0.68em;
+.s9-hier-content {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-bottom: none;
+  padding: 7px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+}
+.s9-hier-row:first-child .s9-hier-content { border-radius: 0 8px 0 0; }
+.s9-hier-row:last-child .s9-hier-content {
+  border-radius: 0 0 8px 0;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s9-hier-title {
+  font-size: 0.58em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.s9-hier-paths {
+  font-size: 0.5em;
+  font-family: var(--font-mono);
   color: var(--text-muted);
-  line-height: 1.65;
+  line-height: 1.55;
 }
-.s9-meta-card-body code {
+.s9-hier-use {
+  font-size: 0.48em;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: 1px;
+}
+.s9-hier-note {
+  display: inline-block;
+  max-width: 760px;
+  margin: 8px 0 0;
+  font-size: 0.5em;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.5;
+}
+.s9-hier-note strong { color: var(--text-primary); font-style: normal; }
+
+/* Pirámide de precedencia — §9.4 */
+.s9-prec-wrap {
+  max-width: 760px;
+  margin: 10px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+.s9-prec-pyramid {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+.s9-prec-tier {
+  border: 1px solid #2a3a5a;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  color: var(--text-primary);
+  background: var(--bg-code);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+.s9-prec-tier.is-top {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+  width: 60%;
+}
+.s9-prec-tier.is-2 { width: 70%; color: var(--accent-secondary); border-color: var(--accent-secondary); }
+.s9-prec-tier.is-3 { width: 82%; }
+.s9-prec-tier.is-4 { width: 94%; }
+.s9-prec-arrow {
+  font-family: var(--font-mono);
+  font-size: 0.42em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+.s9-prec-notes {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.s9-prec-note {
+  font-size: 0.52em;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.s9-prec-note strong { color: var(--text-primary); }
+.s9-prec-note .accent { color: var(--accent); font-weight: 700; }
+
+/* Fields table — §9.5 */
+.s9-fields-wrap {
+  max-width: 940px;
+  margin: 10px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.s9-fields-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.5em;
+  line-height: 1.45;
+}
+.s9-fields-table thead th {
+  background: var(--bg-code);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  padding: 7px 12px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s9-fields-table tbody td {
+  padding: 6px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid #1e2a48;
+  color: var(--text-muted);
+}
+.s9-fields-table tbody tr:last-child td { border-bottom: none; }
+.s9-fields-table tbody tr.is-highlight td {
+  background: rgba(100, 255, 218, 0.05);
+}
+.s9-fields-table td.s9-field-name {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
+  font-weight: 700;
+  white-space: nowrap;
+  width: 22%;
 }
-.s9-meta-card-body .sec-code {
+.s9-fields-table td.s9-field-what {
+  color: var(--text-primary);
+  width: 38%;
+}
+.s9-fields-table td.s9-field-demo {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  width: 40%;
+}
+.s9-fields-table td.s9-field-demo code {
+  color: var(--accent-secondary);
+  font-family: var(--font-mono);
+}
+.s9-fields-table tr.is-highlight td.s9-field-name { color: var(--accent); }
+.s9-fields-table tr.is-future td.s9-field-name {
   color: var(--accent-secondary);
 }
-.s9-meta-moment {
-  background: rgba(100, 255, 218, 0.05);
-  border: 1px solid rgba(100, 255, 218, 0.2);
-  border-radius: 7px;
-  padding: 12px 18px;
-  font-size: 0.7em;
-  color: var(--accent);
-  line-height: 1.65;
-  font-weight: 600;
+.s9-fields-note {
+  display: inline-block;
+  max-width: 880px;
+  margin: 8px 0 0;
+  font-size: 0.46em;
+  color: var(--text-muted);
+  font-style: italic;
   text-align: center;
 }
+.s9-fields-note strong { color: var(--text-primary); font-style: normal; }
 
-/* Comparison wrap */
-.s9-cmp-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+/* Walkthrough — §9.6 — bullet list de los 4 bloques del settings.json */
+.s9-walk-path {
+  display: inline-block;
+  max-width: 760px;
+  margin: 0 auto 10px;
+  background: var(--bg-code);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  color: var(--accent);
+  text-align: center;
 }
-.s9-cmp-card {
-  flex: 1;
-  border-radius: 8px;
-  padding: 18px 20px;
-}
-.s9-cmp-card.skill-side {
-  background: rgba(100, 255, 218, 0.06);
-  border: 1px solid rgba(100, 255, 218, 0.25);
-}
-.s9-cmp-card.cmd-side {
-  background: rgba(130, 170, 255, 0.06);
-  border: 1px solid rgba(130, 170, 255, 0.25);
-}
-.s9-cmp-card-label {
+.s9-walk-list {
+  list-style: disc;
+  display: inline-block;
+  text-align: left;
+  max-width: 820px;
+  margin: 8px auto 0;
+  padding-left: 36px;
   font-size: 0.58em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-.s9-cmp-card.skill-side .s9-cmp-card-label { color: var(--accent); }
-.s9-cmp-card.cmd-side .s9-cmp-card-label { color: var(--accent-secondary); }
-.s9-cmp-card-title {
-  font-size: 0.78em;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-.s9-cmp-card-body {
-  font-size: 0.7em;
+  line-height: 1.65;
   color: var(--text-muted);
-  line-height: 1.7;
 }
-.s9-cmp-card-body code {
+.s9-walk-list li {
+  padding-left: 4px;
+  margin-bottom: 10px;
+}
+.s9-walk-list strong {
+  color: var(--text-primary);
+}
+.s9-walk-list code {
   font-family: var(--font-mono);
+  color: var(--accent);
   font-size: 0.95em;
 }
-.s9-cmp-card.skill-side .s9-cmp-card-body code { color: var(--accent); }
-.s9-cmp-card.cmd-side .s9-cmp-card-body code { color: var(--accent-secondary); }
-.s9-cmp-note {
+.s9-walk-list li.is-allow::marker { color: var(--accent); }
+.s9-walk-list li.is-deny::marker  { color: #ff7676; }
+.s9-walk-list li.is-deny code      { color: #ff7676; }
+.s9-walk-list li.is-ask::marker   { color: var(--accent-secondary); }
+
+/* Qué confunde — grid 1×3 — copia exacta de §8 */
+.s9-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 940px;
+  margin: 12px auto 0;
+}
+.s9-case-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
-  border-radius: 7px;
-  padding: 12px 18px;
-  font-size: 0.68em;
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-.s9-cmp-note strong { color: var(--text-primary); }
-
-/* Build-class command card */
-.s9-cmd-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
+  border-top: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 6px;
 }
-.s9-cmd-code-block {
-  background: var(--bg-code);
-  border-radius: 8px;
-  padding: 22px 28px;
+.s9-case-tag {
   font-family: var(--font-mono);
-  font-size: 0.82em;
-  line-height: 1.85;
+  font-size: 0.44em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
-.s9-cmd-comment { color: var(--text-muted); }
-.s9-cmd-path { color: var(--accent-secondary); }
-.s9-cmd-content { color: var(--accent); }
-.s9-cmd-callout {
-  background: rgba(100, 255, 218, 0.05);
-  border: 1px solid rgba(100, 255, 218, 0.25);
-  border-radius: 7px;
-  padding: 14px 20px;
-  font-size: 0.74em;
+.reveal .slides .s9-slide .s9-case-h3 {
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.s9-case-body {
+  font-size: 0.5em;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.s9-case-body code {
+  font-family: var(--font-mono);
   color: var(--accent);
-  line-height: 1.65;
-  font-weight: 600;
-  text-align: center;
+  font-size: 0.95em;
 }
-.s9-cmd-sep-note {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent-secondary);
-  border-radius: 7px;
-  padding: 13px 20px;
-  font-size: 0.7em;
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-.s9-cmd-sep-note strong { color: var(--text-primary); }
-
-/* Tricotomía caption */
-.s9-tricotomia-caption {
-  max-width: 680px;
-  margin: 18px auto 0;
-  font-size: 0.68em;
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.75;
-}
-.s9-tricotomia-caption strong { color: var(--text-primary); }
 
 /* Demo wrap */
 .s9-demo-wrap {
-  max-width: 720px;
-  margin: 24px auto 0;
+  max-width: 760px;
+  margin: 16px auto 0;
 }
 
-/* Cierre card */
+/* Cierre */
 .s9-close-card {
-  max-width: 660px;
-  margin: 28px auto 0;
+  max-width: 720px;
+  margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 28px 36px;
+  padding: 16px 24px;
   text-align: center;
 }
 .s9-close-main {
-  font-size: 0.84em;
-  line-height: 1.8;
+  font-size: 0.66em;
+  line-height: 1.65;
   color: var(--text-primary);
-  margin: 0 0 20px;
+  margin: 0 0 12px;
 }
+.s9-close-main strong { color: var(--accent); }
 .s9-close-bridge {
-  font-size: 0.76em;
+  font-size: 0.58em;
   color: var(--text-muted);
-  line-height: 1.75;
+  line-height: 1.6;
   border-top: 1px solid #2a3a5a;
-  padding-top: 18px;
+  padding-top: 11px;
   margin: 0;
 }
 .s9-close-bridge em {
@@ -5298,224 +5503,387 @@ Cuando trabajes con código del backend:
   font-style: normal;
   font-weight: 700;
 }
+.s9-close-bridge code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
 </style>
 <section>
-<!-- §9.2 · Qué es una skill (tracker merged from former §9.1 opener) -->
-<section>
-  <div class="lens-tracker on-context" style="margin-bottom:14px;">
-    <div class="pole pole-context">CONTEXT</div>
-    <div class="lens-sep">↔</div>
-    <div class="pole pole-harness">HARNESS</div>
-  </div>
-  <p style="text-align:center;font-size:0.62em;color:var(--text-muted);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin:0 0 14px;">condicional por invocación</p>
+<!-- §9.1 · Apertura — Tarjeta de 5 preguntas (full opener) -->
+<section class="s9-slide">
+  <h2 class="s9-five-q-title">settings.json</h2>
 
-  <h2>Una skill: un procedimiento completo, no una instrucción suelta</h2>
-
-  <div class="s9-focus-card">
-    <p>
-      Una skill empaqueta un flujo de trabajo repetible con <span class="s9-highlight">fases, verificaciones y anti-patterns definidos</span>. No es una instrucción suelta ni una preferencia de estilo: es una capacidad completa sobre cómo ejecutar un tipo de tarea.
-    </p>
-    <p>
-      La diferencia respecto a las path-scoped rules es conceptual antes que técnica. Una path-scoped rule lleva instrucciones que se activan por contexto de archivo. Una skill lleva un <em>procedimiento</em> que se activa por invocación o por relevancia de tarea.
-    </p>
-    <p class="s9-key-line">
-      No cargada al arranque. Cero tokens hasta que la invocás.<br>
-      Lo que no usás, no pagás.
-    </p>
-  </div>
+  <ol class="s9-five-q-grid">
+    <li class="s9-five-q-card is-active">
+      <span class="s9-five-q-num">1</span>
+      <span class="s9-five-q-label">Qué es</span>
+      <span class="s9-five-q-hint">definición en una línea</span>
+    </li>
+    <li class="s9-five-q-card">
+      <span class="s9-five-q-num">2</span>
+      <span class="s9-five-q-label">Dónde vive</span>
+      <span class="s9-five-q-hint">paths / niveles</span>
+    </li>
+    <li class="s9-five-q-card">
+      <span class="s9-five-q-num">3</span>
+      <span class="s9-five-q-label">Cuándo se carga</span>
+      <span class="s9-five-q-hint">momento + trigger</span>
+    </li>
+    <li class="s9-five-q-card">
+      <span class="s9-five-q-num">4</span>
+      <span class="s9-five-q-label">Cómo se usa</span>
+      <span class="s9-five-q-hint">sintaxis + ejemplos</span>
+    </li>
+    <li class="s9-five-q-card">
+      <span class="s9-five-q-num">5</span>
+      <span class="s9-five-q-label">Qué confunde</span>
+      <span class="s9-five-q-hint">casos límite</span>
+    </li>
+  </ol>
 
   <aside class="notes">
-    <p><strong>Señalar el tracker — CONTEXTO iluminado igual que en §8. Leer el sublabel ("condicional por invocación"). Después leer el primer párrafo enfatizando "fases, verificaciones, anti-patterns". Leer el segundo párrafo distinguiendo el trigger. Leer la línea clave al final con pausa antes de "Lo que no usás, no pagás."</strong></p>
-    <p><u>Slide de definición con el tracker en la cabecera (tercer aterrizaje seguido en CONTEXTO; el sublabel "condicional por invocación" es el rótulo nuevo). Un solo concepto: qué es una skill. El contraste con path-scoped rules es el hilo que conecta con §8. La línea de cierre es la afirmación de diseño central — no un detalle técnico, sino la filosofía que justifica el mecanismo.</u></p>
-    <p><em>"El tracker otra vez en CONTEXTO. Tres secciones seguidas aterrizando acá. Y el sublabel dice algo nuevo: condicional por invocación. §8 cerró con una pregunta: ¿puede el contexto condicional ir más lejos? Una path-scoped rule entra cuando tocás ciertos archivos. Funciona perfecto para instrucciones de área. Pero hay algo que no matchea ningún path: un procedimiento completo — cómo se genera un slide, cómo se toma una transcripción de YouTube y se convierte en material de clase, cómo se audita un PR. Para eso existen las skills."</em></p>
-    <p><em>"¿Qué es una skill? No es un prompt largo. No es un bloque de instrucciones pegado en CLAUDE.md. Es un procedimiento completo: fases, pasos de verificación, anti-patterns explícitos. Una capacidad completa sobre cómo hacer algo."</em></p>
-    <p><em>"La diferencia con las path-scoped rules no es técnica. Es conceptual. Una path-scoped rule trae instrucciones cuando tocás ciertos archivos. Una skill trae un procedimiento cuando la invocás, o cuando Claude determina que la tarea lo requiere."</em></p>
-    <p><em>"Y el punto que más importa en términos de contexto: una skill no existe para la sesión hasta que se necesita. No carga al arranque. No ocupa un solo token. Lo que no usás, no pagás."</em></p>
+    <p><strong>Misma apertura que las dos anteriores. No leer las preguntas — el título arriba ya nombra la sección. Ritmo rápido, la plantilla ya la tienen incorporada.</strong></p>
+    <p><u>Apertura de §9 con el mismo dispositivo. Cinco preguntas otra vez, "Qué es" lit, cambia el título. El cambio de naturaleza respecto a §7 y §8 — pasamos de Markdown a JSON, de instrucciones a configuración — no se anuncia acá; se desarrolla en el primer slide de contenido.</u></p>
+    <p><em>"settings.json. Tercera vuelta con la misma plantilla."</em></p>
+    <p><em>"Acá hay un cambio de naturaleza que vale la pena marcar antes de entrar: hasta acá vimos archivos Markdown — instrucciones para el agente. Lo que sigue es un JSON, y le habla a otra cosa."</em></p>
   </aside>
 </section>
 
-<!-- §9.3 · El ejemplo meta: tools/skills/slide-generation/ -->
-<section>
-  <h2>El ejemplo más concreto: la skill que generó esta clase</h2>
+<!-- §9.2 · Qué es — definición + propiedad central -->
+<section class="s9-slide">
+  <ol class="s9-five-q-grid is-mini">
+    <li class="s9-five-q-card is-active"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
+  </ol>
 
-  <div class="s9-meta-wrap">
-    <div class="s9-meta-row">
-      <div class="s9-meta-card accent-left">
-        <span class="s9-meta-card-label">tools/skills/slide-generation/</span>
-        <div class="s9-meta-card-title">La skill que armó este deck</div>
-        <div class="s9-meta-card-body">
-          Su <code>SKILL.md</code> describe cuatro fases explícitas:<br>
-          <strong style="color:var(--accent);">Spine</strong> (esqueleto didáctico) →
-          <strong style="color:var(--accent);">Plan</strong> (tareas de implementación) →
-          <strong style="color:var(--accent);">Execute</strong> (slides sección por sección, con checklists) →
-          <strong style="color:var(--accent);">Verify/Finish</strong>.<br><br>
-          Incluye un checkpoint duro: no se genera HTML sin que se revise y apruebe el <code>spine.md</code>. Lista anti-patterns explícitos — qué no hacer, qué no saltear.
-        </div>
-      </div>
-      <div class="s9-meta-card accent-left-sec">
-        <span class="s9-meta-card-label">tools/skills/yt-transcript-to-md/</span>
-        <div class="s9-meta-card-title sec">Otra skill, otra tarea</div>
-        <div class="s9-meta-card-body">
-          Toma una transcripción de YouTube y la convierte en material estructurado de clase. Dos procedimientos completamente distintos, dos skills distintas.<br><br>
-          Cuando <code class="sec-code">slide-generation</code> está activa, <code class="sec-code">yt-transcript-to-md</code> no ocupa un solo token. Y viceversa.
-        </div>
-      </div>
-    </div>
-    <div class="s9-meta-moment">
-      Momento meta: lo que estás mirando ahora mismo fue generado por esa skill.
-    </div>
-  </div>
+  <h2>Config del runtime, no instrucciones para el agente</h2>
+
+  <ul class="s9-qe-list">
+    <li><strong>Archivo JSON</strong> que configura el <strong>runtime</strong> de Claude Code — el programa que envuelve al LLM.</li>
+    <li><strong>No</strong> son instrucciones para el agente. Eso es <code>CLAUDE.md</code> y <code>.claude/rules/</code>. Acá van parámetros del runtime: qué model usar, qué environment variables inyectar, qué puede ejecutar sin pedir confirmación.</li>
+    <li><strong><code>CLAUDE.md</code> dice "cómo comportarse"</strong>; <strong><code>settings.json</code> dice "cómo ejecutar a Claude"</strong>. Dos canales distintos hacia dos destinatarios distintos.</li>
+    <li class="s9-qe-callout">→ Una instrucción textual puede ser ignorada o mal interpretada; una regla de runtime no puede.</li>
+  </ul>
 
   <aside class="notes">
-    <p><strong>Señalar la tarjeta izquierda — nombrar las cuatro fases en voz alta. Mencionar el checkpoint duro. Señalar la tarjeta derecha — subrayar que son dos procedimientos distintos y que nunca cargan juntas. Leer el callout meta al final.</strong></p>
-    <p><u>Slide del ejemplo concreto y meta. Dos tarjetas: la skill de este curso y otra skill del mismo repo, distintas. El callout de cierre es el momento meta del que habla el spine — nombrar que este deck fue generado por slide-generation es una demostración del argumento en acto.</u></p>
-    <p><em>"El ejemplo más concreto está en este mismo repositorio. tools/skills/slide-generation/ es la skill que construyó las clases que estás viendo. Su SKILL.md define cuatro fases: Spine primero, el esqueleto didáctico; luego Plan, las tareas de implementación; luego Execute, escribir los slides sección por sección con checklists; y finalmente Verify y Finish."</em></p>
-    <p><em>"Tiene un checkpoint duro en medio: no se genera ningún HTML hasta que el spine.md fue revisado y aprobado. Y lista anti-patterns explícitos. Qué no hacer, qué no saltear, qué no inventar."</em></p>
-    <p><em>"El repo tiene otra skill también: yt-transcript-to-md. Hace algo completamente distinto — convierte transcripciones de YouTube en material de clase. Dos skills, dos procedimientos. Cuando una está activa, la otra no existe en el contexto. Cero tokens."</em></p>
-    <p><em>"Y el momento meta: lo que estás mirando ahora mismo — este deck — fue generado por esa skill."</em></p>
+    <p><strong>Leer los tres ítems pausando entre cada uno. Marcar el contraste del tercero — "cómo comportarse" vs "cómo ejecutar a Claude". Pausa antes del callout. El callout es la línea que justifica que exista el archivo.</strong></p>
+    <p><u>Slide de definición. Mini-strip con "Qué es" lit. Lista de tres ítems + callout, mismo patrón que §8.2. La propiedad central: settings.json no es texto para el modelo, es config para el programa que corre al modelo. El callout vuelve más fuerte porque es el argumento de por qué este canal existe — algunas reglas tienen que ser determinísticas, y el lenguaje natural no es determinístico.</u></p>
+    <p><em>"Primera pregunta. Qué es. La respuesta corta: settings.json es un archivo JSON que configura el runtime de Claude Code. El runtime es el programa que envuelve al LLM — el sistema que abre la sesión, le carga el contexto, ejecuta las tools, devuelve los resultados al modelo. Ese programa tiene parámetros, y los parámetros viven en este archivo."</em></p>
+    <p><em>"Lo más importante para tener claro desde el primer minuto: no son instrucciones para el agente. Las instrucciones para el agente las vimos en §7 y §8 — markdown que le habla al modelo. settings.json le habla a otra cosa: al programa que corre al modelo. Qué model usar, qué environment variables inyectar, qué comandos puede correr sin pedir confirmación."</em></p>
+    <p><em>"La línea que vale la pena retener: CLAUDE.md dice cómo comportarse; settings.json dice cómo ejecutar a Claude. Dos canales distintos hacia dos destinatarios distintos."</em></p>
+    <p><em>"Y el callout es la razón por la que este canal existe. Si querés que Claude nunca corra git push sin tu aprobación, no lo ponés en CLAUDE.md — una instrucción textual puede ser ignorada, sobreescrita por contexto posterior, o simplemente reinterpretada. Lo ponés en settings.json como regla de runtime. El runtime la aplica antes de que Claude llegue a intentarlo. Una instrucción textual es opinable; una regla de runtime no."</em></p>
   </aside>
 </section>
 
-<!-- §9.4 · Skill ≠ slash command -->
-<section>
-  <h2>Skill ≠ slash command</h2>
+<!-- §9.3 · Dónde vive — 4 niveles en cascada -->
+<section class="s9-slide">
+  <ol class="s9-five-q-grid is-mini">
+    <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
+    <li class="s9-five-q-card is-active"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
+  </ol>
 
-  <div class="s9-cmp-wrap">
-    <div class="comparison-2col">
-      <div class="s9-cmp-card skill-side">
-        <span class="s9-cmp-card-label">Skill</span>
-        <div class="s9-cmp-card-title">La capacidad / el procedimiento</div>
-        <div class="s9-cmp-card-body">
-          Define fases, verificaciones, anti-patterns. Tiene su propio <code>SKILL.md</code>. Vive en <code>tools/skills/</code> o en <code>~/.claude/skills/</code>.<br><br>
-          No es un atajo — es el conocimiento completo sobre cómo ejecutar ese tipo de tarea.
-        </div>
+  <h2>Cuatro niveles, de mayor a menor precedencia</h2>
+
+  <div class="s9-hierarchy">
+    <div class="s9-hier-row">
+      <div class="s9-hier-level">
+        <span class="s9-hier-level-num">Nivel 1</span>
+        <span class="s9-hier-level-name">Managed</span>
       </div>
-      <div class="s9-cmp-card cmd-side">
-        <span class="s9-cmp-card-label">Slash command</span>
-        <div class="s9-cmp-card-title">El disparador / el acceso directo</div>
-        <div class="s9-cmp-card-body">
-          Un archivo <code>.claude/commands/nombre.md</code>. Una acción frecuente con nombre corto.<br><br>
-          Puede invocar una skill — pero no necesariamente. <code>/memory</code> y <code>/context</code> no invocan ninguna skill. Son shortcuts puros.
-        </div>
+      <div class="s9-hier-content">
+        <span class="s9-hier-title">Política de la organización — fija el techo</span>
+        <span class="s9-hier-paths">administrado por la org (enterprise)</span>
+        <span class="s9-hier-use">Lo que define un admin para todos los usuarios. Puede bloquear permisos que ningún nivel inferior puede levantar.</span>
       </div>
     </div>
-    <div class="s9-cmp-note">
-      <strong>La relación no es 1:1.</strong> Algunos slash commands invocan skills; otros no. Una skill puede existir sin que ningún slash command la llame directamente.
+    <div class="s9-hier-row">
+      <div class="s9-hier-level">
+        <span class="s9-hier-level-num">Nivel 2</span>
+        <span class="s9-hier-level-name">Local del proyecto</span>
+      </div>
+      <div class="s9-hier-content">
+        <span class="s9-hier-title">Tu copia personal del proyecto — no se versiona</span>
+        <span class="s9-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.local.json</code> &nbsp;·&nbsp; va al <code style="font-family:var(--font-mono);">.gitignore</code></span>
+        <span class="s9-hier-use">Tokens reales, paths de tu máquina, permisos puntuales que solo tienen sentido en tu entorno.</span>
+      </div>
+    </div>
+    <div class="s9-hier-row">
+      <div class="s9-hier-level">
+        <span class="s9-hier-level-num">Nivel 3</span>
+        <span class="s9-hier-level-name">Proyecto</span>
+      </div>
+      <div class="s9-hier-content">
+        <span class="s9-hier-title">Config compartida del repo — versionada</span>
+        <span class="s9-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.json</code> &nbsp;·&nbsp; commiteado</span>
+        <span class="s9-hier-use">Lo que aplica a todos los colaboradores: model, env con placeholders, permisos base, hooks.</span>
+      </div>
+    </div>
+    <div class="s9-hier-row">
+      <div class="s9-hier-level">
+        <span class="s9-hier-level-num">Nivel 4</span>
+        <span class="s9-hier-level-name">Usuario</span>
+      </div>
+      <div class="s9-hier-content">
+        <span class="s9-hier-title">Tu config personal — todos tus proyectos</span>
+        <span class="s9-hier-paths"><code style="font-family:var(--font-mono);">~/.claude/settings.json</code></span>
+        <span class="s9-hier-use">Defaults tuyos que viajan de un repo al otro. No los ve el equipo.</span>
+      </div>
     </div>
   </div>
 
-  <aside class="notes">
-    <p><strong>Señalar las dos columnas — leerlas en paralelo. Dar el ejemplo de /memory y /context como shortcuts sin skill. Leer la nota de cierre.</strong></p>
-    <p><u>Slide de distinción conceptual. Las dos columnas ponen en tensión los dos mecanismos. La nota al pie corrige el error más común: asumir que skill y slash command son lo mismo o que van siempre juntos.</u></p>
-    <p><em>"La distinción importa porque se confunde fácil. Una skill es la capacidad — el procedimiento completo, con fases, verificaciones, anti-patterns. Un slash command es el disparador — un nombre corto para una acción frecuente."</em></p>
-    <p><em>"Algunos slash commands invocan skills. Pero no todos. /memory te muestra qué tiene cargado Claude — no hay ninguna skill de por medio. /context te da el estado de la sesión — tampoco hay skill. Son shortcuts directos, sin procedimiento definido detrás."</em></p>
-    <p><em>"La relación no es uno a uno. La distinción no es solo nomenclatura: es la diferencia entre dónde vive el conocimiento y cómo se lo llama."</em></p>
-  </aside>
-</section>
-
-<!-- §9.5 · /build-class como ejemplo — la separación no es cosmética -->
-<section>
-  <h2>/build-class: el comando que no sabe de fases</h2>
-
-  <div class="s9-cmd-wrap">
-    <div class="bg-code-card s9-cmd-code-block">
-      <span class="s9-cmd-comment"># .claude/commands/build-class.md</span><br><br>
-      <span class="s9-cmd-content">"El usuario quiere construir slides para la semana actual.</span><br>
-      <span class="s9-cmd-content">&nbsp;El directorio de trabajo debe ser semanas/NN/.</span><br>
-      <span class="s9-cmd-content">&nbsp;Invocá la skill <span style="color:var(--accent); font-weight:700;">slide-generation</span>."</span>
-    </div>
-    <div class="s9-cmd-callout">
-      Eso es todo. El slash command no sabe nada de fases, de spine, de checklists, de checkpoints duros.
-    </div>
-    <div class="s9-cmd-sep-note">
-      <strong>La separación no es cosmética.</strong> Si mañana cambia el pipeline de generación de slides, actualizás la skill — no el comando. El comando sigue siendo una línea. El procedimiento completo vive donde corresponde.
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Leer el bloque de código despacio, como si fuera el contenido real del archivo. Leer el callout. Enfatizar "la separación no es cosmética" y la idea de dónde vive el procedimiento.</strong></p>
-    <p><u>Slide del ejemplo concreto de slash command. El bloque de código muestra el contenido real de build-class.md — breve a propósito. El contraste con las cuatro fases de la skill que se vieron en el slide anterior es el punto conceptual central.</u></p>
-    <p><em>"Mirá el contenido real de .claude/commands/build-class.md. Es literalmente una línea. No sabe nada de fases. No sabe que hay un spine.md que aprobar antes de generar HTML. No sabe de los checklists de revisión."</em></p>
-    <p><em>"Solo sabe que tiene que invocar la skill slide-generation. El procedimiento completo vive ahí."</em></p>
-    <p><em>"Y eso no es accidental. La separación no es cosmética. Si mañana cambia el pipeline — si se agrega una fase de revisión, si cambia el orden de los pasos, si aparece un nuevo tipo de slide — actualizás la skill. El comando sigue siendo una línea. El que lo usa no nota el cambio."</em></p>
-  </aside>
-</section>
-
-<!-- §9.6 · La tabla que ordena todo — tricotomía completa show-3 -->
-<section>
-  <h2>La tabla que ordena todo — tricotomía completa</h2>
-
-  <div class="tricotomia show-3">
-    <div class="tcell thead">Rótulo</div>
-    <div class="tcell thead">Mecanismo</div>
-    <div class="tcell thead">Cuándo paga contexto</div>
-    <div class="trow-1"><div class="tcell">Siempre cargado</div><div class="tcell">CLAUDE.md y @import</div><div class="tcell">arranque de cada sesión, siempre</div></div>
-    <div class="trow-2"><div class="tcell">Condicional</div><div class="tcell">path-scoped rules · skills</div><div class="tcell">al tocar un archivo / al invocar</div></div>
-    <div class="trow-3"><div class="tcell">Autocurado</div><div class="tcell">auto memory</div><div class="tcell">entre sesiones, lo cura el sistema</div></div>
-  </div>
-
-  <p class="s9-tricotomia-caption">
-    La pregunta que los ordena: <strong>¿cuándo paga contexto?</strong><br>
-    Una skill cae en "condicional" igual que las path-scoped rules — mismo rótulo, trigger distinto: archivo que matchea vs. procedimiento que se invoca. El resultado en contexto es el mismo: cero hasta que hace falta. Esto cierra el adelanto del §4.
+  <p class="s9-hier-note">
+    Los cuatro niveles se <strong>mergean al arranque</strong>. Cuando un mismo campo aparece en más de un nivel, <strong>el más alto gana</strong>.
   </p>
 
   <aside class="notes">
-    <p><strong>Señalar la tabla — las tres filas iluminadas. Leer el caption. Remarcar que la fila 2 ahora dice "path-scoped rules · skills" — el punto de que comparten el rótulo condicional. Nombrar el adelanto del §4.</strong></p>
-    <p><u>Slide del payoff de la tricotomía. La tabla es el mismo visual de §4 y §8, ahora con show-3 y las tres filas completas. La fila 2 muestra explícitamente que skill y path-scoped rule comparten el rótulo "condicional" con triggers distintos. Este es el cierre del dispositivo pedagógico de tres tiempos anunciado en la spine.</u></p>
-    <p><em>"La pregunta que los ordena es siempre la misma: ¿cuándo paga contexto? Con esa pregunta, los tres mecanismos se ubican solos."</em></p>
-    <p><em>"CLAUDE.md: al arranque, siempre, sin excepción. Path-scoped rules y skills: condicional — pero con triggers distintos. Una entra cuando tocás un archivo que matchea el glob; la otra entra cuando la invocás o cuando la tarea la requiere. El resultado en términos de contexto es idéntico: cero hasta que hace falta, exactamente cuando hace falta."</em></p>
-    <p><em>"Y auto memory en la tercera fila: entre sesiones, lo cura el sistema. El agente escribe, vos auditás."</em></p>
-    <p><em>"Esta tabla la plantó §4. §8 cerró dos filas. §9 cierra la tercera. Si ahora les preguntan cómo funciona cualquier feature de Claude Code, tienen la pregunta correcta: ¿cuándo paga contexto?"</em></p>
+    <p><strong>Recorrer los cuatro niveles de arriba abajo. Marcar que el orden no es por dónde vive el archivo en disco sino por precedencia. Pausa en el nivel 2 — explicar el .gitignore como regla, no como detalle. Cerrar con la línea del merge.</strong></p>
+    <p><u>Slide de jerarquía con 4 niveles, en orden de precedencia descendente. La cabecera del visual marca el orden: Managed > Local > Project > User. El demo-repo no usa nivel Managed — vive en organizaciones enterprise — pero importa nombrarlo porque define el techo que ningún proyecto puede levantar.</u></p>
+    <p><em>"Segunda pregunta. Dónde vive. Cuatro niveles, los voy a leer de mayor a menor precedencia."</em></p>
+    <p><em>"Nivel uno, Managed. Es el nivel enterprise — lo fija un administrador de la organización. No lo vamos a tocar nunca en un proyecto personal, pero importa que sepan que existe porque cuando aparece, fija un techo: puede declarar permisos denegados que ningún nivel inferior puede levantar. En equipos corporativos es la política de seguridad base."</em></p>
+    <p><em>"Nivel dos, local del proyecto. Vive en .claude/settings.local.json. La regla de oro: va al .gitignore, siempre, sin excepción. Acá guardás todo lo específico de tu máquina — tokens reales, paths absolutos, permisos puntuales como abrir el browser. Si lo commiteás por accidente con un token real, ese token queda en el historial de git y hay que rotarlo."</em></p>
+    <p><em>"Nivel tres, proyecto. Vive en .claude/settings.json y va commiteado al repo. Es la config compartida del equipo: qué model usan todos, qué environment variables son necesarias con placeholder, qué permisos base operan en el proyecto. Lo que abre cualquiera que clona el repo."</em></p>
+    <p><em>"Nivel cuatro, usuario. Vive en ~/.claude/settings.json — tu home. Son tus defaults personales, los que te seguís de un proyecto al otro. No los ve nadie del equipo."</em></p>
+    <p><em>"Los cuatro se mergean al arranque. Si el mismo campo aparece en más de un nivel, gana el más alto. Si tenés model en tu nivel usuario y model en el proyecto, gana el proyecto. Eso permite que el repo fije la base compartida y vos agregues lo tuyo encima sin pisar nada."</em></p>
   </aside>
 </section>
 
-<!-- §9.7 · section-divider — Demo D6 -->
-<section class="section-divider">
-  <h2>Demo D6 · La skill on-demand</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">La skill existe en el repo. No está en el contexto. No existe, para esta sesión, hasta que la pidamos.</p>
+<!-- §9.4 · Cuándo se carga + precedencia — pirámide + notas -->
+<section class="s9-slide">
+  <ol class="s9-five-q-grid is-mini">
+    <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
+    <li class="s9-five-q-card is-active"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Al arranque de cada sesión — sin recarga en caliente</h2>
+
+  <div class="s9-prec-wrap">
+    <div class="s9-prec-pyramid">
+      <div class="s9-prec-tier is-top">Managed</div>
+      <div class="s9-prec-tier is-2">Local</div>
+      <div class="s9-prec-tier is-3">Proyecto</div>
+      <div class="s9-prec-tier is-4">Usuario</div>
+      <span class="s9-prec-arrow">↑ mayor precedencia</span>
+    </div>
+    <div class="s9-prec-notes">
+      <p class="s9-prec-note"><strong>Cuándo:</strong> al arranque de cada sesión. El runtime lee los cuatro archivos disponibles, los mergea, y aplica la config resultante antes de procesar tu primer mensaje.</p>
+      <p class="s9-prec-note"><strong>No hay recarga en caliente.</strong> Un cambio en cualquier <code style="font-family:var(--font-mono);">settings.json</code> toma efecto en la <strong>próxima sesión</strong>, no en la actual.</p>
+      <p class="s9-prec-note"><strong>Merge por campo:</strong> cuando el mismo campo aparece en más de un nivel, gana el más alto. <span class="accent">Managed puede bloquear</span> completamente niveles inferiores en materia de permisos.</p>
+    </div>
+  </div>
 
   <aside class="notes">
-    <p><u>Divider de demo D6. El objetivo es hacer visible el momento exacto en que una skill entra al contexto. El subtítulo es la intro para el aula del source material — se puede leer directamente. El demo tiene un momento meta posible: la skill que se invoca es la que generó este deck.</u></p>
-    <p><em>"Vamos al demo. Hay una skill instalada en este repo. No está en el contexto. No existe, para esta sesión, hasta que la pidamos. Vamos a ver exactamente cuándo aparece."</em></p>
+    <p><strong>Mostrar la pirámide de izquierda — la base más ancha es Usuario, la punta más alta es Managed. Leer las tres notas de la derecha en orden. Marcar "próxima sesión" como la mecánica operativa más importante.</strong></p>
+    <p><u>Slide de mecánica de carga + precedencia visual. La pirámide está invertida respecto a la lectura intuitiva — abajo el nivel más amplio (Usuario), arriba el más restrictivo (Managed). Las tres notas de la derecha son operativas: cuándo, cómo se actualiza, qué pasa cuando colisionan dos niveles.</u></p>
+    <p><em>"Tercera pregunta. Cuándo se carga. La respuesta es simple: al arranque de cada sesión. El runtime lee los cuatro archivos disponibles, los mergea, y aplica la config resultante antes de procesar tu primer mensaje. No hay nada que importar, nada que invocar — está vivo desde el primer prompt."</em></p>
+    <p><em>"El detalle operativo más importante: no hay recarga en caliente. Si cambiás cualquier campo en mitad de una sesión, esa sesión no se entera. Toma efecto en la próxima. Es deliberado — el merge se calcula una vez al arranque, no por cada turno."</em></p>
+    <p><em>"Y la regla de colisión, que ya nombramos en el slide anterior pero vale la pena repetir con la pirámide en pantalla: cuando el mismo campo aparece en más de un nivel, gana el más alto. Managed gana sobre todos. Y en materia de permisos, Managed no solo gana — puede bloquear: un deny en el nivel managed no se puede sobreescribir desde abajo, ni en local, ni en proyecto, ni en usuario."</em></p>
   </aside>
 </section>
 
-<!-- §9.8 · Demo D6 beats — clickable-steps -->
-<section>
-  <h2>D6 · Tres beats: la skill on-demand</h2>
+<!-- §9.5 · Cómo se usa — tabla de campos clave -->
+<section class="s9-slide">
+  <ol class="s9-five-q-grid is-mini">
+    <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
+    <li class="s9-five-q-card is-active"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Siete campos típicos — uno de ellos vale una sección entera</h2>
+
+  <div class="s9-fields-wrap">
+    <table class="s9-fields-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Qué controla</th>
+          <th>En el demo-repo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="s9-field-name">model</td>
+          <td class="s9-field-what">Qué modelo de Claude usa esta sesión.</td>
+          <td class="s9-field-demo"><code>"claude-sonnet-4-6"</code></td>
+        </tr>
+        <tr>
+          <td class="s9-field-name">env</td>
+          <td class="s9-field-what">Environment variables inyectadas a Claude Code y a los tools.</td>
+          <td class="s9-field-demo"><code>{ DEMO_BEARER_TOKEN: "changeme-in-real-env" }</code></td>
+        </tr>
+        <tr class="is-highlight">
+          <td class="s9-field-name">permissions</td>
+          <td class="s9-field-what">Qué puede ejecutar Claude sin pedir confirmación. Tres listas: <code>allow</code> / <code>deny</code> / <code>ask</code>.</td>
+          <td class="s9-field-demo">tres listas con 12 / 3 / 2 entradas &nbsp;→&nbsp; <code>§10</code></td>
+        </tr>
+        <tr class="is-future">
+          <td class="s9-field-name">permissionMode</td>
+          <td class="s9-field-what">Modo default al arrancar: <code>default</code> / <code>acceptEdits</code> / <code>plan</code> / <code>bypassPermissions</code>.</td>
+          <td class="s9-field-demo">no fijado &nbsp;→&nbsp; <code>§13</code></td>
+        </tr>
+        <tr>
+          <td class="s9-field-name">hooks</td>
+          <td class="s9-field-what">Scripts del ciclo de vida del runtime — antes o después de un evento.</td>
+          <td class="s9-field-demo">no fijado en este repo</td>
+        </tr>
+        <tr>
+          <td class="s9-field-name">includeCoAuthoredBy</td>
+          <td class="s9-field-what">Agrega la línea <code>Co-Authored-By: Claude</code> en commits que genera el agente.</td>
+          <td class="s9-field-demo"><code>true</code></td>
+        </tr>
+        <tr>
+          <td class="s9-field-name">cleanupPeriodDays</td>
+          <td class="s9-field-what">Retención de logs y transcripts locales, en días.</td>
+          <td class="s9-field-demo"><code>30</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="s9-fields-note">
+    <strong>permissions</strong> sale resaltado: la diferencia entre un agente que puede hacer <code style="font-family:var(--font-mono);">git push</code> sin confirmación y uno que siempre pregunta vive ahí. Vuelve completo en §10.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Recorrer fila por fila, sin leerlas todas en voz alta. Marcar permissions como la fila resaltada — vale una sección propia. Marcar permissionMode como la fila secundaria con color distinto — se va a desarrollar en §13. hooks se nombra y se sigue de largo, queda fuera del alcance.</strong></p>
+    <p><u>Slide de campos clave. Tabla de tres columnas: campo / qué controla / valor en el demo-repo. Dos filas con tratamiento visual distinto: permissions resaltada en verde (anticipo §10), permissionMode en color secundario (anticipo §13). El resto son neutrales. La nota al pie consolida que permissions es el campo que más impacta y por qué vale una sección entera.</u></p>
+    <p><em>"Cuarta pregunta. Cómo se usa. La forma más rápida de bajar a tierra es esta tabla: siete campos típicos, uno por fila. No los voy a leer todos — los recorro y me detengo en los que vale la pena."</em></p>
+    <p><em>"model arriba. Define qué modelo usa la sesión. El demo-repo fija Sonnet 4.6, lo que garantiza que cualquier colaborador que clone el repo trabaje con el mismo modelo, sin depender de su nivel usuario."</em></p>
+    <p><em>"env, environment variables que el runtime inyecta. Acá vive un patrón importante: el placeholder en el proyecto, el valor real en el local. La variable existe en el nivel proyecto para documentar que es necesaria; el valor sensible vive solo en local."</em></p>
+    <p><em>"permissions resaltada. Es el campo más impactante de todo el archivo. Tres listas: allow, lo que ejecuta sin preguntar; deny, lo que bloquea sin importar lo que el agente proponga; ask, lo que requiere confirmación explícita. Vuelve completo en §10."</em></p>
+    <p><em>"permissionMode en color distinto porque también queda en deuda — se desarrolla en §13. Es el modo default que arranca la sesión: default es el clásico pregunta-antes-de-actuar, acceptEdits acepta ediciones automático, plan separa pensar de actuar, bypassPermissions desactiva todo. Es el modo overlay sobre las listas de permisos."</em></p>
+    <p><em>"hooks, scripts del ciclo de vida — antes o después de un evento del runtime. Existen, los nombramos, no entramos al detalle hoy."</em></p>
+    <p><em>"Y los dos chicos del final: includeCoAuthoredBy, agrega la línea Co-Authored-By en cada commit que genera Claude — el demo lo tiene en true. cleanupPeriodDays, retención de logs locales, en este caso treinta días. Afecta solo al storage local, no al comportamiento del agente."</em></p>
+  </aside>
+</section>
+
+<!-- §9.6 · Walkthrough del demo-repo settings.json — sin mini-strip (zoom-in concreto) -->
+<section class="s9-slide">
+  <h2>El <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">settings.json</code> del demo-repo, en cuatro bloques</h2>
+
+  <div class="s9-walk-path">.claude/settings.json</div>
+
+  <ul class="s9-walk-list">
+    <li>
+      <strong>Top — identidad del runtime.</strong>
+      <code>model: "claude-sonnet-4-6"</code> · <code>env.DEMO_BEARER_TOKEN</code> (placeholder; valor real en <code>local.json</code>) · <code>includeCoAuthoredBy: true</code> · <code>cleanupPeriodDays: 30</code>.
+    </li>
+    <li class="is-allow">
+      <strong><code>permissions.allow</code> — corre sin preguntar.</strong>
+      Comandos uv (<code>pytest</code>, <code>uvicorn</code>, <code>python</code>, <code>sync</code>), <code>Read(./**)</code>, <code>Edit</code> acotado a <code>backend/</code> · <code>frontend/</code> · <code>tests/</code> · <code>openapi.yaml</code>, <code>WebFetch</code> a un solo dominio.
+    </li>
+    <li class="is-deny">
+      <strong><code>permissions.deny</code> — bloqueado pase lo que pase.</strong>
+      <code>Read(./.env)</code> · <code>Bash(rm -rf *)</code> · <code>Bash(git push *)</code>. Una regla de runtime no se ignora — el callout de §9.2 cobra sentido acá.
+    </li>
+    <li class="is-ask">
+      <strong><code>permissions.ask</code> — pide confirmación cada vez.</strong>
+      <code>Bash(uv add *)</code> · <code>Bash(uv remove *)</code>. Reversibles pero no triviales: humano en el loop antes de modificar dependencias.
+    </li>
+  </ul>
+
+  <aside class="notes">
+    <p><strong>Recorrer los cuatro bloques de arriba hacia abajo. Detener en deny — leer las tres líneas. Detener en ask — explicar el criterio "reversible pero no trivial".</strong></p>
+    <p><u>Walkthrough del settings.json del demo-repo en cuatro bullets. Cada uno corresponde a un bloque del JSON real: identidad arriba, las tres listas de permisos abajo. Sin mini-strip porque es zoom-in concreto al archivo, no responde una pregunta nueva de la plantilla. El bullet deny lleva color rojo para hacer visible el contraste.</u></p>
+    <p><em>"Vamos al archivo real. Este es el .claude/settings.json del demo-repo entero, leído en cuatro bloques."</em></p>
+    <p><em>"Top: la identidad del runtime. Cuatro líneas, cuatro decisiones explícitas. Model fija Sonnet 4.6 — el mismo para todos los que abran el repo. Env declara una environment variable necesaria con placeholder; el valor real vive en el local.json de cada uno. includeCoAuthoredBy true para que los commits queden firmados. cleanupPeriodDays treinta días de retención de logs."</em></p>
+    <p><em>"Allow: lo que el runtime ejecuta sin preguntar nunca. Comandos de uv — pytest, uvicorn, python, sync. Read del proyecto entero. Edit acotado a backend, frontend, tests y al openapi.yaml — los lugares donde el agente puede modificar. Y un WebFetch a un solo dominio: la doc de FastAPI. Cualquier otra URL pide confirmación."</em></p>
+    <p><em>"Deny: tres líneas chicas y críticas. Read del .env — Claude no lee credenciales nunca. Bash rm -rf — bloqueado. Bash git push — bloqueado. Sin importar lo que se le pida. Acá cobra sentido el callout del slide dos: cuando la decisión tiene que ser determinística, no va en CLAUDE.md como instrucción de texto — va en settings.json como regla de runtime."</em></p>
+    <p><em>"Ask: uv add y uv remove. Acciones reversibles pero no triviales. Si el agente quiere agregar una dependencia nueva al proyecto, quiero enterarme antes. No las bloqueo, pero no las dejo automáticas. Ese es el lugar de ask: reversible, con humano en el loop."</em></p>
+  </aside>
+</section>
+
+<!-- §9.7 · Qué confunde — tres confusiones -->
+<section class="s9-slide">
+  <ol class="s9-five-q-grid is-mini">
+    <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
+    <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
+    <li class="s9-five-q-card is-active"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
+  </ol>
+
+  <h2>Tres cosas que confunden de settings.json</h2>
+
+  <div class="s9-cases-grid">
+    <div class="s9-case-card">
+      <span class="s9-case-tag">Caso 1</span>
+      <h3 class="s9-case-h3">Managed fija un techo, no un default</h3>
+      <p class="s9-case-body">
+        En equipos enterprise, el admin puede declarar un <code>deny</code> en el nivel Managed que <strong>ningún proyecto ni usuario puede levantar</strong>. No es un default que vos sobreescribís: es un piso de política que limita lo que cualquier nivel inferior puede pedir. En proyectos personales no aparece; en una org sí.
+      </p>
+    </div>
+    <div class="s9-case-card">
+      <span class="s9-case-tag">Caso 2</span>
+      <h3 class="s9-case-h3"><code>.local.json</code> al <code>.gitignore</code>, siempre</h3>
+      <p class="s9-case-body">
+        Es la única forma de que el esquema de niveles funcione bien en equipo. Si commiteás <code>.claude/settings.local.json</code> con un token real, ese token <strong>queda en el historial de git</strong> — no alcanza con borrarlo en el próximo commit. Hay que rotarlo. El <code>.gitignore</code> del demo-repo ya tiene esa línea desde el primer commit.
+      </p>
+    </div>
+    <div class="s9-case-card">
+      <span class="s9-case-tag">Caso 3</span>
+      <h3 class="s9-case-h3">No confundir con <code>mcp.json</code></h3>
+      <p class="s9-case-body">
+        Los servidores MCP tienen su <strong>propio archivo</strong> (<code>mcp.json</code>) y su propio mecanismo. No son un campo de <code>settings.json</code>; los dos coexisten en <code>.claude/</code> sin reemplazarse. Si buscás cómo conectar un MCP server y caés en <code>settings.json</code>, estás en el archivo equivocado.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Recorrer las tres cards en orden. La uno se nombra rápido — relevante en orgs, no en proyectos personales. La dos es la que más vale la pena marcar — si pasa una vez, el token queda en git para siempre. La tres es preventiva: gente que busca configurar MCP y termina editando settings.json.</strong></p>
+    <p><u>Slide de quinta pregunta. Tres confusiones, grid 1×3 idéntico al de §8.7. Cada card es tag + título-tesis + cuerpo. La dos lleva la marca de seguridad operativa más importante de la sección.</u></p>
+    <p><em>"Quinta pregunta. Qué confunde. Tres cosas, las mismas tres que veo cada vez."</em></p>
+    <p><em>"Una. Managed fija un techo, no un default. Esto importa en organizaciones enterprise: un admin puede declarar permisos denegados que ningún nivel inferior puede levantar. No es un default que vos podés sobreescribir — es un piso de política. En proyectos personales no aparece nunca, en una org corporativa define el espacio de lo posible."</em></p>
+    <p><em>"Dos. Y esta es la importante: el .local.json siempre, siempre, al .gitignore. Es la única forma de que el esquema de niveles funcione bien en equipo. Y atención al detalle operativo: si por accidente commiteás ese archivo con un token real, ese token queda en el historial de git. No alcanza con borrar el archivo en el siguiente commit — el token sigue ahí, en commits viejos, accesible para cualquiera que clone el repo. Hay que rotarlo. El demo-repo ya tiene la línea en el .gitignore desde el primer commit por esa razón."</em></p>
+    <p><em>"Tres. No confundir con mcp.json. Los servidores MCP tienen su propio archivo de configuración y su propio mecanismo. No son un campo de settings.json — los dos coexisten, ninguno reemplaza al otro. Lo digo porque ya vi gente buscando cómo configurar un MCP y editando settings.json al pedo. Cuando lleguemos a MCP, vamos al archivo de MCP."</em></p>
+  </aside>
+</section>
+
+<!-- §9.8 · Demo · los 3 archivos lado a lado (section-divider + clickable-steps) -->
+<section class="section-divider">
+  <h2>Demo · los tres archivos lado a lado</h2>
+  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Hacer visible la convención: <strong>qué va en cada nivel y por qué</strong>.</p>
 
   <div class="s9-demo-wrap">
     <div id="s9-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup: Claude Code abierto en el repo del curso. /context (o /memory) disponible para mostrar fuentes cargadas. Click recorre los 3 beats.</strong></p>
-    <p><u>Beat 1 — qué mirar: ejecutar /context o /memory. La skill slide-generation NO aparece en la lista de fuentes de instrucción cargadas. Solo están CLAUDE.md y las reglas activas. El archivo existe en tools/skills/ — simplemente no está en el contexto de esta sesión. Beat 2 — qué mirar: escribir /build-class o pedirle a Claude explícitamente que genere slides para la semana actual. La skill entra en el momento de la invocación. Si /context muestra fuentes, debería listar slide-generation. Si no da ese detalle, el indicador es el comportamiento: Claude empieza a pedir el spine, carga _config/slide-conventions.md, sigue el pipeline — cosas que no haría sin la skill presente. Momento meta posible: la skill que se invoca es la que generó este mismo deck. Beat 3 — qué mirar: cerrar con el mapa completo de los tres mecanismos. Plan B si /context no da el detalle: abrir una sesión sin invocar nada y pedirle a Claude que revise un archivo cualquiera — no debería ejecutar fases de slide-generation ni pedir spine. Luego invocar /build-class y mostrar que ahora sí ejecuta las fases del pipeline, hace el checkpoint de spine, carga las convenciones. La presencia de la skill se demuestra por su efecto, no por la lista de fuentes.</u></p>
-    <p><em>"Beat 1. Abro una sesión nueva en el directorio del repo. Ejecuto /context. Miren qué está cargado: CLAUDE.md, las reglas activas. La skill slide-generation no aparece. El archivo existe en tools/skills/. Para esta sesión, no existe."</em></p>
-    <p><em>"Beat 2. Escribo /build-class. Recién ahora paga su lugar. Si miran el comportamiento de Claude — empieza a pedir el spine, carga las convenciones de slide, sigue el pipeline de cuatro fases. Eso no lo haría sin la skill. Apareció exactamente cuando la pedí. Por cierto: la skill que acaban de ver entrar al contexto es la que generó este deck."</em></p>
-    <p><em>"Beat 3. El mapa completo: una path-scoped rule entra cuando tocás cierto archivo. Una skill, cuando la pedís. CLAUDE.md, siempre. Tres formas de actuar sobre el contexto. La tricotomía que §4 plantó, ahora cerrada."</em></p>
+    <p><strong>Setup antes del slide: VS Code con tres archivos abiertos en paneles lado a lado — ~/.claude/settings.json (usuario), .claude/settings.json del demo-repo (proyecto), .claude/settings.local.json (local, o el .example si el local no existe en esta máquina). Terminal con cwd en una copia del demo-repo, Claude Code listo para abrir nueva sesión. Click recorre los tres pasos; la narración vive en vivo.</strong></p>
+    <p><u>Demo de la sección. Tres pasos sobre los archivos abiertos en paralelo: recorrer qué va en cada nivel (Paso 1), cambiar un campo y mostrar que toma efecto en próxima sesión (Paso 2), abrir el .gitignore y mostrar que el .local no se trackea (Paso 3). El objetivo del demo no es la mecánica de cada paso — es asentar la convención de qué decisión va en qué nivel. Plan B vive en notes del Paso 3.</u></p>
+    <p><em>"Vamos al demo. Tres pasos sobre los mismos tres archivos abiertos en paralelo. El objetivo no es ver el runtime hacer fuegos artificiales — es ver con qué criterio decidís qué va en cada nivel."</em></p>
   </aside>
 </section>
 
 <!-- §9.9 · Cierre + bridge a §10 -->
-<section>
-  <h2>Del procedimiento al loop — lo que viene en §10</h2>
+<section class="s9-slide">
+  <h2>Config del runtime, no instrucciones para el agente</h2>
 
   <div class="s9-close-card">
     <p class="s9-close-main">
-      Las skills aíslan un <em style="color:var(--accent); font-style:normal; font-weight:700;">procedimiento</em> del resto del contexto. No instrucciones dispersas, sino un objeto de conocimiento completo sobre cómo hacer algo — que no existe para la sesión hasta que se necesita.
+      <code>settings.json</code> configura el <strong>runtime</strong> de Claude Code, no al agente. Define qué model corre, qué environment variables se inyectan, qué hooks se ejecutan en el ciclo de vida, y — sobre todo — qué tools puede ejecutar Claude sin pedir confirmación. Una regla de runtime es <strong>determinística</strong>: no se ignora ni se reinterpreta.
     </p>
     <p class="s9-close-bridge">
-      §10 aísla algo más grande: un <em>loop entero</em>. Un sub-agente con su propia ventana de contexto que nace, trabaja y muere — devolviendo solo el resultado al supervisor. Es la misma lógica de siempre — aislar del contexto lo que no se necesita ahora — aplicada a la unidad más grande: el agente mismo.
+      El campo más impactante de todo lo que vimos es <code>permissions</code>. Define exactamente qué puede hacer el agente sin pedirte confirmación — y la diferencia entre un agente que ejecuta <em>git push</em> sin avisarte y uno que siempre pregunta vive en tres líneas. Vale una sección propia.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal — remarcar "procedimiento" como la unidad de aislamiento. Pausa. Leer el bridge con énfasis en "loop entero" como la escala mayor.</strong></p>
-    <p><u>Cierre de §9 y puente a §10. El párrafo principal consolida qué aislan las skills. El bridge conecta con la lógica escalada de los sub-agentes: misma idea de aislamiento, unidad mayor. La frase "la misma lógica de siempre" ancla la continuidad del hilo conceptual de la parte 2.</u></p>
-    <p><em>"Las skills aíslan un procedimiento. No instrucciones sueltas — un procedimiento completo, con fases y verificaciones, que no existe para la sesión hasta que se invoca. Eso es lo que vimos."</em></p>
-    <p><em>"§10 escala la misma lógica. No aislar un procedimiento del contexto — aislar un loop entero. Un sub-agente tiene su propia ventana, su propio ciclo pensar-actuar-observar, su propia instancia. Puede leer cincuenta archivos, razonar miles de tokens — todo en su ventana. Al supervisor le vuelve solo el resultado."</em></p>
-    <p><em>"Es la misma pregunta de siempre: ¿cuándo paga contexto? Y la misma respuesta: solo cuando hace falta. Pero aplicada a la unidad más grande del sistema: el agente mismo."</em></p>
+    <p><strong>Leer el párrafo principal apoyando "runtime" y "determinística" — son las dos palabras a retener. Pausa antes del bridge. Marcar el contraste git push sin avisar / pregunta siempre con la voz.</strong></p>
+    <p><u>Cierre de §9 + bridge a §10. La línea principal consolida la propiedad central de la sección (config del runtime, no del agente) y rescata la palabra clave "determinística" del callout de §9.2. El bridge anuncia §10 anclándolo en el campo que dejamos resaltado en §9.5 (permissions) y en el ejemplo más operativo posible (git push).</u></p>
+    <p><em>"Cerramos §9. La propiedad central a retener es esta: settings.json configura el runtime, no al agente. Define qué model corre, qué environment variables se inyectan, qué hooks se disparan, y qué tools puede ejecutar Claude sin pedir confirmación. Una regla de runtime es determinística — no se ignora, no se reinterpreta."</em></p>
+    <p><em>"Y dejamos algo en deuda. El campo más impactante de todo lo que vimos es permissions. La diferencia entre un agente que puede correr git push sin avisarte y uno que siempre pregunta antes vive en tres líneas de settings.json. Tres listas, una lógica de evaluación, y un puñado de gotchas que vale la pena ver al detalle. Vale una sección propia."</em></p>
   </aside>
 </section>
 </section>
@@ -7959,19 +8327,19 @@ Cuando trabajes con código del backend:
 <script>
   initClickableSteps({containerId: 's9-demo-steps', steps: [
     {
-      title: 'Beat 1 — La skill existe, pero la sesión no la conoce',
-      summary: 'Sesión nueva en el directorio del repo. Se ejecuta /context (o /memory) para mostrar fuentes cargadas.',
-      example: '/context → solo aparecen CLAUDE.md y las reglas activas. La skill slide-generation no está en la lista. El archivo existe en tools/skills/ — para esta sesión, no existe. Cero tokens.'
+      title: 'Paso 1 — Los tres archivos abiertos en paralelo',
+      summary: 'En VS Code, paneles lado a lado: ~/.claude/settings.json (usuario), .claude/settings.json del demo-repo (proyecto) y .claude/settings.local.json (local) — o el .example si el local no existe en esta máquina. Recorrer qué campo va en cada uno y por qué.',
+      example: 'model en el proyecto porque todos los colaboradores deberían usar el mismo. DEMO_BEARER_TOKEN con placeholder en el proyecto, valor real en local. Los permisos de Bash(open http://localhost:8000) en local porque abrir el browser es una operación de tu máquina, sin sentido en un servidor de CI ni en la de otro colaborador. Tres niveles, tres responsabilidades.'
     },
     {
-      title: 'Beat 2 — Invocar la skill',
-      summary: 'Se escribe /build-class o se le pide a Claude explícitamente que genere slides para la semana actual.',
-      example: 'La skill entra en el momento de la invocación. Indicador por comportamiento: Claude empieza a pedir el spine, carga _config/slide-conventions.md, sigue las cuatro fases del pipeline — cosas que no haría sin la skill presente. Momento meta: la skill que entró al contexto es la que generó este deck.'
+      title: 'Paso 2 — Cambiar el model y ver el efecto en próxima sesión',
+      summary: 'En .claude/settings.json del proyecto, cambiar "model" de claude-sonnet-4-6 a claude-haiku-4-5. Guardar. Cerrar Claude Code y abrir una sesión nueva — la barra inferior de la UI ahora muestra Haiku 4.5 en lugar de Sonnet 4.6. Revertir el cambio.',
+      example: 'Lo que mostramos no es el campo en sí — es la mecánica del runtime. Los settings se leen al arranque, no en caliente. Un cambio guardado mientras hay una sesión abierta no afecta esa sesión. Toma efecto la próxima vez que abrís Claude Code. El indicador del modelo en la UI es la forma más simple de verlo: cambia el archivo, abrís nueva sesión, el indicador refleja el cambio.'
     },
     {
-      title: 'Beat 3 — El mapa completo de los tres mecanismos',
-      summary: 'Cierre con la tricotomía visible: path-scoped rule / skill / CLAUDE.md.',
-      example: 'Una path-scoped rule entra cuando tocás cierto archivo. Una skill, cuando la pedís. CLAUDE.md, siempre. Tres formas de actuar sobre el contexto — la tricotomía de §4 ahora cerrada.'
+      title: 'Paso 3 — El .gitignore lo confirma',
+      summary: 'Abrir el .gitignore del demo-repo. Buscar la línea .claude/settings.local.json. Correr git status con el archivo local presente — no aparece. git no lo trackea.',
+      example: 'La convención no es opinable: ese archivo puede contener tokens reales, paths de tu máquina, permisos que solo tienen sentido en tu entorno. Si viajara al repo, contaminaría la config del equipo y podría exponer credenciales. Por eso el .gitignore lo lista desde el primer commit.\n\nPLAN B (si el demo se traba en algún paso): los tres archivos abiertos sostienen el argumento solos. Leer cada uno en voz alta — proyecto define la base compartida, local agrega lo específico de la máquina, usuario persiste entre proyectos. No hace falta ejecutar nada para que el punto quede claro: la convención es qué va dónde y por qué.'
     }
   ]});
 </script>
