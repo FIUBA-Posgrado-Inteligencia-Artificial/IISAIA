@@ -15,7 +15,7 @@ Esto es lo que vamos a abrir caja por caja en las próximas siete secciones:
 ```
 brainstorming
   → writing-plans
-    → (GitHub Flow: branch, worktree)
+    → (GitHub Flow: branch + PR)
       → subagent-driven-development
         → test-driven-development
           → requesting-code-review
