@@ -1,6 +1,6 @@
 # Cómo se distribuyen e instalan los plugins
 
-El plugin existe en disco como folder. Eso está bien para vos, que lo escribiste. ¿Pero cómo llega al compañero? ¿Le mandás un zip? ¿Le pasás el repo y le pedís que lo clone a una ruta específica? Nada de eso. Llega por un comando, y ese comando depende de saber de qué registro se lo está bajando. Ese registro tiene nombre.
+El plugin existe en disco como folder. Cuando lo escribió otro autor, ese folder vive en su máquina o en su repo. ¿Cómo llega al tuyo? ¿Clonás el repo y copiás archivos a mano? Nada de eso. Llega por un comando, y ese comando depende de saber de qué registro se lo está bajando. Ese registro tiene nombre.
 
 ## Marketplaces
 
