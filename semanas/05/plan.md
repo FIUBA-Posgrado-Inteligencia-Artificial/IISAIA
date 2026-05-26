@@ -288,7 +288,7 @@
 
 5. **Cuatro principios filosóficos.** Pattern: grid 2×2 con los cuatro principios + frase corta cada uno:
    - **TDD** — Tests primero, siempre.
-   - **Systematic over ad-hoc** — Proceso por encima de adivinar.
+   - **Sistemático antes que improvisado** — Un proceso definido por encima de improvisar.
    - **Complexity reduction** — Simplicidad como objetivo primario.
    - **Evidence over claims** — Verificar antes de declarar éxito.
    Notas: ninguno es nuevo en ingeniería; lo nuevo es aplicarlos al loop con el agente, no sólo al código que el agente produce.

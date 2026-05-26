@@ -65,7 +65,7 @@
 **What students walk away knowing:**
 - El problema que ataca: detectar desfasaje en palabras es barato, detectarlo en código ya escrito es caro.
 - El **happy-path completo** como mapa visual: brainstorming → writing-plans → (GitHub Flow) → subagent-driven-development → test-driven-development → requesting-code-review → verification-before-completion → finishing-a-development-branch. **Este mapa es el `pipeline-roadmap` que va a re-iluminarse en §§6-13.**
-- Los cuatro principios declarados en el README (TDD, systematic over ad-hoc, complexity reduction, evidence over claims).
+- Los cuatro principios declarados en el README (TDD, sistemático antes que improvisado, complexity reduction, evidence over claims).
 - Lo que NO hace: no escribe código sin que vos decidas qué construir, no reemplaza tu criterio arquitectónico, no funciona en piloto automático.
 **Animations / interactive:** Ninguna JS. El **pipeline-roadmap del happy-path** se construye CSS-only — 7 piezas + GitHub Flow integrado — y queda preparado para que en §§6-13 se re-ilumine pieza por pieza vía clases CSS toggleadas por Reveal. Mismo patrón visual que el `.lens-tracker` de S04.
 **Slide budget:** 6–7 slides.
