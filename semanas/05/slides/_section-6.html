@@ -228,6 +228,91 @@
     line-height: 1.45;
   }
 
+  /* Approaches block (final reveal in §6.6) */
+  .s6-approaches-block {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  .s6-approaches-header {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .s6-approaches-intro {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.45;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s6-approaches-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+  .s6-approach-card {
+    background: var(--bg-primary);
+    border-radius: 4px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-left: 3px solid var(--text-muted);
+  }
+  .s6-approach-card.is-chosen {
+    border-left-color: var(--accent);
+    border-left-width: 4px;
+  }
+  .s6-approach-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-right: 6px;
+  }
+  .s6-approach-card.is-chosen .s6-approach-badge {
+    color: var(--accent);
+  }
+  .s6-approach-title {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    font-weight: 600;
+  }
+  .s6-approach-card.is-chosen .s6-approach-title {
+    color: var(--accent);
+  }
+  .s6-approach-recommended {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: 6px;
+  }
+  .s6-approach-body {
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    line-height: 1.4;
+    margin: 4px 0 0 0;
+  }
+  .s6-approaches-result {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    margin: var(--spacing-xs) 0 0 0;
+  }
+  .s6-approaches-result strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+  }
+
   /* Sesión real: prompt inicial + Q&A pairs */
   .s6-session {
     max-width: 1100px;
@@ -508,11 +593,35 @@
       <span class="s6-session-q">Para posts, si una fila trae <code>author_id</code> que no existe en el store, ¿cómo lo trato?</span>
       <span class="s6-session-a">Error de fila (igual que validación).</span>
     </div>
+
+    <div class="fragment fade-in" data-fragment-index="6">
+      <div class="s6-approaches-block">
+        <span class="s6-approaches-header">Después de las 6 preguntas</span>
+        <p class="s6-approaches-intro">La skill propuso 3 approaches arquitecturales y recomendó el primero.</p>
+
+        <div class="s6-approaches-grid">
+          <div class="s6-approach-card is-chosen">
+            <span class="s6-approach-badge">A</span><span class="s6-approach-title">Endpoint genérico</span><span class="s6-approach-recommended">recomendado</span>
+            <p class="s6-approach-body"><code>POST /import/{resource}</code> + servicio agnóstico con adapters por recurso. Sin duplicación.</p>
+          </div>
+          <div class="s6-approach-card">
+            <span class="s6-approach-badge">B</span><span class="s6-approach-title">Endpoint por recurso</span>
+            <p class="s6-approach-body">Lógica inline en cada router. Simple pero rollback se duplica.</p>
+          </div>
+          <div class="s6-approach-card">
+            <span class="s6-approach-badge">C</span><span class="s6-approach-title">Endpoint único con discriminador</span>
+            <p class="s6-approach-body">Un handler para todos. Acopla el contrato HTTP.</p>
+          </div>
+        </div>
+
+        <p class="s6-approaches-result">Elegí <strong>A</strong> → la skill pasa a escribir el spec.</p>
+      </div>
+    </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Seis reveals — una pregunta+respuesta por click. La sesión real con Superpowers en el demo-repo.</strong></p>
-    <p><u>Caso real. La sesión existe en logs; las 6 preguntas son las que la skill me hizo, las respuestas son las que le di.</u></p>
+    <p><strong>Siete reveals — seis Q&amp;A + propuesta de approaches al cierre. La sesión real con Superpowers en el demo-repo.</strong></p>
+    <p><u>Caso real. La sesión existe en logs; las 6 preguntas son las que la skill me hizo, las respuestas son las que le di, y los 3 approaches al final son lo que propuso antes de escribir el spec.</u></p>
     <p><em>"Para cerrar, miremos cómo se vio esto en la realidad. Le pedí al agente que agregue una funcionalidad de importar items en masa desde un CSV — ahí arriba está el prompt original. Y miren lo que pasó."</em></p>
     <p><em>"Primera pregunta: la skill detectó que mi pedido tenía una palabra ambigua. Yo dije 'ítems' pero el repo tiene users y posts, no items. La skill no asumió cuál; me preguntó. Yo aclaré que era ambos."</em></p>
     <p><em>"Segunda: 'admin' tampoco existía como rol en el sistema. La skill me dio tres opciones para modelarlo. Yo elegí la más barata — el bearer actual cuenta como admin."</em></p>
@@ -520,6 +629,6 @@
     <p><em>"Cuarta: la definición de duplicado. Para users es claro — email. Para posts no había clave natural. La skill propuso opciones; yo amplié una de ellas: título, autor, y body."</em></p>
     <p><em>"Quinta: dónde poner el UI. Tres opciones: integrado al index, página aparte, modal. Elegí página aparte."</em></p>
     <p><em>"Sexta: caso borde — si un post viene con autor inexistente, ¿qué hacemos? Elegí tratarlo como error de validación, no inventar un user vacío."</em></p>
-    <p><em>"Con eso, la skill tenía suficiente contexto. Propuso tres approaches arquitecturales, me dijo cuál recomendaba y por qué. Yo elegí A. A partir de ahí, escribió el spec en disco. Está en el repo, commiteado, listo para que writing-plans lo lea en la próxima sección."</em></p>
+    <p><em>"Con esas seis respuestas la skill tenía contexto suficiente para proponer arquitectura. Recomendó la opción A: un endpoint genérico /import/{resource} con un servicio agnóstico que usa adapters por tipo. La B era endpoint por recurso con lógica duplicada; la C, un endpoint único con discriminador que acoplaba el contrato HTTP. Elegí A. A partir de ahí, la skill escribió el spec en disco, commiteado, listo para que writing-plans lo lea en la próxima sección."</em></p>
   </aside>
 </section>
