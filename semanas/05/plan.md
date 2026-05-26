@@ -271,7 +271,7 @@
    > "Apenas ve que estás construyendo algo, **no salta a escribir código**. En vez de eso, da un paso atrás y te pregunta qué estás tratando de hacer realmente."
    Atribución pequeña al pie: "—README de Superpowers". Sin reveals.
 
-2. **El problema diagnostico.** Pattern: `comparison-2col` o flow vertical. Izquierda: el flujo sin metodología — "le pedís algo → arranca a tipear → mismatch tarde, con 20 mensajes y archivos commiteados". Derecha: el flujo con — "entendé qué construís → spec → plan → ejecutá → verificá → mergeá". Cierre: "Detectar mismatch en palabras es barato. En código ya escrito es caro."
+2. **El problema diagnostico.** Pattern: `comparison-2col` o flow vertical. Izquierda: el flujo sin metodología — "le pedís algo → arranca a tipear → desfasaje tarde, con 20 mensajes y archivos commiteados". Derecha: el flujo con — "entendé qué construís → spec → plan → ejecutá → verificá → mergeá". Cierre: "Detectar desfasaje en palabras es barato. En código ya escrito es caro."
 
 3. **Qué es Superpowers — definición.** Card central:
    > "Una metodología completa de desarrollo de software para tu coding agent, construida sobre un set de skills componibles."
@@ -579,7 +579,7 @@
    - Cuando estás trabado y no sabés qué falta — agente fresco lee y marca lo que vos ya no ves.
 
 4. **Por qué importa.** Card:
-   > "Code review encuentra cosas distintas a los tests: dead code, mismatch entre spec y código, ergonomía pésima de API pública, archivos que crecieron demasiado, invariantes implícitos rotos."
+   > "Code review encuentra cosas distintas a los tests: dead code, desfasaje entre spec y código, ergonomía pésima de API pública, archivos que crecieron demasiado, invariantes implícitos rotos."
    Sub: "Tests verifican comportamiento. Review verifica diseño."
 
 5. **Las tres severidades.** Pattern: `data-table` o grid 3×1. Tres niveles con qué hacer con cada uno:

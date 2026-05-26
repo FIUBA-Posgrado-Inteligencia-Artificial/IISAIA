@@ -60,10 +60,10 @@
 
 ## Section 4: Superpowers — qué problema resuelve
 **Source material:** `source_material/04-superpowers-que-es.md`
-**Through-line:** Superpowers se autodefine como *"metodología completa de desarrollo + skills componibles"*. El problema clásico que ataca: el agente arranca a tipear código antes de saber qué estás construyendo, y el mismatch entre tu intención y su interpretación aparece tarde, cuando ya hay archivos, tests y veinte mensajes de conversación. El plugin fuerza un proceso con puntos de control. Cuatro principios filosóficos lo guían y tres cosas que NO hace evitan inflar expectativas.
-**Hook:** La frase del README — *"apenas ve que estás construyendo algo, no salta a escribir código. En vez de eso, da un paso atrás y te pregunta qué estás tratando de hacer realmente."* — abre la sección. Carga el contraste con el problema diagnosticado (mismatch tardío).
+**Through-line:** Superpowers se autodefine como *"metodología completa de desarrollo + skills componibles"*. El problema clásico que ataca: el agente arranca a tipear código antes de saber qué estás construyendo, y el desfasaje entre tu intención y su interpretación aparece tarde, cuando ya hay archivos, tests y veinte mensajes de conversación. El plugin fuerza un proceso con puntos de control. Cuatro principios filosóficos lo guían y tres cosas que NO hace evitan inflar expectativas.
+**Hook:** La frase del README — *"apenas ve que estás construyendo algo, no salta a escribir código. En vez de eso, da un paso atrás y te pregunta qué estás tratando de hacer realmente."* — abre la sección. Carga el contraste con el problema diagnosticado (desfasaje tardío).
 **What students walk away knowing:**
-- El problema que ataca: detectar mismatch en palabras es barato, detectarlo en código ya escrito es caro.
+- El problema que ataca: detectar desfasaje en palabras es barato, detectarlo en código ya escrito es caro.
 - El **happy-path completo** como mapa visual: brainstorming → writing-plans → (GitHub Flow) → subagent-driven-development → test-driven-development → requesting-code-review → verification-before-completion → finishing-a-development-branch. **Este mapa es el `pipeline-roadmap` que va a re-iluminarse en §§6-13.**
 - Los cuatro principios declarados en el README (TDD, systematic over ad-hoc, complexity reduction, evidence over claims).
 - Lo que NO hace: no escribe código sin que vos decidas qué construir, no reemplaza tu criterio arquitectónico, no funciona en piloto automático.
@@ -175,7 +175,7 @@
 **What students walk away knowing:**
 - El reviewer como agente separado del implementer; sin sesgo del autor, sin "ya lo discutimos y quedó así".
 - Las tres severidades y qué hacer con cada una: críticos se resuelven YA, mayores requieren aprobación humana explícita, menores van como notas del PR.
-- Qué encuentra code review que los tests no encuentran: dead code, mismatch spec-código, ergonomía pésima de API.
+- Qué encuentra code review que los tests no encuentran: dead code, desfasaje spec-código, ergonomía pésima de API.
 - Anti-patrones: saltearlo porque "los tests pasan", degradar críticos a mayores para no atrasar el merge, pedir review antes de que TDD pase verde.
 **Animations / interactive:** Pipeline-roadmap iluminado. `data-table` o grid 3×1 para las tres severidades con ejemplos.
 **Captura del flujo:** report de review generado sobre el feature del demo-repo de S04, con un issue de cada severidad si se puede.
