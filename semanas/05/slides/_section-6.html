@@ -228,40 +228,26 @@
     line-height: 1.45;
   }
 
-  /* Approaches block (final reveal in §6.6) */
-  .s6-approaches-block {
-    background: var(--bg-secondary);
-    border-top: 3px solid var(--accent);
-    border-radius: 6px;
-    padding: var(--spacing-sm) var(--spacing-md);
-    margin-top: var(--spacing-md);
-  }
-  .s6-approaches-header {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 4px;
+  /* Approaches (slide propio §6.7 — descripciones extendidas) */
+  .s6-approaches-wrap {
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
   }
   .s6-approaches-intro {
-    color: var(--text-primary);
-    font-size: 1rem;
-    line-height: 1.45;
-    margin: 0 0 var(--spacing-sm) 0;
-  }
-  .s6-approaches-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-sm);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0 auto var(--spacing-md) auto;
+    max-width: 880px;
+    font-style: italic;
   }
   .s6-approach-card {
-    background: var(--bg-primary);
-    border-radius: 4px;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
     border-left: 3px solid var(--text-muted);
+    margin-bottom: var(--spacing-sm);
   }
   .s6-approach-card.is-chosen {
     border-left-color: var(--accent);
@@ -270,18 +256,19 @@
   .s6-approach-badge {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-muted);
-    margin-right: 6px;
+    margin-right: var(--spacing-xs);
   }
   .s6-approach-card.is-chosen .s6-approach-badge {
     color: var(--accent);
   }
   .s6-approach-title {
+    display: inline;
     color: var(--text-primary);
-    font-size: 0.98rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
   }
   .s6-approach-card.is-chosen .s6-approach-title {
     color: var(--accent);
@@ -289,28 +276,42 @@
   .s6-approach-recommended {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-left: 6px;
+    margin-left: var(--spacing-xs);
+    background: rgba(100, 255, 218, 0.1);
+    padding: 2px 8px;
+    border-radius: 3px;
   }
   .s6-approach-body {
     color: var(--text-primary);
-    font-size: 0.92rem;
-    line-height: 1.4;
-    margin: 4px 0 0 0;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: var(--spacing-xs) 0 0 0;
+  }
+  .s6-approach-tradeoff {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: var(--spacing-xs) 0 0 0;
+    font-style: italic;
+  }
+  .s6-approach-tradeoff strong {
+    color: var(--accent-secondary);
+    font-style: normal;
   }
   .s6-approaches-result {
     text-align: center;
     color: var(--text-primary);
-    font-size: 1.05rem;
-    margin: var(--spacing-xs) 0 0 0;
+    font-size: 1.2rem;
+    margin: var(--spacing-md) auto 0 auto;
   }
   .s6-approaches-result strong {
     color: var(--accent);
     font-family: var(--font-mono);
-    font-size: 1.1em;
+    font-size: 1.15em;
   }
 
   /* Sesión real: prompt inicial + Q&A pairs */
@@ -593,35 +594,11 @@
       <span class="s6-session-q">Para posts, si una fila trae <code>author_id</code> que no existe en el store, ¿cómo lo trato?</span>
       <span class="s6-session-a">Error de fila (igual que validación).</span>
     </div>
-
-    <div class="fragment fade-in" data-fragment-index="6">
-      <div class="s6-approaches-block">
-        <span class="s6-approaches-header">Después de las 6 preguntas</span>
-        <p class="s6-approaches-intro">La skill propuso 3 approaches arquitecturales y recomendó el primero.</p>
-
-        <div class="s6-approaches-grid">
-          <div class="s6-approach-card is-chosen">
-            <span class="s6-approach-badge">A</span><span class="s6-approach-title">Endpoint genérico</span><span class="s6-approach-recommended">recomendado</span>
-            <p class="s6-approach-body"><code>POST /import/{resource}</code> + servicio agnóstico con adapters por recurso. Sin duplicación.</p>
-          </div>
-          <div class="s6-approach-card">
-            <span class="s6-approach-badge">B</span><span class="s6-approach-title">Endpoint por recurso</span>
-            <p class="s6-approach-body">Lógica inline en cada router. Simple pero rollback se duplica.</p>
-          </div>
-          <div class="s6-approach-card">
-            <span class="s6-approach-badge">C</span><span class="s6-approach-title">Endpoint único con discriminador</span>
-            <p class="s6-approach-body">Un handler para todos. Acopla el contrato HTTP.</p>
-          </div>
-        </div>
-
-        <p class="s6-approaches-result">Elegí <strong>A</strong> → la skill pasa a escribir el spec.</p>
-      </div>
-    </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Siete reveals — seis Q&amp;A + propuesta de approaches al cierre. La sesión real con Superpowers en el demo-repo.</strong></p>
-    <p><u>Caso real. La sesión existe en logs; las 6 preguntas son las que la skill me hizo, las respuestas son las que le di, y los 3 approaches al final son lo que propuso antes de escribir el spec.</u></p>
+    <p><strong>Seis reveals — una pregunta+respuesta por click. La sesión real con Superpowers en el demo-repo.</strong></p>
+    <p><u>Caso real. La sesión existe en logs; las 6 preguntas son las que la skill me hizo, las respuestas son las que le di.</u></p>
     <p><em>"Para cerrar, miremos cómo se vio esto en la realidad. Le pedí al agente que agregue una funcionalidad de importar items en masa desde un CSV — ahí arriba está el prompt original. Y miren lo que pasó."</em></p>
     <p><em>"Primera pregunta: la skill detectó que mi pedido tenía una palabra ambigua. Yo dije 'ítems' pero el repo tiene users y posts, no items. La skill no asumió cuál; me preguntó. Yo aclaré que era ambos."</em></p>
     <p><em>"Segunda: 'admin' tampoco existía como rol en el sistema. La skill me dio tres opciones para modelarlo. Yo elegí la más barata — el bearer actual cuenta como admin."</em></p>
@@ -629,6 +606,51 @@
     <p><em>"Cuarta: la definición de duplicado. Para users es claro — email. Para posts no había clave natural. La skill propuso opciones; yo amplié una de ellas: título, autor, y body."</em></p>
     <p><em>"Quinta: dónde poner el UI. Tres opciones: integrado al index, página aparte, modal. Elegí página aparte."</em></p>
     <p><em>"Sexta: caso borde — si un post viene con autor inexistente, ¿qué hacemos? Elegí tratarlo como error de validación, no inventar un user vacío."</em></p>
-    <p><em>"Con esas seis respuestas la skill tenía contexto suficiente para proponer arquitectura. Recomendó la opción A: un endpoint genérico /import/{resource} con un servicio agnóstico que usa adapters por tipo. La B era endpoint por recurso con lógica duplicada; la C, un endpoint único con discriminador que acoplaba el contrato HTTP. Elegí A. A partir de ahí, la skill escribió el spec en disco, commiteado, listo para que writing-plans lo lea en la próxima sección."</em></p>
+    <p><em>"Con esas seis respuestas la skill tenía contexto suficiente para proponer arquitectura. Lo vemos en la próxima slide."</em></p>
+  </aside>
+</section>
+
+<!-- §6.7 — Approaches arquitecturales propuestos -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Tres approaches arquitecturales</h2>
+
+  <p class="s6-approaches-intro">Con las 6 respuestas anteriores, la skill propuso 3 formas de implementar el feature y recomendó la primera.</p>
+
+  <div class="s6-approaches-wrap">
+    <div class="s6-approach-card is-chosen fragment fade-in" data-fragment-index="0">
+      <span class="s6-approach-badge">A</span><span class="s6-approach-title">Endpoint genérico</span><span class="s6-approach-recommended">recomendada</span>
+      <p class="s6-approach-body">
+        Un router nuevo <code>backend/routers/imports.py</code> con <code>POST /import/users</code> y <code>POST /import/posts</code>. El parser CSV y el orquestador (validar → dedup → insertar → reportar) viven en <code>backend/services/csv_import.py</code> y son agnósticos del recurso; reciben un <em>adapter</em> por recurso que sabe cómo validar una fila, calcular su dup-key y crearla en el store.
+      </p>
+      <p class="s6-approach-tradeoff"><strong>Ventaja:</strong> cero duplicación de lógica de errores y rollback. Sumar un tercer recurso después es trivial.</p>
+    </div>
+
+    <div class="s6-approach-card fragment fade-in" data-fragment-index="1">
+      <span class="s6-approach-badge">B</span><span class="s6-approach-title">Endpoint por recurso, lógica inline</span>
+      <p class="s6-approach-body">
+        <code>POST /users/import</code> dentro de <code>routers/users.py</code>, <code>POST /posts/import</code> dentro de <code>routers/posts.py</code>. Cada uno con su parser, su validación, y su orquestación de rollback.
+      </p>
+      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> más simple de leer fila por fila, pero la lógica de rollback y el formato de respuesta se duplica entre los dos routers — y va a divergir con el tiempo.</p>
+    </div>
+
+    <div class="s6-approach-card fragment fade-in" data-fragment-index="2">
+      <span class="s6-approach-badge">C</span><span class="s6-approach-title">Endpoint único con discriminador</span>
+      <p class="s6-approach-body">
+        Un solo <code>POST /import</code> que toma multipart con <code>resource=users|posts</code> + el file. Un handler para todos los recursos, ramificando por el campo <code>resource</code>.
+      </p>
+      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> más fácil de testear como caja negra pero acopla el contrato HTTP — clientes que solo importan users tienen que conocer el discriminador.</p>
+    </div>
+
+    <p class="s6-approaches-result fragment fade-in" data-fragment-index="3">Elegí <strong>A</strong> → la skill pasa a escribir el spec en disco.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Cuatro reveals — uno por approach + el resultado final.</strong></p>
+    <p><u>Slide dedicada a los approaches que la skill propuso al cierre del brainstorming. Las descripciones son las reales del log, levemente acortadas.</u></p>
+    <p><em>"Con las seis respuestas anteriores, la skill tenía contexto suficiente para proponer arquitectura. Me ofreció tres opciones, en orden de preferencia."</em></p>
+    <p><em>"Opción A, la recomendada: un endpoint genérico, POST barra import barra resource. Un router nuevo, y un servicio agnóstico que vive en services/csv_import.py. El servicio no sabe nada de users ni de posts: recibe un 'adapter' por recurso que conoce cómo validar una fila, cómo calcular su dup-key, y cómo insertarla. La ventaja: cero duplicación. Si mañana quiero importar un tercer recurso, alcanza con agregar un adapter nuevo."</em></p>
+    <p><em>"Opción B: endpoint por recurso, con lógica inline. POST barra users barra import dentro del router de users, y lo mismo para posts. Cada uno con su parser, su validación, su rollback. Más simple de leer fila por fila, pero la lógica de rollback y el formato de respuesta se duplica — y eventualmente divergen."</em></p>
+    <p><em>"Opción C: un endpoint único, POST barra import, que toma el recurso como discriminador en el body. Un handler para todos. Es más fácil de testear como caja negra pero acopla el contrato HTTP — clientes que solo importan users tienen que conocer que existe el campo resource."</em></p>
+    <p><em>"Elegí A. A partir de ahí la skill pasa a escribir el spec en disco. Está commiteado en el repo, listo para que writing-plans lo lea en la próxima sección."</em></p>
   </aside>
 </section>
