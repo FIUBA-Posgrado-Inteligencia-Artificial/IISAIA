@@ -454,7 +454,7 @@
     <p><em>"Subagent-driven-development: ejecuta el plan despachando un subagent fresco por cada tarea. Cada tarea arranca con contexto limpio."</em></p>
     <p><em>"Test-driven-development: dentro de cada tarea, el subagent arranca con un test que falla. Rojo, verde, refactor. Sin TDD, 'ya funciona' termina siendo 'compila'."</em></p>
     <p><em>"Requesting-code-review: cuando el plan está implementado, otro agente — distinto del que implementó — revisa el diff contra el spec. Strengths e issues clasificados por severidad."</em></p>
-    <p><em>"Verification-before-completion: antes de afirmar 'listo', el agente corre los comandos que verifican el trabajo — por ejemplo <code>pytest</code>, <code>npm test</code>, o levantar el server y hacer un curl al endpoint nuevo. Y pega la salida del comando al lado de la afirmación. Sin esa salida pegada, decir 'listo' es opinión, no evidencia."</em></p>
+    <p><em>"Verification-before-completion: cuando el agente cree que terminó, antes de decírtelo, vuelve a correr los tests y los comandos del plan y pega la salida en el mensaje de cierre. Si no hay salida pegada, no puede declarar 'listo'. Existe porque los modelos suelen afirmar 'los tests pasan' sin haber ejecutado nada — y eso te lo lleva descubrir mañana cuando algo se rompe en producción."</em></p>
     <p><em>"Finishing-a-development-branch: cuando todo está verificado, te muestra el menú de opciones — PR, merge, branch viva con plan, descartar. Cierra el ciclo. Este mapa se va a iluminar caja por caja en las próximas secciones. Quédense con el mapa."</em></p>
   </aside>
 </section>
