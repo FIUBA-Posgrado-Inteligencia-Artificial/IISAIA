@@ -240,28 +240,31 @@
     margin: 0;
   }
 
-  /* Slide 7: Bridge */
-  .s4-bridge {
-    text-align: center;
-    max-width: 720px;
-    margin: 0 auto;
+  /* Slide 7: Lo que NO hace */
+  .s4-notdoes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    max-width: 980px;
+    margin: var(--spacing-lg) auto 0 auto;
   }
-  .s4-bridge-text {
+  .s4-notdoes-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+  }
+  .s4-notdoes-title {
+    color: var(--accent-secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s4-notdoes-body {
     color: var(--text-primary);
-    font-size: 1.3rem;
-    line-height: 1.5;
-    margin: 0 0 var(--spacing-md) 0;
-    text-align: center;
-  }
-  .s4-bridge-text strong {
-    color: var(--accent);
-  }
-  .s4-bridge-pivot {
-    color: var(--text-muted);
-    font-style: italic;
     font-size: 1.1rem;
+    line-height: 1.5;
     margin: 0;
-    text-align: center;
   }
 </style>
 
@@ -466,17 +469,31 @@
   </aside>
 </section>
 
-<!-- §4.7 — Bridge a §5 -->
+<!-- §4.7 — Lo que NO hace (honest disclosure antes de instalar) -->
 <section>
-  <div class="s4-bridge">
-    <p class="s4-bridge-text">
-      Ya saben qué problema ataca, cuál es el mapa, y qué principios lo guían.
-    </p>
-    <p class="s4-bridge-pivot">Ahora lo instalamos.</p>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Lo que NO hace</h2>
+
+  <div class="s4-notdoes">
+    <div class="s4-notdoes-card fragment fade-in" data-fragment-index="0">
+      <h3 class="s4-notdoes-title">No escribe código sin que vos decidas qué construir.</h3>
+      <p class="s4-notdoes-body">La skill brainstorming se traba si vos te trabás. Si no sabés qué querés, no avanza.</p>
+    </div>
+    <div class="s4-notdoes-card fragment fade-in" data-fragment-index="1">
+      <h3 class="s4-notdoes-title">No reemplaza tu criterio arquitectónico.</h3>
+      <p class="s4-notdoes-body">Te hace preguntas; las respuestas las ponés vos. El plugin estructura la conversación, no decide por vos.</p>
+    </div>
+    <div class="s4-notdoes-card fragment fade-in" data-fragment-index="2">
+      <h3 class="s4-notdoes-title">No funciona en piloto automático.</h3>
+      <p class="s4-notdoes-body">Las skills hacen preguntas y esperan respuesta. Si abandonás la sesión, el flujo se detiene donde lo dejaste.</p>
+    </div>
   </div>
 
   <aside class="notes">
-    <p><u>Bridge a §5 (instalación). Cierra §4 sin meta-narración.</u></p>
-    <p><em>"Ya saben qué problema ataca Superpowers, cuál es el mapa completo, y qué principios lo guían. Ahora lo instalamos. Un comando."</em></p>
+    <p><strong>Tres reveals — uno por punto.</strong></p>
+    <p><u>Honest disclosure antes de instalar. Tres cosas que no hace el plugin, para no inflar expectativas.</u></p>
+    <p><em>"Tres cosas que conviene aclarar antes de instalarlo. No para asustar — para que sepan exactamente con qué se están metiendo."</em></p>
+    <p><em>"Primero: no escribe código sin que ustedes decidan qué construir. La skill brainstorming se traba si ustedes se traban. Si no saben qué quieren, no avanza."</em></p>
+    <p><em>"Segundo: no reemplaza el criterio arquitectónico. Les hace preguntas; las respuestas las ponen ustedes. El plugin estructura la conversación, no decide por ustedes."</em></p>
+    <p><em>"Tercero: no funciona en piloto automático. Las skills hacen preguntas y esperan respuesta. Si abandonan la sesión, el flujo se detiene donde lo dejaron — no es una IA que vuelve sola al ratito a terminar lo que faltaba."</em></p>
   </aside>
 </section>
