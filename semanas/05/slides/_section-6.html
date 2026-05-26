@@ -321,38 +321,42 @@
   </aside>
 </section>
 
-<!-- §6.3 — Cuándo se activa + Por qué importa (combinado) -->
+<!-- §6.3 — Cuándo se activa + Por qué importa (combinado, con reveals) -->
 <section>
   <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuándo se activa y por qué importa</h2>
 
-  <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Cuándo se activa</p>
-  <div class="s6-compare">
-    <div class="s6-compare-card is-yes">
-      <div class="s6-compare-tag">Sí se activa</div>
-      <p class="s6-compare-body">Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluye scripts de utilidad triviales y cambios de configuración.</p>
-    </div>
-    <div class="s6-compare-card is-no">
-      <div class="s6-compare-tag">No se activa</div>
-      <p class="s6-compare-body">Tareas exploratorias (leer código, explicar cómo funciona algo, debug) y correcciones mecánicas donde el diseño ya está fijado.</p>
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Cuándo se activa</p>
+    <div class="s6-compare">
+      <div class="s6-compare-card is-yes">
+        <div class="s6-compare-tag">Sí se activa</div>
+        <p class="s6-compare-body">Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluye scripts de utilidad triviales y cambios de configuración.</p>
+      </div>
+      <div class="s6-compare-card is-no">
+        <div class="s6-compare-tag">No se activa</div>
+        <p class="s6-compare-body">Tareas exploratorias (leer código, explicar cómo funciona algo, debug) y correcciones mecánicas donde el diseño ya está fijado.</p>
+      </div>
     </div>
   </div>
 
-  <p class="s6-sublabel">Por qué importa</p>
-  <div class="s6-central" style="margin-top: 0;">
-    <div class="s6-central-main">
-      Sin esta skill, el agente arranca a codear con la <strong>primera interpretación plausible</strong> de tu pedido — y las suposiciones no examinadas recién se manifiestan cuando ya hay archivos, tests y commits.
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Por qué importa</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Sin esta skill, el agente arranca a codear con la <strong>primera interpretación plausible</strong> de tu pedido — y las suposiciones no examinadas recién se manifiestan cuando ya hay archivos, tests y commits.
+      </div>
+      <p class="s6-central-sub">
+        Lo caro no es la primera versión. Es todo lo que tirás cuando descubrís que entendió otra cosa.
+      </p>
     </div>
-    <p class="s6-central-sub">
-      Lo caro no es la primera versión. Es todo lo que tirás cuando descubrís que entendió otra cosa.
-    </p>
   </div>
 
   <aside class="notes">
-    <p><u>Slide doble: cuándo aparece la skill + por qué vale tenerla. Las dos secciones encadenan naturalmente — el sí/no contextualiza la regla, y el por-qué la justifica.</u></p>
-    <p><em>"Cuándo se activa: antes de cualquier trabajo creativo. Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluso scripts de utilidad triviales y cambios de configuración."</em></p>
-    <p><em>"Cuándo no se activa: tareas exploratorias — leer código, explicar cómo funciona algo, debugging — y correcciones mecánicas donde el diseño ya está fijado. Si lo único que querés es 'cambiame este import' o 'arregla este typo', la skill no se mete."</em></p>
-    <p><em>"Por qué importa: sin esta skill, el modelo arranca a codear con la primera interpretación plausible del pedido. Esa interpretación viene cargada de suposiciones no examinadas — del modelo y tuyas — que recién se manifiestan cuando ves el resultado y no es lo que querías. Lo caro no es la primera versión: es todo lo que tenés que tirar y volver a hacer cuando descubrís que entendió otra cosa."</em></p>
-    <p><em>"El otro problema que resuelve es el de scope: pedidos que en realidad son cinco proyectos disfrazados de uno. Si no detectás eso antes de empezar, terminás con un spec inejecutable o con un sistema que mezcla cinco responsabilidades en el mismo archivo."</em></p>
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Slide doble: cuándo aparece la skill + por qué vale tenerla. Cada parte se revela en orden con flecha abajo.</u></p>
+    <p><em>"Vamos a ver dos cosas sobre esta skill: dónde se mete, dónde no, y por qué vale tenerla."</em></p>
+    <p><em>"Cuándo se activa: antes de cualquier trabajo creativo. Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluso scripts de utilidad triviales y cambios de configuración. Cuándo no se activa: tareas exploratorias — leer código, explicar cómo funciona algo, debugging — y correcciones mecánicas donde el diseño ya está fijado. Si lo único que querés es 'cambiame este import' o 'arregla este typo', la skill no se mete."</em></p>
+    <p><em>"Por qué importa: sin esta skill, el modelo arranca a codear con la primera interpretación plausible del pedido. Esa interpretación viene cargada de suposiciones no examinadas que recién se manifiestan cuando ya hay archivos, tests y commits. Y ahí lo caro no es la primera versión — es todo lo que tenés que tirar y volver a hacer cuando descubrís que entendió otra cosa. El otro problema que resuelve es el de scope: pedidos que son cinco proyectos disfrazados de uno."</em></p>
   </aside>
 </section>
 
@@ -376,51 +380,54 @@
   </aside>
 </section>
 
-<!-- §6.5 — Operativa: dos cosas del flujo + anti-patrones -->
+<!-- §6.5 — Operativa: dos cosas del flujo + anti-patrones (con reveals) -->
 <section>
   <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Detalles del flujo</h2>
 
-  <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Dos cosas importantes</p>
-  <div class="s6-split">
-    <div class="s6-split-card">
-      <div class="s6-split-tag">El spec en disco</div>
-      <p class="s6-split-body">El spec aprobado se persiste en:</p>
-      <pre style="margin: var(--spacing-xs) 0; background: var(--bg-primary); border-radius: 4px; padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9rem; color: var(--accent-secondary); overflow-x: auto;"><code>docs/superpowers/specs/
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Dos cosas importantes</p>
+    <div class="s6-split">
+      <div class="s6-split-card">
+        <div class="s6-split-tag">El spec en disco</div>
+        <p class="s6-split-body">El spec aprobado se persiste en:</p>
+        <pre style="margin: var(--spacing-xs) 0; background: var(--bg-primary); border-radius: 4px; padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9rem; color: var(--accent-secondary); overflow-x: auto;"><code>docs/superpowers/specs/
   YYYY-MM-DD-&lt;topic&gt;-design.md</code></pre>
-      <p class="s6-split-body" style="margin-top: var(--spacing-xs);">No es chat que se pierde. Es archivo versionado. Las próximas skills lo leen desde ahí.</p>
-    </div>
-    <div class="s6-split-card is-secondary">
-      <div class="s6-split-tag">Spec Self-Review</div>
-      <p class="s6-split-body">Antes de pedirte que revises, la skill chequea sola:</p>
-      <ul class="s6-split-body">
-        <li>Placeholders (<code>TBD</code>, <code>TODO</code>)</li>
-        <li>Contradicciones entre secciones</li>
-        <li>Scope: ¿esto es un spec o son cinco?</li>
-        <li>Ambigüedades de interpretación</li>
-      </ul>
+        <p class="s6-split-body" style="margin-top: var(--spacing-xs);">No es chat que se pierde. Es archivo versionado. Las próximas skills lo leen desde ahí.</p>
+      </div>
+      <div class="s6-split-card is-secondary">
+        <div class="s6-split-tag">Spec Self-Review</div>
+        <p class="s6-split-body">Antes de pedirte que revises, la skill chequea sola:</p>
+        <ul class="s6-split-body">
+          <li>Placeholders (<code>TBD</code>, <code>TODO</code>)</li>
+          <li>Contradicciones entre secciones</li>
+          <li>Scope: ¿esto es un spec o son cinco?</li>
+          <li>Ambigüedades de interpretación</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <p class="s6-sublabel">Tres anti-patrones a evitar</p>
-  <div class="s6-anti">
-    <div class="s6-anti-card">
-      &laquo;Esto es muy simple, no necesita diseño.&raquo; Los proyectos simples son donde las suposiciones no examinadas hacen más daño.
-    </div>
-    <div class="s6-anti-card">
-      Combinar varias preguntas en un solo mensaje. Si un tema necesita más exploración, se rompe en preguntas separadas.
-    </div>
-    <div class="s6-anti-card">
-      Invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito.
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Tres anti-patrones a evitar</p>
+    <div class="s6-anti">
+      <div class="s6-anti-card">
+        &laquo;Esto es muy simple, no necesita diseño.&raquo; Los proyectos simples son donde las suposiciones no examinadas hacen más daño.
+      </div>
+      <div class="s6-anti-card">
+        Combinar varias preguntas en un solo mensaje. Si un tema necesita más exploración, se rompe en preguntas separadas.
+      </div>
+      <div class="s6-anti-card">
+        Invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito.
+      </div>
     </div>
   </div>
 
   <aside class="notes">
-    <p><u>Slide denso: dos detalles operativos del flujo + tres anti-patrones a evitar. Vale dedicarle tiempo.</u></p>
-    <p><em>"Dos cosas importantes del flujo. La primera: el spec aprobado se persiste en disco bajo docs/superpowers/specs, con nombre que arranca con la fecha en formato ISO y termina con el topic. Se commitea al repo. No es un mensaje más de la conversación que se pierde cuando cerrás la sesión: es un archivo de primera clase, versionado igual que el código. Las próximas skills — writing-plans, subagent-driven-development — leen el spec desde ese path, no de la conversación. Si querés cambiar el rumbo del feature, editás ese archivo y volvés a correr el flujo."</em></p>
-    <p><em>"La segunda: hay un Spec Self-Review interno que corre antes de pasártelo a vos. Escanea placeholders, contradicciones entre secciones, scope creep, y ambigüedades. Lo arregla en el momento, sin pedirte input. Vos no deberías leer un TBD en tu propio spec."</em></p>
-    <p><em>"Y tres anti-patrones que vale tener en cabeza. Primero: 'esto es muy simple, no necesita diseño'. Ya lo dijimos — los simples son donde las suposiciones no examinadas hacen más daño. Sin excepciones."</em></p>
-    <p><em>"Segundo: combinar varias preguntas en un solo mensaje. La skill está diseñada para una pregunta por vez. Si un tema necesita más exploración, se rompe en preguntas separadas."</em></p>
-    <p><em>"Tercero: invocar cualquier skill de implementación — writing-plans incluida — antes de que vos hayas aprobado el diseño escrito. Ese es el hard gate."</em></p>
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Slide doble: dos detalles operativos del flujo + tres anti-patrones a evitar. Cada bloque se revela con flecha abajo.</u></p>
+    <p><em>"Vamos a ver dos partes operativas: dos detalles del flujo, y tres anti-patrones a evitar."</em></p>
+    <p><em>"Dos cosas importantes del flujo. La primera: el spec aprobado se persiste en disco bajo docs/superpowers/specs, con nombre que arranca con la fecha en formato ISO y termina con el topic. Se commitea al repo — es archivo versionado, no chat que se pierde. Las próximas skills lo leen desde ese path. La segunda: hay un Spec Self-Review interno que corre antes de pasártelo a vos. Escanea placeholders como TBD o TODO, contradicciones entre secciones, scope creep, y ambigüedades. Lo arregla en el momento. Vos no deberías leer un TBD en tu propio spec."</em></p>
+    <p><em>"Y tres anti-patrones que vale tener en cabeza. Primero: 'esto es muy simple, no necesita diseño'. Los simples son donde las suposiciones no examinadas hacen más daño. Segundo: combinar varias preguntas en un solo mensaje — la skill está diseñada para una pregunta por vez. Tercero: invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito. Ese es el hard gate."</em></p>
   </aside>
 </section>
 
