@@ -37,30 +37,31 @@
     font-style: italic;
   }
 
-  /* Git graph SVG */
+  /* Git graph SVG (compacto para evitar overflow) */
   .s8-graph {
     display: block;
-    max-width: 880px;
-    margin: var(--spacing-md) auto var(--spacing-sm) auto;
+    max-width: 700px;
+    margin: var(--spacing-xs) auto 0 auto;
     width: 100%;
     height: auto;
+    max-height: 130px;
   }
   .s8-graph text {
     font-family: var(--font-mono);
     fill: var(--text-muted);
   }
 
-  /* Concept cards (commit / branch / PR) */
+  /* Concept cards (commit / branch / PR) — denso vertical */
   .s8-concepts {
     max-width: 1000px;
-    margin: var(--spacing-sm) auto 0 auto;
+    margin: var(--spacing-xs) auto 0 auto;
   }
   .s8-concept {
     background: var(--bg-secondary);
     border-left: 4px solid var(--accent);
     border-radius: 6px;
-    padding: var(--spacing-sm) var(--spacing-md);
-    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    margin-bottom: 6px;
   }
   .s8-concept-tag {
     display: inline-block;
@@ -74,15 +75,15 @@
   .s8-concept-name {
     color: var(--accent);
     font-family: var(--font-mono);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-right: var(--spacing-sm);
   }
   .s8-concept-def {
     color: var(--text-primary);
-    font-size: 1.1rem;
-    line-height: 1.55;
-    margin: var(--spacing-xs) 0 0 0;
+    font-size: 1.02rem;
+    line-height: 1.45;
+    margin: 4px 0 0 0;
   }
   .s8-concept-def code {
     background: var(--bg-primary);
@@ -93,28 +94,28 @@
   }
   .s8-concept-rule {
     color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.45;
-    margin: var(--spacing-xs) 0 0 0;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    margin: 4px 0 0 0;
     font-style: italic;
   }
   .s8-concept-cmd {
     background: var(--bg-primary);
     border-radius: 4px;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: 4px 10px;
     font-family: var(--font-mono);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--accent-secondary);
-    margin: var(--spacing-xs) 0 0 0;
-    line-height: 1.6;
+    margin: 4px 0 0 0;
+    line-height: 1.5;
     white-space: pre-wrap;
     overflow-x: auto;
   }
   .s8-concept-cmd-note {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-style: italic;
-    margin: var(--spacing-xs) 0 0 0;
+    margin: 4px 0 0 0;
   }
 
   /* Flow paso a paso */
