@@ -37,10 +37,23 @@
     font-style: italic;
   }
 
+  /* Git graph SVG */
+  .s8-graph {
+    display: block;
+    max-width: 880px;
+    margin: var(--spacing-md) auto var(--spacing-sm) auto;
+    width: 100%;
+    height: auto;
+  }
+  .s8-graph text {
+    font-family: var(--font-mono);
+    fill: var(--text-muted);
+  }
+
   /* Concept cards (commit / branch / PR) */
   .s8-concepts {
     max-width: 1000px;
-    margin: var(--spacing-md) auto 0 auto;
+    margin: var(--spacing-sm) auto 0 auto;
   }
   .s8-concept {
     background: var(--bg-secondary);
@@ -222,9 +235,43 @@
   </aside>
 </section>
 
-<!-- §8.2 — Tres conceptos: commit / branch / PR (con reveals) -->
+<!-- §8.2 — Tres conceptos: commit / branch / PR (con reveals + git graph SVG) -->
 <section>
   <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Tres conceptos, mínimo viable</h2>
+
+  <svg class="s8-graph" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Reveal 0: main with 2 commits -->
+    <g class="fragment fade-in" data-fragment-index="0">
+      <text x="40" y="62" font-size="13">main</text>
+      <line x1="100" y1="55" x2="240" y2="55" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="120" cy="55" r="7" fill="var(--accent)"/>
+      <circle cx="210" cy="55" r="7" fill="var(--accent)"/>
+    </g>
+
+    <!-- Reveal 1: extend main to branch point + branch line + 3 branch commits -->
+    <g class="fragment fade-in" data-fragment-index="1">
+      <line x1="240" y1="55" x2="330" y2="55" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="300" cy="55" r="7" fill="var(--accent)"/>
+      <!-- branch fork -->
+      <path d="M 300 55 Q 330 55 340 75 T 360 115" stroke="var(--accent-secondary)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <line x1="360" y1="115" x2="510" y2="115" stroke="var(--accent-secondary)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="380" cy="115" r="6" fill="var(--accent-secondary)"/>
+      <circle cx="445" cy="115" r="6" fill="var(--accent-secondary)"/>
+      <circle cx="510" cy="115" r="6" fill="var(--accent-secondary)"/>
+      <text x="380" y="148" font-size="12">feature/csv-import</text>
+    </g>
+
+    <!-- Reveal 2: branch merges back into main + merge commit + PR badge -->
+    <g class="fragment fade-in" data-fragment-index="2">
+      <line x1="330" y1="55" x2="610" y2="55" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 510 115 Q 540 115 550 95 T 580 55" stroke="var(--accent-secondary)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="600" cy="55" r="8" fill="var(--accent)" stroke="var(--accent-secondary)" stroke-width="2"/>
+      <!-- PR badge -->
+      <rect x="640" y="38" width="58" height="34" rx="5" fill="var(--bg-secondary)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="669" y="60" font-size="14" font-weight="700" fill="var(--accent)" text-anchor="middle">PR</text>
+      <line x1="608" y1="55" x2="640" y2="55" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 3"/>
+    </g>
+  </svg>
 
   <div class="s8-concepts">
     <div class="s8-concept fragment fade-in" data-fragment-index="0">
