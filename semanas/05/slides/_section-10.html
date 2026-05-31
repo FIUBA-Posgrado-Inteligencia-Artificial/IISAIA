@@ -75,40 +75,7 @@
     font-style: normal;
   }
 
-  /* Crítico card (§10.4) */
-  .s10-critical {
-    max-width: 880px;
-    margin: var(--spacing-md) auto 0 auto;
-    background: var(--bg-secondary);
-    border-top: 4px solid #ff5a5a;
-    border-radius: 8px;
-    padding: var(--spacing-md) var(--spacing-lg);
-    text-align: center;
-  }
-  .s10-critical-frase {
-    color: var(--text-primary);
-    font-size: 1.45rem;
-    line-height: 1.45;
-    margin: 0 0 var(--spacing-md) 0;
-  }
-  .s10-critical-frase strong {
-    color: #ff5a5a;
-  }
-  .s10-critical-sub {
-    display: block;
-    text-align: center !important;
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    max-width: 720px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-style: italic;
-    line-height: 1.5;
-  }
-
-  /* Caso real (§10.6) — timeline de tests */
+  /* Caso real (§10.4) — timeline de tests */
   .s10-timeline {
     max-width: 1000px;
     margin: var(--spacing-md) auto 0 auto;
@@ -267,54 +234,7 @@
   </aside>
 </section>
 
-<!-- §10.4 — Punto crítico: ver el RED primero -->
-<section>
-  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Punto crítico</h2>
-
-  <div class="s10-critical">
-    <p class="s10-critical-frase">
-      Ver el test <strong>fallar</strong> antes de implementar.
-    </p>
-    <p class="s10-critical-sub">
-      Si saltás el RED, no sabés si tu test efectivamente está testeando algo: puede tener un typo, puede estar testeando comportamiento que ya existe, puede pasar por la razón equivocada.
-    </p>
-  </div>
-
-  <aside class="notes">
-    <p><u>La regla central no negociable de TDD: el RED tiene que verse antes de cualquier código de producción.</u></p>
-    <p><em>"Punto crítico: ver el test fallar antes de implementar. Si saltás el RED, no sabés si tu test efectivamente está testeando algo. Puede tener un typo y por eso pasar. Puede estar testeando comportamiento que ya existe en el código. Puede pasar por la razón equivocada — porque la lógica del test está mal, no porque la implementación esté bien."</em></p>
-    <p><em>"Verlo fallar por la razón correcta — feature missing, no typo — es la única garantía de que la lógica del test está bien. Sin esa verificación, el test es una mentira útil que se siente productiva y deja bugs ocultos."</em></p>
-  </aside>
-</section>
-
-<!-- §10.5 — Anti-patrones (concisos, con acción del usuario) -->
-<section>
-  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Anti-patrones a evitar</h2>
-
-  <div class="s6-anti">
-    <div class="s6-anti-card">
-      <strong style="color: var(--accent-secondary); display: block; margin-bottom: 6px;">Tests después del código</strong>
-      <span style="font-family: var(--font-mono); color: var(--text-primary); font-size: 0.95rem;">&laquo;Implementá X primero, después le agregamos los tests.&raquo;</span>
-    </div>
-    <div class="s6-anti-card">
-      <strong style="color: var(--accent-secondary); display: block; margin-bottom: 6px;">Tests que pasan en RED</strong>
-      Aceptar un test verde sin haberlo visto fallar primero — puede no testear nada.
-    </div>
-    <div class="s6-anti-card">
-      <strong style="color: var(--accent-secondary); display: block; margin-bottom: 6px;">Mocks de todo</strong>
-      <span style="font-family: var(--font-mono); color: var(--text-primary); font-size: 0.95rem;">&laquo;Mockeá las dependencias, queremos tests rápidos.&raquo;</span>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><u>Tres anti-patrones con la acción concreta que los desencadena.</u></p>
-    <p><em>"Primero: tests después del código. Pasa cuando le decís al agente que implemente algo y después le agreguen los tests. El test resultante valida lo que el código hace, no la intención original, y nunca probaste que atrapa la regresión."</em></p>
-    <p><em>"Segundo: tests que pasan en RED. Esto es lo que pasa cuando aceptás un test verde sin haberlo visto fallar primero. Si el test no falla cuando todavía no implementaste nada, no está testeando lo que decís que testea — y vos no te enteraste."</em></p>
-    <p><em>"Tercero: mocks de todo. Pasa cuando pedís tests con todas las dependencias mockeadas para que corran rápido. Si toda la lógica real está mockeada, el test no falla cuando rompés la lógica real — sólo verifica que los mocks se llamen en el orden esperado."</em></p>
-  </aside>
-</section>
-
-<!-- §10.6 — Caso real: tests acumulando a través de las 11 tasks -->
+<!-- §10.4 — Caso real: tests acumulando a través de las 11 tasks -->
 <section>
   <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Cada tarea agregó tests</h2>
 
