@@ -94,6 +94,18 @@
   .s13-case-step.is-verify { border-left-color: var(--accent-secondary); }
   .s13-case-step.is-menu { border-left-color: var(--text-muted); }
   .s13-case-step.is-choice { border-left-color: var(--accent); }
+  .s13-case-step.is-followup { border-left-color: var(--accent-secondary); }
+  .s13-case-step.is-followup .s13-case-tag { color: var(--accent-secondary); }
+  .s13-case-quote {
+    background: var(--bg-primary);
+    border-radius: 4px;
+    padding: 4px var(--spacing-sm);
+    margin: 6px 0 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
   .s13-case-tag {
     display: block;
     font-family: var(--font-mono);
@@ -281,12 +293,19 @@
       <span class="s13-case-tag">Elegí — push solo (sin PR)</span>
       <p class="s13-case-body">Variante de B: <code>git push -u origin feature/import-data</code>, sin abrir PR. La skill ejecutó el push y cerró la sesión con el resumen del trabajo.</p>
     </div>
+
+    <div class="s13-case-step is-followup">
+      <span class="s13-case-tag">Después — pedile a Claude la descripción del PR</span>
+      <p class="s13-case-body">Antes de abrir el PR en la UI, podés pedirle a Claude que arme la descripción a partir de los commits de la branch:</p>
+      <p class="s13-case-quote">&laquo;Escribime la descripción del PR para mergear <code>feature/import-data</code> a <code>main</code>. Usá los commits de la branch (<code>git log main..HEAD</code>) y el diff para armar el resumen, los cambios principales y notas de testing.&raquo;</p>
+    </div>
   </div>
 
   <aside class="notes">
-    <p><u>Caso real del log. La skill verifica primero, después arma el menú, y ejecuta la elección.</u></p>
-    <p><em>"Acá está el cierre real del demo-repo. Tres pasos. Primero, la skill corrió ella misma la verificación final — pytest, git status, comprobar que no hay worktree, contar los commits. El resultado fue 46 de 46 tests passing, repo normal, 13 commits adelante de main. Sin esa verificación, no presenta opciones."</em></p>
-    <p><em>"Después armó el menú de cuatro opciones — exactamente las que vimos hace dos slides, adaptadas al contexto: merge a main, push más PR, dejarla como está, o descartar. Yo elegí una variante de B: push pero sin abrir el PR todavía, porque iba a iterar más cambios antes de pedir review."</em></p>
-    <p><em>"La skill ejecutó el push y cerró la sesión con un resumen del trabajo completo — branch, tests, commits, descripción del feature. Ese resumen es el cierre del happy-path."</em></p>
+    <p><u>Caso real del log. La skill verifica primero, después arma el menú, y ejecuta la elección. El cuarto step (descripción del PR) es el follow-up natural después del push.</u></p>
+    <p><em>"Acá está el cierre real del demo-repo. Tres pasos del flujo más uno opcional. Primero, la skill corrió ella misma la verificación final — pytest, git status, comprobar que no hay worktree, contar los commits. El resultado fue 46 de 46 tests passing, repo normal, 13 commits adelante de main. Sin esa verificación, no presenta opciones."</em></p>
+    <p><em>"Después armó el menú de cuatro opciones — exactamente las que vimos hace dos slides, adaptadas al contexto: merge a main, push más PR, dejarla como está, o descartar. Yo elegí una variante de B: push pero sin abrir el PR todavía."</em></p>
+    <p><em>"La skill ejecutó el push y cerró la sesión con un resumen del trabajo completo — branch, tests, commits, descripción del feature."</em></p>
+    <p><em>"Y el paso siguiente, que no es de la skill pero es el follow-up natural: antes de abrir el PR en la UI de GitHub, le pedís a Claude que escriba la descripción del PR a partir de los commits y el diff de la branch. Claude lee git log main..HEAD, mira los cambios, y te arma un PR con resumen, lista de cambios, y notas de testing. Vos lo revisás y lo pegás en la UI. Ese es el cierre real del happy-path."</em></p>
   </aside>
 </section>
