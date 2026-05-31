@@ -153,14 +153,14 @@
   <div class="s12-rule">
     <div class="s12-rule-card is-wrong">
       <p class="s12-rule-tag">Claim sin evidencia</p>
-      <pre class="s12-rule-claim"><code>los tests pasan</code></pre>
+      <div class="s12-rule-claim">los tests pasan</div>
       <p class="s12-rule-body">Afirmación. Si no corriste el comando en este turno, es una opinión.</p>
     </div>
     <div class="s12-rule-card is-right">
       <p class="s12-rule-tag">Claim válido</p>
-      <pre class="s12-rule-claim"><code>los tests pasan:
+      <div class="s12-rule-claim">los tests pasan:
 <span class="out">$ uv run pytest
-======== 46 passed in 1.2s ========</span></code></pre>
+======== 46 passed in 1.2s ========</span></div>
       <p class="s12-rule-body">Hecho. Comando corrido en este turno, salida citada al lado.</p>
     </div>
   </div>
@@ -224,7 +224,7 @@ git status --short
 git log --oneline main..HEAD | wc -l</code></pre>
 
     <p class="s12-case-tag is-out">Output citado en la afirmación</p>
-    <pre class="s12-case-out"><code>&laquo;<strong>46/46 tests passing</strong>. Repo normal (sin worktree), <strong>13 commits adelante de main</strong>, working tree limpio.&raquo;</code></pre>
+    <div class="s12-case-out">&laquo;<strong>46/46 tests passing</strong>. Repo normal (sin worktree), <strong>13 commits adelante de main</strong>, working tree limpio.&raquo;</div>
   </div>
 
   <aside class="notes">
