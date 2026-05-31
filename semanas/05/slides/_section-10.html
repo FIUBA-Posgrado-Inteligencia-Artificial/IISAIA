@@ -1,0 +1,281 @@
+<style>
+  /* §10 — test-driven-development */
+
+  /* Cycle visualization (§10.2) */
+  .s10-cycle {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    gap: var(--spacing-xs);
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s10-step {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--text-muted);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+  }
+  .s10-step.is-red { border-top-color: #ff5a5a; }
+  .s10-step.is-green { border-top-color: var(--accent); }
+  .s10-step.is-refactor { border-top-color: var(--accent-secondary); }
+  .s10-step-num {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-right: 6px;
+  }
+  .s10-step-name {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .s10-step.is-red .s10-step-name { color: #ff5a5a; }
+  .s10-step.is-green .s10-step-name { color: var(--accent); }
+  .s10-step.is-refactor .s10-step-name { color: var(--accent-secondary); }
+  .s10-step-status {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    margin: var(--spacing-xs) 0;
+    color: var(--text-primary);
+  }
+  .s10-step.is-red .s10-step-status { color: #ff5a5a; }
+  .s10-step.is-green .s10-step-status { color: var(--accent); }
+  .s10-step-body {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s10-cycle-arrow {
+    align-self: center;
+    color: var(--text-muted);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .s10-cycle-loop {
+    display: block;
+    text-align: center !important;
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 1100px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    font-style: italic;
+  }
+  .s10-cycle-loop strong {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  /* Caso real (§10.4) — timeline de tests */
+  .s10-timeline {
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s10-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 60px;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: 4px;
+  }
+  .s10-row-label {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+  .s10-row-bar-track {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    height: 22px;
+    overflow: hidden;
+  }
+  .s10-row-bar-fill {
+    background: var(--accent);
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.85;
+  }
+  .s10-row-count {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--accent);
+    text-align: left;
+    font-weight: 700;
+  }
+  .s10-timeline-cap {
+    display: block;
+    text-align: center !important;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    max-width: 1000px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+  .s10-timeline-cap strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+</style>
+
+<!-- §10.1 — Opener: mini-roadmap iluminado en s10 -->
+<section>
+  <div class="pipe-grid s5-happy-path is-mini highlight-s10">
+    <div class="pipe-node" data-group="s6"><div class="pipe-icon">1</div><div class="pipe-label">brainstorming</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7"><div class="pipe-icon">2</div><div class="pipe-label">writing-plans</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8"><div class="pipe-icon">git</div><div class="pipe-label">GitHub Flow</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9"><div class="pipe-icon">3</div><div class="pipe-label">subagent-driven-development</div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s13"><div class="pipe-icon">7</div><div class="pipe-label">finishing-a-development-branch</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12"><div class="pipe-icon">6</div><div class="pipe-label">verification-before-completion</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11"><div class="pipe-icon">5</div><div class="pipe-label">requesting-code-review</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10"><div class="pipe-icon">4</div><div class="pipe-label">test-driven-development</div></div>
+  </div>
+
+  <div class="s-skill-opener">
+    <h2 class="s-skill-opener-name">test-driven-development</h2>
+    <p class="s-skill-opener-tag">Rojo, verde, refactor — en ese orden, sin excepciones.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener de §10. Cuarta skill del happy-path; pieza s10 iluminada en el roadmap.</u></p>
+    <p><em>"Cuarta skill: test-driven-development. Es la disciplina que opera dentro de cada tarea del plan. Mientras subagent-driven se ocupa de quién ejecuta qué, TDD dice cómo se ejecuta cada implementación: el test va primero, siempre."</em></p>
+  </aside>
+</section>
+
+<!-- §10.2 — Qué hace: RED → GREEN → REFACTOR -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">El ciclo</h2>
+
+  <div class="s10-cycle">
+    <div class="s10-step is-red">
+      <span class="s10-step-num">1</span><span class="s10-step-name">RED</span>
+      <span class="s10-step-status">✗ test fails</span>
+      <p class="s10-step-body">Escribís un test que describe lo que querés que haga el código. Lo corrés. Lo ves fallar.</p>
+    </div>
+    <div class="s10-cycle-arrow">→</div>
+    <div class="s10-step is-green">
+      <span class="s10-step-num">2</span><span class="s10-step-name">GREEN</span>
+      <span class="s10-step-status">✓ test passes</span>
+      <p class="s10-step-body">Escribís el <strong>mínimo</strong> código necesario para que el test pase. Nada de extras.</p>
+    </div>
+    <div class="s10-cycle-arrow">→</div>
+    <div class="s10-step is-refactor">
+      <span class="s10-step-num">3</span><span class="s10-step-name">REFACTOR</span>
+      <span class="s10-step-status">✓ aún pasa</span>
+      <p class="s10-step-body">Con el test en verde, limpiás el código sin romper nada. Después, arrancás otra vuelta con el próximo test.</p>
+    </div>
+  </div>
+
+  <p class="s10-cycle-loop">Una vuelta por cada test. <strong>Código sin test previo se borra</strong> y se reescribe siguiendo el ciclo.</p>
+
+  <aside class="notes">
+    <p><u>El ciclo canónico de TDD, con los colores tradicionales. La regla de hierro al final es el delta vs. el TDD "casero": código de prod sin test previo no se "guarda como referencia" — se borra.</u></p>
+    <p><em>"El ciclo tiene tres estaciones. RED: escribís un test que describe lo que querés que haga el código, lo corrés, lo ves fallar. GREEN: escribís el mínimo código necesario para que ese test pase. REFACTOR: con el test en verde, limpiás el código sin romper nada. Y vuelta a empezar con el próximo test."</em></p>
+    <p><em>"La regla de hierro: cualquier código de producción escrito antes de su test se borra y se reescribe siguiendo el ciclo. No se 'adapta', no se 'guarda como referencia' — se borra. Es disciplina, no perfeccionismo."</em></p>
+  </aside>
+</section>
+
+<!-- §10.3 — Cuándo + Por qué (combinado con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuándo se activa y por qué importa</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Cuándo se activa</p>
+    <div class="s6-compare">
+      <div class="s6-compare-card is-yes">
+        <div class="s6-compare-tag">Por default — sí</div>
+        <p class="s6-compare-body">Durante la implementación de cualquier feature, bugfix o cambio de comportamiento, antes de escribir código de producción.</p>
+      </div>
+      <div class="s6-compare-card is-no">
+        <div class="s6-compare-tag">Excepciones — con confirmación</div>
+        <p class="s6-compare-body">Prototipos descartables, archivos de configuración, y código autogenerado por herramientas (ej. el <code>openapi.yaml</code> que produce FastAPI). Tienen que confirmarse explícitamente; no es el camino default.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Por qué importa</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Sin TDD, el agente escribe código que <strong>parece correcto</strong> y después arma tests que pasan al primer intento. Esos tests <strong>escritos después del código</strong> validan lo que el código hace — no lo que vos querías que hiciera.
+      </div>
+      <p class="s6-central-sub">
+        En modo subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es lo que evita que &laquo;ya funciona&raquo; termine siendo &laquo;compila&raquo;.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — cuándo + por qué.</strong></p>
+    <p><u>Cuándo se activa la skill y por qué la disciplina vale.</u></p>
+    <p><em>"Cuándo se activa: durante la implementación de cualquier feature, bugfix o cambio de comportamiento — antes de escribir código de producción. Si la tarea es agregar un endpoint, la skill arranca con un test del endpoint. Si la tarea es arreglar un bug, arranca con un test que reproduce el bug y falla por la razón correcta."</em></p>
+    <p><em>"Las únicas excepciones, que requieren confirmación explícita, son: prototipos descartables, archivos de configuración, y código autogenerado por herramientas — por ejemplo el openapi.yaml que produce FastAPI cuando le pedís el esquema. Esas tres no van por default por TDD; tienen que pedirse a propósito."</em></p>
+    <p><em>"Por qué importa: sin TDD, el agente escribe código que parece correcto y después arma tests que pasan al primer intento. Esos tests escritos después del código validan lo que el código hace, no lo que vos querías que hiciera — y por lo tanto pierden su valor como red de seguridad. Vos nunca los viste atrapar un bug. En el contexto de subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es exactamente lo que evita que 'ya funciona' termine siendo 'compila'."</em></p>
+  </aside>
+</section>
+
+<!-- §10.4 — Caso real: tests acumulando a través de las 11 tasks -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Cada tarea agregó tests</h2>
+
+  <div class="s10-timeline">
+    <div class="s10-row">
+      <span class="s10-row-label">Task 1</span>
+      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 17%;"></div></div>
+      <span class="s10-row-count">8</span>
+    </div>
+    <div class="s10-row">
+      <span class="s10-row-label">Task 2</span>
+      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 26%;"></div></div>
+      <span class="s10-row-count">12</span>
+    </div>
+    <div class="s10-row">
+      <span class="s10-row-label">Task 3</span>
+      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 30%;"></div></div>
+      <span class="s10-row-count">14</span>
+    </div>
+    <div class="s10-row">
+      <span class="s10-row-label">Task 5</span>
+      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 52%;"></div></div>
+      <span class="s10-row-count">24</span>
+    </div>
+    <div class="s10-row">
+      <span class="s10-row-label">Task 6</span>
+      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 72%;"></div></div>
+      <span class="s10-row-count">33</span>
+    </div>
+    <div class="s10-row">
+      <span class="s10-row-label">Task 7</span>
+      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 100%;"></div></div>
+      <span class="s10-row-count">46</span>
+    </div>
+  </div>
+
+  <p class="s10-timeline-cap">Al cerrar el feature: <strong>46/46 tests passing</strong>, 0 warnings, working tree limpio.</p>
+
+  <aside class="notes">
+    <p><u>Caso real: progresión real de tests del demo-repo a lo largo de las 11 tasks. Datos extraídos del log de la sesión.</u></p>
+    <p><em>"Acá está el rastro real de TDD en la sesión del demo-repo. Cada barra es una tarea del plan; el número de la derecha es cuántos tests pasaban después de cerrar esa tarea. Empezamos con 8 — el suite original más algunos nuevos del refactor inicial — y subimos hasta 46."</em></p>
+    <p><em>"Vean el salto entre Task 3 y Task 5: de 14 a 24, +10 tests para los adapters de validación. O entre Task 6 y Task 7: de 33 a 46, +13 tests para el router y los casos HTTP. Cada tarea no terminaba hasta que sus tests pasaban. Y al cerrar el feature: 46/46, 0 warnings, working tree limpio. Ese es el rastro auditable que deja TDD."</em></p>
+  </aside>
+</section>

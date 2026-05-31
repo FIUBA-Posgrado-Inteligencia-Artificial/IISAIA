@@ -1,0 +1,397 @@
+<style>
+  /* §8 — git refresher + GitHub Flow (NO es skill, no usa mini-roadmap iluminado) */
+
+  /* Special opener — git is the envelope, not a step */
+  .s8-opener-frame {
+    max-width: 760px;
+    margin: var(--spacing-md) auto 0 auto;
+    text-align: center;
+  }
+  .s8-opener-eyebrow {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s8-opener-name {
+    color: var(--accent);
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-md) 0;
+    letter-spacing: -0.01em;
+    font-family: var(--font-mono);
+  }
+  .s8-opener-tag {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0 auto var(--spacing-md) auto;
+    max-width: 720px;
+  }
+  .s8-opener-note {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Git graph SVG (compacto para evitar overflow) */
+  .s8-graph {
+    display: block;
+    max-width: 700px;
+    margin: var(--spacing-xs) auto 0 auto;
+    width: 100%;
+    height: auto;
+    max-height: 130px;
+  }
+  .s8-graph text {
+    font-family: var(--font-mono);
+    fill: var(--text-muted);
+  }
+
+  /* Concept cards (commit / branch / PR) — denso vertical */
+  .s8-concepts {
+    max-width: 1000px;
+    margin: var(--spacing-xs) auto 0 auto;
+  }
+  .s8-concept {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    margin-bottom: 6px;
+  }
+  .s8-concept-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-right: var(--spacing-sm);
+  }
+  .s8-concept-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-right: var(--spacing-sm);
+  }
+  .s8-concept-def {
+    color: var(--text-primary);
+    font-size: 1.02rem;
+    line-height: 1.45;
+    margin: 4px 0 0 0;
+  }
+  .s8-concept-def code {
+    background: var(--bg-primary);
+    border-radius: 3px;
+    padding: 1px 6px;
+    color: var(--accent-secondary);
+    font-size: 0.92em;
+  }
+  .s8-concept-rule {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.4;
+    margin: 4px 0 0 0;
+    font-style: italic;
+  }
+  .s8-concept-cmd {
+    background: var(--bg-primary);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent-secondary);
+    margin: 4px 0 0 0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+  .s8-concept-cmd-note {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    font-style: italic;
+    margin: 4px 0 0 0;
+  }
+
+  /* Flow paso a paso */
+  .s8-flow {
+    max-width: 980px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s8-flow-phase {
+    margin-bottom: var(--spacing-md);
+  }
+  .s8-flow-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-xs);
+  }
+  .s8-flow-tag.is-during {
+    color: var(--accent);
+  }
+  .s8-flow-cmd {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+  .s8-flow-narration {
+    background: var(--bg-secondary);
+    border-left: 3px dashed var(--accent);
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+  .s8-flow-narration strong {
+    color: var(--accent);
+  }
+
+  /* Por qué + worktrees */
+  .s8-fit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s8-fit-card {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 3px solid var(--accent);
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  .s8-fit-card strong {
+    display: block;
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .s8-worktrees {
+    max-width: 980px;
+    margin: var(--spacing-lg) auto 0 auto;
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--text-muted);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s8-worktrees-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s8-worktrees-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .s8-worktrees-body code {
+    background: var(--bg-primary);
+    border-radius: 3px;
+    padding: 1px 6px;
+    color: var(--accent-secondary);
+    font-size: 0.9em;
+  }
+</style>
+
+<!-- §8.1 — Opener: git como envoltorio, no como skill -->
+<section>
+  <div class="pipe-grid s5-happy-path is-mini">
+    <div class="pipe-node" data-group="s6"><div class="pipe-icon">1</div><div class="pipe-label">brainstorming</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7"><div class="pipe-icon">2</div><div class="pipe-label">writing-plans</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8" style="border-color: var(--accent); box-shadow: 0 0 24px rgba(100, 255, 218, 0.3);"><div class="pipe-icon" style="color: var(--accent);">git</div><div class="pipe-label">GitHub Flow</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9"><div class="pipe-icon">3</div><div class="pipe-label">subagent-driven-development</div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s13"><div class="pipe-icon">7</div><div class="pipe-label">finishing-a-development-branch</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12"><div class="pipe-icon">6</div><div class="pipe-label">verification-before-completion</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11"><div class="pipe-icon">5</div><div class="pipe-label">requesting-code-review</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10"><div class="pipe-icon">4</div><div class="pipe-label">test-driven-development</div></div>
+  </div>
+
+  <div class="s8-opener-frame">
+    <p class="s8-opener-eyebrow">No es una skill — es el envoltorio</p>
+    <h2 class="s8-opener-name">GitHub Flow</h2>
+    <p class="s8-opener-tag">Las próximas skills operan dentro de una branch. Vale tener cómodo el modelo mental de git.</p>
+    <p class="s8-opener-note">Refresher de tres conceptos + el workflow concreto que se usa con Superpowers.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener de §8. Git no es nodo iluminable como skill, pero en el roadmap mini se destaca el envoltorio (border accent + shadow) para mostrar que es el contexto de lo que viene.</u></p>
+    <p><em>"Antes de meternos en las próximas skills hay que parar un minuto en git. Las skills que vienen — subagent-driven, code-review, verification, finishing-branch — todas operan dentro de una branch. Si el modelo mental de git no está cómodo, esas skills se sienten mágicas o aterradoras según el día."</em></p>
+    <p><em>"Hacemos un refresher rápido de tres conceptos — commit, branch, pull request — y después el workflow concreto que se usa con Superpowers. No es una skill nueva: es el envoltorio que hace que las skills siguientes encajen."</em></p>
+  </aside>
+</section>
+
+<!-- §8.2 — Tres conceptos: commit / branch / PR (con reveals + git graph SVG) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Tres conceptos, mínimo viable</h2>
+
+  <svg class="s8-graph" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Reveal 0: main with 2 commits -->
+    <g class="fragment fade-in" data-fragment-index="0">
+      <text x="40" y="62" font-size="13">main</text>
+      <line x1="100" y1="55" x2="240" y2="55" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="120" cy="55" r="7" fill="var(--accent)"/>
+      <circle cx="210" cy="55" r="7" fill="var(--accent)"/>
+    </g>
+
+    <!-- Reveal 1: extend main to branch point + branch line + 3 branch commits -->
+    <g class="fragment fade-in" data-fragment-index="1">
+      <line x1="240" y1="55" x2="330" y2="55" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="300" cy="55" r="7" fill="var(--accent)"/>
+      <!-- branch fork -->
+      <path d="M 300 55 Q 330 55 340 75 T 360 115" stroke="var(--accent-secondary)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <line x1="360" y1="115" x2="510" y2="115" stroke="var(--accent-secondary)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="380" cy="115" r="6" fill="var(--accent-secondary)"/>
+      <circle cx="445" cy="115" r="6" fill="var(--accent-secondary)"/>
+      <circle cx="510" cy="115" r="6" fill="var(--accent-secondary)"/>
+      <text x="380" y="148" font-size="12">feature/csv-import</text>
+    </g>
+
+    <!-- Reveal 2: branch merges back into main + merge commit + PR badge -->
+    <g class="fragment fade-in" data-fragment-index="2">
+      <line x1="330" y1="55" x2="610" y2="55" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 510 115 Q 540 115 550 95 T 580 55" stroke="var(--accent-secondary)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="600" cy="55" r="8" fill="var(--accent)" stroke="var(--accent-secondary)" stroke-width="2"/>
+      <!-- PR badge -->
+      <rect x="640" y="38" width="58" height="34" rx="5" fill="var(--bg-secondary)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="669" y="60" font-size="14" font-weight="700" fill="var(--accent)" text-anchor="middle">PR</text>
+      <line x1="608" y1="55" x2="640" y2="55" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 3"/>
+    </g>
+  </svg>
+
+  <div class="s8-concepts">
+    <div class="s8-concept fragment fade-in" data-fragment-index="0">
+      <span class="s8-concept-tag">1</span><span class="s8-concept-name">commit</span>
+      <p class="s8-concept-def">Una <strong>foto del repo en un momento</strong>. Guarda QUÉ cambió (el diff), QUIÉN lo hizo, CUÁNDO, y POR QUÉ (mensaje del commit).</p>
+      <div class="s8-concept-cmd">git add &lt;archivos&gt;
+git commit -m "tipo: descripción corta"</div>
+      <p class="s8-concept-rule">Regla práctica: commits chicos y frecuentes. Si no se describe en una sola oración corta, probablemente sean dos.</p>
+    </div>
+    <div class="s8-concept fragment fade-in" data-fragment-index="1">
+      <span class="s8-concept-tag">2</span><span class="s8-concept-name">branch</span>
+      <p class="s8-concept-def">Una <strong>línea paralela de commits</strong>. <code>main</code> es la principal. Una branch propia (<code>feature/&lt;descripcion&gt;</code>) no contamina <code>main</code> mientras experimentás.</p>
+      <div class="s8-concept-cmd">git checkout -b feature/&lt;descripcion&gt;</div>
+      <p class="s8-concept-rule">Mientras la branch está abierta podés romper, deshacer, reintentar — nadie más se entera.</p>
+    </div>
+    <div class="s8-concept fragment fade-in" data-fragment-index="2">
+      <span class="s8-concept-tag">3</span><span class="s8-concept-name">pull request</span>
+      <p class="s8-concept-def">La <strong>propuesta de mergear</strong> tu branch a <code>main</code>. Tiene título, descripción, y queda visible para el equipo.</p>
+      <p class="s8-concept-cmd-note">No es un comando local — se abre desde la UI de GitHub después del <code>git push</code>.</p>
+      <p class="s8-concept-rule">Hasta que no se mergea, la branch existe pero <code>main</code> no tiene esos cambios.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — uno por concepto.</strong></p>
+    <p><u>Refresher de los conceptos base. Suposición: el alumno los vio antes en S04 pero conviene retomarlos antes de las skills que operan sobre git.</u></p>
+    <p><em>"Tres conceptos mínimos. El primero: commit. Una foto del repo en un momento — guarda qué cambió, quién, cuándo, y por qué. Los dos comandos en pantalla: git add para marcar qué archivos van al snapshot, y git commit menos m con un mensaje corto que describe la idea. La práctica es hacer commits chicos y frecuentes — si no se puede describir en una sola oración corta, probablemente sean dos commits."</em></p>
+    <p><em>"Segundo: branch. Una línea paralela de commits. Main es la línea principal del proyecto. Cuando arrancan algo nuevo, abren una branch propia con git checkout menos b seguido del nombre, típicamente con el prefijo feature barra. Mientras está abierta, pueden romper, deshacer, reintentar — nadie más se entera."</em></p>
+    <p><em>"Tercero: pull request. La propuesta de mergear tu branch a main. Acá no hay un comando local — es un evento en GitHub, lo abren desde la UI después de hacer git push. Le ponen título, descripción, y queda visible para el equipo. Hasta que no se mergea, la branch existe pero main no tiene esos cambios."</em></p>
+  </aside>
+</section>
+
+<!-- §8.3 — El flujo paso a paso -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">El flujo concreto con Superpowers</h2>
+
+  <div class="s8-flow">
+    <div class="s8-flow-phase fragment fade-in" data-fragment-index="0">
+      <span class="s8-flow-tag">Antes de arrancar la sesión</span>
+      <pre class="s8-flow-cmd"><code>git checkout main
+git pull
+git checkout -b feature/&lt;descripcion&gt;</code></pre>
+    </div>
+
+    <div class="s8-flow-phase fragment fade-in" data-fragment-index="1">
+      <span class="s8-flow-tag is-during">Durante el trabajo</span>
+      <p class="s8-flow-narration">Superpowers, vía <strong>subagent-driven-development</strong>, commitea <strong>por tarea automáticamente</strong>.</p>
+    </div>
+
+    <div class="s8-flow-phase fragment fade-in" data-fragment-index="2">
+      <span class="s8-flow-tag">Cuando el feature está listo</span>
+      <pre class="s8-flow-cmd"><code>git push origin feature/&lt;descripcion&gt;</code></pre>
+      <p class="s8-flow-narration" style="margin-top: var(--spacing-xs);">Después, en la UI de GitHub: abrís el PR. Título y descripción claros. Superpowers ya generó los commits con buenos mensajes; vos contás la historia general en la descripción del PR.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — uno por fase.</strong></p>
+    <p><u>El workflow concreto. Tres fases: setup, trabajo, cierre.</u></p>
+    <p><em>"Antes de arrancar la sesión: checkout main, pull para traer lo último, y checkout barra b feature barra descripcion. Empezás desde main actualizado y abrís tu branch. Esos tres comandos son el setup de cada sesión."</em></p>
+    <p><em>"Durante el trabajo: Superpowers, vía subagent-driven-development, commitea por tarea automáticamente. Eso lo van a ver en detalle en la próxima sección."</em></p>
+    <p><em>"Cuando el feature está listo, después de que verification-before-completion pasó: push de la branch al origin. Y después, en la UI de GitHub, abrís el PR. Título y descripción claros. Una nota: Superpowers ya generó los commits con buenos mensajes durante la sesión; lo que ustedes hacen al cerrar es contar la historia general en la descripción del PR."</em></p>
+  </aside>
+</section>
+
+<!-- §8.4 — Por qué encaja + worktrees disclosure -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Por qué este patrón encaja</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <div class="s8-fit">
+      <div class="s8-fit-card">
+        <strong>Aislamiento por sesión</strong>
+        Cada sesión tiene su branch. El contexto del próximo trabajo no se contamina con cambios a medio terminar.
+      </div>
+      <div class="s8-fit-card">
+        <strong>PR como contrato visible</strong>
+        Revisable por humanos antes de que el código entre a <code>main</code>. Queda registro de qué se discutió y por qué se aprobó.
+      </div>
+      <div class="s8-fit-card">
+        <strong><code>main</code> siempre estable</strong>
+        Si algo de la sesión sale mal, descartás la branch y volvés a empezar sin romper nada del proyecto.
+      </div>
+      <div class="s8-fit-card">
+        <strong>Sin operaciones complicadas</strong>
+        No necesitás stash, rebase complicado, ni cherry-pick. Sólo branch, commit, push, PR.
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <div class="s8-worktrees">
+      <p class="s8-worktrees-tag">Honest disclosure — <code>using-git-worktrees</code></p>
+      <p class="s8-worktrees-body">Existe una skill que automatiza un workflow más avanzado: trabajar en varias branches en paralelo, cada una en su propio folder físico del mismo repo. <strong>No la usamos acá</strong> — agrega fricción cognitiva sobre git base, y branch + PR alcanza para el trabajo final y para la mayoría del trabajo de equipo real.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — razones del encaje + worktrees disclosure.</strong></p>
+    <p><u>Cierre de §8. Por qué branch + PR es buen match para Superpowers + qué skill alternativa existe pero no la usamos.</u></p>
+    <p><em>"Cuatro razones por las que este patrón se lleva bien con Superpowers. Aislamiento por sesión — cada sesión tiene su branch, el contexto del próximo trabajo no se contamina con cambios a medio terminar. El PR queda como contrato visible — revisable por humanos antes de que el código entre a main. Main siempre permanece estable — si algo de la sesión sale mal, descartás la branch y volvés a empezar sin romper nada del proyecto. Y no necesitás stash, rebase complicado, ni cherry-pick: solo branch, commit, push, PR."</em></p>
+    <p><em>"Antes de cerrar la sección, una mención honesta. Existe una skill llamada using-git-worktrees que automatiza un workflow más avanzado. Worktrees permite trabajar en varias branches en paralelo, cada una en su propio folder físico del mismo repo. No la usamos en este curso porque agrega fricción cognitiva sobre git base, y el flujo simple de branch más PR alcanza para el TP y para la mayoría del trabajo de equipo real. Si en algún momento la quieren explorar, está en el cache de Superpowers."</em></p>
+  </aside>
+</section>

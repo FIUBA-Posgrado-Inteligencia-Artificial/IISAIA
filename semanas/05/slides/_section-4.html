@@ -1,0 +1,521 @@
+<style>
+  /* §4 — Superpowers: qué problema resuelve */
+
+  /* Slide 0: Bridge — nombrar Superpowers antes de citarlo */
+  .s4-bridge-intro {
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .s4-bridge-intro-pre {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+  }
+  .s4-bridge-intro-pre strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .s4-bridge-intro-name {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .s4-bridge-intro-why {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    margin: 0;
+    text-align: center;
+  }
+  .s4-bridge-intro-why strong {
+    color: var(--accent);
+  }
+
+  /* Slide 1: Hook con frase del README */
+  .s4-hook {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .s4-hook-quote {
+    color: var(--text-primary);
+    font-size: 1.55rem;
+    line-height: 1.5;
+    margin: 0 auto var(--spacing-md) auto;
+    text-align: center;
+    font-style: italic;
+  }
+  .s4-hook-quote .s4-hook-emphasis {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 700;
+  }
+  .s4-hook-attrib {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  /* Slide 2: Comparison sin/con metodología */
+  .s4-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s4-compare-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    border-top: 3px solid var(--text-muted);
+  }
+  .s4-compare-card.is-after {
+    border-top-color: var(--accent);
+  }
+  .s4-compare-tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+  }
+  .s4-compare-card.is-after .s4-compare-tag {
+    color: var(--accent);
+  }
+  .s4-compare-flow {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+  }
+  .s4-compare-flow strong {
+    color: var(--accent-secondary);
+  }
+  .s4-compare-closer {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 880px;
+    line-height: 1.5;
+  }
+  .s4-compare-closer strong {
+    color: var(--accent);
+  }
+
+  /* Slide 3: Definition + chips */
+  .s4-def {
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .s4-def-lead {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0 0 var(--spacing-md) 0;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s4-def-frase {
+    font-size: 1.6rem;
+    line-height: 1.45;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+    font-style: italic;
+  }
+  .s4-def-key {
+    color: var(--accent);
+    font-weight: 700;
+    font-style: normal;
+  }
+  .s4-def-chips {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin: 0 auto var(--spacing-md) auto;
+  }
+  .s4-def-chip {
+    display: inline-block;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--accent);
+  }
+  .s4-def-hint {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-md) 0 0 0;
+    text-align: center;
+  }
+
+  /* Slide 4: Happy-path pipeline-roadmap (CRITICAL — re-illuminated in §§6-13) */
+  .s5-happy-path {
+    font-size: 0.78em !important;
+    max-width: 1180px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  /* Mini variant — used as section-opener header in §§6-7 and §§9-13 */
+  .s5-happy-path.is-mini {
+    font-size: 0.5em !important;
+    max-width: 900px;
+    margin: 0 auto var(--spacing-md) auto;
+  }
+  .s5-happy-path.is-mini .pipe-node {
+    min-width: 95px;
+    max-width: 140px;
+    padding: 6px 10px;
+  }
+  .s5-happy-path.is-mini .pipe-icon {
+    font-size: 1em;
+    margin-bottom: 2px;
+  }
+  .s5-happy-path.is-mini .pipe-label {
+    font-size: 0.95em;
+    line-height: 1.15;
+  }
+  .s5-happy-path.is-mini .pipe-sub {
+    display: none;
+  }
+  .s5-happy-path .pipe-node {
+    min-width: 150px;
+    max-width: 200px;
+  }
+  .s5-happy-path .pipe-label {
+    font-size: 1em;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+  .s5-happy-path .pipe-sub {
+    font-size: 0.85em;
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+  .s5-happy-path .pipe-node[data-group="s8"] {
+    border-style: dashed;
+    background: transparent;
+  }
+  .s5-happy-path .pipe-icon {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.4em;
+  }
+  .s5-happy-path .pipe-node[data-group="s8"] .pipe-icon {
+    color: var(--text-muted);
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+  }
+  .s4-roadmap-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    font-style: italic;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 880px;
+    line-height: 1.45;
+  }
+
+  /* Slide 5: Cuatro principios (2×2 grid) */
+  .s4-principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s4-principle-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+  }
+  .s4-principle-title {
+    color: var(--accent);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s4-principle-body {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Slide 7: Lo que NO hace */
+  .s4-notdoes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    max-width: 980px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s4-notdoes-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+  }
+  .s4-notdoes-title {
+    color: var(--accent-secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s4-notdoes-body {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
+
+<!-- §4.1 — Bridge: nombrar Superpowers + por qué lo elegimos -->
+<section>
+  <div class="s4-bridge-intro">
+    <p class="s4-bridge-intro-pre">Un plugin que vale la pena conocer:</p>
+    <h2 class="s4-bridge-intro-name">Superpowers</h2>
+    <p class="s4-bridge-intro-why">
+      Empaqueta una <strong>metodología entera</strong>, no sólo skills sueltas.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Puente entre §3 (cómo instalar plugins) y §4.2 (qué hace Superpowers). Nombra el plugin sin afirmaciones marketinera; la justificación operativa va en la narración.</u></p>
+    <p><em>"De todos los plugins disponibles, hay uno que vale la pena conocer en detalle. Se llama Superpowers."</em></p>
+    <p><em>"Lo singularizo porque no suma skills sueltas — empaqueta una metodología entera, con puntos de control entre cada paso. Es también, en la práctica, el flujo con el que van a armar el trabajo final, así que lo que vean en las próximas dos horas se aplica directo a esa entrega."</em></p>
+    <p><em>"Empezamos por cómo se autodescribe."</em></p>
+  </aside>
+</section>
+
+<!-- §4.2 — Hook: la frase del README -->
+<section>
+  <div class="s4-hook">
+    <p class="s4-hook-quote">
+      &laquo;Apenas ve que estás construyendo algo, <span class="s4-hook-emphasis">no salta a escribir código</span>. En vez de eso, da un paso atrás y te pregunta qué estás tratando de hacer realmente.&raquo;
+    </p>
+    <p class="s4-hook-attrib">README de Superpowers</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Apertura de §4. La frase del README pone el dedo en la llaga que abrimos en §1: el agente que escribe código antes de entender qué construye.</u></p>
+    <p><em>"Superpowers se autodescribe en una línea: apenas ve que estás construyendo algo, no salta a escribir código. En vez de eso, da un paso atrás y te pregunta qué estás tratando de hacer realmente."</em></p>
+    <p><em>"Ese paso atrás es la única razón por la que el plugin existe. No es una colección de skills random — es un plugin entero diseñado alrededor de esa pausa. Vamos a ver qué problema concreto resuelve esa pausa."</em></p>
+  </aside>
+</section>
+
+<!-- §4.3 — El problema diagnostico -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">El problema que ataca</h2>
+
+  <div class="s4-compare">
+    <div class="s4-compare-card">
+      <div class="s4-compare-tag">Sin metodología</div>
+      <p class="s4-compare-flow">
+        Le pedís algo <strong>→</strong> el agente arranca a tipear código <strong>→</strong> el desfasaje entre tu intención y su interpretación aparece tarde, con 20 mensajes y archivos commiteados.
+      </p>
+    </div>
+    <div class="s4-compare-card is-after">
+      <div class="s4-compare-tag">Con metodología</div>
+      <p class="s4-compare-flow">
+        Entendé qué construís <strong>→</strong> escribí el spec <strong>→</strong> planificá <strong>→</strong> ejecutá <strong>→</strong> verificá <strong>→</strong> mergeá.
+      </p>
+    </div>
+  </div>
+
+  <p class="s4-compare-closer">
+    Detectar el desfasaje en palabras es barato. <strong>En código ya escrito es caro.</strong>
+  </p>
+
+  <aside class="notes">
+    <p><u>Diagnóstico del problema. Comparación sin/con. El cierre martilla el costo del desfasaje tardío.</u></p>
+    <p><em>"El problema sin metodología es conocido. Le pedís al agente que construya algo y arranca a tipear código antes de saber qué estás construyendo. Si hay un desfasaje entre lo que vos tenés en la cabeza y lo que él entendió, el desfasaje aparece tarde — cuando ya hay archivos, tests, commits, y la conversación lleva veinte mensajes."</em></p>
+    <p><em>"Lo que cambia con metodología es la secuencia: entendé qué construís, diseñalo, planificá, ejecutá, verificá, mergeá. Cada paso tiene un punto de control antes de pasar al siguiente."</em></p>
+    <p><em>"La razón por la que esto importa: detectar desfasaje en palabras es barato. Detectarlo en código ya escrito es caro. Esa es toda la apuesta de Superpowers."</em></p>
+  </aside>
+</section>
+
+<!-- §4.4 — Qué es Superpowers: definición + chips -->
+<section>
+  <div class="s4-def">
+    <p class="s4-def-lead">Superpowers se autodefine así</p>
+    <p class="s4-def-frase">
+      &laquo;Una <span class="s4-def-key">metodología completa</span> de desarrollo de software para tu coding agent, construida sobre un set de <span class="s4-def-key">skills componibles</span>.&raquo;
+    </p>
+    <div class="s4-def-chips">
+      <span class="s4-def-chip">skills componibles</span>
+      <span class="s4-def-chip">metodología</span>
+    </div>
+    <p class="s4-def-hint">Lo de skills lo vimos en §2. La metodología es lo nuevo.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Definición + chips para anclar las dos palabras clave.</u></p>
+    <p><em>"Superpowers se autodefine así: 'una metodología completa de desarrollo de software para tu coding agent, construida sobre un set de skills componibles'. Dos partes."</em></p>
+    <p><em>"Skills componibles lo vimos en §2 — es el formato plugin: skills sueltas que el plugin junta. No es magia, son archivos markdown que ya conocen."</em></p>
+    <p><em>"Metodología es lo nuevo. No es 'ofrece skills'; es 'fuerza un proceso'. Cada skill no se llama suelta cuando se te ocurre — se invoca automáticamente en el momento del flujo donde aplica. Y entre una skill y la siguiente hay puntos de control."</em></p>
+    <p><em>"Esos puntos de control forman un mapa. El mapa es lo que viene en la próxima."</em></p>
+  </aside>
+</section>
+
+<!-- §4.5 — Pipeline-roadmap del happy-path (SLIDE ANCLA DE PARTE 3) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">El happy-path completo</h2>
+
+  <div class="pipe-grid s5-happy-path" id="s4-happy-path">
+    <!-- Row 1 (L→R): brainstorming → writing-plans → GitHub Flow → subagent-driven -->
+    <div class="pipe-node fragment" data-fragment-index="0" data-group="s6">
+      <div class="pipe-icon">1</div>
+      <div class="pipe-label">brainstorming</div>
+      <div class="pipe-sub">spec en disco</div>
+    </div>
+    <div class="pipe-arrow fragment" data-fragment-index="1"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node fragment" data-fragment-index="1" data-group="s7">
+      <div class="pipe-icon">2</div>
+      <div class="pipe-label">writing-plans</div>
+      <div class="pipe-sub">plan en disco</div>
+    </div>
+    <div class="pipe-arrow fragment" data-fragment-index="2"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node fragment" data-fragment-index="2" data-group="s8">
+      <div class="pipe-icon">git</div>
+      <div class="pipe-label">GitHub Flow</div>
+      <div class="pipe-sub">branch + PR</div>
+    </div>
+    <div class="pipe-arrow fragment" data-fragment-index="3"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node fragment" data-fragment-index="3" data-group="s9">
+      <div class="pipe-icon">3</div>
+      <div class="pipe-label">subagent-driven-development</div>
+      <div class="pipe-sub">fresh por tarea</div>
+    </div>
+
+    <!-- Row 2: bend arrow (top-right → bottom-right) -->
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow fragment" data-fragment-index="4" style="transform: rotate(90deg);"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+
+    <!-- Row 3 (markup L→R; reveals R→L): finishing ← verification ← code-review ← TDD -->
+    <div class="pipe-node fragment" data-fragment-index="7" data-group="s13">
+      <div class="pipe-icon">7</div>
+      <div class="pipe-label">finishing-a-development-branch</div>
+      <div class="pipe-sub">PR / merge / discard</div>
+    </div>
+    <div class="pipe-arrow fragment" data-fragment-index="7"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node fragment" data-fragment-index="6" data-group="s12">
+      <div class="pipe-icon">6</div>
+      <div class="pipe-label">verification-before-completion</div>
+      <div class="pipe-sub">comando + output</div>
+    </div>
+    <div class="pipe-arrow fragment" data-fragment-index="6"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node fragment" data-fragment-index="5" data-group="s11">
+      <div class="pipe-icon">5</div>
+      <div class="pipe-label">requesting-code-review</div>
+      <div class="pipe-sub">agente externo</div>
+    </div>
+    <div class="pipe-arrow fragment" data-fragment-index="5"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node fragment" data-fragment-index="4" data-group="s10">
+      <div class="pipe-icon">4</div>
+      <div class="pipe-label">test-driven-development</div>
+      <div class="pipe-sub">red → green → refactor</div>
+    </div>
+  </div>
+
+  <p class="s4-roadmap-caption">
+    Quedate con este mapa. Cada caja se va a abrir en su propia sección.
+  </p>
+
+  <aside class="notes">
+    <p><strong>Avanzar paso a paso — 8 reveals: una skill por click. El bend al inicio del bottom row es un solo click extra.</strong></p>
+    <p><u>Slide ancla. Este mapa se re-ilumina en §§6-7 y §§9-13, una pieza por sección. Conviene presentarlo con calma.</u></p>
+    <p><em>"Este es el happy-path completo de Superpowers. Las skills se invocan automáticamente cuando aplican — vos no las llamás a mano. Vos describís lo que querés construir y el plugin sabe en qué punto del flujo está. Vamos pieza por pieza."</em></p>
+    <p><em>"Brainstorming: convierte una idea cruda en un design spec. El spec termina en disco como archivo, no como conversación perdida."</em></p>
+    <p><em>"Writing-plans: toma ese spec aprobado y lo convierte en un plan de tareas chicas, también en disco. Spec más plan: el contrato escrito."</em></p>
+    <p><em>"GitHub Flow envuelve todo lo que sigue. No es una skill — es la convención de git: abrís una branch antes de tocar código, y cuando todo está listo, abrís un PR. El plugin se lleva bien con este patrón."</em></p>
+    <p><em>"Subagent-driven-development: ejecuta el plan despachando un subagent fresco por cada tarea. Cada tarea arranca con contexto limpio."</em></p>
+    <p><em>"Test-driven-development: dentro de cada tarea, el subagent arranca con un test que falla. Rojo, verde, refactor. Sin TDD, 'ya funciona' termina siendo 'compila'."</em></p>
+    <p><em>"Requesting-code-review: cuando el plan está implementado, otro agente — distinto del que implementó — revisa el diff contra el spec. Strengths e issues clasificados por severidad."</em></p>
+    <p><em>"Verification-before-completion: cuando el agente cree que terminó, antes de decírtelo, vuelve a correr los tests y los comandos del plan y pega la salida en el mensaje de cierre. Si no hay salida pegada, no puede declarar 'listo'. Existe porque los modelos suelen afirmar 'los tests pasan' sin haber ejecutado nada — y eso te lo lleva descubrir mañana cuando algo se rompe en producción."</em></p>
+    <p><em>"Finishing-a-development-branch: cuando todo está verificado, te muestra el menú de opciones — PR, merge, branch viva con plan, descartar. Cierra el ciclo. Este mapa se va a iluminar caja por caja en las próximas secciones. Quédense con el mapa."</em></p>
+  </aside>
+</section>
+
+<!-- §4.6 — Cuatro principios filosóficos -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuatro principios, declarados en el README</h2>
+
+  <div class="s4-principles">
+    <div class="s4-principle-card">
+      <h3 class="s4-principle-title">Test-Driven Development</h3>
+      <p class="s4-principle-body">Tests primero, siempre. Un test escrito después del código valida lo que el código hace, no lo que vos querías que hiciera.</p>
+    </div>
+    <div class="s4-principle-card">
+      <h3 class="s4-principle-title">Sistemático antes que improvisado</h3>
+      <p class="s4-principle-body">Un proceso definido por encima de improvisar. Si no hay un proceso, lo estás inventando cada vez.</p>
+    </div>
+    <div class="s4-principle-card">
+      <h3 class="s4-principle-title">Complexity reduction</h3>
+      <p class="s4-principle-body">Simplicidad como objetivo primario. El código más simple que cumple es el correcto.</p>
+    </div>
+    <div class="s4-principle-card">
+      <h3 class="s4-principle-title">Evidence over claims</h3>
+      <p class="s4-principle-body">Verificar antes de declarar éxito. &laquo;Los tests pasan&raquo; sin el output al lado es una afirmación, no un hecho.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Cuatro principios filosóficos del plugin. Ninguno es nuevo; lo nuevo es aplicarlos al loop con el agente.</u></p>
+    <p><em>"Cuatro principios, declarados explícitamente en el README del plugin."</em></p>
+    <p><em>"Test-Driven Development: escribir tests primero, siempre. La razón es práctica — un test escrito después del código valida lo que el código hace, no lo que vos querías que hiciera. Pierde su valor como red de seguridad."</em></p>
+    <p><em>"Sistemático antes que improvisado: un proceso definido por encima de improvisar. Las skills son la implementación de esa idea — no es que el plugin tiene 'tips para hacer mejor código', es que tiene UN proceso definido para cada decisión."</em></p>
+    <p><em>"Complexity reduction: simplicidad como objetivo primario. Cualquier feature que se pueda hacer con menos código, se hace con menos código."</em></p>
+    <p><em>"Evidence over claims: verificar antes de declarar éxito. La diferencia entre 'creo que funciona' y 'acá está el comando y su salida'. Lo retomamos en §12."</em></p>
+    <p><em>"Ninguno de los cuatro es nuevo en ingeniería de software. Lo nuevo es que el plugin los aplica al loop con el agente, no sólo al código que el agente produce."</em></p>
+  </aside>
+</section>
+
+<!-- §4.7 — Lo que NO hace (honest disclosure antes de instalar) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Lo que NO hace</h2>
+
+  <div class="s4-notdoes">
+    <div class="s4-notdoes-card fragment fade-in" data-fragment-index="0">
+      <h3 class="s4-notdoes-title">No escribe código sin que vos decidas qué construir.</h3>
+      <p class="s4-notdoes-body">La skill brainstorming se traba si vos te trabás. Si no sabés qué querés, no avanza.</p>
+    </div>
+    <div class="s4-notdoes-card fragment fade-in" data-fragment-index="1">
+      <h3 class="s4-notdoes-title">No reemplaza tu criterio arquitectónico.</h3>
+      <p class="s4-notdoes-body">Te hace preguntas; las respuestas las ponés vos. El plugin estructura la conversación, no decide por vos.</p>
+    </div>
+    <div class="s4-notdoes-card fragment fade-in" data-fragment-index="2">
+      <h3 class="s4-notdoes-title">No funciona en piloto automático.</h3>
+      <p class="s4-notdoes-body">Las skills hacen preguntas y esperan respuesta. Si abandonás la sesión, el flujo se detiene donde lo dejaste.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — uno por punto.</strong></p>
+    <p><u>Honest disclosure antes de instalar. Tres cosas que no hace el plugin, para no inflar expectativas.</u></p>
+    <p><em>"Tres cosas que conviene aclarar antes de instalarlo. No para asustar — para que sepan exactamente con qué se están metiendo."</em></p>
+    <p><em>"Primero: no escribe código sin que ustedes decidan qué construir. La skill brainstorming se traba si ustedes se traban. Si no saben qué quieren, no avanza."</em></p>
+    <p><em>"Segundo: no reemplaza el criterio arquitectónico. Les hace preguntas; las respuestas las ponen ustedes. El plugin estructura la conversación, no decide por ustedes."</em></p>
+    <p><em>"Tercero: no funciona en piloto automático. Las skills hacen preguntas y esperan respuesta. Si abandonan la sesión, el flujo se detiene donde lo dejaron — no es una IA que vuelve sola al ratito a terminar lo que faltaba."</em></p>
+  </aside>
+</section>

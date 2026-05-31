@@ -1,0 +1,313 @@
+<style>
+  /* §13 — finishing-a-development-branch */
+
+  /* §13.2 — Las 4 opciones */
+  .s13-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s13-opt {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 4px solid var(--text-muted);
+  }
+  .s13-opt.is-pr {
+    border-top-color: var(--accent);
+  }
+  .s13-opt-letter {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-right: 6px;
+  }
+  .s13-opt.is-pr .s13-opt-letter {
+    color: var(--accent);
+  }
+  .s13-opt-name {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .s13-opt.is-pr .s13-opt-name {
+    color: var(--accent);
+  }
+  .s13-opt-recommended {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: var(--spacing-xs);
+    background: rgba(100, 255, 218, 0.1);
+    padding: 1px 7px;
+    border-radius: 3px;
+  }
+  .s13-opt-body {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: var(--spacing-xs) 0 0 0;
+  }
+  .s13-opt-when {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.4;
+    margin: 4px 0 0 0;
+    font-style: italic;
+  }
+  .s13-rule {
+    display: block;
+    text-align: center !important;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    max-width: 1000px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    line-height: 1.55;
+  }
+  .s13-rule strong {
+    color: var(--accent);
+  }
+
+  /* §13.4 — Caso real */
+  .s13-case {
+    max-width: 1050px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s13-case-step {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    border-left: 3px solid var(--text-muted);
+  }
+  .s13-case-step.is-verify { border-left-color: var(--accent-secondary); }
+  .s13-case-step.is-menu { border-left-color: var(--text-muted); }
+  .s13-case-step.is-choice { border-left-color: var(--accent); }
+  .s13-case-step.is-followup { border-left-color: var(--accent-secondary); }
+  .s13-case-step.is-followup .s13-case-tag { color: var(--accent-secondary); }
+  .s13-case-quote {
+    background: var(--bg-primary);
+    border-radius: 4px;
+    padding: 4px var(--spacing-sm);
+    margin: 6px 0 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .s13-case-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 4px 0;
+  }
+  .s13-case-step.is-verify .s13-case-tag { color: var(--accent-secondary); }
+  .s13-case-step.is-choice .s13-case-tag { color: var(--accent); }
+  .s13-case-body {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s13-case-body code {
+    background: var(--bg-primary);
+    border-radius: 3px;
+    padding: 1px 6px;
+    color: var(--accent-secondary);
+    font-size: 0.9em;
+  }
+  .s13-case-menu {
+    margin: 4px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .s13-case-menu li {
+    padding: 2px 0 2px var(--spacing-md);
+    position: relative;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .s13-case-menu li::before {
+    content: attr(data-letter);
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  .s13-case-menu li.is-chosen {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .s13-case-menu li.is-chosen::before {
+    color: var(--accent);
+  }
+</style>
+
+<!-- §13.1 — Opener: mini-roadmap iluminado en s13 -->
+<section>
+  <div class="pipe-grid s5-happy-path is-mini highlight-s13">
+    <div class="pipe-node" data-group="s6"><div class="pipe-icon">1</div><div class="pipe-label">brainstorming</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7"><div class="pipe-icon">2</div><div class="pipe-label">writing-plans</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8"><div class="pipe-icon">git</div><div class="pipe-label">GitHub Flow</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9"><div class="pipe-icon">3</div><div class="pipe-label">subagent-driven-development</div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s13"><div class="pipe-icon">7</div><div class="pipe-label">finishing-a-development-branch</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12"><div class="pipe-icon">6</div><div class="pipe-label">verification-before-completion</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11"><div class="pipe-icon">5</div><div class="pipe-label">requesting-code-review</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10"><div class="pipe-icon">4</div><div class="pipe-label">test-driven-development</div></div>
+  </div>
+
+  <div class="s-skill-opener">
+    <h2 class="s-skill-opener-name">finishing-a-development-branch</h2>
+    <p class="s-skill-opener-tag">Cuando todo está verificado, te muestra el menú y ejecuta tu elección.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener de §13. Séptima y última skill del happy-path; pieza s13 iluminada en el roadmap.</u></p>
+    <p><em>"Séptima y última skill del happy-path: finishing-a-development-branch. Cuando todas las tareas del plan están implementadas y verificadas, esta skill estructura las opciones de cierre y limpia el workspace según la que elijas. No decide por vos — te muestra el menú que corresponde al contexto y ejecuta la opción elegida con su cleanup correspondiente."</em></p>
+  </aside>
+</section>
+
+<!-- §13.2 — Las 4 opciones -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuatro opciones, sin estado intermedio</h2>
+
+  <div class="s13-options">
+    <div class="s13-opt is-pr">
+      <span class="s13-opt-letter">A</span><span class="s13-opt-name">Abrir PR</span><span class="s13-opt-recommended">default en GitHub Flow</span>
+      <p class="s13-opt-body">Push de la branch al remote y abre el PR. La branch queda viva para iterar feedback.</p>
+      <p class="s13-opt-when">Para cualquier cambio que amerita revisión humana — casi siempre.</p>
+    </div>
+    <div class="s13-opt">
+      <span class="s13-opt-letter">B</span><span class="s13-opt-name">Merge a main local</span>
+      <p class="s13-opt-body">Checkout main, merge fast-forward, corre tests sobre el resultado, borra la branch local.</p>
+      <p class="s13-opt-when">Trabajo local que no necesita revisión.</p>
+    </div>
+    <div class="s13-opt">
+      <span class="s13-opt-letter">C</span><span class="s13-opt-name">Mantener viva</span>
+      <p class="s13-opt-body">Sin merge, sin push. La branch queda local con sus commits y un plan explícito de seguimiento.</p>
+      <p class="s13-opt-when">Te tenés que ir y el trabajo quedó a mitad de camino.</p>
+    </div>
+    <div class="s13-opt">
+      <span class="s13-opt-letter">D</span><span class="s13-opt-name">Descartar</span>
+      <p class="s13-opt-body">Borra la branch y sus commits. Requiere confirmación explícita.</p>
+      <p class="s13-opt-when">El trabajo no va a ningún lado.</p>
+    </div>
+  </div>
+
+  <p class="s13-rule">La regla central: <strong>no quedarse en estado intermedio.</strong> Una de las cuatro, no &laquo;después decido&raquo;.</p>
+
+  <aside class="notes">
+    <p><u>Las cuatro opciones que el skill presenta. La A (PR) es la más común en GitHub Flow.</u></p>
+    <p><em>"La skill te muestra cuatro opciones según el contexto del workspace. La A es abrir un PR — el default en GitHub Flow y la opción más frecuente. Hace push de la branch al remote y crea el PR con título y descripción. La branch queda viva para iterar el feedback de la revisión."</em></p>
+    <p><em>"La B es merge directo a main local. Checkout main, merge fast-forward, corre los tests sobre el resultado mergeado, borra la branch local. Es para trabajo que no necesita revisión humana — refactor interno, fixes triviales, cosas que no van al PR."</em></p>
+    <p><em>"La C es mantener la branch viva. Sin merge, sin push. Es la salida cuando te tenés que ir y el trabajo quedó a mitad de camino — pero con un plan explícito de seguimiento. No es 'la dejo y veo después'."</em></p>
+    <p><em>"La D es descartar todo. Borra la branch y sus commits. Requiere confirmación explícita tipeando 'discard' — para evitar accidentes."</em></p>
+    <p><em>"La regla central: no quedarse en estado intermedio. Una de las cuatro, no 'después decido'. Branches dormidas son ruido en el repo y confusión para quien venga después, incluido vos mismo dentro de dos semanas."</em></p>
+  </aside>
+</section>
+
+<!-- §13.3 — Cuándo + Por qué (combinado con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuándo se activa y por qué importa</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Cuándo se activa</p>
+    <div class="s6-compare">
+      <div class="s6-compare-card is-yes">
+        <div class="s6-compare-tag">Al final del plan</div>
+        <p class="s6-compare-body">Después de que verification-before-completion pasó y el trabajo está listo para integrarse.</p>
+      </div>
+      <div class="s6-compare-card is-no">
+        <div class="s6-compare-tag">Cuando te vas a la mitad</div>
+        <p class="s6-compare-body">Si te tenés que ir y la branch quedó a mitad de camino, la skill te ofrece la opción C — mantenerla viva con un plan claro de seguimiento.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Por qué importa</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Sin esta skill el flujo termina en <em>&laquo;ya está, mergeá si querés&raquo;</em>. Esa decisión sin marco produce dos resultados malos típicos: se mergea a <code>main</code> algo que merecía revisión, o la branch queda viva indefinidamente y se convierte en <strong>deuda silenciosa</strong>.
+      </div>
+      <p class="s6-central-sub">
+        La skill también ordena el cleanup: mergear primero, después verificar tests sobre el resultado, después remover worktree, y recién al final borrar la branch local. Saltearse ese orden produce errores feos.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — cuándo + por qué.</strong></p>
+    <p><u>Cuándo se invoca + qué resultados malos evita.</u></p>
+    <p><em>"Cuándo se activa: al final del plan, después de que verification-before-completion pasó y el trabajo está listo para integrarse. También cuando explícitamente pedís cerrar la sesión y querés decidir qué hacer con lo hecho — por ejemplo si te tenés que ir y la branch quedó a mitad de camino, la skill te ofrece la opción C, mantenerla viva con un plan claro de seguimiento en vez de dejarla flotando sin decisión."</em></p>
+    <p><em>"Por qué importa: sin esta skill el flujo termina en 'ya está, mergeá si querés', y el humano queda decidiendo a ojo qué hacer con una branch que recién parió. Esa decisión sin marco produce dos resultados malos típicos. O se mergea a main algo que merecía revisión, o la branch queda viva indefinidamente y se convierte en deuda silenciosa que después nadie se anima a borrar porque no se acuerda qué tenía."</em></p>
+    <p><em>"La skill también ordena el cleanup: mergear primero, verificar tests sobre el resultado mergeado, después remover el worktree si aplica, y recién al final borrar la branch local. Saltearse ese orden produce errores feos — git branch -d falla si el worktree todavía referencia la branch, y git worktree remove falla en silencio si lo corrés desde adentro del worktree que estás intentando borrar."</em></p>
+  </aside>
+</section>
+
+<!-- §13.4 — Caso real: el menú que apareció en el demo-repo -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El cierre del demo-repo</h2>
+
+  <div class="s13-case">
+    <div class="s13-case-step is-verify fragment fade-in" data-fragment-index="0">
+      <span class="s13-case-tag">Primero — verificó</span>
+      <p class="s13-case-body">Corrió <code>pytest</code> y <code>git status</code>. Output: <code>46/46 tests passing, repo normal sin worktree, 13 commits adelante de main</code>.</p>
+    </div>
+
+    <div class="s13-case-step is-menu fragment fade-in" data-fragment-index="1">
+      <span class="s13-case-tag">Después — presentó las 4 opciones</span>
+      <ul class="s13-case-menu">
+        <li data-letter="A.">Merge a main local</li>
+        <li data-letter="B.">Push + abrir PR</li>
+        <li data-letter="C.">Dejarla como está</li>
+        <li data-letter="D.">Descartar todo el trabajo</li>
+      </ul>
+    </div>
+
+    <div class="s13-case-step is-choice fragment fade-in" data-fragment-index="2">
+      <span class="s13-case-tag">Elegí — push solo (sin PR)</span>
+      <p class="s13-case-body">Variante de B: <code>git push -u origin feature/import-data</code>, sin abrir PR. La skill ejecutó el push y cerró la sesión con el resumen del trabajo.</p>
+    </div>
+
+    <div class="s13-case-step is-followup fragment fade-in" data-fragment-index="3">
+      <span class="s13-case-tag">Después — pedile a Claude la descripción del PR</span>
+      <p class="s13-case-body">Antes de abrir el PR en la UI, podés pedirle a Claude que arme la descripción a partir de los commits de la branch:</p>
+      <p class="s13-case-quote">&laquo;Escribime la descripción del PR para mergear <code>feature/import-data</code> a <code>main</code>. Usá los commits de la branch (<code>git log main..HEAD</code>) y el diff para armar el resumen, los cambios principales y notas de testing.&raquo;</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Cuatro reveals — uno por step.</strong></p>
+    <p><u>Caso real del log. La skill verifica primero, después arma el menú, y ejecuta la elección. El cuarto step (descripción del PR) es el follow-up natural después del push.</u></p>
+    <p><em>"Acá está el cierre real del demo-repo, paso por paso."</em></p>
+    <p><em>"Primero: la skill corrió ella misma la verificación final. Pytest, git status, comprobar que no hay worktree, contar los commits. El resultado fue 46 de 46 tests passing, repo normal, 13 commits adelante de main. Sin esa verificación, no presenta opciones."</em></p>
+    <p><em>"Después: armó el menú de cuatro opciones — exactamente las que vimos hace dos slides, adaptadas al contexto del workspace: merge a main, push más PR, dejarla como está, o descartar."</em></p>
+    <p><em>"Yo elegí una variante de B: push pero sin abrir el PR todavía, porque iba a iterar más cambios antes de pedir review. La skill ejecutó el push y cerró la sesión con el resumen del trabajo."</em></p>
+    <p><em>"Y el paso siguiente, que no es de la skill pero es el follow-up natural: antes de abrir el PR en la UI de GitHub, le pedís a Claude que escriba la descripción del PR a partir de los commits y el diff de la branch. Claude lee git log main..HEAD, mira los cambios, y te arma un PR con resumen, lista de cambios, y notas de testing. Vos lo revisás y lo pegás en la UI. Ese es el cierre real del happy-path."</em></p>
+  </aside>
+</section>

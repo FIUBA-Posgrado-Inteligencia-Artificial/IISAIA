@@ -1,0 +1,281 @@
+<style>
+  /* §2 — Qué es un plugin */
+
+  /* Slide 1: definición */
+  .s2-def-wrap {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .s2-def-lead {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0 0 var(--spacing-md) 0;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s2-def-frase {
+    font-size: 1.85rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+  }
+  .s2-def-key {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s2-def-chips {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+  .s2-def-chip {
+    display: inline-block;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .s2-def-hint {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-lg) 0 0 0;
+    text-align: center;
+  }
+
+  /* Slide 2 & 3: code blocks with annotations */
+  .s2-code-wrap {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .s2-code-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin: var(--spacing-md) 0 0 0;
+    font-style: italic;
+  }
+  .s2-code-callout {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 780px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  .s2-code-callout strong {
+    color: var(--accent);
+  }
+
+  /* Slide 4: mapping table */
+  .s2-map {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1.3fr;
+    gap: 0;
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .s2-map-cell {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--text-muted);
+    border-right: 1px solid var(--text-muted);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  .s2-map-cell:nth-child(3n) {
+    border-right: none;
+  }
+  .s2-map-cell.is-head {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--text-muted);
+  }
+  .s2-map-cell.is-pain {
+    color: var(--accent-secondary);
+    font-weight: 700;
+  }
+  .s2-map-cell.is-answer {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .s2-map-row {
+    display: contents;
+  }
+  .s2-map-row.fragment:not(.visible) .s2-map-cell {
+    opacity: 0.15;
+  }
+
+  /* Slide 5: bridge */
+  .s2-bridge {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .s2-bridge-line {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-sm) 0;
+    text-align: center;
+  }
+  .s2-bridge-line:last-of-type {
+    margin-bottom: var(--spacing-lg);
+  }
+  .s2-bridge-line strong {
+    color: var(--accent);
+  }
+  .s2-bridge-pivot {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin: 0;
+    text-align: center;
+  }
+</style>
+
+<!-- §2.1 — Definición literal de la doc -->
+<section>
+  <div class="s2-def-wrap">
+    <p class="s2-def-lead">Definición de la doc oficial</p>
+    <p class="s2-def-frase">
+      Plugin:
+      <span class="s2-def-key">directorio autocontenido</span>
+      de
+      <span class="s2-def-key">componentes</span>
+      que extiende Claude Code.
+    </p>
+    <div class="s2-def-chips">
+      <span class="s2-def-chip">directorio autocontenido</span>
+      <span class="s2-def-chip">componentes</span>
+    </div>
+    <p class="s2-def-hint">Las dos palabras importan. Las leemos despacio.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Apertura de §2. La definición literal de la doc; conviene leer las dos palabras clave por separado.</u></p>
+    <p><em>"Un plugin es un directorio autocontenido de componentes que extiende Claude Code con funcionalidad personalizada. Es la definición de la doc oficial, palabra por palabra."</em></p>
+    <p><em>"Vamos a leer las dos partes con cuidado. Primero, 'directorio autocontenido' — todo lo del plugin vive bajo una sola carpeta, sin paths que apunten afuera. Si tenés que clonar tres repos para que el plugin funcione, no es autocontenido."</em></p>
+    <p><em>"Segundo, 'componentes' — no una sola cosa. Adentro del directorio puede haber varias piezas conocidas: skills, agents, hooks, slash commands. Las mismas piezas del runtime que vienen estudiando, ahora juntas bajo un layout que Claude Code ya sabe cargar."</em></p>
+    <p><em>"Vamos a ver cómo se ve por dentro."</em></p>
+  </aside>
+</section>
+
+<!-- §2.2 — Anatomía mínima: árbol de directorios -->
+<section>
+  <h2 class="s2-anatomy-h2" style="text-align: center; max-width: 900px; margin: 0 auto;">La anatomía mínima</h2>
+  <div class="s2-code-wrap">
+    <pre><code class="language-text" data-trim>mi-plugin/
+├── .claude-plugin/
+│   └── plugin.json        # manifest opcional con metadata
+├── skills/                # una carpeta por skill, con su SKILL.md
+├── agents/                # sub-agents en archivos markdown
+├── hooks/
+│   └── hooks.json         # configuración de hooks
+└── commands/              # slash commands como .md sueltos</code></pre>
+    <p class="s2-code-caption">Las mismas piezas del runtime, ahora bajo un layout estándar.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>El árbol mínimo. Cada folder es una de las piezas que ya conocen.</u></p>
+    <p><em>"Adentro del directorio del plugin, el layout que importa al principio es éste. Cada folder lo conocen: skills va al folder skills, agents al folder agents, hooks tiene su archivo hooks.json, commands son los slash commands como markdown sueltos."</em></p>
+    <p><em>"Lo nuevo es el folder con punto adelante: .claude-plugin/. Ahí vive un único archivo, plugin.json, que es el manifest del plugin. Es el archivo opcional que vemos en el próximo slide."</em></p>
+    <p><em>"Si el plugin trae un binario, va en bin/ y queda disponible como comando bare dentro del Bash tool mientras el plugin esté activo. No lo necesitamos hoy, pero está bueno saber que existe."</em></p>
+  </aside>
+</section>
+
+<!-- §2.3 — El manifest mínimo -->
+<section>
+  <h2 class="s2-anatomy-h2" style="text-align: center; max-width: 900px; margin: 0 auto;">El manifest mínimo</h2>
+  <div class="s2-code-wrap">
+    <pre><code class="language-json" data-trim data-line-numbers="2">{
+  "name": "mi-plugin",
+  "version": "0.1.0",
+  "description": "Un plugin de ejemplo",
+  "author": { "name": "Equipo", "email": "equipo@ejemplo.com" }
+}</code></pre>
+    <div class="s2-code-callout">
+      De todos los campos, <strong>solo <code>name</code> es obligatorio</strong>. El resto suma metadata útil. Si no incluís el manifest, Claude Code autodescubre y deriva el nombre desde la carpeta.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Click para resaltar la línea 2 (name).</strong></p>
+    <p><u>El manifest. Sólo name es obligatorio. version habilita versionado explícito; sin él, Claude Code cae al SHA del commit.</u></p>
+    <p><em>"El plugin.json es opcional. Si no lo ponés, Claude Code autodescubre componentes en las ubicaciones por defecto y deriva el nombre del plugin desde el nombre de la carpeta. Lo ponés cuando necesitás declarar metadata o apuntar a paths customizados."</em></p>
+    <p><em>"De todos esos campos, el único realmente obligatorio es name. El resto suma metadata útil para que el plugin se encuentre y se versione, pero no es lo que lo hace cargar."</em></p>
+    <p><em>"El campo version es importante por una razón que vemos en la próxima slide: es lo que Claude Code conserva como cache key para saber cuándo ofrecerte una actualización."</em></p>
+  </aside>
+</section>
+
+<!-- §2.4 — El mapping: tres complicaciones → tres respuestas -->
+<section>
+  <h2 class="s2-anatomy-h2" style="text-align: center; max-width: 900px; margin: 0 auto;">Tres complicaciones, tres respuestas del formato</h2>
+
+  <div class="s2-map">
+    <div class="s2-map-cell is-head">Complicación</div>
+    <div class="s2-map-cell is-head">Respuesta del formato</div>
+    <div class="s2-map-cell is-head">Cómo funciona</div>
+
+    <div class="s2-map-row fragment fade-in" data-fragment-index="0">
+      <div class="s2-map-cell is-pain">Descubrimiento</div>
+      <div class="s2-map-cell is-answer">Marketplaces</div>
+      <div class="s2-map-cell">Registros consultables donde el autor publica y vos buscás por nombre.</div>
+    </div>
+
+    <div class="s2-map-row fragment fade-in" data-fragment-index="1">
+      <div class="s2-map-cell is-pain">Bajada</div>
+      <div class="s2-map-cell is-answer">Layout estandarizado</div>
+      <div class="s2-map-cell">Skills siempre en <code>skills/</code>, agents en <code>agents/</code>, hooks en <code>hooks/hooks.json</code>. Vos no decidís dónde.</div>
+    </div>
+
+    <div class="s2-map-row fragment fade-in" data-fragment-index="2">
+      <div class="s2-map-cell is-pain">Mantenimiento</div>
+      <div class="s2-map-cell is-answer">Versión explícita</div>
+      <div class="s2-map-cell">Si el manifest declara <code>version</code>, ese string es la cache key. Sin él, el SHA del commit.</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — uno por fila.</strong></p>
+    <p><u>Cierre conceptual de §1 + §2: el formato resuelve las tres complicaciones, una por una.</u></p>
+    <p><em>"Hay tres cosas que el formato plugin resuelve, y son exactamente las tres complicaciones que aparecieron antes."</em></p>
+    <p><em>"El descubrimiento deja de ser una búsqueda a ciegas porque el formato habilita marketplaces: registros consultables donde el autor publica y vos buscás por nombre. No hace falta seguir blogs ni preguntar en Discord. Hay un lugar canónico al que Claude Code le pregunta '¿qué plugins están disponibles?' — eso lo vemos al detalle en la próxima sección."</em></p>
+    <p><em>"La bajada deja de ser un puzzle nuevo cada vez porque el layout está estandarizado. No importa quién publicó el plugin: las skills siempre van en skills/, los agents en agents/, los hooks en hooks/hooks.json. Vos no decidís dónde se instala cada cosa porque ya está decidido."</em></p>
+    <p><em>"El mantenimiento deja de ser una foto inmóvil porque el plugin lleva versión explícita. Si el plugin.json declara version 2.1.0, ese string es la versión que Claude Code conserva como cache key. Cuando el autor sube 2.1.1, vos sabés exactamente qué cambió. Si el autor prefiere iterar más rápido y omite el campo, Claude Code cae al commit SHA del repo como versión, y cada commit es tratado como release nuevo. Dos modos, los dos explícitos, los dos visibles para el que instala."</em></p>
+  </aside>
+</section>
+
+<!-- §2.5 — Cierre: lo único que falta -->
+<section>
+  <div class="s2-bridge">
+    <p class="s2-bridge-line">No tenés que adivinar qué existe — hay <strong>marketplaces</strong>.</p>
+    <p class="s2-bridge-line">No tenés que aprender el layout de cada autor — el layout es <strong>uno solo</strong>.</p>
+    <p class="s2-bridge-line">No tenés que rastrear cambios a mano — hay <strong>versión</strong>.</p>
+    <p class="s2-bridge-pivot">Lo único que falta es el comando que instala. Viene ya.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Cierre de §2 + bridge a §3. Recap del trato cerrado por el formato + pivote a marketplaces e instalación.</u></p>
+    <p><em>"El cierre del trato: no tenés que adivinar qué existe, porque hay marketplaces; no tenés que aprender el layout de cada autor, porque el layout es uno solo; no tenés que rastrear cambios a mano, porque hay versión."</em></p>
+    <p><em>"Lo único que falta saber es de dónde sale el comando que instala, y cómo se accede a esos marketplaces. Eso viene ya, en la próxima sección."</em></p>
+  </aside>
+</section>

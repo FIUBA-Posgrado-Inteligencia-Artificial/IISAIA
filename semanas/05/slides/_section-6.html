@@ -1,0 +1,656 @@
+<style>
+  /* §6 — brainstorming (primera skill del happy-path) */
+
+  /* Section-skill opener — used across §§6-13 */
+  .s-skill-opener {
+    text-align: center !important;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+  .s-skill-opener-eyebrow {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: var(--spacing-md) auto var(--spacing-xs) auto;
+    text-align: center !important;
+  }
+  .s-skill-opener-name {
+    color: var(--accent);
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 auto var(--spacing-md) auto;
+    letter-spacing: -0.01em;
+    text-align: center !important;
+    font-family: var(--font-mono);
+  }
+  .s-skill-opener-tag {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 100%;
+    text-align: center !important;
+    display: block;
+  }
+
+  /* Flow vertical: qué hace */
+  .s6-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    max-width: 720px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s6-flow-step {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    width: 100%;
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.45;
+    border-left: 3px solid var(--accent);
+  }
+  .s6-flow-step strong {
+    color: var(--accent);
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .s6-flow-arrow {
+    color: var(--text-muted);
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+
+  /* Comparison sí/no */
+  .s6-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s6-compare-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    border-top: 3px solid var(--text-muted);
+  }
+  .s6-compare-card.is-yes {
+    border-top-color: var(--accent);
+  }
+  .s6-compare-card.is-no {
+    border-top-color: var(--accent-secondary);
+  }
+  .s6-compare-tag {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-sm);
+  }
+  .s6-compare-card.is-yes .s6-compare-tag {
+    color: var(--accent);
+  }
+  .s6-compare-card.is-no .s6-compare-tag {
+    color: var(--accent-secondary);
+  }
+  .s6-compare-body {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Card central (por qué importa, punto crítico) */
+  .s6-central {
+    max-width: 880px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s6-central-main {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    border-top: 4px solid var(--accent);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.55;
+    text-align: center;
+  }
+  .s6-central-main strong {
+    color: var(--accent);
+  }
+  .s6-central-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    text-align: center;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 760px;
+    font-style: italic;
+  }
+
+  /* Artefacto + auto-review (split 2-col) */
+  .s6-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s6-split-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    border-top: 3px solid var(--accent);
+  }
+  .s6-split-card.is-secondary {
+    border-top-color: var(--accent-secondary);
+  }
+  .s6-split-tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+  }
+  .s6-split-card.is-secondary .s6-split-tag {
+    color: var(--accent-secondary);
+  }
+  .s6-split-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s6-split-body code {
+    background: var(--bg-primary);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 0.92em;
+    color: var(--accent-secondary);
+  }
+  .s6-split-body ul {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-xs) 0 0 0;
+  }
+  .s6-split-body li {
+    padding-left: var(--spacing-md);
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .s6-split-body li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Sub-section labels (used inside combined slide) */
+  .s6-sublabel {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+  }
+
+  /* Anti-patterns grid */
+  .s6-anti {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-sm);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .s6-anti-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  /* Approaches (slide propio §6.7 — descripciones extendidas) */
+  .s6-approaches-wrap {
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s6-approaches-intro {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0 auto var(--spacing-md) auto;
+    max-width: 880px;
+    font-style: italic;
+  }
+  .s6-approach-card {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-left: 3px solid var(--text-muted);
+    margin-bottom: var(--spacing-sm);
+  }
+  .s6-approach-card.is-chosen {
+    border-left-color: var(--accent);
+    border-left-width: 4px;
+  }
+  .s6-approach-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-right: var(--spacing-xs);
+  }
+  .s6-approach-card.is-chosen .s6-approach-badge {
+    color: var(--accent);
+  }
+  .s6-approach-title {
+    display: inline;
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .s6-approach-card.is-chosen .s6-approach-title {
+    color: var(--accent);
+  }
+  .s6-approach-recommended {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: var(--spacing-xs);
+    background: rgba(100, 255, 218, 0.1);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .s6-approach-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: var(--spacing-xs) 0 0 0;
+  }
+  .s6-approach-tradeoff {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: var(--spacing-xs) 0 0 0;
+    font-style: italic;
+  }
+  .s6-approach-tradeoff strong {
+    color: var(--accent-secondary);
+    font-style: normal;
+  }
+  .s6-approaches-result {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s6-approaches-result strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.15em;
+  }
+
+  /* Sesión real: prompt inicial + Q&A pairs */
+  .s6-session {
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s6-session-prompt {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    text-align: left;
+  }
+  .s6-session-prompt-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin-bottom: 4px;
+  }
+  .s6-session-qa {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    border-left: 3px solid var(--text-muted);
+    text-align: left;
+  }
+  .s6-session-q {
+    display: block;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.45;
+    margin: 4px 0;
+  }
+  .s6-session-q::before {
+    content: "Q. ";
+    color: var(--text-muted);
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+  .s6-session-a {
+    display: block;
+    color: var(--accent);
+    font-size: 1rem;
+    line-height: 1.45;
+    margin: 4px 0;
+    font-weight: 600;
+  }
+  .s6-session-a::before {
+    content: "A. ";
+    color: var(--accent);
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+</style>
+
+<!-- §6.1 — Opener: mini-roadmap iluminado en s6 + nombre de la skill -->
+<section>
+  <div class="pipe-grid s5-happy-path is-mini highlight-s6">
+    <!-- Row 1 -->
+    <div class="pipe-node" data-group="s6"><div class="pipe-icon">1</div><div class="pipe-label">brainstorming</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7"><div class="pipe-icon">2</div><div class="pipe-label">writing-plans</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8"><div class="pipe-icon">git</div><div class="pipe-label">GitHub Flow</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9"><div class="pipe-icon">3</div><div class="pipe-label">subagent-driven-development</div></div>
+    <!-- Row 2: bend -->
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <!-- Row 3 (markup L→R) -->
+    <div class="pipe-node" data-group="s13"><div class="pipe-icon">7</div><div class="pipe-label">finishing-a-development-branch</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12"><div class="pipe-icon">6</div><div class="pipe-label">verification-before-completion</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11"><div class="pipe-icon">5</div><div class="pipe-label">requesting-code-review</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10"><div class="pipe-icon">4</div><div class="pipe-label">test-driven-development</div></div>
+  </div>
+
+  <div class="s-skill-opener">
+    <h2 class="s-skill-opener-name">brainstorming</h2>
+    <p class="s-skill-opener-tag">Idea cruda → design spec, vía preguntas dirigidas.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener de §6. Primera skill del happy-path; la pieza s6 del roadmap se ilumina mientras las otras quedan en gris. Slide-ancla visual: "estamos en el primer paso".</u></p>
+    <p><em>"Arrancamos con la primera skill del happy-path. Se llama brainstorming. La pieza encendida en el mapa es esta — las demás se van a ir iluminando una por una en las próximas siete secciones."</em></p>
+    <p><em>"Qué hace en una línea: convierte una idea cruda en un design spec a través de preguntas dirigidas, una por vez. Esa idea tiene varias palabras importantes — vamos a abrirlas en las próximas slides."</em></p>
+  </aside>
+</section>
+
+<!-- §6.2 — Qué hace: flow vertical -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Qué hace</h2>
+
+  <div class="s6-flow">
+    <div class="s6-flow-step">
+      <strong>Entrada</strong>
+      Idea cruda — una frase tuya tipo "quiero hacer X".
+    </div>
+    <div class="s6-flow-arrow">↓</div>
+    <div class="s6-flow-step">
+      <strong>Exploración</strong>
+      Diálogo dirigido: una pregunta por vez sobre propósito, restricciones y criterios de éxito.
+    </div>
+    <div class="s6-flow-arrow">↓</div>
+    <div class="s6-flow-step">
+      <strong>Propuesta</strong>
+      Dos o tres approaches con sus trade-offs.
+    </div>
+    <div class="s6-flow-arrow">↓</div>
+    <div class="s6-flow-step">
+      <strong>Salida</strong>
+      Un design spec escrito y aprobado por vos — antes de tocar código.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>El flujo concreto. Cuatro estaciones: idea cruda → exploración → propuesta → spec. Sin saltarse pasos.</u></p>
+    <p><em>"Cuatro estaciones. Vos entrás con una idea cruda. La skill explora el contexto del proyecto y empieza a hacer preguntas — una por vez, multiple-choice cuando se puede, sobre propósito, restricciones, criterios de éxito. Después propone dos o tres approaches con sus trade-offs. Y recién al final arma el spec escrito."</em></p>
+    <p><em>"El spec es lo que vas a aprobar antes de que se toque una sola línea de código. Eso es el contrato."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 — Cuándo se activa + Por qué importa (combinado, con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuándo se activa y por qué importa</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Cuándo se activa</p>
+    <div class="s6-compare">
+      <div class="s6-compare-card is-yes">
+        <div class="s6-compare-tag">Sí se activa</div>
+        <p class="s6-compare-body">Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluye scripts de utilidad triviales y cambios de configuración.</p>
+      </div>
+      <div class="s6-compare-card is-no">
+        <div class="s6-compare-tag">No se activa</div>
+        <p class="s6-compare-body">Tareas exploratorias (leer código, explicar cómo funciona algo, debug) y correcciones mecánicas donde el diseño ya está fijado.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Por qué importa</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Sin esta skill, el agente arranca a codear con la <strong>primera interpretación plausible</strong> de tu pedido — y las suposiciones no examinadas recién se manifiestan cuando ya hay archivos, tests y commits.
+      </div>
+      <p class="s6-central-sub">
+        Lo caro no es la primera versión. Es todo lo que tirás cuando descubrís que entendió otra cosa.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Slide doble: cuándo aparece la skill + por qué vale tenerla. Cada parte se revela en orden con flecha abajo.</u></p>
+    <p><em>"Vamos a ver dos cosas sobre esta skill: dónde se mete, dónde no, y por qué vale tenerla."</em></p>
+    <p><em>"Cuándo se activa: antes de cualquier trabajo creativo. Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluso scripts de utilidad triviales y cambios de configuración. Cuándo no se activa: tareas exploratorias — leer código, explicar cómo funciona algo, debugging — y correcciones mecánicas donde el diseño ya está fijado. Si lo único que querés es 'cambiame este import' o 'arregla este typo', la skill no se mete."</em></p>
+    <p><em>"Por qué importa: sin esta skill, el modelo arranca a codear con la primera interpretación plausible del pedido. Esa interpretación viene cargada de suposiciones no examinadas que recién se manifiestan cuando ya hay archivos, tests y commits. Y ahí lo caro no es la primera versión — es todo lo que tenés que tirar y volver a hacer cuando descubrís que entendió otra cosa. El otro problema que resuelve es el de scope: pedidos que son cinco proyectos disfrazados de uno."</em></p>
+  </aside>
+</section>
+
+<!-- §6.4 — Punto crítico: hard gate -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Punto crítico</h2>
+
+  <div class="s6-central">
+    <div class="s6-central-main">
+      <strong>Nunca implementar nada</strong> — ni un esqueleto del proyecto, ni un archivo vacío — antes de que vos hayas <strong>aprobado el diseño escrito</strong>.
+    </div>
+    <p class="s6-central-sub">
+      Aplica a todo proyecto sin importar cuán simple parezca.
+    </p>
+  </div>
+
+  <aside class="notes">
+    <p><u>La regla central no negociable. Hard gate sobre la implementación.</u></p>
+    <p><em>"Una pregunta por vez. Multiple choice cuando se puede. Nunca implementar nada — ni un esqueleto del proyecto, ni un archivo vacío — antes de que vos hayas aprobado el diseño escrito. Esto aplica a todo proyecto sin importar cuán simple parezca."</em></p>
+    <p><em>"Es la regla que más resistencia genera al principio porque uno tiene el reflejo de 'pero si esto es obvio, hagámoslo y listo'. La skill no se saltea por simplicidad aparente. Y la próxima slide muestra dónde queda anclado ese diseño aprobado."</em></p>
+  </aside>
+</section>
+
+<!-- §6.5 — Operativa: dos cosas del flujo + anti-patrones (con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Detalles del flujo</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Dos cosas importantes</p>
+    <div class="s6-split">
+      <div class="s6-split-card">
+        <div class="s6-split-tag">El spec en disco</div>
+        <p class="s6-split-body">El spec aprobado se persiste en:</p>
+        <pre style="margin: var(--spacing-xs) 0; background: var(--bg-primary); border-radius: 4px; padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9rem; color: var(--accent-secondary); overflow-x: auto;"><code>docs/superpowers/specs/
+  YYYY-MM-DD-&lt;topic&gt;-design.md</code></pre>
+        <p class="s6-split-body" style="margin-top: var(--spacing-xs);">No es chat que se pierde. Es archivo versionado. Las próximas skills lo leen desde ahí.</p>
+      </div>
+      <div class="s6-split-card is-secondary">
+        <div class="s6-split-tag">Spec Self-Review</div>
+        <p class="s6-split-body">Antes de pedirte que revises, la skill chequea sola:</p>
+        <ul class="s6-split-body">
+          <li>Placeholders (<code>TBD</code>, <code>TODO</code>)</li>
+          <li>Contradicciones entre secciones</li>
+          <li>Scope: ¿esto es un spec o son cinco?</li>
+          <li>Ambigüedades de interpretación</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Tres anti-patrones a evitar</p>
+    <div class="s6-anti">
+      <div class="s6-anti-card">
+        &laquo;Esto es muy simple, no necesita diseño.&raquo; Los proyectos simples son donde las suposiciones no examinadas hacen más daño.
+      </div>
+      <div class="s6-anti-card">
+        Combinar varias preguntas en un solo mensaje. Si un tema necesita más exploración, se rompe en preguntas separadas.
+      </div>
+      <div class="s6-anti-card">
+        Invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito.
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Slide doble: dos detalles operativos del flujo + tres anti-patrones a evitar. Cada bloque se revela con flecha abajo.</u></p>
+    <p><em>"Vamos a ver dos partes operativas: dos detalles del flujo, y tres anti-patrones a evitar."</em></p>
+    <p><em>"Dos cosas importantes del flujo. La primera: el spec aprobado se persiste en disco bajo docs/superpowers/specs, con nombre que arranca con la fecha en formato ISO y termina con el topic. Se commitea al repo — es archivo versionado, no chat que se pierde. Las próximas skills lo leen desde ese path. La segunda: hay un Spec Self-Review interno que corre antes de pasártelo a vos. Escanea placeholders como TBD o TODO, contradicciones entre secciones, scope creep, y ambigüedades. Lo arregla en el momento. Vos no deberías leer un TBD en tu propio spec."</em></p>
+    <p><em>"Y tres anti-patrones que vale tener en cabeza. Primero: 'esto es muy simple, no necesita diseño'. Los simples son donde las suposiciones no examinadas hacen más daño. Segundo: combinar varias preguntas en un solo mensaje — la skill está diseñada para una pregunta por vez. Tercero: invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito. Ese es el hard gate."</em></p>
+  </aside>
+</section>
+
+<!-- §6.6 — Caso real: una sesión de brainstorming, pregunta por pregunta -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Una sesión real, pregunta por pregunta</h2>
+
+  <div class="s6-session">
+    <div class="s6-session-prompt">
+      <span class="s6-session-prompt-tag">Prompt inicial</span>
+      &laquo;Necesito que los usuarios admin puedan importar ítems en masa desde un archivo CSV. Quiero ver cómo manejás filas inválidas, duplicados y rollback. El frontend también debe tener elementos que permitan usar este nuevo feature.&raquo;
+    </div>
+
+    <div class="s6-session-qa fragment fade-in" data-fragment-index="0">
+      <span class="s6-session-q">¿Qué representa un &quot;ítem&quot; en este import? El repo hoy tiene <code>users</code> y <code>posts</code>, pero no hay un recurso llamado <code>items</code>.</span>
+      <span class="s6-session-a">Cuando decía ítem me refería tanto a posts como a users.</span>
+    </div>
+
+    <div class="s6-session-qa fragment fade-in" data-fragment-index="1">
+      <span class="s6-session-q">La auth hoy es un único bearer token (no hay roles). ¿Cómo modelamos el &quot;admin&quot;?</span>
+      <span class="s6-session-a">Bearer existente = admin.</span>
+    </div>
+
+    <div class="s6-session-qa fragment fade-in" data-fragment-index="2">
+      <span class="s6-session-q">Cuando el CSV tiene filas válidas e inválidas mezcladas, ¿qué hacemos?</span>
+      <span class="s6-session-a">Configurable por request.</span>
+    </div>
+
+    <div class="s6-session-qa fragment fade-in" data-fragment-index="3">
+      <span class="s6-session-q">¿Qué cuenta como duplicado? Aplica tanto a filas repetidas dentro del CSV como a filas que ya existen en el store.</span>
+      <span class="s6-session-a">Users por email; posts por título, autor y body.</span>
+    </div>
+
+    <div class="s6-session-qa fragment fade-in" data-fragment-index="4">
+      <span class="s6-session-q">¿Dónde vive el feature en el frontend?</span>
+      <span class="s6-session-a">Página <code>admin.html</code> separada.</span>
+    </div>
+
+    <div class="s6-session-qa fragment fade-in" data-fragment-index="5">
+      <span class="s6-session-q">Para posts, si una fila trae <code>author_id</code> que no existe en el store, ¿cómo lo trato?</span>
+      <span class="s6-session-a">Error de fila (igual que validación).</span>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Seis reveals — una pregunta+respuesta por click. La sesión real con Superpowers en el demo-repo.</strong></p>
+    <p><u>Caso real. La sesión existe en logs; las 6 preguntas son las que la skill me hizo, las respuestas son las que le di.</u></p>
+    <p><em>"Para cerrar, miremos cómo se vio esto en la realidad. Le pedí al agente que agregue una funcionalidad de importar items en masa desde un CSV — ahí arriba está el prompt original. Y miren lo que pasó."</em></p>
+    <p><em>"Primera pregunta: la skill detectó que mi pedido tenía una palabra ambigua. Yo dije 'ítems' pero el repo tiene users y posts, no items. La skill no asumió cuál; me preguntó. Yo aclaré que era ambos."</em></p>
+    <p><em>"Segunda: 'admin' tampoco existía como rol en el sistema. La skill me dio tres opciones para modelarlo. Yo elegí la más barata — el bearer actual cuenta como admin."</em></p>
+    <p><em>"Tercera: cómo manejar el caso mixto. La skill me ofreció tres modos: all-or-nothing, best-effort, o configurable. Elegí configurable."</em></p>
+    <p><em>"Cuarta: la definición de duplicado. Para users es claro — email. Para posts no había clave natural. La skill propuso opciones; yo amplié una de ellas: título, autor, y body."</em></p>
+    <p><em>"Quinta: dónde poner el UI. Tres opciones: integrado al index, página aparte, modal. Elegí página aparte."</em></p>
+    <p><em>"Sexta: caso borde — si un post viene con autor inexistente, ¿qué hacemos? Elegí tratarlo como error de validación, no inventar un user vacío."</em></p>
+    <p><em>"Con esas seis respuestas la skill tenía contexto suficiente para proponer arquitectura. Lo vemos en la próxima slide."</em></p>
+  </aside>
+</section>
+
+<!-- §6.7 — Approaches arquitecturales propuestos -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Tres approaches arquitecturales</h2>
+
+  <p class="s6-approaches-intro">Con las 6 respuestas anteriores, la skill propuso 3 formas de implementar el feature y recomendó la primera.</p>
+
+  <div class="s6-approaches-wrap">
+    <div class="s6-approach-card is-chosen fragment fade-in" data-fragment-index="0">
+      <span class="s6-approach-badge">A</span><span class="s6-approach-title">Endpoint genérico</span><span class="s6-approach-recommended">recomendada</span>
+      <p class="s6-approach-body">
+        Un router nuevo <code>backend/routers/imports.py</code> con <code>POST /import/users</code> y <code>POST /import/posts</code>. El parser CSV y el orquestador (validar → dedup → insertar → reportar) viven en <code>backend/services/csv_import.py</code> y son agnósticos del recurso; reciben un <em>adapter</em> por recurso que sabe cómo validar una fila, calcular su dup-key y crearla en el store.
+      </p>
+      <p class="s6-approach-tradeoff"><strong>Ventaja:</strong> cero duplicación de lógica de errores y rollback. Sumar un tercer recurso después es trivial.</p>
+    </div>
+
+    <div class="s6-approach-card fragment fade-in" data-fragment-index="1">
+      <span class="s6-approach-badge">B</span><span class="s6-approach-title">Endpoint por recurso, lógica inline</span>
+      <p class="s6-approach-body">
+        <code>POST /users/import</code> dentro de <code>routers/users.py</code>, <code>POST /posts/import</code> dentro de <code>routers/posts.py</code>. Cada uno con su parser, su validación, y su orquestación de rollback.
+      </p>
+      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> más simple de leer fila por fila, pero la lógica de rollback y el formato de respuesta se duplica entre los dos routers — y va a divergir con el tiempo.</p>
+    </div>
+
+    <div class="s6-approach-card fragment fade-in" data-fragment-index="2">
+      <span class="s6-approach-badge">C</span><span class="s6-approach-title">Endpoint único con discriminador</span>
+      <p class="s6-approach-body">
+        Un solo <code>POST /import</code> que toma multipart con <code>resource=users|posts</code> + el file. Un handler para todos los recursos, ramificando por el campo <code>resource</code>.
+      </p>
+      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> más fácil de testear como caja negra pero acopla el contrato HTTP — clientes que solo importan users tienen que conocer el discriminador.</p>
+    </div>
+
+    <p class="s6-approaches-result fragment fade-in" data-fragment-index="3">Elegí <strong>A</strong> → la skill pasa a escribir el spec en disco.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Cuatro reveals — uno por approach + el resultado final.</strong></p>
+    <p><u>Slide dedicada a los approaches que la skill propuso al cierre del brainstorming. Las descripciones son las reales del log, levemente acortadas.</u></p>
+    <p><em>"Con las seis respuestas anteriores, la skill tenía contexto suficiente para proponer arquitectura. Me ofreció tres opciones, en orden de preferencia."</em></p>
+    <p><em>"Opción A, la recomendada: un endpoint genérico, POST barra import barra resource. Un router nuevo, y un servicio agnóstico que vive en services/csv_import.py. El servicio no sabe nada de users ni de posts: recibe un 'adapter' por recurso que conoce cómo validar una fila, cómo calcular su dup-key, y cómo insertarla. La ventaja: cero duplicación. Si mañana quiero importar un tercer recurso, alcanza con agregar un adapter nuevo."</em></p>
+    <p><em>"Opción B: endpoint por recurso, con lógica inline. POST barra users barra import dentro del router de users, y lo mismo para posts. Cada uno con su parser, su validación, su rollback. Más simple de leer fila por fila, pero la lógica de rollback y el formato de respuesta se duplica — y eventualmente divergen."</em></p>
+    <p><em>"Opción C: un endpoint único, POST barra import, que toma el recurso como discriminador en el body. Un handler para todos. Es más fácil de testear como caja negra pero acopla el contrato HTTP — clientes que solo importan users tienen que conocer que existe el campo resource."</em></p>
+    <p><em>"Elegí A. A partir de ahí la skill pasa a escribir el spec en disco. Está commiteado en el repo, listo para que writing-plans lo lea en la próxima sección."</em></p>
+  </aside>
+</section>

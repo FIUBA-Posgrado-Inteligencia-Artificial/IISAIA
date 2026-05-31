@@ -1,0 +1,126 @@
+<style>
+  /* §14 — El resto del cinturón */
+
+  .s14-intro {
+    display: block;
+    text-align: center !important;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 880px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .s14-list {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .s14-row {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--spacing-md);
+    align-items: start;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--bg-secondary);
+  }
+  .s14-row:last-child {
+    border-bottom: none;
+  }
+  .s14-name {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 700;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .s14-desc {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s14-desc strong {
+    color: var(--accent-secondary);
+  }
+
+  .s14-howto {
+    display: block;
+    text-align: center !important;
+    max-width: 1000px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s14-howto-line {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s14-howto-line strong {
+    color: var(--accent);
+  }
+  .s14-howto-path {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--accent-secondary);
+    margin-top: 4px;
+    word-break: break-all;
+  }
+</style>
+
+<!-- §14 — Resto del cinturón (slide único) -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Otras cinco skills del cinturón</h2>
+
+  <p class="s14-intro">Existen, se activan solas cuando algo se sale del happy-path. Una frase por skill alcanza para reconocerlas.</p>
+
+  <div class="s14-list">
+    <div class="s14-row">
+      <span class="s14-name">systematic-debugging</span>
+      <p class="s14-desc">Root-cause en cuatro fases <strong>cuando aparece un bug</strong>, en lugar de adivinar el arreglo.</p>
+    </div>
+    <div class="s14-row">
+      <span class="s14-name">dispatching-parallel-agents</span>
+      <p class="s14-desc">Despachar varios subagents <strong>en paralelo</strong> cuando hay tareas independientes que se pueden trabajar al mismo tiempo.</p>
+    </div>
+    <div class="s14-row">
+      <span class="s14-name">writing-skills</span>
+      <p class="s14-desc">Crear o editar skills propias — <strong>la skill que escribe skills</strong>. Para codificar patrones recurrentes del equipo.</p>
+    </div>
+    <div class="s14-row">
+      <span class="s14-name">receiving-code-review</span>
+      <p class="s14-desc">El lado opuesto de <code>requesting-code-review</code>: cómo <strong>responder feedback</strong> sin ceder por reflejo ni defenderse ciegamente.</p>
+    </div>
+    <div class="s14-row">
+      <span class="s14-name">using-git-worktrees</span>
+      <p class="s14-desc">Workflow de worktrees para trabajar en <strong>varias branches en paralelo</strong>, cada una en su folder físico.</p>
+    </div>
+  </div>
+
+  <div class="s14-howto">
+    <p class="s14-howto-line">No hace falta memorizarlas. Cada una declara su <strong>trigger en el frontmatter</strong> de su <code>SKILL.md</code> y se invoca sola.</p>
+    <code class="s14-howto-path">~/.claude/plugins/cache/claude-plugins-official/superpowers/skills/&lt;nombre&gt;/SKILL.md</code>
+  </div>
+
+  <aside class="notes">
+    <p><u>Slide único de §14. Nombrar las 5 skills que no recorrimos en detalle + cómo se activan.</u></p>
+    <p><em>"El plugin trae más skills que las que recorrimos en detalle. Las que siguen existen y se activan automáticamente cuando aplican, pero no las trabajamos una por una porque no son centrales al flujo lineal. Aparecen cuando algo se sale del happy-path. Nombrarlas con una frase cada una alcanza para que las reconozcan cuando se les crucen."</em></p>
+    <p><em>"Systematic-debugging: proceso de root-cause en cuatro fases cuando aparece un bug. Se activa cuando algo falla, en lugar de adivinar el arreglo. Útil cuando un test que pasaba ayer hoy falla y no entendés por qué."</em></p>
+    <p><em>"Dispatching-parallel-agents: despachar varios subagentes en paralelo cuando hay tareas independientes que se pueden trabajar al mismo tiempo. Por ejemplo: 'agregá tests para estos cuatro módulos no relacionados'. Acelera trabajo sin orden forzoso entre pasos. Es la variante paralela de subagent-driven-development."</em></p>
+    <p><em>"Writing-skills: crear o editar skills propias. La skill que escribe skills. Útil si tu equipo tiene un patrón recurrente que querés codificar — por ejemplo: 'siempre que tocás un endpoint, agregá su entrada en el changelog'."</em></p>
+    <p><em>"Receiving-code-review: el lado opuesto de requesting-code-review que vimos antes. Cómo responder a feedback de review sin ceder por reflejo y sin defenderte ciegamente. Útil cuando vos sos el reviewee y querés un patrón disciplinado para iterar."</em></p>
+    <p><em>"Using-git-worktrees: workflow de worktrees para trabajar en varias branches en paralelo, cada una en su propio folder físico del mismo repo. La mencionamos antes con la disclosure honesta de por qué no la usamos acá. Útil si en tu trabajo real necesitás contexto físicamente aislado entre branches."</em></p>
+    <p><em>"Y cómo se invocan: no hace falta memorizarlas. Cada skill tiene su trigger declarado en el frontmatter de su SKILL.md; cuando hagan algo que coincida — mencionan un bug, piden trabajar varios cambios en paralelo, quieren crear una skill nueva — Claude las propone o las invoca solo. Si quieren explorar una en particular, su archivo vive en el path que está en pantalla. Abrilo y leelo, es prosa, no magia."</em></p>
+  </aside>
+</section>

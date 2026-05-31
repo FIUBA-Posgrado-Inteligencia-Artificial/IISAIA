@@ -1,0 +1,438 @@
+<style>
+  /* §7 — writing-plans */
+
+  /* Spec-driven framing card */
+  .s7-marco {
+    max-width: 880px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s7-marco-rule {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    line-height: 1.55;
+    text-align: center;
+  }
+  .s7-marco-rule strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s7-marco-rule .s7-never {
+    color: var(--accent-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .s7-marco-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 720px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Chain flow (spec → plan → código) */
+  .s7-chain {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+    flex-wrap: wrap;
+  }
+  .s7-chain-step {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    flex: 1 1 0;
+    min-width: 220px;
+    text-align: center;
+  }
+  .s7-chain-name {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s7-chain-art {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.45;
+  }
+  .s7-chain-art strong {
+    color: var(--accent-secondary);
+  }
+  .s7-chain-arrow {
+    align-self: center;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  /* Real-session demo on plan */
+  .s7-session {
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s7-session-row {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border-left: 3px solid var(--text-muted);
+    text-align: left;
+  }
+  .s7-session-row.is-input { border-left-color: var(--accent-secondary); }
+  .s7-session-row.is-output { border-left-color: var(--accent); }
+  .s7-session-row.is-review { border-left-color: var(--accent-secondary); }
+  .s7-session-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .s7-session-row.is-input .s7-session-tag,
+  .s7-session-row.is-review .s7-session-tag {
+    color: var(--accent-secondary);
+  }
+  .s7-session-row.is-output .s7-session-tag {
+    color: var(--accent);
+  }
+  .s7-session-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  .s7-session-body code {
+    background: var(--bg-primary);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 0.9em;
+    color: var(--accent-secondary);
+  }
+  .s7-task-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: var(--spacing-sm);
+  }
+  .s7-task {
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    line-height: 1.4;
+    padding-left: var(--spacing-md);
+    position: relative;
+  }
+  .s7-task::before {
+    content: counter(s7-task-counter) ".";
+    counter-increment: s7-task-counter;
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+  .s7-task-grid {
+    counter-reset: s7-task-counter;
+  }
+  .s7-review-list {
+    margin: var(--spacing-xs) 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .s7-review-list li {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 4px;
+    padding-left: var(--spacing-md);
+    position: relative;
+  }
+  .s7-review-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+</style>
+
+<!-- §7.1 — Opener: mini-roadmap iluminado en s7 -->
+<section>
+  <div class="pipe-grid s5-happy-path is-mini highlight-s7">
+    <div class="pipe-node" data-group="s6"><div class="pipe-icon">1</div><div class="pipe-label">brainstorming</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7"><div class="pipe-icon">2</div><div class="pipe-label">writing-plans</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8"><div class="pipe-icon">git</div><div class="pipe-label">GitHub Flow</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9"><div class="pipe-icon">3</div><div class="pipe-label">subagent-driven-development</div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s13"><div class="pipe-icon">7</div><div class="pipe-label">finishing-a-development-branch</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12"><div class="pipe-icon">6</div><div class="pipe-label">verification-before-completion</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11"><div class="pipe-icon">5</div><div class="pipe-label">requesting-code-review</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10"><div class="pipe-icon">4</div><div class="pipe-label">test-driven-development</div></div>
+  </div>
+
+  <div class="s-skill-opener">
+    <h2 class="s-skill-opener-name">writing-plans</h2>
+    <p class="s-skill-opener-tag">Spec aprobado → plan ejecutable, en disco.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener de §7. Segunda skill del happy-path; la pieza s7 se ilumina en el roadmap.</u></p>
+    <p><em>"Segunda skill del happy-path: writing-plans. Toma el spec que dejó brainstorming y lo convierte en un plan de implementación en disco. La meta es que cualquier agente — vos mañana, un subagente, un colega — pueda ejecutar el plan sin re-deducir nada."</em></p>
+  </aside>
+</section>
+
+<!-- §7.2 — Spec-driven development: la regla de dirección -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Antes de writing-plans, el marco</h2>
+
+  <div class="s7-marco">
+    <div class="s7-marco-rule">
+      Si cambia el <strong>spec</strong>, cambia el <strong>plan</strong>. Si cambia el <strong>plan</strong>, cambia el <strong>código</strong>.
+      <br><span class="s7-never">Nunca al revés.</span>
+    </div>
+    <p class="s7-marco-sub">El código no le dicta nada al spec. Si en cualquier paso descubrís que la entrada está mal, subís al paso anterior y lo arreglás ahí.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Slide-marco: la regla unidireccional de spec-driven development. Es el contrato conceptual de toda la cadena.</u></p>
+    <p><em>"Antes de meternos en qué hace writing-plans, vale tener claro el marco que la skill obedece. Es una regla simple: si cambia el spec, cambia el plan. Si cambia el plan, cambia el código. Nunca al revés."</em></p>
+    <p><em>"En la práctica significa: si en pleno coding descubrís que el plan está mal, no compensás en el código — volvés al plan y lo arreglás ahí. Si el plan está mal porque el spec estaba mal, volvés al spec. La dirección es siempre desde lo abstracto hacia lo concreto."</em></p>
+  </aside>
+</section>
+
+<!-- §7.3 — La cadena: spec → plan → código -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">La cadena que produce el código</h2>
+
+  <div class="s7-chain">
+    <div class="s7-chain-step">
+      <p class="s7-chain-name">brainstorming</p>
+      <p class="s7-chain-art">produce el <strong>spec</strong></p>
+    </div>
+    <div class="s7-chain-arrow">→</div>
+    <div class="s7-chain-step">
+      <p class="s7-chain-name">writing-plans</p>
+      <p class="s7-chain-art">consume spec, produce <strong>plan</strong></p>
+    </div>
+    <div class="s7-chain-arrow">→</div>
+    <div class="s7-chain-step">
+      <p class="s7-chain-name">subagent-driven</p>
+      <p class="s7-chain-art">consume plan, produce <strong>código</strong></p>
+    </div>
+  </div>
+
+  <p style="text-align: center; color: var(--text-muted); font-size: 1.05rem; margin: var(--spacing-lg) auto 0 auto; max-width: 880px; font-style: italic;">
+    Cada skill mira el artefacto previo como contrato cerrado.
+  </p>
+
+  <aside class="notes">
+    <p><u>Diagrama de la cadena. Cada skill produce un artefacto que la próxima consume como contrato.</u></p>
+    <p><em>"La cadena tiene tres skills. Brainstorming produce el spec. Writing-plans consume el spec y produce el plan. Subagent-driven consume el plan y produce el código."</em></p>
+    <p><em>"La idea clave: cada skill mira el artefacto previo como contrato cerrado. Writing-plans no re-discute el spec; lo toma como dado. Subagent-driven no re-discute el plan. Esto es lo que permite que el flujo escale: cada paso tiene una entrada bien definida y una salida bien definida."</em></p>
+  </aside>
+</section>
+
+<!-- §7.4 — Qué hace + Cuándo se activa (combinado con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Qué hace y cuándo se activa</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Qué hace</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Toma el spec aprobado y lo convierte en un <strong>plan markdown con tareas chicas</strong> — de 2 a 5 minutos cada una, con paths exactos, código completo en cada step, y comandos de verificación al lado.
+      </div>
+      <p class="s6-central-sub">
+        Asunción agresiva: el ingeniero que va a ejecutar no conoce el codebase ni el dominio.
+      </p>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Cuándo se activa</p>
+    <div class="s6-compare">
+      <div class="s6-compare-card is-yes">
+        <div class="s6-compare-tag">Sí se activa</div>
+        <p class="s6-compare-body">Después de brainstorming, antes de tocar código. El spec aprobado es la entrada.</p>
+      </div>
+      <div class="s6-compare-card is-no">
+        <div class="s6-compare-tag">No, sin spec</div>
+        <p class="s6-compare-body">Si pedís plan para una tarea grande sin pasar por brainstorming, lo primero que hace es recomendar volver atrás y producir el spec.</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Qué hace la skill + cuándo se activa.</u></p>
+    <p><em>"Qué hace en detalle: toma el spec aprobado y lo convierte en un plan markdown con tareas chicas — de 2 a 5 minutos cada una. Cada tarea lleva los paths exactos de los archivos que toca, el código completo de cada step, y los comandos de verificación al lado. La asunción es agresiva: el ingeniero que va a ejecutar el plan no conoce el codebase ni el dominio y necesita tenerlo todo a mano."</em></p>
+    <p><em>"Cuándo se activa: después de brainstorming, antes de tocar código. El spec aprobado es la entrada. Si pedís un plan para una tarea grande sin haber pasado por brainstorming, lo primero que hace la skill es recomendar volver atrás y producir el spec — sin spec, el plan no tiene contra qué validarse."</em></p>
+  </aside>
+</section>
+
+<!-- §7.5 — Por qué importa + Punto crítico (combinado con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Por qué importa y dónde no se cede</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Por qué importa</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        El plan en disco es lo que permite que <strong>cualquier agente</strong> — vos mañana, un subagente, un colega que toma la posta — ejecute la implementación sin re-deducir nada.
+      </div>
+      <p class="s6-central-sub">
+        Sin esta skill, el plan vive en tu cabeza y se pierde cuando se cierra la sesión.
+      </p>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Punto crítico</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Tareas de <strong>2 a 5 minutos</strong> con archivos exactos y <strong>código completo en cada step</strong>. Nada de &laquo;similar a la Task N&raquo; sin repetir el código. Nada de &laquo;add appropriate error handling&raquo; sin mostrar qué.
+      </div>
+      <p class="s6-central-sub">
+        Razón: el ejecutor lee tareas fuera de orden, y un subagente arranca cada task con contexto fresco.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Por qué la skill vale + la regla no negociable.</u></p>
+    <p><em>"Por qué importa: el plan persistido en disco es lo que permite que cualquier agente — vos mañana, un subagente, un colega que toma la posta — ejecute la implementación sin re-deducir nada. Es el contrato técnico que cierra la brecha entre la intención del spec y la ejecución en código. Sin esta skill, el plan queda en tu cabeza y se pierde cuando se acaba la ventana de contexto."</em></p>
+    <p><em>"Punto crítico: tareas de 2 a 5 minutos con archivos exactos y código completo en cada step. Nada de 'implementar similar al Task N' sin repetir el código, porque el ejecutor puede leer las tareas fuera de orden y necesita tener todo a mano. Nada de 'agregar error handling apropiado' sin mostrar qué error handling concreto. Si un step describe qué hacer pero no muestra cómo, no es un step — es un placeholder."</em></p>
+  </aside>
+</section>
+
+<!-- §7.6 — Detalles del flujo: artefacto + Self-Review + anti-patrones (con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Detalles del flujo</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Dos cosas importantes</p>
+    <div class="s6-split">
+      <div class="s6-split-card">
+        <div class="s6-split-tag">El plan en disco</div>
+        <p class="s6-split-body">El plan se persiste en:</p>
+        <pre style="margin: var(--spacing-xs) 0; background: var(--bg-primary); border-radius: 4px; padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9rem; color: var(--accent-secondary); overflow-x: auto;"><code>docs/superpowers/plans/
+  YYYY-MM-DD-&lt;feature&gt;.md</code></pre>
+        <p class="s6-split-body" style="margin-top: var(--spacing-xs);">Se commitea junto al spec. Ese par es lo que subagent-driven-development lee para ejecutar autónomamente.</p>
+      </div>
+      <div class="s6-split-card is-secondary">
+        <div class="s6-split-tag">Plan Self-Review</div>
+        <p class="s6-split-body">Antes de pasártelo, la skill chequea sola:</p>
+        <ul class="s6-split-body">
+          <li><strong>Spec coverage</strong>: ¿hay tarea por cada requisito del spec?</li>
+          <li><strong>Placeholders</strong>: <code>TBD</code>, <code>TODO</code>, &laquo;implement later&raquo;</li>
+          <li><strong>Type consistency</strong>: <code>clearLayers()</code> en Task 3 no puede ser <code>clearFullLayers()</code> en Task 7</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Tres anti-patrones a evitar</p>
+    <div class="s6-anti">
+      <div class="s6-anti-card">
+        <code>TBD</code> / <code>TODO</code> / &laquo;implement later&raquo; son <strong>fallas del plan</strong>, no pendientes legítimos. El plan se completa o se reduce su scope.
+      </div>
+      <div class="s6-anti-card">
+        &laquo;Add appropriate error handling&raquo; sin mostrar qué error handling. Vago = no implementable.
+      </div>
+      <div class="s6-anti-card">
+        &laquo;Similar a la Task N&raquo; sin repetir el código. Repetí el código en cada step que lo necesita.
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
+    <p><u>Slide doble: dos detalles operativos + tres anti-patrones a evitar.</u></p>
+    <p><em>"Dos cosas importantes. La primera: el plan se persiste en docs/superpowers/plans con el mismo patrón fecha + topic que vimos en el spec. Ese par — spec más plan — es lo que después lee subagent-driven-development para ejecutar autónomamente. Si querés cambiar el rumbo del feature, editás esos archivos y volvés a correr el flujo. La segunda: hay un Plan Self-Review interno con tres chequeos: spec coverage — ¿hay tarea por cada requisito del spec?; placeholder scan — TBD, TODO, implement later son red flags; type consistency — si en Task 3 llamaste a algo clearLayers, en Task 7 no puede aparecer como clearFullLayers."</em></p>
+    <p><em>"Y tres anti-patrones del plan en sí. TBD, TODO, 'implement later' son fallas del plan, no pendientes legítimos — el plan se completa o se reduce su scope. 'Add appropriate error handling' sin mostrar qué error handling concreto: vago equivale a no implementable. 'Similar to Task N' sin repetir el código: la gente lee tareas fuera de orden, y un subagente arranca cada task con contexto fresco — repetí el código en cada step que lo necesita."</em></p>
+  </aside>
+</section>
+
+<!-- §7.7 — Sesión real: el plan que produjo writing-plans en el demo-repo -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El plan del demo-repo, paso a paso</h2>
+
+  <div class="s7-session">
+    <div class="s7-session-row is-input">
+      <span class="s7-session-tag">Entrada</span>
+      <p class="s7-session-body">
+        Spec aprobado en brainstorming:
+        <br>
+        <code>docs/superpowers/specs/2026-05-24-bulk-csv-import-design.md</code>
+      </p>
+    </div>
+
+    <div class="s7-session-row is-output fragment fade-in" data-fragment-index="0">
+      <span class="s7-session-tag">Salida — plan en disco</span>
+      <p class="s7-session-body">
+        <code>docs/superpowers/plans/2026-05-24-bulk-csv-import.md</code>
+        <br>
+        Commit <code>9f93a27</code> en branch <code>feature/import-data</code>.
+      </p>
+    </div>
+
+    <div class="s7-session-row is-output fragment fade-in" data-fragment-index="1">
+      <span class="s7-session-tag">11 tareas, en TDD</span>
+      <div class="s7-task-grid">
+        <div class="s7-task">Mover <code>reset_store</code> a <code>conftest.py</code></div>
+        <div class="s7-task">Índices del store + <code>find_*</code></div>
+        <div class="s7-task"><code>snapshot()</code> / <code>restore()</code></div>
+        <div class="s7-task">Schemas <code>ImportResult</code> + errores</div>
+        <div class="s7-task">Adapters <code>UserAdapter</code> / <code>PostAdapter</code></div>
+        <div class="s7-task">Orquestador <code>run_import</code></div>
+        <div class="s7-task">Router <code>/import/{resource}</code></div>
+        <div class="s7-task"><code>admin.html</code></div>
+        <div class="s7-task"><code>admin.js</code></div>
+        <div class="s7-task">Estilos + link desde <code>index.html</code></div>
+        <div class="s7-task">Regenerar <code>openapi.yaml</code></div>
+      </div>
+    </div>
+
+    <div class="s7-session-row is-review fragment fade-in" data-fragment-index="2">
+      <span class="s7-session-tag">Plan Self-Review — encontró 2 gaps</span>
+      <ul class="s7-review-list">
+        <li>Faltaba el test <code>test_import_missing_file</code> que el spec lista.</li>
+        <li>Task 4 dice &laquo;Append&raquo; pero <code>from typing import Literal</code> debería ir arriba con los otros imports.</li>
+      </ul>
+      <p class="s7-session-body" style="margin-top: var(--spacing-xs); color: var(--text-muted); font-style: italic;">Los arregla inline. Yo nunca leí un &quot;TBD&quot; en mi propio plan.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — plan generado, tareas, self-review.</strong></p>
+    <p><u>Caso real. La sesión existe en log; las tareas son las 11 reales del plan; el self-review encontró 2 gaps reales que fixeó inline.</u></p>
+    <p><em>"La entrada de writing-plans fue el spec que dejó brainstorming. La skill lo leyó y escribió el plan en este path."</em></p>
+    <p><em>"Salida: el plan en disco, commiteado. Si abrís el archivo, vas a ver 11 tareas en TDD, una por archivo o componente del feature."</em></p>
+    <p><em>"Acá están las 11 tareas en una vista resumen. Cada una tiene paths exactos, código completo, comandos de verificación al lado, y un commit chico al final. Las primeras tres son refactor previo necesario; de la cuatro en adelante van construyendo el feature pieza por pieza."</em></p>
+    <p><em>"Y acá el Plan Self-Review: la skill encontró sola dos gaps en su primer draft del plan y los corrigió antes de pasármelo. El test que faltaba aparecía en la lista del spec pero no en ninguna tarea — spec coverage gap. Y el import de Literal estaba mal ubicado en Task 4 — un placeholder de organización. Los dos quedaron arreglados inline, sin pedirme input. Por eso digo que nunca debería leer un TBD en mi propio plan."</em></p>
+  </aside>
+</section>
+

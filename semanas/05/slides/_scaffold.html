@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 05 — Plugins de Claude Code y Superpowers</title>
+  <link rel="stylesheet" href="../../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../../../node_modules/reveal.js/dist/theme/black.css">
+  <link rel="stylesheet" href="../../../node_modules/reveal.js/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../../../_config/theme/custom.css">
+  <link rel="stylesheet" href="../../../_config/theme/components.css">
+  <style>
+    /* Safety net for dense slides: when a slide's content exceeds the
+       canvas height, show a vertical scrollbar instead of clipping
+       the bottom. Only kicks in when overflow is real. */
+    .reveal .slides > section,
+    .reveal .slides > section > section {
+      overflow-y: auto;
+      max-height: 100%;
+    }
+    /* Make all <pre>/<code> blocks respect their containing card.
+       Reveal.js defaults: pre at width: 90%, and `pre code` with
+       overflow: auto + word-wrap: normal — that forces a horizontal
+       scrollbar instead of wrapping. We override both. */
+    .reveal pre {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+    .reveal pre code {
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      overflow: visible !important;
+      max-height: none !important;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title Slide -->
+      <section class="title-slide">
+        <h1>Plugins de Claude Code y Superpowers</h1>
+        <p class="subtitle">De piezas escribibles a paquetes instalables, y al flujo que opera sobre ellos.</p>
+        <p class="muted">Introducción al desarrollo de software asistido por IA</p>
+      </section>
+
+      <!-- ===== §1 — De piezas a paquetes ===== -->
+      <!-- INJECT_SECTION_1 -->
+      <!-- /§1 -->
+
+      <!-- ===== §2 — Qué es un plugin ===== -->
+      <!-- INJECT_SECTION_2 -->
+      <!-- /§2 -->
+
+      <!-- ===== §3 — Marketplaces e instalación ===== -->
+      <!-- INJECT_SECTION_3 -->
+      <!-- /§3 -->
+
+      <!-- ===== §4 — Superpowers: qué problema resuelve ===== -->
+      <!-- INJECT_SECTION_4 -->
+      <!-- /§4 -->
+
+      <!-- ===== §5 — Instalar Superpowers ===== -->
+      <!-- INJECT_SECTION_5 -->
+      <!-- /§5 -->
+
+      <!-- ===== §6 — brainstorming ===== -->
+      <!-- INJECT_SECTION_6 -->
+      <!-- /§6 -->
+
+      <!-- ===== §7 — writing-plans ===== -->
+      <!-- INJECT_SECTION_7 -->
+      <!-- /§7 -->
+
+      <!-- ===== §8 — git refresher + GitHub Flow ===== -->
+      <!-- INJECT_SECTION_8 -->
+      <!-- /§8 -->
+
+      <!-- ===== §9 — subagent-driven-development ===== -->
+      <!-- INJECT_SECTION_9 -->
+      <!-- /§9 -->
+
+      <!-- ===== §10 — test-driven-development ===== -->
+      <!-- INJECT_SECTION_10 -->
+      <!-- /§10 -->
+
+      <!-- ===== §11 — requesting-code-review ===== -->
+      <!-- INJECT_SECTION_11 -->
+      <!-- /§11 -->
+
+      <!-- ===== §12 — verification-before-completion ===== -->
+      <!-- INJECT_SECTION_12 -->
+      <!-- /§12 -->
+
+      <!-- ===== §13 — finishing-a-development-branch ===== -->
+      <!-- INJECT_SECTION_13 -->
+      <!-- /§13 -->
+
+      <!-- ===== §14 — Resto del cinturón ===== -->
+      <!-- INJECT_SECTION_14 -->
+      <!-- /§14 -->
+
+      <!-- ===== §15 — Bajada al trabajo final ===== -->
+      <!-- INJECT_SECTION_15 -->
+      <!-- /§15 -->
+
+      <section class="section-divider"><h2>¿Preguntas?</h2></section>
+
+    </div>
+  </div>
+
+  <script src="../../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="../../../node_modules/reveal.js/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'fade',
+      width: 1280,
+      height: 800,
+      margin: 0.02,
+      plugins: [RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+</html>

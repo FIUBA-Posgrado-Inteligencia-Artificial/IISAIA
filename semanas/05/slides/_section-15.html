@@ -1,0 +1,165 @@
+<style>
+  /* §15 — Bajada al trabajo final */
+
+  .s15-tagline {
+    display: block;
+    text-align: center !important;
+    color: var(--text-primary);
+    font-size: 1.35rem;
+    line-height: 1.5;
+    max-width: 1000px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+  .s15-tagline strong {
+    color: var(--accent);
+  }
+
+  /* §15.2 — Lo que NO hace */
+  .s15-not {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s15-not-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s15-not-title {
+    color: var(--accent-secondary);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+  .s15-not-body {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s15-not-closer {
+    display: block;
+    text-align: center !important;
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    max-width: 980px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+  .s15-not-closer strong {
+    color: var(--accent);
+  }
+
+</style>
+
+<!-- §15.1 — Pipeline-roadmap recomendado para el TP -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Recomendado para el trabajo final</h2>
+
+  <p class="s15-tagline">El mismo plugin, la misma secuencia, la misma disciplina que viste durante la clase.</p>
+
+  <div class="pipe-grid s5-happy-path" id="s15-happy-path">
+    <!-- Row 1 (L→R) -->
+    <div class="pipe-node" data-group="s6">
+      <div class="pipe-icon">1</div>
+      <div class="pipe-label">brainstorming</div>
+      <div class="pipe-sub">spec del TP</div>
+    </div>
+    <div class="pipe-arrow"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7">
+      <div class="pipe-icon">2</div>
+      <div class="pipe-label">writing-plans</div>
+      <div class="pipe-sub">plan del TP</div>
+    </div>
+    <div class="pipe-arrow"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8">
+      <div class="pipe-icon">git</div>
+      <div class="pipe-label">GitHub Flow</div>
+      <div class="pipe-sub">branch + PR</div>
+    </div>
+    <div class="pipe-arrow"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9">
+      <div class="pipe-icon">3</div>
+      <div class="pipe-label">subagent-driven-development</div>
+      <div class="pipe-sub">implementación delegada</div>
+    </div>
+
+    <!-- Row 2: bend -->
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+
+    <!-- Row 3 (markup L→R) -->
+    <div class="pipe-node" data-group="s13">
+      <div class="pipe-icon">7</div>
+      <div class="pipe-label">finishing-a-development-branch</div>
+      <div class="pipe-sub">PR del TP</div>
+    </div>
+    <div class="pipe-arrow"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12">
+      <div class="pipe-icon">6</div>
+      <div class="pipe-label">verification-before-completion</div>
+      <div class="pipe-sub">evidencia citada</div>
+    </div>
+    <div class="pipe-arrow"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11">
+      <div class="pipe-icon">5</div>
+      <div class="pipe-label">requesting-code-review</div>
+      <div class="pipe-sub">review final</div>
+    </div>
+    <div class="pipe-arrow"><svg width="24" height="14" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10">
+      <div class="pipe-icon">4</div>
+      <div class="pipe-label">test-driven-development</div>
+      <div class="pipe-sub">tests primero</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Slide-cierre del arco. El roadmap del §4 vuelve completo, sin highlight individual, con sub-labels que aterrizan cada skill al TP. Framing: recomendación, no prescripción.</u></p>
+    <p><em>"Para el trabajo final les recomendamos usar este flujo. No hay un modo especial para proyectos integradores; si lo eligen, es el mismo plugin y la misma secuencia que vieron durante la clase."</em></p>
+    <p><em>"Brainstorming les saca el spec del proyecto — no conviene saltearse ese paso, ahí es donde se decide qué construyen. Writing-plans convierte el spec en un plan de tareas chicas. Antes de tocar código, abren la branch con git checkout. Subagent-driven-development corre la implementación delegada — revisan entre tareas, no después de un bloque grande. TDD activa por default — rojo antes que verde. Requesting-code-review corre antes de cerrar el feature. Verification-before-completion corre los comandos finales y cita el output real. Y finishing-a-development-branch les ofrece abrir el PR. El PR es la entrega visible — el repo en GitHub queda como evidencia del proceso entero."</em></p>
+  </aside>
+</section>
+
+<!-- §15.2 — Lo que el flujo NO hace por vos -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Lo que el flujo NO hace por vos</h2>
+
+  <div class="s15-not">
+    <div class="s15-not-card">
+      <p class="s15-not-title">Qué construir</p>
+      <p class="s15-not-body">Decisión tuya, <strong>antes</strong> de abrir <code>brainstorming</code>. El plugin no inventa el producto.</p>
+    </div>
+    <div class="s15-not-card">
+      <p class="s15-not-title">Si la decisión arquitectónica es la correcta</p>
+      <p class="s15-not-body">Decisión tuya, <strong>durante</strong> <code>brainstorming</code>. Cuando el agente te propone una estructura, vos la aceptás, la corregís o la rechazás.</p>
+    </div>
+    <div class="s15-not-card">
+      <p class="s15-not-title">Si el feature sirve a un usuario real</p>
+      <p class="s15-not-body">Decisión tuya, <strong>fuera del flujo</strong>. Ningún agente sabe si lo que pediste tiene sentido para quien lo va a usar.</p>
+    </div>
+    <div class="s15-not-card">
+      <p class="s15-not-title">Decidir qué entregar</p>
+      <p class="s15-not-body">El plugin acelera la ejecución y disciplina el proceso. <strong>No decide qué entregar.</strong></p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Honest disclosure final. Cuatro cosas que el plugin no decide por vos, para que llegues al TP con expectativas alineadas.</u></p>
+    <p><em>"Esto es importante para que no lleguen al trabajo final pensando que el plugin construye el proyecto solo. No lo hace."</em></p>
+    <p><em>"Qué construir es decisión suya, antes de abrir brainstorming. El plugin no inventa el producto."</em></p>
+    <p><em>"Si la decisión arquitectónica es la correcta es decisión suya, durante brainstorming — cuando el agente les propone una estructura, ustedes deciden si la aceptan, la corrigen o la rechazan."</em></p>
+    <p><em>"Si el feature sirve a un usuario real es decisión suya, fuera del flujo. Ningún agente sabe si lo que pidieron tiene sentido para quien lo va a usar."</em></p>
+    <p><em>"El plugin acelera la ejecución y disciplina el proceso. No decide qué entregar. Y eso es lo bueno: les libera tiempo, justamente, para ocuparse de esa parte — que es la única que el plugin no puede hacer."</em></p>
+  </aside>
+</section>
+

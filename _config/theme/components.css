@@ -245,6 +245,42 @@
   opacity: 1;
 }
 
+/* ============ Semana 05 happy-path highlights ============
+   Mini-roadmap re-illumination for §§6-7 and §§9-13. Each skill section
+   adds .highlight-sN to its .pipe-grid; the active node lights up,
+   the rest dim to 0.35. Works whether nodes are .visible (fragments)
+   or not (static mini-header use). */
+.pipe-grid.highlight-s6 .pipe-node,
+.pipe-grid.highlight-s7 .pipe-node,
+.pipe-grid.highlight-s9 .pipe-node,
+.pipe-grid.highlight-s10 .pipe-node,
+.pipe-grid.highlight-s11 .pipe-node,
+.pipe-grid.highlight-s12 .pipe-node,
+.pipe-grid.highlight-s13 .pipe-node {
+  opacity: 0.35;
+  box-shadow: none;
+}
+.pipe-grid.highlight-s6 .pipe-node[data-group="s6"],
+.pipe-grid.highlight-s7 .pipe-node[data-group="s7"],
+.pipe-grid.highlight-s9 .pipe-node[data-group="s9"],
+.pipe-grid.highlight-s10 .pipe-node[data-group="s10"],
+.pipe-grid.highlight-s11 .pipe-node[data-group="s11"],
+.pipe-grid.highlight-s12 .pipe-node[data-group="s12"],
+.pipe-grid.highlight-s13 .pipe-node[data-group="s13"] {
+  opacity: 1;
+  border-color: var(--accent);
+  box-shadow: 0 0 24px rgba(100, 255, 218, 0.3), inset 0 0 12px rgba(100, 255, 218, 0.05);
+}
+.pipe-grid.highlight-s6 .pipe-arrow,
+.pipe-grid.highlight-s7 .pipe-arrow,
+.pipe-grid.highlight-s9 .pipe-arrow,
+.pipe-grid.highlight-s10 .pipe-arrow,
+.pipe-grid.highlight-s11 .pipe-arrow,
+.pipe-grid.highlight-s12 .pipe-arrow,
+.pipe-grid.highlight-s13 .pipe-arrow {
+  opacity: 0.3;
+}
+
 /* ============ New utility classes (extracted from recurring inline styles) ============ */
 
 /* Side-by-side comparison row. Two children, equal widths, gap. */

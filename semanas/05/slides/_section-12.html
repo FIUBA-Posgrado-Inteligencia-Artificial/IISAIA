@@ -1,0 +1,235 @@
+<style>
+  /* §12 — verification-before-completion */
+
+  /* §12.2 — La regla central: claim sin vs con evidencia */
+  .s12-rule {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s12-rule-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 4px solid var(--text-muted);
+  }
+  .s12-rule-card.is-wrong { border-top-color: #ff5a5a; }
+  .s12-rule-card.is-right { border-top-color: var(--accent); }
+  .s12-rule-tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s12-rule-card.is-wrong .s12-rule-tag { color: #ff5a5a; }
+  .s12-rule-card.is-right .s12-rule-tag { color: var(--accent); }
+  .s12-rule-claim {
+    background: var(--bg-primary);
+    border-radius: 4px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-xs) 0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  .s12-rule-claim .out {
+    color: var(--text-muted);
+  }
+  .s12-rule-body {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s12-rule-card.is-wrong .s12-rule-body {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .s12-rule-note {
+    display: block;
+    text-align: center !important;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 1100px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .s12-rule-note strong {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  /* §12.4 — Caso real */
+  .s12-case {
+    max-width: 1050px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s12-case-tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 6px 0;
+  }
+  .s12-case-tag.is-cmd { color: var(--accent-secondary); }
+  .s12-case-tag.is-out { color: var(--accent); }
+  .s12-case-cmd {
+    background: var(--bg-primary);
+    border-left: 3px solid var(--accent-secondary);
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--accent-secondary);
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s12-case-out {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s12-case-out strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+</style>
+
+<!-- §12.1 — Opener: mini-roadmap iluminado en s12 -->
+<section>
+  <div class="pipe-grid s5-happy-path is-mini highlight-s12">
+    <div class="pipe-node" data-group="s6"><div class="pipe-icon">1</div><div class="pipe-label">brainstorming</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s7"><div class="pipe-icon">2</div><div class="pipe-label">writing-plans</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s8"><div class="pipe-icon">git</div><div class="pipe-label">GitHub Flow</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s9"><div class="pipe-icon">3</div><div class="pipe-label">subagent-driven-development</div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+    <div class="pipe-arrow" style="transform: rotate(90deg);"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M2 7h16m0 0l-5-5m5 5l-5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s13"><div class="pipe-icon">7</div><div class="pipe-label">finishing-a-development-branch</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s12"><div class="pipe-icon">6</div><div class="pipe-label">verification-before-completion</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s11"><div class="pipe-icon">5</div><div class="pipe-label">requesting-code-review</div></div>
+    <div class="pipe-arrow"><svg width="20" height="12" viewBox="0 0 24 14"><path d="M22 7H6m0 0l5-5M6 7l5 5" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="pipe-node" data-group="s10"><div class="pipe-icon">4</div><div class="pipe-label">test-driven-development</div></div>
+  </div>
+
+  <div class="s-skill-opener">
+    <h2 class="s-skill-opener-name">verification-before-completion</h2>
+    <p class="s-skill-opener-tag">No digas que funciona si no corriste el comando y mostraste el resultado.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener de §12. Sexta skill del happy-path; pieza s12 iluminada en el roadmap.</u></p>
+    <p><em>"Sexta skill: verification-before-completion. La idea es simple. Antes de decir que algo está terminado — un feature, un bugfix, una refactor — corré el comando que lo prueba: pytest, npm test, levantar el server y hacer un curl, lo que sea. Y pegá la salida del comando en el mismo mensaje donde decís 'listo'. Sin esa salida visible, decir 'listo' es opinión, no hecho."</em></p>
+  </aside>
+</section>
+
+<!-- §12.2 — La regla: claim sin vs con evidencia -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">La regla, en una imagen</h2>
+
+  <div class="s12-rule">
+    <div class="s12-rule-card is-wrong">
+      <p class="s12-rule-tag">Claim sin evidencia</p>
+      <div class="s12-rule-claim">los tests pasan</div>
+      <p class="s12-rule-body">Afirmación. Si no corriste el comando en este turno, es una opinión.</p>
+    </div>
+    <div class="s12-rule-card is-right">
+      <p class="s12-rule-tag">Claim válido</p>
+      <div class="s12-rule-claim">los tests pasan:
+<span class="out">$ uv run pytest
+======== 46 passed in 1.2s ========</span></div>
+      <p class="s12-rule-body">Hecho. Comando corrido en este turno, salida citada al lado.</p>
+    </div>
+  </div>
+
+  <p class="s12-rule-note">La diferencia entre <strong>creo que funciona</strong> y <strong>acá está el comando y su output</strong>.</p>
+
+  <aside class="notes">
+    <p><u>Slide central de §12. El contraste visual aterriza la regla.</u></p>
+    <p><em>"La regla es ésta. Sin evidencia, decir 'los tests pasan' es una opinión. Con la salida del comando pegada al lado de la afirmación, es un hecho."</em></p>
+    <p><em>"La diferencia entre opinión y hecho es lo que distingue trabajo terminado de trabajo 'probablemente terminado'. Por eso esta skill fue promovida del resto del cinturón al happy-path: no es para el meticuloso, es lo mínimo para decir 'cerré'."</em></p>
+  </aside>
+</section>
+
+<!-- §12.3 — Cuándo + Por qué (combinado con reveals) -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuándo se activa y por qué importa</h2>
+
+  <div class="fragment fade-in" data-fragment-index="0">
+    <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Cuándo se activa</p>
+    <div class="s6-compare">
+      <div class="s6-compare-card is-yes">
+        <div class="s6-compare-tag">Antes de cualquier &laquo;listo&raquo;</div>
+        <p class="s6-compare-body">Antes del commit &laquo;feature listo&raquo;, antes del PR, antes de cerrar la tarea, antes de pasar a code-review o a finishing-branch.</p>
+      </div>
+      <div class="s6-compare-card is-no">
+        <div class="s6-compare-tag">Si no podés correr el comando</div>
+        <p class="s6-compare-body">Lo decís explícitamente: <em>&laquo;no pude verificar X porque Y&raquo;</em>. No asumís ni minimizás ni extrapolás desde un check parcial.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Por qué importa</p>
+    <div class="s6-central" style="margin-top: 0;">
+      <div class="s6-central-main">
+        Sin esta skill, el agente claimea éxito porque <strong>compiló</strong> o porque &laquo;los cambios parecen razonables&raquo;. Esa es la mentira que mata el flujo.
+      </div>
+      <p class="s6-central-sub">
+        El humano confía, mergea, y descubre el bug en producción o en el siguiente sprint. Compilar es necesario, no suficiente.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — cuándo + por qué.</strong></p>
+    <p><u>Cuándo se invoca + qué problema concreto resuelve.</u></p>
+    <p><em>"Cuándo se activa: justo antes de cualquier afirmación de completion. Antes del commit que dice 'feature listo', antes del PR, antes de cerrar la tarea, antes de pasarle el trabajo a code-review o a finishing-branch. Si no podés correr el comando — porque la infra no está, porque depende de algo externo, porque es un cambio que requiere ojo humano — lo decís explícitamente: 'no pude verificar X porque Y'. No asumís, no minimizás, no extrapolás desde un check parcial."</em></p>
+    <p><em>"Por qué importa: sin esta skill, los agentes claimean éxito porque compiló o porque 'los cambios parecen razonables'. Esa es la mentira que mata el flujo. El humano confía, mergea, y descubre el bug en producción o en el siguiente sprint. Compilar es necesario, no suficiente — es la barrera más baja del éxito. Tu trabajo es verificar comportamiento, no sintaxis."</em></p>
+  </aside>
+</section>
+
+<!-- §12.4 — Caso real: la verificación final del demo-repo -->
+<section>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">La verificación final del demo-repo</h2>
+
+  <div class="s12-case">
+    <p class="s12-case-tag is-cmd">Comando corrido</p>
+    <pre class="s12-case-cmd"><code>uv run python -m pytest 2>&amp;1 | tail -3
+git rev-parse --show-toplevel
+git status --short
+git log --oneline main..HEAD | wc -l</code></pre>
+
+    <p class="s12-case-tag is-out">Output citado en la afirmación</p>
+    <div class="s12-case-out">&laquo;<strong>46/46 tests passing</strong>. Repo normal (sin worktree), <strong>13 commits adelante de main</strong>, working tree limpio.&raquo;</div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Caso real: la verificación que el coordinador corrió antes de cerrar la branch. Datos del log.</u></p>
+    <p><em>"Acá está la verificación final del demo-repo, real, del log. Arriba está el comando que el coordinador corrió antes de cerrar: pytest para los tests, git rev-parse para confirmar que estaba en un repo normal sin worktree, git status para el working tree, git log para contar los commits de la branch."</em></p>
+    <p><em>"Abajo está cómo se citó el resultado: '46 de 46 tests passing, repo normal, 13 commits adelante de main, working tree limpio'. No es 'creo que está todo bien' — son cuatro afirmaciones concretas, cada una respaldada por un comando que corrió en el mismo turno. Eso es lo que la skill exige."</em></p>
+  </aside>
+</section>

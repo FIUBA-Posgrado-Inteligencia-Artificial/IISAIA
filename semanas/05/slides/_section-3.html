@@ -1,0 +1,455 @@
+<style>
+  /* §3 — Marketplaces e instalación */
+
+  /* Slide 1: Hook */
+  .s3-hook {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .s3-hook-context {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-md) 0;
+    text-align: center;
+  }
+  .s3-hook-pregunta {
+    color: var(--accent);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .s3-hook-answer {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    margin: 0;
+    text-align: center;
+    line-height: 1.55;
+  }
+  .s3-hook-answer strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Slide 2: Marketplace definition + types */
+  .s3-mkt-def {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent);
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 780px;
+    margin: 0 auto var(--spacing-lg) auto;
+  }
+  .s3-mkt-def-line {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-sm) 0;
+    text-align: center !important;
+  }
+  .s3-mkt-def-line:last-child {
+    margin-bottom: 0;
+  }
+  .s3-mkt-types {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s3-mkt-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+  .s3-mkt-card.is-official {
+    border-color: var(--accent);
+  }
+  .s3-mkt-tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-xs);
+  }
+  .s3-mkt-card.is-official .s3-mkt-tag {
+    color: var(--accent);
+  }
+  .s3-mkt-name {
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s3-mkt-desc {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s3-mkt-cmd {
+    background: var(--bg-code, var(--bg-primary));
+    border-radius: 4px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent-secondary);
+    overflow-x: auto;
+  }
+
+  /* Slide 3: Analogy */
+  .s3-analogy {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s3-analogy-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    text-align: center;
+  }
+  .s3-analogy-tool {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s3-analogy-context {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+  .s3-analogy-cap {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 880px;
+  }
+
+  /* Slide 4: Four commands */
+  .s3-cmds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s3-cmd-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+  }
+  .s3-cmd-syntax {
+    background: var(--bg-primary);
+    border-radius: 4px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent-secondary);
+    margin-bottom: var(--spacing-sm);
+    overflow-x: auto;
+  }
+  .s3-cmd-desc {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s3-cmd-desc strong {
+    color: var(--accent);
+  }
+
+  /* Slide 5: Scopes — syntax block + table */
+  .s3-scope-syntax {
+    max-width: 900px;
+    margin: var(--spacing-lg) auto var(--spacing-md) auto;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.55;
+  }
+  .s3-scope-syntax .s3-scope-flag {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s3-scope-syntax .s3-scope-comment {
+    color: var(--text-muted);
+    font-size: 0.85em;
+    margin-left: var(--spacing-sm);
+  }
+  .s3-scopes {
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr 1.4fr;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .s3-scope-cell {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--text-muted);
+    border-right: 1px solid var(--text-muted);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  .s3-scope-cell:nth-child(3n) {
+    border-right: none;
+  }
+  .s3-scope-cell.is-head {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--text-muted);
+  }
+  .s3-scope-cell.is-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  .s3-scope-cell.is-name .s3-scope-flag-inline {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+  .s3-scope-cell.is-name .s3-scope-flag-inline.is-default {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+  }
+  .s3-scope-cell code {
+    background: var(--bg-primary);
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 0.85em;
+    color: var(--accent-secondary);
+  }
+
+  /* Slide 6: Demo */
+  .s3-demo-host {
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+</style>
+
+<!-- §3.1 — Hook: ¿cómo llega al disco? -->
+<section>
+  <div class="s3-hook">
+    <p class="s3-hook-context">El plugin existe en disco como folder. Cuando lo escribió otro autor, ese folder vive en su máquina.</p>
+    <p class="s3-hook-pregunta">¿Cómo llega al tuyo?</p>
+    <p class="s3-hook-answer">No clonás. No copiás archivos a mano. Llega por un <strong>comando</strong> que se apoya en un registro: el <strong>marketplace</strong>.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Hook de §3. Pone la pregunta operativa antes de definir marketplace.</u></p>
+    <p><em>"Ya saben qué hay adentro de un plugin: un directorio con piezas conocidas. Pero ese directorio, cuando lo escribió otro autor, vive en su máquina o en su repo. La pregunta operativa es: ¿cómo llega al disco de ustedes?"</em></p>
+    <p><em>"No clonan el repo. No copian archivos a mano. Llega por un comando. Y ese comando se apoya en algo que tiene nombre: el marketplace. Veamos qué es."</em></p>
+  </aside>
+</section>
+
+<!-- §3.2 — Marketplace: definición + dos tipos -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Marketplace</h2>
+
+  <div class="s3-mkt-def">
+    <p class="s3-mkt-def-line">Un <strong>marketplace</strong> es un registro de plugins que Claude Code sabe consultar.</p>
+    <p class="s3-mkt-def-line">Es el lugar al que le pregunta &quot;¿qué plugins hay y dónde están?&quot; cuando vos escribís un comando de install.</p>
+  </div>
+
+  <div class="s3-mkt-types">
+    <div class="s3-mkt-card is-official">
+      <div class="s3-mkt-tag">Pre-registrado</div>
+      <p class="s3-mkt-name">claude-plugins-official</p>
+      <p class="s3-mkt-desc">Mantenido por Anthropic. Disponible desde el momento en que abrís Claude Code — no hace falta registrar nada.</p>
+    </div>
+    <div class="s3-mkt-card">
+      <div class="s3-mkt-tag">Comunitarios</div>
+      <p class="s3-mkt-name">cualquier repo de GitHub</p>
+      <p class="s3-mkt-desc">Cualquiera puede armar uno. Para usarlo, primero lo registrás:</p>
+      <div class="s3-mkt-cmd">/plugin marketplace add &lt;usuario&gt;/&lt;repo&gt;</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Definición + dos tipos. El oficial viene pre-registrado; los comunitarios se agregan con un comando.</u></p>
+    <p><em>"Un marketplace es un registro de plugins que Claude Code sabe consultar. Es el lugar al que el cliente le pregunta '¿qué plugins están disponibles, y dónde están?' cuando ustedes escriben un comando de install."</em></p>
+    <p><em>"Hay dos tipos. El oficial, claude-plugins-official, lo mantiene Anthropic y viene pre-registrado: no hace falta agregarlo, está disponible desde que abren Claude Code. Y existen los comunitarios: cualquiera puede armar uno, típicamente como repo de GitHub. Para usar uno, primero lo registran con barra plugin marketplace add seguido de usuario barra repo."</em></p>
+    <p><em>"A partir de ese momento, los plugins de ese marketplace están disponibles para instalar igual que los del oficial."</em></p>
+  </aside>
+</section>
+
+<!-- §3.3 — Analogía -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Si la analogía ayuda</h2>
+
+  <div class="s3-analogy">
+    <div class="s3-analogy-card">
+      <p class="s3-analogy-tool">pip</p>
+      <p class="s3-analogy-context">para Python</p>
+    </div>
+    <div class="s3-analogy-card">
+      <p class="s3-analogy-tool">Extension Store</p>
+      <p class="s3-analogy-context">para VS Code</p>
+    </div>
+    <div class="s3-analogy-card" style="border-color: var(--accent);">
+      <p class="s3-analogy-tool" style="color: var(--accent);">Marketplace</p>
+      <p class="s3-analogy-context">para Claude Code</p>
+    </div>
+  </div>
+
+  <p class="s3-analogy-cap">Registro central de paquetes con metadata estandarizada, consultable por nombre.</p>
+
+  <aside class="notes">
+    <p><u>Analogía rápida para anclar el concepto. No es metáfora — es exactamente el mismo patrón visto en otros stacks.</u></p>
+    <p><em>"Si la analogía ayuda: un marketplace es a Claude Code lo que pip es a Python, o lo que el extension store es a VS Code. Registro central de paquetes con metadata estandarizada, consultable por nombre. No es una metáfora floja — es exactamente el mismo patrón que vieron en otros lugares."</em></p>
+    <p><em>"Si ya laburaron con pip install o con instalar una extensión de VS Code, ya saben lo que va a pasar — sólo cambia la sintaxis. Vamos a ver los comandos."</em></p>
+  </aside>
+</section>
+
+<!-- §3.4 — Cuatro comandos del ciclo de vida -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuatro comandos cubren el ciclo de vida</h2>
+
+  <div class="s3-cmds">
+    <div class="s3-cmd-card">
+      <div class="s3-cmd-syntax">/plugin install &lt;plugin&gt;@&lt;marketplace&gt;</div>
+      <p class="s3-cmd-desc">Descarga el plugin y registra sus skills, agents y commands. El <strong>@&lt;marketplace&gt;</strong> desambigua cuando tenés varios registrados.</p>
+    </div>
+    <div class="s3-cmd-card">
+      <div class="s3-cmd-syntax">/plugin update &lt;plugin&gt;</div>
+      <p class="s3-cmd-desc">Actualiza a la última versión disponible según el campo <code>version</code> del manifest. Si el manifest no lo declara, cada commit es release nuevo.</p>
+    </div>
+    <div class="s3-cmd-card">
+      <div class="s3-cmd-syntax">/plugin uninstall &lt;plugin&gt;</div>
+      <p class="s3-cmd-desc">Desinstala. Por default borra el directorio de datos persistente; pasale <code>--keep-data</code> si vas a reinstalar enseguida.</p>
+    </div>
+    <div class="s3-cmd-card">
+      <div class="s3-cmd-syntax">/plugin list</div>
+      <p class="s3-cmd-desc">Lista lo instalado, con <strong>versión</strong>, <strong>marketplace de origen</strong>, y si está <strong>habilitado</strong> o no.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Los 4 comandos del ciclo de vida. Sintaxis exacta + frase corta de qué hace.</u></p>
+    <p><em>"Cuatro comandos cubren todo el ciclo de vida del plugin instalado."</em></p>
+    <p><em>"Install: descarga y registra. La sintaxis es slash plugin install, el nombre del plugin, arroba, el marketplace. Por ejemplo, install formatter at my-marketplace. El arroba marketplace desambigua de qué registro lo están sacando, importante cuando tienen varios registrados."</em></p>
+    <p><em>"Update: actualiza a la última versión disponible según el campo version del manifest que vimos en §2. Si el autor omitió version, Claude Code trata cada commit como release nuevo."</em></p>
+    <p><em>"Uninstall: desinstala. Por default también borra el directorio de datos persistente. Si querés conservarlo — por ejemplo porque vas a reinstalar una versión nueva en seguida — agregás --keep-data."</em></p>
+    <p><em>"List: muestra lo que tenés instalado, con versión, marketplace de origen, y si está habilitado o no. Es el comando que van a usar primero para verificar instalaciones."</em></p>
+  </aside>
+</section>
+
+<!-- §3.5 — Scopes -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">El scope decide quién ve el plugin</h2>
+
+  <div class="s3-scope-syntax">
+    /plugin install &lt;plugin&gt;@&lt;marketplace&gt; <span class="s3-scope-flag">--scope &lt;user|project|local&gt;</span>
+    <div class="s3-scope-comment">El flag es opcional. Sin él, va a <code>user</code>.</div>
+  </div>
+
+  <div class="s3-scopes">
+    <div class="s3-scope-cell is-head">Scope</div>
+    <div class="s3-scope-cell is-head">Dónde se registra</div>
+    <div class="s3-scope-cell is-head">Cuándo usarlo</div>
+
+    <div class="s3-scope-cell is-name">
+      user
+      <span class="s3-scope-flag-inline is-default">sin flag (default)</span>
+    </div>
+    <div class="s3-scope-cell"><code>~/.claude/settings.json</code></div>
+    <div class="s3-scope-cell">Uso personal. Te sirve para todos tus proyectos.</div>
+
+    <div class="s3-scope-cell is-name">
+      project
+      <span class="s3-scope-flag-inline">--scope project</span>
+    </div>
+    <div class="s3-scope-cell"><code>.claude/settings.json</code> del repo</div>
+    <div class="s3-scope-cell">Plugins de equipo. Queda versionado — viaja con el repo.</div>
+
+    <div class="s3-scope-cell is-name">
+      local
+      <span class="s3-scope-flag-inline">--scope local</span>
+    </div>
+    <div class="s3-scope-cell"><code>.claude/settings.local.json</code> (gitignored)</div>
+    <div class="s3-scope-cell">Cosas que sólo querés en tu copia, no en la del equipo.</div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Tres scopes con cuándo usar cada uno. Default es user; el opt-in interesante es project.</u></p>
+    <p><em>"La doc define cuatro scopes, pero alcanza con tener claros los tres que usan en la práctica."</em></p>
+    <p><em>"Por default, install va a user: el plugin queda registrado en .claude/settings.json en su home, y les sirve para todos sus proyectos. Es el caso más común."</em></p>
+    <p><em>"Si pasan --scope project, va al .claude/settings.json del repo en el que están parados. Queda versionado y se comparte con cualquiera que clone — útil para plugins de equipo. Por ejemplo, ejecutan slash plugin install formatter at my-marketplace --scope project y el plugin viaja con el repo."</em></p>
+    <p><em>"Si pasan --scope local, queda en .claude/settings.local.json, que está gitignored, para cosas que quieren sólo en su copia del proyecto. Default user, opt-in a project cuando quieren que el plugin viaje con el repo."</em></p>
+  </aside>
+</section>
+
+<!-- §3.6 — Section divider: anuncia el demo -->
+<section class="section-divider">
+  <h2>Demo</h2>
+  <p style="color: var(--text-muted); margin-top: var(--spacing-sm);">Un plugin instalado en disco — anatomía real</p>
+</section>
+
+<!-- §3.7 — Demo: anatomía en disco -->
+<section>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Anatomía de un plugin instalado</h2>
+  <div id="s3-demo-steps" class="s3-demo-host"></div>
+
+  <aside class="notes">
+    <p><strong>Click cada beat para ver qué hacer + qué mostrar. Plan B en el último.</strong></p>
+    <p><u>Demo en vivo. La teoría de §2 se confirma abriendo el cache del marketplace oficial.</u></p>
+    <p><em>"Ya vimos qué dice la doc sobre la anatomía. Ahora vamos a verificarla con un plugin que ya tienen instalado: cualquier cosa del marketplace oficial. El folder real en disco es exactamente el árbol que dibujamos."</em></p>
+    <p><em>"Beat 1: abro el cache del marketplace oficial. Beat 2: abro un plugin.json y un SKILL.md adentro para que vean que es prosa, no magia. Beat 3: cerramos comparando con el árbol del §2. Eso confirma que el formato no es un PDF — es un folder real que ustedes pueden inspeccionar."</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§3-START -->
+<script>
+  initClickableSteps({containerId: 's3-demo-steps', steps: [
+    {
+      title: '1 — Abrir el cache',
+      summary: '<div style="text-align: left;">Terminal: <code>code ~/.claude/plugins/cache/claude-plugins-official/</code><br>Mirar: el folder se abre con varios plugins instalados, uno por carpeta.</div>',
+      borderColor: 'var(--accent)',
+      example: '<div style="background: var(--bg-primary); padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85em; color: var(--text-muted); line-height: 1.6;">claude-plugins-official/<br>├── superpowers/<br>├── changelog/<br>├── code-reviewer/<br>└── ...</div><p style="color: var(--text-muted); font-size: 0.9em; margin-top: 8px;">Lo que descargó Claude Code cuando alguien corrió <code>/plugin install</code> contra el marketplace oficial.</p>'
+    },
+    {
+      title: '2 — Abrir un plugin adentro',
+      summary: '<div style="text-align: left;">VS Code: abrir <code>superpowers/</code>.<br>Mirar: el árbol estándar — <code>.claude-plugin/plugin.json</code>, <code>skills/</code>, etc.<br>Abrir un <code>SKILL.md</code> para mostrar frontmatter + prosa.</div>',
+      borderColor: 'var(--accent-secondary)',
+      example: '<div style="background: var(--bg-primary); padding: 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85em; color: var(--text-muted); line-height: 1.6;">superpowers/<br>├── .claude-plugin/<br>│   └── plugin.json<br>├── skills/<br>│   ├── brainstorming/SKILL.md<br>│   ├── writing-plans/SKILL.md<br>│   └── ...<br>└── ...</div><p style="color: var(--text-muted); font-size: 0.9em; margin-top: 8px;">Cada <code>SKILL.md</code> es markdown con frontmatter — la misma forma que vieron en S04, sin magia agregada.</p>'
+    },
+    {
+      title: '3 — Volver al árbol de §2',
+      summary: '<div style="text-align: left;">Mirar: el árbol real coincide con el árbol que dibujamos hace dos minutos.<br>Cerrar: el formato no es un PDF, es un folder.</div>',
+      borderColor: 'var(--text-muted)',
+      example: '<p style="color: var(--text-primary); font-size: 0.95em; line-height: 1.5;">El árbol que vimos en §2 no era una abstracción: es exactamente lo que está en disco. Cualquier plugin que respete este formato lo van a poder leer ustedes, instalar con un comando, y modificar si quieren.</p><p style="color: var(--text-muted); font-size: 0.9em; margin-top: 8px;"><strong>Plan B</strong>: si el comando <code>code</code> no abre la carpeta, mostrar un screenshot pre-armado del árbol del cache.</p>'
+    }
+  ]});
+</script>
+<!-- INIT-SCRIPTS-§3-END -->
