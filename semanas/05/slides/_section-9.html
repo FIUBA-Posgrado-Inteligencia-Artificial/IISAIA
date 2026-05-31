@@ -420,13 +420,16 @@
     <p class="s6-sublabel">Tres anti-patrones a evitar</p>
     <div class="s6-anti">
       <div class="s6-anti-card">
-        Reusar el subagent para varias tareas. Perdés el reset de contexto y volvés a la sesión sucia que la skill estaba evitando.
+        <strong style="color: var(--accent-secondary); display: block; margin-bottom: 4px;">Reusar el subagent</strong>
+        Pasarle Task 2 al mismo subagent que ya cerró Task 1. Arranca con su contexto cargado — decisiones tácitas, errores pasados, código viejo. El aislamiento que la skill garantiza desaparece.
       </div>
       <div class="s6-anti-card">
-        Saltearse el two-stage review. Sin él, dos tareas más adelante estás compensando errores que se podían atrapar al toque.
+        <strong style="color: var(--accent-secondary); display: block; margin-bottom: 4px;">Saltearse el two-stage review</strong>
+        Marcar la tarea como hecha sin que el reviewer compare el diff contra el plan. Los errores de compliance se cuelan; dos tareas después estás debugueando algo que se atrapaba al toque.
       </div>
       <div class="s6-anti-card">
-        Intervenir demasiado pronto. La skill está diseñada para correr sola entre checkpoints. Interrumpir rompe el patrón.
+        <strong style="color: var(--accent-secondary); display: block; margin-bottom: 4px;">Intervenir demasiado pronto</strong>
+        Mandarle mensajes al coordinador mientras una tarea está en ejecución, para &laquo;ayudar&raquo;. La skill se diseñó para correr sola entre checkpoints — interrumpir rompe el loop autónomo y perdés la productividad del modo.
       </div>
     </div>
   </div>
@@ -435,7 +438,10 @@
     <p><strong>Dos reveals — operativa + anti-patrones.</strong></p>
     <p><u>Detalles operativos del flujo + los tres anti-patrones que rompen la disciplina.</u></p>
     <p><em>"Dos cosas importantes de la operativa. La primera: cuándo interviene el humano. Sólo en dos momentos: cuando ambas etapas del review pasan y se te presenta el resumen — ahí decidís si seguir o no — o cuando la skill explícitamente pide criterio que no está ni en el plan ni en el spec. La segunda: si un review encuentra issues, el coordinador vuelve a despachar al mismo implementer con feedback puntual y el reviewer vuelve a revisar. Cuando ambas etapas pasan, se marca la tarea como hecha y se despacha la siguiente."</em></p>
-    <p><em>"Tres anti-patrones. El primero: reusar el subagent para varias tareas. Perdés el reset de contexto y volvés a la sesión sucia que la skill estaba evitando — cada tarea arranca fresca o no arranca. El segundo: saltearse el two-stage review. Sin él, dos tareas más adelante estás compensando errores que se podían atrapar al toque, y el costo de revertir crece exponencialmente. El tercero: intervenir demasiado pronto. La skill está diseñada para correr sola entre checkpoints — si interrumpís en el medio para 'ayudar', rompés el patrón y perdés la productividad del modo autónomo."</em></p>
+    <p><em>"Tres anti-patrones, en términos de qué acción concreta los desencadena."</em></p>
+    <p><em>"El primero: reusar el subagent. En la práctica esto pasa cuando vez de cerrar Task 1 y dispatchear un agente nuevo para Task 2, le decís al coordinador que le pase la siguiente al mismo. Ese subagent arranca con su contexto cargado — el diff que generó, las decisiones que tomó, los errores que vio. Y todo eso contamina la Task 2 antes de empezar. Cada tarea arranca fresca o no arranca."</em></p>
+    <p><em>"El segundo: saltearse el two-stage review. Esto pasa cuando vos o el coordinador deciden marcar la tarea como hecha sin que el reviewer compare el diff contra el plan. La consecuencia se siente dos tareas después: estás debugueando algo que el reviewer del Task 1 habría atrapado en veinte segundos, y el costo de revertir crece exponencialmente porque hay tareas posteriores apoyadas sobre el error."</em></p>
+    <p><em>"El tercero: intervenir demasiado pronto. La skill se diseñó para correr sola entre checkpoints — vos sólo participás cuando termina una vuelta completa. Si mientras una tarea está corriendo le mandás un mensaje al coordinador para 'ayudar' o corregir antes de tiempo, rompés el loop autónomo. Perdés la productividad del modo subagent-driven."</em></p>
   </aside>
 </section>
 
