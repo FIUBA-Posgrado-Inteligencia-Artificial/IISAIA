@@ -241,7 +241,7 @@
       </div>
       <div class="s6-compare-card is-no">
         <div class="s6-compare-tag">Excepciones — con confirmación</div>
-        <p class="s6-compare-body">Prototipos descartables, código generado y archivos de configuración. Tienen que confirmarse explícitamente; no es el camino default.</p>
+        <p class="s6-compare-body">Prototipos descartables, archivos de configuración, y código autogenerado por herramientas (ej. el <code>openapi.yaml</code> que produce FastAPI). Tienen que confirmarse explícitamente; no es el camino default.</p>
       </div>
     </div>
   </div>
@@ -250,7 +250,7 @@
     <p class="s6-sublabel">Por qué importa</p>
     <div class="s6-central" style="margin-top: 0;">
       <div class="s6-central-main">
-        Sin TDD, el agente escribe código que <strong>parece correcto</strong> y después arma tests que pasan al primer intento. Esos tests post-hoc validan lo que el código hace — no lo que vos querías que hiciera.
+        Sin TDD, el agente escribe código que <strong>parece correcto</strong> y después arma tests que pasan al primer intento. Esos tests <strong>escritos después del código</strong> validan lo que el código hace — no lo que vos querías que hiciera.
       </div>
       <p class="s6-central-sub">
         En modo subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es lo que evita que &laquo;ya funciona&raquo; termine siendo &laquo;compila&raquo;.
@@ -262,8 +262,8 @@
     <p><strong>Dos reveals — cuándo + por qué.</strong></p>
     <p><u>Cuándo se activa la skill y por qué la disciplina vale.</u></p>
     <p><em>"Cuándo se activa: durante la implementación de cualquier feature, bugfix o cambio de comportamiento — antes de escribir código de producción. Si la tarea es agregar un endpoint, la skill arranca con un test del endpoint. Si la tarea es arreglar un bug, arranca con un test que reproduce el bug y falla por la razón correcta."</em></p>
-    <p><em>"Las únicas excepciones, que requieren confirmación explícita, son: prototipos descartables, código generado, y archivos de configuración. Esas tres no van por default por TDD — pero hay que pedirlo a propósito."</em></p>
-    <p><em>"Por qué importa: sin TDD, el agente escribe código que parece correcto y después arma tests que pasan al primer intento. Esos tests post-hoc validan lo que el código hace, no lo que vos querías que hiciera — y por lo tanto pierden su valor como red de seguridad. Vos nunca los viste atrapar un bug. En el contexto de subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es exactamente lo que evita que 'ya funciona' termine siendo 'compila'."</em></p>
+    <p><em>"Las únicas excepciones, que requieren confirmación explícita, son: prototipos descartables, archivos de configuración, y código autogenerado por herramientas — por ejemplo el openapi.yaml que produce FastAPI cuando le pedís el esquema. Esas tres no van por default por TDD; tienen que pedirse a propósito."</em></p>
+    <p><em>"Por qué importa: sin TDD, el agente escribe código que parece correcto y después arma tests que pasan al primer intento. Esos tests escritos después del código validan lo que el código hace, no lo que vos querías que hiciera — y por lo tanto pierden su valor como red de seguridad. Vos nunca los viste atrapar un bug. En el contexto de subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es exactamente lo que evita que 'ya funciona' termine siendo 'compila'."</em></p>
   </aside>
 </section>
 
