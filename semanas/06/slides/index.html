@@ -51,15 +51,410 @@
         <p class="muted">Introducción al desarrollo de software asistido por IA</p>
       </section>
 
-      <!-- ===== §1 — El LLM no ve tu mundo ===== -->
-      <section>
+      <!-- ===== §1 — Más allá del set que trae el host ===== -->
+      <style>
+  /* §1 — Más allá del set que trae el host */
+  .s1-h2 {
+    text-align: center;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .s1-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 860px;
+  }
+
+  /* CC's native tools grid (recap) */
+  .s1-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-sm);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s1-tool-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
+  }
+  .s1-tool-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s1-tool-detail {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.35;
+  }
+  .s1-tools-takeaway {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 860px;
+  }
+  .s1-tools-takeaway strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Three "no está" cards — staggered reveals */
+  .s1-nostá-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    max-width: 1180px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s1-nostá-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .s1-nostá-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--accent-secondary);
+    text-transform: uppercase;
+  }
+  .s1-nostá-title {
+    color: var(--accent);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .s1-nostá-quiero {
+    color: var(--text-primary);
+    background: var(--bg-code);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  .s1-nostá-quiero::before {
+    content: "→ ";
+    color: var(--text-muted);
+  }
+  .s1-nostá-gap {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Wrapper custom — N×M visual */
+  .s1-salida-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s1-salida-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s1-salida-title {
+    color: var(--text-heading);
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s1-salida-body {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .s1-wrappers-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+  }
+  .s1-wrapper-host {
+    background: var(--bg-code);
+    border: 1px dashed var(--text-muted);
+    border-radius: 6px;
+    padding: var(--spacing-sm);
+    text-align: center;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+  .s1-wrapper-host span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+  .s1-salida-takeaway {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    text-align: center;
+    margin: var(--spacing-md) 0 0 0;
+    line-height: 1.45;
+  }
+  .s1-salida-takeaway strong {
+    color: var(--accent-secondary);
+    font-weight: 700;
+  }
+
+  /* Pegar al prompt — three small chips */
+  .s1-complicaciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0 0 0;
+  }
+  .s1-comp-chip {
+    background: var(--bg-code);
+    border-left: 3px solid var(--text-muted);
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s1-comp-name {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 0 2px 0;
+  }
+  .s1-comp-detail {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Bridge slide */
+  .s1-bridge {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .s1-bridge-pre {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s1-bridge-name {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 var(--spacing-lg) 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .s1-bridge-tagline {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s1-bridge-hint {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-lg) 0 0 0;
+  }
+</style>
 <section>
-  <h2>§1 — TODO</h2>
+<!-- §1.1 — Recap: el set que trae Claude Code -->
+<section>
+  <h2 class="s1-h2">El set de tools que el agente ya tiene.</h2>
+  <p class="s1-h2-sub">Vino con Claude Code. Vos lo venís usando.</p>
+
+  <div class="s1-tools-grid">
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Read</p>
+      <p class="s1-tool-detail">leer archivos del repo</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Write</p>
+      <p class="s1-tool-detail">crear archivos nuevos</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Edit</p>
+      <p class="s1-tool-detail">modificar líneas</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Grep</p>
+      <p class="s1-tool-detail">buscar contenido</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Glob</p>
+      <p class="s1-tool-detail">buscar por path</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Bash</p>
+      <p class="s1-tool-detail">correr comandos</p>
+    </div>
+  </div>
+
+  <p class="s1-tools-takeaway">Para el grueso del workflow de desarrollo local, te alcanza. <strong>Lo decidió Anthropic.</strong></p>
+
+  <aside class="notes">
+    <p><u>Recap visual sin re-explicar qué es un tool. El alumno ya pasó por loop agentic + tools + harness + skills + sub-agents. El slide hace dos cosas: anclar lo que ya tienen y plantar la observación clave — el set es curado.</u></p>
+    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Grep, Glob para buscar. Bash para correr comandos. Cuando hacés un edit, cuando leés un schema, cuando corrés un test, alguno de esos seis está atrás."</em></p>
+    <p><em>"Para casi todo el workflow de desarrollo local — leer código, modificar código, correr comandos — ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos."</em></p>
+    <p><em>"De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
+  </aside>
+</section>
+
+<!-- §1.2 — Tres cosas que NO están -->
+<section>
+  <h2 class="s1-h2">Tres cosas que querés que el agente haga y no están.</h2>
+
+  <div class="s1-nostá-grid">
+    <div class="s1-nostá-card fragment fade-in" data-fragment-index="0">
+      <div class="s1-nostá-eyebrow">no está 1</div>
+      <h3 class="s1-nostá-title">Postgres de producción.</h3>
+      <div class="s1-nostá-quiero">Filas de users con email null, últimas 24 h.</div>
+      <p class="s1-nostá-gap">Bash con psql lo permite, pero el agente no sabe schema, tipos, ni qué columnas son sensibles.</p>
+    </div>
+    <div class="s1-nostá-card fragment fade-in" data-fragment-index="1">
+      <div class="s1-nostá-eyebrow">no está 2</div>
+      <h3 class="s1-nostá-title">Browser controlado.</h3>
+      <div class="s1-nostá-quiero">Abrí esta URL, completá el form, sacame screenshot.</div>
+      <p class="s1-nostá-gap">curl no renderiza, no ejecuta JS, no clickea. No está.</p>
+    </div>
+    <div class="s1-nostá-card fragment fade-in" data-fragment-index="2">
+      <div class="s1-nostá-eyebrow">no está 3</div>
+      <h3 class="s1-nostá-title">Docs de un SDK que salió ayer.</h3>
+      <div class="s1-nostá-quiero">Cómo se usa streamText en esta versión.</div>
+      <p class="s1-nostá-gap">Cutoff de entrenamiento. Si la API cambió, no se entera; sale de memoria y alucina.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — uno por capacidad faltante.</strong></p>
+    <p><u>El alumno aterriza tres casos concretos que cualquiera vivió. Cada card tiene el pedido en mono (lo que vos querrías escribir) y por qué el set actual no lo cubre limpio.</u></p>
+    <p><em>"Tres ejemplos concretos de capacidad que el set por default no te da."</em></p>
+    <p><em>"Primero: querés tirar una query contra Postgres de producción y traerte filas que matchean un patrón. Bash con psql te lo permite si las credenciales están en el entorno. Pero el agente no sabe el schema, no sabe los tipos, no sabe qué columnas son sensibles. Querrías un tool con tipos declarados y permisos, no una shell ciega."</em></p>
+    <p><em>"Segundo: querés controlar un browser. Abrir una página, hacer click, sacar una screenshot, completar un form. Bash con curl no hace nada de eso — no renderiza, no ejecuta JS, no clickea. La capacidad no está."</em></p>
+    <p><em>"Tercero: querés que el agente use un SDK que salió ayer. El modelo tiene cutoff de entrenamiento. Si la API cambió, no se entera; sale de memoria y alucina firmas que no existen. Querrías que pueda consultar la doc real antes de tipear, no salir de memoria."</em></p>
+    <p><em>"Tres situaciones reales. Tres cosas que el agente, con el set actual, no puede. ¿Qué hacés?"</em></p>
+  </aside>
+</section>
+
+<!-- §1.3 — Salida vieja 1: wrapper custom por host -->
+<section>
+  <h2 class="s1-h2">La primera salida instintiva.</h2>
+
+  <div class="s1-salida-card">
+    <p class="s1-salida-eyebrow">salida vieja 1</p>
+    <h3 class="s1-salida-title">Wrapper custom por host.</h3>
+    <p class="s1-salida-body">Te armás un script de Bash, un agente paralelo que invoca tu API, un binario que el agente ejecuta. Funciona en este Claude Code. Pero el wrapper lo escribiste para este host — si mañana querés probar Cursor, Codex CLI, Gemini CLI, el wrapper no se mueve con vos.</p>
+
+    <div class="s1-wrappers-row">
+      <div class="s1-wrapper-host">
+        Claude Code
+        <span>wrapper 1</span>
+      </div>
+      <div class="s1-wrapper-host">
+        Cursor
+        <span>wrapper 2</span>
+      </div>
+      <div class="s1-wrapper-host">
+        Codex CLI
+        <span>wrapper 3</span>
+      </div>
+      <div class="s1-wrapper-host">
+        Gemini CLI
+        <span>wrapper 4</span>
+      </div>
+    </div>
+
+    <p class="s1-salida-takeaway">Cada capacidad × cada host = trabajo nuevo. Eso es <strong>N×M</strong>, y crece feo.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>La primera salida vieja. El visual de 4 wrappers iguales en 4 hosts distintos muestra la duplicación. La frase N×M deja el término plantado para §2, que lo desarrolla.</u></p>
+    <p><em>"La primera respuesta instintiva — y la que más se ve en la práctica — es armarse el wrapper a mano. Un script de Bash que el agente ejecuta. Un binario chico que invoca tu API. Un agente paralelo que hace de puente. Funciona, sin duda. Lo usás en Claude Code y resuelve."</em></p>
+    <p><em>"El problema empieza cuando querés salir de Claude Code. El wrapper lo escribiste para este host — el formato de invocación, las convenciones de output, la forma en que el agente lo descubre, todo eso es específico de este runtime. Si mañana querés probar Cursor, el wrapper no se mueve con vos. Tenés que reescribirlo. Si querés probar Codex CLI, otra vez. Cada capacidad por cada host es trabajo nuevo. Eso es N×M. Si N son los hosts y M las capacidades, mantenerlo es insostenible."</em></p>
+  </aside>
+</section>
+
+<!-- §1.4 — Salida vieja 2: pegar al prompt -->
+<section>
+  <h2 class="s1-h2">La segunda salida instintiva.</h2>
+
+  <div class="s1-salida-card">
+    <p class="s1-salida-eyebrow">salida vieja 2</p>
+    <h3 class="s1-salida-title">Pegar al prompt.</h3>
+    <p class="s1-salida-body">Copiás el schema de Postgres, copiás el HTML de la página, copiás el README del SDK. Si lo necesitás una vez, te alcanza. Si lo necesitás todas las sesiones, sale caro.</p>
+
+    <div class="s1-complicaciones">
+      <div class="s1-comp-chip">
+        <p class="s1-comp-name">Costos</p>
+        <p class="s1-comp-detail">Cada token pegado se factura. Repo entero × cada sesión, escala lineal.</p>
+      </div>
+      <div class="s1-comp-chip">
+        <p class="s1-comp-name">Frescura</p>
+        <p class="s1-comp-detail">Lo que pegás se congela. Diez minutos después ya está desactualizado.</p>
+      </div>
+      <div class="s1-comp-chip">
+        <p class="s1-comp-name">Ruido</p>
+        <p class="s1-comp-detail">Más texto degrada la atención. Pegar "por las dudas" empeora respuestas.</p>
+      </div>
+    </div>
+
+    <p class="s1-salida-takeaway">Las skills, sub-agents y context engineering existen <strong>para que no pegues todo el tiempo</strong>. Acá el techo se ve.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>La segunda salida vieja. Las tres complicaciones se nombran rápido — el alumno ya conoce context engineering y sabe por qué pegar de más no escala. La frase del takeaway ata explícitamente con S04: las herramientas de manejo de contexto existen para esto mismo.</u></p>
+    <p><em>"La segunda respuesta instintiva, todavía más vaga: pegás. Copiás el schema, copiás el HTML, copiás el README. Si lo necesitás una sola vez, está bien. Si lo necesitás todas las sesiones — y en un workflow real lo necesitás todas las sesiones — se cae rápido."</em></p>
+    <p><em>"Tres razones por las que se cae, y las tres las venís viendo desde la clase de harness y context engineering. Costos: cada token que pegás se factura, y se factura cada vez. Frescura: lo que pegás es una foto, y dos minutos después está desactualizada. Ruido: más texto degrada la atención del modelo — pegar de más empeora la respuesta, no la mejora."</em></p>
+    <p><em>"Las skills, los sub-agents, el harness — todo eso lo aprendieron justamente para no estar pegando manualmente. Lo que estamos viendo acá es que el patrón de 'pegar todo al prompt', incluso bien envuelto, tiene techo. Para muchas capacidades necesarias, no alcanza."</em></p>
+  </aside>
+</section>
+
+<!-- §1.5 — Bridge: la salida nueva, MCP -->
+<section>
+  <div class="s1-bridge">
+    <p class="s1-bridge-pre">La salida estructural</p>
+    <h2 class="s1-bridge-name">MCP</h2>
+    <p class="s1-bridge-tagline">Un protocolo común que el host habla, los proveedores hablan, y N×M se vuelve N+M.</p>
+    <p class="s1-bridge-hint">Cómo está armado por dentro — viene ahora.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Bridge al resto del bloque. El nombre cae, sin desarrollar todavía. La frase central es la promesa estructural; las próximas secciones la desarman.</u></p>
+    <p><em>"Lo que falta no es otro wrapper. Es un protocolo común. Si tanto los hosts como los proveedores de capacidades acuerdan hablar el mismo formato, entonces vos escribís el server una vez y funciona en todos los hosts que hablen el protocolo. El problema N×M colapsa a N+M."</em></p>
+    <p><em>"Ese protocolo existe, se llama Model Context Protocol — MCP — y lo propuso Anthropic en 2024. Pero acá viene lo importante: no es un producto de Anthropic. Es un estándar abierto que adoptaron Cursor, Cline, Codex CLI, Visual Studio Code, Aider, Gemini CLI, y otros. Por eso lo vamos a estudiar — porque lo que aprendan acá viaja con ustedes a cualquier host que se sumen a usar."</em></p>
+    <p><em>"En la próxima sección vemos por qué tiene que ser protocolo y no librería, y por qué precedentes como HTTP y LSP cuentan acá."</em></p>
+  </aside>
 </section>
 </section>
       <!-- /§1 -->
 
-      <!-- ===== §2 — La trampa del context window ===== -->
+      <!-- ===== §2 — Protocolo, no API ===== -->
       <section>
 <section>
   <h2>§2 — TODO</h2>
@@ -67,7 +462,7 @@
 </section>
       <!-- /§2 -->
 
-      <!-- ===== §3 — Separar conocimiento de acción ===== -->
+      <!-- ===== §3 — Arquitectura ===== -->
       <section>
 <section>
   <h2>§3 — TODO</h2>
@@ -75,7 +470,7 @@
 </section>
       <!-- /§3 -->
 
-      <!-- ===== §4 — Protocolo, no API ===== -->
+      <!-- ===== §4 — Las tres primitives ===== -->
       <section>
 <section>
   <h2>§4 — TODO</h2>
@@ -83,7 +478,7 @@
 </section>
       <!-- /§4 -->
 
-      <!-- ===== §5 — Arquitectura ===== -->
+      <!-- ===== §5 — Discovery dinámico ===== -->
       <section>
 <section>
   <h2>§5 — TODO</h2>
@@ -91,7 +486,7 @@
 </section>
       <!-- /§5 -->
 
-      <!-- ===== §6 — Las tres primitives ===== -->
+      <!-- ===== §6 — Ecosistema + qué vale instalar ===== -->
       <section>
 <section>
   <h2>§6 — TODO</h2>
@@ -99,7 +494,7 @@
 </section>
       <!-- /§6 -->
 
-      <!-- ===== §7 — Discovery dinámico ===== -->
+      <!-- ===== §7 — Demo Playwright ===== -->
       <section>
 <section>
   <h2>§7 — TODO</h2>
@@ -107,7 +502,7 @@
 </section>
       <!-- /§7 -->
 
-      <!-- ===== §8 — Ecosistema + qué vale instalar ===== -->
+      <!-- ===== §8 — Demo context7 ===== -->
       <section>
 <section>
   <h2>§8 — TODO</h2>
@@ -115,7 +510,7 @@
 </section>
       <!-- /§8 -->
 
-      <!-- ===== §9 — Demo Playwright ===== -->
+      <!-- ===== §9 — Demo Blender ===== -->
       <section>
 <section>
   <h2>§9 — TODO</h2>
@@ -123,21 +518,13 @@
 </section>
       <!-- /§9 -->
 
-      <!-- ===== §10 — Demo context7 ===== -->
+      <!-- ===== §10 — Cuándo MCP, riesgos ===== -->
       <section>
 <section>
   <h2>§10 — TODO</h2>
 </section>
 </section>
       <!-- /§10 -->
-
-      <!-- ===== §11 — Cuándo MCP, riesgos ===== -->
-      <section>
-<section>
-  <h2>§11 — TODO</h2>
-</section>
-</section>
-      <!-- /§11 -->
 
       <section class="section-divider"><h2>¿Preguntas?</h2></section>
 

@@ -6,20 +6,19 @@ Este es el material fuente de la clase de Semana 6. La presentación reveal.js s
 
 | # | Archivo | Tema | Bloque de clase |
 |---|---------|------|-----------------|
-| 1 | [01-llm-no-ve-tu-mundo.md](01-llm-no-ve-tu-mundo.md) | El LLM no ve tu mundo | Concepto (~10 min) |
-| 2 | [02-trampa-del-context-window.md](02-trampa-del-context-window.md) | La trampa del context window | Concepto (~10 min) |
-| 3 | [03-separar-conocimiento-de-accion.md](03-separar-conocimiento-de-accion.md) | Separar conocimiento de acción | Concepto (~11 min) |
-| 4 | [04-protocolo-no-api.md](04-protocolo-no-api.md) | Protocolo, no API | Concepto (~12 min) |
-| 5 | [05-arquitectura-mcp.md](05-arquitectura-mcp.md) | Arquitectura: host / cliente / servidor | Concepto (~12 min) |
-| 6 | [06-tres-primitives.md](06-tres-primitives.md) | Las tres primitives | Concepto (~12 min) |
-| 7 | [07-discovery-dinamico.md](07-discovery-dinamico.md) | Discovery dinámico | Concepto (~12 min) |
-| 8 | [08-ecosistema-vendor-neutral.md](08-ecosistema-vendor-neutral.md) | El ecosistema y por qué viaja con vos | Concepto (~11 min) |
-| 9 | [09-demo-playwright.md](09-demo-playwright.md) | Demo: Playwright MCP | Demos (~12 min) |
-| 10 | [10-demo-context7.md](10-demo-context7.md) | Demo: context7 MCP | Demos (~13 min) |
-| 11 | [11-cuando-mcp-y-riesgos.md](11-cuando-mcp-y-riesgos.md) | Cuándo MCP, cuándo no, y riesgos | Cierre (~10 min) |
+| 1 | [01-mas-alla-del-set-que-trae-el-host.md](01-mas-alla-del-set-que-trae-el-host.md) | Más allá del set que trae el host | Setup (~15 min) |
+| 2 | [02-protocolo-no-api.md](02-protocolo-no-api.md) | Protocolo, no API | Mecánica (~12 min) |
+| 3 | [03-arquitectura-mcp.md](03-arquitectura-mcp.md) | Arquitectura: host / cliente / servidor | Mecánica (~13 min) |
+| 4 | [04-tres-primitives.md](04-tres-primitives.md) | Las tres primitives | Mecánica (~13 min) |
+| 5 | [05-discovery-dinamico.md](05-discovery-dinamico.md) | Discovery dinámico | Mecánica (~14 min) |
+| 6 | [06-ecosistema-vendor-neutral.md](06-ecosistema-vendor-neutral.md) | El ecosistema y qué vale instalar | Mecánica (~14 min) |
+| 7 | [07-demo-playwright.md](07-demo-playwright.md) | Demo: Playwright MCP | Demos (~10 min) |
+| 8 | [08-demo-context7.md](08-demo-context7.md) | Demo: context7 MCP | Demos (~10 min) |
+| 9 | [09-demo-blender.md](09-demo-blender.md) | Demo: Blender MCP (física) | Demos (~10 min) |
+| 10 | [10-cuando-mcp-y-riesgos.md](10-cuando-mcp-y-riesgos.md) | Cuándo MCP, cuándo no, y riesgos | Cierre (~10 min) |
 
 ## Hilo conductor
 
-Hasta ahora los agentes que vimos razonan sobre lo que está en su context window. Cuando hay que mirar afuera — un archivo del repo, una query a la base, una página web, las docs actuales de un SDK — el patrón fue copiar al prompt o esperar que el modelo ya lo sepa. Eso se cae en costos, frescura y ruido. MCP es la abstracción que separa lo que el LLM razona de lo que el LLM acciona, mediante un protocolo abierto que cualquier cliente puede hablar.
+Los agentes que vienen de S04 y S05 ya usan tools — `Read`, `Write`, `Bash`, `Grep`, `Glob`, `Edit`. Lo que no se discutió aún: ese set lo decidió Anthropic, y para todo lo que está afuera (DB de prod, browser, docs en vivo de un SDK nuevo) no hay tool. Las dos salidas instintivas — wrapper custom por host (N×M, no se reusa) y pegar al prompt (costos, frescura, ruido) — tienen techo. MCP es la salida estructural: un protocolo común que cualquier host habla y cualquier proveedor habla, donde el problema colapsa a N+M.
 
-La parte 1 (§§01-08) construye la intuición por capas: el problema (§§01-02), el insight estructural (§§03-04), la mecánica (§§05-07), y el ecosistema vendor-neutral que cierra el arco del curso (§08). La parte 2 (§§09-10) materializa todo con dos demos cortos: Playwright para acción en el browser, context7 para docs reales sobre cualquier SDK. El cierre (§11) calibra: cuándo conviene MCP, cuándo no, y qué riesgos asumís cada vez que conectás un server.
+El bloque (§§2-6) desarma el protocolo en capas: por qué protocolo y no API (§2), arquitectura host/cliente/servidor (§3), las tres primitives expuestas por el server (§4), discovery dinámico como pieza más elegante del protocolo (§5), y el ecosistema vendor-neutral con la pregunta cero "¿el host ya lo hace?" (§6). Los demos (§§7-9) materializan con **tres ángulos distintos**: Playwright (actuar sobre browser), context7 (informar al modelo con docs reales), Blender con física (crear en un dominio no-coding). El cierre (§10) calibra cuándo MCP, cuándo no, y qué riesgos asumís.
