@@ -2900,6 +2900,7 @@
   }
   .s5-poster-q strong { color: var(--accent); font-weight: 700; }
   .s5-poster-q em { color: var(--accent-secondary); font-style: normal; }
+  .s5-poster-q + .s5-poster-q { margin-top: var(--spacing-sm); }
   .s5-poster-sub {
     color: var(--text-muted);
     font-size: 1.2rem;
@@ -3133,7 +3134,8 @@
 <!-- §5.6 — El insight, articulado -->
 <section>
   <div class="s5-poster">
-    <p class="s5-poster-q">El LLM no <em>memoriza</em> tools.<br>Los <strong>descubre</strong> en tiempo de conversación.</p>
+    <p class="s5-poster-q">El LLM no <em>memoriza</em> tools.</p>
+    <p class="s5-poster-q">Los <strong>descubre</strong> en tiempo de conversación.</p>
     <p class="s5-poster-sub">Por eso cualquier server nuevo, escrito hoy, es usable hoy — sin reentrenar el modelo, sin actualizarlo, sin que el vendor del LLM se entere.</p>
   </div>
 
