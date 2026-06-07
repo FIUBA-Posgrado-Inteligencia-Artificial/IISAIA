@@ -307,14 +307,14 @@
 <!-- §5.1 — Hook: la pregunta del cutoff -->
 <section>
   <div class="s5-hook">
-    <p class="s5-hook-lead">Conectás un MCP Server que alguien escribió la semana pasada. El modelo lo usa de una. Pero el modelo se entrenó hace meses.</p>
-    <p class="s5-hook-q">¿Cómo es que el LLM usa tools que se publicaron <strong>después de su cutoff</strong>?</p>
+    <p class="s5-hook-lead">Que el modelo use algo que no vio en entrenamiento ya no te sorprende: le cargás la info al contexto y listo. Eso es context engineering, lo venís haciendo hace semanas.</p>
+    <p class="s5-hook-q">Lo nuevo con MCP: ese contexto <strong>no lo armás vos</strong>. ¿Quién lo arma, y cuándo?</p>
   </div>
 
   <aside class="notes">
-    <p><u>Hook de §5. La pregunta que el alumno arrastra desde S04 — el modelo se congela en el entrenamiento, ¿cómo usa algo que no vio? Sin reveals, la pregunta queda flotando antes de la respuesta.</u></p>
-    <p><em>"Pongámoslo así. Conectás un MCP Server que alguien escribió la semana pasada — no existía cuando este modelo se entrenó. Y el modelo lo usa sin problema, de una. Pero el modelo está congelado, su conocimiento tiene una fecha de corte, un cutoff."</em></p>
-    <p><em>"Entonces, ¿cómo es que el LLM usa tools que se publicaron después de su cutoff? Nunca los vio, no los memorizó, no sabe que existen. Esta pregunta es la pieza más elegante de MCP, y todo este bloque es la respuesta. Vamos a desarmarla."</em></p>
+    <p><u>Hook de §5, recalibrado: NO vender como asombroso que el modelo use tools post-cutoff — a esta altura ya manejan context engineering. La pregunta real es de mecanismo: quién arma el contexto con la descripción del server, y cuándo. Discovery es la respuesta.</u></p>
+    <p><em>"Arranquemos por lo que ya saben. Que el modelo use una herramienta que no vio en el entrenamiento no tiene nada de mágico: le metés en el contexto una descripción de qué es y cómo se usa, y el modelo opera sobre eso. Eso es context engineering, lo venimos haciendo desde hace semanas."</em></p>
+    <p><em>"Lo nuevo que trae MCP no es que se pueda — es que ese contexto no lo armás vos a mano. Conectás un server que escribió un desconocido, y de golpe el modelo sabe qué tools tiene y con qué parámetros. ¿Quién armó ese contexto? ¿En qué momento? Eso es lo que vamos a desarmar: el mecanismo de discovery."</em></p>
   </aside>
 </section>
 
@@ -433,7 +433,7 @@
     <p><u>El catálogo con metadata. El punto pedagógico clave: la respuesta no son nombres pelados — trae description e inputSchema, y eso es lo que el modelo lee para decidir cuándo invocar. Esa metadata viaja al system context.</u></p>
     <p><em>"Después del handshake, el cliente descubre qué hay. Manda un tools slash list — un mensaje cortito, sin parámetros. 'Decime qué tools tenés.'"</em></p>
     <p><em>"Y el server le devuelve un catálogo. Pero ojo, no es una lista de nombres pelada. Cada tool viene con metadata: el nombre, una description en prosa de qué hace, y un inputSchema que dice qué parámetros toma y de qué tipo. Acá ven browser_navigate, de Playwright, con su descripción y su único parámetro url, requerido, de tipo string."</em></p>
-    <p><em>"Y acá está el mecanismo completo: esa metadata se le inyecta al modelo como parte del system context de la conversación. Antes de razonar sobre lo que vos le pediste, el modelo ya tiene en la mesa la descripción exacta de cada herramienta que dispone. La description que escribió el autor del server es literalmente lo que el modelo lee para decidir cuándo usarla. Por eso un server escrito hoy es usable hoy: su catálogo entra al contexto en tiempo de conversación, sin tocar el modelo."</em></p>
+    <p><em>"Y acá está el mecanismo completo: esa metadata se le inyecta al modelo como parte del system context de la conversación. Antes de razonar sobre lo que vos le pediste, el modelo ya tiene en la mesa la descripción exacta de cada herramienta que dispone. La description que escribió el autor del server es literalmente lo que el modelo lee para decidir cuándo usarla. Es el mismo cargar-al-contexto de context engineering — pero automático: el catálogo entra solo, sin que vos lo escribas a mano."</em></p>
   </aside>
 </section>
 
@@ -477,13 +477,13 @@
   <div class="s5-poster">
     <p class="s5-poster-q">El LLM no <em>memoriza</em> tools.</p>
     <p class="s5-poster-q">Los <strong>descubre</strong> en tiempo de conversación.</p>
-    <p class="s5-poster-sub">Por eso cualquier server nuevo, escrito hoy, es usable hoy — sin reentrenar el modelo, sin actualizarlo, sin que el vendor del LLM se entere.</p>
+    <p class="s5-poster-sub">Es el mismo cargar-al-contexto de siempre — pero el protocolo lo estandariza y lo automatiza: el server se describe, el cliente lo inyecta, sin que toques nada. Un server escrito hoy funciona hoy, en cualquier host.</p>
   </div>
 
   <aside class="notes">
-    <p><u>El insight articulado en una frase. Slide-poster sin adornos. Esta es la frase que más vale la pena que se lleven de toda la sección.</u></p>
+    <p><u>El insight articulado. Slide-poster sin adornos. Ojo con el tono: no es "guau, usa algo no entrenado" — eso ya lo manejan. El punto es que el protocolo estandariza y automatiza el cargar-al-contexto que ya conocen.</u></p>
     <p><em>"Si se llevan una sola frase de este bloque, que sea esta. El LLM no memoriza tools. Los descubre en tiempo de conversación."</em></p>
-    <p><em>"Y la consecuencia es enorme: cualquier server nuevo, escrito hoy, es usable hoy. Sin reentrenar el modelo, sin esperar una actualización, sin que la empresa que hace el LLM tenga que enterarse siquiera de que ese server existe. La integración funciona porque hay un protocolo común que dice 'así te describís, y así te invocan'. El descubrimiento reemplaza a la memorización."</em></p>
+    <p><em>"Y para que quede claro: esto no es ningún truco nuevo del modelo. Es exactamente el cargar-al-contexto que vienen usando en context engineering. Lo que aporta MCP es estandarizarlo y automatizarlo: el server se describe de una forma fija, el cliente inyecta ese catálogo solo, y vos no tocás nada. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo. El descubrimiento automático reemplaza al curado manual."</em></p>
   </aside>
 </section>
 
