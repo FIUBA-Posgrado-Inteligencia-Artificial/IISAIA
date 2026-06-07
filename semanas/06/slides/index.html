@@ -782,25 +782,1876 @@
       <!-- /§1 -->
 
       <!-- ===== §2 — Protocolo, no API ===== -->
-      <section>
+      <style>
+  /* §2 — Protocolo, no API
+     All centered elements share max-width 1000px so vertical edges align. */
+  .s2-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s2-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §2.1 — Matrix N×M ↔ N+M visual */
+  .s2-matrix-wrap {
+    max-width: 1000px;
+    height: 360px;
+    margin: var(--spacing-md) auto 0 auto;
+    position: relative;
+  }
+  .s2-matrix-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .s2-matrix-svg .lines-spaghetti line {
+    stroke: var(--text-muted);
+    stroke-width: 1.3;
+    opacity: 0.55;
+  }
+  .s2-matrix-svg .lines-hub line {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    opacity: 1;
+  }
+  .s2-matrix-clients,
+  .s2-matrix-providers {
+    position: absolute;
+    top: 0;
+    width: 180px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 2;
+  }
+  .s2-matrix-clients { left: 0; }
+  .s2-matrix-providers { right: 0; }
+  .s2-matrix-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+  .s2-matrix-hub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+    z-index: 3;
+    box-shadow: 0 0 24px var(--accent);
+  }
+  .s2-matrix-caption {
+    text-align: center;
+    margin: var(--spacing-md) auto 0 auto;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    max-width: 1000px;
+  }
+  .s2-matrix-caption strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+  .s2-matrix-caption-pre {
+    text-align: center;
+    margin: var(--spacing-md) auto 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 1000px;
+  }
+  .s2-matrix-caption-pre strong {
+    color: var(--accent-secondary);
+    font-family: var(--font-mono);
+  }
+
+  /* §2.2 — HTTP + LSP precedents */
+  .s2-precedents {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s2-prec-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  .s2-prec-year {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .s2-prec-name {
+    color: var(--text-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 4px 0 0 0;
+  }
+  .s2-prec-fullname {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0 0 var(--spacing-sm) 0;
+    font-style: italic;
+  }
+  .s2-prec-pair {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s2-prec-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s2-prec-body strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s2-prec-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    line-height: 1.5;
+  }
+
+  /* §2.3 — MCP canonical definition */
+  .s2-def {
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto 0 auto;
+    text-align: center;
+  }
+  .s2-def-pre {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s2-def-quote {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+    font-style: italic;
+    padding: 0 var(--spacing-lg);
+    border-left: 4px solid var(--accent);
+    text-align: left;
+  }
+  .s2-def-quote strong {
+    color: var(--accent);
+    font-weight: 700;
+    font-style: normal;
+  }
+  .s2-def-attr {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: var(--spacing-md) 0 0 0;
+    text-align: right;
+    padding-right: var(--spacing-lg);
+  }
+  .s2-def-adopt {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin: var(--spacing-xl) auto 0 auto;
+    max-width: 1000px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .s2-def-adopters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    padding: 0;
+  }
+  .s2-def-adopters code {
+    background: var(--bg-code);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.98rem;
+  }
+
+  /* §2.4 — USB-C analogy */
+  .s2-usbc {
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto 0 auto;
+    text-align: center;
+  }
+  .s2-usbc-pre {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s2-usbc-quote {
+    font-size: 2.2rem;
+    color: var(--text-heading);
+    line-height: 1.3;
+    margin: 0 auto var(--spacing-lg) auto;
+    max-width: 1000px;
+    font-weight: 600;
+  }
+  .s2-usbc-quote strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s2-usbc-explain {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s2-usbc-attr {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: var(--spacing-md) 0 0 0;
+  }
+
+  /* §2.5 — bridge */
+  .s2-bridge {
+    text-align: center;
+    max-width: 760px;
+    margin: var(--spacing-2xl) auto 0 auto;
+  }
+  .s2-bridge-line {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .s2-bridge-line em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .s2-bridge-hint {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-md) 0 0 0;
+  }
+</style>
 <section>
-  <h2>§2 — TODO</h2>
+<!-- §2.1 — Matrix N×M ↔ N+M (visual canónico) -->
+<section>
+  <h2 class="s2-h2">El patrón estructural.</h2>
+  <p class="s2-h2-sub">Por qué necesariamente tiene forma de protocolo.</p>
+
+  <div class="s2-matrix-wrap">
+    <div class="s2-matrix-clients">
+      <div class="s2-matrix-item">Cliente A</div>
+      <div class="s2-matrix-item">Cliente B</div>
+      <div class="s2-matrix-item">Cliente C</div>
+      <div class="s2-matrix-item">Cliente D</div>
+    </div>
+    <div class="s2-matrix-providers">
+      <div class="s2-matrix-item">Proveedor 1</div>
+      <div class="s2-matrix-item">Proveedor 2</div>
+      <div class="s2-matrix-item">Proveedor 3</div>
+      <div class="s2-matrix-item">Proveedor 4</div>
+    </div>
+    <div class="s2-matrix-hub fragment fade-in" data-fragment-index="0">MCP</div>
+    <svg class="s2-matrix-svg" viewBox="0 0 1000 360" preserveAspectRatio="none">
+      <g class="lines-spaghetti fragment fade-out" data-fragment-index="0">
+        <line x1="180" y1="45"  x2="820" y2="45"  />
+        <line x1="180" y1="45"  x2="820" y2="135" />
+        <line x1="180" y1="45"  x2="820" y2="225" />
+        <line x1="180" y1="45"  x2="820" y2="315" />
+        <line x1="180" y1="135" x2="820" y2="45"  />
+        <line x1="180" y1="135" x2="820" y2="135" />
+        <line x1="180" y1="135" x2="820" y2="225" />
+        <line x1="180" y1="135" x2="820" y2="315" />
+        <line x1="180" y1="225" x2="820" y2="45"  />
+        <line x1="180" y1="225" x2="820" y2="135" />
+        <line x1="180" y1="225" x2="820" y2="225" />
+        <line x1="180" y1="225" x2="820" y2="315" />
+        <line x1="180" y1="315" x2="820" y2="45"  />
+        <line x1="180" y1="315" x2="820" y2="135" />
+        <line x1="180" y1="315" x2="820" y2="225" />
+        <line x1="180" y1="315" x2="820" y2="315" />
+      </g>
+      <g class="lines-hub fragment fade-in" data-fragment-index="0">
+        <line x1="180" y1="45"  x2="450" y2="180" />
+        <line x1="180" y1="135" x2="450" y2="180" />
+        <line x1="180" y1="225" x2="450" y2="180" />
+        <line x1="180" y1="315" x2="450" y2="180" />
+        <line x1="550" y1="180" x2="820" y2="45"  />
+        <line x1="550" y1="180" x2="820" y2="135" />
+        <line x1="550" y1="180" x2="820" y2="225" />
+        <line x1="550" y1="180" x2="820" y2="315" />
+      </g>
+    </svg>
+  </div>
+
+  <p class="s2-matrix-caption-pre">N clientes × M proveedores, cada par una integración. <strong>N × M = 16</strong>.</p>
+  <p class="s2-matrix-caption fragment fade-in" data-fragment-index="0">Un protocolo común al medio. <strong>N + M = 8</strong>.</p>
+
+  <aside class="notes">
+    <p><strong>Un reveal — spaghetti se va, hub aparece.</strong></p>
+    <p><u>La matriz formal, abstracta. §1.4 ya mostró el caso concreto (Postgres × runtimes); §2.1 generaliza: N clientes × M proveedores. La transición de spaghetti a hub es la promesa estructural del protocolo. Este diagrama se va a reusar tal cual en §6, cuando hablemos del ecosistema.</u></p>
+    <p><em>"Pongamos en abstracto lo que vimos en concreto. Tenés N clientes — pueden ser agentes, IDEs, runtimes — y tenés M proveedores de capacidades — Postgres, browser, Slack, lo que sea. Si cada cliente define su propia forma de integrar capacidades, entonces cada par cliente-proveedor es una integración custom. Eso es lo que ven a la izquierda: N por M. Cuatro por cuatro, dieciséis líneas. Cliente nuevo, M integraciones más. Proveedor nuevo, N integraciones más. Crece feo, sin techo."</em></p>
+    <p><em>"Si en cambio metés un protocolo común al medio — esto es lo que aparece ahora — la matriz se colapsa. Cada cliente habla el protocolo, una vez. Cada proveedor habla el protocolo, una vez. Total: N más M. Cuatro más cuatro, ocho conexiones. Y la propiedad clave: cliente nuevo, una integración, hereda todos los proveedores. Proveedor nuevo, una integración, queda disponible para todos los clientes. Esto es lo que hace un protocolo. Y este patrón no es nuevo — ya pasó antes."</em></p>
+  </aside>
+</section>
+
+<!-- §2.2 — Precedentes HTTP y LSP -->
+<section>
+  <h2 class="s2-h2">Este patrón ya pasó antes.</h2>
+  <p class="s2-h2-sub">Dos precedentes históricos del mismo movimiento.</p>
+
+  <div class="s2-precedents">
+    <div class="s2-prec-card">
+      <p class="s2-prec-year">1991</p>
+      <h3 class="s2-prec-name">HTTP</h3>
+      <p class="s2-prec-fullname">HyperText Transfer Protocol</p>
+      <p class="s2-prec-pair">browsers × servers</p>
+      <p class="s2-prec-body">Antes: cada browser hablaba con cada server por su cuenta. Después de HTTP, <strong>cualquier browser habla con cualquier server</strong>, sin coordinación entre autores. Internet se vuelve posible.</p>
+    </div>
+    <div class="s2-prec-card fragment fade-in" data-fragment-index="0">
+      <p class="s2-prec-year">2016</p>
+      <h3 class="s2-prec-name">LSP</h3>
+      <p class="s2-prec-fullname">Language Server Protocol</p>
+      <p class="s2-prec-pair">IDEs × lenguajes</p>
+      <p class="s2-prec-body">Antes: cada IDE × cada lenguaje, autocompletado a mano. Después de LSP, <strong>cada lenguaje publica un server, cada IDE lo consume</strong>. La matriz colapsa.</p>
+    </div>
+  </div>
+
+  <p class="s2-prec-caption fragment fade-in" data-fragment-index="1">MCP es el mismo movimiento, para <strong>agentes × capacidades</strong>. No inventa nada — aplica una idea conocida a un dominio nuevo.</p>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — primero LSP, después la línea de cierre con MCP.</strong></p>
+    <p><u>Dos precedentes históricos del mismo patrón, revelados de a uno. Ubican a MCP en una tradición — no es invento de Anthropic, es aplicar a agentes una idea que ya resolvió problemas análogos.</u></p>
+    <p><em>"Este movimiento que acabamos de ver — la matriz que se colapsa por un protocolo común — no es nuevo. Ya pasó dos veces en la historia reciente del software, y vale la pena ubicarlo donde lo vieron antes. Primero, HTTP. Año 91. HyperText Transfer Protocol. Antes de HTTP cada browser hablaba con cada servidor por su cuenta — coordinaban formatos, encodings, mecanismos. Después de HTTP, cualquier browser habla con cualquier server. Internet se vuelve posible. Esa es la propiedad del protocolo común: descomprime una matriz de coordinación humana en infraestructura compartida."</em></p>
+    <p><em>"Segundo, LSP — Language Server Protocol. 2016, Microsoft. Resolvió exactamente el mismo problema en el mundo de los IDEs. Antes, cada IDE — VS Code, Vim, Emacs, Sublime — implementaba autocompletado y go-to-definition para cada lenguaje — Python, Go, Rust, TypeScript — a mano. N por M. Insostenible. Después de LSP, cada lenguaje publica un language server, cada IDE consume cualquier server. N más M. Y eso es lo que hace que hoy cualquier IDE moderno tenga autocompletado decente en cualquier lenguaje, sin que el equipo del IDE escriba código específico para cada uno."</em></p>
+    <p><em>"MCP es el mismo movimiento, aplicado a agentes y capacidades. No inventa nada conceptualmente. Aplica una idea conocida — protocolo común — a un dominio donde el problema apareció hace poco."</em></p>
+  </aside>
+</section>
+
+<!-- §2.3 — MCP definición canónica -->
+<section>
+  <div class="s2-def">
+    <p class="s2-def-pre">la definición oficial</p>
+    <blockquote class="s2-def-quote">
+      MCP es un <strong>estándar open-source</strong> para conectar aplicaciones de IA a sistemas externos.
+    </blockquote>
+    <p class="s2-def-attr">— modelcontextprotocol.io</p>
+  </div>
+
+  <p class="s2-def-adopt">Lo propuso Anthropic en 2024. Lo adoptaron:</p>
+  <div class="s2-def-adopters">
+    <code>Claude</code>
+    <code>ChatGPT</code>
+    <code>Cursor</code>
+    <code>Codex CLI</code>
+    <code>Opencode</code>
+    <code>VS Code</code>
+  </div>
+
+  <aside class="notes">
+    <p><u>La definición oficial. Nota deliberada: la definición no menciona a Anthropic. Es un estándar abierto que Anthropic propuso, no un producto Anthropic.</u></p>
+    <p><em>"Esta es la definición oficial, de la doc de modelcontextprotocol.io. Léanla con cuidado: 'MCP es un estándar open-source para conectar aplicaciones de IA a sistemas externos.' Notá lo que esa frase no dice. No dice 'estándar de Anthropic'. No dice 'protocolo de Claude'. Dice 'estándar open-source'. Es deliberado: aunque lo propuso Anthropic en 2024, el protocolo es abierto y existe independientemente."</em></p>
+    <p><em>"La adopción lo confirma. Claude lo soporta, obviamente. Pero también ChatGPT, Cursor, Codex CLI, Opencode, VS Code, y otros. Cuando ustedes aprenden MCP, aprenden algo que viaja con ustedes a cualquier runtime de IA que vayan a usar. Eso es lo que hace que valga la pena estudiarlo."</em></p>
+  </aside>
+</section>
+
+<!-- §2.4 — Analogía USB-C -->
+<section>
+  <div class="s2-usbc">
+    <p class="s2-usbc-pre">la analogía oficial</p>
+    <h2 class="s2-usbc-quote">MCP es como un puerto <strong>USB-C</strong> para aplicaciones de IA.</h2>
+    <p class="s2-usbc-explain">Así como USB-C estandariza la forma de conectar dispositivos electrónicos, MCP estandariza la forma en que las aplicaciones de IA se conectan a sistemas externos.</p>
+    <p class="s2-usbc-attr">— modelcontextprotocol.io</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>La analogía oficial, en versión de bolsillo. HTTP y LSP explicaron el porqué estructural; USB-C es la metáfora rápida que se quedan.</u></p>
+    <p><em>"Y la doc oficial propone una analogía más corta, más memorable, que les va a venir a la cabeza después: MCP es como un puerto USB-C para aplicaciones de IA. La idea es la misma — antes de USB-C cada dispositivo tenía su propio cable, su propio conector, su propia forma de comunicarse. Después de USB-C, cualquier dispositivo con USB-C se conecta a cualquier otro con USB-C, sin pensar."</em></p>
+    <p><em>"HTTP y LSP les sirven para entender el porqué estructural — el N por M que colapsa a N más M. USB-C les sirve como mnemónico, para acordarse del concepto en dos palabras. Las dos son útiles."</em></p>
+  </aside>
+</section>
+
+<!-- §2.5 — Bridge a §3 -->
+<section>
+  <div class="s2-bridge">
+    <p class="s2-bridge-line">Vimos <em>por qué tiene que ser un protocolo</em>.</p>
+    <p class="s2-bridge-line">Veamos <em>cómo está armado por dentro</em>.</p>
+    <p class="s2-bridge-hint">Arquitectura: host, cliente, servidor — viene ahora.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Bridge corto a §3. Cierra el "por qué" y abre el "cómo".</u></p>
+    <p><em>"Cerramos el por qué. Lo que viene es el cómo. La arquitectura de MCP por dentro — quiénes son los participantes, cómo se hablan, qué intercambian. Tres roles, dos capas, dos transports. Vamos."</em></p>
+  </aside>
 </section>
 </section>
       <!-- /§2 -->
 
       <!-- ===== §3 — Arquitectura ===== -->
-      <section>
+      <style>
+  /* §3 — Arquitectura: host, cliente, servidor
+     Every top-level centered element shares max-width: 1000px so edges align. */
+  .s3-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s3-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §3.1 + §3.6 — Architecture diagram */
+  .s3-arch {
+    display: grid;
+    grid-template-columns: 1.45fr 80px 1fr;
+    gap: var(--spacing-md);
+    align-items: center;
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+    padding: var(--spacing-md) 0;
+  }
+  .s3-arch-host {
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
+    position: relative;
+  }
+  .s3-arch-host-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: var(--bg-primary);
+    padding: 0 8px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s3-arch-host-name {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-heading);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s3-arch-clients {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .s3-arch-client {
+    background: var(--bg-code);
+    border: 1px dashed var(--text-muted);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+
+  .s3-arch-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .s3-arch-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .s3-arch-arrow-line {
+    width: 100%;
+    height: 2px;
+    background: var(--text-muted);
+    position: relative;
+  }
+  .s3-arch-arrow-line::before,
+  .s3-arch-arrow-line::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .s3-arch-arrow-line::before {
+    left: 0;
+    border-right: 6px solid var(--text-muted);
+  }
+  .s3-arch-arrow-line::after {
+    right: 0;
+    border-left: 6px solid var(--text-muted);
+  }
+  .s3-arch-arrow-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .s3-arch-servers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .s3-arch-server {
+    background: var(--bg-code);
+    border: 2px solid var(--accent-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    position: relative;
+  }
+  .s3-arch-server::before {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background: var(--bg-primary);
+    padding: 0 6px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-secondary);
+  }
+  .s3-arch-server-local::before { content: 'stdio'; }
+  .s3-arch-server-remote::before { content: 'Streamable HTTP'; }
+  .s3-arch-server-name {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-heading);
+  }
+  .s3-arch-server-detail {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* §3.1 — Quick transport definitions row */
+  .s3-arch-transports-quick {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s3-arch-transports-quick-item {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .s3-arch-transports-quick-item strong {
+    color: var(--accent-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* §3.2 — Role definitions */
+  .s3-defs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s3-def-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: var(--spacing-md);
+    align-items: center;
+  }
+  .s3-def-badge {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s3-def-body {
+    color: var(--text-primary);
+    font-size: 1.02rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s3-def-body strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* §3.3 — Rule slide */
+  .s3-rule {
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto 0 auto;
+    text-align: center;
+  }
+  .s3-rule-quote {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 600;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .s3-rule-quote strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s3-rule-sub {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    line-height: 1.5;
+  }
+  .s3-mini-arch {
+    display: grid;
+    grid-template-columns: 1.4fr 60px 1fr;
+    gap: var(--spacing-sm);
+    align-items: center;
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto 0 auto;
+    padding: 0;
+  }
+  .s3-mini-host {
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    position: relative;
+  }
+  .s3-mini-host-label {
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background: var(--bg-primary);
+    padding: 0 6px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s3-mini-clients {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .s3-mini-client {
+    background: var(--bg-code);
+    border: 1px dashed var(--text-muted);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .s3-mini-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .s3-mini-arrow {
+    height: 2px;
+    background: var(--text-muted);
+    margin: 12px 0;
+  }
+  .s3-mini-servers {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .s3-mini-server {
+    background: var(--bg-code);
+    border: 1px solid var(--accent-secondary);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+
+  /* §3.4 + §3.5 — 2-col comparisons */
+  .s3-twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s3-twocol-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  .s3-twocol-badge {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .s3-twocol-title {
+    color: var(--text-heading);
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 4px 0 var(--spacing-sm) 0;
+  }
+  .s3-twocol-body {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s3-twocol-body strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s3-twocol-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    line-height: 1.5;
+  }
+  .s3-twocol-caption strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* §3.5 — Stdio illustration: teclado → STDIN → proceso → STDOUT → pantalla */
+  .s3-stdio-illust-caption {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: var(--spacing-md) 0 var(--spacing-xs) 0;
+    font-style: italic;
+  }
+  .s3-stdio-flow {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto;
+    align-items: center;
+    gap: 6px;
+    padding: var(--spacing-sm);
+    background: var(--bg-code);
+    border-radius: 6px;
+  }
+  .s3-stdio-node {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .s3-stdio-edge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .s3-stdio-edge-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-secondary);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .s3-stdio-edge-line {
+    width: 100%;
+    height: 2px;
+    background: var(--accent-secondary);
+    position: relative;
+  }
+  .s3-stdio-edge-line::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid var(--accent-secondary);
+  }
+
+  /* §3.6 closing line */
+  .s3-mental-caption {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    line-height: 1.5;
+  }
+  .s3-mental-caption em {
+    color: var(--accent);
+    font-style: normal;
+  }
+</style>
 <section>
-  <h2>§3 — TODO</h2>
+<!-- §3.1 — Tres participantes (introducción del diagrama) -->
+<section>
+  <h2 class="s3-h2">Tres participantes.</h2>
+  <p class="s3-h2-sub">Cómo se nombran en MCP. Vale separarlos — "cliente" se sobrecarga rápido.</p>
+
+  <div class="s3-arch">
+    <div class="s3-arch-host">
+      <span class="s3-arch-host-label">MCP Host</span>
+      <p class="s3-arch-host-name">Claude Code</p>
+      <div class="s3-arch-clients">
+        <div class="s3-arch-client fragment fade-in" data-fragment-index="0">MCP Client #1</div>
+        <div class="s3-arch-client fragment fade-in" data-fragment-index="0">MCP Client #2</div>
+      </div>
+    </div>
+
+    <div class="s3-arch-arrows">
+      <div class="s3-arch-arrow fragment fade-in" data-fragment-index="1">
+        <div class="s3-arch-arrow-line"></div>
+        <span class="s3-arch-arrow-label">JSON-RPC</span>
+      </div>
+      <div class="s3-arch-arrow fragment fade-in" data-fragment-index="1">
+        <div class="s3-arch-arrow-line"></div>
+        <span class="s3-arch-arrow-label">JSON-RPC</span>
+      </div>
+    </div>
+
+    <div class="s3-arch-servers">
+      <div class="s3-arch-server s3-arch-server-local fragment fade-in" data-fragment-index="1">
+        <div class="s3-arch-server-name">MCP Server (Postgres)</div>
+        <div class="s3-arch-server-detail">corre como proceso local</div>
+      </div>
+      <div class="s3-arch-server s3-arch-server-remote fragment fade-in" data-fragment-index="1">
+        <div class="s3-arch-server-name">MCP Server (GitHub)</div>
+        <div class="s3-arch-server-detail">corre remoto, hosteado</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s3-arch-transports-quick fragment fade-in" data-fragment-index="1">
+    <div class="s3-arch-transports-quick-item">
+      <strong>stdio</strong>
+      Server local. Mensajes por stdin / stdout, sin red.
+    </div>
+    <div class="s3-arch-transports-quick-item">
+      <strong>Streamable HTTP</strong>
+      Server remoto. HTTP POST + Server-Sent Events opcionales.
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — clientes adentro del host, después servers + arrows.</strong></p>
+    <p><u>Construye el diagrama por capas. Para arrancar va solo el host visible — la aplicación de IA con su nombre. Después aparecen los clientes adentro del host. Por último los servers y las flechas JSON-RPC que los conectan. El diagrama se va a re-iluminar en §4 (foco en el server) y §5 (foco en el handshake).</u></p>
+    <p><em>"Acá llegamos a la arquitectura. MCP define tres roles, y vale separarlos bien porque la palabra cliente se sobrecarga rápido — uno piensa en cliente web, cliente de chat, lo que sea — y acá significa una cosa muy específica."</em></p>
+    <p><em>"Arranquemos por el host. El host es la aplicación de IA con la que ustedes interactúan — Claude Code, Cursor, Visual Studio Code, Claude Desktop. Es la pieza que tiene la UI, que corre el LLM, que ustedes tipean. Es el contenedor de todo lo que viene. Adentro del host viven los clientes — esos rectángulos rayados que aparecen ahora. Cada cliente MCP es un componente del host que mantiene una conexión con UN servidor MCP. Acá ven dos clientes porque el host se va a conectar con dos servers distintos."</em></p>
+    <p><em>"Y a la derecha aparecen los servidores. Son programas externos al host, que viven como proceso aparte. Pueden correr locales — el primer ejemplo, Postgres, vive en la misma máquina y se conecta por stdio — o pueden correr remotos, como el segundo ejemplo, GitHub, que es un servicio externo y se conecta por Streamable HTTP. Entre cada cliente y su servidor viaja JSON-RPC, bidireccional. Esa es la arquitectura. Ahora vamos a las definiciones canónicas para fijarlas."</em></p>
+  </aside>
+</section>
+
+<!-- §3.2 — Definiciones canónicas -->
+<section>
+  <h2 class="s3-h2">Las definiciones canónicas.</h2>
+  <p class="s3-h2-sub">Tal cual aparecen en la doc oficial.</p>
+
+  <div class="s3-defs">
+    <div class="s3-def-card">
+      <div class="s3-def-badge">MCP Host</div>
+      <p class="s3-def-body">La aplicación de IA que <strong>coordina y administra</strong> uno o más MCP Clients.</p>
+    </div>
+    <div class="s3-def-card">
+      <div class="s3-def-badge">MCP Client</div>
+      <p class="s3-def-body">Componente adentro del host que <strong>mantiene una conexión con UN MCP Server</strong>.</p>
+    </div>
+    <div class="s3-def-card">
+      <div class="s3-def-badge">MCP Server</div>
+      <p class="s3-def-body">Programa que <strong>provee contexto a MCP Clients</strong>. Vive como proceso aparte, local o remoto.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Definiciones canónicas. No paráfrasis — tal cual aparecen en modelcontextprotocol.io. La que vale la pena destacar es la del Client porque la regla "uno por server" sale de ahí.</u></p>
+    <p><em>"Las definiciones tal cual están en la doc oficial. El Host coordina y administra clientes. Los Clients — en plural — viven adentro del host y cada uno mantiene una conexión con un único Server. El Server provee contexto, corre aparte, puede ser local o remoto."</em></p>
+    <p><em>"Notá la palabra clave de la definición del Client: 'un MCP Server', singular. No 'los servers', no 'varios servers'. Un cliente, una conexión, un server. Esa regla es lo suficientemente importante como para dedicarle el próximo slide."</em></p>
+  </aside>
+</section>
+
+<!-- §3.3 — La regla clave: un cliente por server -->
+<section>
+  <h2 class="s3-h2">La regla clave.</h2>
+
+  <div class="s3-rule">
+    <p class="s3-rule-quote">Si el host se conecta a <strong>tres servers</strong>, corren <strong>tres clientes</strong> adentro.</p>
+    <p class="s3-rule-sub">El cliente no es uno solo que habla con muchos servers — son muchos clientes, cada uno con su conexión dedicada.</p>
+  </div>
+
+  <div class="s3-mini-arch">
+    <div class="s3-mini-host">
+      <span class="s3-mini-host-label">MCP Host</span>
+      <div class="s3-mini-clients">
+        <div class="s3-mini-client">Client #1</div>
+        <div class="s3-mini-client">Client #2</div>
+        <div class="s3-mini-client">Client #3</div>
+      </div>
+    </div>
+    <div class="s3-mini-arrows">
+      <div class="s3-mini-arrow"></div>
+      <div class="s3-mini-arrow"></div>
+      <div class="s3-mini-arrow"></div>
+    </div>
+    <div class="s3-mini-servers">
+      <div class="s3-mini-server">Server A</div>
+      <div class="s3-mini-server">Server B</div>
+      <div class="s3-mini-server">Server C</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Slide-poster con la regla destacada y un diagrama mínimo que la materializa: host con 3 clientes, cada uno con su flecha a un server.</u></p>
+    <p><em>"La regla. Si el host está conectado a tres servers, corren tres clientes adentro. No es uno solo multiplexando — son tres, cada uno con su conexión dedicada. Esa es la forma de pensar la relación cliente-servidor en MCP."</em></p>
+    <p><em>"¿Por qué importa? Porque cuando hablemos de capabilities, primitives, discovery, en los próximos slides, todo se piensa por par cliente-servidor. La conexión es la unidad de trabajo. Si lo piensan como N clientes para N servers, las propiedades del protocolo cierran solas. Si lo piensan como un cliente multiplexando, se confunden."</em></p>
+  </aside>
+</section>
+
+<!-- §3.4 — Las dos capas -->
+<section>
+  <h2 class="s3-h2">Dos capas.</h2>
+  <p class="s3-h2-sub">MCP se divide en data layer (qué se intercambia) y transport layer (por dónde).</p>
+
+  <div class="s3-twocol">
+    <div class="s3-twocol-card">
+      <p class="s3-twocol-badge">capa interna</p>
+      <h3 class="s3-twocol-title">Data layer</h3>
+      <p class="s3-twocol-body">Define <strong>qué se intercambia</strong>: estructura de mensajes, métodos, primitives, lifecycle, notifications. Wire format: JSON-RPC 2.0.</p>
+    </div>
+    <div class="s3-twocol-card">
+      <p class="s3-twocol-badge">capa externa</p>
+      <h3 class="s3-twocol-title">Transport layer</h3>
+      <p class="s3-twocol-body">Define <strong>por dónde viajan</strong> esos mensajes: canal físico y autenticación.</p>
+    </div>
+  </div>
+
+  <p class="s3-twocol-caption">El mismo set de mensajes funciona <strong>idéntico</strong> sobre cualquier transporte. No tenés que aprender JSON-RPC para usar MCP — sólo saber que está abajo.</p>
+
+  <aside class="notes">
+    <p><u>Separación canónica data layer vs transport layer. La razón pedagógica importante: el mensaje es el mismo independiente del canal. Eso es lo que hace que el protocolo viaje entre transports.</u></p>
+    <p><em>"MCP se divide internamente en dos capas, y vale separarlas mentalmente. La data layer es la capa interna: define qué se intercambia entre cliente y servidor. Mensajes, métodos, las primitives que vamos a ver en el próximo bloque, el lifecycle de la conexión, las notificaciones. Wire format JSON-RPC 2.0 — formato viejo y aburrido, no hay nada que aprender ahí."</em></p>
+    <p><em>"La transport layer es la capa externa: define por dónde viajan los mensajes — qué canal físico se usa y cómo se autentican. Y acá viene la propiedad clave: el mismo set de mensajes JSON-RPC funciona idéntico sobre cualquier transporte. Es lo que les da la portabilidad del protocolo. Ustedes no aprenden JSON-RPC para usar MCP — alcanza con saber que abajo hay un formato estándar."</em></p>
+  </aside>
+</section>
+
+<!-- §3.5 — Los dos transports -->
+<section>
+  <h2 class="s3-h2">Dos transports.</h2>
+  <p class="s3-h2-sub">Cuándo se usa cada uno.</p>
+
+  <div class="s3-twocol">
+    <div class="s3-twocol-card">
+      <p class="s3-twocol-badge">local</p>
+      <h3 class="s3-twocol-title">Stdio transport</h3>
+      <p class="s3-twocol-body">El server corre como <strong>proceso local en la misma máquina</strong>. Mensajes por stdin/stdout. Cero overhead de red.</p>
+      <p class="s3-stdio-illust-caption">Igual que cualquier comando de terminal:</p>
+      <div class="s3-stdio-flow">
+        <div class="s3-stdio-node">teclado</div>
+        <div class="s3-stdio-edge">
+          <span class="s3-stdio-edge-label">stdin</span>
+          <div class="s3-stdio-edge-line"></div>
+        </div>
+        <div class="s3-stdio-node">proceso</div>
+        <div class="s3-stdio-edge">
+          <span class="s3-stdio-edge-label">stdout</span>
+          <div class="s3-stdio-edge-line"></div>
+        </div>
+        <div class="s3-stdio-node">pantalla</div>
+      </div>
+    </div>
+    <div class="s3-twocol-card">
+      <p class="s3-twocol-badge">remoto</p>
+      <h3 class="s3-twocol-title">Streamable HTTP transport</h3>
+      <p class="s3-twocol-body">El server <strong>corre remoto</strong> y el host se conecta por red. HTTP POST + Server-Sent Events opcionales. Auth HTTP estándar — bearer, API keys, OAuth.</p>
+    </div>
+  </div>
+
+  <p class="s3-twocol-caption">Regla simple: <strong>disco/red local → Stdio. Servicio compartido o de terceros → Streamable HTTP.</strong></p>
+
+  <aside class="notes">
+    <p><u>Los dos transports definidos por la spec. Lo importante es la regla de cuándo usar cada uno. La mayoría de los servers populares hoy son stdio.</u></p>
+    <p><em>"Los dos transports que la spec define. Stdio — el server corre como proceso local en la misma máquina que el host. Los mensajes viajan por stdin y stdout. Es el modo el server vive con vos en tu máquina. Cero overhead de red. La mayoría de los servers populares hoy son stdio — filesystem, git, sqlite. Tu máquina los corre y listo."</em></p>
+    <p><em>"Streamable HTTP — el server corre remoto y el host se conecta por red. Usa HTTP POST para mensajes cliente a server, con Server-Sent Events opcionales para streaming. Soporta autenticación HTTP estándar: bearer tokens, API keys, OAuth. Sirve cuando el server vive en un servicio compartido — varios desarrolladores hablando con la misma instancia de Postgres centralizado — o cuando lo hostea un tercero, como GitHub o Notion que exponen su API por MCP."</em></p>
+    <p><em>"La regla simple es la del caption: disco o red local — stdio. Servicio compartido o de terceros — Streamable HTTP."</em></p>
+  </aside>
+</section>
+
+<!-- §3.6 — El diagrama mental que se llevan -->
+<section>
+  <h2 class="s3-h2">El diagrama mental.</h2>
+  <p class="s3-h2-sub">Lo que tienen que poder dibujar de memoria al final de la sección.</p>
+
+  <div class="s3-arch">
+    <div class="s3-arch-host">
+      <span class="s3-arch-host-label">MCP Host</span>
+      <p class="s3-arch-host-name">Claude Code</p>
+      <div class="s3-arch-clients">
+        <div class="s3-arch-client">MCP Client #1</div>
+        <div class="s3-arch-client">MCP Client #2</div>
+      </div>
+    </div>
+
+    <div class="s3-arch-arrows">
+      <div class="s3-arch-arrow">
+        <div class="s3-arch-arrow-line"></div>
+        <span class="s3-arch-arrow-label">JSON-RPC</span>
+      </div>
+      <div class="s3-arch-arrow">
+        <div class="s3-arch-arrow-line"></div>
+        <span class="s3-arch-arrow-label">JSON-RPC</span>
+      </div>
+    </div>
+
+    <div class="s3-arch-servers">
+      <div class="s3-arch-server s3-arch-server-local">
+        <div class="s3-arch-server-name">MCP Server (Postgres)</div>
+        <div class="s3-arch-server-detail">local · stdio</div>
+      </div>
+      <div class="s3-arch-server s3-arch-server-remote">
+        <div class="s3-arch-server-name">MCP Server (GitHub)</div>
+        <div class="s3-arch-server-detail">remoto · Streamable HTTP</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="s3-mental-caption">Vimos qué participantes hay. <em>Falta qué se manda por esas flechas.</em></p>
+
+  <aside class="notes">
+    <p><u>Cierre de §3. El diagrama completo, etiquetado con todo lo que acabamos de definir. Para llevarse y dibujar mentalmente. Bridge al §4 — primitives.</u></p>
+    <p><em>"Y este es el diagrama que se llevan de la sección. Un host — Claude Code, en este caso — con dos clientes adentro. Cada cliente conectado a un server distinto. Un server local que se conecta por stdio — Postgres, vive en tu máquina. Un server remoto que se conecta por Streamable HTTP — GitHub, vive en internet. Entre cada cliente y su server, JSON-RPC bidireccional. Esto es lo que se llevan."</em></p>
+    <p><em>"Lo que falta es lo que viene en el próximo bloque: qué se intercambia por esas flechas. Hasta acá vimos los participantes y cómo se hablan. Falta el contenido. Vamos."</em></p>
+  </aside>
 </section>
 </section>
       <!-- /§3 -->
 
       <!-- ===== §4 — Las tres primitives ===== -->
-      <section>
+      <style>
+  /* §4 — Las tres primitives
+     Every top-level centered element shares max-width: 1000px. */
+  .s4-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s4-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §4.1 — Re-illuminate §3 architecture with focus on the server side.
+     The .s3-arch styles are hoisted to global; we just add the focus-server modifier here. */
+  .s3-arch.focus-server .s3-arch-host {
+    opacity: 0.32;
+    transition: opacity 0.3s ease;
+  }
+  .s3-arch.focus-server .s3-arch-arrows {
+    opacity: 0.32;
+    transition: opacity 0.3s ease;
+  }
+  .s3-arch.focus-server .s3-arch-server {
+    box-shadow: 0 0 24px rgba(130, 170, 255, 0.45);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .s4-prim-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s4-prim-preview-item {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s4-prim-preview-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .s4-prim-preview-by {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 2px 0 0 0;
+    font-family: var(--font-mono);
+  }
+
+  /* §4.2/§4.3/§4.4 — Primitive card (flujo 2-step: discover → invoke) */
+  .s4-prim-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: var(--spacing-md) var(--spacing-xl);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s4-prim-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s4-prim-eyebrow strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s4-prim-def {
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s4-prim-def strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s4-prim-flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin: 0;
+  }
+  .s4-prim-step {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: var(--spacing-sm);
+    background: var(--bg-code);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    align-items: start;
+  }
+  .s4-prim-step-num {
+    background: var(--accent);
+    color: var(--bg-primary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.82rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: 2px;
+  }
+  .s4-prim-step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .s4-prim-step-call {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+    word-break: break-word;
+  }
+  .s4-prim-step-call-args {
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+  .s4-prim-step-return {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    align-items: start;
+    margin-top: 2px;
+    padding-left: var(--spacing-sm);
+  }
+  .s4-prim-step-return-arrow {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .s4-prim-step-return-label {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .s4-prim-step-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .s4-prim-step-items code {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    padding: 3px 10px;
+    border-radius: 4px;
+    display: block;
+    word-break: break-word;
+  }
+  .s4-prim-step-return-text {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  .s4-prim-step-return-text em {
+    color: var(--accent);
+    font-style: normal;
+    font-family: var(--font-mono);
+  }
+  /* Catalog entry with full schema spec */
+  .s4-prim-spec {
+    background: var(--bg-secondary);
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-left: 2px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .s4-prim-spec-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+  .s4-prim-spec-name {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .s4-prim-spec-schema {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .s4-prim-spec-schema code {
+    background: var(--bg-code);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent-secondary);
+    font-size: 0.78rem;
+  }
+  .s4-prim-spec-desc {
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    font-style: italic;
+    line-height: 1.3;
+  }
+  /* Response shape — structured JSON-ish */
+  .s4-prim-step-return-shape {
+    background: var(--bg-secondary);
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-left: 2px solid var(--accent-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    margin: 4px 0;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  .s4-prim-step-return-shape .key { color: var(--accent-secondary); }
+  .s4-prim-step-return-shape .str { color: var(--code-text); }
+
+  /* Claude Code session — concrete interaction example */
+  .s4-prim-cc {
+    background: var(--bg-code);
+    border: 1px solid rgba(136, 146, 176, 0.3);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-md) 0 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+  .s4-prim-cc-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .s4-prim-cc-user {
+    color: var(--accent);
+    margin: 3px 0;
+  }
+  .s4-prim-cc-internal {
+    color: var(--text-muted);
+    padding-left: var(--spacing-sm);
+    font-size: 0.78rem;
+    margin: 3px 0;
+    font-style: italic;
+  }
+  .s4-prim-cc-confirmation {
+    background: var(--bg-primary);
+    padding: 4px 10px;
+    margin: 6px 0;
+    border-left: 3px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 700;
+    border-radius: 3px;
+  }
+  .s4-prim-cc-assistant {
+    color: var(--text-primary);
+    margin: 3px 0;
+  }
+  .s4-prim-key {
+    margin: var(--spacing-md) 0 0 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-code);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+  .s4-prim-key strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* §4.5 — Why the separation */
+  .s4-sep-table {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr 1fr;
+    gap: 8px;
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s4-sep-header {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px;
+    text-align: center;
+  }
+  .s4-sep-header.label-col { text-align: left; }
+  .s4-sep-cell {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+  }
+  .s4-sep-name {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 700;
+    background: transparent;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+  }
+  .s4-sep-caption {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .s4-sep-caption strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* §4.6 — Client primitives */
+  .s4-client {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s4-client-card {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s4-client-name {
+    color: var(--accent-secondary);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .s4-client-body {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin: 4px 0 0 0;
+  }
+  .s4-client-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+</style>
 <section>
-  <h2>§4 — TODO</h2>
+<!-- §4.1 — Opener: qué expone un MCP Server (re-iluminar el diagrama del §3) -->
+<section>
+  <h2 class="s4-h2">Qué expone un MCP Server.</h2>
+  <p class="s4-h2-sub">Tres primitives <em>del server</em>, cada una con un dueño distinto. El cliente expone otras cuatro — al cierre.</p>
+
+  <div class="s3-arch focus-server">
+    <div class="s3-arch-host">
+      <span class="s3-arch-host-label">MCP Host</span>
+      <p class="s3-arch-host-name">Claude Code</p>
+      <div class="s3-arch-clients">
+        <div class="s3-arch-client">MCP Client #1</div>
+        <div class="s3-arch-client">MCP Client #2</div>
+      </div>
+    </div>
+    <div class="s3-arch-arrows">
+      <div class="s3-arch-arrow">
+        <div class="s3-arch-arrow-line"></div>
+        <span class="s3-arch-arrow-label">JSON-RPC</span>
+      </div>
+      <div class="s3-arch-arrow">
+        <div class="s3-arch-arrow-line"></div>
+        <span class="s3-arch-arrow-label">JSON-RPC</span>
+      </div>
+    </div>
+    <div class="s3-arch-servers">
+      <div class="s3-arch-server s3-arch-server-local">
+        <div class="s3-arch-server-name">MCP Server (Postgres)</div>
+        <div class="s3-arch-server-detail">local · stdio</div>
+      </div>
+      <div class="s3-arch-server s3-arch-server-remote">
+        <div class="s3-arch-server-name">MCP Server (GitHub)</div>
+        <div class="s3-arch-server-detail">remoto · Streamable HTTP</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s4-prim-preview">
+    <div class="s4-prim-preview-item">
+      <p class="s4-prim-preview-name">tools</p>
+      <p class="s4-prim-preview-by">model-controlled</p>
+    </div>
+    <div class="s4-prim-preview-item">
+      <p class="s4-prim-preview-name">resources</p>
+      <p class="s4-prim-preview-by">application-controlled</p>
+    </div>
+    <div class="s4-prim-preview-item">
+      <p class="s4-prim-preview-name">prompts</p>
+      <p class="s4-prim-preview-by">user-controlled</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>Anclaje visual: el mismo diagrama del §3, ahora con foco en los servers. Las tres primitives viven adentro de cada server. La fila de abajo es preview de los tres slides que siguen.</u></p>
+    <p><em>"Volvemos al diagrama. Lo mismo que se llevaron del bloque anterior, ahora con el foco corrido: el host y los clientes se atenúan, los servers se destacan. Lo que viene en este bloque es qué expone cada server por adentro."</em></p>
+    <p><em>"La doc de MCP define tres primitives del lado del server — tres tipos de cosa que un server pone disponible. Y la clave para entenderlas es el framing oficial: cada una tiene un dueño distinto de la iniciativa, alguien que decide cuándo se usa. Tools las invoca el modelo, resources las decide cargar la aplicación, prompts las pide el usuario. Esa diferencia organiza todo. Vamos una por una, y al cierre vemos las cuatro que MCP también define del lado del cliente — siete en total."</em></p>
+  </aside>
+</section>
+
+<!-- §4.2 — Tools (model-controlled) -->
+<section>
+  <h2 class="s4-h2">Tools.</h2>
+
+  <div class="s4-prim-card">
+    <p class="s4-prim-eyebrow">primitive 1 — <strong>model-controlled</strong></p>
+    <p class="s4-prim-def">Funciones que el LLM puede invocar. El cliente las descubre primero, después el modelo decide cuál llamar. Ejemplo: <strong>Playwright MCP</strong>.</p>
+
+    <div class="s4-prim-flow">
+      <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
+        <span class="s4-prim-step-num">1</span>
+        <div class="s4-prim-step-body">
+          <div class="s4-prim-step-call">tools/list</div>
+          <div class="s4-prim-step-return">
+            <span class="s4-prim-step-return-arrow">↳</span>
+            <div>
+              <div class="s4-prim-step-return-label">catálogo que devuelve el server — cada tool con nombre, descripción e inputSchema</div>
+              <div class="s4-prim-step-items">
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">browser_navigate</span>
+                    <span class="s4-prim-spec-schema">inputs: <code>url: string</code> (required)</span>
+                  </div>
+                  <div class="s4-prim-spec-desc">"Navigate browser to a URL"</div>
+                </div>
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">browser_click</span>
+                    <span class="s4-prim-spec-schema">inputs: <code>element: string, ref: string</code></span>
+                  </div>
+                  <div class="s4-prim-spec-desc">"Click on an element on the page"</div>
+                </div>
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">browser_take_screenshot</span>
+                    <span class="s4-prim-spec-schema">inputs: <code>filename: string</code></span>
+                  </div>
+                  <div class="s4-prim-spec-desc">"Take a screenshot of the current page"</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s4-prim-step fragment fade-in" data-fragment-index="1">
+        <span class="s4-prim-step-num">2</span>
+        <div class="s4-prim-step-body">
+          <div class="s4-prim-step-call">tools/call<span class="s4-prim-step-call-args">(name: "browser_navigate", arguments: { url: "https://docs.anthropic.com" })</span></div>
+          <div class="s4-prim-step-return">
+            <span class="s4-prim-step-return-arrow">↳</span>
+            <div>
+              <div class="s4-prim-step-return-label">el server ejecuta y devuelve</div>
+              <div class="s4-prim-step-return-shape">{ <span class="key">content</span>: [ { <span class="key">type</span>: <span class="str">"text"</span>, <span class="key">text</span>: <span class="str">"Navigated to docs.anthropic.com — page snapshot..."</span> } ] }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
+      <div class="s4-prim-cc-label">así se ve en Claude Code</div>
+      <div class="s4-prim-cc-user">&gt; Abrí docs.anthropic.com y dame los headers principales</div>
+      <div class="s4-prim-cc-internal">→ tool call: browser_navigate({ url: "https://docs.anthropic.com" })</div>
+      <div class="s4-prim-cc-confirmation">⚠  Allow browser_navigate? [y / n]</div>
+      <div class="s4-prim-cc-internal">✓ approved · result returned to model</div>
+      <div class="s4-prim-cc-assistant">claude &gt; Los headers principales son: Introduction, Quickstart, Models, Guides, API Reference...</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
+    <p><u>Tools como flujo de 2 pasos con schema completo + cierre concreto que muestra cómo se ve en Claude Code. La confirmación antes de ejecutar visualiza el "acción con efecto" sin necesidad de etiquetarlo.</u></p>
+    <p><em>"Primera primitive: tools. Funciones que el LLM puede invocar. Para el ejemplo uso Playwright MCP — el server real de Microsoft que ya van a ver en el demo del §7."</em></p>
+    <p><em>"Paso uno. El cliente le pregunta al server qué tools tiene, con un tools/list. El server le devuelve un catálogo — esos tres ejemplos son tres tools reales de Playwright MCP: navegar a una URL, hacer click en un elemento, sacar screenshot. Cada entry trae el nombre, una descripción que el modelo va a leer, y un schema de parámetros. Ese catálogo es lo que el modelo termina viendo en su contexto."</em></p>
+    <p><em>"Paso dos. Durante la conversación, cuando el modelo decide que tiene que abrir la doc de Anthropic, mira el catálogo, identifica browser_navigate, arma los argumentos concretos con la URL, y emite un tools/call. El server real abre el browser headless, navega a esa URL y devuelve el snapshot de la página al modelo."</em></p>
+    <p><em>"Y así se ve esto desde Claude Code. El usuario pide algo en lenguaje natural — 'abrí docs.anthropic.com y dame los headers'. Claude identifica que tiene que usar browser_navigate y arma el call. Pero antes de ejecutar, Claude Code pide confirmación al usuario — porque los tools cambian el mundo, son acción con efecto. Una vez aprobado, el server ejecuta y la respuesta vuelve. El modelo después la usa para contestar."</em></p>
+  </aside>
+</section>
+
+<!-- §4.3 — Resources (application-controlled) -->
+<section>
+  <h2 class="s4-h2">Resources.</h2>
+
+  <div class="s4-prim-card">
+    <p class="s4-prim-eyebrow">primitive 2 — <strong>application-controlled</strong></p>
+    <p class="s4-prim-def">Datos pasivos accesibles por URI. La aplicación los descubre y decide cuáles cargar al contexto. Ejemplo: <strong>Postgres MCP</strong> — expone el schema de cada tabla.</p>
+
+    <div class="s4-prim-flow">
+      <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
+        <span class="s4-prim-step-num">1</span>
+        <div class="s4-prim-step-body">
+          <div class="s4-prim-step-call">resources/list</div>
+          <div class="s4-prim-step-return">
+            <span class="s4-prim-step-return-arrow">↳</span>
+            <div>
+              <div class="s4-prim-step-return-label">catálogo — cada resource con uri, name, mimeType</div>
+              <div class="s4-prim-step-items">
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">postgres://db-prod/users/schema</span>
+                    <span class="s4-prim-spec-schema">mimeType: <code>application/json</code></span>
+                  </div>
+                  <div class="s4-prim-spec-desc">name: "users.schema" · description: "Schema for users table"</div>
+                </div>
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">postgres://db-prod/orders/schema</span>
+                    <span class="s4-prim-spec-schema">mimeType: <code>application/json</code></span>
+                  </div>
+                  <div class="s4-prim-spec-desc">name: "orders.schema" · description: "Schema for orders table"</div>
+                </div>
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">postgres://db-prod/payments/schema</span>
+                    <span class="s4-prim-spec-schema">mimeType: <code>application/json</code></span>
+                  </div>
+                  <div class="s4-prim-spec-desc">name: "payments.schema" · description: "Schema for payments table"</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s4-prim-step fragment fade-in" data-fragment-index="1">
+        <span class="s4-prim-step-num">2</span>
+        <div class="s4-prim-step-body">
+          <div class="s4-prim-step-call">resources/read<span class="s4-prim-step-call-args">(uri: "postgres://db-prod/users/schema")</span></div>
+          <div class="s4-prim-step-return">
+            <span class="s4-prim-step-return-arrow">↳</span>
+            <div>
+              <div class="s4-prim-step-return-label">el server consulta la base y devuelve</div>
+              <div class="s4-prim-step-return-shape">{ <span class="key">contents</span>: [ { <span class="key">uri</span>: <span class="str">"postgres://db-prod/users/schema"</span>, <span class="key">mimeType</span>: <span class="str">"application/json"</span>, <span class="key">text</span>: <span class="str">'{ "columns": [{ "name": "id", "type": "uuid" }, { "name": "email", "type": "text" }, ...] }'</span> } ] }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
+      <div class="s4-prim-cc-label">así se ve en Claude Code</div>
+      <div class="s4-prim-cc-internal">[ el usuario marca los schemas de users y orders como contexto (acción en la UI de Claude Code, no escribiéndolo al modelo) ]</div>
+      <div class="s4-prim-cc-internal">→ Claude Code emite: resources/read("postgres://db-prod/users/schema") y orders/schema</div>
+      <div class="s4-prim-cc-internal">✓ schemas inyectados al contexto, antes de que el usuario pregunte nada</div>
+      <div class="s4-prim-cc-user">&gt; Escribime una query que traiga usuarios con pedidos sin pagar</div>
+      <div class="s4-prim-cc-assistant">claude &gt; <code>SELECT u.id, u.email FROM users u JOIN orders o ON o.user_id = u.id WHERE o.status = 'unpaid'</code> (con los nombres de columnas reales, sin alucinarlos)</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
+    <p><u>Resources con Postgres MCP. El schema es un caso net-new sobre CC — CC ya lee archivos nativamente, pero no se puede conectar a una DB para introspeccionar schemas. Cronología clave: el read sucede ANTES de que el usuario pregunte algo. El modelo nunca decide — la app dispara el read por acción del usuario en la UI.</u></p>
+    <p><em>"Segunda primitive: resources. Datos pasivos accesibles por URI. Ejemplo real: Postgres MCP server, oficial de Anthropic — expone el schema de cada tabla de la base como un resource. Y noten que esto es net-new sobre CC: CC ya tiene herramientas para leer archivos del filesystem, pero no se puede conectar a una base de datos para introspeccionar schemas. Postgres MCP llena ese hueco."</em></p>
+    <p><em>"Paso uno. El cliente le pide al server el catálogo con resources/list. El Postgres MCP introspecciona la base — corre las queries de catálogo de Postgres — y devuelve una URI por cada tabla. Tres ejemplos: users.schema, orders.schema, payments.schema. Cada URI viene con mimeType application slash json porque el contenido es JSON estructurado del schema."</em></p>
+    <p><em>"Paso dos. La app decide cargar el schema de users. Emite resources/read con la URI concreta. El server consulta la base y devuelve el JSON del schema: las columnas, tipos, nullability, índices. La app lo inyecta al contexto del modelo."</em></p>
+    <p><em>"Y así se ve en Claude Code, con la cronología correcta: el usuario marca los schemas de users y orders como contexto — esto puede ser desde un panel de resources del lado, una @-mention de los recursos disponibles, o cualquier mecanismo de UI que la app les exponga. Es una acción en la UI, no consulta al modelo. Claude Code emite los reads y carga los schemas al contexto antes de que el usuario pregunte nada. Recién después el usuario hace la pregunta: escribime una query que traiga usuarios con pedidos sin pagar. El modelo arma el SQL con los nombres reales de las columnas — sin alucinarlos, porque los tiene en contexto. Eso es application-controlled. Nota al margen: algunos servers exponen resource templates — URIs parametrizadas como github slash issues slash llave-owner, llave-repo, llave-number — que la app expande con valores concretos en tiempo real."</em></p>
+  </aside>
+</section>
+
+<!-- §4.4 — Prompts (user-controlled) -->
+<section>
+  <h2 class="s4-h2">Prompts.</h2>
+
+  <div class="s4-prim-card">
+    <p class="s4-prim-eyebrow">primitive 3 — <strong>user-controlled</strong></p>
+    <p class="s4-prim-def">Templates reutilizables. El usuario los descubre y los invoca explícitamente con argumentos. Ejemplo: <strong>Git MCP</strong>.</p>
+
+    <div class="s4-prim-flow">
+      <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
+        <span class="s4-prim-step-num">1</span>
+        <div class="s4-prim-step-body">
+          <div class="s4-prim-step-call">prompts/list</div>
+          <div class="s4-prim-step-return">
+            <span class="s4-prim-step-return-arrow">↳</span>
+            <div>
+              <div class="s4-prim-step-return-label">catálogo — cada prompt con nombre, descripción y arguments</div>
+              <div class="s4-prim-step-items">
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">review-pr</span>
+                    <span class="s4-prim-spec-schema">arguments: <code>diff: string</code> (required)</span>
+                  </div>
+                  <div class="s4-prim-spec-desc">"Review a pull request diff with structured feedback"</div>
+                </div>
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">explain-commit</span>
+                    <span class="s4-prim-spec-schema">arguments: <code>sha: string</code> (required)</span>
+                  </div>
+                  <div class="s4-prim-spec-desc">"Explain what a commit changes and why"</div>
+                </div>
+                <div class="s4-prim-spec">
+                  <div class="s4-prim-spec-row">
+                    <span class="s4-prim-spec-name">summarize-changes</span>
+                    <span class="s4-prim-spec-schema">arguments: <code>since: string</code> (required)</span>
+                  </div>
+                  <div class="s4-prim-spec-desc">"Summarize repo changes since a given date or commit"</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s4-prim-step fragment fade-in" data-fragment-index="1">
+        <span class="s4-prim-step-num">2</span>
+        <div class="s4-prim-step-body">
+          <div class="s4-prim-step-call">prompts/get<span class="s4-prim-step-call-args">(name: "review-pr", arguments: { diff: "&lt;diff content&gt;" })</span></div>
+          <div class="s4-prim-step-return">
+            <span class="s4-prim-step-return-arrow">↳</span>
+            <div>
+              <div class="s4-prim-step-return-label">el server expande el template y devuelve</div>
+              <div class="s4-prim-step-return-shape">{ <span class="key">messages</span>: [ { <span class="key">role</span>: <span class="str">"user"</span>, <span class="key">content</span>: { <span class="key">type</span>: <span class="str">"text"</span>, <span class="key">text</span>: <span class="str">"Review the following PR diff... &lt;diff&gt;"</span> } } ] }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
+      <div class="s4-prim-cc-label">así se ve en Claude Code</div>
+      <div class="s4-prim-cc-user">&gt; /review-pr</div>
+      <div class="s4-prim-cc-internal">⌘  slash command — Claude Code llama prompts/get("review-pr", { diff: ... })</div>
+      <div class="s4-prim-cc-internal">→ template expandido, mensaje listo enviado al modelo</div>
+      <div class="s4-prim-cc-assistant">claude &gt; Found 3 issues:<br>&nbsp;&nbsp;1. Missing test coverage in <code>auth.ts:42</code><br>&nbsp;&nbsp;2. SQL injection risk in <code>users.ts:88</code><br>&nbsp;&nbsp;3. Inconsistent error handling pattern...</div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
+    <p><u>Prompts como flujo de 2 pasos + cierre concreto que muestra la sintaxis de slash command que el usuario tipea. Eso visualiza el "user-controlled" — el usuario invoca explícitamente.</u></p>
+    <p><em>"Tercera primitive: prompts. Templates reutilizables. Para el ejemplo uso un Git MCP — un patrón real que aparece en varios servers de la comunidad para acciones recurrentes sobre el repositorio."</em></p>
+    <p><em>"Paso uno. El cliente le pide al server qué templates tiene disponibles con prompts/list. El server le devuelve un catálogo: review-pr para revisar un pull request, explain-commit para entender qué hace un commit concreto, summarize-changes para resumir los cambios desde una fecha. Cada template tiene un nombre, una descripción, y un schema de argumentos."</em></p>
+    <p><em>"Paso dos. El usuario decide pedirle al agente que revise un PR. El host emite prompts/get con el nombre y los args. El server combina internamente instrucciones para el modelo — qué buscar, qué priorizar, qué formato de respuesta — junto con el diff que el usuario pasó, y devuelve todo armado como un mensaje listo en la estructura messages que ven en la response. No ejecuta nada, sólo arma el material."</em></p>
+    <p><em>"Y así se ve en Claude Code. El usuario tipea barra review-pr — exactamente como cualquier slash command. Si tipean barra solita en Claude Code y tienen un server MCP conectado, los prompts del server aparecen ahí, mezclados con los comandos nativos. Claude Code llama prompts/get internamente, el template se expande, se envía al modelo, y el modelo arma el review. Por eso user-controlled — el usuario invoca explícitamente, no se disparan solos."</em></p>
+  </aside>
+</section>
+
+<!-- §4.5 — Por qué la separación -->
+<section>
+  <h2 class="s4-h2">Por qué la separación.</h2>
+  <p class="s4-h2-sub">Cada primitive tiene un dueño distinto de la iniciativa. Eso determina todo lo demás.</p>
+
+  <div class="s4-sep-table">
+    <div class="s4-sep-header label-col">Primitive</div>
+    <div class="s4-sep-header">Quién decide</div>
+    <div class="s4-sep-header">Permisos</div>
+    <div class="s4-sep-header">Interfaz típica</div>
+
+    <div class="s4-sep-name">tools</div>
+    <div class="s4-sep-cell">El modelo</div>
+    <div class="s4-sep-cell">De acción, con confirmación</div>
+    <div class="s4-sep-cell">Dialogo de confirmación</div>
+
+    <div class="s4-sep-name">resources</div>
+    <div class="s4-sep-cell">La aplicación</div>
+    <div class="s4-sep-cell">De lectura, transparentes</div>
+    <div class="s4-sep-cell">Carga automática / picker</div>
+
+    <div class="s4-sep-name">prompts</div>
+    <div class="s4-sep-cell">El usuario</div>
+    <div class="s4-sep-cell">Invocación explícita</div>
+    <div class="s4-sep-cell">Slash commands</div>
+  </div>
+
+  <p class="s4-sep-caption">Iniciativa distinta → <strong>permisos distintos → UI distinta</strong>. Mezclarlas haría imposible un modelo coherente.</p>
+
+  <aside class="notes">
+    <p><u>Síntesis: el por qué pedagógico de las tres primitives. La diferencia de iniciativa determina permisos y UI. Esa es la razón estructural por la que MCP las separa.</u></p>
+    <p><em>"La síntesis. Por qué tres primitives distintas y no una sola con flags. La razón es que cada una tiene un dueño distinto de la iniciativa, y esa diferencia se propaga al resto del diseño. Los tools los decide el modelo, y eso implica un modelo de permisos de acción con confirmación. Los resources los decide la aplicación, eso implica permisos de lectura, transparentes, sin pedir nada. Los prompts los decide el usuario, eso implica invocación explícita, slash commands."</em></p>
+    <p><em>"Iniciativa distinta lleva a permisos distintos lleva a interfaz distinta. Mezclarlas las tres en una sola primitive haría imposible un modelo de permisos coherente: el host no sabría cuándo pedir confirmación, cuándo cargar transparente, cuándo esperar al usuario. Por eso la spec separa."</em></p>
+  </aside>
+</section>
+
+<!-- §4.6 — Y del otro lado: client primitives -->
+<section>
+  <h2 class="s4-h2">Y del otro lado: cuatro primitives del cliente.</h2>
+  <p class="s4-h2-sub">El cliente también expone primitives hacia el server. La comunicación no es de una sola dirección.</p>
+
+  <div class="s4-client">
+    <div class="s4-client-card">
+      <p class="s4-client-name">Sampling</p>
+      <p class="s4-client-body">El server le pide al cliente: "pedile al LLM esto". Habilita workflows agentic sin que el server necesite SDK de modelo propio.</p>
+    </div>
+    <div class="s4-client-card">
+      <p class="s4-client-name">Elicitation</p>
+      <p class="s4-client-body">El server le pide al cliente: "preguntale al usuario X dato". Para confirmaciones, preferencias, datos faltantes.</p>
+    </div>
+    <div class="s4-client-card">
+      <p class="s4-client-name">Roots</p>
+      <p class="s4-client-body">El cliente le declara al server: "estos directorios son tu scope". Coordinación, no enforcement de seguridad.</p>
+    </div>
+    <div class="s4-client-card">
+      <p class="s4-client-name">Logging</p>
+      <p class="s4-client-body">El server manda mensajes de log al cliente. Para debugging y observabilidad.</p>
+    </div>
+  </div>
+
+  <p class="s4-client-caption">Las nombramos para que sepan que existen. El detalle vive en la doc oficial.</p>
+
+  <aside class="notes">
+    <p><u>Cierre de §4: client primitives. Cuatro nombres rápidos, sin profundizar. El alumno tiene que poder reconocerlas cuando aparezcan después.</u></p>
+    <p><em>"Y para cerrar el bloque, una observación que suele pasarse por alto: del otro lado, el cliente también expone primitives hacia el server. La comunicación no es de una sola dirección, hay cuatro mecanismos definidos."</em></p>
+    <p><em>"Sampling: el server le pide al cliente que le pida al LLM algo. Útil cuando el server quiere lógica agentic pero no quiere incluir un SDK de modelo propio — usa el LLM que el cliente ya tiene. Elicitation: el server le pide al cliente que le pregunte algo al usuario — confirmaciones, preferencias, datos que faltan a mitad de una operación. Roots: el cliente le declara al server qué directorios son su scope de trabajo. Es coordinación, no enforcement de seguridad — un server bien comportado los respeta, pero la spec no obliga. Logging: el server manda mensajes de log al cliente, para debugging."</em></p>
+    <p><em>"Las nombramos para que las reconozcan cuando aparezcan en docs de servers que vayan a usar. Profundizarlas a cada una requiere su propio bloque, y la doc oficial lo hace bien. Cerrando el inventario: tres primitives del server, cuatro del cliente, siete en total. Lo que sigue es algo conceptualmente más jugoso: cómo es que el modelo, cada vez que arranca una conversación, sabe qué tools tiene disponibles cuando los servers fueron escritos después de su cutoff date."</em></p>
+  </aside>
 </section>
 </section>
       <!-- /§4 -->

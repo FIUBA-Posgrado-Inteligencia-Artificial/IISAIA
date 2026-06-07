@@ -1,3 +1,441 @@
+<style>
+  /* §2 — Protocolo, no API
+     All centered elements share max-width 1000px so vertical edges align. */
+  .s2-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s2-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §2.1 — Matrix N×M ↔ N+M visual */
+  .s2-matrix-wrap {
+    max-width: 1000px;
+    height: 360px;
+    margin: var(--spacing-md) auto 0 auto;
+    position: relative;
+  }
+  .s2-matrix-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .s2-matrix-svg .lines-spaghetti line {
+    stroke: var(--text-muted);
+    stroke-width: 1.3;
+    opacity: 0.55;
+  }
+  .s2-matrix-svg .lines-hub line {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    opacity: 1;
+  }
+  .s2-matrix-clients,
+  .s2-matrix-providers {
+    position: absolute;
+    top: 0;
+    width: 180px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 2;
+  }
+  .s2-matrix-clients { left: 0; }
+  .s2-matrix-providers { right: 0; }
+  .s2-matrix-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+  .s2-matrix-hub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+    z-index: 3;
+    box-shadow: 0 0 24px var(--accent);
+  }
+  .s2-matrix-caption {
+    text-align: center;
+    margin: var(--spacing-md) auto 0 auto;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    max-width: 1000px;
+  }
+  .s2-matrix-caption strong {
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+  .s2-matrix-caption-pre {
+    text-align: center;
+    margin: var(--spacing-md) auto 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 1000px;
+  }
+  .s2-matrix-caption-pre strong {
+    color: var(--accent-secondary);
+    font-family: var(--font-mono);
+  }
+
+  /* §2.2 — HTTP + LSP precedents */
+  .s2-precedents {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s2-prec-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  .s2-prec-year {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .s2-prec-name {
+    color: var(--text-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 4px 0 0 0;
+  }
+  .s2-prec-fullname {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0 0 var(--spacing-sm) 0;
+    font-style: italic;
+  }
+  .s2-prec-pair {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s2-prec-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s2-prec-body strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s2-prec-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    line-height: 1.5;
+  }
+
+  /* §2.3 — MCP canonical definition */
+  .s2-def {
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto 0 auto;
+    text-align: center;
+  }
+  .s2-def-pre {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s2-def-quote {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+    font-style: italic;
+    padding: 0 var(--spacing-lg);
+    border-left: 4px solid var(--accent);
+    text-align: left;
+  }
+  .s2-def-quote strong {
+    color: var(--accent);
+    font-weight: 700;
+    font-style: normal;
+  }
+  .s2-def-attr {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: var(--spacing-md) 0 0 0;
+    text-align: right;
+    padding-right: var(--spacing-lg);
+  }
+  .s2-def-adopt {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin: var(--spacing-xl) auto 0 auto;
+    max-width: 1000px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .s2-def-adopters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    padding: 0;
+  }
+  .s2-def-adopters code {
+    background: var(--bg-code);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.98rem;
+  }
+
+  /* §2.4 — USB-C analogy */
+  .s2-usbc {
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto 0 auto;
+    text-align: center;
+  }
+  .s2-usbc-pre {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s2-usbc-quote {
+    font-size: 2.2rem;
+    color: var(--text-heading);
+    line-height: 1.3;
+    margin: 0 auto var(--spacing-lg) auto;
+    max-width: 1000px;
+    font-weight: 600;
+  }
+  .s2-usbc-quote strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .s2-usbc-explain {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s2-usbc-attr {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: var(--spacing-md) 0 0 0;
+  }
+
+  /* §2.5 — bridge */
+  .s2-bridge {
+    text-align: center;
+    max-width: 760px;
+    margin: var(--spacing-2xl) auto 0 auto;
+  }
+  .s2-bridge-line {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .s2-bridge-line em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .s2-bridge-hint {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-md) 0 0 0;
+  }
+</style>
+
+<!-- §2.1 — Matrix N×M ↔ N+M (visual canónico) -->
 <section>
-  <h2>§2 — TODO</h2>
+  <h2 class="s2-h2">El patrón estructural.</h2>
+  <p class="s2-h2-sub">Por qué necesariamente tiene forma de protocolo.</p>
+
+  <div class="s2-matrix-wrap">
+    <div class="s2-matrix-clients">
+      <div class="s2-matrix-item">Cliente A</div>
+      <div class="s2-matrix-item">Cliente B</div>
+      <div class="s2-matrix-item">Cliente C</div>
+      <div class="s2-matrix-item">Cliente D</div>
+    </div>
+    <div class="s2-matrix-providers">
+      <div class="s2-matrix-item">Proveedor 1</div>
+      <div class="s2-matrix-item">Proveedor 2</div>
+      <div class="s2-matrix-item">Proveedor 3</div>
+      <div class="s2-matrix-item">Proveedor 4</div>
+    </div>
+    <div class="s2-matrix-hub fragment fade-in" data-fragment-index="0">MCP</div>
+    <svg class="s2-matrix-svg" viewBox="0 0 1000 360" preserveAspectRatio="none">
+      <g class="lines-spaghetti fragment fade-out" data-fragment-index="0">
+        <line x1="180" y1="45"  x2="820" y2="45"  />
+        <line x1="180" y1="45"  x2="820" y2="135" />
+        <line x1="180" y1="45"  x2="820" y2="225" />
+        <line x1="180" y1="45"  x2="820" y2="315" />
+        <line x1="180" y1="135" x2="820" y2="45"  />
+        <line x1="180" y1="135" x2="820" y2="135" />
+        <line x1="180" y1="135" x2="820" y2="225" />
+        <line x1="180" y1="135" x2="820" y2="315" />
+        <line x1="180" y1="225" x2="820" y2="45"  />
+        <line x1="180" y1="225" x2="820" y2="135" />
+        <line x1="180" y1="225" x2="820" y2="225" />
+        <line x1="180" y1="225" x2="820" y2="315" />
+        <line x1="180" y1="315" x2="820" y2="45"  />
+        <line x1="180" y1="315" x2="820" y2="135" />
+        <line x1="180" y1="315" x2="820" y2="225" />
+        <line x1="180" y1="315" x2="820" y2="315" />
+      </g>
+      <g class="lines-hub fragment fade-in" data-fragment-index="0">
+        <line x1="180" y1="45"  x2="450" y2="180" />
+        <line x1="180" y1="135" x2="450" y2="180" />
+        <line x1="180" y1="225" x2="450" y2="180" />
+        <line x1="180" y1="315" x2="450" y2="180" />
+        <line x1="550" y1="180" x2="820" y2="45"  />
+        <line x1="550" y1="180" x2="820" y2="135" />
+        <line x1="550" y1="180" x2="820" y2="225" />
+        <line x1="550" y1="180" x2="820" y2="315" />
+      </g>
+    </svg>
+  </div>
+
+  <p class="s2-matrix-caption-pre">N clientes × M proveedores, cada par una integración. <strong>N × M = 16</strong>.</p>
+  <p class="s2-matrix-caption fragment fade-in" data-fragment-index="0">Un protocolo común al medio. <strong>N + M = 8</strong>.</p>
+
+  <aside class="notes">
+    <p><strong>Un reveal — spaghetti se va, hub aparece.</strong></p>
+    <p><u>La matriz formal, abstracta. §1.4 ya mostró el caso concreto (Postgres × runtimes); §2.1 generaliza: N clientes × M proveedores. La transición de spaghetti a hub es la promesa estructural del protocolo. Este diagrama se va a reusar tal cual en §6, cuando hablemos del ecosistema.</u></p>
+    <p><em>"Pongamos en abstracto lo que vimos en concreto. Tenés N clientes — pueden ser agentes, IDEs, runtimes — y tenés M proveedores de capacidades — Postgres, browser, Slack, lo que sea. Si cada cliente define su propia forma de integrar capacidades, entonces cada par cliente-proveedor es una integración custom. Eso es lo que ven a la izquierda: N por M. Cuatro por cuatro, dieciséis líneas. Cliente nuevo, M integraciones más. Proveedor nuevo, N integraciones más. Crece feo, sin techo."</em></p>
+    <p><em>"Si en cambio metés un protocolo común al medio — esto es lo que aparece ahora — la matriz se colapsa. Cada cliente habla el protocolo, una vez. Cada proveedor habla el protocolo, una vez. Total: N más M. Cuatro más cuatro, ocho conexiones. Y la propiedad clave: cliente nuevo, una integración, hereda todos los proveedores. Proveedor nuevo, una integración, queda disponible para todos los clientes. Esto es lo que hace un protocolo. Y este patrón no es nuevo — ya pasó antes."</em></p>
+  </aside>
+</section>
+
+<!-- §2.2 — Precedentes HTTP y LSP -->
+<section>
+  <h2 class="s2-h2">Este patrón ya pasó antes.</h2>
+  <p class="s2-h2-sub">Dos precedentes históricos del mismo movimiento.</p>
+
+  <div class="s2-precedents">
+    <div class="s2-prec-card">
+      <p class="s2-prec-year">1991</p>
+      <h3 class="s2-prec-name">HTTP</h3>
+      <p class="s2-prec-fullname">HyperText Transfer Protocol</p>
+      <p class="s2-prec-pair">browsers × servers</p>
+      <p class="s2-prec-body">Antes: cada browser hablaba con cada server por su cuenta. Después de HTTP, <strong>cualquier browser habla con cualquier server</strong>, sin coordinación entre autores. Internet se vuelve posible.</p>
+    </div>
+    <div class="s2-prec-card fragment fade-in" data-fragment-index="0">
+      <p class="s2-prec-year">2016</p>
+      <h3 class="s2-prec-name">LSP</h3>
+      <p class="s2-prec-fullname">Language Server Protocol</p>
+      <p class="s2-prec-pair">IDEs × lenguajes</p>
+      <p class="s2-prec-body">Antes: cada IDE × cada lenguaje, autocompletado a mano. Después de LSP, <strong>cada lenguaje publica un server, cada IDE lo consume</strong>. La matriz colapsa.</p>
+    </div>
+  </div>
+
+  <p class="s2-prec-caption fragment fade-in" data-fragment-index="1">MCP es el mismo movimiento, para <strong>agentes × capacidades</strong>. No inventa nada — aplica una idea conocida a un dominio nuevo.</p>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — primero LSP, después la línea de cierre con MCP.</strong></p>
+    <p><u>Dos precedentes históricos del mismo patrón, revelados de a uno. Ubican a MCP en una tradición — no es invento de Anthropic, es aplicar a agentes una idea que ya resolvió problemas análogos.</u></p>
+    <p><em>"Este movimiento que acabamos de ver — la matriz que se colapsa por un protocolo común — no es nuevo. Ya pasó dos veces en la historia reciente del software, y vale la pena ubicarlo donde lo vieron antes. Primero, HTTP. Año 91. HyperText Transfer Protocol. Antes de HTTP cada browser hablaba con cada servidor por su cuenta — coordinaban formatos, encodings, mecanismos. Después de HTTP, cualquier browser habla con cualquier server. Internet se vuelve posible. Esa es la propiedad del protocolo común: descomprime una matriz de coordinación humana en infraestructura compartida."</em></p>
+    <p><em>"Segundo, LSP — Language Server Protocol. 2016, Microsoft. Resolvió exactamente el mismo problema en el mundo de los IDEs. Antes, cada IDE — VS Code, Vim, Emacs, Sublime — implementaba autocompletado y go-to-definition para cada lenguaje — Python, Go, Rust, TypeScript — a mano. N por M. Insostenible. Después de LSP, cada lenguaje publica un language server, cada IDE consume cualquier server. N más M. Y eso es lo que hace que hoy cualquier IDE moderno tenga autocompletado decente en cualquier lenguaje, sin que el equipo del IDE escriba código específico para cada uno."</em></p>
+    <p><em>"MCP es el mismo movimiento, aplicado a agentes y capacidades. No inventa nada conceptualmente. Aplica una idea conocida — protocolo común — a un dominio donde el problema apareció hace poco."</em></p>
+  </aside>
+</section>
+
+<!-- §2.3 — MCP definición canónica -->
+<section>
+  <div class="s2-def">
+    <p class="s2-def-pre">la definición oficial</p>
+    <blockquote class="s2-def-quote">
+      MCP es un <strong>estándar open-source</strong> para conectar aplicaciones de IA a sistemas externos.
+    </blockquote>
+    <p class="s2-def-attr">— modelcontextprotocol.io</p>
+  </div>
+
+  <p class="s2-def-adopt">Lo propuso Anthropic en 2024. Lo adoptaron:</p>
+  <div class="s2-def-adopters">
+    <code>Claude</code>
+    <code>ChatGPT</code>
+    <code>Cursor</code>
+    <code>Codex CLI</code>
+    <code>Opencode</code>
+    <code>VS Code</code>
+  </div>
+
+  <aside class="notes">
+    <p><u>La definición oficial. Nota deliberada: la definición no menciona a Anthropic. Es un estándar abierto que Anthropic propuso, no un producto Anthropic.</u></p>
+    <p><em>"Esta es la definición oficial, de la doc de modelcontextprotocol.io. Léanla con cuidado: 'MCP es un estándar open-source para conectar aplicaciones de IA a sistemas externos.' Notá lo que esa frase no dice. No dice 'estándar de Anthropic'. No dice 'protocolo de Claude'. Dice 'estándar open-source'. Es deliberado: aunque lo propuso Anthropic en 2024, el protocolo es abierto y existe independientemente."</em></p>
+    <p><em>"La adopción lo confirma. Claude lo soporta, obviamente. Pero también ChatGPT, Cursor, Codex CLI, Opencode, VS Code, y otros. Cuando ustedes aprenden MCP, aprenden algo que viaja con ustedes a cualquier runtime de IA que vayan a usar. Eso es lo que hace que valga la pena estudiarlo."</em></p>
+  </aside>
+</section>
+
+<!-- §2.4 — Analogía USB-C -->
+<section>
+  <div class="s2-usbc">
+    <p class="s2-usbc-pre">la analogía oficial</p>
+    <h2 class="s2-usbc-quote">MCP es como un puerto <strong>USB-C</strong> para aplicaciones de IA.</h2>
+    <p class="s2-usbc-explain">Así como USB-C estandariza la forma de conectar dispositivos electrónicos, MCP estandariza la forma en que las aplicaciones de IA se conectan a sistemas externos.</p>
+    <p class="s2-usbc-attr">— modelcontextprotocol.io</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>La analogía oficial, en versión de bolsillo. HTTP y LSP explicaron el porqué estructural; USB-C es la metáfora rápida que se quedan.</u></p>
+    <p><em>"Y la doc oficial propone una analogía más corta, más memorable, que les va a venir a la cabeza después: MCP es como un puerto USB-C para aplicaciones de IA. La idea es la misma — antes de USB-C cada dispositivo tenía su propio cable, su propio conector, su propia forma de comunicarse. Después de USB-C, cualquier dispositivo con USB-C se conecta a cualquier otro con USB-C, sin pensar."</em></p>
+    <p><em>"HTTP y LSP les sirven para entender el porqué estructural — el N por M que colapsa a N más M. USB-C les sirve como mnemónico, para acordarse del concepto en dos palabras. Las dos son útiles."</em></p>
+  </aside>
+</section>
+
+<!-- §2.5 — Bridge a §3 -->
+<section>
+  <div class="s2-bridge">
+    <p class="s2-bridge-line">Vimos <em>por qué tiene que ser un protocolo</em>.</p>
+    <p class="s2-bridge-line">Veamos <em>cómo está armado por dentro</em>.</p>
+    <p class="s2-bridge-hint">Arquitectura: host, cliente, servidor — viene ahora.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Bridge corto a §3. Cierra el "por qué" y abre el "cómo".</u></p>
+    <p><em>"Cerramos el por qué. Lo que viene es el cómo. La arquitectura de MCP por dentro — quiénes son los participantes, cómo se hablan, qué intercambian. Tres roles, dos capas, dos transports. Vamos."</em></p>
+  </aside>
 </section>
