@@ -3769,7 +3769,7 @@
     </div>
     <div class="s6-scope-cell">
       <code>~/.claude.json</code>
-      <span class="loc-note">sección de este proyecto</span>
+      <span class="loc-note">anidado bajo <code>projects["…/este-proyecto"]</code></span>
     </div>
     <div class="s6-scope-cell">Solo vos, solo en este proyecto. Para probar algo personal.</div>
 
@@ -3789,11 +3789,12 @@
     </div>
     <div class="s6-scope-cell">
       <code>~/.claude.json</code>
-      <span class="loc-note">a nivel global</span>
+      <span class="loc-note">a nivel raíz, fuera de <code>projects</code></span>
     </div>
     <div class="s6-scope-cell">Solo vos, en todos tus proyectos. Tu setup personal.</div>
   </div>
 
+  <p class="s6-scope-prec"><strong>local</strong> y <strong>user</strong> son el mismo archivo (<code>~/.claude.json</code>) en secciones distintas; solo <strong>project</strong> es un archivo aparte (<code>.mcp.json</code>).</p>
   <p class="s6-scope-prec">Si un server con el mismo nombre aparece en más de un scope, gana <code>local &gt; project &gt; user</code> — no se mezclan, se toma la entrada entera del de mayor prioridad.</p>
 
   <aside class="notes">
