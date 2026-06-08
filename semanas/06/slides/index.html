@@ -2774,6 +2774,16 @@
     max-width: 1000px;
   }
   .s5-tl-cap strong { color: var(--accent); font-weight: 700; }
+  .s5-tl-cap2 {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: var(--spacing-sm) auto 0 auto;
+    max-width: 1000px;
+    font-style: italic;
+  }
+  .s5-tl-cap2 strong { color: var(--accent-secondary); font-weight: 700; font-style: normal; }
 
   /* §5.3 — Handshake bar (encabezado de la animación de apoyo) */
   .s5-bar {
@@ -2971,7 +2981,7 @@
     <div class="s5-tl-step fragment fade-in" data-fragment-index="2">
       <span class="s5-tl-num">3</span>
       <p class="s5-tl-title">El cliente pide el catálogo</p>
-      <p class="s5-tl-desc"><code>*/list</code>. Lo dispara el cliente, solo.</p>
+      <p class="s5-tl-desc"><code>*/list</code>, automático. Lo dispara el cliente —código del host—, no el modelo.</p>
     </div>
 
     <span class="s5-tl-arrow fragment fade-in" data-fragment-index="3">&rarr;</span>
@@ -2989,17 +2999,19 @@
     </div>
   </div>
 
-  <p class="s5-tl-cap fragment fade-in" data-fragment-index="5">¿Quién arma el contexto? <strong>El cliente.</strong> ¿Cuándo? <strong>Al conectar</strong> — no en tu pregunta.</p>
+  <p class="s5-tl-cap fragment fade-in" data-fragment-index="5">¿Quién arma el contexto? <strong>El cliente</strong> (código del host), no el modelo. ¿Cuándo? <strong>Solo, al conectar.</strong></p>
+  <p class="s5-tl-cap2 fragment fade-in" data-fragment-index="6">Tiene que ser así: el modelo no puede pedir lo que <strong>todavía no sabe que existe</strong>.</p>
 
   <aside class="notes">
-    <p><strong>Seis reveals — los 5 pasos del timeline de a uno, después el caption que responde el hook.</strong></p>
-    <p><u>El corazón de la sección, como mapa de un vistazo. Construye el flujo paso a paso de izquierda a derecha. El paso 4 (catálogo→contexto) está marcado distinto: es el crux, el momento donde se responde la pregunta del hook. El caption final cierra explícitamente con quién y cuándo.</u></p>
+    <p><strong>Siete reveals — los 5 pasos del timeline de a uno, después el caption que responde el hook, y el cierre del huevo-y-la-gallina.</strong></p>
+    <p><u>El corazón de la sección, como mapa de un vistazo. Construye el flujo paso a paso de izquierda a derecha. El paso 4 (catálogo→contexto) está marcado distinto: es el crux. El caption responde quién/cuándo; el último reveal mata la ambigüedad de si lo decide el modelo.</u></p>
     <p><em>"Vamos a seguir, paso a paso, qué pasa exactamente cuando conectás un MCP Server. Paso uno: lo conectás. Es algo que hacés una sola vez, agregándolo a la config, antes de cualquier conversación."</em></p>
     <p><em>"Paso dos, el handshake. Apenas se conecta, cliente y server se presentan: qué versión del protocolo hablan, y qué sabe hacer cada uno. A esto se lo llama capability negotiation, y lo importante es que queda fijo para toda la sesión — el protocolo es stateful, no se renegocia en cada vuelta."</em></p>
-    <p><em>"Paso tres: el cliente pide el catálogo, con un */list. Y acá la conexión con el bloque anterior: ese */list ya lo vieron, es el mismo que aparecía en cada primitive. Lo nuevo no es el mensaje — es quién lo dispara y cuándo. Lo dispara el cliente, solo, sin que vos hagas nada."</em></p>
+    <p><em>"Paso tres: se pide el catálogo, con un */list. Y acá hay que ser precisos con el quién, porque es la pregunta natural. No lo pide el modelo. Lo pide el cliente — que es código del host, no la LLM — de forma automática, apenas se conecta. No hay ninguna decisión del modelo del tipo 'me parece que debería listar'. Es plomería determinística. Y cuidado con un detalle del bloque anterior: dijimos que los tools son model-controlled. Eso es para invocarlos — el tools/call lo decide el modelo. Pero descubrirlos, el tools/list, lo hace el cliente. Descubrir y usar son cosas distintas."</em></p>
     <p><em>"Paso cuatro, y este es el que importa, por eso está marcado distinto. El catálogo que vuelve — el nombre, la descripción y el schema de cada tool — se inyecta al contexto del modelo. Esto es exactamente el cargar-al-contexto de context engineering, pero automático: lo arma el cliente, no vos."</em></p>
     <p><em>"Paso cinco: listo. Antes de que escribas tu primera pregunta, el modelo ya tiene en su contexto la descripción de cada herramienta disponible."</em></p>
-    <p><em>"Y así se responde la pregunta del arranque. ¿Quién arma el contexto? El cliente. ¿Cuándo? Al conectar, no cuando vos preguntás. Eso es discovery."</em></p>
+    <p><em>"Y así se responde la pregunta del arranque. ¿Quién arma el contexto? El cliente, código del host. ¿Cuándo? Solo, al conectar."</em></p>
+    <p><em>"Y por qué tiene que ser el cliente y no el modelo: piénsenlo un segundo. El modelo no puede pedir el catálogo de un server que no sabe que existe — sería el huevo y la gallina. Por eso el cliente lo arma antes y se lo deja servido. Cuando el modelo entra a la conversación, el catálogo ya está ahí."</em></p>
   </aside>
 </section>
 
@@ -3173,9 +3185,9 @@
       },
       {
         title: '2 — tools/list',
-        summary: 'El cliente pide el catálogo de lo que el server expone ahora.',
+        summary: 'El cliente (código del host, no el modelo) pide el catálogo, automático.',
         borderColor: 'var(--accent)',
-        example: '<div style="font-family: var(--font-mono); color: var(--text-muted); line-height: 1.6;">cliente &rarr; server: { "method": "tools/list" }<br>server &rarr; cliente: { "result": { "tools": [ { name, description, inputSchema }, ... ] } }</div><p style="color: var(--text-primary); margin-top: 8px;">No son nombres pelados: cada tool trae <strong style="color: var(--accent);">metadata</strong>.</p>'
+        example: '<div style="font-family: var(--font-mono); color: var(--text-muted); line-height: 1.6;">cliente &rarr; server: { "method": "tools/list" }<br>server &rarr; cliente: { "result": { "tools": [ { name, description, inputSchema }, ... ] } }</div><p style="color: var(--text-primary); margin-top: 8px;">Lo dispara el cliente automáticamente, no el modelo. No son nombres pelados: cada tool trae <strong style="color: var(--accent);">metadata</strong>.</p>'
       },
       {
         title: '3 — catálogo → contexto',
