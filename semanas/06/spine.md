@@ -97,7 +97,8 @@
 **Key analogy:** **"Build once and integrate everywhere"** — frase canónica de la doc, con asterisco: el valor lo aporta el server **sobre lo que el host ya tenía**. Lo que vale en un host fino (claude.ai chat) puede no valer en uno rico (Claude Code).
 **What students walk away knowing:**
 - Un MCP server corre idéntico en cualquier host MCP — **portabilidad estructural**.
-- El JSON de config se ve casi igual en todos los hosts (con variaciones cosméticas).
+- Cómo se agrega un server: en CC con `claude mcp add ...` (atajo), y el JSON `mcpServers` que escribe por debajo — casi igual en todos los hosts (con variaciones cosméticas) + nota de scope (`--scope project` → `.mcp.json` versionado).
+- Cómo cambia el contexto de una sesión nueva antes/después de agregar un server: solo tools nativas → nativas + las del MCP server (concreta el discovery de §5 y el "extiende, no reemplaza").
 - Las tres consecuencias prácticas: amortización, portabilidad, durabilidad.
 - **Cada host trae sus tools nativas** — MCP **extiende, no duplica**. Callback explícito a la observación de §1 (set curado de CC).
 - **La pregunta correcta antes de instalar cualquier MCP server**: "¿el host ya lo hace?".

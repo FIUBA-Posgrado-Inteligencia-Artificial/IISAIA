@@ -3257,6 +3257,111 @@
     font-size: 0.92rem;
   }
 
+  /* §6.2 — Comando de Claude Code (es un div, no un bloque pre/code, así que los spans van bien) */
+  .s6-add-label {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: var(--spacing-md) auto var(--spacing-sm) auto;
+    max-width: 1000px;
+  }
+  .s6-add-cmd {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--bg-code);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    text-align: left;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .s6-add-cmd .muted { color: var(--text-muted); }
+  .s6-add-cmd .hl { color: var(--accent); font-weight: 700; }
+  .s6-add-arrow {
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    margin: var(--spacing-sm) auto;
+    max-width: 1000px;
+  }
+
+  /* §6.3 — Antes y después: el contexto de la sesión */
+  .s6-ba-panel {
+    background: var(--bg-code);
+    border: 1px solid rgba(136, 146, 176, 0.25);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    text-align: left;
+  }
+  .s6-ba-panel.is-after { border-color: var(--accent); }
+  .s6-ba-head {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s6-ba-head code {
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--accent);
+    font-size: 0.92rem;
+  }
+  .s6-ba-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .s6-ba-tool {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+  .s6-ba-mcp {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+    border-left: 3px solid var(--accent);
+    padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+  }
+  .s6-ba-mcp-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 6px 0;
+  }
+  .s6-ba-mcp .s6-ba-tool {
+    color: var(--accent);
+    background: rgba(130, 170, 255, 0.12);
+  }
+  .s6-ba-foot {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: var(--spacing-sm) 0 0 0;
+  }
+  .s6-ba-foot strong { color: var(--accent); font-weight: 700; }
+  .s6-ba-cap {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-ba-cap strong { color: var(--accent); font-weight: 700; }
+
   /* §6.3 + §6.5 + §6.9 — Posters */
   .s6-poster {
     max-width: 1000px;
@@ -3531,10 +3636,15 @@
   </aside>
 </section>
 
-<!-- §6.2 — El config se ve casi igual -->
+<!-- §6.2 — Cómo se agrega un server -->
 <section>
-  <h2 class="s6-h2">Y el config se ve casi igual en todos.</h2>
-  <p class="s6-h2-sub">Para meter un server, el host lee un JSON parecido a este.</p>
+  <h2 class="s6-h2">Cómo se agrega un server.</h2>
+  <p class="s6-h2-sub">En Claude Code, un comando. Por debajo, el mismo JSON portable.</p>
+
+  <p class="s6-add-label">en Claude Code · una línea</p>
+  <div class="s6-add-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx -y @playwright/mcp</div>
+
+  <p class="s6-add-arrow">CC escribe la config por vos &darr;</p>
 
   <div class="s6-config">
 <pre><code class="language-json" data-trim>{
@@ -3547,12 +3657,66 @@
 }</code></pre>
   </div>
 
-  <p class="s6-config-cap">Un nombre, un comando que lo arranca, y opcionalmente <code>args</code> y variables de entorno. Ese bloque, con variaciones cosméticas, es lo que ponés en Claude Code, en Cursor, en Cline.</p>
+  <p class="s6-config-cap">El comando es el atajo de CC; ese JSON es lo portable — casi igual en todos los hosts. Con <code>--scope project</code> queda en <code>.mcp.json</code>, versionado, y viaja con el repo.</p>
 
   <aside class="notes">
-    <p><u>El config canónico. La estructura es estándar: nombre, command, args. La idea: no hay que aprender un formato nuevo por host — es casi el mismo JSON en todos.</u></p>
-    <p><em>"Y para conectarlo, el config se ve casi igual en todos los hosts. Es un JSON con una clave mcpServers, y adentro, por cada server, un nombre — acá playwright —, el comando que lo arranca — npx —, y los argumentos. Eso es todo."</em></p>
-    <p><em>"Cada host tiene su propio archivo de settings y alguna variación cosmética, pero la estructura es esta misma. Si aprendiste a configurar un server en un host, ya sabés hacerlo en todos. No hay un formato nuevo que aprender por cada agente."</em></p>
+    <p><u>Cómo se agrega, general y en CC. Lo importante: el comando es la comodidad de Claude Code, pero lo que escribe — el JSON con mcpServers — es lo estándar y portable. La estructura: nombre, command, args. No hay formato nuevo por host.</u></p>
+    <p><em>"¿Cómo se agrega un server, concretamente? En Claude Code es una línea: claude mcp add, el nombre que le querés poner, y el comando que lo arranca con sus argumentos. Acá: claude mcp add playwright, npx menos y arroba playwright barra mcp. Enter, y queda."</em></p>
+    <p><em>"Lo que hace ese comando es escribir un JSON por vos. Ese JSON es el de abajo: una clave mcpServers, y adentro, por cada server, un nombre, el command que lo arranca, y los args. Y acá está la conexión con la portabilidad: ese JSON, con variaciones cosméticas, es el mismo en Cursor, en Cline, en VS Code. El comando es el atajo de CC; el JSON es lo que viaja. Y un detalle de alcance: por default queda para tu usuario, pero con scope project lo escribís en un .mcp.json versionado en el repo, que viaja con el proyecto para todo el equipo."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 — Una sesión nueva, antes y después -->
+<section>
+  <h2 class="s6-h2">Una sesión nueva, antes y después.</h2>
+  <p class="s6-h2-sub">Lo que el modelo tiene disponible al arrancar, con y sin el server.</p>
+
+  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
+    <div class="s6-ba-panel">
+      <p class="s6-ba-head">sesión nueva · sin MCP</p>
+      <div class="s6-ba-tools">
+        <span class="s6-ba-tool">Read</span>
+        <span class="s6-ba-tool">Write</span>
+        <span class="s6-ba-tool">Edit</span>
+        <span class="s6-ba-tool">Grep</span>
+        <span class="s6-ba-tool">Glob</span>
+        <span class="s6-ba-tool">Bash</span>
+      </div>
+      <p class="s6-ba-foot">6 nativas · <strong>0 de MCP</strong></p>
+    </div>
+
+    <div class="s6-ba-panel is-after fragment fade-in" data-fragment-index="0">
+      <p class="s6-ba-head">después de <code>claude mcp add playwright</code></p>
+      <div class="s6-ba-tools">
+        <span class="s6-ba-tool">Read</span>
+        <span class="s6-ba-tool">Write</span>
+        <span class="s6-ba-tool">Edit</span>
+        <span class="s6-ba-tool">Grep</span>
+        <span class="s6-ba-tool">Glob</span>
+        <span class="s6-ba-tool">Bash</span>
+        <div class="s6-ba-mcp">
+          <p class="s6-ba-mcp-label">&blacktriangleright; playwright (MCP)</p>
+          <div class="s6-ba-tools">
+            <span class="s6-ba-tool">browser_navigate</span>
+            <span class="s6-ba-tool">browser_click</span>
+            <span class="s6-ba-tool">browser_snapshot</span>
+            <span class="s6-ba-tool">browser_take_screenshot</span>
+            <span class="s6-ba-tool">… ~20 tools</span>
+          </div>
+        </div>
+      </div>
+      <p class="s6-ba-foot">6 nativas · <strong>+ ~20 de playwright</strong></p>
+    </div>
+  </div>
+
+  <p class="s6-ba-cap fragment fade-in" data-fragment-index="1">Al abrir la sesión, el cliente descubre el server y le <strong>inyecta el catálogo al contexto</strong> — el discovery que vimos recién. El modelo arranca sabiendo que esas tools existen, sin que vos las menciones. Y las nativas <strong>siguen ahí</strong>: extiende, no reemplaza.</p>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — el panel "después", después la conclusión.</strong></p>
+    <p><u>El antes/después concreto, que ata §5 (discovery) con §6 (extiende no reemplaza). Izquierda: sesión nueva, solo nativas. Derecha: tras agregar Playwright, las nativas siguen + el bloque de tools del MCP. El reveal hace aparecer el "después" para que se note el delta.</u></p>
+    <p><em>"Veamos qué cambia, concretamente, en una sesión. A la izquierda, una sesión nueva de Claude Code sin ningún MCP: el modelo tiene disponibles las seis tools nativas que ya conocemos. Read, Write, Edit, Grep, Glob, Bash. Cero de MCP."</em></p>
+    <p><em>"A la derecha, la misma sesión después de correr claude mcp add playwright. Las seis nativas siguen exactamente igual — esto es importante. Y aparece un bloque nuevo: las tools de Playwright. browser_navigate, browser_click, browser_snapshot, browser_take_screenshot, y así una veintena más."</em></p>
+    <p><em>"¿Y cómo llegaron ahí? Esto es el discovery del bloque anterior, en concreto. Al abrir la sesión, el cliente se conecta al server, descubre su catálogo, y se lo inyecta al contexto del modelo. El modelo arranca sabiendo que esas tools existen, sin que vos escribas nada. Y fíjense en las nativas: siguen ahí, intactas. El MCP extiende, no reemplaza — que es justo lo que vemos ahora."</em></p>
   </aside>
 </section>
 
