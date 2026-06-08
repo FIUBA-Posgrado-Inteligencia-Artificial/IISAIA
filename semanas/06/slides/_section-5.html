@@ -190,6 +190,10 @@
   .s5-hs-steps {
     max-width: 1100px;
     margin: var(--spacing-xs) auto 0 auto;
+    /* Reserva el espacio del panel de detalle (overlay absoluto que la JS
+       dibuja debajo de la fila de pasos). Al hacer el contenido más alto, el
+       centrado vertical de reveal sube los pasos y el overlay entra sin scroll. */
+    min-height: 320px;
   }
 
   /* §5.4 + §5.6 — Insight / consecuencia posters */
