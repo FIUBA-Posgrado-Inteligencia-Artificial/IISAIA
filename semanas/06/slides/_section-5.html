@@ -230,6 +230,33 @@
     margin: var(--spacing-lg) auto 0 auto;
     max-width: 1000px;
   }
+  /* §5.4 — Descubrir vs invocar (resuelve el cruce con "model-controlled" de §4) */
+  .s5-split {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s5-split-item {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .s5-split-item .lbl {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .s5-split-item strong { color: var(--accent); font-weight: 700; }
+  .s5-split-item code { font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.88rem; }
 
   /* §5.5 — Notifications */
   .s5-notif {
@@ -395,13 +422,26 @@
   <div class="s5-poster">
     <p class="s5-poster-q">El contexto lo arma el <strong>cliente</strong>, solo.</p>
     <p class="s5-poster-q">Vos no tocás nada.</p>
-    <p class="s5-poster-sub">Es el mismo cargar-al-contexto que ya conocés — el protocolo solo lo estandariza y lo automatiza. Un server escrito hoy funciona hoy, en cualquier host.</p>
+
+    <div class="s5-split">
+      <div class="s5-split-item">
+        <span class="lbl">Descubrir qué tools hay</span>
+        <strong>El cliente</strong>, automático · <code>*/list</code>
+      </div>
+      <div class="s5-split-item">
+        <span class="lbl">Decidir cuál usar</span>
+        <strong>El modelo</strong>, en la conversación · <code>tools/call</code>
+      </div>
+    </div>
+
+    <p class="s5-poster-sub">Por eso "tools = <em style="font-style: normal; color: var(--accent-secondary);">model-controlled</em>" es sobre <strong style="color: var(--accent);">invocar</strong>, no sobre descubrir. Y descubrir es el mismo cargar-al-contexto de siempre, ahora automático.</p>
   </div>
 
   <aside class="notes">
-    <p><u>El insight articulado en una frase. Slide-poster sin adornos. Cierra el medio: el descubrimiento automático reemplaza al curado manual del contexto.</u></p>
-    <p><em>"Si se llevan una sola idea de todo esto, que sea esta. El contexto con las herramientas disponibles no lo armás vos a mano. Lo arma el cliente, solo, en el momento de conectar."</em></p>
-    <p><em>"Y de nuevo, no es un truco nuevo del modelo. Es el mismo cargar-al-contexto que vienen usando en context engineering — lo que aporta MCP es estandarizarlo y automatizarlo. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo. El descubrimiento automático reemplaza al curado manual."</em></p>
+    <p><u>El insight + la distinción que evita el cruce con "model-controlled" de §4. El contexto (descubrir) lo arma el cliente; el modelo decide qué invocar después. Dos operaciones distintas.</u></p>
+    <p><em>"Si se llevan una sola idea de todo esto, que sea esta. El contexto con las herramientas disponibles no lo armás vos a mano, y tampoco lo decide el modelo. Lo arma el cliente, solo, en el momento de conectar."</em></p>
+    <p><em>"Y acá conviene atar un cabo del bloque anterior, porque es donde más se confunde. Dijimos que los tools son model-controlled. Eso aplica a invocarlos — decidir cuál usar y llamarlo, el tools/call, eso sí es del modelo. Pero descubrir qué tools existen, el tools/list, lo hace el cliente, automático. Descubrir y usar son dos operaciones distintas, con dueños distintos. El modelo nunca descubre; recibe el catálogo ya armado y elige sobre eso."</em></p>
+    <p><em>"Y descubrir no es ningún truco nuevo: es el mismo cargar-al-contexto que vienen usando en context engineering, ahora estandarizado y automático. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo."</em></p>
   </aside>
 </section>
 
