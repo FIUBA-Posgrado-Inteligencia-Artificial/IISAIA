@@ -84,8 +84,8 @@
 - **El insight clave:** el modelo no necesita memorizar tools; los descubre en tiempo de conversación. Por eso cualquier server nuevo, escrito hoy, es usable hoy, sin reentrenar.
 - **Notifications** (`listChanged` + `notifications/tools/list_changed`) — el catálogo es dinámico, no una foto inicial.
 - La consecuencia: el ecosistema crece sin coordinación central; MCP es infraestructura, no producto.
-**Animations / interactive:** **Pieza visual de la clase entera.** Recomiendo construir un diagrama animado del handshake usando `clickable-steps.js` adaptado, con cuatro steps clicables: (1) `initialize` con capability negotiation, (2) `tools/list`, (3) el catálogo con metadata viajando al system context del LLM, (4) `notifications/tools/list_changed` cambiando el estado. Cada step muestra un mini-mensaje JSON-RPC y un highlight sobre la parte del diagrama del §3 que está activa. **Si el budget no alcanza para JS, fallback a `flow-with-arrows` puro CSS con fragment-reveals.**
-**Slide budget:** 7–8 slides (clímax conceptual; sostiene budget mayor).
+**Animations / interactive:** **Estructura timeline-first (rediseño aprobado 2026-06-07).** El medio NO re-explica `*/list` (§4 ya lo mostró tres veces con metadata) — se apoya en él para contar el *cuándo/quién*. Arco de 6 slides: (1) **hook** "¿quién arma el contexto, y cuándo?"; (2) **timeline estático** "qué pasa cuando conectás un server" — 5 nodos revelados de a uno (conectás → handshake/capability negotiation → cliente pide `*/list` → catálogo→system context → el modelo ya sabe), con caption que responde el hook; (3) **animación de apoyo** vía `clickable-steps.js` (barra Client⟷Server + 4 steps de detalle del protocolo con mini-JSON al click, `onChange` ilumina dirección del mensaje) — profundización opcional, no sustancia; (4) **insight poster** "el contexto lo arma el cliente, solo; vos no tocás nada"; (5) **notifications** (`listChanged`); (6) **consecuencia** "el ecosistema crece sin coordinación central". Se eliminan los dos volcados de JSON crudo sueltos (handshake + catálogo) — el JSON sobrevive sólo en el detalle clicable de la animación.
+**Slide budget:** 6 slides.
 
 ---
 

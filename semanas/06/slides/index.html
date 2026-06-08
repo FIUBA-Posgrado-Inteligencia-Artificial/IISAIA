@@ -2700,111 +2700,82 @@
     border-bottom: 3px solid var(--accent);
   }
 
-  /* §5.2 — Dos mecanismos */
-  .s5-mech {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-lg);
-    max-width: 1000px;
+  /* §5.2 — Timeline estático: qué pasa cuando conectás un server */
+  .s5-tl {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 4px;
+    max-width: 1120px;
     margin: var(--spacing-lg) auto 0 auto;
   }
-  .s5-mech-card {
+  .s5-tl-step {
+    flex: 1;
     background: var(--bg-secondary);
-    border-top: 4px solid var(--accent);
+    border-top: 3px solid var(--accent);
     border-radius: 8px;
-    padding: var(--spacing-md) var(--spacing-lg);
-  }
-  .s5-mech-when {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin: 0;
-  }
-  .s5-mech-name {
-    color: var(--text-heading);
-    font-size: 1.45rem;
-    font-weight: 700;
-    margin: 4px 0 var(--spacing-sm) 0;
-  }
-  .s5-mech-body {
-    color: var(--text-primary);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    margin: 0;
-  }
-  .s5-mech-body code {
-    font-family: var(--font-mono);
-    font-size: 0.92rem;
-    color: var(--accent-secondary);
-    background: var(--bg-code);
-    padding: 1px 6px;
-    border-radius: 3px;
-  }
-  .s5-mech-note {
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    margin: var(--spacing-lg) auto 0 auto;
-    max-width: 1000px;
-    font-style: italic;
   }
-  .s5-mech-note code {
+  /* El paso 4 es el crux: el catálogo entra al contexto */
+  .s5-tl-step.is-key { border-top-color: var(--accent-secondary); }
+  .s5-tl-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-primary);
     font-family: var(--font-mono);
-    font-style: normal;
-    color: var(--accent-secondary);
-    font-size: 0.9rem;
-  }
-
-  /* §5.3 + §5.4 — JSON-RPC message cards */
-  .s5-msg-card {
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md) var(--spacing-md);
-  }
-  .s5-msg-card.is-client { border-top: 4px solid var(--accent); }
-  .s5-msg-card.is-server { border-top: 4px solid var(--accent-secondary); }
-  .s5-msg-role {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin: 0 0 var(--spacing-xs) 0;
     font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    flex-shrink: 0;
   }
-  .s5-msg-card.is-client .s5-msg-role { color: var(--accent); }
-  .s5-msg-card.is-server .s5-msg-role { color: var(--accent-secondary); }
-  .s5-msg-card pre {
-    margin: 0;
-  }
-  .s5-msg-card pre code {
-    font-size: 0.82rem !important;
-    line-height: 1.5;
-    background: var(--bg-code);
-    border-radius: 6px;
-    padding: var(--spacing-sm) var(--spacing-md) !important;
-  }
-  .s5-cap {
-    text-align: center;
-    color: var(--text-primary);
-    font-size: 1.15rem;
-    line-height: 1.5;
-    margin: var(--spacing-md) auto 0 auto;
-    max-width: 1000px;
-  }
-  .s5-cap strong {
+  .s5-tl-step.is-key .s5-tl-num { background: var(--accent-secondary); }
+  .s5-tl-title {
+    font-family: var(--font-mono);
     color: var(--accent);
     font-weight: 700;
+    font-size: 0.98rem;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
   }
-  .s5-cap code {
+  .s5-tl-step.is-key .s5-tl-title { color: var(--accent-secondary); }
+  .s5-tl-desc {
+    color: var(--text-primary);
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s5-tl-desc code {
     font-family: var(--font-mono);
     color: var(--accent-secondary);
-    font-size: 0.92rem;
+    font-size: 0.84rem;
   }
+  .s5-tl-arrow {
+    flex-shrink: 0;
+    align-self: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+  }
+  .s5-tl-cap {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s5-tl-cap strong { color: var(--accent); font-weight: 700; }
 
-  /* §5.5 — Handshake bar (encabezado de la animación) */
+  /* §5.3 — Handshake bar (encabezado de la animación de apoyo) */
   .s5-bar {
     display: grid;
     grid-template-columns: 1fr 120px 1fr;
@@ -2884,7 +2855,7 @@
     margin: var(--spacing-sm) auto 0 auto;
   }
 
-  /* §5.6 + §5.8 — Insight / consecuencia posters */
+  /* §5.4 + §5.6 — Insight / consecuencia posters */
   .s5-poster {
     max-width: 1000px;
     margin: var(--spacing-lg) auto 0 auto;
@@ -2909,7 +2880,7 @@
     max-width: 1000px;
   }
 
-  /* §5.7 — Notifications */
+  /* §5.5 — Notifications */
   .s5-notif {
     display: grid;
     grid-template-columns: 1fr 40px 1fr;
@@ -2971,135 +2942,71 @@
   </div>
 
   <aside class="notes">
-    <p><u>Hook de §5, recalibrado: NO vender como asombroso que el modelo use tools post-cutoff — a esta altura ya manejan context engineering. La pregunta real es de mecanismo: quién arma el contexto con la descripción del server, y cuándo. Discovery es la respuesta.</u></p>
+    <p><u>Hook de §5, recalibrado: NO vender como asombroso que el modelo use tools post-cutoff — a esta altura ya manejan context engineering. La pregunta real es de mecanismo: quién arma el contexto con la descripción del server, y cuándo. El resto de la sección es la respuesta.</u></p>
     <p><em>"Arranquemos por lo que ya saben. Que el modelo use una herramienta que no vio en el entrenamiento no tiene nada de mágico: le metés en el contexto una descripción de qué es y cómo se usa, y el modelo opera sobre eso. Eso es context engineering, lo venimos haciendo desde hace semanas."</em></p>
-    <p><em>"Lo nuevo que trae MCP no es que se pueda — es que ese contexto no lo armás vos a mano. Conectás un server que escribió un desconocido, y de golpe el modelo sabe qué tools tiene y con qué parámetros. ¿Quién armó ese contexto? ¿En qué momento? Eso es lo que vamos a desarmar: el mecanismo de discovery."</em></p>
+    <p><em>"Lo nuevo que trae MCP no es que se pueda — es que ese contexto no lo armás vos a mano. Conectás un server que escribió un desconocido, y de golpe el modelo sabe qué tools tiene y con qué parámetros. ¿Quién armó ese contexto? ¿En qué momento? Eso es lo que vamos a desarmar."</em></p>
   </aside>
 </section>
 
-<!-- §5.2 — Los dos mecanismos -->
+<!-- §5.2 — Timeline: qué pasa cuando conectás un server -->
 <section>
-  <h2 class="s5-h2">Dos mecanismos, una conexión.</h2>
-  <p class="s5-h2-sub">La respuesta no es magia: son dos pasos del protocolo, bien separados.</p>
+  <h2 class="s5-h2">Qué pasa cuando conectás un server.</h2>
+  <p class="s5-h2-sub">Todo esto sucede solo, antes de que escribas tu primera pregunta.</p>
 
-  <div class="s5-mech">
-    <div class="s5-mech-card fragment fade-in" data-fragment-index="0">
-      <p class="s5-mech-when">cuando arranca · una vez</p>
-      <p class="s5-mech-name">Capability negotiation</p>
-      <p class="s5-mech-body">Durante el <code>initialize</code>, cliente y server se cuentan qué versión del protocolo hablan y qué saben hacer.</p>
+  <div class="s5-tl">
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="0">
+      <span class="s5-tl-num">1</span>
+      <p class="s5-tl-title">Conectás el server</p>
+      <p class="s5-tl-desc">Una vez. Antes de cualquier conversación.</p>
     </div>
-    <div class="s5-mech-card fragment fade-in" data-fragment-index="1">
-      <p class="s5-mech-when">en la conversación · cada vez</p>
-      <p class="s5-mech-name">Discovery</p>
-      <p class="s5-mech-body">Con métodos <code>*/list</code>, el cliente le pregunta al server qué tools, resources y prompts tiene <em>ahora</em>.</p>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="1">&rarr;</span>
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="1">
+      <span class="s5-tl-num">2</span>
+      <p class="s5-tl-title">Handshake</p>
+      <p class="s5-tl-desc">Se presentan: qué versión hablan y qué sabe hacer cada uno. Queda fijo toda la sesión.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="2">&rarr;</span>
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="2">
+      <span class="s5-tl-num">3</span>
+      <p class="s5-tl-title">El cliente pide el catálogo</p>
+      <p class="s5-tl-desc"><code>*/list</code>. Lo dispara el cliente, solo.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="3">&rarr;</span>
+    <div class="s5-tl-step is-key fragment fade-in" data-fragment-index="3">
+      <span class="s5-tl-num">4</span>
+      <p class="s5-tl-title">El catálogo entra al contexto</p>
+      <p class="s5-tl-desc"><code>name</code>, <code>description</code> y schema de cada tool, al prompt del modelo.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="4">&rarr;</span>
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="4">
+      <span class="s5-tl-num">5</span>
+      <p class="s5-tl-title">El modelo ya sabe</p>
+      <p class="s5-tl-desc">Antes de tu pregunta, ya tiene el catálogo en contexto.</p>
     </div>
   </div>
 
-  <p class="s5-mech-note fragment fade-in" data-fragment-index="2">Y si el catálogo cambia mientras hablás, hay un tercer mecanismo: <code>notifications</code>. Lo vemos al final.</p>
+  <p class="s5-tl-cap fragment fade-in" data-fragment-index="5">¿Quién arma el contexto? <strong>El cliente.</strong> ¿Cuándo? <strong>Al conectar</strong> — no en tu pregunta.</p>
 
   <aside class="notes">
-    <p><strong>Tres reveals — capability negotiation, discovery, mención de notifications.</strong></p>
-    <p><u>Separa los dos mecanismos antes de profundizar cada uno. La distinción clave es el "cuándo": negotiation pasa una vez al arrancar, discovery pasa durante la conversación.</u></p>
-    <p><em>"La respuesta vive en dos mecanismos que conviene separar bien. El primero: capability negotiation. Pasa una sola vez, cuando el host arranca el server, durante un mensaje que se llama initialize. Ahí cliente y server se presentan: yo hablo esta versión del protocolo, soporto estas capabilities; el otro responde igual."</em></p>
-    <p><em>"El segundo: discovery. Pasa durante la conversación, cada vez que hace falta. El cliente le pregunta al server qué tiene disponible con métodos que terminan en list — tools slash list, resources slash list, prompts slash list. La palabra clave es ahora: le pregunta qué tiene en este momento, no qué tenía cuando se programó."</em></p>
-    <p><em>"Y hay un tercero, más chico, para cuando el catálogo cambia en vivo: las notifications. Lo dejamos para el cierre del bloque. Vamos al primero."</em></p>
+    <p><strong>Seis reveals — los 5 pasos del timeline de a uno, después el caption que responde el hook.</strong></p>
+    <p><u>El corazón de la sección, como mapa de un vistazo. Construye el flujo paso a paso de izquierda a derecha. El paso 4 (catálogo→contexto) está marcado distinto: es el crux, el momento donde se responde la pregunta del hook. El caption final cierra explícitamente con quién y cuándo.</u></p>
+    <p><em>"Vamos a seguir, paso a paso, qué pasa exactamente cuando conectás un MCP Server. Paso uno: lo conectás. Es algo que hacés una sola vez, agregándolo a la config, antes de cualquier conversación."</em></p>
+    <p><em>"Paso dos, el handshake. Apenas se conecta, cliente y server se presentan: qué versión del protocolo hablan, y qué sabe hacer cada uno. A esto se lo llama capability negotiation, y lo importante es que queda fijo para toda la sesión — el protocolo es stateful, no se renegocia en cada vuelta."</em></p>
+    <p><em>"Paso tres: el cliente pide el catálogo, con un */list. Y acá la conexión con el bloque anterior: ese */list ya lo vieron, es el mismo que aparecía en cada primitive. Lo nuevo no es el mensaje — es quién lo dispara y cuándo. Lo dispara el cliente, solo, sin que vos hagas nada."</em></p>
+    <p><em>"Paso cuatro, y este es el que importa, por eso está marcado distinto. El catálogo que vuelve — el nombre, la descripción y el schema de cada tool — se inyecta al contexto del modelo. Esto es exactamente el cargar-al-contexto de context engineering, pero automático: lo arma el cliente, no vos."</em></p>
+    <p><em>"Paso cinco: listo. Antes de que escribas tu primera pregunta, el modelo ya tiene en su contexto la descripción de cada herramienta disponible."</em></p>
+    <p><em>"Y así se responde la pregunta del arranque. ¿Quién arma el contexto? El cliente. ¿Cuándo? Al conectar, no cuando vos preguntás. Eso es discovery."</em></p>
   </aside>
 </section>
 
-<!-- §5.3 — El handshake: initialize + capability negotiation -->
+<!-- §5.3 — La misma secuencia, con el detalle del protocolo (animación de apoyo) -->
 <section>
-  <h2 class="s5-h2">El handshake.</h2>
-  <p class="s5-h2-sub">Como dos extraños que se presentan: qué versión hablás, qué sabés hacer.</p>
-
-  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
-    <div class="s5-msg-card is-client fragment fade-in" data-fragment-index="0">
-      <p class="s5-msg-role">Cliente dice</p>
-<pre><code class="language-json" data-trim>{
-  "method": "initialize",
-  "params": {
-    "protocolVersion": "2025-06-18",
-    "capabilities": {
-      "sampling": {},
-      "elicitation": {}
-    },
-    "clientInfo": { "name": "claude-code" }
-  }
-}</code></pre>
-    </div>
-    <div class="s5-msg-card is-server fragment fade-in" data-fragment-index="1">
-      <p class="s5-msg-role">Server responde</p>
-<pre><code class="language-json" data-trim>{
-  "result": {
-    "protocolVersion": "2025-06-18",
-    "capabilities": {
-      "tools": { "listChanged": true },
-      "resources": { "subscribe": true },
-      "prompts": {}
-    },
-    "serverInfo": { "name": "playwright-mcp" }
-  }
-}</code></pre>
-    </div>
-  </div>
-
-  <p class="s5-cap fragment fade-in" data-fragment-index="2">MCP es un protocolo <strong>stateful</strong>: esa negociación queda registrada para toda la sesión. Cada uno sabe exactamente qué puede pedirle al otro.</p>
-
-  <aside class="notes">
-    <p><strong>Tres reveals — mensaje del cliente, respuesta del server, la línea de stateful.</strong></p>
-    <p><u>El handshake concreto. No hace falta que lean cada campo: la idea es que se presentan mutuamente. La analogía de los dos extraños evita que JSON-RPC suene a magia.</u></p>
-    <p><em>"El handshake, concreto. El cliente abre con un mensaje initialize. Le dice al server tres cosas: qué versión del protocolo habla — ese protocolVersion con la fecha —, qué capabilities soporta él como cliente — acá sampling y elicitation, las primitives del cliente que vimos en el bloque anterior — y quién es."</em></p>
-    <p><em>"El server responde con la misma forma: yo hablo esa misma versión, y estas son mis capabilities. Fíjense en una en particular: tools, con listChanged en true. Eso significa 'tengo tools, y además te voy a avisar si cambian'. Esa banderita es la que habilita las notifications del final."</em></p>
-    <p><em>"Y la propiedad clave: MCP es stateful. Esa negociación no se tira después del primer mensaje — queda registrada para toda la sesión. Cliente y server saben en todo momento qué se pueden pedir mutuamente. No re-negocian en cada vuelta."</em></p>
-  </aside>
-</section>
-
-<!-- §5.4 — Discovery con */list: el catálogo -->
-<section>
-  <h2 class="s5-h2">El catálogo.</h2>
-  <p class="s5-h2-sub">Después del handshake, el cliente pregunta qué hay con <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.92rem;">*/list</code>. La respuesta no es una lista de nombres.</p>
-
-  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
-    <div class="s5-msg-card is-client fragment fade-in" data-fragment-index="0" style="flex: 0 0 32%;">
-      <p class="s5-msg-role">Cliente pide</p>
-<pre><code class="language-json" data-trim>{
-  "method": "tools/list"
-}</code></pre>
-    </div>
-    <div class="s5-msg-card is-server fragment fade-in" data-fragment-index="1">
-      <p class="s5-msg-role">Server devuelve un catálogo con metadata</p>
-<pre><code class="language-json" data-trim>{
-  "result": {
-    "tools": [
-      {
-        "name": "browser_navigate",
-        "description": "Navigate the browser to a URL",
-        "inputSchema": {
-          "type": "object",
-          "properties": { "url": { "type": "string" } },
-          "required": ["url"]
-        }
-      }
-    ]
-  }
-}</code></pre>
-    </div>
-  </div>
-
-  <p class="s5-cap fragment fade-in" data-fragment-index="2">Esa metadata — <strong>name, description, inputSchema</strong> — se inyecta al <strong>system context</strong> del modelo. Antes de razonar sobre tu pregunta, el modelo ya tiene en la mesa la descripción exacta de cada tool.</p>
-
-  <aside class="notes">
-    <p><strong>Tres reveals — request, response con metadata, la línea del system context.</strong></p>
-    <p><u>El catálogo con metadata. El punto pedagógico clave: la respuesta no son nombres pelados — trae description e inputSchema, y eso es lo que el modelo lee para decidir cuándo invocar. Esa metadata viaja al system context.</u></p>
-    <p><em>"Después del handshake, el cliente descubre qué hay. Manda un tools slash list — un mensaje cortito, sin parámetros. 'Decime qué tools tenés.'"</em></p>
-    <p><em>"Y el server le devuelve un catálogo. Pero ojo, no es una lista de nombres pelada. Cada tool viene con metadata: el nombre, una description en prosa de qué hace, y un inputSchema que dice qué parámetros toma y de qué tipo. Acá ven browser_navigate, de Playwright, con su descripción y su único parámetro url, requerido, de tipo string."</em></p>
-    <p><em>"Y acá está el mecanismo completo: esa metadata se le inyecta al modelo como parte del system context de la conversación. Antes de razonar sobre lo que vos le pediste, el modelo ya tiene en la mesa la descripción exacta de cada herramienta que dispone. La description que escribió el autor del server es literalmente lo que el modelo lee para decidir cuándo usarla. Es el mismo cargar-al-contexto de context engineering — pero automático: el catálogo entra solo, sin que vos lo escribas a mano."</em></p>
-  </aside>
-</section>
-
-<!-- §5.5 — El insight clave: handshake animado (clickable-steps) -->
-<section>
-  <h2 class="s5-h2">Cómo el modelo se entera.</h2>
-  <p class="s5-h2-sub">El intercambio completo, paso por paso. Click en cada uno.</p>
+  <h2 class="s5-h2">La misma secuencia, por dentro.</h2>
+  <p class="s5-h2-sub">Si querés ver el mensaje JSON-RPC de cada paso: click en cada uno.</p>
 
   <div class="s5-bar" id="s5-hs-bar">
     <div class="s5-bar-node is-client">
@@ -3123,30 +3030,29 @@
   <div class="s5-hs-steps" id="s5-handshake-steps"></div>
 
   <aside class="notes">
-    <p><strong>Click cada paso. La barra de arriba se ilumina según quién manda el mensaje. Plan B: si el JS no carga, los slides 5.3, 5.4 y 5.7 ya cubren el contenido — narrar la secuencia 1-2-3-4 a mano.</strong></p>
-    <p><u>El clímax conceptual de la clase, interactivo. Cuatro pasos: initialize, tools/list, catálogo al contexto, list_changed. Al clickear, la barra muestra la dirección del mensaje. El paso 3 es el aha — el catálogo entra al contexto del modelo.</u></p>
-    <p><em>"Juntemos todo en una secuencia. Arriba está el par que ya conocen del diagrama: el MCP Client adentro del host, el MCP Server como proceso aparte, JSON-RPC entre los dos. Voy a ir clickeando los pasos y la barra se ilumina según quién le habla a quién."</em></p>
-    <p><em>"Paso uno, initialize: el cliente arranca, negocian capabilities. Paso dos, tools slash list: el cliente pide el catálogo. Paso tres, y este es el que importa: el catálogo, con toda su metadata, se inyecta al system context del modelo. Ahí es donde el modelo se entera de qué tools tiene — sin haberlos memorizado nunca. Paso cuatro, list_changed: si el server cambia su catálogo, avisa, y el cliente vuelve a pedir la lista. El loop se cierra."</em></p>
-    <p><em>"Quédense con el paso tres. Todo lo demás es plomería. El corazón es que el conocimiento de qué herramientas hay no vive en los pesos del modelo — vive en el contexto, y se arma en el momento."</em></p>
+    <p><strong>Slide de apoyo / profundización. Click cada paso; la barra de arriba se ilumina según quién manda el mensaje. Quien no quiera el detalle, con el timeline anterior alcanza. Plan B si el JS no carga: narrar la secuencia 1-2-3-4 a mano sobre la barra.</strong></p>
+    <p><u>Mismos pasos del timeline, pero con el mensaje JSON-RPC real de cada uno en el panel de detalle. El paso 3 (catálogo → contexto) es el aha. La barra muestra la dirección del mensaje al clickear.</u></p>
+    <p><em>"Para quien quiera ver la plomería: el mismo flujo del timeline, pero clickeable, con el mensaje real de cada paso. Arriba está el par que ya conocen del diagrama: el MCP Client adentro del host, el MCP Server como proceso aparte, JSON-RPC entre los dos. Al clickear cada paso, la barra se ilumina según quién le habla a quién."</em></p>
+    <p><em>"Paso uno, initialize: el handshake, negocian capabilities. Paso dos, tools/list: el cliente pide el catálogo. Paso tres, el que importa: el catálogo se inyecta al contexto del modelo — ahí se entera de qué tools hay, sin haberlos memorizado. Paso cuatro, list_changed: si el server cambia su catálogo, avisa, y el cliente vuelve a pedir la lista. Eso último lo vemos en el próximo slide."</em></p>
   </aside>
 </section>
 
-<!-- §5.6 — El insight, articulado -->
+<!-- §5.4 — El insight, articulado -->
 <section>
   <div class="s5-poster">
-    <p class="s5-poster-q">El LLM no <em>memoriza</em> tools.</p>
-    <p class="s5-poster-q">Los <strong>descubre</strong> en tiempo de conversación.</p>
-    <p class="s5-poster-sub">Es el mismo cargar-al-contexto de siempre — pero el protocolo lo estandariza y lo automatiza: el server se describe, el cliente lo inyecta, sin que toques nada. Un server escrito hoy funciona hoy, en cualquier host.</p>
+    <p class="s5-poster-q">El contexto lo arma el <strong>cliente</strong>, solo.</p>
+    <p class="s5-poster-q">Vos no tocás nada.</p>
+    <p class="s5-poster-sub">Es el mismo cargar-al-contexto que ya conocés — el protocolo solo lo estandariza y lo automatiza. Un server escrito hoy funciona hoy, en cualquier host.</p>
   </div>
 
   <aside class="notes">
-    <p><u>El insight articulado. Slide-poster sin adornos. Ojo con el tono: no es "guau, usa algo no entrenado" — eso ya lo manejan. El punto es que el protocolo estandariza y automatiza el cargar-al-contexto que ya conocen.</u></p>
-    <p><em>"Si se llevan una sola frase de este bloque, que sea esta. El LLM no memoriza tools. Los descubre en tiempo de conversación."</em></p>
-    <p><em>"Y para que quede claro: esto no es ningún truco nuevo del modelo. Es exactamente el cargar-al-contexto que vienen usando en context engineering. Lo que aporta MCP es estandarizarlo y automatizarlo: el server se describe de una forma fija, el cliente inyecta ese catálogo solo, y vos no tocás nada. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo. El descubrimiento automático reemplaza al curado manual."</em></p>
+    <p><u>El insight articulado en una frase. Slide-poster sin adornos. Cierra el medio: el descubrimiento automático reemplaza al curado manual del contexto.</u></p>
+    <p><em>"Si se llevan una sola idea de todo esto, que sea esta. El contexto con las herramientas disponibles no lo armás vos a mano. Lo arma el cliente, solo, en el momento de conectar."</em></p>
+    <p><em>"Y de nuevo, no es un truco nuevo del modelo. Es el mismo cargar-al-contexto que vienen usando en context engineering — lo que aporta MCP es estandarizarlo y automatizarlo. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo. El descubrimiento automático reemplaza al curado manual."</em></p>
   </aside>
 </section>
 
-<!-- §5.7 — Notifications: el catálogo es dinámico -->
+<!-- §5.5 — Notifications: el catálogo es dinámico -->
 <section>
   <h2 class="s5-h2">Y si cambia en vivo.</h2>
   <p class="s5-h2-sub">El catálogo no es una foto inicial. Acá entra el tercer mecanismo.</p>
@@ -3170,14 +3076,14 @@
 
   <aside class="notes">
     <p><strong>Tres reveals — la notificación del server, la reacción del cliente, el caption de discovery dinámica.</strong></p>
-    <p><u>Notifications cierra el mecanismo. La banderita listChanged del handshake era la habilitación; acá se usa. El punto: el catálogo puede cambiar a mitad de sesión y el contexto se actualiza solo.</u></p>
-    <p><em>"¿Se acuerdan del listChanged en true del handshake? Acá se cobra. Cuando el server declaró esa capability, se reserva el derecho de avisar en cualquier momento que su catálogo cambió. Manda una notificación — notifications slash tools slash list_changed. Sin respuesta esperada, es un aviso."</em></p>
+    <p><u>Notifications cierra el mecanismo. En el handshake el server pudo declarar que avisa si su catálogo cambia (listChanged); acá se cobra. El punto: el catálogo puede cambiar a mitad de sesión y el contexto se actualiza solo.</u></p>
+    <p><em>"Falta un detalle del timeline: dijimos que el catálogo entra al contexto al conectar. ¿Y si cambia después? Para eso está el tercer mecanismo. En el handshake, el server pudo declarar que avisa cuando su catálogo cambia. Cuando efectivamente cambia, manda una notificación — notifications slash tools slash list_changed. Sin respuesta esperada, es un aviso."</em></p>
     <p><em>"Y el cliente reacciona: vuelve a pedir tools slash list, trae el catálogo nuevo, y actualiza el contexto del modelo en tiempo real. El modelo, en la próxima vuelta, ve el set actualizado."</em></p>
-    <p><em>"¿Cuándo pasa esto en la práctica? Un server que expone tools distintos según los directorios que le pasaron como scope. Un server con auth por scopes que suma tools cuando el usuario amplía permisos a mitad de sesión. Un server cuyo catálogo depende del estado de un proceso externo. La idea de fondo: discovery es dinámica, no una foto que se saca al arrancar."</em></p>
+    <p><em>"¿Cuándo pasa esto en la práctica? Un server que expone tools distintos según los directorios que le pasaron como scope. Un server con auth por scopes que suma tools cuando el usuario amplía permisos a mitad de sesión. La idea de fondo: discovery es dinámica, no una foto que se saca al arrancar."</em></p>
   </aside>
 </section>
 
-<!-- §5.8 — La consecuencia práctica: bridge a §6 -->
+<!-- §5.6 — La consecuencia práctica: bridge a §6 -->
 <section>
   <div class="s5-poster">
     <p class="s5-poster-q">El ecosistema crece <strong>sin coordinación central</strong>.</p>
