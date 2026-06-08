@@ -141,6 +141,88 @@
     max-width: 1000px;
   }
 
+  /* §6.3 — Scopes: dónde vive el config */
+  .s6-scope-syntax {
+    max-width: 1000px;
+    margin: var(--spacing-md) auto var(--spacing-md) auto;
+    background: var(--bg-code);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .s6-scope-syntax .flag { color: var(--accent); font-weight: 700; }
+  .s6-scope-syntax .note { color: var(--text-muted); font-size: 0.85em; margin-left: var(--spacing-sm); }
+  .s6-scope {
+    display: grid;
+    grid-template-columns: 0.95fr 1.25fr 1.5fr;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .s6-scope-cell {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--text-muted);
+    border-right: 1px solid var(--text-muted);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+  .s6-scope-cell:nth-child(3n) { border-right: none; }
+  .s6-scope-cell.is-head {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s6-scope-cell.is-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  .s6-scope-cell.is-name .tag {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+  .s6-scope-cell code {
+    background: var(--bg-code);
+    color: var(--accent-secondary);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+  .s6-scope-cell .loc-note {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 3px;
+  }
+  .s6-scope-prec {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    font-style: italic;
+  }
+  .s6-scope-prec code {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--accent-secondary);
+    font-size: 0.88rem;
+  }
+
   /* §6.3 — Antes y después: el contexto de la sesión */
   .s6-ba-panel {
     background: var(--bg-code);
@@ -506,12 +588,68 @@
 }</code></pre>
   </div>
 
-  <p class="s6-config-cap">El comando es el atajo de CC; ese JSON es lo portable — casi igual en todos los hosts. Con <code>--scope project</code> queda en <code>.mcp.json</code>, versionado, y viaja con el repo.</p>
+  <p class="s6-config-cap">El comando es el atajo de CC; ese JSON es lo portable — casi igual en todos los hosts. ¿Y dónde lo escribe? Depende del <strong>scope</strong>.</p>
 
   <aside class="notes">
-    <p><u>Cómo se agrega, general y en CC. Lo importante: el comando es la comodidad de Claude Code, pero lo que escribe — el JSON con mcpServers — es lo estándar y portable. La estructura: nombre, command, args. No hay formato nuevo por host.</u></p>
+    <p><u>Cómo se agrega, general y en CC. Lo importante: el comando es la comodidad de Claude Code, pero lo que escribe — el JSON con mcpServers — es lo estándar y portable. La estructura: nombre, command, args. No hay formato nuevo por host. El "dónde lo escribe" lo abre el slide siguiente (scopes).</u></p>
     <p><em>"¿Cómo se agrega un server, concretamente? En Claude Code es una línea: claude mcp add, el nombre que le querés poner, y el comando que lo arranca con sus argumentos. Acá: claude mcp add playwright, npx menos y arroba playwright barra mcp. Enter, y queda."</em></p>
-    <p><em>"Lo que hace ese comando es escribir un JSON por vos. Ese JSON es el de abajo: una clave mcpServers, y adentro, por cada server, un nombre, el command que lo arranca, y los args. Y acá está la conexión con la portabilidad: ese JSON, con variaciones cosméticas, es el mismo en Cursor, en Cline, en VS Code. El comando es el atajo de CC; el JSON es lo que viaja. Y un detalle de alcance: por default queda para tu usuario, pero con scope project lo escribís en un .mcp.json versionado en el repo, que viaja con el proyecto para todo el equipo."</em></p>
+    <p><em>"Lo que hace ese comando es escribir un JSON por vos. Ese JSON es el de abajo: una clave mcpServers, y adentro, por cada server, un nombre, el command que lo arranca, y los args. Y acá está la conexión con la portabilidad: ese JSON, con variaciones cosméticas, es el mismo en Cursor, en Cline, en VS Code. El comando es el atajo de CC; el JSON es lo que viaja. Ahora bien, ¿dónde escribe exactamente ese JSON? Depende del scope, y eso lo vemos en el próximo slide."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 — Dónde vive el config: scopes -->
+<section>
+  <h2 class="s6-h2">¿Dónde vive ese JSON?</h2>
+  <p class="s6-h2-sub">El mismo comando lo puede escribir en tres lugares distintos. Lo elegís con el scope.</p>
+
+  <div class="s6-scope-syntax">
+    claude mcp add &lt;nombre&gt; &lt;comando&gt; <span class="flag">--scope local | project | user</span>
+    <span class="note">sin flag &rarr; local</span>
+  </div>
+
+  <div class="s6-scope">
+    <div class="s6-scope-cell is-head">Scope</div>
+    <div class="s6-scope-cell is-head">Dónde se escribe el JSON</div>
+    <div class="s6-scope-cell is-head">Quién lo ve · cuándo</div>
+
+    <div class="s6-scope-cell is-name">
+      local
+      <span class="tag">default</span>
+    </div>
+    <div class="s6-scope-cell">
+      <code>~/.claude.json</code>
+      <span class="loc-note">sección de este proyecto</span>
+    </div>
+    <div class="s6-scope-cell">Solo vos, solo en este proyecto. Para probar algo personal.</div>
+
+    <div class="s6-scope-cell is-name">
+      project
+      <span class="tag">--scope project</span>
+    </div>
+    <div class="s6-scope-cell">
+      <code>.mcp.json</code>
+      <span class="loc-note">en la raíz del repo</span>
+    </div>
+    <div class="s6-scope-cell">Todo el equipo. Va a git y viaja con el repo. Para servers del proyecto.</div>
+
+    <div class="s6-scope-cell is-name">
+      user
+      <span class="tag">--scope user</span>
+    </div>
+    <div class="s6-scope-cell">
+      <code>~/.claude.json</code>
+      <span class="loc-note">a nivel global</span>
+    </div>
+    <div class="s6-scope-cell">Solo vos, en todos tus proyectos. Tu setup personal.</div>
+  </div>
+
+  <p class="s6-scope-prec">Si un server con el mismo nombre aparece en más de un scope, gana <code>local &gt; project &gt; user</code> — no se mezclan, se toma la entrada entera del de mayor prioridad.</p>
+
+  <aside class="notes">
+    <p><u>Los tres lugares donde puede vivir el config, con el scope que los elige. Espejo de los scopes de plugins de S05. Lo clave: project es el único compartido (va a git en .mcp.json); local y user son privados, en tu ~/.claude.json. Default es local.</u></p>
+    <p><em>"El mismo comando puede escribir el JSON en tres lugares distintos, y lo elegís con el flag scope. Si no ponés el flag, va a local."</em></p>
+    <p><em>"Local, el default: queda en tu archivo ~/.claude.json, en la sección de este proyecto. Privado, solo vos, solo acá. Es para probar un server sin ensuciar nada compartido. Project: queda en un archivo .mcp.json en la raíz del repo. Este es el único que se comparte — va a git, y cualquiera que clone el repo hereda el server. Es para servers que son parte del proyecto, que querés que todo el equipo tenga. User: queda también en tu ~/.claude.json, pero a nivel global, no atado a un proyecto. Privado tuyo, pero disponible en todos tus proyectos. Es tu setup personal."</em></p>
+    <p><em>"Y si el mismo nombre de server aparece en más de un scope, hay un orden de prioridad: gana local, después project, después user. No se mezclan los campos — se toma la entrada entera del scope de mayor prioridad. La regla práctica: project para lo del equipo, local o user para lo tuyo."</em></p>
   </aside>
 </section>
 
