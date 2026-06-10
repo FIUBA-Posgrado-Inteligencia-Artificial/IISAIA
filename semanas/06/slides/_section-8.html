@@ -1,5 +1,5 @@
 <style>
-  /* §8 — Demo remoto: Notion (Streamable HTTP)
+  /* §8 — Demo remoto: Linear (Streamable HTTP)
      Centered prose shares max-width 1000px. */
   .s8-h2 {
     text-align: center;
@@ -202,19 +202,19 @@
   <h2 class="s8-h2">El mismo patrón, con un server que vive afuera.</h2>
 
   <div class="s8-q0flow">
-    <span class="s8-q0-box">¿Claude Code habla con tu Notion?</span>
+    <span class="s8-q0-box">¿Claude Code habla con tu Linear?</span>
     <span class="s8-q0-arrow">&rarr;</span>
     <span class="s8-q0-no">No</span>
     <span class="s8-q0-arrow">&rarr;</span>
     <span class="s8-q0-mcp">corresponde MCP</span>
   </div>
 
-  <p class="s8-sub">Notion expone un server <strong>remoto</strong>, hosteado por Notion: no corre en tu máquina, vive en internet y se conecta por Streamable HTTP. Misma pregunta cero, otro transport.</p>
+  <p class="s8-sub">Linear expone un server <strong>remoto</strong>, hosteado por Linear: no corre en tu máquina, vive en internet y se conecta por Streamable HTTP. Misma pregunta cero, otro transport.</p>
 
   <aside class="notes">
-    <p><u>Marco del segundo demo, en espejo con §7. Pregunta cero da "no" → MCP. El contraste clave: este server es remoto (Streamable HTTP), no local. Notion lo hostea; vos te conectás por red con auth.</u></p>
-    <p><em>"Segundo demo, mismo molde. Pregunta cero: ¿Claude Code habla con tu Notion de fábrica? No. Así que corresponde MCP."</em></p>
-    <p><em>"Pero acá cambia algo respecto a Playwright. El server de Notion no lo corrés vos: lo hostea Notion, vive en internet, y te conectás por Streamable HTTP. Es un server remoto. La pregunta cero es la misma; lo que cambia es el transport. Veamos cómo se agrega uno remoto, que se ve distinto."</em></p>
+    <p><u>Marco del segundo demo, en espejo con §7. Pregunta cero da "no" → MCP. El contraste clave: este server es remoto (Streamable HTTP), no local. Linear lo hostea; vos te conectás por red con auth.</u></p>
+    <p><em>"Segundo demo, mismo molde. Pregunta cero: ¿Claude Code habla con tu Linear de fábrica? No. Así que corresponde MCP."</em></p>
+    <p><em>"Pero acá cambia algo respecto a Playwright. El server de Linear no lo corrés vos: lo hostea Linear, vive en internet, y te conectás por Streamable HTTP. Es un server remoto. La pregunta cero es la misma; lo que cambia es el transport. Veamos cómo se agrega uno remoto, que se ve distinto."</em></p>
   </aside>
 </section>
 
@@ -234,8 +234,8 @@
       </div>
     </div>
     <div class="s8-cmp-card is-remote">
-      <p class="s8-cmp-tag">remoto · Streamable HTTP (Notion)</p>
-      <div class="s8-cmp-cmd"><span class="muted">$</span> claude mcp add <span class="hl">--transport http</span> notion <span class="hl">https://mcp.notion.com/mcp</span></div>
+      <p class="s8-cmp-tag">remoto · Streamable HTTP (Linear)</p>
+      <div class="s8-cmp-cmd"><span class="muted">$</span> claude mcp add <span class="hl">--transport http</span> linear <span class="hl">https://mcp.linear.app/mcp</span></div>
       <div class="s8-cmp-rows">
         <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "http"</code>, <code>url</code></span></div>
         <div class="s8-cmp-row"><span class="k">arranque</span><span>una URL — el server ya corre afuera</span></div>
@@ -247,7 +247,7 @@
   <div class="s8-oauth">
     <span class="s8-oauth-step">en Claude Code: <code>/mcp</code></span>
     <span class="s8-oauth-arrow">&rarr;</span>
-    <span class="s8-oauth-step">se abre el browser, login en Notion</span>
+    <span class="s8-oauth-step">se abre el browser, login en Linear</span>
     <span class="s8-oauth-arrow">&rarr;</span>
     <span class="s8-oauth-step">el token queda guardado (se renueva solo)</span>
   </div>
@@ -255,29 +255,29 @@
   <aside class="notes">
     <p><u>El corazón de las dos secciones: el contraste local vs remoto. Local = un comando que arranca un proceso (Stdio). Remoto = una URL a un server que ya corre afuera (HTTP) + OAuth. Materializa los dos transports de §3.</u></p>
     <p><em>"Acá está la diferencia, y es el sentido de hacer estos dos demos juntos. A la izquierda, el local de recién: claude mcp add, y un comando que arranca un proceso en tu máquina. En el JSON queda type stdio, con command y args. No hay auth porque el server vive con vos."</em></p>
-    <p><em>"A la derecha, el remoto: claude mcp add, pero con transport http, y en vez de un comando, una URL — la de Notion. El server ya está corriendo en internet; vos solo apuntás a él. En el JSON queda type http, con url. Y como es un servicio de terceros con tus datos, necesita autenticación."</em></p>
-    <p><em>"Esa auth es OAuth, y se resuelve adentro de Claude Code: corrés barra mcp, se abre el browser, te logueás en Notion y das permiso, y el token queda guardado de forma segura, renovándose solo. No pegás ningún token a mano. Esto es exactamente Stdio versus Streamable HTTP, los dos transports que vimos en la arquitectura, ahora en concreto."</em></p>
+    <p><em>"A la derecha, el remoto: claude mcp add, pero con transport http, y en vez de un comando, una URL — la de Linear. El server ya está corriendo en internet; vos solo apuntás a él. En el JSON queda type http, con url. Y como es un servicio de terceros con tus datos, necesita autenticación."</em></p>
+    <p><em>"Esa auth es OAuth, y se resuelve adentro de Claude Code: corrés barra mcp, se abre el browser, te logueás en Linear y das permiso, y el token queda guardado de forma segura, renovándose solo. No pegás ningún token a mano. Esto es exactamente Stdio versus Streamable HTTP, los dos transports que vimos en la arquitectura, ahora en concreto."</em></p>
   </aside>
 </section>
 
 <!-- §8.3 — Section divider: demo en vivo -->
 <section class="section-divider">
   <h2>Demo</h2>
-  <p style="color: var(--text-muted); margin-top: var(--spacing-sm);">Notion desde Claude Code — terminal + Notion lado a lado</p>
+  <p style="color: var(--text-muted); margin-top: var(--spacing-sm);">Linear desde Claude Code — terminal + Linear lado a lado</p>
 </section>
 
 <!-- §8.4 — Beats del demo -->
 <section>
-  <h2 class="s8-h2">El agente, sobre tu Notion.</h2>
+  <h2 class="s8-h2">El agente, en tu Linear.</h2>
   <p class="s8-h2-sub">Click cada beat para ver el pedido y qué mirar.</p>
 
   <div class="s8-demo-steps" id="s8-demo-steps"></div>
 
   <aside class="notes">
-    <p><strong>Demo en vivo, terminal + Notion lado a lado. Click cada beat. Plan B en el tercero.</strong></p>
-    <p><u>Dos casos sobre un server remoto: lectura (buscar y resumir) y acción (crear una página). El alumno tiene que ver que es el mismo patrón que Playwright, con datos que viven afuera.</u></p>
-    <p><em>"Al vivo, mismo molde que antes. Primero lectura: le pido que busque una página en mi Notion y me la resuma. El agente usa los tools de Notion para buscar, leer la página y devolver el resumen — los datos vienen del workspace, no de la máquina."</em></p>
-    <p><em>"Después, acción: le pido que cree una página nueva con el resumen de una reunión. El agente llama el tool de crear y la página aparece en Notion, en vivo. Si la conexión falla, screenshots pre-armados del antes y después."</em></p>
+    <p><strong>Demo en vivo, terminal + Linear lado a lado. Click cada beat.</strong></p>
+    <p><u>Dos casos sobre un server remoto: lectura (buscar y resumir issues) y acción (crear un issue). El alumno tiene que ver que es el mismo patrón que Playwright, con datos que viven afuera.</u></p>
+    <p><em>"Al vivo, mismo molde que antes. Primero lectura: le pido que busque en Linear los issues abiertos que tengo asignados y me los resuma. El agente usa los tools de Linear para buscar, leer los issues y devolver el resumen — los datos vienen del workspace, no de la máquina."</em></p>
+    <p><em>"Después, acción: le pido que cree un issue nuevo. El agente llama el tool de crear y el issue aparece en Linear, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio."</em></p>
   </aside>
 </section>
 
@@ -291,7 +291,7 @@
       <p class="s8-close-body">Corre en tu máquina, como subproceso. Sin red, sin auth. Lo arranca un comando.</p>
     </div>
     <div class="s8-close-card is-remote">
-      <p class="s8-close-name">Notion · remoto · HTTP</p>
+      <p class="s8-close-name">Linear · remoto · HTTP</p>
       <p class="s8-close-body">Vive en internet, hosteado. Te conectás por red, con OAuth. Lo señalás con una URL.</p>
     </div>
   </div>
@@ -300,7 +300,7 @@
 
   <aside class="notes">
     <p><u>Cierre del bloque de demos y del arco de los dos transports. La conclusión que se llevan: el transport (local/remoto) cambia la plomería de conexión, pero el patrón de intercambio MCP es el mismo. Esto cierra §3 (dos transports) con evidencia.</u></p>
-    <p><em>"Y este es el cierre de los dos demos. Pusimos lado a lado un server local y uno remoto. Playwright: local, Stdio, corre en tu máquina, sin auth, lo arranca un comando. Notion: remoto, HTTP, vive en internet, OAuth, lo señalás con una URL."</em></p>
+    <p><em>"Y este es el cierre de los dos demos. Pusimos lado a lado un server local y uno remoto. Playwright: local, Stdio, corre en tu máquina, sin auth, lo arranca un comando. Linear: remoto, HTTP, vive en internet, OAuth, lo señalás con una URL."</em></p>
     <p><em>"Lo que cambia entre los dos es dónde vive el server y cómo te conectás — la plomería. Pero el intercambio, lo que pasa una vez conectados, es idéntico: el server expone sus capacidades, el modelo las descubre, las invoca, y el resultado vuelve a la conversación. Un solo patrón, para cualquier server, viva donde viva. Eso es MCP."</em></p>
   </aside>
 </section>
@@ -312,22 +312,16 @@
     steps: [
       {
         title: '1 — Lectura',
-        summary: 'Buscar y resumir una página de tu Notion.',
+        summary: 'Buscar y resumir issues de tu Linear.',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en mi Notion la página de la última reunión y resumímela</div><p style="color: var(--text-primary); margin-top: 8px;">El agente usa los tools de Notion para buscar, abrir la página y resumirla. Los datos vienen del workspace remoto, no de tu disco.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en Linear los issues abiertos asignados a mí y resumímelos</div><p style="color: var(--text-primary); margin-top: 8px;">El agente usa los tools de Linear para buscar, abrir los issues y resumirlos. Los datos vienen del workspace remoto, no de tu disco.</p>'
       },
       {
         title: '2 — Acción',
-        summary: 'Crear una página nueva: con efecto, sobre tus datos.',
+        summary: 'Crear un issue: con efecto, sobre tus datos.',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; creá una página con el resumen de esta reunión</div><p style="color: var(--text-primary); margin-top: 8px;">El agente llama el tool de crear página y aparece en Notion, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio.</p>'
-      },
-      {
-        title: '3 — Plan B',
-        summary: 'Si la conexión falla en vivo.',
-        borderColor: 'var(--text-muted)',
         borderFull: true,
-        example: '<p style="color: var(--text-primary);">Screenshots pre-armados del antes/después en Notion, en <code>semanas/06/img/</code>. Si el OAuth o la red fallan, mostramos las capturas y narramos el intercambio.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; creá un issue "arreglar el login" con prioridad alta</div><p style="color: var(--text-primary); margin-top: 8px;">El agente llama el tool de crear issue y aparece en Linear, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio.</p>'
       }
     ]
   });
