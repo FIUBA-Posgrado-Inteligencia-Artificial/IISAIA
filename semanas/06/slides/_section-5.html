@@ -1,0 +1,542 @@
+<style>
+  /* §5 — Discovery dinámico
+     Every top-level centered element shares max-width: 1000px so edges align. */
+  .s5-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s5-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §5.1 — Hook: la pregunta del cutoff */
+  .s5-hook {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .s5-hook-lead {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0 auto var(--spacing-lg) auto;
+    max-width: 1000px;
+  }
+  .s5-hook-q {
+    color: var(--accent);
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s5-hook-q strong {
+    color: var(--text-heading);
+    font-weight: 700;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  /* §5.2 — Timeline estático: qué pasa cuando conectás un server */
+  .s5-tl {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 4px;
+    max-width: 1120px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s5-tl-step {
+    flex: 1;
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  /* El paso 4 es el crux: el catálogo entra al contexto */
+  .s5-tl-step.is-key { border-top-color: var(--accent-secondary); }
+  .s5-tl-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-primary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .s5-tl-step.is-key .s5-tl-num { background: var(--accent-secondary); }
+  .s5-tl-title {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.98rem;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+  .s5-tl-step.is-key .s5-tl-title { color: var(--accent-secondary); }
+  .s5-tl-desc {
+    color: var(--text-primary);
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s5-tl-desc code {
+    font-family: var(--font-mono);
+    color: var(--accent-secondary);
+    font-size: 0.84rem;
+  }
+  .s5-tl-arrow {
+    flex-shrink: 0;
+    align-self: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+  }
+  .s5-tl-cap {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s5-tl-cap strong { color: var(--accent); font-weight: 700; }
+  .s5-tl-cap2 {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: var(--spacing-sm) auto 0 auto;
+    max-width: 1000px;
+    font-style: italic;
+  }
+  .s5-tl-cap2 strong { color: var(--accent-secondary); font-weight: 700; font-style: normal; }
+
+  /* §5.3 — Handshake bar (encabezado de la animación de apoyo) */
+  .s5-bar {
+    display: grid;
+    grid-template-columns: auto 140px auto;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    margin: var(--spacing-sm) auto var(--spacing-xs) auto;
+  }
+  .s5-bar-node {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    text-align: center;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    border: 2px solid transparent;
+  }
+  .s5-bar-node.is-client { border-color: var(--accent); }
+  .s5-bar-node.is-server { border-color: var(--accent-secondary); }
+  .s5-bar-node-name {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin: 0;
+  }
+  .s5-bar-node-sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin: 3px 0 0 0;
+  }
+  .s5-bar-link {
+    position: relative;
+    height: 2px;
+    background: var(--text-muted);
+    transition: background 0.2s ease;
+  }
+  .s5-bar-link-label {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+  /* Active-direction highlights driven by data-dir on the bar */
+  .s5-bar[data-dir] .s5-bar-link { background: var(--accent); }
+  .s5-bar[data-dir="c2s"] .s5-bar-node.is-client { box-shadow: 0 0 20px rgba(130, 170, 255, 0.5); }
+  .s5-bar[data-dir="s2c"] .s5-bar-node.is-server,
+  .s5-bar[data-dir="cat"] .s5-bar-node.is-server { box-shadow: 0 0 20px rgba(130, 170, 255, 0.5); }
+  .s5-hs-dir {
+    text-align: center;
+    color: var(--accent);
+    font-size: 1rem;
+    font-family: var(--font-mono);
+    min-height: 1.4em;
+    margin: var(--spacing-sm) auto 0 auto;
+    max-width: 820px;
+  }
+  .s5-hs-steps {
+    max-width: 1100px;
+    margin: var(--spacing-xs) auto 0 auto;
+    /* Reserva el espacio del panel de detalle (overlay absoluto que la JS
+       dibuja debajo de la fila de pasos). Al hacer el contenido más alto, el
+       centrado vertical de reveal sube los pasos y el overlay entra sin scroll. */
+    min-height: 360px;
+  }
+  /* Achicar el texto de los step boxes (la JS los dibuja con estilos inline;
+     overrideamos scopeado para bajar la altura de la fila). */
+  #s5-handshake-steps .cs-step {
+    font-size: 0.84em !important;
+    padding: 8px 11px !important;
+  }
+  #s5-handshake-steps .cs-step > div:first-child {
+    margin-bottom: 3px !important;
+  }
+
+  /* §5.4 + §5.6 — Insight / consecuencia posters */
+  .s5-poster {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s5-poster-q {
+    font-size: 2rem;
+    color: var(--text-primary);
+    line-height: 1.35;
+    font-weight: 600;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s5-poster-q strong { color: var(--accent); font-weight: 700; }
+  .s5-poster-q em { color: var(--accent-secondary); font-style: normal; }
+  .s5-poster-q + .s5-poster-q { margin-top: var(--spacing-sm); }
+  .s5-poster-sub {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  /* §5.4 — Descubrir vs invocar (resuelve el cruce con "model-controlled" de §4) */
+  .s5-split {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s5-split-item {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .s5-split-item .lbl {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .s5-split-item strong { color: var(--accent); font-weight: 700; }
+  .s5-split-item code { font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.88rem; }
+
+  /* §5.5 — Notifications */
+  .s5-notif {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    align-items: center;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s5-notif-step {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+  }
+  .s5-notif-step-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s5-notif-step pre { margin: 0; }
+  .s5-notif-step pre code {
+    font-size: 0.82rem !important;
+    line-height: 1.5;
+    background: var(--bg-code);
+    border-radius: 6px;
+    padding: var(--spacing-sm) !important;
+  }
+  .s5-notif-step-text {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s5-notif-arrow {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    color: var(--accent);
+    text-align: center;
+  }
+  .s5-notif-cap {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+    font-style: italic;
+  }
+  .s5-notif-cap strong { color: var(--accent); font-weight: 700; font-style: normal; }
+</style>
+
+<!-- §5.1 — Hook: la pregunta del cutoff -->
+<section>
+  <div class="s5-hook">
+    <p class="s5-hook-lead">Que el modelo use algo que no vio en entrenamiento ya no te sorprende: le cargás la info al contexto y listo. Eso es context engineering, lo venís haciendo hace semanas.</p>
+    <p class="s5-hook-q">Lo nuevo con MCP: ese contexto <strong>no lo armás vos</strong>. ¿Quién lo arma, y cuándo?</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Hook de §5, recalibrado: NO vender como asombroso que el modelo use tools post-cutoff — a esta altura ya manejan context engineering. La pregunta real es de mecanismo: quién arma el contexto con la descripción del server, y cuándo. El resto de la sección es la respuesta.</u></p>
+    <p><em>"Arranquemos por lo que ya saben. Que el modelo use una herramienta que no vio en el entrenamiento no tiene nada de mágico: le metés en el contexto una descripción de qué es y cómo se usa, y el modelo opera sobre eso. Eso es context engineering, lo venimos haciendo desde hace semanas."</em></p>
+    <p><em>"Lo nuevo que trae MCP no es que se pueda — es que ese contexto no lo armás vos a mano. Conectás un server que escribió un desconocido, y de golpe el modelo sabe qué tools tiene y con qué parámetros. ¿Quién armó ese contexto? ¿En qué momento? Eso es lo que vamos a desarmar."</em></p>
+  </aside>
+</section>
+
+<!-- §5.2 — Timeline: qué pasa cuando conectás un server -->
+<section>
+  <h2 class="s5-h2">Qué pasa cuando conectás un server.</h2>
+  <p class="s5-h2-sub">Todo esto sucede solo, antes de que escribas tu primera pregunta.</p>
+
+  <div class="s5-tl">
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="0">
+      <span class="s5-tl-num">1</span>
+      <p class="s5-tl-title">Conectás el server</p>
+      <p class="s5-tl-desc">Una vez. Antes de cualquier conversación.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="1">&rarr;</span>
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="1">
+      <span class="s5-tl-num">2</span>
+      <p class="s5-tl-title">Handshake</p>
+      <p class="s5-tl-desc">Se presentan: qué versión hablan y qué sabe hacer cada uno. Queda fijo toda la sesión.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="2">&rarr;</span>
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="2">
+      <span class="s5-tl-num">3</span>
+      <p class="s5-tl-title">El cliente pide el catálogo</p>
+      <p class="s5-tl-desc"><code>*/list</code>, automático. Lo dispara el cliente —código del host—, no el modelo.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="3">&rarr;</span>
+    <div class="s5-tl-step is-key fragment fade-in" data-fragment-index="3">
+      <span class="s5-tl-num">4</span>
+      <p class="s5-tl-title">El catálogo entra al contexto</p>
+      <p class="s5-tl-desc"><code>name</code>, <code>description</code> y schema de cada tool, al prompt del modelo.</p>
+    </div>
+
+    <span class="s5-tl-arrow fragment fade-in" data-fragment-index="4">&rarr;</span>
+    <div class="s5-tl-step fragment fade-in" data-fragment-index="4">
+      <span class="s5-tl-num">5</span>
+      <p class="s5-tl-title">El modelo ya sabe</p>
+      <p class="s5-tl-desc">Antes de tu pregunta, ya tiene el catálogo en contexto.</p>
+    </div>
+  </div>
+
+  <p class="s5-tl-cap fragment fade-in" data-fragment-index="5">¿Quién arma el contexto? <strong>El cliente</strong> (código del host), no el modelo. ¿Cuándo? <strong>Solo, al conectar.</strong></p>
+  <p class="s5-tl-cap2 fragment fade-in" data-fragment-index="6">Tiene que ser así: el modelo no puede pedir lo que <strong>todavía no sabe que existe</strong>.</p>
+
+  <aside class="notes">
+    <p><strong>Siete reveals — los 5 pasos del timeline de a uno, después el caption que responde el hook, y el cierre del huevo-y-la-gallina.</strong></p>
+    <p><u>El corazón de la sección, como mapa de un vistazo. Construye el flujo paso a paso de izquierda a derecha. El paso 4 (catálogo→contexto) está marcado distinto: es el crux. El caption responde quién/cuándo; el último reveal mata la ambigüedad de si lo decide el modelo.</u></p>
+    <p><em>"Vamos a seguir, paso a paso, qué pasa exactamente cuando conectás un MCP Server. Paso uno: lo conectás. Es algo que hacés una sola vez, agregándolo a la config, antes de cualquier conversación."</em></p>
+    <p><em>"Paso dos, el handshake. Apenas se conecta, cliente y server se presentan: qué versión del protocolo hablan, y qué sabe hacer cada uno. A esto se lo llama capability negotiation, y lo importante es que queda fijo para toda la sesión — el protocolo es stateful, no se renegocia en cada vuelta."</em></p>
+    <p><em>"Paso tres: se pide el catálogo, con un */list. Y acá hay que ser precisos con el quién, porque es la pregunta natural. No lo pide el modelo. Lo pide el cliente — que es código del host, no la LLM — de forma automática, apenas se conecta. No hay ninguna decisión del modelo del tipo 'me parece que debería listar'. Es plomería determinística. Y cuidado con un detalle del bloque anterior: dijimos que los tools son model-controlled. Eso es para invocarlos — el tools/call lo decide el modelo. Pero descubrirlos, el tools/list, lo hace el cliente. Descubrir y usar son cosas distintas."</em></p>
+    <p><em>"Paso cuatro, y este es el que importa, por eso está marcado distinto. El catálogo que vuelve — el nombre, la descripción y el schema de cada tool — se inyecta al contexto del modelo. Esto es exactamente el cargar-al-contexto de context engineering, pero automático: lo arma el cliente, no vos."</em></p>
+    <p><em>"Paso cinco: listo. Antes de que escribas tu primera pregunta, el modelo ya tiene en su contexto la descripción de cada herramienta disponible."</em></p>
+    <p><em>"Y así se responde la pregunta del arranque. ¿Quién arma el contexto? El cliente, código del host. ¿Cuándo? Solo, al conectar."</em></p>
+    <p><em>"Y por qué tiene que ser el cliente y no el modelo: piénsenlo un segundo. El modelo no puede pedir el catálogo de un server que no sabe que existe — sería el huevo y la gallina. Por eso el cliente lo arma antes y se lo deja servido. Cuando el modelo entra a la conversación, el catálogo ya está ahí."</em></p>
+  </aside>
+</section>
+
+<!-- §5.3 — La misma secuencia, con el detalle del protocolo (animación de apoyo) -->
+<section>
+  <h2 class="s5-h2">La misma secuencia, por dentro.</h2>
+  <p class="s5-h2-sub">Si querés ver el mensaje JSON-RPC de cada paso: click en cada uno.</p>
+
+  <div class="s5-bar" id="s5-hs-bar">
+    <div class="s5-bar-node is-client">
+      <p class="s5-bar-node-name">MCP Client</p>
+      <p class="s5-bar-node-sub">adentro del host (Claude Code)</p>
+    </div>
+    <div class="s5-bar-link">
+      <span class="s5-bar-link-label">JSON-RPC</span>
+    </div>
+    <div class="s5-bar-node is-server">
+      <p class="s5-bar-node-name">MCP Server</p>
+      <p class="s5-bar-node-sub">proceso aparte (playwright-mcp)</p>
+    </div>
+  </div>
+
+  <p class="s5-hs-dir" id="s5-hs-dir">Click cada paso para seguir el intercambio.</p>
+
+  <div class="s5-hs-steps" id="s5-handshake-steps"></div>
+
+  <aside class="notes">
+    <p><strong>Slide de apoyo / profundización. Click cada paso; la barra de arriba se ilumina según quién manda el mensaje. Quien no quiera el detalle, con el timeline anterior alcanza. Plan B si el JS no carga: narrar la secuencia 1-2-3-4 a mano sobre la barra.</strong></p>
+    <p><u>Mismos pasos del timeline, pero con el mensaje JSON-RPC real de cada uno en el panel de detalle. El paso 3 (catálogo → contexto) es el aha. La barra muestra la dirección del mensaje al clickear.</u></p>
+    <p><em>"Para quien quiera ver la plomería: el mismo flujo del timeline, pero clickeable, con el mensaje real de cada paso. Arriba está el par que ya conocen del diagrama: el MCP Client adentro del host, el MCP Server como proceso aparte, JSON-RPC entre los dos. Al clickear cada paso, la barra se ilumina según quién le habla a quién."</em></p>
+    <p><em>"Paso uno, initialize: el handshake, negocian capabilities. Paso dos, tools/list: el cliente pide el catálogo. Paso tres, el que importa: el catálogo se inyecta al contexto del modelo — ahí se entera de qué tools hay, sin haberlos memorizado. Paso cuatro, list_changed: si el server cambia su catálogo, avisa, y el cliente vuelve a pedir la lista. Eso último lo vemos en el próximo slide."</em></p>
+  </aside>
+</section>
+
+<!-- §5.4 — El insight, articulado -->
+<section>
+  <div class="s5-poster">
+    <p class="s5-poster-q">El contexto lo arma el <strong>cliente</strong>, solo.</p>
+    <p class="s5-poster-q">Vos no tocás nada.</p>
+
+    <div class="s5-split">
+      <div class="s5-split-item">
+        <span class="lbl">Descubrir qué tools hay</span>
+        <strong>El cliente</strong>, automático · <code>*/list</code>
+      </div>
+      <div class="s5-split-item">
+        <span class="lbl">Decidir cuál usar</span>
+        <strong>El modelo</strong>, en la conversación · <code>tools/call</code>
+      </div>
+    </div>
+
+    <p class="s5-poster-sub">Por eso "tools = <em style="font-style: normal; color: var(--accent-secondary);">model-controlled</em>" es sobre <strong style="color: var(--accent);">invocar</strong>, no sobre descubrir. Y descubrir es el mismo cargar-al-contexto de siempre, ahora automático.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>El insight + la distinción que evita el cruce con "model-controlled" de §4. El contexto (descubrir) lo arma el cliente; el modelo decide qué invocar después. Dos operaciones distintas.</u></p>
+    <p><em>"Si se llevan una sola idea de todo esto, que sea esta. El contexto con las herramientas disponibles no lo armás vos a mano, y tampoco lo decide el modelo. Lo arma el cliente, solo, en el momento de conectar."</em></p>
+    <p><em>"Y acá conviene atar un cabo del bloque anterior, porque es donde más se confunde. Dijimos que los tools son model-controlled. Eso aplica a invocarlos — decidir cuál usar y llamarlo, el tools/call, eso sí es del modelo. Pero descubrir qué tools existen, el tools/list, lo hace el cliente, automático. Descubrir y usar son dos operaciones distintas, con dueños distintos. El modelo nunca descubre; recibe el catálogo ya armado y elige sobre eso."</em></p>
+    <p><em>"Y descubrir no es ningún truco nuevo: es el mismo cargar-al-contexto que vienen usando en context engineering, ahora estandarizado y automático. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo."</em></p>
+  </aside>
+</section>
+
+<!-- §5.5 — Notifications: el catálogo es dinámico -->
+<section>
+  <h2 class="s5-h2">Y si cambia en vivo.</h2>
+  <p class="s5-h2-sub">El catálogo no es una foto inicial. Acá entra el tercer mecanismo.</p>
+
+  <div class="s5-notif">
+    <div class="s5-notif-step fragment fade-in" data-fragment-index="0">
+      <p class="s5-notif-step-label">El server avisa</p>
+<pre><code class="language-json" data-trim>{
+  "method":
+    "notifications/tools/list_changed"
+}</code></pre>
+    </div>
+    <div class="s5-notif-arrow fragment fade-in" data-fragment-index="1">&rarr;</div>
+    <div class="s5-notif-step fragment fade-in" data-fragment-index="1">
+      <p class="s5-notif-step-label">El cliente reacciona</p>
+      <p class="s5-notif-step-text">Vuelve a pedir <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.92rem;">tools/list</code> y actualiza el contexto del modelo en tiempo real.</p>
+    </div>
+  </div>
+
+  <p class="s5-notif-cap fragment fade-in" data-fragment-index="2">Cubre servers que exponen tools según los <code style="font-family: var(--font-mono); font-style: normal; color: var(--accent-secondary); font-size: 0.9rem;">roots</code> que reciben, o que agregan tools cuando el usuario amplía permisos. La discovery es <strong>dinámica</strong>, no una foto.</p>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — la notificación del server, la reacción del cliente, el caption de discovery dinámica.</strong></p>
+    <p><u>Notifications cierra el mecanismo. En el handshake el server pudo declarar que avisa si su catálogo cambia (listChanged); acá se cobra. El punto: el catálogo puede cambiar a mitad de sesión y el contexto se actualiza solo.</u></p>
+    <p><em>"Falta un detalle del timeline: dijimos que el catálogo entra al contexto al conectar. ¿Y si cambia después? Para eso está el tercer mecanismo. En el handshake, el server pudo declarar que avisa cuando su catálogo cambia. Cuando efectivamente cambia, manda una notificación — notifications slash tools slash list_changed. Sin respuesta esperada, es un aviso."</em></p>
+    <p><em>"Y el cliente reacciona: vuelve a pedir tools slash list, trae el catálogo nuevo, y actualiza el contexto del modelo en tiempo real. El modelo, en la próxima vuelta, ve el set actualizado."</em></p>
+    <p><em>"¿Cuándo pasa esto en la práctica? Un server que expone tools distintos según los directorios que le pasaron como scope. Un server con auth por scopes que suma tools cuando el usuario amplía permisos a mitad de sesión. La idea de fondo: discovery es dinámica, no una foto que se saca al arrancar."</em></p>
+  </aside>
+</section>
+
+<!-- §5.6 — La consecuencia práctica: bridge a §6 -->
+<section>
+  <div class="s5-poster">
+    <p class="s5-poster-q">El ecosistema crece <strong>sin coordinación central</strong>.</p>
+    <p class="s5-poster-sub">Alguien escribe un server para SAP, otro para Shopify, otro para la API interna de su empresa. Todos quedan disponibles para cualquier host MCP — nadie tiene que esperar a que el vendor del LLM los "soporte". Los soporta por construcción.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Cierre de §5 y bridge a §6. La consecuencia de la discovery dinámica: esto es lo que hace de MCP infraestructura y no producto. La pregunta que abre §6 — qué significa esto para vos como ingeniero.</u></p>
+    <p><em>"Y esta es la consecuencia, la que convierte a MCP en infraestructura y no en producto. Como el descubrimiento es dinámico y no hay que tocar el modelo, el ecosistema crece sin coordinación central."</em></p>
+    <p><em>"Alguien escribe un server para SAP. Otro para Shopify. Otro para la API interna de su propia empresa. Todos quedan automáticamente disponibles para cualquier host que hable MCP. Nadie tiene que esperar a que la empresa del LLM los soporte oficialmente — los soporta por construcción, porque hablan el protocolo. Eso prepara la próxima pregunta: si los servers se reusan en cualquier host, ¿qué significa eso para vos cuando vas a elegir cuáles instalar?"</em></p>
+  </aside>
+</section>
+
+<!-- INIT-SCRIPTS-§5-START -->
+<script>
+  initClickableSteps({
+    containerId: 's5-handshake-steps',
+    steps: [
+      {
+        title: '1 — initialize',
+        summary: 'Cliente y server negocian versión y capabilities. Pasa una vez, al arrancar.',
+        borderColor: 'var(--accent)',
+        example: '<div style="font-family: var(--font-mono); color: var(--text-muted); line-height: 1.6;">cliente &rarr; server: { "method": "initialize", "params": { "protocolVersion": "...", "capabilities": {...} } }</div><p style="color: var(--text-primary); margin-top: 8px;">La negociación queda registrada toda la sesión. MCP es <strong style="color: var(--accent);">stateful</strong>.</p>'
+      },
+      {
+        title: '2 — tools/list',
+        summary: 'El cliente (código del host, no el modelo) pide el catálogo, automático.',
+        borderColor: 'var(--accent)',
+        example: '<div style="font-family: var(--font-mono); color: var(--text-muted); line-height: 1.6;">cliente &rarr; server: { "method": "tools/list" }<br>server &rarr; cliente: { "result": { "tools": [ { name, description, inputSchema }, ... ] } }</div><p style="color: var(--text-primary); margin-top: 8px;">Lo dispara el cliente automáticamente, no el modelo. No son nombres pelados: cada tool trae <strong style="color: var(--accent);">metadata</strong>.</p>'
+      },
+      {
+        title: '3 — catálogo → contexto',
+        summary: 'La metadata de cada tool entra al system context del LLM. Acá el modelo se entera.',
+        borderColor: 'var(--accent-secondary)',
+        example: '<p style="color: var(--text-primary); line-height: 1.5;">El catálogo — name, description, inputSchema de cada tool — se inyecta al <strong style="color: var(--accent);">system context</strong> del modelo.</p><p style="color: var(--text-primary); margin-top: 8px;">El modelo ahora sabe qué tools tiene <strong style="color: var(--accent);">sin haberlos memorizado</strong>. Lee la description para decidir cuándo invocar cada uno.</p>'
+      },
+      {
+        title: '4 — list_changed',
+        summary: 'El server avisa que su catálogo cambió. El cliente vuelve a pedir tools/list.',
+        borderColor: 'var(--accent-secondary)',
+        borderFull: true,
+        example: '<div style="font-family: var(--font-mono); color: var(--text-muted); line-height: 1.6;">server &rarr; cliente: { "method": "notifications/tools/list_changed" }</div><p style="color: var(--text-primary); margin-top: 8px;">El cliente re-descubre y actualiza el contexto. Discovery <strong style="color: var(--accent);">dinámica</strong>, no una foto inicial. El loop vuelve al paso 2.</p>'
+      }
+    ],
+    onChange: function (idx) {
+      var bar = document.getElementById('s5-hs-bar');
+      var dir = document.getElementById('s5-hs-dir');
+      if (!bar || !dir) return;
+      var dirs = [
+        'Cliente → Server  ·  negocian capabilities',
+        'Cliente → Server  ·  pide el catálogo',
+        'Server → contexto del LLM  ·  la metadata entra al prompt',
+        'Server → Cliente  ·  avisa que el catálogo cambió'
+      ];
+      var classes = ['c2s', 'c2s', 'cat', 's2c'];
+      if (idx < 0) {
+        bar.removeAttribute('data-dir');
+        dir.textContent = 'Click cada paso para seguir el intercambio.';
+      } else {
+        bar.setAttribute('data-dir', classes[idx]);
+        dir.textContent = dirs[idx];
+      }
+    }
+  });
+</script>
+<!-- INIT-SCRIPTS-§5-END -->

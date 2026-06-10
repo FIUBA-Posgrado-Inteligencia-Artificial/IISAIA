@@ -1,0 +1,726 @@
+<style>
+  /* §1 — Más allá del set que trae el host */
+  .s1-h2 {
+    text-align: center;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .s1-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 860px;
+  }
+
+  /* CC's native tools grid (recap) */
+  .s1-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-sm);
+    max-width: 1100px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s1-tool-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
+  }
+  .s1-tool-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s1-tool-detail {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.35;
+  }
+  .s1-tools-takeaway {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 860px;
+  }
+  .s1-tools-takeaway strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Three "no está" cards — staggered reveals */
+  .s1-nostá-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    max-width: 1180px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s1-nostá-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .s1-nostá-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--accent-secondary);
+    text-transform: uppercase;
+  }
+  .s1-nostá-title {
+    color: var(--accent);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .s1-nostá-quiero {
+    color: var(--text-primary);
+    background: var(--bg-code);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  .s1-nostá-quiero::before {
+    content: "→ ";
+    color: var(--text-muted);
+  }
+  .s1-nostá-gap {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Wrapper custom — N×M visual */
+  .s1-salida-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s1-salida-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s1-salida-title {
+    color: var(--text-heading);
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s1-salida-body {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  /* Postgres step-cards — narrativa en 3 pasos, apilados compactos */
+  .s1-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-width: 1080px;
+    margin: var(--spacing-sm) auto 0 auto;
+  }
+  .s1-step-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: 10px 18px;
+    align-items: start;
+  }
+  .s1-step-num {
+    width: 1.9em;
+    height: 1.9em;
+    border-radius: 50%;
+    background: var(--bg-code);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--accent);
+    margin-top: 2px;
+  }
+  .s1-step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .s1-step-title {
+    color: var(--text-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .s1-step-card pre {
+    margin: 0 !important;
+    background: var(--bg-code) !important;
+    border-radius: 4px;
+    padding: 8px 12px !important;
+    font-size: 0.88rem;
+  }
+  .s1-step-foot {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .s1-step-foot code {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--code-text);
+    background: var(--bg-code);
+    padding: 0 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  .s1-missing-items {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  .s1-missing-items li {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    padding-left: 1.5em;
+    position: relative;
+    line-height: 1.3;
+  }
+  .s1-missing-items li::before {
+    content: "✗";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-secondary);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .s1-missing-items li strong {
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+  }
+  .s1-missing-items li span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-top: 1px;
+    line-height: 1.3;
+  }
+  .s1-salida-takeaway {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    text-align: center;
+    margin: var(--spacing-md) 0 0 0;
+    line-height: 1.45;
+  }
+  .s1-salida-takeaway strong {
+    color: var(--accent-secondary);
+    font-weight: 700;
+  }
+
+  /* Pegar al prompt — three small chips */
+  .s1-complicaciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0 0 0;
+  }
+  .s1-comp-chip {
+    background: var(--bg-code);
+    border-left: 3px solid var(--text-muted);
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .s1-comp-name {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 0 2px 0;
+  }
+  .s1-comp-detail {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Bridge slide */
+  .s1-bridge {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .s1-bridge-pre {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s1-bridge-name {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 var(--spacing-lg) 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .s1-bridge-tagline {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .s1-bridge-hint {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-lg) 0 0 0;
+  }
+
+  /* Step foot — accent the punchline */
+  .s1-step-foot strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Step 4 — runtime → artifacts list */
+  .s1-runtime-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 2px 0 0 0;
+  }
+  .s1-runtime-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .s1-runtime-name {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.88rem;
+  }
+  .s1-runtime-artifacts {
+    color: var(--text-muted);
+    display: flex;
+    gap: 4px 10px;
+    flex-wrap: wrap;
+  }
+  .s1-runtime-artifacts code {
+    font-family: var(--font-mono);
+    background: var(--bg-code);
+    color: var(--code-text);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+  }
+
+  /* §1.4 — N×M vs N+M convergence visual */
+  .s1-matrix-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1200px;
+    margin: var(--spacing-sm) auto 0 auto;
+    align-items: start;
+  }
+  .s1-matrix-state {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .s1-matrix-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: center;
+  }
+  .s1-matrix-math {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0;
+  }
+  .s1-matrix-math .strike {
+    color: var(--accent-secondary);
+  }
+  /* N×M grid */
+  .s1-nm-grid {
+    display: grid;
+    grid-template-columns: auto repeat(4, 1fr);
+    gap: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    margin: 0;
+  }
+  .s1-nm-grid > div {
+    padding: 6px 4px;
+    border-radius: 3px;
+    text-align: center;
+  }
+  .s1-nm-corner { background: transparent; }
+  .s1-nm-colhead, .s1-nm-rowhead {
+    background: var(--bg-code);
+    color: var(--text-muted);
+  }
+  .s1-nm-cell {
+    background: var(--bg-code);
+    color: var(--accent-secondary);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  /* N+M hub */
+  .s1-hub-layout {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto 1fr;
+    gap: 6px;
+    align-items: center;
+  }
+  .s1-hub-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .s1-hub-item {
+    background: var(--bg-code);
+    color: var(--text-primary);
+    padding: 5px 8px;
+    border-radius: 3px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  .s1-hub-arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+    gap: 4px;
+  }
+  .s1-hub-arrows > div {
+    text-align: center;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .s1-hub-node {
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 16px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-align: center;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+</style>
+
+<!-- §1.1 — Recap: el set que trae Claude Code -->
+<section>
+  <h2 class="s1-h2">El set de tools que el agente ya tiene.</h2>
+  <p class="s1-h2-sub">Vino con Claude Code. Vos lo venís usando.</p>
+
+  <div class="s1-tools-grid">
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Read</p>
+      <p class="s1-tool-detail">leer archivos del repo</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Write</p>
+      <p class="s1-tool-detail">crear archivos nuevos</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Edit</p>
+      <p class="s1-tool-detail">modificar líneas</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Grep</p>
+      <p class="s1-tool-detail">buscar contenido</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Glob</p>
+      <p class="s1-tool-detail">buscar por path</p>
+    </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">Bash</p>
+      <p class="s1-tool-detail">correr comandos</p>
+    </div>
+  </div>
+
+  <p class="s1-tools-takeaway">Para el grueso del workflow de desarrollo local, te alcanza. <strong>Lo decidió Anthropic.</strong></p>
+
+  <aside class="notes">
+    <p><u>Recap visual sin re-explicar qué es un tool. El alumno ya pasó por loop agentic + tools + harness + skills + sub-agents. El slide hace dos cosas: anclar lo que ya tienen y plantar la observación clave — el set es curado.</u></p>
+    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Grep, Glob para buscar. Bash para correr comandos. Cuando hacés un edit, cuando leés un schema, cuando corrés un test, alguno de esos seis está atrás."</em></p>
+    <p><em>"Para casi todo el workflow de desarrollo local — leer código, modificar código, correr comandos — ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos."</em></p>
+    <p><em>"De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
+  </aside>
+</section>
+
+<!-- §1.2 — Tres cosas que NO están -->
+<section>
+  <h2 class="s1-h2">Tres cosas que querés que el agente haga y no están.</h2>
+
+  <div class="s1-nostá-grid">
+    <div class="s1-nostá-card fragment fade-in" data-fragment-index="0">
+      <div class="s1-nostá-eyebrow">no está 1</div>
+      <h3 class="s1-nostá-title">Postgres de producción.</h3>
+      <div class="s1-nostá-quiero">Filas de users con email null, últimas 24 h.</div>
+      <p class="s1-nostá-gap">Bash con psql lo permite, pero el agente no sabe schema, tipos, ni qué columnas son sensibles.</p>
+    </div>
+    <div class="s1-nostá-card fragment fade-in" data-fragment-index="1">
+      <div class="s1-nostá-eyebrow">no está 2</div>
+      <h3 class="s1-nostá-title">Browser controlado.</h3>
+      <div class="s1-nostá-quiero">Abrí esta URL, completá el form, sacame screenshot.</div>
+      <p class="s1-nostá-gap">curl no renderiza, no ejecuta JS, no clickea.</p>
+    </div>
+    <div class="s1-nostá-card fragment fade-in" data-fragment-index="2">
+      <div class="s1-nostá-eyebrow">no está 3</div>
+      <h3 class="s1-nostá-title">Docs de un SDK que salió ayer.</h3>
+      <div class="s1-nostá-quiero">Cómo se usa streamText en esta versión.</div>
+      <p class="s1-nostá-gap">Cutoff de entrenamiento. Si la API cambió, no se entera; sale de memoria y alucina.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — uno por capacidad faltante.</strong></p>
+    <p><u>El alumno aterriza tres casos concretos que cualquiera vivió. Cada card tiene el pedido en mono (lo que vos querrías escribir) y por qué el set actual no lo cubre limpio.</u></p>
+    <p><em>"Tres ejemplos concretos de capacidad que el set por default no te da."</em></p>
+    <p><em>"Primero: querés tirar una query contra Postgres de producción y traerte filas que matchean un patrón. Bash con psql te lo permite si las credenciales están en el entorno. Pero el agente no sabe el schema, no sabe los tipos, no sabe qué columnas son sensibles. Querrías un tool con tipos declarados y permisos, no una shell ciega."</em></p>
+    <p><em>"Segundo: querés controlar un browser. Abrir una página, hacer click, sacar una screenshot, completar un form. Bash con curl no hace nada de eso — no renderiza, no ejecuta JS, no clickea. La capacidad no está."</em></p>
+    <p><em>"Tercero: querés que el agente use un SDK que salió ayer. El modelo tiene cutoff de entrenamiento. Si la API cambió, no se entera; sale de memoria y alucina firmas que no existen. Querrías que pueda consultar la doc real antes de tipear, no salir de memoria."</em></p>
+    <p><em>"Tres situaciones reales. Tres cosas que el agente, con el set actual, no puede. ¿Qué hacés?"</em></p>
+  </aside>
+</section>
+
+<!-- §1.3 — El caso Postgres: el viaje real del dev con Claude Code -->
+<section>
+  <h2 class="s1-h2">¿Cómo le damos Postgres al agente?</h2>
+
+  <div class="s1-steps">
+    <div class="s1-step-card fragment fade-in" data-fragment-index="0">
+      <div class="s1-step-num">1</div>
+      <div class="s1-step-body">
+        <h3 class="s1-step-title">El runtime ya corre <code>psql</code>.</h3>
+        <pre><code class="language-bash">$ psql postgresql://readonly:s3cret@10.0.1.42:5432/analytics \
+    -c "SELECT email FROM users LIMIT 5"</code></pre>
+        <p class="s1-step-foot">Funciona — <strong>mientras lo que Opus sabe sobre psql cubra lo que necesitás.</strong></p>
+      </div>
+    </div>
+
+    <div class="s1-step-card fragment fade-in" data-fragment-index="1">
+      <div class="s1-step-num">2</div>
+      <div class="s1-step-body">
+        <h3 class="s1-step-title">Agregás instrucciones al contexto.</h3>
+        <pre><code class="language-markdown"># CLAUDE.md
+## Base de datos
+- Conexión: postgresql://readonly:s3cret@10.0.1.42:5432/analytics
+- Schema: users(id, email, signup_date, active)
+- Siempre limitá con LIMIT en queries exploratorias</code></pre>
+        <p class="s1-step-foot">Mejor. Pero <strong>¿cómo sabés si no te falta algo? No sabés lo que no sabés.</strong></p>
+      </div>
+    </div>
+
+    <div class="s1-step-card fragment fade-in" data-fragment-index="2">
+      <div class="s1-step-num">3</div>
+      <div class="s1-step-body">
+        <h3 class="s1-step-title">Sumás rules y permisos para que no haga DELETE.</h3>
+        <pre><code class="language-json">// .claude/settings.json
+{
+  "permissions": {
+    "deny": ["Bash(psql*DELETE*)", "Bash(psql*UPDATE*)", "Bash(psql*DROP*)"]
+  }
+}</code></pre>
+        <p class="s1-step-foot">Robusto. <strong>Para Claude Code.</strong></p>
+      </div>
+    </div>
+
+    <div class="s1-step-card fragment fade-in" data-fragment-index="3">
+      <div class="s1-step-num">4</div>
+      <div class="s1-step-body">
+        <h3 class="s1-step-title">Mañana querés probar Cursor. Después Codex. Después Opencode.</h3>
+        <div class="s1-runtime-list">
+          <div class="s1-runtime-row">
+            <div class="s1-runtime-name">Claude Code</div>
+            <div class="s1-runtime-artifacts"><code>CLAUDE.md</code><code>.claude/settings.json</code><code>hooks</code></div>
+          </div>
+          <div class="s1-runtime-row">
+            <div class="s1-runtime-name">Cursor</div>
+            <div class="s1-runtime-artifacts"><code>.cursorrules</code><code>cursor settings</code></div>
+          </div>
+          <div class="s1-runtime-row">
+            <div class="s1-runtime-name">Codex CLI</div>
+            <div class="s1-runtime-artifacts"><code>AGENTS.md</code><code>config.toml</code></div>
+          </div>
+          <div class="s1-runtime-row">
+            <div class="s1-runtime-name">Opencode</div>
+            <div class="s1-runtime-artifacts"><code>AGENTS.md</code><code>opencode.json</code></div>
+          </div>
+        </div>
+        <p class="s1-step-foot">Mismo objetivo. <strong>Otro formato por cada runtime. Empezás de cero.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Cuatro reveals — el viaje real del dev.</strong></p>
+    <p><u>Escenario concreto: vos sos un dev usando Claude Code con Opus, querés trabajar contra una base Postgres. Vas iterando con las herramientas que ya conocés de S04/S05 — Bash, CLAUDE.md, rules, settings — y descubrís que el problema estructural aparece cuando querés moverte a otro runtime.</u></p>
+    <p><em>"Ahora vamos al escenario real. Ustedes están usando Claude Code con Opus, y quieren que el agente trabaje contra una base de Postgres. ¿Cómo lo van resolviendo, paso a paso? Todo lo que vamos a ver son herramientas que ya conocen de las últimas dos clases."</em></p>
+    <p><em>"Paso uno. Lo más simple: el runtime ya tiene Bash, y Opus sabe algo de psql del entrenamiento. Le tiran un pedido, el agente arma una query psql y la ejecuta. Funciona — mientras lo que Opus sabe sobre psql cubra lo que ustedes necesitan. Si Opus se olvidó del flag para timestamps con timezone, o no conoce la convención que usa el equipo, ahí estás. Están a la merced de los pesos del modelo."</em></p>
+    <p><em>"Paso dos. Quieren más control. Agregan instrucciones al contexto — un CLAUDE.md con detalles de la base, el schema, las convenciones del equipo. Mejor. Pero acá aparece un problema sutil: cómo saben que no les falta nada. La doc la escriben ustedes, y ustedes no saben lo que no saben. Cada vacío en esa doc es un riesgo de que el agente actúe mal porque le falta información."</em></p>
+    <p><em>"Paso tres. Suman reglas y permisos. Configurás el settings.json de Claude Code para que el agente nunca corra DELETE, UPDATE o DROP sin pedir confirmación. Agregás hooks que validen comandos antes de ejecutarse. Ahora tu setup es robusto. Para Claude Code."</em></p>
+    <p><em>"Paso cuatro. Y acá está la trampa estructural. Mañana querés probar Cursor — mismo agente, otro runtime. Tu CLAUDE.md no se llama CLAUDE.md ahí, se llama .cursorrules. Tu settings.json no tiene equivalente directo, hay otra forma de configurar permisos. Tus hooks viven en otro lado. Codex CLI tiene su propio formato — AGENTS.md, config.toml. Opencode también — AGENTS.md, opencode.json. Cada runtime tiene su propia forma de implementar lo mismo. Y por cada capacidad nueva — browser, Slack, lo que sea — multiplicás el trabajo otra vez. La pregunta que sigue: ¿por qué crece tan feo?"</em></p>
+  </aside>
+</section>
+
+<!-- §1.4 — Convergencia: capacidades × runtimes = N × M -->
+<section>
+  <h2 class="s1-h2">Capacidades × runtimes.</h2>
+
+  <div class="s1-matrix-demo">
+    <!-- State 1 — N × M -->
+    <div class="s1-matrix-state">
+      <p class="s1-matrix-label">Cada celda: tu propio setup — N × M</p>
+      <div class="s1-nm-grid">
+        <div class="s1-nm-corner"></div>
+        <div class="s1-nm-colhead">CC</div>
+        <div class="s1-nm-colhead">Cursor</div>
+        <div class="s1-nm-colhead">Codex</div>
+        <div class="s1-nm-colhead">Opencode</div>
+
+        <div class="s1-nm-rowhead">Postgres</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+
+        <div class="s1-nm-rowhead">browser</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+
+        <div class="s1-nm-rowhead">docs SDK</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+
+        <div class="s1-nm-rowhead">Slack</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+        <div class="s1-nm-cell">✗</div>
+      </div>
+      <p class="s1-matrix-math">4 × 4 = <span class="strike">16</span> setups custom</p>
+    </div>
+
+    <!-- State 2 — N + M -->
+    <div class="s1-matrix-state fragment fade-in" data-fragment-index="0">
+      <p class="s1-matrix-label">Con protocolo común — N + M</p>
+      <div class="s1-hub-layout">
+        <div class="s1-hub-col">
+          <div class="s1-hub-item">Postgres</div>
+          <div class="s1-hub-item">browser</div>
+          <div class="s1-hub-item">docs SDK</div>
+          <div class="s1-hub-item">Slack</div>
+        </div>
+        <div class="s1-hub-arrows">
+          <div>→</div>
+          <div>→</div>
+          <div>→</div>
+          <div>→</div>
+        </div>
+        <div class="s1-hub-node">Protocolo</div>
+        <div class="s1-hub-arrows">
+          <div>→</div>
+          <div>→</div>
+          <div>→</div>
+          <div>→</div>
+        </div>
+        <div class="s1-hub-col">
+          <div class="s1-hub-item">CC</div>
+          <div class="s1-hub-item">Cursor</div>
+          <div class="s1-hub-item">Codex</div>
+          <div class="s1-hub-item">Opencode</div>
+        </div>
+      </div>
+      <p class="s1-matrix-math">4 + 4 = 8 conexiones</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Un reveal — N×M visible primero, después aparece N+M al lado.</strong></p>
+    <p><u>Convergencia visual del §1: cada celda de la matriz es lo que el dev acaba de armar para Postgres en Claude Code — el CLAUDE.md + las rules + los permisos. Cuatro capacidades por cuatro runtimes = dieciséis setups custom. Un protocolo común lo colapsa a N + M.</u></p>
+    <p><em>"Acá está la convergencia. Miren el grid de la izquierda. Cada celda es lo que ustedes acaban de armar para Postgres en Claude Code — el CLAUDE.md con instrucciones, las rules con permisos, los hooks. Cuatro capacidades por cuatro runtimes. Postgres en Claude Code, un setup. Postgres en Cursor, otro setup. Postgres en Codex CLI, otro. Postgres en Opencode, otro. Y así con browser, con docs, con Slack. Cuatro por cuatro: dieciséis setups completos, cada uno con sus formatos. Si mañana aparece un runtime nuevo, cuatro setups más. Si aparece una capacidad nueva, otros cuatro. Esto crece feo. Esto es N por M."</em></p>
+    <p><em>"Si en cambio metés un protocolo común al medio — esto es lo que aparece a la derecha — la matriz se colapsa. Cada capacidad habla el protocolo una sola vez. Cada runtime entiende el protocolo una sola vez. Cuatro más cuatro: ocho conexiones. Runtime nuevo: una integración, hereda todas las capacidades. Capacidad nueva: una integración, queda disponible en todos los runtimes. La matriz desaparece. Esto es N más M. Y ese protocolo común tiene nombre — viene ahora."</em></p>
+  </aside>
+</section>
+
+<!-- §1.5 — Bridge: la salida nueva, MCP -->
+<section>
+  <div class="s1-bridge">
+    <p class="s1-bridge-pre">La salida estructural</p>
+    <h2 class="s1-bridge-name">MCP</h2>
+    <p class="s1-bridge-tagline">Un protocolo común que el host habla, los proveedores hablan, y N×M se vuelve N+M.</p>
+    <p class="s1-bridge-hint">Cómo está armado por dentro — viene ahora.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Bridge al resto del bloque. El nombre cae, sin desarrollar todavía. La frase central es la promesa estructural; las próximas secciones la desarman.</u></p>
+    <p><em>"Lo que falta no es otro wrapper. Es un protocolo común. Si tanto los hosts como los proveedores de capacidades acuerdan hablar el mismo formato, entonces vos escribís el server una vez y funciona en todos los hosts que hablen el protocolo. El problema N×M colapsa a N+M."</em></p>
+    <p><em>"Ese protocolo existe, se llama Model Context Protocol — MCP — y lo propuso Anthropic en 2024. Pero acá viene lo importante: no es un producto de Anthropic. Es un estándar abierto que adoptaron Cursor, Codex CLI, Opencode, y otros. Por eso lo vamos a estudiar — porque lo que aprendan acá viaja con ustedes a cualquier runtime que se sumen a usar."</em></p>
+    <p><em>"En la próxima sección vemos por qué tiene que ser protocolo y no librería, y por qué precedentes como HTTP y LSP cuentan acá."</em></p>
+  </aside>
+</section>

@@ -1,0 +1,869 @@
+<style>
+  /* §6 — El ecosistema, qué viaja con vos, y qué vale instalar
+     All centered prose shares max-width 1000px so vertical edges align. */
+  .s6-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s6-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §6.1 — Un server, muchos hosts (hub) */
+  .s6-hub {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s6-hub-server {
+    display: inline-block;
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: var(--spacing-md) var(--spacing-2xl);
+    position: relative;
+  }
+  .s6-hub-server-label {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    padding: 0 8px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .s6-hub-server-name {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    color: var(--text-heading);
+    font-weight: 700;
+    margin: 0;
+  }
+  .s6-hub-server-sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 4px 0 0 0;
+  }
+  .s6-hub-conn {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    letter-spacing: 0.05em;
+    margin: var(--spacing-md) 0;
+  }
+  .s6-hub-hosts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s6-hub-host {
+    background: var(--bg-code);
+    border: 1px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-family: var(--font-mono);
+    font-size: 0.98rem;
+    color: var(--text-primary);
+  }
+
+  /* §6.2 — Config JSON */
+  .s6-config {
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s6-config pre { margin: 0; }
+  .s6-config pre code {
+    font-size: 0.98rem !important;
+    line-height: 1.55;
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg) !important;
+  }
+  .s6-config-cap {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-config-cap code {
+    font-family: var(--font-mono);
+    color: var(--accent-secondary);
+    font-size: 0.92rem;
+  }
+
+  /* §6.2 — Comando de Claude Code (es un div, no un bloque pre/code, así que los spans van bien) */
+  .s6-add-label {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: var(--spacing-md) auto var(--spacing-sm) auto;
+    max-width: 1000px;
+  }
+  .s6-add-cmd {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--bg-code);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    text-align: left;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .s6-add-cmd .muted { color: var(--text-muted); }
+  .s6-add-cmd .hl { color: var(--accent); font-weight: 700; }
+  .s6-add-arrow {
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    margin: var(--spacing-sm) auto;
+    max-width: 1000px;
+  }
+
+  /* §6.3 — Scopes: dónde vive el config */
+  .s6-scope-syntax {
+    max-width: 1000px;
+    margin: var(--spacing-md) auto var(--spacing-md) auto;
+    background: var(--bg-code);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .s6-scope-syntax .flag { color: var(--accent); font-weight: 700; }
+  .s6-scope-syntax .note { color: var(--text-muted); font-size: 0.85em; margin-left: var(--spacing-sm); }
+  .s6-scope {
+    display: grid;
+    grid-template-columns: 0.95fr 1.25fr 1.5fr;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .s6-scope-cell {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--text-muted);
+    border-right: 1px solid var(--text-muted);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+  .s6-scope-cell:nth-child(3n) { border-right: none; }
+  .s6-scope-cell.is-head {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .s6-scope-cell.is-name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  .s6-scope-cell.is-name .tag {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+  .s6-scope-cell code {
+    background: var(--bg-code);
+    color: var(--accent-secondary);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+  .s6-scope-cell .loc-note {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 3px;
+  }
+  .s6-scope-prec {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+    font-style: italic;
+  }
+  .s6-scope-prec code {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--accent-secondary);
+    font-size: 0.88rem;
+  }
+
+  /* §6.3 — Antes y después: el contexto de la sesión */
+  .s6-ba-panel {
+    background: var(--bg-code);
+    border: 1px solid rgba(136, 146, 176, 0.25);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    text-align: left;
+  }
+  .s6-ba-panel.is-after { border-color: var(--accent); }
+  .s6-ba-head {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s6-ba-head code {
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--accent);
+    font-size: 0.92rem;
+  }
+  .s6-ba-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .s6-ba-tool {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+  .s6-ba-mcp {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+    border-left: 3px solid var(--accent);
+    padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+  }
+  .s6-ba-mcp-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 6px 0;
+  }
+  .s6-ba-mcp .s6-ba-tool {
+    color: var(--accent);
+    background: rgba(130, 170, 255, 0.12);
+  }
+  .s6-ba-foot {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: var(--spacing-sm) 0 0 0;
+  }
+  .s6-ba-foot strong { color: var(--accent); font-weight: 700; }
+  .s6-ba-cap {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-ba-cap strong { color: var(--accent); font-weight: 700; }
+
+  /* §6.3 + §6.5 + §6.9 — Posters */
+  .s6-poster {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s6-poster-pre {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .s6-poster-q {
+    font-size: 2.2rem;
+    color: var(--text-heading);
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s6-poster-q strong { color: var(--accent); }
+  .s6-poster-sub {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-poster-attr {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §6.4 — Tres consecuencias */
+  .s6-conseq {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s6-conseq-card {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+  }
+  .s6-conseq-name {
+    color: var(--text-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s6-conseq-body {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* §6.6 — MCP extiende, no reemplaza (comparison) */
+  .s6-cmp-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  .s6-cmp-card.is-native { border-top: 4px solid var(--text-muted); }
+  .s6-cmp-card.is-mcp { border-top: 4px solid var(--accent); }
+  .s6-cmp-badge {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .s6-cmp-title {
+    color: var(--text-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 4px 0 var(--spacing-sm) 0;
+  }
+  .s6-cmp-body {
+    color: var(--text-primary);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s6-cmp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .s6-cmp-chips code {
+    background: var(--bg-code);
+    color: var(--accent-secondary);
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+  .s6-cmp-q0 {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.45;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-cmp-q0 strong { color: var(--accent); font-weight: 700; }
+
+  /* §6.7 — Aplicado a CC: clasificación 2-col */
+  .s6-class {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s6-class-col {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  .s6-class-col.is-redundant { border-top: 4px solid var(--text-muted); }
+  .s6-class-col.is-netnew { border-top: 4px solid var(--accent); }
+  .s6-class-head {
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s6-class-head-tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .s6-class-head-title {
+    color: var(--text-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .s6-class-col.is-netnew .s6-class-head-title { color: var(--accent); }
+  .s6-class-item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: var(--spacing-sm);
+    align-items: baseline;
+    padding: 6px 0;
+    border-top: 1px solid rgba(136, 146, 176, 0.18);
+  }
+  .s6-class-item:first-of-type { border-top: none; }
+  .s6-class-item code {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent-secondary);
+  }
+  .s6-class-item-why {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  /* §6.8 — Por qué existen filesystem/git como MCP */
+  .s6-why {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s6-why-line {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0 auto;
+    max-width: 1000px;
+    font-weight: 600;
+  }
+  .s6-why-sub {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-why-sub code {
+    font-family: var(--font-mono);
+    color: var(--accent-secondary);
+    font-size: 0.9rem;
+  }
+  .s6-why-key {
+    color: var(--text-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: var(--spacing-xl) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s6-why-key strong { color: var(--accent); }
+
+  /* §6.9 — Pregunta cero, card central */
+  .s6-q0 {
+    max-width: 760px;
+    margin: var(--spacing-lg) auto 0 auto;
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: var(--spacing-xl) var(--spacing-xl);
+    text-align: center;
+  }
+  .s6-q0-pre {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s6-q0-q {
+    font-size: 2.4rem;
+    color: var(--text-heading);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .s6-q0-sub {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+</style>
+
+<!-- §6.1 — Un server, muchos hosts -->
+<section>
+  <h2 class="s6-h2">Un server, muchos hosts.</h2>
+  <p class="s6-h2-sub">Si el server habla el protocolo, cualquier host que también lo hable lo puede consumir.</p>
+
+  <div class="s6-hub">
+    <div class="s6-hub-server">
+      <span class="s6-hub-server-label">un MCP Server</span>
+      <p class="s6-hub-server-name">Playwright MCP</p>
+      <p class="s6-hub-server-sub">el mismo binario, sin cambiar una línea</p>
+    </div>
+    <p class="s6-hub-conn">corre, igual, en &darr;</p>
+    <div class="s6-hub-hosts fragment fade-in" data-fragment-index="0">
+      <span class="s6-hub-host">Claude Code</span>
+      <span class="s6-hub-host">Claude Desktop</span>
+      <span class="s6-hub-host">ChatGPT</span>
+      <span class="s6-hub-host">VS Code</span>
+      <span class="s6-hub-host">Cursor</span>
+      <span class="s6-hub-host">Cline</span>
+      <span class="s6-hub-host">Codex CLI</span>
+      <span class="s6-hub-host">Aider</span>
+      <span class="s6-hub-host">Gemini CLI</span>
+      <span class="s6-hub-host">MCPJam</span>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Un reveal — primero el server solo, después la grilla de hosts.</strong></p>
+    <p><u>Cierra el arco que abrió §2. La matriz N+M, ahora desde el lado del proveedor: un server, escrito una vez, corre en todos los hosts que hablan el protocolo. El reveal hace aparecer la grilla para que pegue el "todos estos".</u></p>
+    <p><em>"En §2 vimos por qué un protocolo común colapsa la matriz a N más M. Acá lo vemos desde el lado del server, que es donde te toca a vos como usuario. Agarrás un server — Playwright MCP, por ejemplo — que alguien escribió una vez."</em></p>
+    <p><em>"Y ese mismo binario, sin cambiar una línea, corre en todos estos hosts: Claude Code, Claude Desktop, ChatGPT, Visual Studio Code, Cursor, Cline, Codex CLI, Aider, Gemini CLI, MCPJam. El server no sabe ni le importa en cuál está corriendo. Habla el protocolo, y listo. La doc oficial resume esto con una frase que vemos en un momento."</em></p>
+  </aside>
+</section>
+
+<!-- §6.2 — Cómo se agrega un server -->
+<section>
+  <h2 class="s6-h2">Cómo se agrega un server.</h2>
+  <p class="s6-h2-sub">En Claude Code, un comando. Por debajo, el mismo JSON portable.</p>
+
+  <p class="s6-add-label">en Claude Code · una línea</p>
+  <div class="s6-add-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx @playwright/mcp@latest</div>
+
+  <p class="s6-add-arrow">CC escribe la config por vos &darr;</p>
+
+  <div class="s6-config">
+<pre><code class="language-json" data-trim>{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}</code></pre>
+  </div>
+
+  <p class="s6-config-cap">El comando es el atajo de CC; ese JSON es lo portable — casi igual en todos los hosts. ¿Y dónde lo escribe? Depende del <strong>scope</strong>.</p>
+
+  <aside class="notes">
+    <p><u>Cómo se agrega, general y en CC. Lo importante: el comando es la comodidad de Claude Code, pero lo que escribe — el JSON con mcpServers — es lo estándar y portable. La estructura: nombre, command, args. No hay formato nuevo por host. El "dónde lo escribe" lo abre el slide siguiente (scopes).</u></p>
+    <p><em>"¿Cómo se agrega un server, concretamente? En Claude Code es una línea: claude mcp add, el nombre que le querés poner, y el comando que lo arranca con sus argumentos. Acá: claude mcp add playwright, npx arroba playwright barra mcp arroba latest. Enter, y queda."</em></p>
+    <p><em>"Lo que hace ese comando es escribir un JSON por vos. Ese JSON es el de abajo: una clave mcpServers, y adentro, por cada server, un nombre, el command que lo arranca, y los args. Y acá está la conexión con la portabilidad: ese JSON, con variaciones cosméticas, es el mismo en Cursor, en Cline, en VS Code. El comando es el atajo de CC; el JSON es lo que viaja. Ahora bien, ¿dónde escribe exactamente ese JSON? Depende del scope, y eso lo vemos en el próximo slide."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 — Dónde vive el config: scopes -->
+<section>
+  <h2 class="s6-h2">¿Dónde vive ese JSON?</h2>
+  <p class="s6-h2-sub">El mismo comando lo puede escribir en tres lugares distintos. Lo elegís con el scope.</p>
+
+  <div class="s6-scope-syntax">
+    claude mcp add &lt;nombre&gt; &lt;comando&gt; <span class="flag">--scope local | project | user</span>
+    <span class="note">sin flag &rarr; local</span>
+  </div>
+
+  <div class="s6-scope">
+    <div class="s6-scope-cell is-head">Scope</div>
+    <div class="s6-scope-cell is-head">Dónde se escribe el JSON</div>
+    <div class="s6-scope-cell is-head">Quién lo ve · cuándo</div>
+
+    <div class="s6-scope-cell is-name">
+      local
+      <span class="tag">default</span>
+    </div>
+    <div class="s6-scope-cell">
+      <code>~/.claude.json</code>
+      <span class="loc-note">anidado bajo <code>projects["…/este-proyecto"]</code></span>
+    </div>
+    <div class="s6-scope-cell">Solo vos, solo en este proyecto. Para probar algo personal.</div>
+
+    <div class="s6-scope-cell is-name">
+      project
+      <span class="tag">--scope project</span>
+    </div>
+    <div class="s6-scope-cell">
+      <code>.mcp.json</code>
+      <span class="loc-note">en la raíz del repo</span>
+    </div>
+    <div class="s6-scope-cell">Todo el equipo. Va a git y viaja con el repo. Para servers del proyecto.</div>
+
+    <div class="s6-scope-cell is-name">
+      user
+      <span class="tag">--scope user</span>
+    </div>
+    <div class="s6-scope-cell">
+      <code>~/.claude.json</code>
+      <span class="loc-note">a nivel raíz, fuera de <code>projects</code></span>
+    </div>
+    <div class="s6-scope-cell">Solo vos, en todos tus proyectos. Tu setup personal.</div>
+  </div>
+
+  <p class="s6-scope-prec"><strong>local</strong> y <strong>user</strong> son el mismo archivo (<code>~/.claude.json</code>) en secciones distintas; solo <strong>project</strong> es un archivo aparte (<code>.mcp.json</code>).</p>
+  <p class="s6-scope-prec">Si un server con el mismo nombre aparece en más de un scope, gana <code>local &gt; project &gt; user</code> — no se mezclan, se toma la entrada entera del de mayor prioridad.</p>
+
+  <aside class="notes">
+    <p><u>Los tres lugares donde puede vivir el config, con el scope que los elige. Espejo de los scopes de plugins de S05. Lo clave: project es el único compartido (va a git en .mcp.json); local y user son privados, en tu ~/.claude.json. Default es local.</u></p>
+    <p><em>"El mismo comando puede escribir el JSON en tres lugares distintos, y lo elegís con el flag scope. Si no ponés el flag, va a local."</em></p>
+    <p><em>"Local, el default: queda en tu archivo ~/.claude.json, en la sección de este proyecto. Privado, solo vos, solo acá. Es para probar un server sin ensuciar nada compartido. Project: queda en un archivo .mcp.json en la raíz del repo. Este es el único que se comparte — va a git, y cualquiera que clone el repo hereda el server. Es para servers que son parte del proyecto, que querés que todo el equipo tenga. User: queda también en tu ~/.claude.json, pero a nivel global, no atado a un proyecto. Privado tuyo, pero disponible en todos tus proyectos. Es tu setup personal."</em></p>
+    <p><em>"Y si el mismo nombre de server aparece en más de un scope, hay un orden de prioridad: gana local, después project, después user. No se mezclan los campos — se toma la entrada entera del scope de mayor prioridad. La regla práctica: project para lo del equipo, local o user para lo tuyo."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 — Una sesión nueva, antes y después -->
+<section>
+  <h2 class="s6-h2">Una sesión nueva, antes y después.</h2>
+  <p class="s6-h2-sub">Lo que el modelo tiene disponible al arrancar, con y sin el server.</p>
+
+  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
+    <div class="s6-ba-panel">
+      <p class="s6-ba-head">sesión nueva · sin MCP</p>
+      <div class="s6-ba-tools">
+        <span class="s6-ba-tool">Read</span>
+        <span class="s6-ba-tool">Write</span>
+        <span class="s6-ba-tool">Edit</span>
+        <span class="s6-ba-tool">Grep</span>
+        <span class="s6-ba-tool">Glob</span>
+        <span class="s6-ba-tool">Bash</span>
+      </div>
+      <p class="s6-ba-foot">6 nativas · <strong>0 de MCP</strong></p>
+    </div>
+
+    <div class="s6-ba-panel is-after fragment fade-in" data-fragment-index="0">
+      <p class="s6-ba-head">después de <code>claude mcp add playwright</code></p>
+      <div class="s6-ba-tools">
+        <span class="s6-ba-tool">Read</span>
+        <span class="s6-ba-tool">Write</span>
+        <span class="s6-ba-tool">Edit</span>
+        <span class="s6-ba-tool">Grep</span>
+        <span class="s6-ba-tool">Glob</span>
+        <span class="s6-ba-tool">Bash</span>
+        <div class="s6-ba-mcp">
+          <p class="s6-ba-mcp-label">&blacktriangleright; playwright (MCP)</p>
+          <div class="s6-ba-tools">
+            <span class="s6-ba-tool">browser_navigate</span>
+            <span class="s6-ba-tool">browser_click</span>
+            <span class="s6-ba-tool">browser_snapshot</span>
+            <span class="s6-ba-tool">browser_take_screenshot</span>
+            <span class="s6-ba-tool">… ~20 tools</span>
+          </div>
+        </div>
+      </div>
+      <p class="s6-ba-foot">6 nativas · <strong>+ ~20 de playwright</strong></p>
+    </div>
+  </div>
+
+  <p class="s6-ba-cap fragment fade-in" data-fragment-index="1">Al abrir la sesión, el cliente descubre el server y le <strong>inyecta el catálogo al contexto</strong> — el discovery que vimos recién. El modelo arranca sabiendo que esas tools existen, sin que vos las menciones. Y las nativas <strong>siguen ahí</strong>: extiende, no reemplaza.</p>
+
+  <aside class="notes">
+    <p><strong>Dos reveals — el panel "después", después la conclusión.</strong></p>
+    <p><u>El antes/después concreto, que ata §5 (discovery) con §6 (extiende no reemplaza). Izquierda: sesión nueva, solo nativas. Derecha: tras agregar Playwright, las nativas siguen + el bloque de tools del MCP. El reveal hace aparecer el "después" para que se note el delta.</u></p>
+    <p><em>"Veamos qué cambia, concretamente, en una sesión. A la izquierda, una sesión nueva de Claude Code sin ningún MCP: el modelo tiene disponibles las seis tools nativas que ya conocemos. Read, Write, Edit, Grep, Glob, Bash. Cero de MCP."</em></p>
+    <p><em>"A la derecha, la misma sesión después de correr claude mcp add playwright. Las seis nativas siguen exactamente igual — esto es importante. Y aparece un bloque nuevo: las tools de Playwright. browser_navigate, browser_click, browser_snapshot, browser_take_screenshot, y así una veintena más."</em></p>
+    <p><em>"¿Y cómo llegaron ahí? Esto es el discovery del bloque anterior, en concreto. Al abrir la sesión, el cliente se conecta al server, descubre su catálogo, y se lo inyecta al contexto del modelo. El modelo arranca sabiendo que esas tools existen, sin que vos escribas nada. Y fíjense en las nativas: siguen ahí, intactas. El MCP extiende, no reemplaza — que es justo lo que vemos ahora."</em></p>
+  </aside>
+</section>
+
+<!-- §6.3 — Build once and integrate everywhere -->
+<section>
+  <div class="s6-poster">
+    <p class="s6-poster-pre">la frase de la doc oficial</p>
+    <p class="s6-poster-q">"Build once, <strong>integrate everywhere</strong>."</p>
+    <p class="s6-poster-sub">Escribís el server una vez. Se integra en cualquier host que hable el protocolo — los de hoy y los que vengan.</p>
+    <p class="s6-poster-attr">— modelcontextprotocol.io</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>La frase canónica de la doc, como poster. Resume las dos slides anteriores en cuatro palabras. Tiene un asterisco que desarrollamos en la segunda mitad de la sección: "everywhere" no quiere decir "con el mismo valor en todos lados".</u></p>
+    <p><em>"Y esta es la frase con la que la doc oficial resume todo lo anterior: build once, integrate everywhere. Lo escribís una vez, se integra en todos lados. Es una promesa fuerte, y es real."</em></p>
+    <p><em>"Pero tiene un asterisco que vamos a desarmar en un rato — porque integrarse en todos lados no es lo mismo que aportar valor en todos lados. Primero veamos qué te da concretamente esta portabilidad."</em></p>
+  </aside>
+</section>
+
+<!-- §6.4 — Tres consecuencias prácticas -->
+<section>
+  <h2 class="s6-h2">Qué te da, concretamente.</h2>
+  <p class="s6-h2-sub">Tres consecuencias de que el server sea portable.</p>
+
+  <div class="s6-conseq">
+    <div class="s6-conseq-card fragment fade-in" data-fragment-index="0">
+      <p class="s6-conseq-name">Amortización</p>
+      <p class="s6-conseq-body">Aprendés a usar un server una vez y te sirve en todos los hosts. Mismos tools, mismos nombres.</p>
+    </div>
+    <div class="s6-conseq-card fragment fade-in" data-fragment-index="1">
+      <p class="s6-conseq-name">Portabilidad</p>
+      <p class="s6-conseq-body">Cambiar de host no te cuesta tu setup. Te llevás el JSON, lo pegás, y todo lo que tenías sigue andando.</p>
+    </div>
+    <div class="s6-conseq-card fragment fade-in" data-fragment-index="2">
+      <p class="s6-conseq-name">Durabilidad</p>
+      <p class="s6-conseq-body">Lo que aprendiste no caduca cuando aparezca el próximo IDE con IA. Mientras hable MCP, la mecánica aplica.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Tres reveals — amortización, portabilidad, durabilidad.</strong></p>
+    <p><u>Las tres consecuencias prácticas de la portabilidad, para vos como ingeniero. No son tres ideas distintas — son tres caras del mismo hecho: el server es independiente del host.</u></p>
+    <p><em>"Primera: amortización. El esfuerzo de aprender a usar un server se reparte entre todos los hosts. Si aprendiste a usar Playwright MCP en Claude Code, no lo reaprendés cuando pruebes Cursor. Mismo server, mismos tools, mismos nombres."</em></p>
+    <p><em>"Segunda: portabilidad. Si en algún momento querés probar otro agente, no perdés tu ecosistema. Te llevás el JSON de configuración, lo pegás en el host nuevo, y todo lo que ya tenías sigue funcionando. No empezás de cero."</em></p>
+    <p><em>"Tercera: durabilidad. Lo que aprendieron sobre MCP no se vuelve obsoleto cuando salga el próximo IDE con IA. Mientras los nuevos hablen el protocolo — y lo van a hablar, porque ahí está el ecosistema — todo esto sigue aplicando. Es conocimiento que no caduca."</em></p>
+  </aside>
+</section>
+
+<!-- §6.5 — ¿Pero todo MCP suma en todo host? -->
+<section>
+  <div class="s6-poster">
+    <p class="s6-poster-q">¿Pero todo MCP <strong>suma en todo host</strong>?</p>
+    <p class="s6-poster-sub">No.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>El giro de la sección. Hasta acá vendimos portabilidad; acá la matizamos. Sin reveals, la pregunta y el "No" quedan suspendidos. Lo que sigue es el porqué: cada host trae sus propias tools.</u></p>
+    <p><em>"Hasta acá te vendí la portabilidad: un server corre en todos lados. Pero hay una pregunta que cambia todo el criterio de cuándo instalar algo. ¿Todo MCP server suma en todo host?"</em></p>
+    <p><em>"No. Y entender por qué no es lo que separa al que arma su setup bien del que lo llena de cosas redundantes. Vamos al porqué."</em></p>
+  </aside>
+</section>
+
+<!-- §6.6 — MCP extiende, no reemplaza -->
+<section>
+  <h2 class="s6-h2">MCP extiende, no reemplaza.</h2>
+  <p class="s6-h2-sub">Cada host trae su propio set de tools nativas, anteriores a MCP.</p>
+
+  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
+    <div class="s6-cmp-card is-native">
+      <p class="s6-cmp-badge">parte del host · no es MCP</p>
+      <p class="s6-cmp-title">Tools nativas</p>
+      <p class="s6-cmp-body">Vienen de fábrica. No se agregan ni se sacan. En Claude Code:</p>
+      <div class="s6-cmp-chips">
+        <code>Read</code><code>Write</code><code>Edit</code><code>Grep</code><code>Glob</code><code>Bash</code>
+      </div>
+    </div>
+    <div class="s6-cmp-card is-mcp">
+      <p class="s6-cmp-badge">extensión · MCP</p>
+      <p class="s6-cmp-title">MCP servers</p>
+      <p class="s6-cmp-body">Agregan capacidades que el host <strong>no</strong> trae nativamente. Un proceso aparte, una dependencia más.</p>
+      <div class="s6-cmp-chips">
+        <code>playwright</code><code>postgres</code><code>slack</code><code>...</code>
+      </div>
+    </div>
+  </div>
+
+  <p class="s6-cmp-q0 fragment fade-in" data-fragment-index="0">La pregunta correcta antes de instalar cualquier MCP server: <strong>¿el host ya lo hace?</strong></p>
+
+  <aside class="notes">
+    <p><strong>Un reveal — primero el contraste, después la pregunta correcta.</strong></p>
+    <p><u>El equívoco a desarmar: MCP no reemplaza las tools del host, las extiende. Las tools nativas (en CC: Read/Write/Edit/Grep/Glob/Bash) son parte del host, anteriores a MCP. Callback explícito al recap de §1. De acá sale la pregunta cero.</u></p>
+    <p><em>"Acá está el equívoco más común. La gente piensa que MCP reemplaza las tools del host. No. Cada host trae su propio set de tools nativas, anteriores a MCP, que son parte del host y no se agregan ni se sacan. En Claude Code son las que ya conocen del arranque de la clase: Read, Write, Edit, Grep, Glob, Bash. Eso no es MCP."</em></p>
+    <p><em>"Lo que MCP agrega es extensión: capacidades que el host no trae. Y cada extensión tiene un costo — un proceso aparte, otra dependencia, otra superficie de seguridad. Por eso la pregunta correcta antes de instalar cualquier MCP server es siempre la misma, y es la que más vale la pena que se lleven: ¿el host ya lo hace? Si sí, instalarlo duplica y agrega complejidad. Si no, extiende y vale la pena."</em></p>
+  </aside>
+</section>
+
+<!-- §6.7 — Aplicado a Claude Code -->
+<section>
+  <h2 class="s6-h2">Aplicado a Claude Code.</h2>
+  <p class="s6-h2-sub">La misma pregunta cero, sobre servers populares. La respuesta es respecto a CC.</p>
+
+  <div class="s6-class">
+    <div class="s6-class-col is-redundant">
+      <p class="s6-class-head">
+        <span class="s6-class-head-tag">el host ya lo hace</span>
+        <span class="s6-class-head-title">Redundantes en CC</span>
+      </p>
+      <div class="s6-class-item"><code>filesystem</code><span class="s6-class-item-why"><code>Read</code> / <code>Write</code> ya están.</span></div>
+      <div class="s6-class-item"><code>git</code><span class="s6-class-item-why"><code>Bash</code> con <code>git</code>, y más flexible.</span></div>
+      <div class="s6-class-item"><code>fetch</code><span class="s6-class-item-why"><code>Bash</code> con <code>curl</code> ya está.</span></div>
+    </div>
+    <div class="s6-class-col is-netnew">
+      <p class="s6-class-head">
+        <span class="s6-class-head-tag">el host no lo hace</span>
+        <span class="s6-class-head-title">Net-new sobre CC</span>
+      </p>
+      <div class="s6-class-item"><code>playwright</code><span class="s6-class-item-why">CC no maneja un browser.</span></div>
+      <div class="s6-class-item"><code>context7</code><span class="s6-class-item-why">Docs de SDKs nuevos, fuera del cutoff.</span></div>
+      <div class="s6-class-item"><code>postgres</code><span class="s6-class-item-why">CC no se conecta a tu base.</span></div>
+      <div class="s6-class-item"><code>slack</code><span class="s6-class-item-why">CC no habla con Slack.</span></div>
+      <div class="s6-class-item"><code>github</code><span class="s6-class-item-why">Operaciones que <code>gh</code> no expone igual.</span></div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><u>La pregunta cero aplicada concretamente a CC. La clasificación es RESPECTO a CC — no en abstracto. Izquierda: lo que CC ya hace nativo, instalar el MCP duplica. Derecha: lo que CC no hace, el MCP extiende. Los dos de la derecha que están en negrita conceptual — playwright y context7 — son los demos que vienen.</u></p>
+    <p><em>"Apliquemos la pregunta cero a servers que ya existen y son populares. A la izquierda, los que en Claude Code son redundantes, porque el host ya lo hace. Filesystem: Read y Write ya están. Git: Bash con git ya está, y de hecho es más flexible que el MCP. Fetch: Bash con curl ya está. Instalar cualquiera de estos en CC no te suma nada — duplica."</em></p>
+    <p><em>"A la derecha, los net-new: capacidades que CC no tiene de fábrica. Playwright, para manejar un browser. Context7, para traer docs de SDKs nuevos que están fuera del cutoff del modelo. Postgres, para conectarse a una base. Slack, para hablar con Slack. El github MCP, que agrega operaciones que el gh de línea de comandos no expone igual. Estos sí valen la pena. Y dos de ellos — playwright y context7 — son justo los que vamos a poner a andar en los demos."</em></p>
+  </aside>
+</section>
+
+<!-- §6.8 — ¿Por qué existen filesystem y git como MCP entonces? -->
+<section>
+  <h2 class="s6-h2">¿Y por qué existen, entonces?</h2>
+
+  <div class="s6-why">
+    <p class="s6-why-line">Porque otros hosts <em style="font-style: normal; color: var(--accent);">no</em> tienen lo que CC trae de fábrica.</p>
+    <p class="s6-why-sub">claude.ai (el chat) no tiene <code>Bash</code>, no tiene <code>Read</code>, no tiene <code>Grep</code>. Un <code>filesystem</code> MCP ahí es <em style="font-style: normal; color: var(--accent-secondary);">net-new</em>: le da algo que el host no tenía.</p>
+    <p class="s6-why-key">Mismo binario, <strong>distinto valor según el contenedor</strong>.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Resuelve la paradoja aparente: si filesystem y git son redundantes, ¿por qué existen? Porque "redundante" es respecto a CC, no en abstracto. En un host más fino (el chat de claude.ai) son net-new. Esta es la frase que cierra el matiz de "build once integrate everywhere".</u></p>
+    <p><em>"Y acá puede saltar una duda razonable: si filesystem y git son redundantes, ¿por qué existen, por qué la gente los escribió? Porque redundante es respecto a Claude Code, no en abstracto. Hay hosts mucho más finos. El chat de claude.ai, por ejemplo, no tiene Bash, no tiene Read, no tiene Grep — no tiene nada de eso de fábrica. Un filesystem MCP en ese contexto es net-new: le da capacidades que el host no tenía."</em></p>
+    <p><em>"Y esta es la consecuencia fina del build once integrate everywhere. El server es el mismo en todos lados, pero su valor no. Un server vale lo que aporta sobre el host concreto que lo aloja. Mismo binario, distinto valor según el contenedor. Por eso la pregunta cero siempre es respecto al host donde estás parado."</em></p>
+  </aside>
+</section>
+
+<!-- §6.9 — La pregunta cero, card central -->
+<section>
+  <div class="s6-q0">
+    <p class="s6-q0-pre">el primer filtro, siempre</p>
+    <p class="s6-q0-q">¿El host ya lo hace?</p>
+  </div>
+  <p class="s6-q0-sub">Antes de cualquier otra evaluación. Si sí, no instales. Si no, recién ahí mirás lo demás — lo vemos al cierre de la clase.</p>
+
+  <aside class="notes">
+    <p><u>Cierre de §6 y modelo mental que se llevan. La pregunta cero, destacada como card. Reaparece reforzada en §10 como primer filtro de las cinco preguntas. Bridge a los demos: §§7-8 agarran dos net-new y los ponen a andar.</u></p>
+    <p><em>"Si se llevan una sola herramienta mental de esta sección, que sea esta pregunta. Antes de instalar cualquier MCP server, sea cual sea, en el host que sea: ¿el host ya lo hace? Es el primer filtro, antes que cualquier otra cosa. Si la respuesta es sí, no lo instales — ahí termina la conversación. Si es no, recién ahí evaluás el resto, que lo vemos al final de la clase."</em></p>
+    <p><em>"Y lo que viene ahora son los demos: agarramos dos de los net-new que acabamos de ver — Playwright y context7 — y los ponemos a andar en vivo. La pregunta cero, para los dos, da no. Por eso corresponde MCP."</em></p>
+  </aside>
+</section>
