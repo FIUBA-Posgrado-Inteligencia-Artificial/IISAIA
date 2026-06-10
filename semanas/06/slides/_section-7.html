@@ -200,7 +200,7 @@
   <h2 class="s7-h2">Una línea, y queda.</h2>
   <p class="s7-h2-sub">El comando que ya vimos, aplicado.</p>
 
-  <div class="s7-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx -y @playwright/mcp</div>
+  <div class="s7-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx @playwright/mcp@latest</div>
 
   <div class="s7-transport">
     <div class="s7-transport-tag">
@@ -215,7 +215,7 @@
 
   <aside class="notes">
     <p><u>Install del server local. Lo importante para el contraste con §8: acá hay un comando que arranca un proceso local (Stdio, sin red, sin auth). En el remoto va a haber una URL y OAuth.</u></p>
-    <p><em>"Se agrega con el comando que ya vimos en el bloque del ecosistema: claude mcp add playwright, npx menos y arroba playwright barra mcp. Una línea."</em></p>
+    <p><em>"Se agrega con el comando que ya vimos en el bloque del ecosistema: claude mcp add playwright, npx arroba playwright barra mcp arroba latest. Una línea."</em></p>
     <p><em>"Y la forma de este server es la de un local, transport Stdio: corre como un subproceso en tu propia máquina. npx baja el paquete la primera vez y después lo arranca solo cada vez que abrís una sesión. Los mensajes viajan por stdin y stdout, sin red. No hay URL ni autenticación, porque el server vive con vos. Guarden esa imagen — el próximo demo es exactamente lo contrario."</em></p>
   </aside>
 </section>

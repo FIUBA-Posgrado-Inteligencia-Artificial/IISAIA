@@ -119,7 +119,7 @@
 **Source material:** `source_material/07-demo-playwright.md`
 **Through-line:** Primer demo en vivo. La pregunta cero de §6 da "no" (CC no maneja un browser) → corresponde MCP. **Es un server local (Stdio):** corre como subproceso en tu máquina, sin red, sin auth. Dos casos (lectura: traer títulos de una página; acción: completar un form). Lo que tienen que sacar no es Playwright — es **la forma del intercambio**, mapeada al diagrama del §5. Planta el eje local/remoto que cierra en §8.
 **What students walk away knowing:**
-- Cómo se instala un server local con un comando (`claude mcp add playwright npx -y @playwright/mcp`).
+- Cómo se instala un server local con un comando (`claude mcp add playwright npx @playwright/mcp@latest`).
 - Que un server **local** corre en tu máquina, transport Stdio, sin red ni auth.
 - El patrón del intercambio aplicado: server expone → LLM descubre → invoca → resultado vuelve.
 - Por qué Playwright **sí** se instala en CC: net-new, CC no maneja un browser.

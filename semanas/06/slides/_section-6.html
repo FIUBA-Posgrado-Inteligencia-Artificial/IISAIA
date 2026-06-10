@@ -573,7 +573,7 @@
   <p class="s6-h2-sub">En Claude Code, un comando. Por debajo, el mismo JSON portable.</p>
 
   <p class="s6-add-label">en Claude Code · una línea</p>
-  <div class="s6-add-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx -y @playwright/mcp</div>
+  <div class="s6-add-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx @playwright/mcp@latest</div>
 
   <p class="s6-add-arrow">CC escribe la config por vos &darr;</p>
 
@@ -582,7 +582,7 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp"]
+      "args": ["@playwright/mcp@latest"]
     }
   }
 }</code></pre>
@@ -592,7 +592,7 @@
 
   <aside class="notes">
     <p><u>Cómo se agrega, general y en CC. Lo importante: el comando es la comodidad de Claude Code, pero lo que escribe — el JSON con mcpServers — es lo estándar y portable. La estructura: nombre, command, args. No hay formato nuevo por host. El "dónde lo escribe" lo abre el slide siguiente (scopes).</u></p>
-    <p><em>"¿Cómo se agrega un server, concretamente? En Claude Code es una línea: claude mcp add, el nombre que le querés poner, y el comando que lo arranca con sus argumentos. Acá: claude mcp add playwright, npx menos y arroba playwright barra mcp. Enter, y queda."</em></p>
+    <p><em>"¿Cómo se agrega un server, concretamente? En Claude Code es una línea: claude mcp add, el nombre que le querés poner, y el comando que lo arranca con sus argumentos. Acá: claude mcp add playwright, npx arroba playwright barra mcp arroba latest. Enter, y queda."</em></p>
     <p><em>"Lo que hace ese comando es escribir un JSON por vos. Ese JSON es el de abajo: una clave mcpServers, y adentro, por cada server, un nombre, el command que lo arranca, y los args. Y acá está la conexión con la portabilidad: ese JSON, con variaciones cosméticas, es el mismo en Cursor, en Cline, en VS Code. El comando es el atajo de CC; el JSON es lo que viaja. Ahora bien, ¿dónde escribe exactamente ese JSON? Depende del scope, y eso lo vemos en el próximo slide."</em></p>
   </aside>
 </section>
