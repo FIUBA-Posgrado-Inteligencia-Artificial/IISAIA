@@ -130,7 +130,7 @@
 **Source material:** datos verificados contra doc de Claude Code y Linear (no hay `.md` de source dedicado).
 **Through-line:** Segundo demo, **mismo patrón, otro transport**. Pregunta cero da "no" (CC no habla con tu Linear) → MCP. **Es un server remoto (Streamable HTTP):** lo hostea Linear, vive en internet, te conectás por URL + OAuth. El **corazón** es el contraste local/remoto: comando+args (Stdio) vs URL+OAuth (HTTP), `type: stdio` vs `type: http`, `/mcp` para el OAuth. Cierra el arco de los dos transports de §3 con evidencia: cambia la plomería, el intercambio es idéntico.
 **What students walk away knowing:**
-- Cómo se agrega un server **remoto**: `claude mcp add --transport http linear https://mcp.linear.app/mcp`, y el OAuth vía `/mcp` (se abre el browser, token guardado y auto-renovado).
+- Cómo se agrega un server **remoto**: `claude mcp add --transport http linear-server https://mcp.linear.app/mcp`, y el OAuth vía `/mcp` (se abre el browser, token guardado y auto-renovado).
 - La diferencia concreta local vs remoto: dónde vive el server, comando vs URL, sin auth vs OAuth, `type: stdio` vs `type: http`.
 - Que el **patrón de intercambio es el mismo** viva donde viva el server — eso cierra §3.
 **Animations / interactive:** **Demo en vivo, terminal + Linear lado a lado.** Slides: marco con pregunta cero + tag "remoto · HTTP"; el contraste local/remoto (`comparison-2col` + flow de OAuth); section-divider; beats en `clickable-steps`; cierre "dos servers, dos transports, un patrón". Plan B: screenshots.
