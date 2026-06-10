@@ -4293,17 +4293,501 @@
       <!-- /§7 -->
 
       <!-- ===== §8 — Demo remoto: Notion (Streamable HTTP) ===== -->
-      <section>
+      <style>
+  /* §8 — Demo remoto: Notion (Streamable HTTP)
+     Centered prose shares max-width 1000px. */
+  .s8-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s8-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s8-eyebrow {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin: 0 auto var(--spacing-sm) auto;
+    max-width: 1000px;
+  }
+
+  /* §8.1 — Pregunta cero (flow, igual que §7) */
+  .s8-q0flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s8-q0-box {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+  }
+  .s8-q0-no {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+  .s8-q0-arrow { color: var(--text-muted); font-family: var(--font-mono); font-size: 1.4rem; }
+  .s8-q0-mcp {
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .s8-sub {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s8-sub strong { color: var(--accent); font-weight: 700; }
+
+  /* §8.2 — Contraste local vs remoto */
+  .s8-cmp-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  .s8-cmp-card.is-local { border-top: 4px solid var(--text-muted); }
+  .s8-cmp-card.is-remote { border-top: 4px solid var(--accent); }
+  .s8-cmp-tag {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .s8-cmp-card.is-local .s8-cmp-tag { color: var(--text-muted); }
+  .s8-cmp-card.is-remote .s8-cmp-tag { color: var(--accent); }
+  .s8-cmp-cmd {
+    background: var(--bg-code);
+    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    overflow-x: auto;
+    margin-bottom: var(--spacing-sm);
+  }
+  .s8-cmp-cmd .hl { color: var(--accent); font-weight: 700; }
+  .s8-cmp-cmd .muted { color: var(--text-muted); }
+  .s8-cmp-rows { display: flex; flex-direction: column; gap: 6px; }
+  .s8-cmp-row {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--spacing-sm);
+    align-items: baseline;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .s8-cmp-row .k {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+  .s8-cmp-row code {
+    font-family: var(--font-mono);
+    color: var(--accent-secondary);
+    font-size: 0.88rem;
+  }
+  .s8-oauth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s8-oauth-step {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.98rem;
+    color: var(--text-primary);
+  }
+  .s8-oauth-step code {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+  .s8-oauth-arrow { color: var(--text-muted); font-family: var(--font-mono); }
+
+  /* §8.4 — Demo beats */
+  .s8-demo-steps {
+    max-width: 1100px;
+    margin: var(--spacing-md) auto 0 auto;
+    min-height: 300px;
+  }
+  #s8-demo-steps .cs-step {
+    font-size: 0.84em !important;
+    padding: 8px 11px !important;
+  }
+  #s8-demo-steps .cs-step > div:first-child { margin-bottom: 3px !important; }
+
+  /* §8.5 — Cierre del arco de los dos transports */
+  .s8-close {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s8-close-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+  }
+  .s8-close-card.is-local { border-left: 3px solid var(--text-muted); }
+  .s8-close-card.is-remote { border-left: 3px solid var(--accent); }
+  .s8-close-name {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+  .s8-close-card.is-local .s8-close-name { color: var(--text-muted); }
+  .s8-close-card.is-remote .s8-close-name { color: var(--accent); }
+  .s8-close-body {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s8-key {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    line-height: 1.45;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+    font-weight: 600;
+  }
+  .s8-key strong { color: var(--accent); font-weight: 700; }
+</style>
 <section>
-  <h2>§8 — TODO</h2>
+<!-- §8.1 — Marco: pregunta cero + server remoto -->
+<section>
+  <p class="s8-eyebrow">Demo · server remoto · Streamable HTTP</p>
+  <h2 class="s8-h2">El mismo patrón, con un server que vive afuera.</h2>
+
+  <div class="s8-q0flow">
+    <span class="s8-q0-box">¿Claude Code habla con tu Notion?</span>
+    <span class="s8-q0-arrow">&rarr;</span>
+    <span class="s8-q0-no">No</span>
+    <span class="s8-q0-arrow">&rarr;</span>
+    <span class="s8-q0-mcp">corresponde MCP</span>
+  </div>
+
+  <p class="s8-sub">Notion expone un server <strong>remoto</strong>, hosteado por Notion: no corre en tu máquina, vive en internet y se conecta por Streamable HTTP. Misma pregunta cero, otro transport.</p>
+
+  <aside class="notes">
+    <p><u>Marco del segundo demo, en espejo con §7. Pregunta cero da "no" → MCP. El contraste clave: este server es remoto (Streamable HTTP), no local. Notion lo hostea; vos te conectás por red con auth.</u></p>
+    <p><em>"Segundo demo, mismo molde. Pregunta cero: ¿Claude Code habla con tu Notion de fábrica? No. Así que corresponde MCP."</em></p>
+    <p><em>"Pero acá cambia algo respecto a Playwright. El server de Notion no lo corrés vos: lo hostea Notion, vive en internet, y te conectás por Streamable HTTP. Es un server remoto. La pregunta cero es la misma; lo que cambia es el transport. Veamos cómo se agrega uno remoto, que se ve distinto."</em></p>
+  </aside>
+</section>
+
+<!-- §8.2 — Cómo se agrega un remoto: el contraste -->
+<section>
+  <h2 class="s8-h2">Un remoto se agrega distinto.</h2>
+  <p class="s8-h2-sub">Mismo comando base, pero apunta a una URL — y la auth es OAuth.</p>
+
+  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
+    <div class="s8-cmp-card is-local">
+      <p class="s8-cmp-tag">local · Stdio (Playwright)</p>
+      <div class="s8-cmp-cmd"><span class="muted">$</span> claude mcp add playwright <span class="hl">npx -y @playwright/mcp</span></div>
+      <div class="s8-cmp-rows">
+        <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "stdio"</code>, <code>command</code> + <code>args</code></span></div>
+        <div class="s8-cmp-row"><span class="k">arranque</span><span>un comando que corre local</span></div>
+        <div class="s8-cmp-row"><span class="k">auth</span><span>ninguna — vive en tu máquina</span></div>
+      </div>
+    </div>
+    <div class="s8-cmp-card is-remote">
+      <p class="s8-cmp-tag">remoto · Streamable HTTP (Notion)</p>
+      <div class="s8-cmp-cmd"><span class="muted">$</span> claude mcp add <span class="hl">--transport http</span> notion <span class="hl">https://mcp.notion.com/mcp</span></div>
+      <div class="s8-cmp-rows">
+        <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "http"</code>, <code>url</code></span></div>
+        <div class="s8-cmp-row"><span class="k">arranque</span><span>una URL — el server ya corre afuera</span></div>
+        <div class="s8-cmp-row"><span class="k">auth</span><span>OAuth en el browser</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s8-oauth">
+    <span class="s8-oauth-step">en Claude Code: <code>/mcp</code></span>
+    <span class="s8-oauth-arrow">&rarr;</span>
+    <span class="s8-oauth-step">se abre el browser, login en Notion</span>
+    <span class="s8-oauth-arrow">&rarr;</span>
+    <span class="s8-oauth-step">el token queda guardado (se renueva solo)</span>
+  </div>
+
+  <aside class="notes">
+    <p><u>El corazón de las dos secciones: el contraste local vs remoto. Local = un comando que arranca un proceso (Stdio). Remoto = una URL a un server que ya corre afuera (HTTP) + OAuth. Materializa los dos transports de §3.</u></p>
+    <p><em>"Acá está la diferencia, y es el sentido de hacer estos dos demos juntos. A la izquierda, el local de recién: claude mcp add, y un comando que arranca un proceso en tu máquina. En el JSON queda type stdio, con command y args. No hay auth porque el server vive con vos."</em></p>
+    <p><em>"A la derecha, el remoto: claude mcp add, pero con transport http, y en vez de un comando, una URL — la de Notion. El server ya está corriendo en internet; vos solo apuntás a él. En el JSON queda type http, con url. Y como es un servicio de terceros con tus datos, necesita autenticación."</em></p>
+    <p><em>"Esa auth es OAuth, y se resuelve adentro de Claude Code: corrés barra mcp, se abre el browser, te logueás en Notion y das permiso, y el token queda guardado de forma segura, renovándose solo. No pegás ningún token a mano. Esto es exactamente Stdio versus Streamable HTTP, los dos transports que vimos en la arquitectura, ahora en concreto."</em></p>
+  </aside>
+</section>
+
+<!-- §8.3 — Section divider: demo en vivo -->
+<section class="section-divider">
+  <h2>Demo</h2>
+  <p style="color: var(--text-muted); margin-top: var(--spacing-sm);">Notion desde Claude Code — terminal + Notion lado a lado</p>
+</section>
+
+<!-- §8.4 — Beats del demo -->
+<section>
+  <h2 class="s8-h2">El agente, sobre tu Notion.</h2>
+  <p class="s8-h2-sub">Click cada beat para ver el pedido y qué mirar.</p>
+
+  <div class="s8-demo-steps" id="s8-demo-steps"></div>
+
+  <aside class="notes">
+    <p><strong>Demo en vivo, terminal + Notion lado a lado. Click cada beat. Plan B en el tercero.</strong></p>
+    <p><u>Dos casos sobre un server remoto: lectura (buscar y resumir) y acción (crear una página). El alumno tiene que ver que es el mismo patrón que Playwright, con datos que viven afuera.</u></p>
+    <p><em>"Al vivo, mismo molde que antes. Primero lectura: le pido que busque una página en mi Notion y me la resuma. El agente usa los tools de Notion para buscar, leer la página y devolver el resumen — los datos vienen del workspace, no de la máquina."</em></p>
+    <p><em>"Después, acción: le pido que cree una página nueva con el resumen de una reunión. El agente llama el tool de crear y la página aparece en Notion, en vivo. Si la conexión falla, screenshots pre-armados del antes y después."</em></p>
+  </aside>
+</section>
+
+<!-- §8.5 — Qué viste: cierre del arco de los dos transports -->
+<section>
+  <h2 class="s8-h2">Dos servers, dos transports, un patrón.</h2>
+
+  <div class="s8-close">
+    <div class="s8-close-card is-local">
+      <p class="s8-close-name">Playwright · local · Stdio</p>
+      <p class="s8-close-body">Corre en tu máquina, como subproceso. Sin red, sin auth. Lo arranca un comando.</p>
+    </div>
+    <div class="s8-close-card is-remote">
+      <p class="s8-close-name">Notion · remoto · HTTP</p>
+      <p class="s8-close-body">Vive en internet, hosteado. Te conectás por red, con OAuth. Lo señalás con una URL.</p>
+    </div>
+  </div>
+
+  <p class="s8-key">Cambia dónde vive el server y cómo te conectás. <strong>El intercambio es idéntico:</strong> el server expone, el LLM descubre, invoca, el resultado vuelve.</p>
+
+  <aside class="notes">
+    <p><u>Cierre del bloque de demos y del arco de los dos transports. La conclusión que se llevan: el transport (local/remoto) cambia la plomería de conexión, pero el patrón de intercambio MCP es el mismo. Esto cierra §3 (dos transports) con evidencia.</u></p>
+    <p><em>"Y este es el cierre de los dos demos. Pusimos lado a lado un server local y uno remoto. Playwright: local, Stdio, corre en tu máquina, sin auth, lo arranca un comando. Notion: remoto, HTTP, vive en internet, OAuth, lo señalás con una URL."</em></p>
+    <p><em>"Lo que cambia entre los dos es dónde vive el server y cómo te conectás — la plomería. Pero el intercambio, lo que pasa una vez conectados, es idéntico: el server expone sus capacidades, el modelo las descubre, las invoca, y el resultado vuelve a la conversación. Un solo patrón, para cualquier server, viva donde viva. Eso es MCP."</em></p>
+  </aside>
 </section>
 </section>
       <!-- /§8 -->
 
       <!-- ===== §9 — Cierre: recomendaciones de Claude Code ===== -->
-      <section>
+      <style>
+  /* §9 — Cierre: recomendaciones de Claude Code
+     Centered prose shares max-width 1000px. */
+  .s9-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s9-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §9.1 — Opener */
+  .s9-opener {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s9-opener-line {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0 auto;
+    max-width: 1000px;
+    font-weight: 600;
+  }
+  .s9-opener-line strong { color: var(--accent); font-weight: 700; }
+  .s9-opener-sub {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §9.2 — Tips grid */
+  .s9-tips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s9-tip {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+  }
+  .s9-tip-cmd {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 4px 0;
+  }
+  .s9-tip-cmd .alias {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .s9-tip-what {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.45;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s9-tip-when {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.4;
+    margin: 0;
+    font-style: italic;
+  }
+  .s9-tips-extra {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s9-tips-extra code {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--accent);
+    font-size: 0.92rem;
+  }
+
+  /* §9.3 — Cierre */
+  .s9-close {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s9-close-q {
+    font-size: 2rem;
+    color: var(--text-heading);
+    line-height: 1.35;
+    font-weight: 700;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s9-close-q strong { color: var(--accent); }
+  .s9-close-sub {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+</style>
 <section>
-  <h2>§9 — TODO</h2>
+<!-- §9.1 — Opener -->
+<section>
+  <p class="s9-eyebrow" style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-secondary); margin: 0 auto var(--spacing-sm) auto; max-width: 1000px;">Para cerrar</p>
+  <h2 class="s9-h2">Cuatro cosas de Claude Code que te van a servir.</h2>
+
+  <div class="s9-opener">
+    <p class="s9-opener-sub">No son de MCP — son del día a día con la herramienta. Poco obvias, y te ahorran tiempo apenas las incorporás.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener del cierre. Cambia el registro: dejamos MCP y pasamos a tips prácticos de Claude Code, la herramienta que usan. Cuatro comandos/flujos poco conocidos pero de alto valor.</u></p>
+    <p><em>"Y para cerrar, cambio de registro. Dejamos MCP un momento y les dejo cuatro cosas de Claude Code, la herramienta que vienen usando, que no son obvias y que les van a ahorrar tiempo apenas las incorporen. Nada de teoría — puro día a día."</em></p>
+  </aside>
+</section>
+
+<!-- §9.2 — Los cuatro tips -->
+<section>
+  <h2 class="s9-h2">Claude Code en el día a día.</h2>
+
+  <div class="s9-tips">
+    <div class="s9-tip fragment fade-in" data-fragment-index="0">
+      <p class="s9-tip-cmd">/btw &lt;pregunta&gt;</p>
+      <p class="s9-tip-what">Una pregunta al pasar que <strong style="color: var(--accent);">no entra al historial</strong> ni infla el contexto.</p>
+      <p class="s9-tip-when">Para chequear un detalle sin ensuciar la sesión en la que estás trabajando.</p>
+    </div>
+    <div class="s9-tip fragment fade-in" data-fragment-index="1">
+      <p class="s9-tip-cmd">/rc <span class="alias">alias de /remote-control</span></p>
+      <p class="s9-tip-what">Deja la sesión disponible para controlarla desde <strong style="color: var(--accent);">claude.ai</strong>.</p>
+      <p class="s9-tip-when">Para seguir desde el celular o el browser, lejos de la terminal.</p>
+    </div>
+    <div class="s9-tip fragment fade-in" data-fragment-index="2">
+      <p class="s9-tip-cmd">claude -c &nbsp;/&nbsp; claude -r</p>
+      <p class="s9-tip-what"><strong style="color: var(--accent);">Retomás una sesión anterior.</strong> <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.9rem;">-c</code> la última del directorio; <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.9rem;">-r</code> abre un picker para elegir cuál.</p>
+      <p class="s9-tip-when">Para no perder el contexto de un día para el otro.</p>
+    </div>
+    <div class="s9-tip fragment fade-in" data-fragment-index="3">
+      <p class="s9-tip-cmd">/rewind <span class="alias">o Esc Esc</span></p>
+      <p class="s9-tip-what">Volvés atrás la <strong style="color: var(--accent);">conversación y el código</strong> a un checkpoint anterior.</p>
+      <p class="s9-tip-when">Cuando una serie de cambios salió mal y querés deshacer sin pelear con git.</p>
+    </div>
+  </div>
+
+  <p class="s9-tips-extra fragment fade-in" data-fragment-index="4">Y una de yapa: <code>/compact</code> resume la conversación cuando el contexto se llena, sin perder el hilo.</p>
+
+  <aside class="notes">
+    <p><strong>Cinco reveals — los cuatro tips de a uno, después la yapa de /compact.</strong></p>
+    <p><u>Los cuatro comandos/flujos. Verificados contra la doc de Claude Code. Cada uno con qué hace y cuándo usarlo. El quinto, /compact, como bonus.</u></p>
+    <p><em>"Primero, barra btw, de 'by the way'. Le hacés una pregunta al pasar y la respuesta no entra al historial ni te infla el contexto — aparece y se va. Ideal para chequear un detalle sin ensuciar la sesión en la que estás laburando."</em></p>
+    <p><em>"Segundo, barra rc, que es alias de barra remote-control. Deja la sesión disponible para controlarla desde claude.ai. Arrancás algo en la terminal de la oficina y lo seguís desde el celular, o desde el browser. La sesión es la misma."</em></p>
+    <p><em>"Tercero, retomar sesiones. claude menos c retoma la última sesión de ese directorio, directo. claude menos r abre un picker para que elijas cuál de tus sesiones anteriores retomar. Es la forma de no perder el contexto de un día para el otro — no arrancás de cero cada vez."</em></p>
+    <p><em>"Cuarto, y para mí el más subestimado: barra rewind, o apretar Escape dos veces. Vuelve atrás no solo la conversación sino también el código, a un checkpoint anterior. Cada prompt crea un checkpoint automático. Cuando una serie de cambios se fue al descenso, en vez de pelearte con git para deshacer, hacés rewind y volvés a un punto bueno."</em></p>
+    <p><em>"Y una de yapa para cuando una sesión se hace larga: barra compact resume toda la conversación en algo breve, libera contexto, y seguís sin perder el hilo. Esas cinco, incorpórenlas y van a laburar bastante más cómodos."</em></p>
+  </aside>
+</section>
+
+<!-- §9.3 — Cierre de la semana -->
+<section>
+  <div class="s9-close">
+    <p class="s9-close-q">El agente ya no está limitado a lo que <strong>trae de fábrica</strong>.</p>
+    <p class="s9-close-sub">MCP es cómo lo extendés — y la pregunta cero, cómo elegís bien qué sumar.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Cierre temático de la semana, en una sola idea (no un recap con bullets). Conecta el arco entero: el problema de §1 (el set finito) se resuelve con MCP, y la pregunta cero es la herramienta de criterio. Después viene la slide de preguntas.</u></p>
+    <p><em>"Y con esto cerramos. Arrancamos la clase con un problema: el agente trae un set finito de tools, curado, que no podés extender editando el host. Lo terminamos con la respuesta: MCP es la forma estándar de extender lo que el agente ve y lo que toca, sin atarte a un host. Y si se llevan una sola herramienta de criterio, que sea la pregunta cero: antes de sumar cualquier server, ¿el host ya lo hace? Eso es todo. ¿Preguntas?"</em></p>
+  </aside>
 </section>
 </section>
       <!-- /§9 -->
@@ -4405,6 +4889,34 @@
         borderColor: 'var(--text-muted)',
         borderFull: true,
         example: '<p style="color: var(--text-primary);">Screenshots pre-armados del browser controlado y el output, en <code>semanas/06/img/</code>. La gracia es ver el browser moverse solo; si falla en vivo, mostramos las capturas y narramos el intercambio.</p>'
+      }
+    ]
+  });
+</script>
+
+  <!-- init §8 -->
+<script>
+  initClickableSteps({
+    containerId: 's8-demo-steps',
+    steps: [
+      {
+        title: '1 — Lectura',
+        summary: 'Buscar y resumir una página de tu Notion.',
+        borderColor: 'var(--accent)',
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en mi Notion la página de la última reunión y resumímela</div><p style="color: var(--text-primary); margin-top: 8px;">El agente usa los tools de Notion para buscar, abrir la página y resumirla. Los datos vienen del workspace remoto, no de tu disco.</p>'
+      },
+      {
+        title: '2 — Acción',
+        summary: 'Crear una página nueva: con efecto, sobre tus datos.',
+        borderColor: 'var(--accent)',
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; creá una página con el resumen de esta reunión</div><p style="color: var(--text-primary); margin-top: 8px;">El agente llama el tool de crear página y aparece en Notion, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio.</p>'
+      },
+      {
+        title: '3 — Plan B',
+        summary: 'Si la conexión falla en vivo.',
+        borderColor: 'var(--text-muted)',
+        borderFull: true,
+        example: '<p style="color: var(--text-primary);">Screenshots pre-armados del antes/después en Notion, en <code>semanas/06/img/</code>. Si el OAuth o la red fallan, mostramos las capturas y narramos el intercambio.</p>'
       }
     ]
   });

@@ -1,3 +1,186 @@
+<style>
+  /* §9 — Cierre: recomendaciones de Claude Code
+     Centered prose shares max-width 1000px. */
+  .s9-h2 {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .s9-h2-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: var(--spacing-xs) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §9.1 — Opener */
+  .s9-opener {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s9-opener-line {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0 auto;
+    max-width: 1000px;
+    font-weight: 600;
+  }
+  .s9-opener-line strong { color: var(--accent); font-weight: 700; }
+  .s9-opener-sub {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+
+  /* §9.2 — Tips grid */
+  .s9-tips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .s9-tip {
+    background: var(--bg-secondary);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+  }
+  .s9-tip-cmd {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 4px 0;
+  }
+  .s9-tip-cmd .alias {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .s9-tip-what {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.45;
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+  .s9-tip-when {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.4;
+    margin: 0;
+    font-style: italic;
+  }
+  .s9-tips-extra {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+  .s9-tips-extra code {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--accent);
+    font-size: 0.92rem;
+  }
+
+  /* §9.3 — Cierre */
+  .s9-close {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+    text-align: center;
+  }
+  .s9-close-q {
+    font-size: 2rem;
+    color: var(--text-heading);
+    line-height: 1.35;
+    font-weight: 700;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .s9-close-q strong { color: var(--accent); }
+  .s9-close-sub {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    margin: var(--spacing-lg) auto 0 auto;
+    max-width: 1000px;
+  }
+</style>
+
+<!-- §9.1 — Opener -->
 <section>
-  <h2>§9 — TODO</h2>
+  <p class="s9-eyebrow" style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-secondary); margin: 0 auto var(--spacing-sm) auto; max-width: 1000px;">Para cerrar</p>
+  <h2 class="s9-h2">Cuatro cosas de Claude Code que te van a servir.</h2>
+
+  <div class="s9-opener">
+    <p class="s9-opener-sub">No son de MCP — son del día a día con la herramienta. Poco obvias, y te ahorran tiempo apenas las incorporás.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Opener del cierre. Cambia el registro: dejamos MCP y pasamos a tips prácticos de Claude Code, la herramienta que usan. Cuatro comandos/flujos poco conocidos pero de alto valor.</u></p>
+    <p><em>"Y para cerrar, cambio de registro. Dejamos MCP un momento y les dejo cuatro cosas de Claude Code, la herramienta que vienen usando, que no son obvias y que les van a ahorrar tiempo apenas las incorporen. Nada de teoría — puro día a día."</em></p>
+  </aside>
+</section>
+
+<!-- §9.2 — Los cuatro tips -->
+<section>
+  <h2 class="s9-h2">Claude Code en el día a día.</h2>
+
+  <div class="s9-tips">
+    <div class="s9-tip fragment fade-in" data-fragment-index="0">
+      <p class="s9-tip-cmd">/btw &lt;pregunta&gt;</p>
+      <p class="s9-tip-what">Una pregunta al pasar que <strong style="color: var(--accent);">no entra al historial</strong> ni infla el contexto.</p>
+      <p class="s9-tip-when">Para chequear un detalle sin ensuciar la sesión en la que estás trabajando.</p>
+    </div>
+    <div class="s9-tip fragment fade-in" data-fragment-index="1">
+      <p class="s9-tip-cmd">/rc <span class="alias">alias de /remote-control</span></p>
+      <p class="s9-tip-what">Deja la sesión disponible para controlarla desde <strong style="color: var(--accent);">claude.ai</strong>.</p>
+      <p class="s9-tip-when">Para seguir desde el celular o el browser, lejos de la terminal.</p>
+    </div>
+    <div class="s9-tip fragment fade-in" data-fragment-index="2">
+      <p class="s9-tip-cmd">claude -c &nbsp;/&nbsp; claude -r</p>
+      <p class="s9-tip-what"><strong style="color: var(--accent);">Retomás una sesión anterior.</strong> <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.9rem;">-c</code> la última del directorio; <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.9rem;">-r</code> abre un picker para elegir cuál.</p>
+      <p class="s9-tip-when">Para no perder el contexto de un día para el otro.</p>
+    </div>
+    <div class="s9-tip fragment fade-in" data-fragment-index="3">
+      <p class="s9-tip-cmd">/rewind <span class="alias">o Esc Esc</span></p>
+      <p class="s9-tip-what">Volvés atrás la <strong style="color: var(--accent);">conversación y el código</strong> a un checkpoint anterior.</p>
+      <p class="s9-tip-when">Cuando una serie de cambios salió mal y querés deshacer sin pelear con git.</p>
+    </div>
+  </div>
+
+  <p class="s9-tips-extra fragment fade-in" data-fragment-index="4">Y una de yapa: <code>/compact</code> resume la conversación cuando el contexto se llena, sin perder el hilo.</p>
+
+  <aside class="notes">
+    <p><strong>Cinco reveals — los cuatro tips de a uno, después la yapa de /compact.</strong></p>
+    <p><u>Los cuatro comandos/flujos. Verificados contra la doc de Claude Code. Cada uno con qué hace y cuándo usarlo. El quinto, /compact, como bonus.</u></p>
+    <p><em>"Primero, barra btw, de 'by the way'. Le hacés una pregunta al pasar y la respuesta no entra al historial ni te infla el contexto — aparece y se va. Ideal para chequear un detalle sin ensuciar la sesión en la que estás laburando."</em></p>
+    <p><em>"Segundo, barra rc, que es alias de barra remote-control. Deja la sesión disponible para controlarla desde claude.ai. Arrancás algo en la terminal de la oficina y lo seguís desde el celular, o desde el browser. La sesión es la misma."</em></p>
+    <p><em>"Tercero, retomar sesiones. claude menos c retoma la última sesión de ese directorio, directo. claude menos r abre un picker para que elijas cuál de tus sesiones anteriores retomar. Es la forma de no perder el contexto de un día para el otro — no arrancás de cero cada vez."</em></p>
+    <p><em>"Cuarto, y para mí el más subestimado: barra rewind, o apretar Escape dos veces. Vuelve atrás no solo la conversación sino también el código, a un checkpoint anterior. Cada prompt crea un checkpoint automático. Cuando una serie de cambios se fue al descenso, en vez de pelearte con git para deshacer, hacés rewind y volvés a un punto bueno."</em></p>
+    <p><em>"Y una de yapa para cuando una sesión se hace larga: barra compact resume toda la conversación en algo breve, libera contexto, y seguís sin perder el hilo. Esas cinco, incorpórenlas y van a laburar bastante más cómodos."</em></p>
+  </aside>
+</section>
+
+<!-- §9.3 — Cierre de la semana -->
+<section>
+  <div class="s9-close">
+    <p class="s9-close-q">El agente ya no está limitado a lo que <strong>trae de fábrica</strong>.</p>
+    <p class="s9-close-sub">MCP es cómo lo extendés — y la pregunta cero, cómo elegís bien qué sumar.</p>
+  </div>
+
+  <aside class="notes">
+    <p><u>Cierre temático de la semana, en una sola idea (no un recap con bullets). Conecta el arco entero: el problema de §1 (el set finito) se resuelve con MCP, y la pregunta cero es la herramienta de criterio. Después viene la slide de preguntas.</u></p>
+    <p><em>"Y con esto cerramos. Arrancamos la clase con un problema: el agente trae un set finito de tools, curado, que no podés extender editando el host. Lo terminamos con la respuesta: MCP es la forma estándar de extender lo que el agente ve y lo que toca, sin atarte a un host. Y si se llevan una sola herramienta de criterio, que sea la pregunta cero: antes de sumar cualquier server, ¿el host ya lo hace? Eso es todo. ¿Preguntas?"</em></p>
+  </aside>
 </section>
