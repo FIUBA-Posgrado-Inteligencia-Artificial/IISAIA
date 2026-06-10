@@ -1,6 +1,6 @@
 # Spine — Semana 06: Model Context Protocol (MCP)
 
-**Whole-week through-line:** Los agentes que viene usando el alumno desde S04 ya tienen tools nativas (`Read`, `Write`, `Bash`, `Grep`, `Glob`, `Edit` en Claude Code). Lo que no se discutió aún: ese set lo decidió Anthropic, y para todo lo que está afuera (DB de prod, browser, docs en vivo de un SDK que salió ayer) no hay tool. Las dos salidas instintivas tienen techo — **wrapper custom por host (N×M, no se reusa)** y **pegar al prompt (costos, frescura, ruido — lo que ya conocen desde context engineering)**. **MCP es la salida estructural: un protocolo común** donde el problema colapsa a N+M. §1 plantea el problema y nombra la solución en un golpe; §§2-6 desarman el protocolo en capas (por qué protocolo, arquitectura, primitives, discovery, ecosistema con la pregunta cero); §§7-9 materializan con **tres demos net-new sobre CC desde tres ángulos distintos** (Playwright = actuar sobre el browser; context7 = informar al modelo con docs reales; Blender con física = crear en un dominio no-coding); §10 calibra cuándo MCP y los tres riesgos. La cadena es **setup → mecánica → ecosistema → uso → calibración**.
+**Whole-week through-line:** Los agentes que viene usando el alumno desde S04 ya tienen tools nativas (`Read`, `Write`, `Bash`, `Grep`, `Glob`, `Edit` en Claude Code). Lo que no se discutió aún: ese set lo decidió Anthropic, y para todo lo que está afuera (DB de prod, browser, docs en vivo de un SDK que salió ayer) no hay tool. Las dos salidas instintivas tienen techo — **wrapper custom por host (N×M, no se reusa)** y **pegar al prompt (costos, frescura, ruido — lo que ya conocen desde context engineering)**. **MCP es la salida estructural: un protocolo común** donde el problema colapsa a N+M. §1 plantea el problema y nombra la solución en un golpe; §§2-6 desarman el protocolo en capas (por qué protocolo, arquitectura, primitives, discovery, ecosistema con la pregunta cero); §§7-8 materializan con **dos demos que contrastan los dos transports** (Playwright = server **local**/Stdio; Notion = server **remoto**/Streamable HTTP), mostrando que el patrón de intercambio es idéntico viva donde viva el server; §9 cierra con **recomendaciones prácticas de Claude Code** (`/btw`, `/rc`, retomar sesión, `/rewind`). La cadena es **setup → mecánica → ecosistema → uso → cierre**. (Rediseño 2026-06-09: antes eran tres demos + sección de riesgos.)
 
 **Dispositivos pedagógicos de toda la semana:**
 
@@ -111,59 +111,46 @@
 
 ---
 
-# Demos (§§7-9)
+# Demos (§§7-8) + Cierre (§9)
 
-## Section 7: Demo — Playwright MCP
+> **Rediseño aprobado 2026-06-09.** El cierre de la semana se reorganizó: en vez de tres demos net-new (Playwright/context7/Blender) + sección de calibración/riesgos, son **dos demos contrastando los dos transports** (local Stdio vs remoto Streamable HTTP) + un cierre con **recomendaciones prácticas de Claude Code**. Materializa el eje Stdio/HTTP de §3 y deja un cierre útil para el día a día. Las secciones §9 (Blender) y §10 (riesgos) viejas se eliminaron del scaffold; el material `08-demo-context7.md`, `09-demo-blender.md`, `10-cuando-mcp-y-riesgos.md` queda sin usar.
+
+## Section 7: Demo local — Playwright (Stdio)
 **Source material:** `source_material/07-demo-playwright.md`
-**Through-line:** Primer demo en vivo. Materializa la Parte 1 entera con un caso real: instalación de una línea, dos casos (lectura + acción), ver al agente actuar en un browser controlado. **Por qué Playwright como demo**: es ejemplo paradigmático de net-new sobre CC — CC sabe correr Bash pero no maneja un browser. La pregunta cero de §6 vuelve "no" → corresponde MCP. Lo que tienen que sacar **no es** el cómo de Playwright — **es la forma del intercambio**, que se mapea explícitamente al diagrama del §5.
+**Through-line:** Primer demo en vivo. La pregunta cero de §6 da "no" (CC no maneja un browser) → corresponde MCP. **Es un server local (Stdio):** corre como subproceso en tu máquina, sin red, sin auth. Dos casos (lectura: traer títulos de una página; acción: completar un form). Lo que tienen que sacar no es Playwright — es **la forma del intercambio**, mapeada al diagrama del §5. Planta el eje local/remoto que cierra en §8.
 **What students walk away knowing:**
-- Cómo se instala un MCP server con un comando (`claude mcp add ...`).
-- El patrón concreto del intercambio aplicado: server expone capacidades → LLM las descubre → invocación con argumentos → resultado vuelve a la conversación.
-- Que el patrón es genérico — lo que cambia entre demos es qué hace el server, no cómo se habla.
-- Por qué Playwright **sí** se instala en CC: capacidad que CC no tenía. La pregunta cero da "no" → MCP corresponde.
-**Animations / interactive:** **Demo en vivo, terminal + browser lado a lado.** Slide-soporte mínima: un slide marco que arranca con "¿CC maneja un browser?" → no → corresponde MCP; un slide con el comando de instalación; el demo en vivo; slide de cierre "qué viste" que mapea explícitamente al diagrama del §5 (highlight del paso del catálogo y de la invocación). Plan B documentado: screenshots pre-armados del browser controlado + output, por si el demo en vivo falla.
-**Slide budget:** 3–4 slides + slide de demo.
+- Cómo se instala un server local con un comando (`claude mcp add playwright npx -y @playwright/mcp`).
+- Que un server **local** corre en tu máquina, transport Stdio, sin red ni auth.
+- El patrón del intercambio aplicado: server expone → LLM descubre → invoca → resultado vuelve.
+- Por qué Playwright **sí** se instala en CC: net-new, CC no maneja un browser.
+**Animations / interactive:** **Demo en vivo, terminal + browser lado a lado.** Slides: marco con pregunta cero + tag "local · Stdio"; install (`claude mcp add` + tags de transport); section-divider; beats del demo en `clickable-steps` (lectura/acción/Plan B); "qué viste" con el intercambio de §5 + bridge a §8. Plan B: screenshots pre-armados.
+**Slide budget:** 5 slides (incluye divider).
 
-## Section 8: Demo — context7 MCP
-**Source material:** `source_material/08-demo-context7.md`
-**Through-line:** Segundo demo, mismo patrón, otro problema concreto: **alucinaciones de API** cuando el agente trabaja contra SDKs nuevos o versiones con breaking changes. La causa raíz ya la conocen desde §1 (no está en el set + cutoff de entrenamiento). La pregunta cero de §6 da "no" → corresponde MCP. context7 es la forma estándar de darle acceso a docs reales — open-source, vendor-neutral, gratis. La instalación se ve igual que Playwright; el intercambio sigue el mismo patrón.
-**Hook:** **Las alucinaciones de API** como apertura — complicación concreta que cualquier alumno reconoció. Conecta directamente con la tercera "no está" de §1 (docs en vivo de SDK nuevo).
+## Section 8: Demo remoto — Notion (Streamable HTTP)
+**Source material:** datos verificados contra doc de Claude Code y Notion (no hay `.md` de source dedicado).
+**Through-line:** Segundo demo, **mismo patrón, otro transport**. Pregunta cero da "no" (CC no habla con tu Notion) → MCP. **Es un server remoto (Streamable HTTP):** lo hostea Notion, vive en internet, te conectás por URL + OAuth. El **corazón** es el contraste local/remoto: comando+args (Stdio) vs URL+OAuth (HTTP), `type: stdio` vs `type: http`, `/mcp` para el OAuth. Cierra el arco de los dos transports de §3 con evidencia: cambia la plomería, el intercambio es idéntico.
 **What students walk away knowing:**
-- Las alucinaciones de API tienen causa raíz estructural (cutoff date + cambios de SDK), no son magia ni mala suerte.
-- Mismo comando de instalación, mismo patrón de intercambio que Playwright — refuerza la portabilidad del modelo mental.
-- El takeaway estructural que cierra el círculo con §1: "más prompt" no era la solución; el server que trae info real, sí.
-- Por qué context7 **sí** se instala en CC: net-new, CC no tiene conocimiento actualizado de SDKs ni mecanismo de fetch de docs.
-**Animations / interactive:** **Demo en vivo, terminal + editor lado a lado.** Slide marco con la pregunta cero ("¿CC conoce esta API?") → no → corresponde MCP; slide con el comando de instalación; el demo en vivo; slide de cierre "qué viste" que cierra el círculo con §1 (la complicación tercera resuelta). Plan B: screenshots del antes/después del agente con y sin context7.
-**Slide budget:** 3–4 slides + slide de demo.
-
-## Section 9: Demo — Blender MCP (física)
-**Source material:** `source_material/09-demo-blender.md`
-**Through-line:** Tercer demo. Hasta acá los demos fueron sobre dominios de desarrollo (browser, docs de SDK). **Este es el wow del bloque: MCP no se limita a herramientas de desarrollo — cualquier programa que alguien empaquete como server queda al alcance del agente.** Blender MCP expone las primitives de Blender como tools; el agente arma una escena con rampa inclinada + 6 esferas de colores + física rigid body y corre la simulación. Las balls caen, ruedan, chocan, se dispersan. El resultado es kinético, visible, recognizable. El patrón del intercambio es **idéntico** a los dos demos anteriores; cambia solo el dominio.
-**Hook:** Pregunta corta — *"¿y si no fuera código?"*. Captura el salto conceptual antes de pasar al pedido concreto.
-**What students walk away knowing:**
-- **MCP no es solo para devtools.** Cualquier programa que alguien empaquete como server queda al alcance del agente. Blender hoy, mañana Unity / Photoshop / Excel / CAD / DAW musical.
-- El agente coordinó **una secuencia de pasos en un dominio que no conoce nativamente** — sin haber programado en `bpy` ni tocado Blender. Eso refuerza el insight del §5: el server le describe sus capacidades, y el agente combina.
-- Por qué Blender MCP **sí** se instala en CC: net-new — CC no maneja 3D, no controla Blender, no setea física.
-- El patrón del intercambio es el mismo de los tres demos. **Tres dominios completamente distintos, mismo aparato.**
-**Animations / interactive:** **Demo en vivo, viewport de Blender + terminal lado a lado.** Slide marco con pregunta cero ("¿CC modela 3D?") → no → corresponde MCP; slide con comando de instalación + nota de setup overhead (Blender abierto con add-on); el demo en vivo con la simulación corriendo; slide de cierre "qué viste" que cierra **el bloque entero de demos** — los tres ángulos en un visual (actuar / informar / crear), mapeo al diagrama del §5. **Plan B esencial: video pre-grabado de 30-40s** del demo funcionando bien. No es opcional acá: si la sim falla en vivo, paramos y mostramos el video. La gracia es ver las balls moverse.
-**Slide budget:** 4–5 slides + slide de demo (más que Playwright/context7 porque hay un slide de "qué viste" que cierra el bloque entero, no solo este demo).
+- Cómo se agrega un server **remoto**: `claude mcp add --transport http notion https://mcp.notion.com/mcp`, y el OAuth vía `/mcp` (se abre el browser, token guardado y auto-renovado).
+- La diferencia concreta local vs remoto: dónde vive el server, comando vs URL, sin auth vs OAuth, `type: stdio` vs `type: http`.
+- Que el **patrón de intercambio es el mismo** viva donde viva el server — eso cierra §3.
+**Animations / interactive:** **Demo en vivo, terminal + Notion lado a lado.** Slides: marco con pregunta cero + tag "remoto · HTTP"; el contraste local/remoto (`comparison-2col` + flow de OAuth); section-divider; beats en `clickable-steps`; cierre "dos servers, dos transports, un patrón". Plan B: screenshots.
+**Slide budget:** 5 slides (incluye divider).
 
 ---
 
-# Cierre — Calibración (§10)
+# Cierre — Recomendaciones de Claude Code (§9)
 
-## Section 10: Cuándo MCP, cuándo no, y riesgos
-**Source material:** `source_material/09-cuando-mcp-y-riesgos.md`
-**Through-line:** Calibración final, con la **pregunta cero al frente**: antes de cualquier criterio fino, "¿el host ya lo hace?". Si sí, ahí termina la conversación. Si no, recién ahí aplican las tres condiciones (recurrencia + datos vivos/grandes + reuso) y las excepciones (one-off, chico/estático, server sin auditar). Los tres riesgos (supply chain, permisos, observabilidad). El modelo mental de cierre: un MCP server es una dependencia más — **cinco preguntas** que aplicás antes de conectar, empezando por la pregunta cero.
-**Key analogy:** **MCP server como dependencia de tu entorno** — vale lo mismo que aplicás a cualquier librería que metés en un proyecto. Las cinco preguntas (con la pregunta cero como primer filtro) son el modelo mental que se llevan más allá del curso.
+## Section 9: Claude Code en el día a día
+**Source material:** comandos verificados contra la doc de Claude Code (no hay `.md` de source).
+**Through-line:** Cambio de registro: se deja MCP y se cierra con **tips prácticos de Claude Code**, la herramienta que usan. Cuatro comandos/flujos poco obvios y de alto valor, más uno de yapa. Termina con un cierre temático de la semana en una sola idea (no un recap con bullets).
 **What students walk away knowing:**
-- **La pregunta cero ("¿el host ya lo hace?") va primero** — antes que cualquier otro criterio. Si el host trae la capacidad, no instales.
-- Asumiendo que la pregunta cero da "no", las tres condiciones para que MCP rinda (recurrencia + datos vivos/grandes + reuso) y las cuatro excepciones donde no.
-- Los tres riesgos concretos (supply chain / permisos / observabilidad) con su mitigación práctica para cada uno.
-- El modelo mental "una dependencia más" — **cinco preguntas** en orden: ¿el host ya lo hace? ¿quién es el autor? ¿qué hace? ¿qué le permito? ¿cómo me entero si cambia?
-- Cierre de clase: MCP no es la respuesta a todo, es infraestructura que vino para quedarse — el conocimiento se lleva.
-**Animations / interactive:** Ninguna JS. **Slide-opener con la pregunta cero como card central destacada** (refuerza lo de §6). `comparison-2col` para cuándo sí / cuándo no. `data-table` 3×2 para los tres riesgos con su mitigación. Slide de cierre con las **cinco preguntas** del modelo mental como `clickable-steps` o cards numeradas (1 a 5), con la pregunta cero visualmente marcada como filtro previo.
-**Slide budget:** 5–6 slides.
+- `/btw <pregunta>` — pregunta al pasar que no entra al historial ni infla el contexto.
+- `/rc` (alias de `/remote-control`) — controlar la sesión desde claude.ai (celular/browser).
+- `claude -c` / `claude -r` — retomar la última sesión / elegir cuál de un picker.
+- `/rewind` (o `Esc Esc`) — volver atrás conversación y código a un checkpoint.
+- De yapa: `/compact` — resumir el contexto cuando se llena.
+**Animations / interactive:** Ninguna JS. Opener; grid 2×2 de tip-cards con reveals (uno por tip) + línea de `/compact`; slide de cierre temático ("el agente ya no está limitado a lo que trae de fábrica · MCP es cómo lo extendés · la pregunta cero, cómo elegís"). Después, la slide de `¿Preguntas?` del scaffold.
+**Slide budget:** 3 slides.
 
 ---
 
