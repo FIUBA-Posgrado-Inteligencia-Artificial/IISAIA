@@ -133,7 +133,7 @@
 - Cómo se agrega un server **remoto**: `claude mcp add --transport http linear https://mcp.linear.app/mcp`, y el OAuth vía `/mcp` (se abre el browser, token guardado y auto-renovado).
 - La diferencia concreta local vs remoto: dónde vive el server, comando vs URL, sin auth vs OAuth, `type: stdio` vs `type: http`.
 - Que el **patrón de intercambio es el mismo** viva donde viva el server — eso cierra §3.
-**Animations / interactive:** **Demo en vivo, terminal + Notion lado a lado.** Slides: marco con pregunta cero + tag "remoto · HTTP"; el contraste local/remoto (`comparison-2col` + flow de OAuth); section-divider; beats en `clickable-steps`; cierre "dos servers, dos transports, un patrón". Plan B: screenshots.
+**Animations / interactive:** **Demo en vivo, terminal + Linear lado a lado.** Slides: marco con pregunta cero + tag "remoto · HTTP"; el contraste local/remoto (`comparison-2col` + flow de OAuth); section-divider; beats en `clickable-steps`; cierre "dos servers, dos transports, un patrón". Plan B: screenshots.
 **Slide budget:** 5 slides (incluye divider).
 
 ---
