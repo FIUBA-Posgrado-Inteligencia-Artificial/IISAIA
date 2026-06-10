@@ -4258,10 +4258,10 @@
   <div class="s7-demo-steps" id="s7-demo-steps"></div>
 
   <aside class="notes">
-    <p><strong>Demo en vivo, terminal + browser lado a lado. Click cada beat. Plan B en el tercero.</strong></p>
-    <p><u>Dos casos: lectura (traer datos de una página) y acción (completar un form). El alumno tiene que ver el browser moverse solo. Si el browser no levanta, screenshots pre-armados.</u></p>
+    <p><strong>Demo en vivo, terminal + browser lado a lado. Click cada beat.</strong></p>
+    <p><u>Dos casos: lectura (traer datos de una página) y acción (completar un form). El alumno tiene que ver el browser moverse solo.</u></p>
     <p><em>"Vamos al vivo. Dos casos. El primero, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts. Van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos — sin que yo copie ni pegue nada."</em></p>
-    <p><em>"El segundo, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena uno por uno y hace submit. Si por lo que sea el browser no levanta en el momento, tengo screenshots pre-armados para mostrar el antes y después."</em></p>
+    <p><em>"El segundo, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena uno por uno y hace submit."</em></p>
   </aside>
 </section>
 
@@ -4882,13 +4882,6 @@
         summary: 'Completar un form: ahora con efecto.',
         borderColor: 'var(--accent)',
         example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> en cada campo &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p>'
-      },
-      {
-        title: '3 — Plan B',
-        summary: 'Si el browser no levanta en vivo.',
-        borderColor: 'var(--text-muted)',
-        borderFull: true,
-        example: '<p style="color: var(--text-primary);">Screenshots pre-armados del browser controlado y el output, en <code>semanas/06/img/</code>. La gracia es ver el browser moverse solo; si falla en vivo, mostramos las capturas y narramos el intercambio.</p>'
       }
     ]
   });
