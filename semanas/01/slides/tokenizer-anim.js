@@ -39,9 +39,25 @@ function buildAnimation(text, containerId, titleId, conceptsId) {
   // Simple BPE-like tokenization: group into realistic subword chunks
   var tokens = bpeTokenize(displayChars);
 
-  // Assign colors to tokens (cycle through palette)
-  var palette = ['#4dc9f6','#f67019','#acc236','#e8508b','#9b59b6','#27ae60','#e67e22','#2980b9'];
-  tokens.forEach(function(t, i) { t.color = palette[i % palette.length]; });
+  // Assign colors per unique token text, so repeated tokens share the same color
+  // and two different tokens never do.
+  var uniqueTexts = [];
+  tokens.forEach(function(t) {
+    if (uniqueTexts.indexOf(t.text) === -1) uniqueTexts.push(t.text);
+  });
+  var colorByText = {};
+  var slotCount = uniqueTexts.length;
+  var stride = coprimeStride(slotCount);
+  uniqueTexts.forEach(function(txt, i) {
+    // Hues are spread evenly over the wheel; the stride scrambles which token gets
+    // which hue, so neighbouring boxes rarely land on neighbouring colors.
+    var slot = (i * stride) % slotCount;
+    // Alternate lightness between adjacent hues: with many tokens the hue gap alone
+    // is too small to tell, say, three greens apart.
+    var lightness = slot % 2 === 0 ? 64 : 78;
+    colorByText[txt] = hslToHex(slot * (360 / slotCount), 72, lightness);
+  });
+  tokens.forEach(function(t) { t.color = colorByText[t.text]; });
 
   var stages = [
     {
@@ -334,6 +350,34 @@ function bpeTokenize(chars) {
   });
 
   return tokens;
+}
+
+/**
+ * Largest step below n/2 that is coprime with n, so repeatedly adding it visits
+ * every slot exactly once instead of cycling early.
+ */
+function coprimeStride(n) {
+  function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+  for (var k = Math.floor(n / 2); k > 1; k--) {
+    if (gcd(k, n) === 1) return k;
+  }
+  return 1;
+}
+
+/**
+ * HSL to hex. Kept in hex because callers append an alpha suffix (color + '22').
+ */
+function hslToHex(h, s, l) {
+  s /= 100;
+  l /= 100;
+  var a = s * Math.min(l, 1 - l);
+  function channel(n) {
+    var k = (n + h / 30) % 12;
+    var v = l - a * Math.max(-1, Math.min(k - 3, Math.min(9 - k, 1)));
+    var hex = Math.round(255 * v).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }
+  return '#' + channel(0) + channel(8) + channel(4);
 }
 
 function escapeHtml(str) {
