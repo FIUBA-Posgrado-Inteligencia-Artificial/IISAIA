@@ -1,7 +1,6 @@
 node_modules/
 .claude/*
 !.claude/commands/
-semana_1.md
 .env
 .runpod-pod
 __pycache__/
