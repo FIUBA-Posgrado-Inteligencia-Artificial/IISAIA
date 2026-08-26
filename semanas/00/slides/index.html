@@ -19,33 +19,39 @@
       max-height: 100%;
     }
 
-    /* Bloque de texto centrado fuera de cajas. Cada bloque lleva su
-       propio max-width para no depender de <br> entre oraciones. */
-    .s00-statement {
-      max-width: 980px;
+    /* Bloque de texto centrado fuera de cajas. Cada bloque lleva su propio
+       max-width para no depender de <br> entre oraciones de largo distinto.
+       max-width unificado en 1000px, igual que el resto de los decks.
+       El prefijo .reveal es necesario: sin el, `.reveal p` de custom.css
+       gana por especificidad y se come el color y el centrado. */
+    .reveal .s00-statement {
+      max-width: 1000px;
       margin: 0 auto;
+      text-align: center;
       font-size: 1.6rem;
       line-height: 1.45;
     }
-    .s00-statement-punch {
-      max-width: 980px;
+    .reveal .s00-statement-punch {
+      max-width: 1000px;
       margin: 1.4rem auto 0;
+      text-align: center;
       font-size: 1.9rem;
       font-weight: 600;
       color: var(--accent);
       line-height: 1.35;
     }
-    .s00-note {
-      max-width: 900px;
+    .reveal .s00-note {
+      max-width: 1000px;
       margin: 1.6rem auto 0;
+      text-align: center;
       font-size: 1.05rem;
-      opacity: 0.75;
+      color: var(--text-muted);
     }
 
     /* Arbol de directorios. Deliberadamente NO usa <pre><code>: el
        plugin de highlight escapa el HTML inline y las anotaciones al
        margen saldrian como texto literal. */
-    .s00-tree {
+    .reveal .s00-tree {
       font-family: monospace;
       font-size: 1.15rem;
       line-height: 1.75;
@@ -57,17 +63,21 @@
       border-radius: 8px;
       padding: 1.4rem 1.8rem;
     }
-    .s00-tree .ann {
+    .reveal .s00-tree .ann {
       color: var(--accent-secondary);
       opacity: 0.9;
     }
-    .s00-tree .dir {
+    .reveal .s00-tree .dir {
       color: var(--accent);
       font-weight: 600;
     }
 
     /* Pasos numerados de la slide 10 — unica lista enumerativa del deck. */
-    .s00-steps {
+    /* display:block es obligatorio: reveal.js pone las listas en
+       inline-block, y los margenes auto no centran un inline-block —
+       queda pegado al borde izquierdo con ancho shrink-to-fit. */
+    .reveal .s00-steps {
+      display: block;
       list-style: none;
       counter-reset: s00step;
       max-width: 860px;
@@ -75,7 +85,7 @@
       padding: 0;
       text-align: left;
     }
-    .s00-steps li {
+    .reveal .s00-steps li {
       counter-increment: s00step;
       position: relative;
       padding-left: 3.2rem;
@@ -83,7 +93,7 @@
       font-size: 1.2rem;
       line-height: 1.5;
     }
-    .s00-steps li::before {
+    .reveal .s00-steps li::before {
       content: counter(s00step);
       position: absolute;
       left: 0;
