@@ -18,6 +18,7 @@
  *       // ...
  *     ],
  *     exampleLabel: 'Que entra',                 // optional, header of the detail panel (default: 'Ejemplo concreto')
+ *     hintText: 'Click en una caja',             // optional, hint shown when nothing is selected
  *     onChange: function(idx, step) { ... }   // optional, fires after every click/keyboard interaction; idx is -1 when deselected, step is null when deselected
  *   })
  */
@@ -67,7 +68,7 @@ function initClickableSteps(opts) {
     // Hint text — always inline, doesn't affect layout when detail is open
     var hintText = activeIdx >= 0
       ? 'Click la caja activa otra vez para cerrar'
-      : 'Click en una caja para ver un ejemplo concreto';
+      : (opts.hintText || 'Click en una caja para ver un ejemplo concreto');
     html += '<div style="text-align: center; margin-top: 8px; color: var(--text-muted); font-size: 0.55em; font-style: italic; opacity: 0.6;">' + hintText + '</div>';
 
     // Detail panel — absolutely positioned overlay, only rendered when active.

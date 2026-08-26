@@ -51,7 +51,7 @@
        slide si no se le reserva lugar. Sin este padding la slide desborda
        ~90px al clickear cualquier caja. */
     .reveal #s00-roadmap {
-      padding-bottom: 150px;
+      padding-bottom: 105px;
     }
 
     /* Etiquetas del panel de detalle. Usan rem y no em a proposito: el
@@ -171,7 +171,6 @@
       <!-- 2. El programa, en orden -->
       <section>
         <h2>El programa, en orden</h2>
-        <p class="s00-lead">Click en cada unidad.</p>
         <div id="s00-roadmap"></div>
         <p class="s00-note">Clase 8 — Demo Day: presentás y defendés tu trabajo práctico final.</p>
         <aside class="notes">
@@ -260,40 +259,41 @@
     initClickableSteps({
       containerId: 's00-roadmap',
       exampleLabel: 'Qué entra',
+      hintText: 'Click en una caja para ver qué entra',
       steps: [
         {
           title: 'El modelo',
-          summary: 'Clase 1',
+          summary: '',
           borderColor: 'var(--accent-secondary)',
           example: '<div class="s00-chips"><span class="s00-chip">tokens</span><span class="s00-chip">tokenización</span><span class="s00-chip">predicción estocástica</span><span class="s00-chip">pre-training</span><span class="s00-chip">modelos base</span><span class="s00-chip">post-training</span><span class="s00-chip">RLHF</span><span class="s00-chip">alucinaciones</span><span class="s00-chip">límites del razonamiento</span></div>'
         },
         {
           title: 'Frontend',
-          summary: 'Clase 2 · TP 1',
+          summary: 'TP 1',
           borderColor: 'var(--accent-secondary)',
           example: '<div class="s00-chips"><span class="s00-chip">HTML semántico</span><span class="s00-chip">CSS</span><span class="s00-chip">modelo de caja</span><span class="s00-chip">layout</span><span class="s00-chip">estado</span><span class="s00-chip">DOM</span><span class="s00-chip">eventos</span><span class="s00-chip">single-file</span><span class="s00-chip">patrones de prompt</span></div><p class="s00-tp">Acá sale el TP 1: un artefacto de una sola página.</p>'
         },
         {
           title: 'Backend',
-          summary: 'Clase 3 · TP 2',
+          summary: 'TP 2',
           borderColor: 'var(--accent-secondary)',
           example: '<div class="s00-chips"><span class="s00-chip">cliente-servidor</span><span class="s00-chip">HTTP</span><span class="s00-chip">methods</span><span class="s00-chip">status codes</span><span class="s00-chip">REST</span><span class="s00-chip">endpoints</span><span class="s00-chip">SQL / NoSQL</span><span class="s00-chip">logs y errores</span><span class="s00-chip">OpenAPI</span></div><p class="s00-tp">Acá sale el TP 2: el contrato de una API y sus datos.</p>'
         },
         {
           title: 'Agentes',
-          summary: 'Clases 4 y 5 · TP Final',
+          summary: 'TP Final',
           borderColor: 'var(--accent)',
-          example: '<div class="s00-chips"><span class="s00-chip">el loop</span><span class="s00-chip">tools</span><span class="s00-chip">ventana de contexto</span><span class="s00-chip">modos de falla</span><span class="s00-chip">CLAUDE.md</span><span class="s00-chip">rules</span><span class="s00-chip">permisos</span><span class="s00-chip">skills</span><span class="s00-chip">sub-agentes</span><span class="s00-chip">plan mode</span></div><p class="s00-tp">En la clase 5 sale la consigna del TP Final.</p>'
+          example: '<div class="s00-chips"><span class="s00-chip">el loop</span><span class="s00-chip">tools</span><span class="s00-chip">ventana de contexto</span><span class="s00-chip">modos de falla</span><span class="s00-chip">CLAUDE.md</span><span class="s00-chip">rules</span><span class="s00-chip">permisos</span><span class="s00-chip">skills</span><span class="s00-chip">sub-agentes</span><span class="s00-chip">plan mode</span></div><p class="s00-tp">Acá sale la consigna del TP Final.</p>'
         },
         {
           title: 'Plugins',
-          summary: 'Clase 6',
+          summary: '',
           borderColor: 'var(--accent-secondary)',
           example: '<div class="s00-chips"><span class="s00-chip">plugins</span><span class="s00-chip">marketplaces</span><span class="s00-chip">spec</span><span class="s00-chip">plan</span><span class="s00-chip">TDD</span><span class="s00-chip">code review</span><span class="s00-chip">verificación</span><span class="s00-chip">git</span><span class="s00-chip">branch</span><span class="s00-chip">pull request</span></div>'
         },
         {
           title: 'MCP',
-          summary: 'Clase 7',
+          summary: '',
           borderColor: 'var(--accent-secondary)',
           example: '<div class="s00-chips"><span class="s00-chip">protocolo</span><span class="s00-chip">host / cliente / servidor</span><span class="s00-chip">primitives</span><span class="s00-chip">discovery</span><span class="s00-chip">Stdio</span><span class="s00-chip">HTTP remoto</span><span class="s00-chip">ecosistema</span><span class="s00-chip">riesgos</span></div>'
         }
