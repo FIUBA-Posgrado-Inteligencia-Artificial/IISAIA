@@ -10,7 +10,7 @@ Esta es la estructura de referencia. Copiala tal cual en tu propio repositorio y
 |---------|---------|--------|
 | TP 1 | [tp1/](tp1/) | pendiente |
 | TP 2 | [tp2/](tp2/) | pendiente |
-| Proyecto integrador | [tp-final/](tp-final/) | pendiente |
+| Trabajo Práctico Final | [tp-final/](tp-final/) | pendiente |
 
 ## Cómo se usa esta estructura
 

@@ -1,4 +1,4 @@
-# Proyecto integrador — Título
+# Trabajo Práctico Final — Título
 
 La aplicación completa: interfaz, servidor y datos que persisten. Se presenta y se defiende en la última clase.
 

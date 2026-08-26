@@ -4,13 +4,13 @@
 
 La materia se aprueba con tres trabajos prácticos. Los tres son individuales: no hay grupos en ninguna de las entregas, tampoco en la última.
 
-Las dos primeras son acotadas y sirven para practicar lo que se vio en clase. La tercera es el proyecto integrador: la aplicación completa, con interfaz, servidor y datos, que presentás en el Demo Day de la última clase.
+Las dos primeras son acotadas y sirven para practicar lo que se vio en clase. La tercera es el trabajo práctico final: la aplicación completa, con interfaz, servidor y datos, que presentás en el Demo Day de la última clase.
 
 Los detalles de cada consigna se comunican cuando corresponde. Lo que importa hoy es la forma: tres entregas, todas tuyas, todas en un repositorio público de GitHub.
 
 ## Por qué individual
 
-Podrías preguntarte por qué el proyecto final no admite equipos, si en la industria se trabaja en equipo.
+Podrías preguntarte por qué el trabajo práctico final no admite equipos, si en la industria se trabaja en equipo.
 
 La razón es el criterio de evaluación. Lo que se mira es si vos podés explicar y sostener las decisiones del proyecto. En un grupo esa responsabilidad se diluye: hay siempre alguien que entendió la parte del servidor y alguien que entendió la interfaz, y cuando el proyecto se defiende cada uno cubre el hueco del otro. Individual, no hay dónde esconderse — y eso es exactamente el punto del curso.
 
