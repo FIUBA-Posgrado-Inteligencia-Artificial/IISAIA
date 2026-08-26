@@ -48,31 +48,7 @@
       color: var(--text-muted);
     }
 
-    /* Arbol de directorios. Deliberadamente NO usa <pre><code>: el
-       plugin de highlight escapa el HTML inline y las anotaciones al
-       margen saldrian como texto literal. */
-    .reveal .s00-tree {
-      font-family: monospace;
-      font-size: 1.15rem;
-      line-height: 1.75;
-      white-space: pre-wrap;
-      text-align: left;
-      max-width: 760px;
-      margin: 0 auto;
-      background: var(--bg-secondary, #1a1a1a);
-      border-radius: 8px;
-      padding: 1.4rem 1.8rem;
-    }
-    .reveal .s00-tree .ann {
-      color: var(--accent-secondary);
-      opacity: 0.9;
-    }
-    .reveal .s00-tree .dir {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Pasos numerados de la slide 10 — unica lista enumerativa del deck. */
+    /* Pasos numerados de la ultima slide — unica lista enumerativa del deck. */
     /* display:block es obligatorio: reveal.js pone las listas en
        inline-block, y los margenes auto no centran un inline-block —
        queda pegado al borde izquierdo con ancho shrink-to-fit. */
@@ -114,17 +90,14 @@
   <div class="reveal">
     <div class="slides">
 
-      <!-- ============ §1 — Qué es este curso y adónde llegás ============ -->
-
       <!-- 1. Portada -->
       <section class="title-slide">
-        <h1>Dirigir, no escribir</h1>
-        <p class="subtitle">Qué vas a construir, cómo se evalúa y dónde vive tu trabajo</p>
-        <p class="muted">Introducción al desarrollo de software asistido por IA</p>
+        <h1>Introducción a la ingeniería de software asistida por Inteligencia Artificial</h1>
+        <p class="subtitle">Ocho semanas para pasar de escribir código a dirigir a quien lo escribe</p>
         <aside class="notes">
           <p><strong>Proyectar mientras se acomodan. Arrancar cuando esté la mayoría.</strong></p>
-          <p><u>Apertura del curso. Quince minutos de encuadre y pasamos al tema real.</u></p>
-          <p><em>"Antes de meternos en el tema de hoy, quince minutos para que sepas dónde te metiste: qué vamos a hacer estas ocho semanas, cómo se aprueba, y una cosa concreta que te vas a llevar de tarea hoy. Después arrancamos en serio."</em></p>
+          <p><u>Apertura del curso. Diez minutos de encuadre y pasamos al tema real.</u></p>
+          <p><em>"Bueno, arrancamos. Diez minutos para que sepas dónde te metiste: qué vamos a hacer estas ocho semanas, cómo se aprueba, y una cosa concreta que te llevás de tarea hoy. Después entramos en tema."</em></p>
         </aside>
       </section>
 
@@ -134,36 +107,14 @@
         <p class="s00-statement-punch fragment fade-in">No vas a escribir la mayor parte del código.</p>
         <aside class="notes">
           <p><strong>Leer la primera parte. Pausa real de 3-4 segundos antes de revelar.</strong></p>
-          <p><u>El gancho del bloque. La segunda frase es el golpe: dejarla respirar, no explicarla todavía.</u></p>
+          <p><u>El gancho. La segunda frase es el golpe: dejarla respirar, no explicarla enseguida.</u></p>
           <p><em>"Arranquemos por el final. En ocho semanas vas a tener una aplicación andando. No un ejercicio: algo que se abre, que alguien usa, que guarda datos y sigue estando ahí mañana. Y la vas a presentar acá adelante."</em></p>
           <p><em>"Ahora, la parte rara. La mayor parte de ese código no lo vas a escribir vos."</em></p>
+          <p><u>Suelen aparecer dos reacciones, las dos equivocadas: alivio ("entonces no hay nada que aprender") y desconfianza ("entonces no es un curso serio"). Si alguna aparece en la cara de alguien, nombrala y desarmala: el trabajo no desapareció, se corrió de lugar. Escribir la sintaxis dejó de ser lo difícil; decidir qué se construye, y darse cuenta de que lo que volvió está mal, sigue siendo tuyo.</u></p>
         </aside>
       </section>
 
-      <!-- 3. Las dos reacciones equivocadas -->
-      <section>
-        <h2>Dos reacciones, las dos equivocadas</h2>
-        <div class="comparison-2col">
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent);">
-            <h3 style="color: var(--accent);">Alivio</h3>
-            <p>"Entonces no hay nada que aprender."</p>
-          </div>
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent-secondary);">
-            <h3 style="color: var(--accent-secondary);">Desconfianza</h3>
-            <p>"Entonces no es un curso serio."</p>
-          </div>
-        </div>
-        <p class="s00-statement-punch fragment fade-in">El trabajo no desapareció. Se corrió de lugar.</p>
-        <aside class="notes">
-          <p><strong>Revelar alivio. Revelar desconfianza. Pausa. Revelar el cierre.</strong></p>
-          <p><u>Desarma las dos lecturas con las que llega el alumno antes de que se instalen.</u></p>
-          <p><em>"Cuando digo esto suelen pasar dos cosas. Algunos sienten alivio: si la máquina escribe, no hay nada que estudiar."</em></p>
-          <p><em>"Y otros desconfían: si la máquina escribe, esto no es un curso serio."</em></p>
-          <p><em>"Las dos se equivocan por el mismo motivo. Escribir la sintaxis dejó de ser la parte difícil. Decidir qué se construye, con qué estructura, y darte cuenta de que lo que volvió está mal — eso sigue siendo tuyo, y es más difícil de lo que parece."</em></p>
-        </aside>
-      </section>
-
-      <!-- 4. El arco de las ocho clases -->
+      <!-- 3. El arco de las ocho clases -->
       <section>
         <h2>Cómo llegás hasta ahí</h2>
         <div class="pipe-grid" id="s00-arco">
@@ -191,16 +142,14 @@
           <p><u>El arco completo en tres movimientos. Cada uno habilita al siguiente.</u></p>
           <p><em>"El recorrido tiene tres movimientos. El primero es entender la herramienta: cómo funciona por dentro esto que vas a usar, por qué a veces inventa cosas con total seguridad, dónde están sus límites. Sin eso, cuando falle vas a pensar que está roto o que sos vos."</em></p>
           <p><em>"El segundo es aprender a nombrar. Suena menor y es lo que más cambia las cosas: si te devuelve algo que no pediste, necesitás las palabras para corregirlo. Sin vocabulario, lo único que podés hacer es aceptar todo o rechazar todo."</em></p>
-          <p><em>"Y el tercero es dirigir a algo que actúa solo: que abre archivos, los modifica, ejecuta cosas. Ahí el problema cambia de forma, y le vamos a dedicar la mitad del curso."</em></p>
+          <p><em>"Y el tercero es dirigir a algo que actúa solo: que abre archivos, los modifica, ejecuta cosas. Ahí el problema cambia de forma, y le dedicamos la mitad del curso."</em></p>
           <p><em>"La última clase es tuya: mostrás lo que construiste y contás cómo lo dirigiste."</em></p>
         </aside>
       </section>
 
-      <!-- ============ §2 — Cómo se aprueba ============ -->
-
-      <!-- 5. Las tres entregas -->
+      <!-- 4. Cómo se aprueba -->
       <section>
-        <h2>Tres entregas</h2>
+        <h2>Cómo se aprueba</h2>
         <div style="display: flex; align-items: center; gap: 12px; justify-content: center;">
           <div class="flow-step">TP 1</div>
           <span class="flow-arrow">→</span>
@@ -208,139 +157,34 @@
           <span class="flow-arrow">→</span>
           <div class="flow-step active">Proyecto integrador</div>
         </div>
-        <p class="s00-statement-punch fragment fade-in">Las tres, individuales.</p>
-        <p class="s00-note fragment fade-in">El proyecto integrador se presenta y se defiende en la última clase. Las consignas se comunican cuando corresponde; hoy importa la forma.</p>
+        <p class="s00-note fragment fade-in">Las tres entregas son individuales. El proyecto integrador se defiende en la última clase.</p>
+        <p class="s00-statement-punch fragment fade-in">Que funcione no alcanza: se evalúa que puedas explicar cómo lo dirigiste.</p>
         <aside class="notes">
-          <p><strong>Mostrar el flujo. Revelar "individuales". Revelar la nota.</strong></p>
-          <p><u>La forma de la evaluación, sin entrar en consignas.</u></p>
-          <p><em>"La materia se aprueba con tres trabajos prácticos. Los dos primeros son acotados y sirven para practicar lo que vimos en clase. El tercero es el grande: la aplicación completa de la que hablábamos recién."</em></p>
-          <p><em>"Los tres son individuales. No hay grupos en ninguna, tampoco en la última. Y esto lo digo ahora porque suele ser la primera pregunta."</em></p>
-          <p><u>Si preguntan por qué individual: el criterio es si vos podés sostener las decisiones del proyecto, y en grupo eso se diluye — siempre hay alguien que entendió el servidor y alguien la interfaz, y al defender cada uno tapa el hueco del otro. No ponerlo en la slide: suena defensivo.</u></p>
+          <p><strong>Mostrar el flujo. Revelar "individuales". Pausa. Revelar el criterio.</strong></p>
+          <p><u>Forma de la evaluación y criterio, en una sola slide. La parte que más sorprende es la última línea.</u></p>
+          <p><em>"Se aprueba con tres trabajos prácticos. Los dos primeros son acotados y sirven para practicar lo que vimos en clase. El tercero es el grande: la aplicación completa de la que hablábamos recién, que presentás y defendés en la última clase."</em></p>
+          <p><em>"Los tres son individuales. Lo aclaro ahora porque suele ser la primera pregunta."</em></p>
+          <p><em>"Y acá viene lo que sorprende. Que funcione no alcanza. Un producto que anda pero cuyos caminos no podés reconstruir no dice nada: lo podría haber generado cualquiera pidiendo que le hagan una app de tareas. Lo que se mira es cómo especificaste, qué decidiste vos, y cómo te diste cuenta cuando el modelo se fue para cualquier lado."</em></p>
+          <p><u>Si preguntan por qué individual: el criterio es si vos podés sostener las decisiones del proyecto, y en grupo eso se diluye. Si preguntan cómo se entrega: un repositorio público de GitHub, el README de cada carpeta funciona como informe, y desde la clase 6 también se lee el historial de commits — por eso el repositorio se arma hoy y no la semana de la entrega.</u></p>
         </aside>
       </section>
 
-      <!-- 6. Qué se evalúa -->
-      <section>
-        <h2>Que funcione no alcanza</h2>
-        <div class="comparison-2col">
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent-secondary);">
-            <h3 style="color: var(--accent-secondary);">Lo que no alcanza</h3>
-            <p>El producto anda, pero no podés reconstruir cómo llegaste hasta ahí.</p>
-          </div>
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent);">
-            <h3 style="color: var(--accent);">Lo que se mira</h3>
-            <p>Cómo especificaste qué construir, qué decidiste vos, y cómo te diste cuenta de que algo se había desviado.</p>
-          </div>
-        </div>
-        <p class="s00-statement-punch fragment fade-in">Apropiación: poder explicarlo, corregirlo y extenderlo.</p>
-        <aside class="notes">
-          <p><strong>Revelar izquierda. Revelar derecha. Pausa. Revelar la definición.</strong></p>
-          <p><u>El criterio real de evaluación. Es la parte que más sorprende.</u></p>
-          <p><em>"Acá viene lo que suele sorprender. Que funcione no alcanza. Un producto que anda pero cuyos caminos no podés reconstruir no dice nada sobre tu rol: lo podría haber generado cualquiera pidiendo 'hacé una app de tareas'."</em></p>
-          <p><em>"Lo que se mira es otra cosa. Cómo especificaste qué querías antes de que se escribiera código. Qué decisiones tomaste vos y no el modelo por defecto porque no dijiste nada. Y cómo te diste cuenta cuando se fue para cualquier lado, que va a pasar."</em></p>
-          <p><em>"Hay una palabra para esto: apropiación. Que el proyecto sea tuyo aunque el código lo haya escrito otro. Y se mide de una sola manera: si podés explicarlo, corregirlo y extenderlo. No en cuántas líneas tipeaste."</em></p>
-        </aside>
-      </section>
-
-      <!-- 7. Dónde queda registrado -->
-      <section>
-        <h2>Dónde queda registrado</h2>
-        <div class="comparison-2col">
-          <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
-            <h3 style="color: var(--accent);">Desde la primera entrega</h3>
-            <p>El <code>README.md</code> es el informe: qué te propusiste, los prompts principales, qué salió mal y cómo lo corregiste, y cómo se ejecuta el proyecto.</p>
-          </div>
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent-secondary);">
-            <h3 style="color: var(--accent-secondary);">Desde la clase 6</h3>
-            <p>También se lee el historial de tu trabajo: cada guardado, con su fecha y su motivo. Para entonces vas a tener las herramientas para que salga solo.</p>
-          </div>
-        </div>
-        <p class="s00-statement-punch fragment fade-in">El historial no se puede fabricar la noche anterior.</p>
-        <aside class="notes">
-          <p><strong>La primera card ya está. Revelar la segunda. Pausa larga antes del cierre.</strong></p>
-          <p><u>Puente al §3: si el historial se lee, tiene que existir desde el principio.</u></p>
-          <p><em>"Todo esto se entrega igual: un repositorio público en GitHub. Si nunca usaste GitHub, es una página web donde se guardan proyectos, y lo vemos en detalle más adelante. Ahí adentro, el archivo README es el informe de la entrega: lo que no se ve mirando el código."</em></p>
-          <p><em>"Y desde la clase 6 se suma algo más: el historial. Cada vez que guardás un avance queda registrado con fecha y con una nota de qué cambiaste. Eso también se lee, porque es donde se ve el proceso."</em></p>
-          <p><em>"Lo cual tiene una consecuencia práctica que conviene entender hoy y no en la semana siete. Un repositorio con un solo guardado que dice 'entrega final' no tiene proceso que mostrar. El historial no se fabrica la noche anterior. Por eso el repositorio se arma ahora."</em></p>
-        </aside>
-      </section>
-
-      <!-- ============ §3 — Tu repositorio ============ -->
-
-      <!-- 8. La estructura -->
-      <section>
-        <h2>Un repo, tres carpetas</h2>
-        <div class="s00-tree"><span class="dir">apellido-iisaia/</span>
-├── README.md          <span class="ann">índice del repo</span>
-│
-├── <span class="dir">tp1/</span>
-│   ├── README.md      <span class="ann">informe del TP 1</span>
-│   ├── prompts.md
-│   └── index.html
-│
-├── <span class="dir">tp2/</span>
-│
-└── <span class="dir">tp-final/</span></div>
-        <p class="s00-note fragment fade-in">El README de la raíz es el índice: quién sos y qué hay en cada carpeta. El de adentro de cada carpeta es el informe de esa entrega.</p>
-        <aside class="notes">
-          <p><strong>Dejar el árbol en pantalla unos segundos antes de hablar. Revelar la nota al final.</strong></p>
-          <p><u>La estructura concreta que tienen que armar. Es la slide más práctica del bloque.</u></p>
-          <p><em>"Así se organiza. Un repositorio, con una carpeta por entrega. El nombre lo elegís vos, que se entienda de qué es. Y tiene que ser público: si es privado, no lo puedo corregir."</em></p>
-          <p><em>"Hay dos tipos de README acá y conviene no confundirlos. El de la raíz es el índice: quién sos y qué hay en cada carpeta, con un link a cada una. Es lo primero que se ve al abrir el repo. El de adentro de cada carpeta es el informe de esa entrega puntual. Lo que va dentro de cada carpeta cambia según la consigna; el esqueleto no cambia nunca."</em></p>
-        </aside>
-      </section>
-
-      <!-- 9. Por qué uno solo -->
-      <section>
-        <h2>Por qué uno y no tres</h2>
-        <div class="comparison-2col">
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent-secondary);">
-            <h3 style="color: var(--accent-secondary);">Tres repos sueltos</h3>
-            <p>Tres links distintos. Tres historiales cortos, cada uno empezado la semana de la entrega.</p>
-          </div>
-          <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--accent);">
-            <h3 style="color: var(--accent);">Un repo que crece</h3>
-            <p>Un link para todo el curso. Un historial continuo donde se ve cómo cambió tu forma de trabajar entre la clase 2 y la 8.</p>
-          </div>
-        </div>
-        <p class="s00-statement-punch fragment fade-in">Esa progresión es justamente lo que se quiere ver.</p>
-        <aside class="notes">
-          <p><strong>Revelar izquierda. Revelar derecha. Revelar el cierre.</strong></p>
-          <p><u>Justifica la decisión de un solo repo. Cierra el argumento que abrió la slide anterior sobre el historial.</u></p>
-          <p><em>"Es más fácil armar tres repositorios sueltos, uno por entrega, y mandarme tres links. Pero se pierde lo importante."</em></p>
-          <p><em>"En un repositorio único se ve cómo trabajás: si guardás seguido o todo de golpe, si dejás anotado qué cambiaste, cómo evolucionó tu manera de encarar las cosas entre la segunda clase y la última."</em></p>
-          <p><em>"Y eso es justamente lo que el curso quiere que pase. Es imposible de ver en tres repositorios aislados creados cada uno la noche antes. Aparte, en lo práctico: un solo link, el mismo de principio a fin."</em></p>
-        </aside>
-      </section>
-
-      <!-- 10. Qué hacés esta semana -->
+      <!-- 5. Esta semana -->
       <section>
         <h2>Esta semana</h2>
         <ol class="s00-steps">
           <li class="fragment fade-in">Creá una cuenta de GitHub, si no tenés.</li>
-          <li class="fragment fade-in">Creá el repositorio, público, con un README que por ahora sólo diga tu nombre.</li>
+          <li class="fragment fade-in">Creá el repositorio, público, con un <code>README.md</code> que por ahora sólo diga tu nombre.</li>
           <li class="fragment fade-in">Mandame el link a <strong style="color: var(--accent);">enzo.tng@gmail.com</strong></li>
         </ol>
-        <p class="s00-note fragment fade-in">Es el único link que se entrega en todo el curso: no hay que reenviarlo en cada entrega. Y si nunca usaste git, no es un problema — se ve en serio más adelante. Hoy alcanza con crearlo desde la web, que son dos clicks y no hay que instalar nada.</p>
+        <p class="s00-note fragment fade-in">Un solo repositorio para las ocho semanas, con una carpeta por entrega. La estructura de referencia está en el repo del curso, en <code>semanas/00/source_material/apellido-iisaia/</code></p>
         <aside class="notes">
-          <p><strong>Revelar los tres pasos de a uno. Revelar la nota. Insistir en que es de hoy, no de la semana que viene.</strong></p>
-          <p><u>La única tarea concreta del bloque. Diez minutos de trabajo.</u></p>
-          <p><em>"Tres pasos, y no te llevan más de diez minutos. Primero, cuenta de GitHub si no tenés."</em></p>
-          <p><em>"Segundo, creás el repositorio. Público. Con un README que por ahora diga tu nombre y nada más — las carpetas las vas creando cuando llegue cada entrega, no hace falta que las armes vacías ahora."</em></p>
-          <p><em>"Y tercero, me mandás el link por mail. La dirección está en la slide."</em></p>
-          <p><em>"Dos aclaraciones. Ese link es el único que vas a entregar en todo el curso: como el repositorio es siempre el mismo y va creciendo, con tenerlo una vez me alcanza. Y si nunca usaste git en tu vida, tranquilo: lo vemos en serio más adelante. Para esto alcanza con crearlo desde la página, sin instalar nada."</em></p>
-        </aside>
-      </section>
-
-      <!-- 11. El pase -->
-      <section>
-        <p class="s00-statement">Eso es todo lo administrativo.</p>
-        <p class="s00-statement-punch fragment fade-in">Ahora sí: cómo funciona por dentro el modelo con el que vas a trabajar.</p>
-        <aside class="notes">
-          <p><strong>Revelar y arrancar la clase. No abrir preguntas acá.</strong></p>
-          <p><u>Pase al contenido real. La nota más corta del deck a propósito.</u></p>
-          <p><em>"Eso es todo lo administrativo. Si te quedó alguna duda de esto, me preguntás en el corte."</em></p>
-          <p><em>"Ahora sí, el tema del día: qué es exactamente esta cosa con la que vas a trabajar las próximas ocho semanas, y por qué a veces te miente con una seguridad absoluta."</em></p>
+          <p><strong>Revelar los tres pasos de a uno. Revelar la nota. Insistir en que es de hoy.</strong></p>
+          <p><u>La única tarea concreta del bloque. Diez minutos de trabajo. Es la última slide: se cierra acá y se entra al tema del día.</u></p>
+          <p><em>"Tres pasos, y no te llevan más de diez minutos. Primero, cuenta de GitHub si no tenés. Segundo, creás el repositorio, público, con un README que por ahora diga tu nombre y nada más. Y tercero, me mandás el link por mail; la dirección está en la slide."</em></p>
+          <p><em>"Es un solo repositorio para todo el curso, con una carpeta por entrega. No armes tres repos sueltos: el historial de commits es la evidencia del proceso, y sólo cuenta una historia si es continuo. Aparte, así me mandás un link una sola vez."</em></p>
+          <p><em>"La estructura exacta está en el repositorio del curso, en esa ruta. Entrás, la mirás, la copiás. Y si nunca usaste git, tranquilo: lo vemos en serio más adelante, hoy alcanza con crear el repo desde la página web."</em></p>
+          <p><em>"Listo lo administrativo. Ahora sí, el tema del día: qué es exactamente esta cosa con la que vas a trabajar, y por qué a veces te miente con una seguridad absoluta."</em></p>
         </aside>
       </section>
 
