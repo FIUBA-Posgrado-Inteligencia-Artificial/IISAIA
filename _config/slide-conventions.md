@@ -55,6 +55,6 @@ Rules for generating and formatting reveal.js presentations.
 
 - `_config/theme/components.css` — CSS classes for slide components (pipeline, flow, chat-mockup, comparison, etc.).
 - `shared/patterns/` — HTML snippet library for recurring slide patterns. See `shared/patterns/README.md`.
-- `tools/skills/slide-generation/voice-and-didactics.md` — voice and didactic principles for slide content.
-- `tools/skills/slide-generation/animation-pattern.md` — animation contract and reuse policy.
-- `tools/skills/slide-generation/spine-template.md` — schema for the spine.md document produced by `/build-class`.
+- `.claude/skills/slide-generation/voice-and-didactics.md` — voice and didactic principles for slide content.
+- `.claude/skills/slide-generation/animation-pattern.md` — animation contract and reuse policy.
+- `.claude/skills/slide-generation/spine-template.md` — schema for the spine.md document produced by `/build-class`.

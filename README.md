@@ -31,7 +31,7 @@ Requiere además [uv](https://docs.astral.sh/uv/) y [Claude Code](https://claude
 # Herramientas Python (yt-transcript, runpod-llama, etc.)
 uv sync
 
-# Skills de Claude Code (workflow de generación de slides)
+# Skills de propósito general (opcional)
 cp -r tools/skills/* ~/.claude/skills/
 ```
 
@@ -45,6 +45,7 @@ cp -r tools/skills/* ~/.claude/skills/
 
 ```
 .claude/commands/        # Slash commands (/build-class)
+.claude/skills/          # Skills de proyecto (slide-generation)
 _config/theme/           # CSS del tema visual + components.css
 docs/superpowers/        # Design specs e implementation plans
 semanas/NN/
@@ -54,5 +55,5 @@ semanas/NN/
 shared/patterns/         # Snippet library de patrones de slide
 shared/templates/        # Template base de reveal.js
 tools/runpod-llama.py    # Manager del pod con modelo Llama 70B
-tools/skills/            # Skill definitions de Claude Code
+tools/skills/            # Skills de propósito general
 ```
