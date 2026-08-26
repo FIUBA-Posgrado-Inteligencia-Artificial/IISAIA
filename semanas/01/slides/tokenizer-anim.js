@@ -229,6 +229,9 @@ function buildAnimation(text, containerId, titleId, conceptsId) {
         if (titleEl) titleEl.style.opacity = '0';
         if (conceptsEl) conceptsEl.style.opacity = '0';
       }
+      // Each step changes the content height. Reveal centers the slide vertically
+      // once, on load, so without this the taller steps spill off the bottom.
+      if (typeof Reveal !== 'undefined' && Reveal.layout) Reveal.layout();
     }, 200);
   }
 
