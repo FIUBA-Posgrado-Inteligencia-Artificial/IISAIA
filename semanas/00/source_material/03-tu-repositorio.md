@@ -44,7 +44,9 @@ Además hay una razón práctica: un solo link. El mismo desde el principio hast
 
 Tres pasos, y no llevan más de diez minutos:
 
-Creá una cuenta de GitHub si no tenés. Creá el repositorio, público, con un `README.md` que por ahora sólo diga tu nombre y que es tu repo del curso. Compartí el link por el canal que se indique.
+Creá una cuenta de GitHub si no tenés. Creá el repositorio, público, con un `README.md` que por ahora sólo diga tu nombre y que es tu repo del curso. Mandá el link por correo al docente.
+
+Ese link es el único que se entrega en todo el curso. No hay que volver a mandarlo en cada entrega: como el repositorio es siempre el mismo y va creciendo, con tenerlo una vez alcanza.
 
 Las carpetas se van creando cuando llegue cada entrega — no hace falta que las armes ahora vacías.
 
