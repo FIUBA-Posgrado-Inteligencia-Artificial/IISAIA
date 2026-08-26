@@ -165,7 +165,7 @@ function buildAnimation(text, containerId, titleId, conceptsId) {
         var html = '<div style="display: flex; gap: 4px; flex-wrap: wrap; align-items: center;">';
         tokens.forEach(function(t) {
           html += '<span style="background: ' + t.color + '22; border: 2px solid ' + t.color + '; border-radius: 6px; padding: 4px 10px; display: inline-flex; flex-direction: column; align-items: center; gap: 1px;">' +
-            '<span style="color: ' + t.color + '; font-size: 1em; font-weight: bold;">' + escapeHtml(t.text) + '</span>' +
+            '<span style="color: ' + t.color + '; font-size: 1em; font-weight: bold;">' + renderTokenText(t.text) + '</span>' +
             '<span style="color: var(--text-primary); font-size: 0.7em;">' + t.id + '</span>' +
             '</span>';
         });
@@ -174,6 +174,7 @@ function buildAnimation(text, containerId, titleId, conceptsId) {
         html += '<ul style="margin-top: 8px; font-size: 0.75em; color: var(--text-muted); line-height: 1.6;">';
         html += '<li>' + displayChars.length + ' caracteres → <span style="color: var(--accent);">' + tokens.length + ' subpalabras</span> (secuencia mas corta, vocabulario mas grande)</li>';
         html += '<li>GPT-4 usa un vocabulario de ~100.000 tokens</li>';
+        html += '<li>El <span style="color: var(--text-primary);">·</span> marca el espacio que viaja pegado al token: <span style="color: var(--text-primary);">tres</span> y <span style="color: var(--text-primary);">·tres</span> son tokens distintos</li>';
         html += '</ul>';
         return html;
       }
@@ -378,6 +379,17 @@ function hslToHex(h, s, l) {
     return hex.length === 1 ? '0' + hex : hex;
   }
   return '#' + channel(0) + channel(8) + channel(4);
+}
+
+/**
+ * A leading space belongs to the token but collapses in HTML, which makes two
+ * different tokens look identical in the boxes. Render it as a visible dot.
+ */
+function renderTokenText(text) {
+  if (text.charAt(0) === ' ') {
+    return '<span style="opacity: 0.5;">·</span>' + escapeHtml(text.slice(1));
+  }
+  return escapeHtml(text);
 }
 
 function escapeHtml(str) {
