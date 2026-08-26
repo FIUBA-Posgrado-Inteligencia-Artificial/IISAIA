@@ -54,6 +54,30 @@
       padding-bottom: 150px;
     }
 
+    /* Etiquetas del panel de detalle. Usan rem y no em a proposito: el
+       componente aplica font-size 0.65em al contenedor, y rem escapa a
+       esa reduccion. */
+    .reveal .s00-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .reveal .s00-chip {
+      background: rgba(100, 255, 218, 0.07);
+      border: 1px solid rgba(100, 255, 218, 0.32);
+      border-radius: 999px;
+      padding: 5px 15px;
+      font-size: 0.95rem;
+      line-height: 1.25;
+      color: var(--text-primary);
+    }
+    .reveal .s00-tp {
+      margin: 14px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
     /* Las tres entregas, con su fecha de consigna. */
     .reveal .s00-entregas {
       display: grid;
@@ -137,7 +161,6 @@
       <!-- 1. Portada -->
       <section class="title-slide">
         <h1>Introducción a la ingeniería de software asistida por Inteligencia Artificial</h1>
-        <p class="subtitle">Ocho clases: qué vemos, cuándo entregás y cómo se corrige</p>
         <aside class="notes">
           <p><strong>Proyectar mientras se acomodan. Arrancar cuando esté la mayoría.</strong></p>
           <p><u>Apertura del curso. Diez minutos de encuadre y pasamos al tema real.</u></p>
@@ -148,7 +171,7 @@
       <!-- 2. El programa, en orden -->
       <section>
         <h2>El programa, en orden</h2>
-        <p class="s00-lead">Click en cada unidad para ver qué entra.</p>
+        <p class="s00-lead">Click en cada unidad.</p>
         <div id="s00-roadmap"></div>
         <p class="s00-note">Clase 8 — Demo Day: presentás y defendés tu trabajo práctico final.</p>
         <aside class="notes">
@@ -239,40 +262,40 @@
       exampleLabel: 'Qué entra',
       steps: [
         {
-          title: '1 — Cómo funciona un LLM',
-          summary: 'Clase 1. Por qué el modelo responde lo que responde.',
+          title: 'El modelo',
+          summary: 'Clase 1',
           borderColor: 'var(--accent-secondary)',
-          example: '<div style="color: var(--text-primary); line-height: 1.8;">Tokens y tokenización · naturaleza estocástica de la predicción · pre-training: escala y curación de datos · modelos base e in-context learning · post-training y alineación con RLHF · alucinaciones: por qué ocurren y cómo se mitigan · límites del razonamiento</div><p style="color: var(--text-muted); margin-top: 10px;">Es la única unidad que no es sobre construir. Es la que hace que el resto se entienda.</p>'
+          example: '<div class="s00-chips"><span class="s00-chip">tokens</span><span class="s00-chip">tokenización</span><span class="s00-chip">predicción estocástica</span><span class="s00-chip">pre-training</span><span class="s00-chip">modelos base</span><span class="s00-chip">post-training</span><span class="s00-chip">RLHF</span><span class="s00-chip">alucinaciones</span><span class="s00-chip">límites del razonamiento</span></div>'
         },
         {
-          title: '2 — Frontend',
-          summary: 'Clase 2. El vocabulario para dirigir lo que se ve.',
+          title: 'Frontend',
+          summary: 'Clase 2 · TP 1',
           borderColor: 'var(--accent-secondary)',
-          example: '<div style="color: var(--text-primary); line-height: 1.8;">HTML semántico: la estructura · CSS: modelo de caja, layout, tipografía, color y variables · estado, DOM y eventos · el paradigma single-file · cuatro patrones de prompt para construir interfaz</div><p style="color: var(--accent); margin-top: 10px;"><strong>Acá sale el TP 1.</strong></p>'
+          example: '<div class="s00-chips"><span class="s00-chip">HTML semántico</span><span class="s00-chip">CSS</span><span class="s00-chip">modelo de caja</span><span class="s00-chip">layout</span><span class="s00-chip">estado</span><span class="s00-chip">DOM</span><span class="s00-chip">eventos</span><span class="s00-chip">single-file</span><span class="s00-chip">patrones de prompt</span></div><p class="s00-tp">Acá sale el TP 1: un artefacto de una sola página.</p>'
         },
         {
-          title: '3 — Backend, datos y contratos',
-          summary: 'Clase 3. El vocabulario para dirigir lo que no se ve.',
+          title: 'Backend',
+          summary: 'Clase 3 · TP 2',
           borderColor: 'var(--accent-secondary)',
-          example: '<div style="color: var(--text-primary); line-height: 1.8;">Cliente-servidor y protocolo HTTP · methods y status codes · REST: recurso, jerarquía, idempotencia · rutas, controladores y el endpoint como contrato · SQL frente a NoSQL · leer fallas: 4xx, 5xx, logs · OpenAPI como contrato escrito</div><p style="color: var(--accent); margin-top: 10px;"><strong>Acá sale el TP 2.</strong></p>'
+          example: '<div class="s00-chips"><span class="s00-chip">cliente-servidor</span><span class="s00-chip">HTTP</span><span class="s00-chip">methods</span><span class="s00-chip">status codes</span><span class="s00-chip">REST</span><span class="s00-chip">endpoints</span><span class="s00-chip">SQL / NoSQL</span><span class="s00-chip">logs y errores</span><span class="s00-chip">OpenAPI</span></div><p class="s00-tp">Acá sale el TP 2: el contrato de una API y sus datos.</p>'
         },
         {
-          title: '4 — Desarrollo agéntico',
-          summary: 'Clases 4 y 5. La IA deja de escribir y empieza a actuar.',
+          title: 'Agentes',
+          summary: 'Clases 4 y 5 · TP Final',
           borderColor: 'var(--accent)',
-          example: '<div style="color: var(--text-primary); line-height: 1.8;">El loop pensar → actuar → observar · las tools como interfaz de acción · la ventana de contexto como recurso finito · modos de falla del agente · configuración del runtime: memoria persistente, reglas, permisos, skills, sub-agentes y modo plan</div><p style="color: var(--accent); margin-top: 10px;"><strong>Ocupa dos clases. En la 5 sale la consigna del TP Final.</strong></p>'
+          example: '<div class="s00-chips"><span class="s00-chip">el loop</span><span class="s00-chip">tools</span><span class="s00-chip">ventana de contexto</span><span class="s00-chip">modos de falla</span><span class="s00-chip">CLAUDE.md</span><span class="s00-chip">rules</span><span class="s00-chip">permisos</span><span class="s00-chip">skills</span><span class="s00-chip">sub-agentes</span><span class="s00-chip">plan mode</span></div><p class="s00-tp">En la clase 5 sale la consigna del TP Final.</p>'
         },
         {
-          title: '5 — Plugins y spec-driven development',
-          summary: 'Clase 6. El flujo de trabajo completo, empaquetado.',
+          title: 'Plugins',
+          summary: 'Clase 6',
           borderColor: 'var(--accent-secondary)',
-          example: '<div style="color: var(--text-primary); line-height: 1.8;">Plugins: qué son, marketplaces e instalación · del spec al plan y del plan a la implementación · desarrollo delegado a sub-agentes · desarrollo guiado por pruebas · revisión de código asistida · verificación con evidencia · git y GitHub Flow: commit, branch y pull request</div><p style="color: var(--text-muted); margin-top: 10px;">Desde acá, el repositorio también se lee como evidencia del proceso.</p>'
+          example: '<div class="s00-chips"><span class="s00-chip">plugins</span><span class="s00-chip">marketplaces</span><span class="s00-chip">spec</span><span class="s00-chip">plan</span><span class="s00-chip">TDD</span><span class="s00-chip">code review</span><span class="s00-chip">verificación</span><span class="s00-chip">git</span><span class="s00-chip">branch</span><span class="s00-chip">pull request</span></div>'
         },
         {
-          title: '6 — Model Context Protocol',
-          summary: 'Clase 7. Conectar el agente a lo que está afuera.',
+          title: 'MCP',
+          summary: 'Clase 7',
           borderColor: 'var(--accent-secondary)',
-          example: '<div style="color: var(--text-primary); line-height: 1.8;">Por qué un protocolo y no una API · arquitectura host, cliente y servidor · las tres primitives · discovery dinámico · transports local y remoto · el ecosistema y qué vale instalar · cuándo no conviene, y qué riesgos asumís</div><p style="color: var(--text-muted); margin-top: 10px;">Dos demos en vivo: un servidor local y uno remoto.</p>'
+          example: '<div class="s00-chips"><span class="s00-chip">protocolo</span><span class="s00-chip">host / cliente / servidor</span><span class="s00-chip">primitives</span><span class="s00-chip">discovery</span><span class="s00-chip">Stdio</span><span class="s00-chip">HTTP remoto</span><span class="s00-chip">ecosistema</span><span class="s00-chip">riesgos</span></div>'
         }
       ]
     });
