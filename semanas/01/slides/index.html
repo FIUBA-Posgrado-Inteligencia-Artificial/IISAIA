@@ -1653,6 +1653,7 @@
           <aside class="notes">
             <p><strong>Correr la animación en dos fases. Mostrar especialmente la máscara de loss y la evolución del modelo en cada checkpoint.</strong></p>
             <p><u>Animación SFT: serialización con tokens especiales, loss masking, evolución del modelo. Paralelo a la del pre-training.</u></p>
+            <p><u>Si preguntan en el paso 2: el header &lt;|im_start|&gt;assistant lo agrega el server al inferir, el modelo nunca tiene que generarlo.</u></p>
             <p><em>"Animación en dos fases. Primera, tres pasos de explicación: cómo se serializa una conversación con tokens especiales nuevos que se agregan al vocabulario en post-training; la máscara de loss, el truco clave, donde el modelo ve toda la conversación pero el gradiente solo cuenta los tokens del asistente, así aprende a ser el asistente y no el usuario; y el grafo del paso de entrenamiento. Segunda fase: el comportamiento del modelo durante el entrenamiento, con el mismo prompt en cada checkpoint. Es el paralelo de la animación del modelo base, pero ahora vemos cómo aprende a ser asistente, no a continuar internet. Vean cómo pasa de autocompletar al estilo de Wikipedia, a un refusal tosco, y eventualmente a refusar con matiz y ofrecer alternativas legítimas."</em></p>
           </aside>
         </section>

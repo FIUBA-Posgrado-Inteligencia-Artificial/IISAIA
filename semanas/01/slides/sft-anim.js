@@ -37,41 +37,59 @@ function initSftAnim(opts) {
         return html;
       }
     },
-    // Stage 2: Token-by-token predictions with loss masking visible
+    // Stage 2: The loss mask, drawn as a shape over the conversation from stage 1,
+    // then the same per-position prediction rows used by the pre-training animation.
     {
       render: function() {
         var html = '<div style="font-size: 0.7em;">';
-        html += '<div style="color: var(--text-muted); margin-bottom: 10px;">Como en pre-training, el modelo predice el siguiente token en <strong style="color: var(--text-primary);">cada posición</strong>. Lo nuevo: la <strong style="color: var(--accent);">máscara de loss</strong> apaga el gradiente sobre los tokens del usuario y los headers &mdash; así el modelo aprende a producir solo las respuestas:</div>';
-        html += '<div style="background: var(--bg-secondary); border-radius: 6px; padding: 8px 12px; font-family: var(--font-mono); font-size: 0.78em; line-height: 1.7;">';
+        html += '<div style="color: var(--text-muted); margin-bottom: 10px;">Como en pre-training, el modelo predice el siguiente token en <strong style="color: var(--text-primary);">cada posición</strong>. Lo nuevo es la <strong style="color: var(--accent);">máscara de loss</strong>: parte de la conversación se lee, pero no se aprende.</div>';
 
-        var noLoss = 'display: flex; align-items: center; gap: 6px; opacity: 0.5; padding: 3px 6px; margin: 2px 0;';
-        var loss = 'display: flex; align-items: center; gap: 6px; background: rgba(100,255,218,0.10); padding: 3px 6px; border-radius: 3px; margin: 2px 0;';
+        // The mask over the same conversation shown in stage 1
+        var maskLabel = 'font-family: var(--font-body); text-align: right; min-width: 165px; flex-shrink: 0; line-height: 1.35;';
+        html += '<div style="display: flex; flex-direction: column; gap: 5px; font-family: var(--font-mono); font-size: 0.82em; margin-bottom: 10px;">';
 
-        function rowHtml(style, ctx, pred, corr, indicator) {
-          var s = '<div style="' + style + '">';
-          s += '<span style="color: var(--text-muted); min-width: 220px;">' + ctx + '</span>';
-          s += '<span style="color: var(--text-muted);">&rarr; predice:</span>';
-          s += '<span style="color: #e74c3c; min-width: 50px;">' + pred + '</span>';
-          s += '<span style="color: var(--text-muted);">correcto:</span>';
-          s += '<span style="color: #27ae60; min-width: 90px;">' + corr + '</span>';
-          s += indicator;
-          s += '</div>';
+        html += '<div style="display: flex; align-items: center; gap: 12px; background: var(--bg-secondary); border-left: 3px solid var(--text-muted); border-radius: 4px; padding: 7px 11px;">';
+        html += '<div style="flex: 1; line-height: 1.65; opacity: 0.5;">';
+        html += '<span style="color: #e8508b;">&lt;|im_start|&gt;</span><span style="color: var(--accent-secondary);">user</span><br>';
+        html += '<span style="color: var(--text-primary);">What is the capital of France?</span><span style="color: #e8508b;">&lt;|im_end|&gt;</span><br>';
+        html += '<span style="color: #e8508b;">&lt;|im_start|&gt;</span><span style="color: var(--accent);">assistant</span>';
+        html += '</div>';
+        html += '<div style="' + maskLabel + ' color: var(--text-muted);"><span style="font-size: 1.15em;">máscara = 0</span><br>lo lee como contexto</div>';
+        html += '</div>';
+
+        html += '<div style="display: flex; align-items: center; gap: 12px; background: rgba(100,255,218,0.10); border-left: 3px solid var(--accent); border-radius: 4px; padding: 7px 11px;">';
+        html += '<div style="flex: 1; line-height: 1.65;">';
+        html += '<span style="color: var(--text-primary);">The capital of France is Paris.</span><span style="color: #e8508b;">&lt;|im_end|&gt;</span>';
+        html += '</div>';
+        html += '<div style="' + maskLabel + ' color: var(--accent);"><span style="font-size: 1.15em; font-weight: bold;">máscara = 1</span><br>esto aprende a producir</div>';
+        html += '</div>';
+
+        html += '</div>';
+
+        // Per-position predictions. One grid for every row, so the columns line up.
+        html += '<div style="display: grid; grid-template-columns: auto auto auto auto auto 1fr; font-family: var(--font-mono); font-size: 0.75em; background: var(--bg-secondary); border-radius: 6px; padding: 6px 8px; row-gap: 2px;">';
+
+        function cellRow(bg, dim, ctx, pred, corr, indicator, indColor, indWeight) {
+          var base = 'padding: 3px 6px; background: ' + bg + '; opacity: ' + dim + ';';
+          var s = '';
+          s += '<span style="' + base + ' color: var(--text-muted); border-radius: 3px 0 0 3px;">' + ctx + '</span>';
+          s += '<span style="' + base + ' color: var(--text-muted);">&rarr; predice:</span>';
+          s += '<span style="' + base + ' color: #e74c3c;">' + pred + '</span>';
+          s += '<span style="' + base + ' color: var(--text-muted);">correcto:</span>';
+          s += '<span style="' + base + ' color: #27ae60;">' + corr + '</span>';
+          s += '<span style="' + base + ' color: ' + indColor + '; font-weight: ' + indWeight + '; text-align: right; font-family: var(--font-body); border-radius: 0 3px 3px 0;">' + indicator + '</span>';
           return s;
         }
 
-        var ctxIndicator = '<span style="color: var(--text-muted); margin-left: auto; font-size: 0.9em;">contexto, sin loss</span>';
-        var lossIndicator = '<span style="color: var(--accent); margin-left: auto; font-size: 0.9em; font-weight: bold;">loss aplica</span>';
-
-        html += rowHtml(noLoss, '[&lt;|im_start|&gt; user]', 'name', 'What', ctxIndicator);
-        html += rowHtml(noLoss, '[&hellip;, What is the capital]', 'in', 'of', ctxIndicator);
-        html += rowHtml(noLoss, '[&hellip;, France ? &lt;|im_end|&gt;]', 'user', '&lt;|im_start|&gt;', ctxIndicator);
-        html += rowHtml(loss,   '[&hellip;, &lt;|im_start|&gt; assistant]', 'I', 'The', lossIndicator);
-        html += rowHtml(loss,   '[&hellip;, The capital of France is]', 'a', 'Paris', lossIndicator);
-        html += rowHtml(loss,   '[&hellip;, is Paris .]', 'It', '&lt;|im_end|&gt;', lossIndicator);
-
+        var off = 'transparent', on = 'rgba(100,255,218,0.10)';
+        var offCol = 'var(--text-muted)', onCol = 'var(--accent)';
+        html += cellRow(off, '0.5', '[&hellip;, France ? &lt;|im_end|&gt;]', 'user', '&lt;|im_start|&gt;', 'máscara 0', offCol, 'normal');
+        html += cellRow(on, '1', '[&hellip;, &lt;|im_start|&gt; assistant]', 'I', 'The', 'máscara 1', onCol, 'bold');
+        html += cellRow(on, '1', '[&hellip;, The capital of France is]', 'a', 'Paris', 'máscara 1', onCol, 'bold');
+        html += cellRow(on, '1', '[&hellip;, is Paris .]', 'It', '&lt;|im_end|&gt;', 'máscara 1', onCol, 'bold');
         html += '</div>';
-        html += '<div style="color: var(--text-muted); margin-top: 8px;">En las filas con <span style="color: var(--accent);">loss</span>, cada paso ajusta los parámetros para que el correcto (verde) suba en probabilidad. En las filas de contexto, el modelo procesa pero no aprende.</div>';
-        html += '<div style="color: var(--text-muted); margin-top: 6px; font-style: italic; font-size: 0.92em;">Nota: el header <code>&lt;|im_start|&gt;assistant</code> lo agrega el server al inferir &mdash; el modelo nunca tiene que generarlo.</div>';
+
+        html += '<div style="color: var(--text-muted); margin-top: 8px;">Solo las filas con <span style="color: var(--accent);">máscara 1</span> mueven los parámetros: así aprende a ser el asistente, no el usuario.</div>';
         html += '</div>';
         return html;
       }
