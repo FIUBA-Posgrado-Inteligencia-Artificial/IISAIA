@@ -19,36 +19,79 @@
       max-height: 100%;
     }
 
-    /* Bloque de texto centrado fuera de cajas. Cada bloque lleva su propio
-       max-width para no depender de <br> entre oraciones de largo distinto.
-       max-width unificado en 1000px, igual que el resto de los decks.
-       El prefijo .reveal es necesario: sin el, `.reveal p` de custom.css
-       gana por especificidad y se come el color y el centrado. */
-    .reveal .s00-statement {
+    /* El prefijo .reveal es necesario en todas las clases propias: sin el,
+       `.reveal p` de custom.css gana por especificidad y se come el color
+       y el centrado. max-width unificado en 1000px, igual que los demas decks. */
+    .reveal .s00-lead {
       max-width: 1000px;
-      margin: 0 auto;
+      margin: 0 auto 1.2rem;
       text-align: center;
-      font-size: 1.6rem;
-      line-height: 1.45;
+      font-size: 1.05rem;
+      color: var(--text-muted);
     }
     .reveal .s00-statement-punch {
       max-width: 1000px;
       margin: 1.4rem auto 0;
       text-align: center;
-      font-size: 1.9rem;
+      font-size: 1.6rem;
       font-weight: 600;
       color: var(--accent);
       line-height: 1.35;
     }
     .reveal .s00-note {
       max-width: 1000px;
-      margin: 1.6rem auto 0;
+      margin: 1.4rem auto 0;
       text-align: center;
       font-size: 1.05rem;
       color: var(--text-muted);
     }
 
-    /* Pasos numerados de la ultima slide — unica lista enumerativa del deck. */
+    /* El panel de detalle de los clickable-steps esta absolutamente
+       posicionado: no empuja el contenido, pero se sale de la caja de la
+       slide si no se le reserva lugar. Sin este padding la slide desborda
+       ~90px al clickear cualquier caja. */
+    .reveal #s00-roadmap {
+      padding-bottom: 150px;
+    }
+
+    /* Las tres entregas, con su fecha de consigna. */
+    .reveal .s00-entregas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .reveal .s00-entrega {
+      background: var(--bg-secondary, #1a1a1a);
+      border-left: 3px solid var(--text-muted);
+      border-radius: 8px;
+      padding: 1.1rem 1.2rem;
+      text-align: left;
+    }
+    .reveal .s00-entrega-final {
+      border-left-color: var(--accent);
+    }
+    .reveal .s00-entrega-tp {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+    }
+    .reveal .s00-entrega-final .s00-entrega-tp {
+      color: var(--accent);
+    }
+    .reveal .s00-entrega-cuando {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin: 0.2rem 0 0.7rem;
+    }
+    .reveal .s00-entrega-que {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
     /* display:block es obligatorio: reveal.js pone las listas en
        inline-block, y los margenes auto no centran un inline-block —
        queda pegado al borde izquierdo con ancho shrink-to-fit. */
@@ -90,86 +133,69 @@
   <div class="reveal">
     <div class="slides">
 
+
       <!-- 1. Portada -->
       <section class="title-slide">
         <h1>Introducción a la ingeniería de software asistida por Inteligencia Artificial</h1>
-        <p class="subtitle">Ocho semanas para pasar de escribir código a dirigir a quien lo escribe</p>
+        <p class="subtitle">Ocho clases: qué vemos, cuándo entregás y cómo se corrige</p>
         <aside class="notes">
           <p><strong>Proyectar mientras se acomodan. Arrancar cuando esté la mayoría.</strong></p>
           <p><u>Apertura del curso. Diez minutos de encuadre y pasamos al tema real.</u></p>
-          <p><em>"Bueno, arrancamos. Diez minutos para que sepas dónde te metiste: qué vamos a hacer estas ocho semanas, cómo se aprueba, y una cosa concreta que te llevás de tarea hoy. Después entramos en tema."</em></p>
+          <p><em>"Arrancamos. Diez minutos para que sepas exactamente qué vamos a ver, en qué orden, cuándo tenés que entregar y con qué criterio se corrige. Después entramos en tema."</em></p>
         </aside>
       </section>
 
-      <!-- 2. La promesa -->
+      <!-- 2. El programa, en orden -->
       <section>
-        <p class="s00-statement">En ocho semanas vas a terminar una aplicación funcionando: una interfaz que alguien puede usar, un servidor que responde y datos que quedan guardados.</p>
-        <p class="s00-statement-punch fragment fade-in">No vas a escribir la mayor parte del código.</p>
+        <h2>El programa, en orden</h2>
+        <p class="s00-lead">Click en cada unidad para ver qué entra.</p>
+        <div id="s00-roadmap"></div>
+        <p class="s00-note">Clase 8 — Demo Day: presentás y defendés tu trabajo práctico final.</p>
         <aside class="notes">
-          <p><strong>Leer la primera parte. Pausa real de 3-4 segundos antes de revelar.</strong></p>
-          <p><u>El gancho. La segunda frase es el golpe: dejarla respirar, no explicarla enseguida.</u></p>
-          <p><em>"Arranquemos por el final. En ocho semanas vas a tener una aplicación andando. No un ejercicio: algo que se abre, que alguien usa, que guarda datos y sigue estando ahí mañana. Y la vas a presentar acá adelante."</em></p>
-          <p><em>"Ahora, la parte rara. La mayor parte de ese código no lo vas a escribir vos."</em></p>
-          <p><u>Suelen aparecer dos reacciones, las dos equivocadas: alivio ("entonces no hay nada que aprender") y desconfianza ("entonces no es un curso serio"). Si alguna aparece en la cara de alguien, nombrala y desarmala: el trabajo no desapareció, se corrió de lugar. Escribir la sintaxis dejó de ser lo difícil; decidir qué se construye, y darse cuenta de que lo que volvió está mal, sigue siendo tuyo.</u></p>
+          <p><strong>Recorrer las seis cajas clickeando. No leerlas todas: abrir la 1, la 4 y la 6, y mencionar el resto al pasar.</strong></p>
+          <p><u>La slide central del bloque. Responde "qué voy a aprender y en qué orden" con los temas reales del programa, no con generalidades.</u></p>
+          <p><em>"Esto es el curso completo. Seis unidades, ocho clases. Vamos de adentro hacia afuera: primero entender la herramienta, después el vocabulario para dirigirla, y después dirigir algo que actúa solo."</em></p>
+          <p><em>"La unidad 1 es la única que no es sobre construir: es sobre cómo funciona el modelo por dentro. Parece teórica y es la más práctica de todas, porque cuando el modelo te falle vas a saber por qué, en vez de pensar que está roto o que sos vos."</em></p>
+          <p><em>"Las unidades 2 y 3 son el vocabulario. Frontend y backend. No es para que escribas el código: es para que puedas pedirlo con precisión y darte cuenta si lo que volvió sirve. Y de acá salen los dos primeros trabajos prácticos."</em></p>
+          <p><em>"La unidad 4 es el salto: la IA deja de escribir y empieza a actuar. Abre archivos, los modifica, ejecuta comandos. Es la única que ocupa dos clases, porque es la mitad del curso en importancia. Y ahí, en la clase 5, sale la consigna del trabajo final."</em></p>
+          <p><em>"La 5 y la 6 son cómo se profesionaliza eso: empaquetar un flujo de trabajo completo, y conectar el agente a sistemas que están fuera de tu máquina."</em></p>
+          <p><em>"Y la clase 8 es tuya: presentás lo que construiste y contás cómo lo dirigiste."</em></p>
         </aside>
       </section>
 
-      <!-- 3. El arco de las ocho clases -->
+      <!-- 3. Las tres entregas -->
       <section>
-        <h2>Cómo llegás hasta ahí</h2>
-        <div class="pipe-grid" id="s00-arco">
-          <div class="pipe-node fragment" data-fragment-index="0">
-            <div class="pipe-icon">●</div>
-            <div class="pipe-label">Entender el modelo</div>
-            <div class="pipe-sub">por qué responde lo que responde</div>
+        <h2>Las tres entregas</h2>
+        <div class="s00-entregas">
+          <div class="s00-entrega">
+            <div class="s00-entrega-tp">TP 1</div>
+            <div class="s00-entrega-cuando">sale en la clase 2</div>
+            <div class="s00-entrega-que">Un artefacto frontend de una sola página.</div>
           </div>
-          <span class="pipe-arrow fragment" data-fragment-index="1">→</span>
-          <div class="pipe-node fragment" data-fragment-index="2">
-            <div class="pipe-icon">●</div>
-            <div class="pipe-label">Nombrar lo que construís</div>
-            <div class="pipe-sub">el vocabulario para pedir con precisión</div>
+          <div class="s00-entrega">
+            <div class="s00-entrega-tp">TP 2</div>
+            <div class="s00-entrega-cuando">sale en la clase 3</div>
+            <div class="s00-entrega-que">Backend: el contrato de una API y sus datos.</div>
           </div>
-          <span class="pipe-arrow fragment" data-fragment-index="3">→</span>
-          <div class="pipe-node fragment" data-fragment-index="4">
-            <div class="pipe-icon">●</div>
-            <div class="pipe-label">Dirigir al agente</div>
-            <div class="pipe-sub">cuando la IA deja de escribir y actúa</div>
+          <div class="s00-entrega s00-entrega-final">
+            <div class="s00-entrega-tp">TP Final</div>
+            <div class="s00-entrega-cuando">consigna en la 5 · defensa en la 8</div>
+            <div class="s00-entrega-que">La aplicación completa: interfaz, servidor y datos.</div>
           </div>
         </div>
-        <p class="s00-note fragment fade-in">Y la última clase presentás lo tuyo.</p>
-        <aside class="notes">
-          <p><strong>Revelar las tres etapas de a una, con las flechas. Cerrar con la línea final.</strong></p>
-          <p><u>El arco completo en tres movimientos. Cada uno habilita al siguiente.</u></p>
-          <p><em>"El recorrido tiene tres movimientos. El primero es entender la herramienta: cómo funciona por dentro esto que vas a usar, por qué a veces inventa cosas con total seguridad, dónde están sus límites. Sin eso, cuando falle vas a pensar que está roto o que sos vos."</em></p>
-          <p><em>"El segundo es aprender a nombrar. Suena menor y es lo que más cambia las cosas: si te devuelve algo que no pediste, necesitás las palabras para corregirlo. Sin vocabulario, lo único que podés hacer es aceptar todo o rechazar todo."</em></p>
-          <p><em>"Y el tercero es dirigir a algo que actúa solo: que abre archivos, los modifica, ejecuta cosas. Ahí el problema cambia de forma, y le dedicamos la mitad del curso."</em></p>
-          <p><em>"La última clase es tuya: mostrás lo que construiste y contás cómo lo dirigiste."</em></p>
-        </aside>
-      </section>
-
-      <!-- 4. Cómo se aprueba -->
-      <section>
-        <h2>Cómo se aprueba</h2>
-        <div style="display: flex; align-items: center; gap: 12px; justify-content: center;">
-          <div class="flow-step">TP 1</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step">TP 2</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-step active">TP Final</div>
-        </div>
-        <p class="s00-note fragment fade-in">Las tres entregas son individuales. El trabajo práctico final se defiende en la última clase.</p>
+        <p class="s00-note">Las tres son individuales.</p>
         <p class="s00-statement-punch fragment fade-in">Que funcione no alcanza: se evalúa que puedas explicar cómo lo dirigiste.</p>
         <aside class="notes">
-          <p><strong>Mostrar el flujo. Revelar "individuales". Pausa. Revelar el criterio.</strong></p>
-          <p><u>Forma de la evaluación y criterio, en una sola slide. La parte que más sorprende es la última línea.</u></p>
-          <p><em>"Se aprueba con tres trabajos prácticos. Los dos primeros son acotados y sirven para practicar lo que vimos en clase. El tercero es el grande: la aplicación completa de la que hablábamos recién, que presentás y defendés en la última clase."</em></p>
-          <p><em>"Los tres son individuales. Lo aclaro ahora porque suele ser la primera pregunta."</em></p>
-          <p><em>"Y acá viene lo que sorprende. Que funcione no alcanza. Un producto que anda pero cuyos caminos no podés reconstruir no dice nada: lo podría haber generado cualquiera pidiendo que le hagan una app de tareas. Lo que se mira es cómo especificaste, qué decidiste vos, y cómo te diste cuenta cuando el modelo se fue para cualquier lado."</em></p>
-          <p><u>Si preguntan por qué individual: el criterio es si vos podés sostener las decisiones del proyecto, y en grupo eso se diluye. Si preguntan cómo se entrega: un repositorio público de GitHub, el README de cada carpeta funciona como informe, y desde la clase 6 también se lee el historial de commits — por eso el repositorio se arma hoy y no la semana de la entrega.</u></p>
+          <p><strong>Dejar leer las tres cajas. Pausa. Revelar el criterio.</strong></p>
+          <p><u>Cuándo se pide cada TP y con qué criterio se corrige. Concreto: fechas de consigna, no promesas.</u></p>
+          <p><em>"Tres entregas. El TP 1 sale en la clase 2, cuando ya tengas el vocabulario de frontend: un artefacto de una sola página. El TP 2 en la clase 3, con backend: el contrato de una API y su modelo de datos."</em></p>
+          <p><em>"El trabajo práctico final se consigna en la clase 5, y ahí mismo exponés tu idea para que te devuelva si el alcance cierra. Se defiende en la clase 8. Es la aplicación completa: interfaz, servidor y datos que persisten."</em></p>
+          <p><em>"Las tres son individuales, incluida la última. Y acá va lo que suele sorprender: que funcione no alcanza. Un producto que anda pero cuyos caminos no podés reconstruir no dice nada — lo podría haber generado cualquiera. Lo que se mira es cómo especificaste, qué decidiste vos, y cómo te diste cuenta cuando el modelo se fue para otro lado."</em></p>
+          <p><u>Material de reserva. Por qué individual: el criterio es si vos podés sostener las decisiones, y en grupo eso se diluye. Cómo se entrega: repositorio público de GitHub, el README de cada carpeta es el informe, y desde la clase 6 también se lee el historial de commits.</u></p>
         </aside>
       </section>
 
-      <!-- 5. Esta semana -->
+      <!-- 4. Esta semana -->
       <section>
         <h2>Esta semana</h2>
         <ol class="s00-steps">
@@ -177,13 +203,13 @@
           <li class="fragment fade-in">Creá el repositorio, público, con un <code>README.md</code> que por ahora sólo diga tu nombre.</li>
           <li class="fragment fade-in">Mandame el link a <strong style="color: var(--accent);">enzo.tng@gmail.com</strong></li>
         </ol>
-        <p class="s00-note fragment fade-in">Un solo repositorio para las ocho semanas, con una carpeta por entrega. La estructura de referencia está en el repo del curso, en <code>semanas/00/source_material/apellido-iisaia/</code></p>
+        <p class="s00-note fragment fade-in">Un solo repositorio para las ocho clases, con una carpeta por entrega. La estructura de referencia está en el repo del curso, en <code>semanas/00/source_material/apellido-iisaia/</code></p>
         <aside class="notes">
           <p><strong>Revelar los tres pasos de a uno. Revelar la nota. Insistir en que es de hoy.</strong></p>
-          <p><u>La única tarea concreta del bloque. Diez minutos de trabajo. Es la última slide: se cierra acá y se entra al tema del día.</u></p>
-          <p><em>"Tres pasos, y no te llevan más de diez minutos. Primero, cuenta de GitHub si no tenés. Segundo, creás el repositorio, público, con un README que por ahora diga tu nombre y nada más. Y tercero, me mandás el link por mail; la dirección está en la slide."</em></p>
-          <p><em>"Es un solo repositorio para todo el curso, con una carpeta por entrega. No armes tres repos sueltos: el historial de commits es la evidencia del proceso, y sólo cuenta una historia si es continuo. Aparte, así me mandás un link una sola vez."</em></p>
-          <p><em>"La estructura exacta está en el repositorio del curso, en esa ruta. Entrás, la mirás, la copiás. Y si nunca usaste git, tranquilo: lo vemos en serio más adelante, hoy alcanza con crear el repo desde la página web."</em></p>
+          <p><u>La única tarea concreta del bloque. Diez minutos de trabajo. Última slide: se cierra acá y se entra al tema del día.</u></p>
+          <p><em>"Tres pasos, diez minutos. Cuenta de GitHub si no tenés. Creás el repositorio, público, con un README que por ahora diga tu nombre y nada más. Y me mandás el link por mail, que está ahí en la slide."</em></p>
+          <p><em>"Es un solo repositorio para todo el curso, con una carpeta por entrega. No armes tres repos sueltos: el historial de commits es la evidencia del proceso, y sólo cuenta una historia si es continuo. Aparte, así me pasás un link una sola vez y listo."</em></p>
+          <p><em>"La estructura exacta que espero está en el repositorio del curso, en esa ruta. Entrás, la mirás, la copiás — ya tiene el README de cada entrega con las secciones que van. Y si nunca usaste git, tranquilo: lo vemos en serio en la clase 6, hoy alcanza con crear el repo desde la página web."</em></p>
           <p><em>"Listo lo administrativo. Ahora sí, el tema del día: qué es exactamente esta cosa con la que vas a trabajar, y por qué a veces te miente con una seguridad absoluta."</em></p>
         </aside>
       </section>
@@ -194,6 +220,7 @@
   <script src="../../../node_modules/reveal.js/dist/reveal.js"></script>
   <script src="../../../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
   <script src="../../../node_modules/reveal.js/plugin/notes/notes.js"></script>
+  <script src="clickable-steps.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -203,6 +230,51 @@
       height: 800,
       margin: 0.02,
       plugins: [RevealHighlight, RevealNotes]
+    });
+
+    // Los temas de cada caja salen textuales del programa analitico de
+    // programa.md. Si el programa cambia, esto cambia con el.
+    initClickableSteps({
+      containerId: 's00-roadmap',
+      exampleLabel: 'Qué entra',
+      steps: [
+        {
+          title: '1 — Cómo funciona un LLM',
+          summary: 'Clase 1. Por qué el modelo responde lo que responde.',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div style="color: var(--text-primary); line-height: 1.8;">Tokens y tokenización · naturaleza estocástica de la predicción · pre-training: escala y curación de datos · modelos base e in-context learning · post-training y alineación con RLHF · alucinaciones: por qué ocurren y cómo se mitigan · límites del razonamiento</div><p style="color: var(--text-muted); margin-top: 10px;">Es la única unidad que no es sobre construir. Es la que hace que el resto se entienda.</p>'
+        },
+        {
+          title: '2 — Frontend',
+          summary: 'Clase 2. El vocabulario para dirigir lo que se ve.',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div style="color: var(--text-primary); line-height: 1.8;">HTML semántico: la estructura · CSS: modelo de caja, layout, tipografía, color y variables · estado, DOM y eventos · el paradigma single-file · cuatro patrones de prompt para construir interfaz</div><p style="color: var(--accent); margin-top: 10px;"><strong>Acá sale el TP 1.</strong></p>'
+        },
+        {
+          title: '3 — Backend, datos y contratos',
+          summary: 'Clase 3. El vocabulario para dirigir lo que no se ve.',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div style="color: var(--text-primary); line-height: 1.8;">Cliente-servidor y protocolo HTTP · methods y status codes · REST: recurso, jerarquía, idempotencia · rutas, controladores y el endpoint como contrato · SQL frente a NoSQL · leer fallas: 4xx, 5xx, logs · OpenAPI como contrato escrito</div><p style="color: var(--accent); margin-top: 10px;"><strong>Acá sale el TP 2.</strong></p>'
+        },
+        {
+          title: '4 — Desarrollo agéntico',
+          summary: 'Clases 4 y 5. La IA deja de escribir y empieza a actuar.',
+          borderColor: 'var(--accent)',
+          example: '<div style="color: var(--text-primary); line-height: 1.8;">El loop pensar → actuar → observar · las tools como interfaz de acción · la ventana de contexto como recurso finito · modos de falla del agente · configuración del runtime: memoria persistente, reglas, permisos, skills, sub-agentes y modo plan</div><p style="color: var(--accent); margin-top: 10px;"><strong>Ocupa dos clases. En la 5 sale la consigna del TP Final.</strong></p>'
+        },
+        {
+          title: '5 — Plugins y spec-driven development',
+          summary: 'Clase 6. El flujo de trabajo completo, empaquetado.',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div style="color: var(--text-primary); line-height: 1.8;">Plugins: qué son, marketplaces e instalación · del spec al plan y del plan a la implementación · desarrollo delegado a sub-agentes · desarrollo guiado por pruebas · revisión de código asistida · verificación con evidencia · git y GitHub Flow: commit, branch y pull request</div><p style="color: var(--text-muted); margin-top: 10px;">Desde acá, el repositorio también se lee como evidencia del proceso.</p>'
+        },
+        {
+          title: '6 — Model Context Protocol',
+          summary: 'Clase 7. Conectar el agente a lo que está afuera.',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div style="color: var(--text-primary); line-height: 1.8;">Por qué un protocolo y no una API · arquitectura host, cliente y servidor · las tres primitives · discovery dinámico · transports local y remoto · el ecosistema y qué vale instalar · cuándo no conviene, y qué riesgos asumís</div><p style="color: var(--text-muted); margin-top: 10px;">Dos demos en vivo: un servidor local y uno remoto.</p>'
+        }
+      ]
     });
   </script>
 </body>

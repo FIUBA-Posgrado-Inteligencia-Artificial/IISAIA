@@ -4,9 +4,9 @@
 
 **Nota de alcance:** bloque de apertura de ~10 min dentro del primer encuentro, no una clase autónoma. Sin demos, sin animaciones, sin slide de preguntas y sin slide de cierre: termina en la tarea concreta y de ahí se entra directo a Funcionamiento de LLMs. No tiene fila propia en `programa.md` — es el segmento "Introducción al curso" que la fila 1 ya contempla.
 
-**Densidad:** cinco slides. La versión anterior tenía once y era demasiado andamiaje para el contenido real. Todo lo que se recortó —las dos reacciones equivocadas, el árbol de carpetas, el "por qué uno y no tres", el "dónde queda registrado" y el pase final— sobrevive en speaker notes, disponible si alguien pregunta.
+**Densidad:** cuatro slides. Las versiones anteriores (once y después cinco) apoyaban el bloque en promesas y arcos abstractos: sonaban bien pero no informaban, y el alumno salía sin saber qué iba a ver ni cuándo entregaba. El bloque ahora se para sobre datos verificables del programa: los temas de cada unidad salen textuales del programa analítico de `programa.md`, y las entregas dicen en qué clase se piden. Lo que no era información sobrevive en speaker notes.
 
-## Section 1: Qué es este curso y adónde llegás
+## Section 1: El programa, en orden
 **Source material:** `source_material/01-que-es-este-curso.md`
 **Through-line:** Este curso no enseña a programar, enseña a dirigir a quien programa — y esa afirmación se sostiene con una promesa concreta y un arco de tres movimientos que la vuelve creíble en vez de sonar a eslogan.
 **Hook:** "En ocho semanas vas a terminar una aplicación funcionando. No vas a escribir la mayor parte del código." Se dice y se deja respirar, sin resolver de inmediato. Las dos reacciones equivocadas —alivio y desconfianza— quedan en la nota del orador: se nombran sólo si aparecen en la cara de alguien.
