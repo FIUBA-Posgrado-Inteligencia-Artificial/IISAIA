@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 00 — Presentación del curso</title>
+  <link rel="stylesheet" href="../../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../../../node_modules/reveal.js/dist/theme/black.css">
+  <link rel="stylesheet" href="../../../node_modules/reveal.js/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../../../_config/theme/custom.css">
+  <link rel="stylesheet" href="../../../_config/theme/components.css">
+  <style>
+    /* Safety net for dense slides: when a slide's content exceeds the
+       canvas height, show a vertical scrollbar instead of clipping
+       the bottom. Only kicks in when overflow is real. */
+    .reveal .slides > section,
+    .reveal .slides > section > section {
+      overflow-y: auto;
+      max-height: 100%;
+    }
+
+    /* El prefijo .reveal es necesario en todas las clases propias: sin el,
+       `.reveal p` de custom.css gana por especificidad y se come el color
+       y el centrado. max-width unificado en 1000px, igual que los demas decks. */
+    .reveal .s00-note {
+      max-width: 1000px;
+      margin: 1.4rem auto 0;
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    /* El panel de detalle de los clickable-steps esta absolutamente
+       posicionado: no empuja el contenido, pero se sale de la caja de la
+       slide si no se le reserva lugar. Sin este padding la slide desborda
+       ~90px al clickear cualquier caja. */
+    .reveal #s00-roadmap {
+      padding-bottom: 105px;
+    }
+
+    /* Etiquetas del panel de detalle. Usan rem y no em a proposito: el
+       componente aplica font-size 0.65em al contenedor, y rem escapa a
+       esa reduccion. */
+    .reveal .s00-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .reveal .s00-chip {
+      background: rgba(100, 255, 218, 0.07);
+      border: 1px solid rgba(100, 255, 218, 0.32);
+      border-radius: 999px;
+      padding: 5px 15px;
+      font-size: 0.95rem;
+      line-height: 1.25;
+      color: var(--text-primary);
+    }
+    .reveal .s00-tp {
+      margin: 14px 0 0;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+    .reveal .s00-tp strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Las tres entregas, con su fecha de consigna. */
+    .reveal .s00-entregas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .reveal .s00-entrega {
+      background: var(--bg-secondary, #1a1a1a);
+      border-left: 3px solid var(--text-muted);
+      border-radius: 8px;
+      padding: 1.1rem 1.2rem;
+      text-align: left;
+    }
+    .reveal .s00-entrega-final {
+      border-left-color: var(--accent);
+    }
+    .reveal .s00-entrega-tp {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+    }
+    .reveal .s00-entrega-final .s00-entrega-tp {
+      color: var(--accent);
+    }
+    .reveal .s00-entrega-cuando {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin: 0.2rem 0 0.7rem;
+    }
+    .reveal .s00-entrega-que {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* display:block es obligatorio: reveal.js pone las listas en
+       inline-block, y los margenes auto no centran un inline-block —
+       queda pegado al borde izquierdo con ancho shrink-to-fit. */
+    .reveal .s00-steps {
+      display: block;
+      list-style: none;
+      counter-reset: s00step;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0;
+      text-align: left;
+    }
+    .reveal .s00-steps li {
+      counter-increment: s00step;
+      position: relative;
+      padding-left: 3.2rem;
+      margin-bottom: 1.1rem;
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+    .reveal .s00-steps li::before {
+      content: counter(s00step);
+      position: absolute;
+      left: 0;
+      top: -0.1rem;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- 1. Portada -->
+      <section class="title-slide">
+        <h1>Introducción a la ingeniería de software asistida por Inteligencia Artificial</h1>
+        <aside class="notes">
+          <p><strong>Proyectar mientras se acomodan. Arrancar cuando esté la mayoría.</strong></p>
+          <p><u>Apertura del curso. Diez minutos de encuadre y pasamos al tema real.</u></p>
+          <p><em>"Arrancamos. Diez minutos para que sepas exactamente qué vamos a ver, en qué orden, cuándo tenés que entregar y con qué criterio se corrige. Después entramos en tema."</em></p>
+        </aside>
+      </section>
+
+      <!-- 2. El programa, en orden -->
+      <section>
+        <h2>El programa, en orden</h2>
+        <div id="s00-roadmap"></div>
+        <p class="s00-note">Clase 8 — Demo Day: presentás y defendés tu trabajo práctico final.</p>
+        <aside class="notes">
+          <p><strong>Recorrer las seis cajas clickeando. No leerlas todas: abrir la 1, la 4 y la 6, y mencionar el resto al pasar.</strong></p>
+          <p><u>La slide central del bloque. Responde "qué voy a aprender y en qué orden" con los temas reales del programa, no con generalidades.</u></p>
+          <p><em>"Esto es el curso completo. Seis unidades, ocho clases. Vamos de adentro hacia afuera: primero entender la herramienta, después el vocabulario para dirigirla, y después dirigir algo que actúa solo."</em></p>
+          <p><em>"La unidad 1 es la única que no es sobre construir: es sobre cómo funciona el modelo por dentro. Parece teórica y es la más práctica de todas, porque cuando el modelo te falle vas a saber por qué, en vez de pensar que está roto o que sos vos."</em></p>
+          <p><em>"Las unidades 2 y 3 son el vocabulario. Frontend y backend. No es para que escribas el código: es para que puedas pedirlo con precisión y darte cuenta si lo que volvió sirve. Y de acá salen los dos primeros trabajos prácticos."</em></p>
+          <p><em>"La unidad 4 es el salto: la IA deja de escribir y empieza a actuar. Abre archivos, los modifica, ejecuta comandos. Es la única que ocupa dos clases, porque es la mitad del curso en importancia. Y ahí, en la clase 5, sale la consigna del trabajo final."</em></p>
+          <p><em>"La 5 y la 6 son cómo se profesionaliza eso: empaquetar un flujo de trabajo completo, y conectar el agente a sistemas que están fuera de tu máquina."</em></p>
+          <p><em>"Y la clase 8 es tuya: presentás lo que construiste y contás cómo lo dirigiste."</em></p>
+        </aside>
+      </section>
+
+      <!-- 3. Las tres entregas -->
+      <section>
+        <h2>Las tres entregas</h2>
+        <div class="s00-entregas">
+          <div class="s00-entrega">
+            <div class="s00-entrega-tp">TP 1</div>
+            <div class="s00-entrega-cuando">sale en la clase 2</div>
+            <div class="s00-entrega-que">Un artefacto frontend de una sola página.</div>
+          </div>
+          <div class="s00-entrega">
+            <div class="s00-entrega-tp">TP 2</div>
+            <div class="s00-entrega-cuando">sale en la clase 3</div>
+            <div class="s00-entrega-que">Backend: el contrato de una API y sus datos.</div>
+          </div>
+          <div class="s00-entrega s00-entrega-final">
+            <div class="s00-entrega-tp">TP Final</div>
+            <div class="s00-entrega-cuando">consigna en la 5 · defensa en la 8</div>
+            <div class="s00-entrega-que">La aplicación completa: interfaz, servidor y datos.</div>
+          </div>
+        </div>
+        <p class="s00-note">Las tres son individuales. Los criterios de cada entrega se detallan junto con su consigna.</p>
+        <p class="s00-note fragment fade-in">Un solo repositorio para las ocho clases, con una carpeta por entrega. La estructura de referencia está en el repo del curso, en <code>semanas/00/source_material/apellido-iisaia/</code></p>
+        <aside class="notes">
+          <p><strong>Dejar leer las tres cajas antes de hablar.</strong></p>
+          <p><u>Cuándo se pide cada TP. Concreto: clases de consigna, sin adelantar criterios de corrección.</u></p>
+          <p><em>"Tres entregas. El TP 1 sale en la clase 2, cuando ya tengas el vocabulario de frontend: un artefacto de una sola página. El TP 2 en la clase 3, con backend: el contrato de una API y su modelo de datos."</em></p>
+          <p><em>"El trabajo práctico final se consigna en la clase 5, y ahí mismo exponés tu idea para que te devuelva si el alcance cierra. Se defiende en la clase 8. Es la aplicación completa: interfaz, servidor y datos que persisten."</em></p>
+          <p><em>"Las tres son individuales, incluida la última. Y no te preocupes ahora por con qué criterio se corrige cada una: eso lo vas a tener por escrito junto con cada consigna, cuando ya tengas las herramientas para entenderlo."</em></p>
+          <p><em>"Las tres viven en un solo repositorio, que vas a ir completando durante las ocho clases, con una carpeta por entrega. No armes tres repos sueltos: el historial de commits es la evidencia del proceso, y sólo cuenta una historia si es continuo. Aparte, así me pasás un link una sola vez."</em></p>
+          <p><em>"La estructura exacta está en el repositorio del curso, en esa ruta. Entrás, la mirás, la copiás — ya tiene el README de cada entrega con las secciones que van adentro."</em></p>
+          <p><u>Material de reserva. Por qué individual: el criterio es si vos podés sostener las decisiones, y en grupo eso se diluye. El README de cada carpeta funciona como informe, y desde la clase 6 también se lee el historial de commits.</u></p>
+        </aside>
+      </section>
+
+      <!-- 4. Esta semana -->
+      <section>
+        <h2>Esta semana</h2>
+        <ol class="s00-steps">
+          <li class="fragment fade-in">Creá una cuenta de GitHub, si no tenés.</li>
+          <li class="fragment fade-in">Creá el repositorio, público, con un <code>README.md</code> que por ahora sólo diga tu nombre.</li>
+          <li class="fragment fade-in">Mandame el link a <strong style="color: var(--accent);">enzo.tng@gmail.com</strong></li>
+        </ol>
+        <aside class="notes">
+          <p><strong>Revelar los tres pasos de a uno. Revelar la nota. Insistir en que es de hoy.</strong></p>
+          <p><u>La única tarea concreta del bloque. Diez minutos de trabajo. Última slide: se cierra acá y se entra al tema del día.</u></p>
+          <p><em>"Tres pasos, diez minutos. Cuenta de GitHub si no tenés. Creás el repositorio, público, con un README que por ahora diga tu nombre y nada más. Y me mandás el link por mail, que está ahí en la slide."</em></p>
+          <p><em>"Y si nunca usaste git, tranquilo: lo vemos en serio más adelante. Hoy alcanza con crear el repositorio desde la página web, que son dos clicks y no hay que instalar nada."</em></p>
+          <p><em>"Listo lo administrativo. Ahora sí, el tema del día: qué es exactamente esta cosa con la que vas a trabajar, y por qué a veces te miente con una seguridad absoluta."</em></p>
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="../../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="../../../node_modules/reveal.js/plugin/notes/notes.js"></script>
+  <script src="clickable-steps.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'fade',
+      width: 1280,
+      height: 800,
+      margin: 0.02,
+      plugins: [RevealHighlight, RevealNotes]
+    });
+
+    // Los temas de cada caja salen textuales del programa analitico de
+    // programa.md. Si el programa cambia, esto cambia con el.
+    initClickableSteps({
+      containerId: 's00-roadmap',
+      exampleLabel: 'Qué entra',
+      hintText: 'Click en una caja para ver qué entra',
+      steps: [
+        {
+          title: 'El modelo',
+          summary: '',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div class="s00-chips"><span class="s00-chip">tokens</span><span class="s00-chip">tokenización</span><span class="s00-chip">predicción estocástica</span><span class="s00-chip">pre-training</span><span class="s00-chip">modelos base</span><span class="s00-chip">post-training</span><span class="s00-chip">RLHF</span><span class="s00-chip">alucinaciones</span><span class="s00-chip">límites del razonamiento</span></div>'
+        },
+        {
+          title: 'Frontend',
+          summary: 'TP 1',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div class="s00-chips"><span class="s00-chip">HTML semántico</span><span class="s00-chip">CSS</span><span class="s00-chip">modelo de caja</span><span class="s00-chip">layout</span><span class="s00-chip">estado</span><span class="s00-chip">DOM</span><span class="s00-chip">eventos</span><span class="s00-chip">single-file</span><span class="s00-chip">patrones de prompt</span></div><p class="s00-tp"><strong>TP 1</strong> · un artefacto de una sola página.</p>'
+        },
+        {
+          title: 'Backend',
+          summary: 'TP 2',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div class="s00-chips"><span class="s00-chip">cliente-servidor</span><span class="s00-chip">HTTP</span><span class="s00-chip">methods</span><span class="s00-chip">status codes</span><span class="s00-chip">REST</span><span class="s00-chip">endpoints</span><span class="s00-chip">SQL / NoSQL</span><span class="s00-chip">logs y errores</span><span class="s00-chip">OpenAPI</span></div><p class="s00-tp"><strong>TP 2</strong> · el contrato de una API y sus datos.</p>'
+        },
+        {
+          title: 'Agentes',
+          summary: 'TP Final',
+          borderColor: 'var(--accent)',
+          example: '<div class="s00-chips"><span class="s00-chip">el loop</span><span class="s00-chip">tools</span><span class="s00-chip">ventana de contexto</span><span class="s00-chip">modos de falla</span><span class="s00-chip">CLAUDE.md</span><span class="s00-chip">rules</span><span class="s00-chip">permisos</span><span class="s00-chip">skills</span><span class="s00-chip">sub-agentes</span><span class="s00-chip">plan mode</span></div><p class="s00-tp"><strong>TP Final</strong> · la aplicación completa.</p>'
+        },
+        {
+          title: 'Plugins',
+          summary: '',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div class="s00-chips"><span class="s00-chip">plugins</span><span class="s00-chip">marketplaces</span><span class="s00-chip">spec</span><span class="s00-chip">plan</span><span class="s00-chip">TDD</span><span class="s00-chip">code review</span><span class="s00-chip">verificación</span><span class="s00-chip">git</span><span class="s00-chip">branch</span><span class="s00-chip">pull request</span></div>'
+        },
+        {
+          title: 'MCP',
+          summary: '',
+          borderColor: 'var(--accent-secondary)',
+          example: '<div class="s00-chips"><span class="s00-chip">protocolo</span><span class="s00-chip">host / cliente / servidor</span><span class="s00-chip">primitives</span><span class="s00-chip">discovery</span><span class="s00-chip">Stdio</span><span class="s00-chip">HTTP remoto</span><span class="s00-chip">ecosistema</span><span class="s00-chip">riesgos</span></div>'
+        }
+      ]
+    });
+  </script>
+</body>
+</html>
