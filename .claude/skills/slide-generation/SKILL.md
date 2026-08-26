@@ -19,9 +19,9 @@ Read these files at the start of every invocation:
 - `semanas/NN/source_material/index.md` and the `.md` files it references
 - `programa.md` — find the row for week NN (alcance + temas)
 - `_config/slide-conventions.md` — formatting rules
-- `tools/skills/slide-generation/voice-and-didactics.md` — voice + didactic principles
-- `tools/skills/slide-generation/spine-template.md` — schema for spine.md
-- `tools/skills/slide-generation/animation-pattern.md` — animation contract + reuse policy
+- `.claude/skills/slide-generation/voice-and-didactics.md` — voice + didactic principles
+- `.claude/skills/slide-generation/spine-template.md` — schema for spine.md
+- `.claude/skills/slide-generation/animation-pattern.md` — animation contract + reuse policy
 - `shared/patterns/README.md` — pattern catalogue
 
 ## Phase 1: Spine (wraps superpowers:brainstorming)

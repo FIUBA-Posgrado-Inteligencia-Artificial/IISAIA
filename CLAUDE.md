@@ -24,8 +24,9 @@ Presentaciones HTML (reveal.js) para un curso de 8 semanas.
 | `docs/superpowers/specs/` | Design specs producidos por brainstorming |
 | `docs/superpowers/plans/` | Implementation plans producidos por writing-plans |
 | `tools/` | Scripts utilitarios (yt-transcript.py, runpod-llama.py, etc.) |
-| `tools/skills/` | Skill definitions para Claude Code (copiar a ~/.claude/skills/) |
-| `tools/skills/slide-generation/` | Skill que envuelve el pipeline de superpowers para generar slides |
+| `tools/skills/` | Skills de proposito general, para instalar en `~/.claude/skills/` |
+| `.claude/commands/` | Slash commands del proyecto (`/build-class`) |
+| `.claude/skills/slide-generation/` | Skill de proyecto: envuelve el pipeline de superpowers para generar slides |
 
 ## Routing Table
 
@@ -35,10 +36,10 @@ Presentaciones HTML (reveal.js) para un curso de 8 semanas.
 | Edit existing slides for week N | `semanas/NN/slides/index.html` + `_config/theme/components.css` + `shared/patterns/` |
 | Pick a slide pattern | `shared/patterns/README.md` |
 | Slide formatting rules | `_config/slide-conventions.md` |
-| Slide voice + didactic principles | `tools/skills/slide-generation/voice-and-didactics.md` |
-| Speaker notes structure (3-format) | `tools/skills/slide-generation/voice-and-didactics.md` |
-| Animation contract + reuse policy | `tools/skills/slide-generation/animation-pattern.md` |
-| Spine schema (for Phase 1) | `tools/skills/slide-generation/spine-template.md` |
+| Slide voice + didactic principles | `.claude/skills/slide-generation/voice-and-didactics.md` |
+| Speaker notes structure (3-format) | `.claude/skills/slide-generation/voice-and-didactics.md` |
+| Animation contract + reuse policy | `.claude/skills/slide-generation/animation-pattern.md` |
+| Spine schema (for Phase 1) | `.claude/skills/slide-generation/spine-template.md` |
 | Change theme or styling | `_config/theme/` |
 | Set up a new week's directory | `programa.md` + `shared/templates/week-template.html` |
 | Understand weekly topics | `programa.md` (schedule table at bottom) |
@@ -53,11 +54,12 @@ Presentaciones HTML (reveal.js) para un curso de 8 semanas.
 After cloning:
 
 ```bash
-# Install Claude Code skills
-cp -r tools/skills/* ~/.claude/skills/
-
 # Python tools (yt-transcript)
 uv sync
+
+# Skills de proposito general (opcional; slide-generation NO va aca,
+# vive en .claude/skills/ y Claude Code la toma sola al abrir el repo)
+cp -r tools/skills/* ~/.claude/skills/
 ```
 
 ## Run
