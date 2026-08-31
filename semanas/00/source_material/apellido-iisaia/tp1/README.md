@@ -1,47 +1,39 @@
 # TP 1 — Captcha de máquina de Galton
 
-Un formulario de reserva de turno cuya verificación de seguridad exige ingresar un código de 3 letras soltando bolas en una máquina de Galton. Funciona, y está diseñado para que la distribución binomial trabaje en contra del usuario.
+Un formulario de reserva de turno donde la verificación te hace ingresar tres letras soltando bolas en una máquina de Galton. Funciona bien y usarlo es horrible, que era la idea.
 
 ## Cómo se ejecuta
 
-Se abre `index.html` con doble click. No hay nada que instalar ni que compilar: un solo archivo, sin dependencias externas.
+Doble click en `index.html`. Un solo archivo, sin dependencias.
 
 ## Qué me propuse construir
 
-Una bad UI que fuera hostil por matemática y no por capricho. La idea era que la interfaz no escondiera nada ni mintiera — las probabilidades están escritas debajo de cada canaleta, a la vista — y que aun así fuera dolorosa de usar, porque la distribución binomial concentra las bolas en el centro y las letras de los bordes salen 1 vez cada 16.
-
-Antes de escribir el primer prompt dejé decidido: cuántas filas de pegs, cómo se mapea cada canaleta a una letra, qué palanca tiene el usuario, cómo se borra un error, y cómo se anima la caída. El artefacto se construyó en tres prompts, en una sola conversación de Canvas.
+Una bad UI hostil por matemática y no por capricho. No esconde nada —las probabilidades están escritas debajo de cada canaleta— y aun así duele, porque la binomial junta las bolas en el centro y las letras de los bordes salen una vez cada dieciséis. Salió en tres prompts, en una sola conversación de Canvas.
 
 ## Decisiones que tomé yo
 
-**Elementos del DOM en lugar de `<canvas>`.** Es la decisión más importante y la que más explícita hay que hacer. Pedido a secas, un tablero de Galton sale dibujado en `<canvas>`: anda perfecto y el estado deja de tener reflejo visible en el DOM. Los pegs, la bola y las canaletas son divs posicionados con CSS, así que se puede abrir el inspector y ver el estado y su representación al mismo tiempo.
+**DOM en vez de `<canvas>`.** La más importante. Pedido a secas, un tablero de Galton sale dibujado en canvas: anda igual, pero el estado deja de verse en el DOM. Acá los pegs, la bola y las canaletas son divs, y se puede abrir el inspector a mirar el estado y su reflejo al mismo tiempo.
 
-**Cuatro filas y cinco canaletas.** R filas de pegs dan R+1 canaletas y 2^R caminos posibles. Con 4 filas quedan 16 caminos y la distribución es 1/16, 4/16, 6/16, 4/16, 1/16. Con 6 filas el borde cae a 1/64, que hace el artefacto más cruel pero también más lento de demostrar. Elegí que se pueda completar en clase.
+**Cuatro filas, cinco canaletas.** Dan 16 caminos y una distribución de 1/16, 4/16, 6/16, 4/16, 1/16. Con seis filas el borde cae a 1/64: más cruel, pero demasiado lento para mostrarlo en clase.
 
-**Borrar con un botón, sin soltar una bola.** La alternativa más hostil era que borrar exigiera embocar una canaleta de borrado. La descarté: convierte un error en una espiral de la que no se sale, y ahí deja de ser una interfaz operable para pasar a ser un castigo.
+**Borrar con un botón.** La versión más hostil era obligarte a embocar una canaleta de borrado. Convierte un error en una espiral de la que no se sale.
 
-**Las letras de las canaletas son estado reordenable.** Sin esto el captcha es una tragamonedas: mirás caer la bola sin poder intervenir. Poder mover la letra que necesitás al centro le devuelve agencia al usuario, y el mecanismo se limita solo — el objetivo son tres letras y el centro es uno, así que cada acierto obliga a reordenar de nuevo.
+**Las letras de las canaletas se reordenan.** Sin esto mirás caer la bola sin poder intervenir. Poder mover al centro la que necesitás alcanza para que sea una interfaz y no una tragamonedas, y tampoco la vuelve fácil: el objetivo son tres letras y el centro es uno.
 
-**El captcha no es la página.** Un captcha suelto no frustra a nadie, porque nadie llegó ahí queriendo otra cosa. Envolverlo en una reserva de turno lo pone donde aparecen los captchas de verdad: cortando una tarea que el usuario quiere terminar.
+**El captcha no es la página.** Suelto no molesta a nadie, porque nadie llegó ahí queriendo otra cosa. Envuelto en una reserva de turno corta algo que querías terminar.
 
 ## Qué salió mal y cómo lo corregí
 
-Lo más interesante de esta entrega es que **el resultado salió bien y el prompt igual estaba mal**. El prompt inicial tenía dos defectos que no vi al escribirlo, y que el modelo resolvió por su cuenta sin avisar.
+El resultado salió bien y el prompt igual estaba mal.
 
-**Una contradicción interna.** La sección de estructura pedía un triángulo de 4 filas. La de comportamiento decía "después de la sexta fila cae en la canaleta correspondiente" — sobra de una versión anterior en la que el tablero tenía 6. El modelo tomó las 4 filas y descartó la mención a la sexta. Acertó, pero no había forma de saber que iba a acertar: la contradicción era simétrica y podría haber devuelto un tablero de 6 filas con 7 canaletas y solo 5 letras.
+Tenía una contradicción —la estructura pedía cuatro filas de pegs y el comportamiento hablaba de "la sexta", que había quedado de una versión anterior— y una referencia huérfana: el estilo decía que la probabilidad va escrita, pero la estructura nunca pidió mostrarla. El modelo se quedó con cuatro filas y agregó las probabilidades, bien calculadas.
 
-**Una referencia huérfana.** La sección de estilo decía "la probabilidad está escrita, no señalizada con color", pero la de estructura nunca pidió mostrar probabilidades — describía las canaletas solo con su letra. El modelo dedujo que había que mostrarlas, las agregó, y además calculó bien el binomial. Tres inferencias encadenadas, ninguna pedida.
+Las dos ambigüedades salieron a mi favor, y ahí está el problema: juzgando por el resultado, me quedo con que el prompt estaba bien escrito. Faltó releerlo cruzando las secciones entre sí antes de mandarlo, que es la revisión que uno saltea cuando escribió el texto hace treinta segundos.
 
-Las dos ambigüedades salieron a favor, y ese es justamente el problema: si hubiera juzgado el prompt por el resultado, me habría quedado con la idea de que estaba bien escrito. Un output correcto no valida la especificación que lo produjo. Lo que corrige el problema no es reescribir el prompt después, sino releerlo antes de mandarlo buscando contradicciones entre secciones — el tipo de revisión que se saltea justo cuando uno mismo escribió el texto treinta segundos antes.
+Lo que sí anduvo por diseño fueron las tres reglas defensivas de los prompts 2 y 3: bloquear los clicks mientras la bola cae, dejar los porcentajes pegados a la posición y no a la letra, y pedir que el captcha no se tocara al envolverlo. Las tres son bugs silenciosos si no se nombran.
 
-**Lo que sí funcionó por diseño.** Las tres reglas defensivas de los prompts 2 y 3 se cumplieron todas: el bloqueo de clicks mientras la bola cae, los porcentajes quedándose en su posición al intercambiar letras, y el captcha sobreviviendo intacto al pedido de envolverlo en otra página. Ninguna de las tres es obvia, y las tres son bugs silenciosos si no se nombran.
-
-**Sobre los cuatro patrones.** La secuencia fue describir el artefacto, iterar sobre el estado, y un pedido estructural. No hubo un prompt de arreglar el layout ni uno de tematizar, porque el triángulo de pegs quedó alineado con las canaletas desde el primer intento y el estilo de captcha viejo salió del prompt inicial. Forzar esos dos prompts para completar la lista habría sido inventar un problema que no existía.
+No hubo prompt de layout ni de tematizado: el triángulo quedó alineado al primer intento y el estilo salió del inicial. Agregarlos para completar los cuatro patrones habría sido inventar un problema.
 
 ## Prompts
 
-El registro completo está en [prompts.md](prompts.md). Los dos que más cambiaron el resultado:
-
-El **primero**, porque fija todo el artefacto de una y define el terreno sobre el que se itera después. Si sale torcido, los siguientes prompts pelean contra una base equivocada.
-
-El **segundo**, porque agregar el reordenamiento de canaletas es lo que convirtió el artefacto de una animación que se mira a una interfaz que se opera. Es el prompt donde la feature se expresó como estado con sus transiciones de ida y de vuelta, en vez de describirla visualmente.
+El registro completo está en [prompts.md](prompts.md). Los que más pesaron son el primero, que fija el artefacto entero, y el del reordenamiento, que convirtió una animación que se mira en una interfaz que se opera.
