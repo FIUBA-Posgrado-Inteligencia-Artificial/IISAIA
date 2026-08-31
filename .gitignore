@@ -7,9 +7,11 @@ node_modules/
 !.claude/skills/
 .claude/skills/*
 !.claude/skills/slide-generation/
+!.claude/skills/grading/
 .env
 .runpod-pod
 __pycache__/
+.venv/
 
 *.DS_Store
 image.png
