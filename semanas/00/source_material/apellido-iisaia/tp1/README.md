@@ -8,7 +8,7 @@ Doble click en `index.html`. Un solo archivo, sin dependencias.
 
 ## Qué me propuse construir
 
-Una bad UI hostil por matemática y no por capricho. No esconde nada —las probabilidades están escritas debajo de cada canaleta— y aun así duele, porque la binomial junta las bolas en el centro y las letras de los bordes salen una vez cada dieciséis. Salió en tres prompts, en una sola conversación de Canvas.
+Una bad UI hostil por matemática y no por capricho. No esconde nada —las probabilidades están escritas debajo de cada canaleta— y aun así duele, porque la binomial junta las bolas en el centro y las letras de los bordes salen una vez cada dieciséis. Salió en tres prompts, en una sola conversación de Gemini Canvas.
 
 ## Decisiones que tomé yo
 

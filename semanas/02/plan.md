@@ -114,7 +114,7 @@ Divider, el cambio de mentalidad ("no estás escribiendo código, estás encarga
 Divider, el tema, y constraints + entregable.
 
 - **Tema:** bad UI, inspirado en r/badUIbattles. Dos videos de YouTube en iframe, revelados de a uno por fragment. El reto es que sea terrible pero funcional: si rompe, no cuenta como bad UI, cuenta como bug.
-- **Constraints:** individual, un solo `index.html`, sin build tools ni dependencias externas, una sola conversación de Canvas — Gemini o ChatGPT.
+- **Constraints:** individual, un solo `index.html`, sin build tools ni dependencias externas, una sola conversación de Gemini Canvas.
 - **Entregable:** carpeta `tp1/` en el repositorio único del curso, con `index.html`, `prompts.md` y `README.md` siguiendo el template ya publicado. No hay repositorio nuevo y no hay presentación en clase.
 
 **Descartado con motivo:** las cuatro slides por rol (Architect / Prompt / Review / Test) que estaban planeadas. El ciclo se explica una vez en §6 con el diagrama, y repetirlo rol por rol en el briefing alargaba §7 sin agregar nada. Las cuatro tareas siguen siendo obligatorias trabajando solo — eso vive en el speaker note del diagrama.

@@ -84,7 +84,7 @@
 **What students walk away knowing:**
 - Las cuatro tareas del ciclo y qué hace cada una, más el criterio de re-entrada al Architect (cambios grandes de alcance).
 - Que trabajando solo las cuatro siguen siendo obligatorias, y que saltear Review es el desvío más común y el que aparece más tarde.
-- Constraints (individual, un `index.html`, una conversación de Canvas en Gemini o ChatGPT) y entregable (carpeta `tp1/` del repositorio del curso, con `index.html` + `prompts.md` + `README.md` según el template ya publicado). Sin presentación en clase.
+- Constraints (individual, un `index.html`, una conversación de Gemini Canvas) y entregable (carpeta `tp1/` del repositorio del curso, con `index.html` + `prompts.md` + `README.md` según el template ya publicado). Sin presentación en clase.
 **Animations / interactive:** Diagrama estático del ciclo (flow-with-arrows) — Architect arriba, loop Prompt→Review→Test debajo, nota de retorno al Architect. Vive al final de §6, antes del divider de la actividad. Dos iframes de YouTube revelados por fragment.
 **Slide budget:** 5–6
 

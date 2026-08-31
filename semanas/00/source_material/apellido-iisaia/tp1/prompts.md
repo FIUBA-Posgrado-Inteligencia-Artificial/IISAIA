@@ -1,6 +1,6 @@
 # Prompts — TP 1
 
-El registro del proceso, en orden. Tres prompts en una sola conversación de Canvas. El artefacto quedó terminado en el tercero.
+El registro del proceso, en orden. Tres prompts en una sola conversación de Gemini Canvas. El artefacto quedó terminado en el tercero.
 
 ---
 
@@ -115,4 +115,4 @@ lógica. Solo deja de ser la página y pasa a ser un paso.
 
 ## Conversación completa
 
-Una sola conversación de Canvas, sin reiniciar el hilo. El artefacto final tiene 828 líneas en un archivo.
+Una sola conversación de Gemini Canvas, sin reiniciar el hilo. El artefacto final tiene 828 líneas en un archivo.

@@ -19,4 +19,4 @@ Este es el material fuente de la clase de Semana 2. La presentación reveal.js s
 
 Esta clase enseña vocabulario frontend para que el alumno pueda **dirigir** una IA, no para reemplazar la sintaxis con la mano. El artefacto `demo.html` es a la vez la página que se diserta en clase y la referencia que el alumno se lleva a su casa: la página se enseña a sí misma.
 
-La actividad de cierre es individual: cada estudiante aplica el ciclo de desarrollo asistido por IA para construir una bad UI de una sola página en Canvas (Gemini o ChatGPT). Arranca en clase y se termina en casa; la entrega es la carpeta `tp1/` del repositorio del curso.
+La actividad de cierre es individual: cada estudiante aplica el ciclo de desarrollo asistido por IA para construir una bad UI de una sola página en Gemini Canvas. Arranca en clase y se termina en casa; la entrega es la carpeta `tp1/` del repositorio del curso.

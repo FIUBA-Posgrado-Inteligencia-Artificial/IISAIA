@@ -1,6 +1,6 @@
-# Actividad práctica: construir una bad UI con Canvas
+# Actividad práctica: construir una bad UI con Gemini Canvas
 
-Vas a construir un artefacto frontend en una sola página HTML, usando Canvas —de Gemini o de ChatGPT, la que prefieras— como tu herramienta. Es un trabajo individual. Arranca en clase, para que puedas sacarte las dudas conmigo delante, y se termina en casa.
+Vas a construir un artefacto frontend en una sola página HTML, usando Gemini Canvas como tu herramienta. Es un trabajo individual. Arranca en clase, para que puedas sacarte las dudas conmigo delante, y se termina en casa.
 
 La actividad no es solo construir algo. Es practicar cómo se dirige a un LLM cuando el que decide sos vos, y dejar registro escrito de cómo lo dirigiste.
 
@@ -54,7 +54,7 @@ Como trabajás solo, las cuatro son tuyas y las hacés en secuencia. Cambiar de 
 
 - Trabajo individual.
 - Un solo archivo `index.html`. Sin build tools, sin archivos CSS/JS separados, sin dependencias externas.
-- Una sola conversación de Canvas, en Gemini o en ChatGPT.
+- Una sola conversación de Gemini Canvas.
 
 ## Entregable
 
