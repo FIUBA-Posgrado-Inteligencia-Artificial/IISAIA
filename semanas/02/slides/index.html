@@ -1425,7 +1425,7 @@ btn.addEventListener('click', () =&gt; {
               <h3 style="color: var(--text-muted); margin-bottom: 12px;">Prompt sin vocabulario</h3>
               <p style="font-style: italic; font-size: 0.78em; line-height: 1.5;">"Hacé una página web con un contador."</p>
               <p style="font-size: 0.7em; color: var(--text-muted); margin-top: 16px;">
-                La IA puede tirarte un proyecto multi-archivo con <code>package.json</code> y dependencias. Funciona, pero no entra en ChatGPT Canvas.
+                La IA puede tirarte un proyecto multi-archivo con <code>package.json</code> y dependencias. Funciona, pero no entra en un Canvas.
               </p>
             </div>
             <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
@@ -1445,7 +1445,7 @@ btn.addEventListener('click', () =&gt; {
             <p><u>Cierre de §5. Mismo reframing que §2.5 / §3.7 / §4.7: vocabulario por determinismo, iteración y auditoría.</u></p>
             <p><em>"Mismo cierre que las secciones anteriores. Mirá los dos prompts: la intención es la misma — una página con un contador."</em></p>
             <p><em>"Y el mismo descargo de honestidad: si vos hoy le pedís a Claude o a ChatGPT 'hacé una página con un contador', lo más probable es que te devuelva código razonable. Pero acá hay una sutileza: 'razonable' depende del default del modelo. Algunos modelos asumen multi-archivo con build tools porque eso es lo que vieron en proyectos de producción. Otros tiran single-file. Es lotería."</em></p>
-            <p><em>"El prompt específico fija cuatro restricciones que importan especialmente cuando trabajás con ChatGPT Canvas o con cualquier free tier de IA: un solo archivo HTML, CSS y JS inline, vanilla JS sin frameworks, cero dependencias externas. Esas cuatro palabras hacen que el resultado quepa en el contexto del modelo, se ejecute al hacer doble click, y deploye con copy-paste."</em></p>
+            <p><em>"El prompt específico fija cuatro restricciones que importan especialmente cuando trabajás en un Canvas de ChatGPT o de Gemini, o con cualquier free tier de IA: un solo archivo HTML, CSS y JS inline, vanilla JS sin frameworks, cero dependencias externas. Esas cuatro palabras hacen que el resultado quepa en el contexto del modelo, se ejecute al hacer doble click, y deploye con copy-paste."</em></p>
             <p><em>"Y la moraleja general que ya conocen: vago es lotería, específico es determinismo. Cerramos la anatomía. Lo que viene son cuatro patrones de prompt que aplican todo el vocabulario de la clase a casos concretos."</em></p>
           </aside>
         </section>
@@ -1646,7 +1646,7 @@ Reemplazá todos los hardcodeados por estas variables.</code></pre>
             <p><em>"Cuando construís software con un LLM hay cuatro tareas que tienen que pasar siempre, sin importar el tamaño del proyecto. Una al inicio y tres en loop."</em></p>
             <p><em>"Architect entra una sola vez al principio: descompone qué se va a construir y escribe el primer prompt — el Patrón 1 que acabamos de ver. Después arranca el loop: Prompt, Review, Test. Prompt escribe el siguiente pedido aplicando los Patrones 2, 3 y 4 según corresponda. Review audita lo que devuelve el LLM antes de pegarlo. Test corre el artefacto y reporta qué falla. Se cierra el loop volviendo a Prompt para la próxima iteración."</em></p>
             <p><em>"Solo se vuelve a Architect si cambia el alcance grande — por ejemplo, si decidís a mitad de camino que el Pomodoro va a manejar varias tareas, no una. Eso requiere re-especificar."</em></p>
-            <p><em>"Si trabajás solo, hacés las cuatro tareas en orden vos mismo. Si trabajás en grupo, las reparten como prefieran. Lo que no puede pasar es que alguna no se cumpla."</em></p>
+            <p><em>"En la actividad que viene las cuatro tareas las hacés vos, una atrás de la otra. Y ahí está la parte difícil de trabajar solo: cambiar de tarea es cambiar de sombrero. Cuando te toca revisar, revisás en serio — aunque el prompt lo hayas escrito vos treinta segundos antes. Lo que no puede pasar es que alguna de las cuatro se saltee."</em></p>
           </aside>
         </section>
 
@@ -1660,10 +1660,11 @@ Reemplazá todos los hardcodeados por estas variables.</code></pre>
         <!-- §7.1: Section divider -->
         <section class="section-divider">
           <h2>Actividad práctica</h2>
-          <p style="color: var(--text-muted); font-size: 0.85em; margin-top: 8px;">Aplicar todo lo visto hoy. ChatGPT Canvas. Un solo archivo HTML.</p>
+          <p style="color: var(--text-muted); font-size: 0.85em; margin-top: 8px;">Individual. Un solo archivo HTML. Arranca acá, se termina en casa.</p>
           <aside class="notes">
-            <p><u>Section divider. Cierra la parte teórica + aplicada y arranca el briefing de la actividad.</u></p>
-            <p><em>"Llegamos al cierre teórico. Lo que viene es la actividad práctica: aplicar todo lo que vimos hoy a un artefacto chico. Una sola conversación con ChatGPT Canvas, un solo archivo HTML como resultado."</em></p>
+            <p><u>Section divider. Cierra la parte teórica + aplicada y arranca el briefing de la actividad. Individual, sin presentación.</u></p>
+            <p><em>"Llegamos al cierre teórico. Lo que viene es la actividad práctica: aplicar todo lo que vimos hoy a un artefacto chico. Es individual — cada uno la suya — y el resultado es un solo archivo HTML."</em></p>
+            <p><em>"El tiempo que queda de clase es para arrancarla y sacarse las dudas de encima conmigo acá. No hace falta que quede terminada hoy; se termina en casa y queda subida al repositorio."</em></p>
           </aside>
         </section>
 
@@ -1721,32 +1722,34 @@ Reemplazá todos los hardcodeados por estas variables.</code></pre>
             <div class="bg-secondary-card" style="border-left: 4px solid var(--accent); padding: 14px;">
               <h3 style="color: var(--accent); font-size: 0.95em; margin-bottom: 8px;">Constraints</h3>
               <ul style="margin: 0; padding-left: 18px; font-size: 0.7em; line-height: 1.7;">
+                <li>Trabajo <strong>individual</strong>.</li>
                 <li>Un solo archivo <code>index.html</code>.</li>
                 <li>Sin build tools, sin archivos CSS/JS separados, sin dependencias externas.</li>
-                <li>Una sola conversación de <strong>ChatGPT Canvas</strong>.</li>
+                <li>Una sola conversación de <strong>Canvas</strong> — Gemini o ChatGPT, la que prefieras.</li>
               </ul>
             </div>
             <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary); padding: 14px;">
               <h3 style="color: var(--accent-secondary); font-size: 0.95em; margin-bottom: 8px;">Entregable</h3>
-              <p style="font-size: 0.7em; margin-bottom: 8px;">Repositorio público en GitHub con tres archivos:</p>
+              <p style="font-size: 0.7em; margin-bottom: 8px;">Una carpeta <code>tp1/</code> nueva en tu repositorio, con tres archivos:</p>
               <ul style="margin: 0; padding-left: 18px; font-size: 0.7em; line-height: 1.7;">
                 <li><code>index.html</code> — el artefacto, listo para abrir con doble click.</li>
                 <li><code>prompts.md</code> — la secuencia de prompts en orden, con una anotación breve por prompt.</li>
-                <li><code>README.md</code> — qué es la página, quién lo construyó, qué funcionó y qué no.</li>
+                <li><code>README.md</code> — el informe: qué te propusiste, qué decidiste vos, qué salió mal y cómo lo corregiste.</li>
               </ul>
             </div>
           </div>
           <div style="max-width: 44em; margin: 18px auto 0; padding: 12px 16px; background: var(--bg-secondary); border-radius: 6px; border-left: 4px solid var(--accent);">
-            <p style="font-size: 0.75em; margin: 0;"><strong>Cuando muestren su trabajo:</strong> el artefacto andando, y una decisión de prompt que les enseñó algo — un éxito o un fracaso, los dos sirven.</p>
+            <p style="font-size: 0.75em; margin: 0;">Es el mismo repositorio que creaste al principio del curso, y <code>README.md</code> y <code>prompts.md</code> siguen el template que ya está publicado ahí. No hay presentación en clase: la entrega es el repositorio.</p>
           </div>
           <p style="margin-top: 18px; font-size: 0.85em; text-align: center; color: var(--accent);">
             Suerte construyendo la peor UI posible.
           </p>
           <aside class="notes">
-            <p><u>Constraints técnicos + qué hay que entregar + cierre. El prompts.md es el registro del proceso, no solo el producto.</u></p>
-            <p><em>"Constraints: un solo archivo index.html. Cero build tools, cero archivos separados, cero dependencias externas — single-file, como vimos. Una sola conversación de ChatGPT Canvas, así toda la historia queda en un solo hilo."</em></p>
-            <p><em>"Entregable: un repositorio público en GitHub con tres archivos. El index.html con el artefacto funcional. Un prompts punto md donde dejan la secuencia de prompts que usaron, en orden, con una anotación breve por cada uno explicando qué intentaban lograr — esto es el registro del proceso, tan importante como el producto. Y un README punto md con descripción corta: qué es, quién lo construyó, qué funcionó y qué no."</em></p>
-            <p><em>"Cuando llegue el momento de mostrar el trabajo, dos cosas alcanzan: el artefacto andando — torturando a quien lo use — y una decisión de prompt que les enseñó algo. Un éxito o un fracaso — los dos sirven. La decisión es lo más interesante de contar; el artefacto se ve solo."</em></p>
+            <p><u>Constraints técnicos + qué hay que entregar + cierre. Individual, sin presentación. El prompts.md es el registro del proceso, no solo el producto.</u></p>
+            <p><em>"Constraints. Es individual: cada uno construye el suyo. Un solo archivo index.html, cero build tools, cero archivos separados, cero dependencias externas — single-file, como vimos recién. Y una sola conversación de Canvas, así toda la historia queda en un hilo. Pueden usar Gemini o ChatGPT, las dos tienen Canvas y las dos sirven igual para esto."</em></p>
+            <p><em>"Entregable. No hay repositorio nuevo: es el mismo que crearon al principio del curso, ese que va a crecer hasta la última clase. Ahí adentro crean una carpeta tp1 y le ponen tres archivos. El index.html con el artefacto funcional. Un prompts punto md con la secuencia de prompts que usaron, en orden, con una anotación breve por cada uno explicando qué intentaban lograr — ese archivo es el registro del proceso, y pesa tanto como el producto. Y un README punto md, que es el informe de la entrega."</em></p>
+            <p><em>"Para el README y el prompts.md no arranquen de cero: el template ya está publicado en el repo de referencia que vieron al principio del curso. Tiene las secciones que espero encontrar — qué te propusiste construir, qué decisiones tomaste vos y no el modelo, qué salió mal y cómo lo corregiste. Esa tercera sección es la que más miro al corregir."</em></p>
+            <p><em>"Y una aclaración para que nadie se prepare de más: no hay presentación en clase. La entrega es el repositorio, nada más."</em></p>
             <p><em>"Suerte construyendo la peor UI posible."</em></p>
           </aside>
         </section>

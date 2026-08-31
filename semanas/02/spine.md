@@ -1,6 +1,6 @@
 # Spine — Semana 02: Arquitectura Frontend
 
-**Whole-week through-line:** El curso te pide ser supervisor arquitectónico de la IA, y para dirigir hace falta vocabulario técnico. Esta clase entrega ese vocabulario en cinco capas — estructura, estilo, comportamiento, estado y empaque — y cierra cada capa con la misma comparación: el mismo pedido escrito vago y escrito con vocabulario, para mostrar que nombrar las cosas convierte la lotería en determinismo. La segunda mitad empaqueta ese vocabulario en cuatro patrones de prompt reusables, y la clase termina con una actividad grupal de 60 minutos donde el equipo construye una *bad UI* funcional aplicando el ciclo Architect → Prompter → Reviewer → Tester.
+**Whole-week through-line:** El curso te pide ser supervisor arquitectónico de la IA, y para dirigir hace falta vocabulario técnico. Esta clase entrega ese vocabulario en cinco capas — estructura, estilo, comportamiento, estado y empaque — y cierra cada capa con la misma comparación: el mismo pedido escrito vago y escrito con vocabulario, para mostrar que nombrar las cosas convierte la lotería en determinismo. La segunda mitad empaqueta ese vocabulario en cuatro patrones de prompt reusables, y la clase termina con una actividad individual donde cada estudiante construye una *bad UI* funcional aplicando el ciclo Architect → Prompt → Review → Test.
 
 **Recurring device:** cada sección de la anatomía (§§2–5) cierra con un slide "Cómo le pedís X a una IA": prompt vago contra prompt con vocabulario, cerrado con la misma moraleja — vago es lotería, específico es determinismo. Es el latido de la clase; no romperlo al editar.
 
@@ -76,15 +76,16 @@
 **Animations / interactive:** None bespoke. Un slide por patrón, con plantilla y ejemplo trabajado revelados por fragments. El ejemplo es el mismo Pomodoro en los cuatro, para que se vea la secuencia natural P1 → P2 → P3 → P4 sobre un solo artefacto.
 **Slide budget:** 8–10
 
-## Section 7: Actividad grupal — bad UI con el ciclo Architect/Prompter/Reviewer/Tester
-**Source material:** `source_material/07-actividad-grupal.md`
-**Through-line:** En 60 minutos los grupos de 4 construyen una interfaz deliberadamente pésima pero funcional, repartiéndose cuatro tareas: Architect (una vez al inicio) y el loop Prompter ↔ Reviewer ↔ Tester. Hacer bad UI a propósito exige entender qué hace buena a una UI, y que funcione exige dominar el ciclo evento-estado-DOM de §4.
+## Section 7: Actividad individual — bad UI con el ciclo Architect/Prompt/Review/Test
+**Source material:** `source_material/07-actividad-practica.md`
+**Through-line:** Cada estudiante construye solo una interfaz deliberadamente pésima pero funcional, sosteniendo las cuatro tareas del ciclo sin repartirlas: Architect una vez al inicio, después el loop Prompt → Review → Test. Hacer bad UI a propósito exige entender qué hace buena a una UI; que además funcione exige dominar el ciclo evento-estado-DOM de §4. Arranca en clase, con el docente disponible para dudas, y se termina en casa.
 **Hook:** Dos videos del género (r/badUIbattles) revelados de a uno: sliders que son laberintos, botones que escapan del cursor.
+**Key analogy:** Cambiar de tarea es cambiar de sombrero, y el más incómodo es el de Review: auditar en serio un prompt que escribiste vos treinta segundos antes.
 **What students walk away knowing:**
 - Las cuatro tareas del ciclo y qué hace cada una, más el criterio de re-entrada al Architect (cambios grandes de alcance).
-- Que el reparto es coordinación viva, no cargos fijos — pero si una de las cuatro tareas no se cumple, el proyecto se desvía de manera predecible.
-- Constraints (un `index.html`, ChatGPT Canvas, 60 min) y entregable (repo público con `index.html` + `prompts.md` + `README.md`).
-**Animations / interactive:** Diagrama estático del ciclo (flow-with-arrows) — Architect arriba, loop Prompter→Reviewer→Tester debajo, flecha de retorno al Architect. Dos iframes de YouTube revelados por fragment.
+- Que trabajando solo las cuatro siguen siendo obligatorias, y que saltear Review es el desvío más común y el que aparece más tarde.
+- Constraints (individual, un `index.html`, una conversación de Canvas en Gemini o ChatGPT) y entregable (carpeta `tp1/` del repositorio del curso, con `index.html` + `prompts.md` + `README.md` según el template ya publicado). Sin presentación en clase.
+**Animations / interactive:** Diagrama estático del ciclo (flow-with-arrows) — Architect arriba, loop Prompt→Review→Test debajo, nota de retorno al Architect. Vive al final de §6, antes del divider de la actividad. Dos iframes de YouTube revelados por fragment.
 **Slide budget:** 5–6
 
 ---
