@@ -1129,7 +1129,7 @@ btn.addEventListener('click', () =&gt; {
       </section>
 
       <!-- ============================================================
-           §5 — Single-file platform
+           §5 — Empaque: single-file y multi-archivo
            ============================================================ -->
       <section>
 
@@ -1160,7 +1160,7 @@ btn.addEventListener('click', () =&gt; {
             <p><strong>Después de la frase principal y la definición, revelar la pregunta de transición con un click.</strong></p>
             <p><u>Apertura de §5. Capa de empaque activa. Distinguir empaque (decisión general) de single-file (una estrategia particular) antes de defender la estrategia que usamos.</u></p>
             <p><em>"Quinta y última capa: empaque. Es la decisión de cómo se distribuyen las cuatro capas anteriores — estructura, estilo, comportamiento y estado — entre archivos. Pueden ir todas en un solo archivo HTML, pueden ir cada una en su archivo separado, o pueden ir en una pila más compleja con bundlers, módulos y compiladores. Empaque es la decisión; cada una de esas formas es una estrategia."</em></p>
-            <p><em>"En esta clase usamos la estrategia más simple: todo en un solo .html. Se llama single-file. Quiero ser preciso con qué significa: el archivo tiene HTML, CSS y JavaScript adentro — el CSS dentro de un tag style, el JS dentro de un tag script — y nada más. No hay archivos auxiliares, no hay paquetes que instalar, no hay servidor que levantar, no hay builds. Cualquier navegador moderno lo abre con doble click y lo ejecuta. No es la única forma; en la industria, los proyectos grandes usan multi-archivo casi siempre. Pero para esta clase, single-file es lo que mejor funciona, y la próxima slide explica por qué."</em></p>
+            <p><em>"En esta clase usamos la estrategia más simple: todo en un solo .html. Se llama single-file. Quiero ser preciso con qué significa: el archivo tiene HTML, CSS y JavaScript adentro — el CSS dentro de un tag style, el JS dentro de un tag script — y nada más. No hay archivos auxiliares, no hay paquetes que instalar, no hay servidor que levantar, no hay builds. Cualquier navegador moderno lo abre con doble click y lo ejecuta. No es la única forma; en la industria, los proyectos grandes usan multi-archivo casi siempre. Vamos a ver las dos, una al lado de la otra, y recién después por qué elegimos ésta."</em></p>
           </aside>
         </section>
 
@@ -1234,7 +1234,118 @@ btn.addEventListener('click', () =&gt; {
           </aside>
         </section>
 
-        <!-- §5.3: Tres ventajas del single-file -->
+        <!-- §5.3: La otra estrategia — multi-archivo -->
+        <section>
+          <h2>La otra estrategia: multi-archivo</h2>
+          <p style="font-size: 0.72em; color: var(--text-muted); text-align: center; max-width: 42em; margin: 6px auto 12px;">
+            El mismo contador, empaquetado como lo empaqueta la industria: cada capa en su archivo, más la maquinaria que los vuelve a juntar.
+          </p>
+          <div class="comparison-2col" style="align-items: stretch;">
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent);">
+              <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1em;">Single-file</h3>
+              <div style="font-family: var(--font-mono); font-size: 0.66em; line-height: 1.75; white-space: pre;">contador/
+└─ index.html
+      &lt;body&gt;<span style="color: var(--text-muted);">      Capa 1</span>
+      &lt;style&gt;<span style="color: var(--text-muted);">     Capa 2</span>
+      &lt;script&gt;<span style="color: var(--text-muted);">    Capas 3 y 4</span></div>
+              <p style="font-size: 0.72em; color: var(--text-muted); margin-top: 16px;">
+                Las cuatro capas viven adentro del mismo archivo, separadas por tags. Doble click y el navegador lo ejecuta.
+              </p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary);">
+              <h3 style="color: var(--accent-secondary); margin-bottom: 12px; font-size: 1em;">Multi-archivo</h3>
+              <div style="font-family: var(--font-mono); font-size: 0.66em; line-height: 1.75; white-space: pre;">contador/
+├─ package.json<span style="color: var(--text-muted);">   qué necesita</span>
+├─ src/
+│  ├─ index.html<span style="color: var(--text-muted);">  Capa 1</span>
+│  ├─ styles.css<span style="color: var(--text-muted);">  Capa 2</span>
+│  └─ counter.js<span style="color: var(--text-muted);">  Capas 3 y 4</span>
+├─ node_modules/<span style="color: var(--text-muted);">  lo descargado</span>
+└─ dist/
+   └─ bundle.js<span style="color: var(--text-muted);">   lo que sirve</span></div>
+              <p style="font-size: 0.72em; color: var(--text-muted); margin-top: 16px;">
+                Las capas viven separadas, y hacen falta dos carpetas más que nadie escribe a mano.
+              </p>
+            </div>
+          </div>
+          <p class="fragment fade-in" style="margin-top: 16px; font-size: 0.75em; text-align: center;">
+            Mismo contador en pantalla. <strong>Decisión de empaque opuesta.</strong>
+          </p>
+          <aside class="notes">
+            <p><strong>Recorrer el árbol de la derecha de arriba abajo. Click final revela el cierre.</strong></p>
+            <p><u>La contraparte del single-file. Todavía no se defiende ninguna de las dos — se muestran como dos estrategias del mismo empaque.</u></p>
+            <p><em>"Dijimos que empaque es la decisión y single-file es una estrategia. Esta es la otra, la que usa la industria casi siempre. Mismo contador, mismas cinco capas, repartidas distinto."</em></p>
+            <p><em>"Mirá el árbol de la derecha. Un package.json, que declara qué necesita el proyecto. Una carpeta src con tres archivos, uno por capa: el index.html con la estructura, el styles.css con el estilo, el counter.js con comportamiento y estado. Hasta ahí es lo mismo que vimos, nada más que cortado en pedazos."</em></p>
+            <p><em>"Lo interesante son las dos carpetas de abajo, porque no las escribe nadie: aparecen solas. node_modules es donde caen las dependencias que descargás. Y dist es el resultado de un paso de build — el archivo que el servidor termina sirviendo. Esas dos las genera la herramienta, y la próxima slide es exactamente sobre esa herramienta."</em></p>
+            <p><em>"[Click.] El punto de la comparación: en pantalla los dos contadores son idénticos. Nadie que abra la página nota la diferencia. Lo único que cambió es una decisión de empaque — y esa decisión es tuya, no de la IA."</em></p>
+          </aside>
+        </section>
+
+        <!-- §5.4: npm — el pip de JavaScript -->
+        <section>
+          <h2>npm: el pip de JavaScript</h2>
+          <p style="font-size: 0.72em; color: var(--text-muted); text-align: center; max-width: 42em; margin: 6px auto 12px;">
+            Ya conocés la mecánica desde Python. Cambian los nombres, no la idea.
+          </p>
+          <table style="width: 100%; max-width: 48em; margin: 0 auto; border-collapse: collapse; font-size: 0.72em;">
+            <thead>
+              <tr>
+                <th style="text-align: left; padding: 7px 10px; border-bottom: 2px solid var(--text-muted); font-weight: normal; color: var(--text-muted);">Python</th>
+                <th style="text-align: left; padding: 7px 10px; border-bottom: 2px solid var(--text-muted); color: var(--accent);">JavaScript</th>
+                <th style="text-align: left; padding: 7px 10px; border-bottom: 2px solid var(--text-muted); font-weight: normal; color: var(--text-muted);">Qué hace</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 7px 10px;"><code>requirements.txt</code></td>
+                <td style="padding: 7px 10px;"><code style="color: var(--accent);">package.json</code></td>
+                <td style="padding: 7px 10px; color: var(--text-muted);">Declara qué necesita el proyecto</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 10px;">PyPI</td>
+                <td style="padding: 7px 10px; color: var(--accent);">npm registry</td>
+                <td style="padding: 7px 10px; color: var(--text-muted);">El repositorio público de donde se baja</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 10px;"><code>pip install</code></td>
+                <td style="padding: 7px 10px;"><code style="color: var(--accent);">npm install</code></td>
+                <td style="padding: 7px 10px; color: var(--text-muted);">Trae los paquetes a tu máquina</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 10px;"><code>site-packages/</code></td>
+                <td style="padding: 7px 10px;"><code style="color: var(--accent);">node_modules/</code></td>
+                <td style="padding: 7px 10px; color: var(--text-muted);">Dónde quedan una vez bajados</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="fragment fade-in" style="margin-top: 18px;">
+            <p style="font-size: 0.75em; text-align: center; margin-bottom: 10px;">
+              La pieza sin equivalente en Python: el <strong style="color: var(--accent-secondary);">bundler</strong>.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <div class="flow-step" style="font-size: 0.62em;"><code>node_modules/</code> + <code>src/</code></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-step" style="font-size: 0.62em; border-color: var(--accent-secondary); color: var(--accent-secondary);">bundler</div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-step" style="font-size: 0.62em;"><code>dist/bundle.js</code></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-step" style="font-size: 0.62em;">navegador</div>
+            </div>
+            <p style="font-size: 0.7em; color: var(--text-muted); text-align: center; max-width: 42em; margin: 12px auto 0;">
+              Python importa desde <code>site-packages</code> y listo. El navegador no sabe leer una carpeta de dependencias, así que alguien tiene que aplastar todo a un archivo que sí entienda.
+            </p>
+          </div>
+          <aside class="notes">
+            <p><strong>Recorrer la tabla fila por fila. Click revela el bundler.</strong></p>
+            <p><u>npm explicado por analogía con pip. La única pieza nueva es el bundler; el resto ya lo saben con otros nombres.</u></p>
+            <p><em>"npm es el gestor de paquetes de JavaScript. Y la buena noticia es que no tienen que aprenderlo de cero, porque ya lo usaron en Python con otro nombre. Fila por fila."</em></p>
+            <p><em>"El requirements.txt de Python es el package.json de JavaScript: un archivo de texto donde declarás qué librerías necesita tu proyecto y en qué versión. PyPI, el repositorio público de donde pip descarga, es el npm registry. El comando pip install es npm install: lee el manifiesto, va al registro, descarga. Y donde Python deja todo en site-packages, JavaScript lo deja en node_modules. Misma cadena, cuatro nombres distintos."</em></p>
+            <p><em>"Un detalle sobre node_modules que a veces sorprende: es enorme. Un proyecto chico se lleva tranquilamente cientos de megas, porque cada dependencia arrastra las suyas. Por eso nunca se versiona en git — se declara en el package.json y cada uno corre npm install en su máquina."</em></p>
+            <p><em>"[Click.] Y acá está la pieza que Python no necesita: el bundler. En Python, tu programa corre en tu máquina y puede leer site-packages directamente. En la web no: el que ejecuta el código es el navegador de otra persona, y el navegador no tiene acceso a tu carpeta de dependencias. Entonces hace falta un paso intermedio que agarre tu código más las dependencias que usás y las aplaste en uno o dos archivos que el browser sí pueda descargar. Ese paso es el bundler — webpack, vite, esbuild. Es el precio de admisión del multi-archivo en frontend, y es exactamente el precio que el single-file no paga."</em></p>
+          </aside>
+        </section>
+
+        <!-- §5.5: Tres ventajas del single-file -->
         <section>
           <h2>Por qué single-file con una IA</h2>
           <div class="consequence-row" style="margin-top: 12px;">
@@ -1268,7 +1379,45 @@ btn.addEventListener('click', () =&gt; {
           </aside>
         </section>
 
-        <!-- §5.4: Cómo le pedís single-file a una IA -->
+        <!-- §5.6: Dónde se rompe el single-file -->
+        <section>
+          <h2>Dónde se rompe el single-file</h2>
+          <p style="font-size: 0.72em; color: var(--text-muted); text-align: center; max-width: 42em; margin: 6px auto 14px;">
+            Cuatro señales de que el archivo único dejó de ayudar.
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 48em; margin: 0 auto;">
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary); padding: 12px;">
+              <h3 style="color: var(--accent-secondary); margin-bottom: 8px; font-size: 0.95em;">Más de mil líneas</h3>
+              <p style="font-size: 0.72em; line-height: 1.5; margin: 0; color: var(--text-muted);">Encontrar algo se vuelve doloroso, y el LLM también pierde precisión cuando tiene que reescribir un archivo enorme entero.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary); padding: 12px;">
+              <h3 style="color: var(--accent-secondary); margin-bottom: 8px; font-size: 0.95em;">Varias personas editando</h3>
+              <p style="font-size: 0.72em; line-height: 1.5; margin: 0; color: var(--text-muted);">Dos manos sobre el mismo archivo gigante producen conflictos de merge en cada commit. Archivos separados los evitan.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary); padding: 12px;">
+              <h3 style="color: var(--accent-secondary); margin-bottom: 8px; font-size: 0.95em;">Dependencias pesadas</h3>
+              <p style="font-size: 0.72em; line-height: 1.5; margin: 0; color: var(--text-muted);">Un editor de texto rico, un motor 3D. Entran por CDN con una línea, o el proyecto ya justifica el multi-archivo completo.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent-secondary); padding: 12px;">
+              <h3 style="color: var(--accent-secondary); margin-bottom: 8px; font-size: 0.95em;">Aparece un servidor</h3>
+              <p style="font-size: 0.72em; line-height: 1.5; margin: 0; color: var(--text-muted);">Con backend y base de datos hay código que no puede vivir en el navegador. Una página estática deja de alcanzar.</p>
+            </div>
+          </div>
+          <p style="margin-top: 16px; font-size: 0.72em; color: var(--text-muted); text-align: center; max-width: 40em; margin-left: auto; margin-right: auto;">
+            Ninguna es un fracaso del formato. Es el formato avisando que el proyecto creció.
+          </p>
+          <aside class="notes">
+            <p><u>Los límites honestos del single-file. Cierra la deuda que dejó la slide anterior y justifica por qué se mostró el multi-archivo.</u></p>
+            <p><em>"Dije que el single-file no es universal, así que seamos honestos con los límites. Cuatro señales de que el archivo único dejó de ayudarte."</em></p>
+            <p><em>"La primera es el tamaño. Pasadas las mil líneas, encontrar algo adentro se vuelve doloroso — y ojo, no es solo un problema para vos: cuando le pedís un cambio chico a la IA sobre un archivo enorme, tiene que reescribirlo entero, y ahí es donde se le escapan regresiones en código que ya andaba."</em></p>
+            <p><em>"La segunda es el equipo. Si son cuatro personas tocando el mismo archivo gigante, cada commit es un conflicto de merge. Con archivos separados, cada uno trabaja en el suyo y git no tiene que adivinar nada."</em></p>
+            <p><em>"La tercera son las dependencias pesadas. Si necesitás un editor de texto rico o un motor 3D, no lo vas a escribir a mano. Podés meterlo por CDN con una línea — un servidor público que te sirve la librería — y ahí seguís siendo single-file. Pero si necesitás tres o cuatro de esas, ya estás en territorio de proyecto multi-archivo."</em></p>
+            <p><em>"Y la cuarta: aparece un servidor. Cuando hay backend y base de datos, hay código que no puede correr en el navegador de nadie. Eso lo vemos la clase que viene."</em></p>
+            <p><em>"Ninguna de las cuatro es un fracaso del single-file. Es el formato avisándote que el proyecto creció y que la decisión de empaque hay que volver a tomarla. Para lo que van a construir hoy, ninguna aplica."</em></p>
+          </aside>
+        </section>
+
+        <!-- §5.7: Cómo le pedís single-file a una IA -->
         <section>
           <h2>Cómo le pedís single-file a una IA</h2>
           <div class="comparison-2col" style="margin-top: 12px; align-items: stretch;">
