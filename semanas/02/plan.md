@@ -1,204 +1,146 @@
 # Plan — Semana 02 slides
 
-Implementation plan for the deck described in `spine.md`. One task per section in spine order, plus setup at the start and a coherence pass at the end. Patterns referenced are from `shared/patterns/`.
+Plan de implementación del deck descrito en `spine.md`. **El deck ya está construido**: este documento fue alineado contra `slides/index.html` tal como existe hoy, así que describe lo que hay, no lo que se pensaba hacer. Sirve para dos cosas — entender por qué cada sección quedó como quedó, y no volver a proponer cosas que ya se descartaron con motivo.
 
-Branch: `feature/semana-02-slides` (create at task 0).
+Una tarea por sección, en orden del spine. Los patrones referenciados salen de `shared/patterns/`.
+
+**Estado actual:** 43 slides (1 título + 5 + 6 + 8 + 6 + 7 + 7 + 3).
+
+---
+
+## Decisiones transversales
+
+Tres decisiones se tomaron durante la ejecución y aplican a todo el deck. Cambiar cualquiera de ellas es un cambio grande, no un ajuste:
+
+**Sin JavaScript bespoke.** El deck no carga ningún script propio — `semanas/02/slides/` contiene únicamente `index.html`. Todo lo interactivo se resuelve con fragments de reveal.js, con HTML/CSS renderizado en el slide, o abriendo `demo.html`. En particular, `clickable-steps.js` se evaluó para §6 y se descartó: cuatro slides con fragments explican los patrones mejor que un panel con click-to-reveal, porque el patrón y su ejemplo trabajado se leen juntos.
+
+**`demo.html` se abre en pestaña nueva, no en iframe.** Los slides de demo tienen un botón `<a target="_blank">` a `../source_material/demo.html#ancla`. Hay tres: §2 (`#estructura`), §3 (`#estilo`), §4 (`#estado`). El iframe se descartó porque `demo.html` es una página completa y compite con el deck por pantalla. §5 no linkea al demo: se explica con código propio y un contador renderizado en el mismo slide.
+
+**Cada sección de anatomía cierra igual.** §§2–5 terminan con un slide "Cómo le pedís X a una IA": prompt vago contra prompt con vocabulario, mismo cierre — *vago es lotería, específico es determinismo*. Es el latido de la clase. Un slide nuevo en esas secciones va antes de ese cierre, nunca después.
 
 ---
 
 ## Task 0 — Setup
 
-**Goal:** working `slides/index.html` skeleton ready to receive sections.
+Esqueleto de `slides/index.html` a partir de `shared/templates/week-template.html`, con el tema de `_config/theme/` cargado.
 
-- Create `feature/semana-02-slides` from clean `main`.
-- Copy `shared/templates/week-template.html` to `semanas/02/slides/index.html`.
-- Set the title slide (week 02 — "Arquitectura Frontend y Vibe Coding"), subtitle from `programa.md`.
-- Verify `_config/theme/` CSS loads (theme variables, components.css).
-- Verify `semanas/02/img/` exists; create if missing.
-- Copy `shared/patterns/title-slide.html` and `shared/patterns/section-divider.html` references in case they need adapting.
-- `npm start` and confirm the empty deck renders at `http://localhost:3000/semanas/02/slides/`.
-
-**Commit:** `feat(semana-02): scaffold reveal.js deck`
+- Título del deck: **Arquitectura Frontend** (sin número de semana en el `h1`; la semana vive solo en el `<title>`).
+- reveal.js se sirve desde `node_modules/` en la raíz del repo, con los plugins `highlight` y `notes`.
+- `npm start` y confirmar que renderiza en `http://localhost:3000/semanas/02/slides/`.
 
 ---
 
-## Task 1 — Section 1: Frontend y el supervisor arquitectónico
+## Task 1 — §1: Frontend y el supervisor arquitectónico (5 slides)
 
-**Spine entry:** §1. Through-line: cuello de botella es la decisión, no la sintaxis; alumno = supervisor.
+**Spine:** §1. El cuello de botella es la decisión, no la sintaxis; el alumno es supervisor.
 
-**Patterns likely:**
-- `title-slide.html` for the week opener (already in setup).
-- A hook slide with the "pregunta incómoda" — likely a custom centered-question slide (no pattern exact match; if invented, add to `shared/patterns/` as `question-hook.html`).
-- `comparison-2col.html` for "antes / ahora" of escribir vs leer código.
-- `pipeline-roadmap.html` (or a simpler 5-pill roadmap) to seed the five-layer outline (Estructura / Estilo / Comportamiento / Estado / Empaque) — this roadmap will get re-highlighted in §§2–5.
-- `section-divider.html` to close into Anatomía.
+Hook con la pregunta incómoda del `flexbox`, el rol del alumno, qué cambia al delegar la sintaxis, el diagrama de cinco capas, y el alcance de la clase.
 
-**Animations:** none.
+**Patrones:** slide de pregunta centrada para el hook; `comparison-2col.html` para el rol; tarjetas en fila para las tres consecuencias.
 
-**Speaker-note target:** ~120–180 words/slide for hook+motivation slides; ~80 for the roadmap.
-
-**Notes:** the 5-layer roadmap introduced here is the canonical "where are we" device for the rest of the deck — re-highlight the active layer at the start of §§2–5.
-
-**Commit:** `feat(semana-02): §1 supervisor arquitectónico`
+**Invariante:** el diagrama de cinco capas (`pipe-node` / `pipe-grid`) nace acá y se repite como roadmap activo en la apertura de §§2–5, cambiando solo cuál pill está encendida. Mismos colores, mismas etiquetas.
 
 ---
 
-## Task 2 — Section 2: Estructura HTML
+## Task 2 — §2: Estructura HTML (6 slides)
 
-**Spine entry:** §2. Through-line: HTML semántico nombra; div soup es el costo.
+**Spine:** §2. El HTML semántico nombra; la div soup es el costo de no nombrar.
 
-**Patterns likely:**
-- Re-highlight the 5-layer roadmap on "Estructura".
-- Hook: `comparison-2col.html` showing `<header>...</header>` vs `<div class="header">...</div>` rendered identically — caption "el navegador no las lee igual".
-- `data-table.html` (or a denser 7-row variant) for the seven structural elements (header/main/section/article/nav/footer/aside).
-- One slide for content elements (h1–h6, p, ul/ol/li, a, img) and one for interaction (button, input, form, label) — likely a 2-col layout, no bullet lists.
-- `code-walkthrough.html` for the prompt-vago vs prompt-con-vocabulario contrast (two stacked code blocks, the second annotated with `data-line-numbers`).
-- Live demo slide: embed `demo.html` §1 in iframe (or anchor link if iframe is too heavy at full screen). Verify the §1 toggle visually distinguishes semantic from div-soup — if not, edit `demo.html` to make it obvious.
+Apertura con roadmap, las dos versiones de la misma página, por qué importa la diferencia, las siete etiquetas estructurales, los elementos de contenido e interacción, y el cierre de prompt.
 
-**Animations:** none bespoke. Iframe of `demo.html#section-1` if reveal.js plays nice.
+**Patrones:** `comparison-2col.html` para semántico vs div soup; `data-table.html` para las siete etiquetas y para los elementos de contenido.
 
-**Speaker-note target:** ~100–150 words/slide.
-
-**Demo.html consideration:** if the §1 toggle in `demo.html` doesn't clearly signal "these two render identically", patch the demo (e.g., overlay outline-tree visualization side-by-side).
-
-**Commit:** `feat(semana-02): §2 estructura HTML`
+**Demo:** botón a `demo.html#estructura`. El toggle Semántico ↔ Sopa de divs muestra el mismo render; "Ver código" muestra que el HTML es distinto.
 
 ---
 
-## Task 3 — Section 3: Estilo CSS
+## Task 3 — §3: Estilo CSS (8 slides)
 
-**Spine entry:** §3. Through-line: cuatro primitivas (caja, layout, tipografía/color, variables).
+**Spine:** §3. Cuatro primitivas alcanzan para dirigir: caja, layout, tipografía/color, variables.
 
-**Patterns likely:**
-- Roadmap re-highlight on "Estilo".
-- Box model: a custom annotated diagram (concentric layers content/padding/border/margin). If not in `shared/patterns/`, invent and add as `box-model-diagram.html`.
-- Flex vs Grid: `comparison-2col.html` — flex (1D, fila/columna) vs grid (2D, filas+columnas), each with one minimal code block.
-- Tipografía/color: a small sample slide with two paired examples (one font, one paired heading+body); palette swatches as 4 colored squares.
-- Variables CSS: `code-walkthrough.html` showing `:root { --color-primary: ... }` and the use site `var(--color-primary)`.
-- Live demo slide: embed `demo.html` §2 (theme switcher).
-- Prompt-vago vs prompt-específico close.
+Apertura con roadmap, sintaxis CSS, una slide por primitiva, la demo en vivo, y el cierre de prompt.
 
-**Animations:** none bespoke. The theme switcher in `demo.html` §2 is the live element.
+**Invariante — las slides de primitiva tienen tres piezas.** Cada una muestra el markup HTML con su clase, la regla CSS que le aplica, y el resultado renderizado con HTML/CSS real en el mismo slide. Varias variantes por slide (distintos valores produciendo distintos resultados) hacen obvio el efecto. El render va detrás de un fragment para poder introducir el concepto antes de que aterrice. Es el patrón más denso del deck y el que más se rompe al editar sin cuidado.
 
-**Speaker-note target:** ~100–150 words/slide; longer (~200) on the box-model intro.
-
-**Demo.html consideration:** confirm `demo.html` §2 theme switcher actually swaps `--color-accent` / `--color-bg` visibly. If subtle, push contrast in the alt theme.
-
-**Commit:** `feat(semana-02): §3 estilo CSS`
+**Demo:** botón a `demo.html#estilo` — flex playground con `justify-content` y theme switcher de una variable.
 
 ---
 
-## Task 4 — Section 4: Estado, DOM y eventos
+## Task 4 — §4: Comportamiento y estado (6 slides)
 
-**Spine entry:** §4. Through-line: ciclo evento → estado → DOM; "estado es la verdad, DOM es el reflejo".
+**Spine:** §4. Estado, DOM y eventos conectados en un ciclo.
 
-**Patterns likely:**
-- Roadmap re-highlight on "Estado/Comportamiento" (decide whether to merge the two roadmap pills here or keep separate; spine treats §4 as one section).
-- Hook: a counter mockup — click → "1" → question slide "¿qué se actualizó entre el click y el render?".
-- Three concept slides (Estado / DOM / Eventos), each with a tight definition + a one-line example. NOT bullet lists — use 2-col definition+example layout.
-- The 5-step cycle: `flow-with-arrows.html` (Estado inicial → Click → Listener → Mutación de estado → Mutación de DOM → Render). Use `class="fragment"` to reveal each step.
-- "Estado es la verdad, DOM es el reflejo": single-statement slide, large type, `metaphor-pages.html` style (or a simpler centered slide if metaphor-pages doesn't fit).
-- Live demo: `demo.html` §3 (counter + todo + event log).
-- Prompt-vago vs prompt-específico close.
+Las capas 3 y 4 se presentan juntas — el roadmap enciende las dos pills a la vez, porque separarlas obligaba a explicar el ciclo dos veces. Hook del contador, el triángulo dinámico, el ciclo evento → estado → DOM revelado por fragments, la demo, y el cierre de prompt.
 
-**Animations:** the cycle slide uses fragments. No bespoke JS.
+**Patrones:** `flow-with-arrows.html` para el ciclo.
 
-**Speaker-note target:** ~120–180 words/slide; longer on the cycle slide as it's the anchor.
-
-**Demo.html consideration:** §3 of `demo.html` already has counter, todo, event log per recent commits. Verify each one shows the evento→estado→DOM cycle visibly (event log especially). If the event log doesn't make the cycle obvious, add timestamped entries that name "evento" / "estado" / "DOM" at each step.
-
-**Commit:** `feat(semana-02): §4 estado y eventos`
+**Demo:** botón a `demo.html#estado` — contador, todo list y un event log que nombra evento, mutación de estado y mutación de DOM en cada paso.
 
 ---
 
-## Task 5 — Section 5: Single-file platform
+## Task 5 — §5: Empaque, single-file y multi-archivo (7 slides)
 
-**Spine entry:** §5. Through-line: un archivo cabe en contexto, deploya por copy-paste, sin toolchain.
+**Spine:** §5. Empaque es la decisión; single-file y multi-archivo son dos estrategias.
 
-**Framing reminder:** "Empaque" is the general decision (how the previous four layers are distributed across files). "Single-file" is one specific empaque strategy — the one this course defaults to because of LLM context limits. Open the section by establishing this distinction so single-file lands as a deliberate choice, not a tautology.
+**Encuadre:** la sección abre distinguiendo empaque (la decisión de cómo se reparten las cuatro capas anteriores entre archivos) de single-file (una estrategia particular). Esa distinción es lo que hace que la elección del curso se lea como decisión y no como tautología, y es la razón por la que se muestran las dos estrategias antes de defender una.
 
-**Patterns likely:**
-- Roadmap re-highlight on "Empaque".
-- Hook (light): screenshot of `demo.html` source + filesize stat ("~600 líneas, un archivo, todo lo que viste").
-- Three-advantage slides: each advantage gets its own slide with concrete framing (cabe en contexto / deploy copy-paste / cero toolchain). Use `comparison-2col.html` for "antes / ahora" on each — multi-archivo + bundler vs single file.
-- "Cuándo se rompe": a short list of limits — but NOT a bullet list. Use a 2x2 grid of "se rompe cuando..." cells.
-- Live demo: open the view-source modal already implemented in `demo.html` §5.
+Orden: apertura → cómo se ve un single-file → la otra estrategia, multi-archivo → npm → por qué single-file con una IA → dónde se rompe → cierre de prompt.
 
-**Animations:** none.
+- **Single-file** se muestra con el contador de §4 completo en un `.html`, con el render en vivo al lado y cada capa marcada.
+- **Multi-archivo** es el mismo contador como árbol de proyecto anotado (`package.json`, `src/`, `node_modules/`, `dist/`), al lado del árbol single-file con sus tags anotados por capa. Las dos capas se anotan igual en ambos para que el paralelo se vea.
+- **npm** se explica por analogía con pip, porque los alumnos vienen de Python: tabla `requirements.txt`/`package.json`, PyPI/npm registry, `pip install`/`npm install`, `site-packages`/`node_modules`. El **bundler** va detrás de un fragment como la única pieza sin equivalente en Python, con el flow `node_modules/ + src/ → bundler → dist/bundle.js → navegador`.
+- **Dónde se rompe** son cuatro tarjetas en 2×2: mil líneas, varias personas editando, dependencias pesadas, aparece un servidor. Cierra la deuda que abre el speaker note de las tres ventajas, que anuncia límites concretos.
 
-**Speaker-note target:** ~100–140 words/slide.
-
-**Demo.html consideration:** §5 view-source modal exists per recent commit. Verify it actually shows the file content and that line count is visible.
-
-**Commit:** `feat(semana-02): §5 single-file platform`
+**Nota de vocabulario:** el backend se nombra como "aparece un servidor" en el texto visible; la referencia a la clase siguiente vive en el speaker note.
 
 ---
 
-## Task 6 — Section 6: Cuatro patrones de prompt
+## Task 6 — §6: Cuatro patrones de prompt (7 slides)
 
-**Spine entry:** §6. The payoff section. ~20 min, 8–10 slides.
+**Spine:** §6. Cuatro patrones cubren cerca del 80% del trabajo UI con IA.
 
-**Patterns likely:**
-- `section-divider.html` "Patrones" to mark the shift from anatomía to aplicación.
-- Hook: prompt vago "hacelo más lindo" vs prompt P3 (flex/justify/gap) → resultados — `comparison-2col.html`.
-- Mindset shift slide: "no estás escribiendo código, estás encargando código" — single statement.
-- Overview of the 4 patterns: reuse `clickable-steps.js` from week 01 — copy file into `semanas/02/slides/`, adapt content to the 4 patterns. Each step shows the template + one trabajado example.
-- Per-pattern slides (P1/P2/P3/P4): each gets one slide with template (left) + ejemplo trabajado (right), code-walkthrough style. The Pomodoro examples from source go here.
-- "Cómo se conectan con las secciones 2–5": a small diagram showing which vocabulary each pattern leans on (P1 → estructura+estilo+estado, P2 → estado, P3 → layout, P4 → variables). Likely `flow-with-arrows.html` repurposed or a custom 4-row table.
-- Live demo: dice roller in 4 prompts (one slide naming the demo, then run it live in another tab). Slides include the four prompts as `code-walkthrough.html` blocks for reference.
+Divider, el cambio de mentalidad ("no estás escribiendo código, estás encargando código"), una slide por patrón, y el diagrama del ciclo de desarrollo asistido por IA.
 
-**Animations:** copy-and-adapt `clickable-steps.js` from `semanas/01/slides/` → `semanas/02/slides/`. Update content arrays to P1/P2/P3/P4 with template + ejemplo. Verify the contract `initClickableSteps({ containerId })`.
+**Invariante — un solo ejemplo corriendo.** Los cuatro patrones usan el mismo Pomodoro, para que se vea la secuencia natural P1 → P2 → P3 → P4 sobre un artefacto que evoluciona. Cada slide tiene plantilla y ejemplo trabajado, revelados por fragments en ese orden. No hay demo en vivo en esta sección: la construcción real la hacen los alumnos en la actividad.
 
-**Speaker-note target:** ~150–220 words/slide. This is the densest section — the script needs to flag where to switch to the live tab and back.
-
-**Commit:** `feat(semana-02): §6 patrones de prompt`
+**Ubicación del diagrama del ciclo:** vive al final de §6, no en §7. Cierra la parte aplicada conectando los patrones con el proceso, y deja §7 como briefing puro de la consigna.
 
 ---
 
-## Task 7 — Section 7: Actividad grupal — briefing
+## Task 7 — §7: Actividad práctica (3 slides)
 
-**Spine entry:** §7. Briefing for the 60-min group activity.
+**Spine:** §7. Bad UI individual, arranca en clase y se termina en casa.
 
-**Patterns likely:**
-- `section-divider.html` "Actividad".
-- Goal slide: 60 min, grupos de 4, single-file, ChatGPT Canvas.
-- Cycle diagram: `flow-with-arrows.html` — Architect (top, one-time) → loop Prompter → Reviewer → Tester → back to Prompter, with a return arrow to Architect for major scope changes. This is the centerpiece of the briefing.
-- Per-role slides (4 slides): Architect / Prompter / Reviewer / Tester — each with the role's responsibility and a concrete failure mode if absent. Use `comparison-2col.html` (responsabilidad / qué falla si no se cumple).
-- Constraints + entregable slide: `data-table.html` 2-col (constraints | entregable).
-- Cierre: "5 min de presentación por grupo" + "el formato es suyo".
+Divider, el tema, y constraints + entregable.
 
-**Animations:** none.
+- **Tema:** bad UI, inspirado en r/badUIbattles. Dos videos de YouTube en iframe, revelados de a uno por fragment. El reto es que sea terrible pero funcional: si rompe, no cuenta como bad UI, cuenta como bug.
+- **Constraints:** individual, un solo `index.html`, sin build tools ni dependencias externas, una sola conversación de Canvas — Gemini o ChatGPT.
+- **Entregable:** carpeta `tp1/` en el repositorio único del curso, con `index.html`, `prompts.md` y `README.md` siguiendo el template ya publicado. No hay repositorio nuevo y no hay presentación en clase.
 
-**Speaker-note target:** ~100–140 words/slide. Briefing notes lean on imperative ("dividan los roles ahora", "el repo va al chat antes de presentar").
-
-**Commit:** `feat(semana-02): §7 briefing actividad grupal`
+**Descartado con motivo:** las cuatro slides por rol (Architect / Prompt / Review / Test) que estaban planeadas. El ciclo se explica una vez en §6 con el diagrama, y repetirlo rol por rol en el briefing alargaba §7 sin agregar nada. Las cuatro tareas siguen siendo obligatorias trabajando solo — eso vive en el speaker note del diagrama.
 
 ---
 
-## Task 8 — Coherence pass
+## Task 8 — Pasada de coherencia
 
-**Goal:** the deck reads as one whole-week through-line, not seven independent decks.
+Lista de re-verificación después de cualquier edición grande:
 
-- Walk the deck section by section in the browser. Verify section transitions feel like an arc, not jumps.
-- Verify the 5-layer roadmap re-highlights consistently in §§2–5 (same colors, same labels, only the active pill changes).
-- Verify section openers (hooks where spine specifies one) actually hook — read them aloud cold, ask "would I lean in?".
-- Verify all "what students walk away knowing" bullets from each spine section are addressed somewhere in the slides (cross-check spine ↔ slides).
-- Check no orphan animations (every `init...()` call has a container; no script tags pointing to missing files).
-- Run `npm start`, walk through the deck end-to-end, time it roughly: target ~60 min for §§1–6, ~8 min for §7.
-- Open browser console, confirm zero errors.
-- Run any speaker-note sanity check: pick 3 random slides, confirm notes have the three-format structure (`<strong>`/`<u>`/`<em>`) where applicable.
-- Verify no inline `style="..."` blocks where a `_config/theme/components.css` class exists (refactor to class if found).
-- Verify no AI-filler vocabulary made it through (`grep` for the banned list).
-
-**Commit:** `chore(semana-02): coherence pass and final review`
+- Caminar el deck sección por sección en el browser. Las transiciones tienen que leerse como un arco.
+- El roadmap de cinco capas re-enciende consistente en §§2–5: mismos colores, mismas etiquetas, solo cambia la pill activa.
+- Los cierres "Cómo le pedís X a una IA" siguen siendo los últimos slides de §§2–5.
+- Cada bullet de "what students walk away knowing" del spine está cubierto en algún slide.
+- Ningún `init...()` huérfano ni `<script src>` a archivos que no existen.
+- Consola del browser sin errores propios. Los tres de `compute-pressure` vienen de los iframes de YouTube de §7 y son esperables.
+- Los speaker notes usan los tres formatos (`<strong>` acciones / `<u>` descripción / `<em>` script), y en slides con fragments hay un bloque `<em>` por reveal.
+- Sin vocabulario de relleno de IA (grep contra la lista de `voice-and-didactics.md`).
+- Todo entra en pantalla a 1280×800, con los fragments revelados.
 
 ---
 
-## Notes for execution phase
+## Notas de ejecución
 
-- Re-read `spine.md` before starting each task (anti-drift).
-- After each task, run the per-section review checklist from the slide-generation skill.
-- Show each section to Enzo before moving to the next.
-- Any new pattern invented during execution must be added to `shared/patterns/` with a row in the catalogue (don't silently inline).
-- `demo.html` may be modified when a slide reveals a concrete improvement; commit demo changes alongside the slide that motivated them.
-- Animations: only `clickable-steps.js` is a reuse-and-adapt task (in §6). Everything else is HTML + fragments + iframes to `demo.html`.
+- Releer `spine.md` antes de tocar cualquier sección (anti-drift).
+- Mostrar cada sección a Enzo antes de seguir con la próxima.
+- Todo patrón nuevo que se invente va a `shared/patterns/` con su fila en el catálogo — no inline silencioso.
+- `demo.html` se puede modificar cuando un slide revela una mejora concreta; el cambio del demo se commitea junto al slide que lo motivó.
+- Reveal.js escapa el HTML dentro de `<pre><code>`, así que los `<span>` coloreados no funcionan ahí. Para texto monoespaciado con color (árboles de directorios, salidas de terminal) usar un `<div>` con `white-space: pre`.

@@ -90,4 +90,4 @@
 
 ---
 
-**Total estimado:** ~43–50 slides para ~65–70 min de clase + 60 min de actividad grupal.
+**Total real:** 43 slides (1 título + 5 + 6 + 8 + 6 + 7 + 7 + 3) para ~70 min de clase, más el briefing de la actividad y el tiempo que quede para que arranquen.
