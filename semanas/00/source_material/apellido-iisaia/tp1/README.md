@@ -32,8 +32,6 @@ Las dos ambigüedades salieron a mi favor, y ahí está el problema: juzgando po
 
 Lo que sí anduvo por diseño fueron las tres reglas defensivas de los prompts 2 y 3: bloquear los clicks mientras la bola cae, dejar los porcentajes pegados a la posición y no a la letra, y pedir que el captcha no se tocara al envolverlo. Las tres son bugs silenciosos si no se nombran.
 
-No hubo prompt de layout ni de tematizado: el triángulo quedó alineado al primer intento y el estilo salió del inicial. Agregarlos para completar los cuatro patrones habría sido inventar un problema.
-
 ## Prompts
 
 El registro completo está en [prompts.md](prompts.md). Los que más pesaron son el primero, que fija el artefacto entero, y el del reordenamiento, que convirtió una animación que se mira en una interfaz que se opera.
