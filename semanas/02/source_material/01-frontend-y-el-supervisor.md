@@ -11,7 +11,9 @@ Frontend no quiere decir "página web". Hay de varios tipos:
 - **Escritorio**: programa instalado en la máquina. Photoshop, Excel, Spotify.
 - **Terminal**: texto como interfaz. También es un frontend, aunque no tenga un solo botón.
 
-Los cuatro resuelven el mismo problema —traducir lo que una persona quiere en algo que el sistema entiende— y se diferencian en cómo llegan al usuario. Vamos a trabajar sobre el web por una razón práctica: es el único que se abre con doble click, sin instalar nada y sin una tienda de por medio.
+Los cuatro hacen lo mismo: exponen la funcionalidad de un software para que el usuario la use del modo en que los desarrolladores la pensaron. Esa última parte es menos inocente de lo que suena. Un frontend no muestra todo lo que el sistema puede hacer, muestra lo que alguien decidió que se puede hacer y en qué orden. Cada botón que existe, y cada botón que no existe, son decisiones — y tomar esas decisiones es exactamente el trabajo que vamos a practicar.
+
+Vamos a trabajar sobre el web por una razón práctica: es el único que no hace falta instalar. Se abre con doble click, sin permisos y sin una tienda de por medio.
 
 ## La pregunta incómoda
 
