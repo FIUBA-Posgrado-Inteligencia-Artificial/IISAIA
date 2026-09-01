@@ -4,7 +4,7 @@ Plan de implementación del deck descrito en `spine.md`. **El deck ya está cons
 
 Una tarea por sección, en orden del spine. Los patrones referenciados salen de `shared/patterns/`.
 
-**Estado actual:** 43 slides (1 título + 5 + 6 + 8 + 6 + 7 + 7 + 3).
+**Estado actual:** 44 slides (1 título + 6 + 6 + 8 + 6 + 7 + 7 + 3).
 
 ---
 
@@ -30,13 +30,15 @@ Esqueleto de `slides/index.html` a partir de `shared/templates/week-template.htm
 
 ---
 
-## Task 1 — §1: Frontend y el supervisor arquitectónico (5 slides)
+## Task 1 — §1: Frontend y el supervisor arquitectónico (6 slides)
 
 **Spine:** §1. El cuello de botella es la decisión, no la sintaxis; el alumno es supervisor.
 
-Hook con la pregunta incómoda del `flexbox`, el rol del alumno, qué cambia al delegar la sintaxis, el diagrama de cinco capas, y el alcance de la clase.
+Definición de frontend con sus cuatro tipos, el cuello de botella que se corre a la decisión, el rol del alumno, qué cambia al delegar la sintaxis, el diagrama de cinco capas, y el alcance de la clase.
 
-**Patrones:** slide de pregunta centrada para el hook; `comparison-2col.html` para el rol; tarjetas en fila para las tres consecuencias.
+**Patrones:** fila de tarjetas para los tipos de frontend y para las tres consecuencias; `comparison-2col.html` para el antes/ahora y para el rol.
+
+**Apertura:** la sección abre definiendo qué es un frontend y acotando el foco al web, no con un hook. La versión anterior abría con la pregunta del `flexbox`; se reemplazó porque la palabra "frontend" aparece toda la clase y conviene fijarla antes de usarla. El argumento del `flexbox` sobrevive en el material fuente y en la slide del cuello de botella.
 
 **Invariante:** el diagrama de cinco capas (`pipe-node` / `pipe-grid`) nace acá y se repite como roadmap activo en la apertura de §§2–5, cambiando solo cuál pill está encendida. Mismos colores, mismas etiquetas.
 

@@ -6,15 +6,15 @@
 
 ## Section 1: Frontend y el supervisor arquitectónico
 **Source material:** `source_material/01-frontend-y-el-supervisor.md`
-**Through-line:** Si la IA escribe el código, el cuello de botella ya no es la sintaxis sino la decisión — y para decidir hace falta vocabulario. El rol del alumno es supervisor, no tipista.
-**Hook:** "Si la IA puede escribir el código, ¿para qué seguimos aprendiendo qué es un `flexbox`?" — la pregunta incómoda en pantalla, sin respuesta inmediata.
+**Through-line:** Arranca acotando qué es un frontend y cuál de sus tipos se trabaja, y de ahí pasa a la tesis: si la IA escribe el código, el cuello de botella ya no es la sintaxis sino la decisión, y para decidir hace falta vocabulario. El rol del alumno es supervisor, no tipista.
 **Key analogy:** La IA es tu equipo de implementación; vos sos el supervisor que decide qué se construye y por qué.
 **What students walk away knowing:**
+- Qué es un frontend, y que el web es uno de varios tipos junto con el móvil, el de escritorio y el de terminal.
 - Por qué saber leer código importa más que saber escribirlo cuando la IA escribe.
 - Qué cambia al delegar la sintaxis: la velocidad sube, el costo de mal-especificar sube, y leer pesa más que escribir.
 - El roadmap de las cinco capas (estructura, estilo, comportamiento, estado, empaque) que estructura toda la clase.
 **Animations / interactive:** None bespoke. El diagrama de cinco capas (`pipe-node`) aparece acá por primera vez y se reusa como roadmap activo en la apertura de cada sección siguiente.
-**Slide budget:** 4–5
+**Slide budget:** 6
 
 ## Section 2: Estructura — HTML como sustantivos
 **Source material:** `source_material/02-estructura-html.md`
@@ -90,4 +90,4 @@
 
 ---
 
-**Total real:** 43 slides (1 título + 5 + 6 + 8 + 6 + 7 + 7 + 3) para ~70 min de clase, más el briefing de la actividad y el tiempo que quede para que arranquen.
+**Total real:** 44 slides (1 título + 6 + 6 + 8 + 6 + 7 + 7 + 3) para ~70 min de clase, más el briefing de la actividad y el tiempo que quede para que arranquen.

@@ -81,13 +81,7 @@
       border-color: var(--accent);
       box-shadow: 0 0 16px rgba(100, 255, 218, 0.2);
     }
-    /* Big-question hook (§1). Centered, large, restrained. */
-    .big-question { font-size: 1.6em; line-height: 1.3; color: var(--text-primary);
-      max-width: 18em; margin: 0 auto; text-align: center; }
-    .big-question .accent { color: var(--accent); }
-    .big-question .muted-q { color: var(--text-muted); font-size: 0.6em; display: block;
-      margin-top: 1em; font-style: italic; }
-    /* Three-consequence row (§1). */
+    /* Card row (§1, §5). Equal-width cards side by side. */
     .consequence-row { display: flex; gap: 16px; align-items: stretch; margin-top: 16px; }
     .consequence-row .bg-secondary-card { flex: 1; }
     .consequence-row h3 { color: var(--accent); margin-bottom: 8px; font-size: 1em; }
@@ -116,16 +110,43 @@
            ============================================================ -->
       <section>
 
-        <!-- §1.1: Hook — la pregunta incómoda -->
+        <!-- §1.1: Qué es un frontend y de qué tipos hay -->
         <section>
-          <p class="big-question">
-            Si la IA puede escribir el código,<br>
-            <span class="accent">¿para qué seguís aprendiendo?</span>
+          <h2>Qué es un frontend</h2>
+          <p style="font-size: 1.1em; max-width: 40em; margin: 10px auto 0; text-align: center;">
+            La capa de un sistema con la que trata una persona: recibe lo que el usuario hace y le devuelve algo que puede ver.
+          </p>
+          <p style="font-size: 1.05em; color: var(--text-muted); max-width: 40em; margin: 10px auto 0; text-align: center;">
+            Los datos, las reglas del negocio y el servidor viven detrás, y el usuario nunca los toca directamente.
+          </p>
+          <div class="consequence-row" style="margin-top: 22px;">
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--accent); padding: 12px;">
+              <h3 style="color: var(--accent); margin-bottom: 8px; font-size: 0.95em;">Web</h3>
+              <p style="color: var(--text-muted);">Corre dentro de un navegador. No se instala: se abre una dirección y ya está.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted); padding: 12px;">
+              <h3 style="color: var(--text-muted); margin-bottom: 8px; font-size: 0.95em;">Móvil</h3>
+              <p style="color: var(--text-muted);">Aplicación nativa de Android o iOS, instalada desde una tienda.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted); padding: 12px;">
+              <h3 style="color: var(--text-muted); margin-bottom: 8px; font-size: 0.95em;">Escritorio</h3>
+              <p style="color: var(--text-muted);">Programa instalado en la máquina. Photoshop, Excel, Spotify.</p>
+            </div>
+            <div class="bg-secondary-card" style="border-left: 4px solid var(--text-muted); padding: 12px;">
+              <h3 style="color: var(--text-muted); margin-bottom: 8px; font-size: 0.95em;">Terminal</h3>
+              <p style="color: var(--text-muted);">Texto como interfaz. También es un frontend, aunque no tenga un solo botón.</p>
+            </div>
+          </div>
+          <p class="fragment fade-in" style="margin-top: 20px; font-size: 1.05em; text-align: center; max-width: 42em; margin-left: auto; margin-right: auto;">
+            Los cuatro hacen lo mismo: traducir lo que una persona quiere en algo que el sistema entiende. Vamos con el <strong style="color: var(--accent);">web</strong>, que es el único que se abre con doble click y sin instalar nada.
           </p>
           <aside class="notes">
-            <p><strong>Dejar la pregunta en pantalla 5–10 segundos sin responder.</strong></p>
-            <p><u>Hook de la clase. La pregunta incómoda que motiva todo lo que sigue.</u></p>
-            <p><em>"Empezamos con una pregunta que probablemente ya se hicieron al menos una vez. Si la IA te escribe el código en dos segundos, ¿para qué seguís sentado en una clase de programación? La pregunta incomoda porque parece honesta. La respuesta corta es: aprender a tipear lo que la IA tipea sola no era el punto, ni siquiera antes de la IA. Pero hay otra cosa que sí importa, y es lo que vamos a desarmar hoy."</em></p>
+            <p><strong>Presentar los cuatro tipos. Click para revelar el cierre.</strong></p>
+            <p><u>Apertura: qué es un frontend y qué tipos hay, antes de acotar el foco al web.</u></p>
+            <p><em>"Antes de meternos en nada, pongámonos de acuerdo en qué es un frontend, porque es la palabra que va a aparecer toda la clase. Es la capa de un sistema con la que trata una persona: agarra lo que el usuario hace —un click, algo que tipea— y le devuelve algo que puede ver. Todo el resto del sistema, los datos, las reglas del negocio, el servidor, vive detrás y el usuario nunca lo toca de forma directa."</em></p>
+            <p><em>"Y frontend no quiere decir 'página web'. Hay de varios tipos. El web corre adentro de un navegador, y su particularidad es que no se instala: abrís una dirección y ya lo estás usando. El móvil es la app nativa que bajás de una tienda. El de escritorio es el programa instalado en tu máquina — Photoshop, Excel, Spotify."</em></p>
+            <p><em>"Y el cuarto sorprende a algunos: la terminal también es un frontend. No tiene botones ni colores, la interfaz es texto, pero cumple exactamente la misma función — recibe lo que la persona pide y le muestra un resultado. Lo menciono ahora porque más adelante en el curso vamos a trabajar bastante ahí, y conviene que no se lea como algo de otra categoría."</em></p>
+            <p><em>"[Click.] Los cuatro resuelven el mismo problema, traducir lo que una persona quiere en algo que el sistema entiende. Hoy trabajamos sobre el web, y la razón es práctica: es el único que se abre con doble click, sin instalar nada, sin permisos y sin una tienda de por medio."</em></p>
           </aside>
         </section>
 
