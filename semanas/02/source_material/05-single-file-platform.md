@@ -2,7 +2,7 @@
 
 Toda página que vamos a construir esta clase vive en un solo archivo `.html`. No hay carpetas, no hay `node_modules`, no hay configuración. Hay un archivo. Ese mismo archivo es lo que le pasás al LLM, lo que abrís en el navegador y lo que subís al servidor.
 
-Esa idea tiene nombre: **single-file platform**. Una página completa, autosuficiente, que no necesita nada alrededor para funcionar. En este curso es el formato por defecto, y vale la pena entender por qué antes de tomarlo como dogma.
+Esa idea tiene nombre: **single-file platform**. Una página completa, autosuficiente, que no necesita nada alrededor para funcionar. Es el formato con el que vamos a trabajar hoy, y vale la pena entender por qué antes de tomarlo como dogma: no es el formato del curso entero, es el que le sirve a esto.
 
 ## ¿Por qué cabe todo en uno?
 
@@ -36,8 +36,8 @@ Hay que ser honesto: el single-file no es universal, y conviene saber sus límit
 
 Cuando el archivo pasa las mil líneas, leerlo se vuelve doloroso; ahí sí conviene partirlo. Cuando hay backend, el modelo se queda corto: la próxima clase introduce el equivalente del lado servidor (semana 3 cubre el *single-file server*). Cuando necesitás dependencias pesadas, como un editor de texto rico o un motor 3D, se introduce una **dependencia externa** vía **CDN** (un servidor público que sirve la librería con una sola línea), o directamente se justifica un proyecto multi-archivo. Y cuando trabajás en equipo, el merge granular sobre un único archivo gigante se vuelve un infierno; ahí los archivos separados ganan por arrastre.
 
-Para esta clase y para los TPs que dependan de un LLM gratuito, el paradigma sirve perfecto.
+Para lo que vas a construir hoy sirve perfecto. Para un proyecto que crezca —el trabajo final entre ellos— vas a terminar en multi-archivo, y justamente por eso conviene conocer las dos estrategias y no una sola.
 
 ## Lo que ganás esta clase
 
-El archivo `demo.html` que vas a ver en cinco minutos es la prueba viva. Una página completa, con cinco demos interactivas, layout, estado, eventos, tema, todo en un archivo. Si una página educativa puede vivir entera en un `.html`, lo mismo aplica al artefacto que tu grupo va a construir esta tarde.
+El archivo `demo.html` que vas a ver en cinco minutos es la prueba viva. Una página completa, con cinco demos interactivas, layout, estado, eventos, tema, todo en un archivo. Si una página educativa puede vivir entera en un `.html`, lo mismo aplica al artefacto que vas a construir vos.

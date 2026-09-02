@@ -1,8 +1,23 @@
 # Frontend y el supervisor arquitectónico
 
-Si una IA puede escribir el código, ¿por qué seguimos aprendiendo qué es un `flexbox` o qué hace un `<section>`? La respuesta corta: porque el cuello de botella ya no es la sintaxis, es la decisión.
+## Qué es un frontend
+
+El **frontend** es la capa de un sistema con la que trata una persona: recibe lo que el usuario hace —un click, algo que escribe— y le devuelve algo que puede ver. Los datos, las reglas del negocio y el servidor viven detrás, y el usuario nunca los toca directamente.
+
+Frontend no quiere decir "página web". Hay de varios tipos:
+
+- **Web**: corre dentro de un navegador. No se instala, se abre una dirección.
+- **Móvil**: aplicación nativa de Android o iOS, instalada desde una tienda.
+- **Escritorio**: programa instalado en la máquina. Photoshop, Excel, Spotify.
+- **Terminal**: texto como interfaz. También es un frontend, aunque no tenga un solo botón.
+
+Los cuatro hacen lo mismo: exponen la funcionalidad de un software para que el usuario la use del modo en que los desarrolladores la pensaron. Esa última parte es menos inocente de lo que suena. Un frontend no muestra todo lo que el sistema puede hacer, muestra lo que alguien decidió que se puede hacer y en qué orden. Cada botón que existe, y cada botón que no existe, son decisiones — y tomar esas decisiones es exactamente el trabajo que vamos a practicar.
+
+Vamos a trabajar sobre el web por una razón práctica: es el único que no hace falta instalar. Se abre con doble click, sin permisos y sin una tienda de por medio.
 
 ## La pregunta incómoda
+
+Si una IA puede escribir el código, ¿por qué seguimos aprendiendo qué es un `flexbox` o qué hace un `<section>`? La respuesta corta: porque el cuello de botella ya no es la sintaxis, es la decisión.
 
 La pregunta incomoda porque parece honesta. Si Claude o ChatGPT te resuelven el `display: grid` en dos segundos, ¿qué sentido tiene memorizarlo? Ninguno. Memorizar sintaxis nunca fue el punto, ni siquiera antes de la IA.
 

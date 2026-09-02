@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro Médico San Lucas - Reserva de Turno</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important; /* Cero redondeo estricto */
+    }
+
+    body {
+      background-color: #2b2b2b;
+      font-family: "Courier New", Courier, monospace;
+      color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    /* Contenedor principal estilo ventana/tarjeta de verificación clásica */
+    .app-container {
+      width: 100%;
+      max-width: 440px;
+      background-color: #d4d0c8;
+      border: 3px solid #000000;
+      box-shadow: 6px 6px 0px #000000;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* HEADER */
+    header {
+      border: 2px solid #808080;
+      background-color: #e4e0d8;
+      padding: 10px;
+      border-top-color: #ffffff;
+      border-left-color: #ffffff;
+    }
+
+    .header-title {
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed #808080;
+      padding-bottom: 4px;
+    }
+
+    .header-subtitle {
+      font-size: 11px;
+      color: #444444;
+    }
+
+    .target-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .target-instruction {
+      font-size: 11px;
+      color: #333333;
+      line-height: 1.2;
+    }
+
+    /* Estilo del CAPTCHA gráfico retro con fondo distorsionado */
+    .captcha-badge {
+      background-color: #fff8dc;
+      border: 2px solid #000000;
+      padding: 4px 12px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: #1a1a1a;
+      text-decoration: line-through;
+      user-select: none;
+      font-style: italic;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.05),
+        rgba(0, 0, 0, 0.05) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+    }
+
+    /* MAIN: CONTENIDO DINÁMICO SEGÚN PASO */
+    main {
+      border: 2px solid #000000;
+      background-color: #ffffff;
+      padding: 12px;
+    }
+
+    .step-section {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-section.active {
+      display: flex;
+    }
+
+    /* Formularios y campos */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #333333;
+      text-transform: uppercase;
+    }
+
+    .form-input {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      padding: 6px 8px;
+      border: 2px inset #808080;
+      background-color: #f7f7f7;
+      color: #000000;
+      width: 100%;
+    }
+
+    .form-input:focus {
+      outline: none;
+      background-color: #ffffff;
+      border-color: #000080;
+    }
+
+    /* Tablero de Galton */
+    .board-container {
+      position: relative;
+      width: 100%;
+      height: 310px;
+      background-color: #f0f0f0;
+      border: 2px inset #808080;
+      overflow: hidden;
+    }
+
+    /* Pegs (clavijas) */
+    .peg {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #707070;
+      border: 1px solid #303030;
+      border-radius: 50% !important;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      transition: transform 0.1s ease, background-color 0.1s ease;
+    }
+
+    .peg.hit {
+      background-color: #ff3b00;
+      transform: translate(-50%, -50%) scale(1.6);
+      box-shadow: 0 0 6px #ff3b00;
+    }
+
+    /* La bola */
+    .ball {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-color: #ff6600;
+      border: 2px solid #993300;
+      border-radius: 50% !important;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+      transition: top 220ms cubic-bezier(0.3, 0.7, 0.4, 1), left 220ms ease-in-out;
+    }
+
+    /* Canaletas receptoras */
+    .bins-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 85px;
+      display: flex;
+      border-top: 2px solid #000000;
+      z-index: 3;
+      background-color: #e4e0d8;
+    }
+
+    .canaleta {
+      flex: 1;
+      border-right: 2px solid #000000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 2px;
+      background-color: #dcd7ce;
+      transition: background-color 0.15s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .canaleta:hover {
+      background-color: #ece8df;
+    }
+
+    .canaleta:last-child {
+      border-right: none;
+    }
+
+    .canaleta.selected {
+      background-color: #000080;
+    }
+
+    .canaleta.selected .canaleta-letter {
+      color: #ffffff;
+    }
+
+    .canaleta.selected .canaleta-prob {
+      color: #e0e0e0;
+      border-top-color: #ffffff;
+    }
+
+    .canaleta.highlight {
+      background-color: #ffcc99;
+    }
+
+    .canaleta-letter {
+      font-size: 16px;
+      font-weight: 900;
+      color: #000000;
+    }
+
+    .canaleta-prob {
+      font-size: 9px;
+      font-weight: bold;
+      color: #444444;
+      border-top: 1px solid #999999;
+      width: 100%;
+      text-align: center;
+      padding-top: 2px;
+    }
+
+    /* Sección de Turno Confirmado */
+    .confirmed-box {
+      background-color: #e8f5e9;
+      border: 2px solid #2e7d32;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .confirmed-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: #1b5e20;
+      text-align: center;
+      border-bottom: 1px dashed #a5d6a7;
+      padding-bottom: 6px;
+    }
+
+    .confirmed-details {
+      font-size: 12px;
+      color: #263238;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    /* FOOTER Y CONTROLES */
+    footer {
+      border-top: 2px solid #808080;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-contact {
+      font-size: 10px;
+      color: #333333;
+      text-align: center;
+    }
+
+    /* Panel de letras ingresadas */
+    .inputs-display-box {
+      border: 2px inset #808080;
+      background-color: #ffffff;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .inputs-label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .slots-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+
+    .slot {
+      width: 28px;
+      height: 32px;
+      border: 2px solid #000000;
+      background-color: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .slot.filled {
+      background-color: #e0e0e0;
+    }
+
+    /* Botones retro */
+    .buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    button {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 8px 10px;
+      background-color: #d4d0c8;
+      color: #000000;
+      border: 2px solid #ffffff;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #e0dcd4;
+    }
+
+    button:active:not(:disabled) {
+      border: 2px solid #404040;
+      border-right-color: #ffffff;
+      border-bottom-color: #ffffff;
+      padding-top: 9px;
+      padding-left: 11px;
+      padding-bottom: 7px;
+      padding-right: 9px;
+    }
+
+    button:disabled {
+      color: #888888;
+      background-color: #cccccc;
+      border-color: #e0e0e0;
+      border-right-color: #999999;
+      border-bottom-color: #999999;
+      cursor: not-allowed;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: #000080;
+      color: #ffffff;
+      border-color: #5555ff;
+      border-right-color: #000033;
+      border-bottom-color: #000033;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: #0000aa;
+    }
+
+    /* Mensajes de resultado */
+    .result-banner {
+      display: none;
+      padding: 8px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: bold;
+      border: 2px solid #000000;
+      background-color: #ffcdd2;
+      color: #b71c1c;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- HEADER: TÍTULO Y CAPTCHA OBJETIVO -->
+    <header>
+      <div class="header-title">
+        <span>CENTRO MÉDICO SAN LUCAS</span>
+        <span class="header-subtitle">Turnos Web</span>
+      </div>
+
+      <!-- Header informativo para el paso de Formulario y Confirmado -->
+      <div id="form-header-info" style="font-size: 11px; color: #333333;">
+        Complete el formulario para solicitar su cita médica.
+      </div>
+
+      <!-- Header específico para el paso de Captcha -->
+      <div id="captcha-header-info" style="display: none;" class="target-wrapper">
+        <div class="target-instruction">
+          Verificación obligatoria:<br>Ingrese el código:
+        </div>
+        <div id="captcha-target" class="captcha-badge" title="Objetivo a replicar">
+          ---
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN: CONTENEDOR SEGÚN PASO -->
+    <main>
+      <!-- PASO 1: FORMULARIO -->
+      <section id="step-formulario" class="step-section active">
+        <form id="booking-form" style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="form-group">
+            <label class="form-label" for="input-nombre">Nombre y Apellido:</label>
+            <input type="text" id="input-nombre" class="form-input" required placeholder="Ej. Juan Pérez">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-email">Correo Electrónico:</label>
+            <input type="email" id="input-email" class="form-input" required placeholder="ejemplo@correo.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-fecha">Fecha del Turno:</label>
+            <input type="date" id="input-fecha" class="form-input" required>
+          </div>
+          <button type="submit" class="btn-full btn-primary" style="margin-top: 6px;">Reservar turno</button>
+        </form>
+      </section>
+
+      <!-- PASO 2: CAPTCHA (MÁQUINA DE GALTON) -->
+      <section id="step-captcha" class="step-section">
+        <div id="board" class="board-container">
+          <!-- Clavijas y canaletas generadas vía JS -->
+          <div id="ball" class="ball"></div>
+          <div id="bins" class="bins-container"></div>
+        </div>
+        <!-- Banner de Error en Captcha -->
+        <div id="result-box" class="result-banner">
+          ✗ FALLÓ VERIFICACIÓN: CÓDIGO INCORRECTO. REINTENTANDO...
+        </div>
+      </section>
+
+      <!-- PASO 3: CONFIRMADO -->
+      <section id="step-confirmado" class="step-section">
+        <div class="confirmed-box">
+          <div class="confirmed-title">✓ TURNO CONFIRMADO CON ÉXITO</div>
+          <div class="confirmed-details">
+            <div><strong>Paciente:</strong> <span id="conf-nombre">---</span></div>
+            <div><strong>Email:</strong> <span id="conf-email">---</span></div>
+            <div><strong>Fecha:</strong> <span id="conf-fecha">---</span></div>
+            <div><strong>Estado:</strong> Aprobado por verificación humana</div>
+          </div>
+        </div>
+        <button id="btn-nuevo-turno" class="btn-full btn-primary" style="margin-top: 8px;">Solicitar otro turno</button>
+      </section>
+    </main>
+
+    <!-- FOOTER: CONTROLES DEL CAPTCHA Y LÍNEA DE CONTACTO -->
+    <footer>
+      <!-- Controles de Galton visibles únicamente en paso captcha -->
+      <div id="captcha-controls" style="display: none; flex-direction: column; gap: 8px;">
+        <div class="inputs-display-box">
+          <span class="inputs-label">INGRESADOS:</span>
+          <div class="slots-wrapper">
+            <div id="slot-0" class="slot">-</div>
+            <div id="slot-1" class="slot">-</div>
+            <div id="slot-2" class="slot">-</div>
+          </div>
+        </div>
+        <div class="buttons-row">
+          <button id="btn-drop" type="button">Soltar bola</button>
+          <button id="btn-delete" type="button">Borrar último</button>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        Consultas y urgencias: 0800-555-SANLUCAS | Sede Central
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const BASE_LETTERS = ['A', 'B', 'C', 'D', 'E'];
+    const PROBABILITIES = ['1/16', '4/16', '6/16', '4/16', '1/16'];
+    const STEP_DURATION_MS = 220;
+
+    // Estado general de pasos: "formulario" | "captcha" | "confirmado"
+    let paso = "formulario";
+    let datosUsuario = { nombre: '', email: '', fecha: '' };
+
+    // Estado interno del Captcha de Galton
+    let letras = ['A', 'B', 'C', 'D', 'E'];
+    let seleccionada = null;
+    let objetivo = [];
+    let ingresados = [];
+    let cayendo = false;
+
+    // Elementos del DOM
+    const stepFormEl = document.getElementById('step-formulario');
+    const stepCaptchaEl = document.getElementById('step-captcha');
+    const stepConfirmadoEl = document.getElementById('step-confirmado');
+    const bookingFormEl = document.getElementById('booking-form');
+
+    const headerInfoForm = document.getElementById('form-header-info');
+    const headerInfoCaptcha = document.getElementById('captcha-header-info');
+    const targetBadgeEl = document.getElementById('captcha-target');
+    const captchaControlsEl = document.getElementById('captcha-controls');
+
+    const boardEl = document.getElementById('board');
+    const ballEl = document.getElementById('ball');
+    const binsEl = document.getElementById('bins');
+    const resultBoxEl = document.getElementById('result-box');
+
+    const btnDropEl = document.getElementById('btn-drop');
+    const btnDeleteEl = document.getElementById('btn-delete');
+    const btnNuevoTurnoEl = document.getElementById('btn-nuevo-turno');
+
+    const slots = [
+      document.getElementById('slot-0'),
+      document.getElementById('slot-1'),
+      document.getElementById('slot-2')
+    ];
+
+    const confNombreEl = document.getElementById('conf-nombre');
+    const confEmailEl = document.getElementById('conf-email');
+    const confFechaEl = document.getElementById('conf-fecha');
+
+    const pegElements = [];
+
+    function cambiarPaso(nuevoPaso) {
+      paso = nuevoPaso;
+
+      stepFormEl.classList.remove('active');
+      stepCaptchaEl.classList.remove('active');
+      stepConfirmadoEl.classList.remove('active');
+
+      headerInfoForm.style.display = 'none';
+      headerInfoCaptcha.style.display = 'none';
+      captchaControlsEl.style.display = 'none';
+
+      if (paso === "formulario") {
+        stepFormEl.classList.add('active');
+        headerInfoForm.style.display = 'block';
+      } else if (paso === "captcha") {
+        stepCaptchaEl.classList.add('active');
+        headerInfoCaptcha.style.display = 'flex';
+        captchaControlsEl.style.display = 'flex';
+        initCaptchaRound();
+      } else if (paso === "confirmado") {
+        stepConfirmadoEl.classList.add('active');
+        headerInfoForm.style.display = 'block';
+        confNombreEl.textContent = datosUsuario.nombre;
+        confEmailEl.textContent = datosUsuario.email;
+        confFechaEl.textContent = datosUsuario.fecha;
+      }
+    }
+
+    function buildBoard() {
+      const boardWidth = boardEl.clientWidth || 372;
+      const startY = 32;
+      const rowGapY = 40;
+      const pegSpacingX = 48;
+      const centerX = boardWidth / 2;
+
+      for (let r = 0; r < 4; r++) {
+        pegElements[r] = [];
+        const numPegsInRow = r + 1;
+        const rowStartX = centerX - ((numPegsInRow - 1) * pegSpacingX) / 2;
+        const posY = startY + r * rowGapY;
+
+        for (let c = 0; c < numPegsInRow; c++) {
+          const posX = rowStartX + c * pegSpacingX;
+          const peg = document.createElement('div');
+          peg.className = 'peg';
+          peg.style.left = `${posX}px`;
+          peg.style.top = `${posY}px`;
+          boardEl.appendChild(peg);
+          pegElements[r].push({ el: peg, x: posX, y: posY });
+        }
+      }
+
+      binsEl.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const bin = document.createElement('div');
+        bin.className = 'canaleta';
+        bin.id = `bin-${i}`;
+        bin.innerHTML = `
+          <span class="canaleta-letter">${letras[i]}</span>
+          <span class="canaleta-prob">${PROBABILITIES[i]}</span>
+        `;
+        bin.addEventListener('click', () => onBinClick(i));
+        binsEl.appendChild(bin);
+      }
+    }
+
+    function onBinClick(index) {
+      if (cayendo) return;
+
+      if (seleccionada === null) {
+        seleccionada = index;
+      } else if (seleccionada === index) {
+        seleccionada = null;
+      } else {
+        const temp = letras[seleccionada];
+        letras[seleccionada] = letras[index];
+        letras[index] = temp;
+        seleccionada = null;
+      }
+
+      updateBinsUI();
+    }
+
+    function updateBinsUI() {
+      for (let i = 0; i < 5; i++) {
+        const binEl = document.getElementById(`bin-${i}`);
+        if (!binEl) continue;
+
+        const letterEl = binEl.querySelector('.canaleta-letter');
+        if (letterEl) {
+          letterEl.textContent = letras[i];
+        }
+
+        if (seleccionada === i) {
+          binEl.classList.add('selected');
+        } else {
+          binEl.classList.remove('selected');
+        }
+      }
+    }
+
+    function getRandomLetter() {
+      return BASE_LETTERS[Math.floor(Math.random() * BASE_LETTERS.length)];
+    }
+
+    function initCaptchaRound() {
+      letras = ['A', 'B', 'C', 'D', 'E'];
+      seleccionada = null;
+      objetivo = [getRandomLetter(), getRandomLetter(), getRandomLetter()];
+      ingresados = [];
+      cayendo = false;
+
+      targetBadgeEl.textContent = objetivo.join(' ');
+      resultBoxEl.style.display = 'none';
+      ballEl.style.display = 'none';
+
+      updateBinsUI();
+      updateCaptchaUI();
+    }
+
+    function updateCaptchaUI() {
+      for (let i = 0; i < 3; i++) {
+        if (i < ingresados.length) {
+          slots[i].textContent = ingresados[i];
+          slots[i].classList.add('filled');
+        } else {
+          slots[i].textContent = '-';
+          slots[i].classList.remove('filled');
+        }
+      }
+
+      const isCompleted = ingresados.length >= 3;
+
+      btnDropEl.disabled = cayendo || isCompleted;
+      btnDeleteEl.disabled = cayendo || ingresados.length === 0;
+
+      if (isCompleted && !cayendo) {
+        verifyResult();
+      }
+    }
+
+    function verifyResult() {
+      const targetStr = objetivo.join('');
+      const inputStr = ingresados.join('');
+
+      if (targetStr === inputStr) {
+        cambiarPaso("confirmado");
+      } else {
+        resultBoxEl.style.display = 'block';
+        setTimeout(() => {
+          initCaptchaRound();
+        }, 1600);
+      }
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function dropBall() {
+      if (cayendo || ingresados.length >= 3) return;
+
+      cayendo = true;
+      updateCaptchaUI();
+
+      const boardWidth = boardEl.clientWidth || 372;
+      const centerX = boardWidth / 2;
+
+      ballEl.style.transition = 'none';
+      ballEl.style.left = `${centerX}px`;
+      ballEl.style.top = `10px`;
+      ballEl.style.display = 'block';
+
+      await sleep(20);
+      ballEl.style.transition = `top ${STEP_DURATION_MS}ms cubic-bezier(0.25, 1, 0.5, 1), left ${STEP_DURATION_MS}ms ease-in-out`;
+
+      let currentCol = 0;
+      const initialPeg = pegElements[0][0];
+      ballEl.style.left = `${initialPeg.x}px`;
+      ballEl.style.top = `${initialPeg.y}px`;
+      await sleep(STEP_DURATION_MS);
+      flashPeg(initialPeg.el);
+
+      for (let r = 1; r < 4; r++) {
+        const goRight = Math.random() < 0.5 ? 1 : 0;
+        currentCol += goRight;
+
+        const nextPeg = pegElements[r][currentCol];
+        ballEl.style.left = `${nextPeg.x}px`;
+        ballEl.style.top = `${nextPeg.y}px`;
+
+        await sleep(STEP_DURATION_MS);
+        flashPeg(nextPeg.el);
+      }
+
+      const finalBounceRight = Math.random() < 0.5 ? 1 : 0;
+      const finalBinIndex = currentCol + finalBounceRight;
+
+      const binWidth = boardWidth / 5;
+      const binTargetX = (finalBinIndex * binWidth) + (binWidth / 2);
+      const binTargetY = 250;
+
+      ballEl.style.left = `${binTargetX}px`;
+      ballEl.style.top = `${binTargetY}px`;
+
+      await sleep(STEP_DURATION_MS);
+
+      const chosenBinEl = document.getElementById(`bin-${finalBinIndex}`);
+      if (chosenBinEl) {
+        chosenBinEl.classList.add('highlight');
+        setTimeout(() => chosenBinEl.classList.remove('highlight'), 300);
+      }
+
+      const letterObtained = letras[finalBinIndex];
+      ingresados.push(letterObtained);
+
+      await sleep(150);
+      ballEl.style.display = 'none';
+
+      cayendo = false;
+      updateCaptchaUI();
+    }
+
+    function flashPeg(pegDom) {
+      if (!pegDom) return;
+      pegDom.classList.add('hit');
+      setTimeout(() => pegDom.classList.remove('hit'), 180);
+    }
+
+    bookingFormEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      datosUsuario.nombre = document.getElementById('input-nombre').value;
+      datosUsuario.email = document.getElementById('input-email').value;
+      datosUsuario.fecha = document.getElementById('input-fecha').value;
+
+      cambiarPaso("captcha");
+    });
+
+    btnDropEl.addEventListener('click', dropBall);
+
+    btnDeleteEl.addEventListener('click', () => {
+      if (cayendo || ingresados.length === 0) return;
+      ingresados.pop();
+      resultBoxEl.style.display = 'none';
+      updateCaptchaUI();
+    });
+
+    btnNuevoTurnoEl.addEventListener('click', () => {
+      bookingFormEl.reset();
+      cambiarPaso("formulario");
+    });
+
+    window.addEventListener('load', () => {
+      buildBoard();
+    });
+
+    window.addEventListener('resize', () => {
+      const existingPegs = document.querySelectorAll('.peg');
+      existingPegs.forEach(p => p.remove());
+      pegElements.length = 0;
+      buildBoard();
+    });
+  </script>
+</body>
+</html>
