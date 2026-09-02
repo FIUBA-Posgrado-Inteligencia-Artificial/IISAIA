@@ -138,7 +138,7 @@
             </div>
           </div>
           <p class="fragment fade-in" style="margin-top: 20px; font-size: 1.05em; text-align: center; max-width: 42em; margin-left: auto; margin-right: auto;">
-            Los cuatro hacen lo mismo: exponen la funcionalidad de un software para que el usuario la use del modo en que los desarrolladores la pensaron. Vamos con el <strong style="color: var(--accent);">web</strong>, que es el que no hace falta instalar.
+            Los cuatro hacen lo mismo: exponen la funcionalidad de un software para que el usuario la use del modo en que los desarrolladores la pensaron.
           </p>
           <aside class="notes">
             <p><strong>Presentar los cuatro tipos. Click para revelar el cierre.</strong></p>
@@ -153,7 +153,10 @@
 
         <!-- §1.2: La respuesta — cuello de botella es la decisión -->
         <section>
-          <h2>El cuello de botella ya no es la sintaxis</h2>
+          <h2>Ahora ese código lo escribe la IA</h2>
+          <p style="font-size: 1.05em; max-width: 40em; margin: 10px auto 18px; text-align: center;">
+            Construir un frontend es escribir código. Cuando el que lo escribe es un modelo, cambia en qué se te va el tiempo.
+          </p>
           <div class="comparison-2col">
             <div class="bg-secondary-card fragment fade-in" style="border-left: 4px solid var(--text-muted);">
               <h3 style="color: var(--text-muted);">Antes</h3>
@@ -169,7 +172,7 @@
           <aside class="notes">
             <p><strong>Revelar Antes. Pausa breve. Revelar Ahora.</strong></p>
             <p><u>La inversión del ratio escribir/leer es el dato central de la clase.</u></p>
-            <p><em>"Cuando vos delegás la sintaxis a un modelo, el ratio entre escribir y leer se invierte."</em></p>
+            <p><em>"Recién dijimos qué es un frontend. Ese frontend hay que construirlo, y construirlo es escribir código: HTML, CSS y JavaScript. Lo que cambió no es eso, es quién lo escribe. Hasta hace poco lo escribías vos, línea por línea. Hoy se lo pedís a un modelo y te lo devuelve armado en segundos. Eso parece un cambio de velocidad nada más, pero lo importante es otra cosa: cambia en qué se te va el tiempo."</em></p>
             <p><em>"Antes pasabas la mayor parte del tiempo escribiendo. Una parte chica del tiempo, leyendo."</em></p>
             <p><em>"Hoy la mayor parte del tiempo es leyendo respuestas que la IA te tira y decidiendo si las pegás en producción o las descartás. Y leer código que no entendés es lo mismo que aceptar una decisión que vos no tomaste."</em></p>
           </aside>
@@ -177,7 +180,7 @@
 
         <!-- §1.3: El rol — supervisor arquitectónico -->
         <section>
-          <h2>Tu rol esta clase: <span style="color: var(--accent);">supervisor arquitectónico</span></h2>
+          <h2>Programar con IA te pone de <span style="color: var(--accent);">supervisor arquitectónico</span></h2>
           <div class="comparison-2col" style="margin-top: 12px;">
             <div class="bg-secondary-card">
               <h3 style="color: var(--text-muted);">La IA</h3>
@@ -193,8 +196,8 @@
           </p>
           <aside class="notes">
             <p><strong>Revelar la frase de cierre con un click.</strong></p>
-            <p><u>Slide del rol. La frase que cierra es el setup del resto de la clase.</u></p>
-            <p><em>"El rol que vamos a practicar durante estas ocho semanas no es el de programador clásico. Es el de supervisor arquitectónico. Tu trabajo es decidir qué se construye, en qué orden, con qué piezas y por qué. La IA escribe; vos dirigís."</em></p>
+            <p><u>Slide del rol. No es una consigna de clase: es a lo que se parece el trabajo hoy. La frase que cierra es el setup de todo lo que sigue.</u></p>
+            <p><em>"Y acá quiero ser claro con algo, porque no es un ejercicio de clase. Cualquiera que hoy programe con un modelo al lado termina en este rol, trabaje donde trabaje. Cuando la parte de tipear la hace otro, lo que queda de tu lado es decidir: qué se construye, en qué orden, con qué piezas y por qué. La IA es tu equipo de implementación — hace exactamente lo que le pediste, ni más ni menos. La IA escribe; vos dirigís. Eso ya es así afuera, nosotros lo vamos a practicar."</em></p>
             <p><em>"Y para dirigir hace falta una cosa básica: saber cómo se llaman las cosas. Eso es lo único que ningún modelo te puede regalar."</em></p>
           </aside>
         </section>
@@ -654,7 +657,7 @@
               <pre style="margin: 0; font-size: 0.55em; box-shadow: none; width: 100%; max-width: 100%; box-sizing: border-box;"><code class="language-html" data-trim>&lt;button class="apretado"&gt;Aceptar&lt;/button&gt;
 &lt;button class="estandar"&gt;Aceptar&lt;/button&gt;
 &lt;button class="generoso"&gt;Aceptar&lt;/button&gt;</code></pre>
-              <p class="fragment fade-in" data-fragment-index="1" style="font-size: 0.55em; color: var(--text-muted); margin: 8px 0 4px; text-align: center;">Resultado — pares de botones idénticos. Mirá el tamaño (<strong style="color: #10b981;">padding</strong>), el grosor del borde (<strong style="color: #ef4444;">border</strong>) y el espacio entre hermanos (<strong style="color: #f59e0b;">margin</strong>):</p>
+              <p class="fragment fade-in" data-fragment-index="1" style="font-size: 0.55em; color: var(--text-muted); margin: 8px 0 4px; text-align: center;">Resultado — pares de botones idénticos. Mirá el tamaño (<strong style="color: #10b981;">padding</strong>), el grosor del borde (<strong style="color: #ef4444;">border</strong>) y el espacio entre las dos cajas (<strong style="color: #f59e0b;">margin</strong>):</p>
               <div class="fragment fade-in" data-fragment-index="1" style="background: var(--bg-primary); padding: 10px; border-radius: 4px;">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
                   <div style="flex: 0 0 auto;">
@@ -692,9 +695,9 @@
             <p><em>"Todo elemento HTML es una caja. No 'casi todo': todo. Cada caja tiene cuatro capas concéntricas, como una cebolla. Adentro de todo está el contenido — el texto, la imagen, lo que sea. Alrededor del contenido, padding: el espacio interno entre el contenido y el borde. Después border, el borde mismo. Y afuera de todo, margin: el espacio externo que separa esta caja de las que la rodean."</em></p>
             <p><em>"Y arriba en el código tenemos el patrón HTML: tres botones, cada uno con una clase distinta — apretado, estándar y generoso. Cada clase va a tener una regla CSS con valores distintos para esas cuatro capas. Vamos a verlas en concreto."</em></p>
             <p><em>"Para que se vea bien qué hace cada capa, en cada fila puse dos botones idénticos uno arriba del otro. Y en cada fila los tres valores del box model — padding, border y margin — son distintos, así que pueden ver las tres capas trabajando al mismo tiempo."</em></p>
-            <p><em>"Apretado: padding chico de 2 por 6, border de 1 píxel, esquinas casi rectas. El botón sale chico, casi sin aire interno. Y como el margin es cero, los dos hermanos están pegados — sin ningún espacio entre ellos."</em></p>
-            <p><em>"Estándar: padding razonable de 8 por 14, border de 1 píxel, esquinas suaves. El botón es más grande, cómodo de leer y clickear. Margin de 8 píxeles, así que entre los dos hermanos aparece un espacio claro."</em></p>
-            <p><em>"Generoso: padding grande de 14 por 24, border de 3 píxeles, esquinas más redondeadas. El botón pesa visualmente, atrae la atención. Margin de 20 píxeles, y la separación entre hermanos es notoriamente más grande que en estándar."</em></p>
+            <p><em>"Apretado: padding chico de 2 por 6, border de 1 píxel, esquinas casi rectas. El botón sale chico, casi sin aire interno. Y como el margin es cero, los dos botones están pegados — sin ningún espacio entre una caja y la otra."</em></p>
+            <p><em>"Estándar: padding razonable de 8 por 14, border de 1 píxel, esquinas suaves. El botón es más grande, cómodo de leer y clickear. Margin de 8 píxeles, así que entre las dos cajas aparece un espacio claro."</em></p>
+            <p><em>"Generoso: padding grande de 14 por 24, border de 3 píxeles, esquinas más redondeadas. El botón pesa visualmente, atrae la atención. Margin de 20 píxeles, y la separación entre las dos cajas es notoriamente más grande que en estándar."</em></p>
             <p><em>"Una aclaración por si lo pregunta alguien: en las reglas también ven border-radius con valores distintos en cada variante. No es parte del box model — el box model son las cuatro capas que vimos. Border-radius es una propiedad aparte que redondea las esquinas del border. La metí en el ejemplo para que la progresión apretado-estándar-generoso se vea más natural visualmente, pero conceptualmente no es una quinta capa."</em></p>
             <p><em>"Tres palabras que necesitás para pedirle a la IA cualquier ajuste visual: padding adentro, border alrededor, margin entre cajas. Con esas tres, no hay ambigüedad."</em></p>
             <p><em>"La diferencia entre una página apretada y una que respira se decide en padding y margin. Sin esos dos nombres, vas a decirle a la IA 'dale más aire' y la IA va a tirar al azar — a veces padding, a veces margin, a veces line-height. Con esos dos nombres, el cambio es exacto."</em></p>
@@ -766,10 +769,28 @@
 
             <div class="bg-secondary-card fragment fade-in" data-fragment-index="1" style="border-left: 4px solid var(--accent); min-width: 0; padding: 10px;">
               <h3 style="color: var(--accent); margin-bottom: 4px; font-size: 0.95em;">Tipografía</h3>
-              <p style="font-size: 0.62em; margin-bottom: 6px;">Una sola sans, o una pareja serif heading + sans body. La propiedad es <code>font-family</code>.</p>
-              <pre style="margin: 0; font-size: 0.5em; box-shadow: none;"><code class="language-html" data-trim>&lt;h1&gt;Título&lt;/h1&gt;
+              <p style="font-size: 0.62em; margin-bottom: 6px;">Una fuente para todo el sitio, o dos como mucho: una para los títulos y otra para el cuerpo. La propiedad es <code>font-family</code>.</p>
+              <div style="background: var(--bg-primary); border-radius: 4px; padding: 5px 9px; margin-bottom: 4px;">
+                <div style="display: flex; align-items: baseline; gap: 9px; margin-bottom: 3px;">
+                  <span style="font-family: Georgia, serif; font-size: 0.85em; color: var(--accent); min-width: 2.4em;">Aa</span>
+                  <code style="font-size: 0.5em; min-width: 6.8em;">serif</code>
+                  <span style="font-size: 0.5em; color: var(--text-muted);">Con remates: patitas en las puntas. Georgia, Times.</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 9px; margin-bottom: 4px;">
+                  <span style="font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--accent); min-width: 2.4em;">Aa</span>
+                  <code style="font-size: 0.5em; min-width: 6.8em;">sans-serif</code>
+                  <span style="font-size: 0.5em; color: var(--text-muted);">Sin remates, puntas limpias. Helvetica, Arial.</span>
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 9px;">
+                  <span style="font-family: 'Courier New', monospace; font-size: 0.85em; color: var(--accent); min-width: 2.4em;">Aa</span>
+                  <code style="font-size: 0.5em; min-width: 6.8em;">monospace</code>
+                  <span style="font-size: 0.5em; color: var(--text-muted);">Todas las letras ocupan lo mismo. Para código.</span>
+                </div>
+              </div>
+              <p style="font-size: 0.48em; color: var(--text-muted); margin-bottom: 6px; line-height: 1.45;">Existen <code>cursive</code> y <code>fantasy</code>, pero cada navegador las resuelve distinto. La coma es una <strong style="color: var(--accent);">lista de respaldo</strong>, no una mezcla: <code>'Georgia', serif</code> es <em>«usá Georgia; si no está, cualquier serif»</em>.</p>
+              <pre style="margin: 0; font-size: 0.5em; box-shadow: none; padding: 8px 10px;"><code class="language-html" data-trim>&lt;h1&gt;Título&lt;/h1&gt;
 &lt;p&gt;Cuerpo del texto.&lt;/p&gt;</code></pre>
-              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none;"><code class="language-css" data-trim>h1 { font-family: 'Georgia', serif; }
+              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none; padding: 8px 10px;"><code class="language-css" data-trim>h1 { font-family: 'Georgia', serif; }
 p  { font-family: system-ui, sans-serif; }</code></pre>
               <p style="font-size: 0.5em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">Resultado:</p>
               <div style="background: var(--bg-primary); padding: 10px; border-radius: 4px;">
@@ -781,12 +802,12 @@ p  { font-family: system-ui, sans-serif; }</code></pre>
             <div class="bg-secondary-card fragment fade-in" data-fragment-index="2" style="border-left: 4px solid var(--accent-secondary); min-width: 0; padding: 10px;">
               <h3 style="color: var(--accent-secondary); margin-bottom: 4px; font-size: 0.95em;">Color</h3>
               <p style="font-size: 0.6em; margin-bottom: 6px;">Definir una paleta y respetarla en todo el sitio es práctica estándar. Las propiedades son <code>background</code> y <code>color</code>.</p>
-              <pre style="margin: 0; font-size: 0.5em; box-shadow: none;"><code class="language-html" data-trim>&lt;div class="card"&gt;
+              <pre style="margin: 0; font-size: 0.5em; box-shadow: none; padding: 8px 10px;"><code class="language-html" data-trim>&lt;div class="card"&gt;
   &lt;h3&gt;Bienvenido&lt;/h3&gt;
   &lt;p class="meta"&gt;Hace 2 días&lt;/p&gt;
   &lt;button class="cta"&gt;Aceptar&lt;/button&gt;
 &lt;/div&gt;</code></pre>
-              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none;"><code class="language-css" data-trim>.card { background: #0f172a; color: #e2e8f0; }
+              <pre style="margin: 4px 0 0; font-size: 0.5em; box-shadow: none; padding: 8px 10px;"><code class="language-css" data-trim>.card { background: #0f172a; color: #e2e8f0; }
 .meta { color: #94a3b8; }
 .cta  { background: #f59e0b; color: #0f172a; }</code></pre>
               <p style="font-size: 0.5em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">Resultado:</p>
@@ -795,27 +816,12 @@ p  { font-family: system-ui, sans-serif; }</code></pre>
                 <div style="color: #94a3b8; font-size: 0.6em; margin-bottom: 6px;">Hace 2 días</div>
                 <button style="background: #f59e0b; color: #0f172a; padding: 4px 12px; border: none; border-radius: 4px; font-size: 0.65em; font-weight: 600; cursor: default;">Aceptar</button>
               </div>
-              <p style="font-size: 0.45em; color: var(--text-muted); margin: 6px 0 3px; text-align: center;">La paleta del curso (4 tonos):</p>
-              <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 6px;">
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #0f172a; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.4em; color: var(--text-muted);">#0f172a</span>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #e2e8f0; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.4em; color: var(--text-muted);">#e2e8f0</span>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #f59e0b; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.4em; color: var(--text-muted);">#f59e0b</span>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
-                  <div style="background: #94a3b8; width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-muted);"></div>
-                  <span style="font-size: 0.4em; color: var(--text-muted);">#94a3b8</span>
-                </div>
-              </div>
-              <div style="text-align: center;">
-                <a href="https://coolors.co/0f172a-e2e8f0-f59e0b-94a3b8" target="_blank" rel="noopener" style="font-size: 0.5em; color: var(--accent); text-decoration: underline;">Ver esta paleta en coolors.co →</a>
+              <p style="font-size: 0.45em; color: var(--text-muted); margin: 5px 0 3px; text-align: center;">La paleta del curso:</p>
+              <div style="display: flex; gap: 8px; justify-content: center;">
+                <div style="background: #0f172a; width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--text-muted);"></div>
+                <div style="background: #e2e8f0; width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--text-muted);"></div>
+                <div style="background: #f59e0b; width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--text-muted);"></div>
+                <div style="background: #94a3b8; width: 24px; height: 24px; border-radius: 3px; border: 1px solid var(--text-muted);"></div>
               </div>
             </div>
 
@@ -827,10 +833,10 @@ p  { font-family: system-ui, sans-serif; }</code></pre>
             <p><strong>Revelar Tipografía (click 1). Revelar Color (click 2). Revelar la nota inferior (click 3).</strong></p>
             <p><u>Tipografía y color, las dos decisiones que cubre la tercera primitiva. Cada card sigue el patrón HTML → CSS → resultado.</u></p>
             <p><em>"La tercera primitiva agrupa tipografía y color, las dos cosas que más afectan la sensación general de un sitio."</em></p>
-            <p><em>"Tipografía. Arrancamos por el cómo: en CSS, la propiedad que define qué fuente usar se llama font-family. Le decís a una regla — apuntando a una etiqueta o a una clase — qué familia tipográfica aplicar al texto que renderiza ese elemento. Mirá el card de la izquierda: en el HTML hay un h1 y un p; en el CSS hay dos reglas, una para cada etiqueta, y cada una le pide su propia font-family. Con eso en la mano, vienen las dos opciones que tenés para diseñar una página. La primera: usar una sola fuente sans-serif para todo el sitio, simple y limpia, sin distinción entre títulos y cuerpo. La segunda: combinar una serif para los títulos y una sans para el cuerpo, lo que se usa cuando querés un poco más de personalidad — es lo que muestra este ejemplo. Abajo se ve el resultado: Georgia, una serif clásica, en el título; system-ui, la sans del sistema operativo, en el cuerpo. El título con personalidad, el cuerpo limpio. Por qué importa nombrar font-family en el prompt: si decís 'algo elegante' y nada más, la IA puede tirar Comic Sans irónicamente y vos no la frenaste."</em></p>
+            <p><em>"Tipografía. Arrancamos por el cómo: en CSS, la propiedad que define qué fuente usar se llama font-family. Le decís a una regla — apuntando a una etiqueta o a una clase — qué familia tipográfica aplicar al texto que renderiza ese elemento. Mirá el card de la izquierda: en el HTML hay un h1 y un p; en el CSS hay dos reglas, una para cada etiqueta, y cada una le pide su propia font-family. Antes de seguir, las tres familias que tenés que saber nombrar, y que están ahí renderizadas para que se vea la diferencia. Serif son las que tienen remates: esas patitas chiquitas en las puntas de cada trazo. Georgia, Times, las de los diarios y los libros. Sans-serif es literalmente 'sin serif' — puntas limpias, sin patitas. Helvetica, Arial, y la enorme mayoría de lo que ves en pantalla. Y monospace es la que le da a cada letra exactamente el mismo ancho, para que las columnas queden alineadas: por eso es la de los editores de código. Existen dos más en CSS, cursive y fantasy, pero cada navegador las resuelve como quiere, así que en la práctica no se usan. Con esas tres alcanza. Y ojo con una confusión muy fácil de hacer acá: esas tres palabras no son propiedades que le aplicás a una fuente, son categorías a las que la fuente ya pertenece. No podés agarrar Helvetica y pedirle que sea monospace — Helvetica es una sans-serif, sus letras tienen anchos distintos por diseño. Lo que confunde es la coma. font-family no toma una fuente más modificadores: toma una lista de respaldo en orden de preferencia. Cuando escribís Georgia coma serif, el navegador lee de izquierda a derecha: '¿tenés Georgia instalada? Usala. ¿No la tenés? Entonces usá cualquier serif que tengas.' Por eso la última posición de la lista siempre lleva una familia genérica: es la red de seguridad para cuando la fuente específica no está en la máquina del que abre la página. Y por eso la genérica del final tiene que ser de la misma categoría que las fuentes que la preceden — si ponés Helvetica coma monospace, la página se va a ver completamente distinta según quién la abra. Ahora, las dos opciones que tenés para diseñar una página. La primera: una sola sans-serif para todo el sitio, simple y limpia, sin distinción entre títulos y cuerpo. La segunda: combinar una serif para los títulos y una sans-serif para el cuerpo, lo que se usa cuando querés un poco más de personalidad — es lo que muestra este ejemplo. Abajo se ve el resultado: Georgia, una serif clásica, en el título; system-ui, la sans del sistema operativo, en el cuerpo. El título con personalidad, el cuerpo limpio. Por qué importa nombrar font-family en el prompt: si decís 'algo elegante' y nada más, la IA puede tirar Comic Sans irónicamente y vos no la frenaste."</em></p>
             <p><em>"Color. Antes de meternos en el código, una idea de fondo: en cualquier sitio profesional, el equipo elige una paleta de pocos colores y la respeta en cada elemento de la página. No se inventan colores nuevos cada vez que se agrega un botón o un encabezado — los colores se eligen al principio y se reutilizan. Eso es lo que da identidad visual coherente."</em></p>
             <p><em>"Ahora el cómo. Las dos propiedades que controlan el color de un elemento en CSS son background, que pinta el fondo, y color, que pinta el texto. Aplicás cualquiera a una regla apuntando a una etiqueta o a una clase. Mirá el card de la derecha: en el HTML hay un div con la clase card, que adentro tiene un h3 de bienvenida, un p con la clase meta para texto secundario, y un button con la clase cta. En el CSS, cada regla usa uno o dos hex de la paleta: punto-card usa el fondo cero-efe-uno-siete-dos-a y el texto principal e-dos-e-ocho-efe-cero. Punto-meta usa el muted nueve-cuatro-a-tres-be-ocho para que el 'Hace 2 días' se note menos que el título. Y punto-cta usa el acento ámbar efe-cinco-nueve-e-cero-be de fondo y el texto oscuro encima."</em></p>
-            <p><em>"El resultado, abajo, son los cuatro colores de la paleta trabajando juntos en un mismo bloque: fondo oscuro, título claro, meta gris, botón ámbar. La paleta del curso está debajo como referencia, con los hex completos. Y abajo de todo, un link a coolors.co que abre esta misma paleta en el navegador — útil cuando estás eligiendo o ajustando colores."</em></p>
+            <p><em>"El resultado, abajo, son los cuatro colores de la paleta trabajando juntos en un mismo bloque: fondo oscuro, título claro, meta gris, botón ámbar. La paleta del curso está debajo como referencia; los cuatro hex completos los tienen en el bloque de CSS de arriba. Si quieren jugar con ella, está publicada en coolors punto co barra cero-efe-uno-siete-dos-a guión e-dos-e-ocho-efe-cero guión efe-cinco-nueve-e-cero-be guión nueve-cuatro-a-tres-be-ocho — pásenles el link por el chat en vez de dictarlo."</em></p>
             <p><em>"La regla de cierre: nombrá la fuente y los códigos hex en el prompt. Si pedís 'que se vea moderno', la IA inventa una paleta genérica — esta vez ámbar, la próxima rosa, no sabés. Si pedís fondo cero-efe-uno-siete-dos-a, texto e-dos-e-ocho-efe-cero, acento efe-cinco-nueve-e-cero-be, obtenés exactamente eso. Vago es lotería; específico es determinismo."</em></p>
           </aside>
         </section>
@@ -1173,16 +1179,16 @@ btn.addEventListener('click', () =&gt; {
             Cómo se reparten las cuatro capas anteriores <span style="color: var(--accent);">entre archivos</span>.
           </p>
           <p style="margin-top: 8px; font-size: 0.7em; text-align: center; color: var(--text-muted); max-width: 42em; margin-left: auto; margin-right: auto; font-style: italic;">
-            <strong>Empaque</strong> es la decisión. <strong>Single-file</strong> es la estrategia que usa este curso: todo en un solo <code>.html</code>, con el CSS y el JavaScript dentro del mismo archivo, sin más herramientas que un navegador moderno.
+            <strong>Empaque</strong> es la decisión. <strong>Single-file</strong> es una de las estrategias: todo en un solo <code>.html</code>, con el CSS y el JavaScript dentro del mismo archivo, sin más herramientas que un navegador moderno.
           </p>
           <p class="fragment fade-in" style="margin-top: 20px; font-size: 0.85em; text-align: center; color: var(--text-muted); max-width: 32em; margin-left: auto; margin-right: auto;">
             ¿Por qué la versión más simple, todo en un solo archivo, es la que mejor funciona con una IA?
           </p>
           <aside class="notes">
             <p><strong>Después de la frase principal y la definición, revelar la pregunta de transición con un click.</strong></p>
-            <p><u>Apertura de §5. Capa de empaque activa. Distinguir empaque (decisión general) de single-file (una estrategia particular) antes de defender la estrategia que usamos.</u></p>
+            <p><u>Apertura de §5. Capa de empaque activa. Distinguir empaque (decisión general) de single-file (una estrategia particular) antes de comparar las dos.</u></p>
             <p><em>"Quinta y última capa: empaque. Es la decisión de cómo se distribuyen las cuatro capas anteriores — estructura, estilo, comportamiento y estado — entre archivos. Pueden ir todas en un solo archivo HTML, pueden ir cada una en su archivo separado, o pueden ir en una pila más compleja con bundlers, módulos y compiladores. Empaque es la decisión; cada una de esas formas es una estrategia."</em></p>
-            <p><em>"En esta clase usamos la estrategia más simple: todo en un solo .html. Se llama single-file. Quiero ser preciso con qué significa: el archivo tiene HTML, CSS y JavaScript adentro — el CSS dentro de un tag style, el JS dentro de un tag script — y nada más. No hay archivos auxiliares, no hay paquetes que instalar, no hay servidor que levantar, no hay builds. Cualquier navegador moderno lo abre con doble click y lo ejecuta. No es la única forma; en la industria, los proyectos grandes usan multi-archivo casi siempre. Vamos a ver las dos, una al lado de la otra, y recién después por qué elegimos ésta."</em></p>
+            <p><em>"Arrancamos por la estrategia más simple: todo en un solo .html. Se llama single-file. Quiero ser preciso con qué significa: el archivo tiene HTML, CSS y JavaScript adentro — el CSS dentro de un tag style, el JS dentro de un tag script — y nada más. No hay archivos auxiliares, no hay paquetes que instalar, no hay servidor que levantar, no hay builds. Cualquier navegador moderno lo abre con doble click y lo ejecuta. No es la única forma, y ojo con esto porque conviene decirlo ahora: en la industria los proyectos grandes usan multi-archivo casi siempre, y ustedes van a terminar usando las dos. Lo que construyan hoy sale single-file, pero cuando el proyecto crezca — el final, sin ir más lejos — van a necesitar la otra. Por eso las vemos a las dos, una al lado de la otra, y recién después por qué para esto elegimos ésta."</em></p>
           </aside>
         </section>
 
@@ -1252,7 +1258,7 @@ btn.addEventListener('click', () =&gt; {
             <p><em>"Adentro del body, las dos etiquetas semánticas — span y button — que vimos en §4. Esa es la capa 1, la estructura. Lo único que define qué hay en la página."</em></p>
             <p><em>"Y al final del body, antes del cierre, un tag script. Ese bloque entero es JavaScript: las capas 3 y 4 — comportamiento y estado — pegadas. Adentro tenemos let count en cero, los dos querySelector que vimos en §4, y el addEventListener que conecta el click con la mutación del estado y del DOM. Lo que en multi-archivo iría en un app.js separado, acá vive dentro del body."</em></p>
             <p><em>"Aclaración por si alguien la pregunta: ¿por qué el style va en el head y el script va al final del body? Es por cómo parsea el navegador. Lee el archivo de arriba hacia abajo. El CSS tiene que estar antes de que arranque a pintar la página, así que va en el head; si lo ponés más abajo, la página renderiza un instante sin estilos y después salta al diseño correcto. El JavaScript es al revés: querySelector del span con id count solo funciona si ese span ya existe en el DOM. Por eso el script va al final del body, después del contenido. Misma idea, dos posiciones opuestas: CSS antes del paint, JS después de que el HTML esté armado."</em></p>
-            <p><em>"Y la capa 5, empaque: todo eso vive en un solo .html. No hay archivos auxiliares. Doble click sobre el archivo, el navegador lo abre, el contador funciona. A la derecha tienen el render: el span y el botón ya pintados con el CSS, listos para hacer click. Esto es exactamente lo que vamos a producir todo el curso."</em></p>
+            <p><em>"Y la capa 5, empaque: todo eso vive en un solo .html. No hay archivos auxiliares. Doble click sobre el archivo, el navegador lo abre, el contador funciona. A la derecha tienen el render: el span y el botón ya pintados con el CSS, listos para hacer click. Esto es exactamente lo que van a producir en la primera entrega."</em></p>
           </aside>
         </section>
 
@@ -1357,13 +1363,34 @@ btn.addEventListener('click', () =&gt; {
               Python importa desde <code>site-packages</code> y listo. El navegador no sabe leer una carpeta de dependencias, así que alguien tiene que aplastar todo a un archivo que sí entienda.
             </p>
           </div>
+          <div class="fragment fade-in" style="margin-top: 16px;">
+            <p style="font-size: 0.72em; text-align: center; margin-bottom: 10px;">
+              <code>package.json</code> guarda además los <strong style="color: var(--accent);">comandos</strong> del proyecto.
+            </p>
+            <div style="display: flex; gap: 26px; align-items: center; justify-content: center;">
+              <div style="font-family: var(--font-mono); font-size: 0.5em; white-space: pre; background: var(--bg-code); color: var(--code-text); padding: 10px 14px; border-radius: 4px; flex: 0 0 auto;">"scripts": {
+  "start": "vite",
+  "build": "vite build"
+}</div>
+              <div style="font-size: 0.62em; line-height: 1.9; flex: 0 0 auto;">
+                <div><code style="color: var(--accent);">npm start</code> — levanta el servidor de desarrollo</div>
+                <div><code style="color: var(--accent-secondary);">npm run build</code> — corre el bundler y escribe <code>dist/</code></div>
+              </div>
+            </div>
+            <p style="font-size: 0.62em; color: var(--text-muted); text-align: center; max-width: 42em; margin: 12px auto 0;">
+              <code>start</code> y <code>test</code> tienen atajo propio; cualquier otro script necesita <code>run</code>.
+            </p>
+          </div>
           <aside class="notes">
-            <p><strong>Recorrer la tabla fila por fila. Click revela el bundler.</strong></p>
+            <p><strong>Recorrer la tabla fila por fila. Click 1 revela el bundler. Click 2 revela los comandos.</strong></p>
             <p><u>npm explicado por analogía con pip. La única pieza nueva es el bundler; el resto ya lo saben con otros nombres.</u></p>
             <p><em>"npm es el gestor de paquetes de JavaScript. Y la buena noticia es que no tienen que aprenderlo de cero, porque ya lo usaron en Python con otro nombre. Fila por fila."</em></p>
             <p><em>"El requirements.txt de Python es el package.json de JavaScript: un archivo de texto donde declarás qué librerías necesita tu proyecto y en qué versión. PyPI, el repositorio público de donde pip descarga, es el npm registry. El comando pip install es npm install: lee el manifiesto, va al registro, descarga. Y donde Python deja todo en site-packages, JavaScript lo deja en node_modules. Misma cadena, cuatro nombres distintos."</em></p>
             <p><em>"Un detalle sobre node_modules que a veces sorprende: es enorme. Un proyecto chico se lleva tranquilamente cientos de megas, porque cada dependencia arrastra las suyas. Por eso nunca se versiona en git — se declara en el package.json y cada uno corre npm install en su máquina."</em></p>
             <p><em>"[Click.] Y acá está la pieza que Python no necesita: el bundler. En Python, tu programa corre en tu máquina y puede leer site-packages directamente. En la web no: el que ejecuta el código es el navegador de otra persona, y el navegador no tiene acceso a tu carpeta de dependencias. Entonces hace falta un paso intermedio que agarre tu código más las dependencias que usás y las aplaste en uno o dos archivos que el browser sí pueda descargar. Ese paso es el bundler — webpack, vite, esbuild. Es el precio de admisión del multi-archivo en frontend, y es exactamente el precio que el single-file no paga."</em></p>
+            <p><em>"[Click.] Una última cosa sobre package.json, porque hasta acá parece que solo sirve para declarar dependencias. También guarda los comandos del proyecto, en una sección que se llama scripts. Vos les ponés el nombre que quieras y adentro va la línea que se ejecuta de verdad."</em></p>
+            <p><em>"Estos dos son los que van a ver en el noventa y nueve por ciento de los proyectos. npm start levanta el servidor de desarrollo — el que te sirve la página en localhost mientras trabajás. Y npm run build es el que dispara el bundler que acabamos de ver: agarra tu código más las dependencias y escribe la carpeta dist, que es lo que después subís al servidor. O sea que la flecha del medio del diagrama de arriba, en la práctica, es este comando."</em></p>
+            <p><em>"Y un detalle que confunde a todo el mundo la primera vez: start y test tienen atajo propio, podés escribir npm start sin la palabra run. Cualquier otro script la necesita. Por eso es npm run build y no npm build — si tipean npm build no van a obtener lo que esperan."</em></p>
           </aside>
         </section>
 
