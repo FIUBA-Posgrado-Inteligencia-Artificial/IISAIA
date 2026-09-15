@@ -411,6 +411,19 @@
   color: var(--accent-secondary);
   text-align: center;
 }
+/* Stage 5 por turnos: fragments que colapsan su lugar al ocultarse.
+   .c5-in  = fade-in, no ocupa lugar hasta que aparece.
+   .c5-out = fade-out, deja de ocupar lugar cuando desaparece. */
+.reveal .s1-recap-stage4 .fragment.c5-in:not(.visible) { display: none; }
+.reveal .s1-recap-stage4 .fragment.c5-out.visible { display: none; }
+.reveal .s1-c5-empty {
+  margin: 0 !important;
+  font-size: 0.56em;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: left;
+}
+.reveal .s1-c5-out p.s1-c5-empty { text-align: center; }
 </style>
 
 <!-- §1.1 · Recap — el programa que envuelve al LLM -->
@@ -491,28 +504,36 @@
     <p class="s1-recap-infer fragment fade-in" data-fragment-index="4">Los pasos 2 a 4 los corre un <strong>servidor de inferencia</strong>: el backend del proveedor si usás Claude, ChatGPT o Gemini; tu propia máquina si corrés un modelo abierto.</p>
     </div>
 
-    <!-- Stage 5: appears alone with full width when the 4-col view fades out.
-         Flujo: contexto (un solo texto) → programa externo → respuesta,
-         y el retorno de la respuesta al historial del próximo turno. -->
+    <!-- Stage 5: conversación por turnos. Índices: 5 aparece (turno 1),
+         6 respuesta 1, 7 turno 2 (intercambio pasa al historial), 8 respuesta 2. -->
     <div class="s1-recap-stage4 fragment fade-in" data-fragment-index="5">
       <span class="s1-recap-stage4-label">5 · conversación: el programa arma el contexto turno tras turno</span>
 
       <div class="s1-c5-flow">
         <div class="s1-c5-ctx">
-          <span class="s1-c5-title">lo que recibe el LLM en cada turno</span>
+          <span class="s1-c5-title">lo que recibe el LLM en el turno <span class="fragment fade-out c5-out" data-fragment-index="7">1</span><span class="fragment fade-in c5-in" data-fragment-index="7">2</span></span>
           <div class="s1-c5-seg sys">
             <span class="s1-c5-tag">system prompt · fijo</span>
             <p>"Sos un asistente útil que responde con precisión y brevedad."</p>
           </div>
           <div class="s1-c5-seg hist">
             <span class="s1-c5-tag">historial · crece</span>
-            <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
-            <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje de programación interpretado…</p>
+            <p class="s1-c5-empty fragment fade-out c5-out" data-fragment-index="7">vacío en el primer turno</p>
+            <div class="fragment fade-in c5-in" data-fragment-index="7">
+              <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
+              <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje de programación interpretado…</p>
+            </div>
           </div>
           <div class="s1-c5-seg new">
             <span class="s1-c5-tag">mensaje nuevo</span>
-            <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
-            <p><strong>&lt;|assistant|&gt;</strong></p>
+            <div class="fragment fade-out c5-out" data-fragment-index="7">
+              <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
+              <p><strong>&lt;|assistant|&gt;</strong></p>
+            </div>
+            <div class="fragment fade-in c5-in" data-fragment-index="7">
+              <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+              <p><strong>&lt;|assistant|&gt;</strong></p>
+            </div>
           </div>
         </div>
 
@@ -530,11 +551,18 @@
 
         <div class="s1-c5-out">
           <span class="s1-c5-title">respuesta</span>
-          <p>"Para instalar Python, descargá el instalador desde python.org…"</p>
+          <p class="s1-c5-empty fragment fade-out c5-out" data-fragment-index="6">…</p>
+          <div class="fragment fade-out c5-out" data-fragment-index="7">
+            <p class="fragment fade-in c5-in" data-fragment-index="6">"Un lenguaje de programación interpretado…"</p>
+          </div>
+          <div class="fragment fade-out c5-out" data-fragment-index="8">
+            <p class="s1-c5-empty fragment fade-in c5-in" data-fragment-index="7">…</p>
+          </div>
+          <p class="fragment fade-in c5-in" data-fragment-index="8">"Para instalar Python, descargá el instalador desde python.org…"</p>
         </div>
       </div>
 
-      <div class="s1-c5-return" aria-hidden="true">
+      <div class="s1-c5-return fragment fade-in" data-fragment-index="7" aria-hidden="true">
         <div class="s1-c5-return-path"></div>
         <div class="s1-c5-return-head"></div>
         <p class="s1-c5-return-label">próximo turno: el mensaje y la respuesta pasan al historial</p>
@@ -543,14 +571,17 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Cinco estados y una línea de resumen: cinco reveals. Señalar siempre la caja punteada.</strong></p>
+    <p><strong>Ocho reveals: estados 2-4, resumen, y el punto 5 en cuatro clicks (turno 1, respuesta, turno 2, respuesta). Señalar siempre la caja punteada.</strong></p>
     <p><u>Recap de S1: cómo creció el programa externo alrededor del LLM.</u></p>
     <p><em>"Arranquemos con un refresco de la semana 1. La unidad básica del modelo es esta: le pasás un texto, te devuelve el próximo token. Una sola predicción. No hace falta nada más alrededor."</em></p>
     <p><em>"Lo que vimos después es que esa predicción se mete en un loop. Y acá empieza algo importante: el loop no lo corre el LLM. Lo corre un programa afuera, la rutina del provider, del SDK, del runtime, que toma la salida del LLM, la concatena a la entrada, le vuelve a pedir el próximo token, y corta cuando se alcanza un tope explícito como max_tokens. Esa caja punteada es lo nuevo que tienen que ver."</em></p>
     <p><em>"La versión madura del loop introduce dos usos de tokens especiales que el LLM aprendió en una etapa puntual de su entrenamiento: el supervised fine-tuning, o SFT. Por eso ahora la caja dice 'LLM + SFT'. El primero, en la entrada: el usuario manda texto plano. Es el programa el que envuelve ese texto con tokens de rol: pone &lt;|user|&gt; antes del mensaje y &lt;|assistant|&gt; al final, como diciéndole 'acá te toca a vos'. El LLM aprendió en SFT a leer esos marcadores. El segundo, en la salida: durante SFT el modelo aprende a emitir un token de fin de turno, que el programa interpreta como 'terminé'. La señal viene de adentro del LLM, pero quien la lee y detiene la generación sigue siendo el programa."</em></p>
     <p><em>"El siguiente paso del entrenamiento agrega una capa más: reinforcement learning, RL. Por eso la caja dice 'LLM + SFT + RL'. Lo que aprende el modelo con RL, entre otras cosas, es a razonar antes de responder. Genera una cadena de pensamiento envuelta en tokens especiales como &lt;thinking&gt;...&lt;/thinking&gt;, y después la respuesta final. El programa externo lee el output completo, filtra los tokens de razonamiento, y solo le muestra al usuario la respuesta final. El pensamiento queda entre bambalinas. Otra responsabilidad nueva del programa."</em></p>
     <p><em>"¿Y dónde corre todo esto? Estos cuatro pasos los corre un servidor de inferencia. Si usás Claude, ChatGPT o Gemini, ese servidor es el backend del proveedor: vos no lo ves. Si bajás un modelo abierto y lo corrés con Ollama o vLLM, o en una GPU alquilada como la demo de Llama, ese mismo programa corre en una máquina tuya. Un detalle: con algunos modelos abiertos el razonamiento viene tal cual en la salida, y lo filtra la aplicación que lo muestra."</em></p>
-    <p><em>"Ahora dejá que los cuatro se vayan y mirá esto solo. El programa hace una cosa más, que es lo que arma la conversación que conocen. Tres bloques: el system prompt, un texto fijo que el programa pone primero en cada turno. El historial, todo lo que el usuario y el modelo se dijeron antes, que el programa guarda. Y el mensaje nuevo. El programa concatena los tres bloques en un solo texto y eso es lo que el LLM recibe, en cada turno, completo. El LLM genera la respuesta, siempre con su loop, su &lt;END&gt; y su razonamiento interno. Y si en el medio emite una tool call, por ejemplo una búsqueda, el programa pausa, la ejecuta, le inyecta el resultado y el LLM sigue redactando con eso delante. Fijate para qué sirven acá las tools: consultan el mundo para redactar una respuesta, y todo termina cuando termina el texto. Después el programa suma el intercambio al historial. Próximo turno, el historial es un poco más largo. El LLM por sí solo no recuerda nada entre turnos; el que recuerda es el programa. Todo lo que sigue trata sobre cómo evoluciona este programa: empezó contando tokens, aprendió a mantener una conversación, va a terminar siendo un agente."</em></p>
+    <p><em>"Ahora dejá que los cuatro se vayan y mirá esto solo: una conversación. Primer turno. El programa arma un solo texto: el system prompt, un texto fijo que va primero, y tu mensaje, envuelto en tokens de rol. El historial todavía está vacío. Eso, completo, es lo que recibe el LLM."</em></p>
+    <p><em>"El LLM genera la respuesta, siempre con su loop, su &lt;END&gt; y su razonamiento interno. Y si en el medio emite una tool call, por ejemplo una búsqueda, el programa pausa, la ejecuta, le inyecta el resultado y el LLM sigue redactando con eso delante. Fijate para qué sirven acá las tools: consultan el mundo para redactar una respuesta, y todo termina cuando termina el texto."</em></p>
+    <p><em>"Segundo turno. El programa toma el intercambio anterior, tu pregunta y su respuesta, y lo pasa al historial. Tu mensaje nuevo va al final. Y le vuelve a mandar todo completo: system prompt, historial y mensaje nuevo. El LLM por sí solo no recuerda nada entre turnos; el que recuerda es el programa."</em></p>
+    <p><em>"Llega la segunda respuesta, y así sigue: en cada turno el historial es un poco más largo. Todo lo que sigue trata sobre cómo evoluciona este programa: empezó contando tokens, aprendió a mantener una conversación, va a terminar siendo un agente."</em></p>
   </aside>
 </section>
 
