@@ -571,7 +571,7 @@
 
       <div class="s1-c5-flow">
         <div class="s1-c5-ctx">
-          <span class="s1-c5-title">lo que recibe el LLM en el turno <span class="fragment fade-out c5-out" data-fragment-index="7">1</span><span class="fragment fade-in c5-in" data-fragment-index="7">2</span></span>
+          <span class="s1-c5-title">lo que recibe el LLM en el turno <span class="fragment fade-out c5-out" data-fragment-index="7">1</span><span class="fragment fade-out c5-out" data-fragment-index="9"><span class="fragment fade-in c5-in" data-fragment-index="7">2</span></span><span class="fragment fade-in c5-in" data-fragment-index="9">3</span></span>
           <div class="s1-c5-seg sys">
             <span class="s1-c5-tag">system prompt · fijo</span>
             <p>"Sos un asistente útil que responde con precisión y brevedad."</p>
@@ -579,9 +579,17 @@
           <div class="s1-c5-seg hist">
             <span class="s1-c5-tag">historial · crece</span>
             <p class="s1-c5-empty fragment fade-out c5-out" data-fragment-index="7">vacío en el primer turno</p>
-            <div class="fragment fade-in c5-in" data-fragment-index="7">
+            <div class="fragment fade-out c5-out" data-fragment-index="9">
+              <div class="fragment fade-in c5-in" data-fragment-index="7">
+                <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
+                <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje de programación interpretado…</p>
+              </div>
+            </div>
+            <div class="fragment fade-in c5-in" data-fragment-index="9">
               <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
               <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje de programación interpretado…</p>
+              <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+              <p><strong>&lt;|assistant|&gt;</strong> Descargá el instalador desde python.org…</p>
             </div>
           </div>
           <div class="s1-c5-seg new">
@@ -590,8 +598,14 @@
               <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
               <p><strong>&lt;|assistant|&gt;</strong></p>
             </div>
-            <div class="fragment fade-in c5-in" data-fragment-index="7">
-              <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+            <div class="fragment fade-out c5-out" data-fragment-index="9">
+              <div class="fragment fade-in c5-in" data-fragment-index="7">
+                <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+                <p><strong>&lt;|assistant|&gt;</strong></p>
+              </div>
+            </div>
+            <div class="fragment fade-in c5-in" data-fragment-index="9">
+              <p><strong>&lt;|user|&gt;</strong> ¿y cómo agrego una librería?</p>
               <p><strong>&lt;|assistant|&gt;</strong></p>
             </div>
           </div>
@@ -618,7 +632,13 @@
           <div class="fragment fade-out c5-out" data-fragment-index="8">
             <p class="s1-c5-empty fragment fade-in c5-in" data-fragment-index="7">…</p>
           </div>
-          <p class="fragment fade-in c5-in" data-fragment-index="8">"Para instalar Python, descargá el instalador desde python.org…"</p>
+          <div class="fragment fade-out c5-out" data-fragment-index="9">
+            <p class="fragment fade-in c5-in" data-fragment-index="8">"Para instalar Python, descargá el instalador desde python.org…"</p>
+          </div>
+          <div class="fragment fade-out c5-out" data-fragment-index="10">
+            <p class="s1-c5-empty fragment fade-in c5-in" data-fragment-index="9">…</p>
+          </div>
+          <p class="fragment fade-in c5-in" data-fragment-index="10">"Con pip: abrí la terminal y corré pip install requests…"</p>
         </div>
       </div>
 
@@ -631,7 +651,7 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Ocho reveals: estados 2-4, resumen, y el punto 5 en cuatro clicks (turno 1, respuesta, turno 2, respuesta). Señalar siempre la caja punteada.</strong></p>
+    <p><strong>Diez reveals: estados 2-4, resumen, y el punto 5 en seis clicks (tres turnos con su respuesta). Señalar siempre la caja punteada.</strong></p>
     <p><u>Recap de S1: cómo creció el programa externo alrededor del LLM.</u></p>
     <p><em>"Arranquemos con un refresco de la semana 1. La unidad básica del modelo es esta: le pasás un texto, te devuelve el próximo token. Una sola predicción. No hace falta nada más alrededor."</em></p>
     <p><em>"Lo que vimos después es que esa predicción se mete en un loop. Y acá empieza algo importante: el loop no lo corre el LLM. Lo corre un programa afuera, la rutina del provider, del SDK, del runtime, que toma la salida del LLM, la concatena a la entrada, le vuelve a pedir el próximo token, y corta cuando se alcanza un tope explícito como max_tokens. Esa caja punteada es lo nuevo que tienen que ver."</em></p>
@@ -641,7 +661,9 @@
     <p><em>"Ahora dejá que los cuatro se vayan y mirá esto solo: una conversación. Primer turno. El programa arma un solo texto: el system prompt, un texto fijo que va primero, y tu mensaje, envuelto en tokens de rol. El historial todavía está vacío. Eso, completo, es lo que recibe el LLM."</em></p>
     <p><em>"El LLM genera la respuesta, siempre con su loop, su &lt;END&gt; y su razonamiento interno. Y si en el medio emite una tool call, por ejemplo una búsqueda, el programa pausa, la ejecuta, le inyecta el resultado y el LLM sigue redactando con eso delante. Fijate para qué sirven acá las tools: consultan el mundo para redactar una respuesta, y todo termina cuando termina el texto."</em></p>
     <p><em>"Segundo turno. El programa toma el intercambio anterior, tu pregunta y su respuesta, y lo pasa al historial. Tu mensaje nuevo va al final. Y le vuelve a mandar todo completo: system prompt, historial y mensaje nuevo. El LLM por sí solo no recuerda nada entre turnos; el que recuerda es el programa."</em></p>
-    <p><em>"Llega la segunda respuesta, y así sigue: en cada turno el historial es un poco más largo. Todo lo que sigue trata sobre cómo evoluciona este programa: empezó contando tokens, aprendió a mantener una conversación, va a terminar siendo un agente."</em></p>
+    <p><em>"Llega la segunda respuesta."</em></p>
+    <p><em>"Tercer turno, y ya se ve el patrón: el intercambio anterior también pasa al historial, que ahora tiene dos idas y vueltas. El mensaje nuevo va al final. Mirá el bloque de la izquierda: es lo único que el LLM ve, y crece turno a turno."</em></p>
+    <p><em>"Tercera respuesta. Cada turno el texto de entrada es un poco más largo, y eso lo van a volver a ver en un rato cuando hablemos de la ventana de contexto. Todo lo que sigue trata sobre cómo evoluciona este programa: empezó contando tokens, aprendió a mantener una conversación, va a terminar siendo un agente."</em></p>
   </aside>
 </section>
 
