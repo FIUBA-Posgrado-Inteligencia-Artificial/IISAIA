@@ -1195,7 +1195,7 @@
       <div class="s2-trace-phase pensar">pensar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p><code>GET /projects/4/tasks</code> devuelve 404. No sé si falla el request o cómo está registrado el endpoint.</p>
+        <p><code>GET /projects/4/tasks</code> devuelve 404. No sé si falla el request o cómo está registrado el endpoint: lo reproduzco con un <code>curl</code> y leo el router.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -1219,7 +1219,7 @@
       <div class="s2-trace-phase pensar">pensar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>Ya sé qué falla y dónde. Corrijo el path en el router.</p>
+        <p>Ya sé qué falla y dónde. Corrijo el <code>prefix</code> en el router y vuelvo a probar con <code>curl</code>.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -1245,7 +1245,7 @@
   <aside class="notes">
     <p><strong>Leer el trace despacio, fase por fase, con el puntero.</strong></p>
     <p><u>Trace de dos vueltas sobre un 404 local; leer el router es parte de actuar.</u></p>
-    <p><em>"Veámoslo concreto, en tu máquina. La tarea: 'arreglá el 404 en /projects/4/tasks'. El agente no tiene más información que el objetivo. Primera vuelta. Pensar: no sé si el problema está en el request o en cómo se registró el endpoint. Actuar: dos tools en la misma vuelta, un curl al endpoint y una lectura del archivo del router. Observar: el curl confirma el 404, y en el router el prefix termina en barra, así que el path quedó registrado como /projects/{id}//tasks, con el slash duplicado. Esa observación entró al contexto. Segunda vuelta. Pensar: ya sé qué es y dónde está. Actuar: edita el router. Observar: repite el curl y devuelve 200. Condición de corte: objetivo alcanzado. Dos vueltas. La primera no arregló nada: identificó la causa. La segunda corrigió y verificó. Un chat que te devuelve un texto después del primer prompt no completó ninguna de esas vueltas: te delegó el trabajo a vos."</em></p>
+    <p><em>"Veámoslo concreto, en tu máquina. La tarea: 'arreglá el 404 en /projects/4/tasks'. El agente no tiene más información que el objetivo. Primera vuelta. Pensar: no sé si el problema está en el request o en cómo se registró el endpoint, así que decide dos cosas: reproducirlo con un curl y leer el router. Marcá eso: elegir qué tools va a usar es parte de pensar. Actuar: las dos tools en la misma vuelta, el curl al endpoint y la lectura del archivo del router. Observar: el curl confirma el 404, y en el router el prefix termina en barra, así que el path quedó registrado como /projects/{id}//tasks, con el slash duplicado. Esa observación entró al contexto. Segunda vuelta. Pensar: ya sé qué es y dónde está, corrijo el prefix y vuelvo a probar. Actuar: edita el router. Observar: repite el curl y devuelve 200. Condición de corte: objetivo alcanzado. Dos vueltas. La primera no arregló nada: identificó la causa. La segunda corrigió y verificó. Un chat que te devuelve un texto después del primer prompt no completó ninguna de esas vueltas: te delegó el trabajo a vos."</em></p>
   </aside>
 </section>
 
