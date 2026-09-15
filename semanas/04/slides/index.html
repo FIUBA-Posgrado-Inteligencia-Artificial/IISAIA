@@ -599,31 +599,31 @@
             <p class="s1-c5-empty fragment fade-out c5-out" data-fragment-index="7">vacío en el primer turno</p>
             <div class="fragment fade-out c5-out" data-fragment-index="9">
               <div class="fragment fade-in c5-in" data-fragment-index="7">
-                <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
-                <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje interpretado…</p>
+                <p><strong>&lt;|user|&gt;</strong> ¿cómo agrego requests al proyecto?</p>
+                <p><strong>&lt;|assistant|&gt;</strong> Con uv: corré uv add requests.</p>
               </div>
             </div>
             <div class="fragment fade-in c5-in" data-fragment-index="9">
-              <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
-              <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje interpretado…</p>
-              <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
-              <p><strong>&lt;|assistant|&gt;</strong> Descargá el instalador de python.org…</p>
+              <p><strong>&lt;|user|&gt;</strong> ¿cómo agrego requests al proyecto?</p>
+              <p><strong>&lt;|assistant|&gt;</strong> Con uv: corré uv add requests.</p>
+              <p><strong>&lt;|user|&gt;</strong> ¿y para correr los tests?</p>
+              <p><strong>&lt;|assistant|&gt;</strong> uv run pytest, sin activar el entorno.</p>
             </div>
           </div>
           <div class="s1-c5-seg new">
             <span class="s1-c5-tag">mensaje nuevo</span>
             <div class="fragment fade-out c5-out" data-fragment-index="7">
-              <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
+              <p><strong>&lt;|user|&gt;</strong> ¿cómo agrego requests al proyecto?</p>
               <p><strong>&lt;|assistant|&gt;</strong></p>
             </div>
             <div class="fragment fade-out c5-out" data-fragment-index="9">
               <div class="fragment fade-in c5-in" data-fragment-index="7">
-                <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+                <p><strong>&lt;|user|&gt;</strong> ¿y para correr los tests?</p>
                 <p><strong>&lt;|assistant|&gt;</strong></p>
               </div>
             </div>
             <div class="fragment fade-in c5-in" data-fragment-index="9">
-              <p><strong>&lt;|user|&gt;</strong> ¿y cómo agrego una librería?</p>
+              <p><strong>&lt;|user|&gt;</strong> ¿cómo fijo la versión?</p>
               <p><strong>&lt;|assistant|&gt;</strong></p>
             </div>
           </div>
@@ -645,18 +645,18 @@
           <span class="s1-c5-title">respuesta</span>
           <p class="s1-c5-empty fragment fade-out c5-out" data-fragment-index="6">…</p>
           <div class="fragment fade-out c5-out" data-fragment-index="7">
-            <p class="fragment fade-in c5-in" data-fragment-index="6">"Un lenguaje de programación interpretado…"</p>
+            <p class="fragment fade-in c5-in" data-fragment-index="6">"Con uv: corré uv add requests."</p>
           </div>
           <div class="fragment fade-out c5-out" data-fragment-index="8">
             <p class="s1-c5-empty fragment fade-in c5-in" data-fragment-index="7">…</p>
           </div>
           <div class="fragment fade-out c5-out" data-fragment-index="9">
-            <p class="fragment fade-in c5-in" data-fragment-index="8">"Para instalar Python, descargá el instalador desde python.org…"</p>
+            <p class="fragment fade-in c5-in" data-fragment-index="8">"uv run pytest, sin activar el entorno."</p>
           </div>
           <div class="fragment fade-out c5-out" data-fragment-index="10">
             <p class="s1-c5-empty fragment fade-in c5-in" data-fragment-index="9">…</p>
           </div>
-          <p class="fragment fade-in c5-in" data-fragment-index="10">"Con pip: abrí la terminal y corré pip install requests…"</p>
+          <p class="fragment fade-in c5-in" data-fragment-index="10">"uv add 'requests&gt;=2.32' y commiteá el uv.lock."</p>
         </div>
       </div>
 
@@ -677,8 +677,8 @@
     <p><em>"El siguiente paso del entrenamiento agrega una capa más: reinforcement learning, RL. Por eso la caja dice 'LLM + SFT + RL'. Lo que aprende el modelo con RL, entre otras cosas, es a razonar antes de responder. Genera una cadena de pensamiento envuelta en tokens especiales como &lt;thinking&gt;...&lt;/thinking&gt;, y después la respuesta final. El programa externo lee el output completo, filtra los tokens de razonamiento, y solo le muestra al usuario la respuesta final. El pensamiento queda entre bambalinas. Otra responsabilidad nueva del programa."</em></p>
     <p><em>"¿Y dónde corre todo esto? Estos cuatro pasos los corre un servidor de inferencia. Si usás Claude, ChatGPT o Gemini, ese servidor es el backend del proveedor: vos no lo ves. Si bajás un modelo abierto y lo corrés con Ollama o vLLM, o en una GPU alquilada como la demo de Llama, ese mismo programa corre en una máquina tuya. Un detalle: con algunos modelos abiertos el razonamiento viene tal cual en la salida, y lo filtra la aplicación que lo muestra."</em></p>
     <p><em>"Ahora dejá que los cuatro se vayan y mirá esto solo: una conversación. Primer turno. El programa arma un solo texto: el system prompt, un texto fijo que va primero, y tu mensaje, envuelto en tokens de rol. El historial todavía está vacío. Eso, completo, es lo que recibe el LLM."</em></p>
-    <p><em>"Y miren la segunda línea del system prompt. Cuando usan ChatGPT o Claude en la web y el modelo 'se acuerda' de algo que le contaron la semana pasada, no es que el modelo recuerde: el producto guarda esos datos en algún lado y el programa se los pega al system prompt antes de mandarlo. Sigue siendo texto en la entrada. El modelo no recuerda: lee."</em></p>
-    <p><em>"El LLM genera la respuesta, siempre con su loop, su &lt;END&gt; y su razonamiento interno. Y si en el medio emite una tool call, por ejemplo una búsqueda, el programa pausa, la ejecuta, le inyecta el resultado y el LLM sigue redactando con eso delante. Fijate para qué sirven acá las tools: consultan el mundo para redactar una respuesta, y todo termina cuando termina el texto."</em></p>
+    <p><em>"Y miren la segunda línea del system prompt. Cuando usan ChatGPT o Claude en la web y el modelo 'se acuerda' de algo que le contaron la semana pasada, no es que el modelo recuerde: el producto guarda esos datos en algún lado y el programa se los pega al system prompt antes de mandarlo. Acá dice que este usuario programa en Python y usa uv. Sigue siendo texto en la entrada. El modelo no recuerda: lee."</em></p>
+    <p><em>"Y fijate la respuesta: contesta con uv, aunque en esta conversación nadie dijo uv. Eso salió de la línea de memoria, no del historial. El LLM genera la respuesta, siempre con su loop, su &lt;END&gt; y su razonamiento interno. Y si en el medio emite una tool call, por ejemplo una búsqueda, el programa pausa, la ejecuta, le inyecta el resultado y el LLM sigue redactando con eso delante. Fijate para qué sirven acá las tools: consultan el mundo para redactar una respuesta, y todo termina cuando termina el texto."</em></p>
     <p><em>"Segundo turno. El programa toma el intercambio anterior, tu pregunta y su respuesta, y lo pasa al historial. Tu mensaje nuevo va al final. Y le vuelve a mandar todo completo: system prompt, historial y mensaje nuevo. El LLM por sí solo no recuerda nada entre turnos; el que recuerda es el programa."</em></p>
     <p><em>"Llega la segunda respuesta."</em></p>
     <p><em>"Tercer turno, y ya se ve el patrón: el intercambio anterior también pasa al historial, que ahora tiene dos idas y vueltas. El mensaje nuevo va al final. Mirá el bloque de la izquierda: es lo único que el LLM ve, y crece turno a turno."</em></p>
