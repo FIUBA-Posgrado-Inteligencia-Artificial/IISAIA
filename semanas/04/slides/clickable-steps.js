@@ -77,11 +77,11 @@ function initClickableSteps(opts) {
       var detailColor = s.color || 'var(--accent)';
       html += '<div style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 100; '
         + 'background: var(--bg-code); border-radius: 6px; padding: 8px 12px; '
-        + 'font-size: 0.4em; line-height: 1.45; '
+        + 'font-size: 0.53em; line-height: 1.45; '
         + 'border-left: 3px solid ' + detailColor + '; '
-        + 'max-height: 220px; overflow-y: auto; '
+        + 'max-height: 280px; overflow-y: auto; '
         + 'box-shadow: 0 6px 20px rgba(0,0,0,0.5);">';
-      html += '<div style="color: var(--text-muted); margin-bottom: 6px; font-size: 0.95em;">Ejemplo concreto &mdash; ' + s.title + '</div>';
+      html += '<div style="color: var(--text-muted); margin-bottom: 6px; font-size: 0.95em;">Ejemplo concreto &middot; ' + s.title + '</div>';
       html += s.example;
       html += '</div>';
     }

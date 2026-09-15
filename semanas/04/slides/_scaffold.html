@@ -39,207 +39,6 @@
       display: block;
     }
 
-    /* ------------------------------------------------------------------ */
-    /* SHARED HELPER: .lens-tracker                                        */
-    /* A thin horizontal bar with two poles: CONTEXT and HARNESS.         */
-    /* Usage: add class .on-context or .on-harness to activate one pole.  */
-    /* ------------------------------------------------------------------ */
-    .lens-tracker {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      max-width: 720px;
-      margin: 0 auto;
-      gap: var(--spacing-md);
-    }
-
-    .lens-tracker .pole {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      background: var(--bg-secondary);
-      border: 1px solid var(--text-muted);
-      border-radius: 8px;
-      padding: var(--spacing-xs) var(--spacing-sm);
-      transition:
-        color 0.3s ease,
-        background 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.3s ease,
-        font-weight 0.3s ease;
-    }
-
-    .lens-tracker .lens-sep {
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    /* on-context: CONTEXT pole lit (accent-secondary blue), HARNESS dimmed */
-    .lens-tracker.on-context .pole-context {
-      color: var(--bg-primary);
-      background: var(--accent-secondary);
-      border-color: var(--accent-secondary);
-      transform: scale(1.05);
-      font-weight: 700;
-    }
-    .lens-tracker.on-context .pole-harness {
-      color: var(--text-muted);
-      background: var(--bg-secondary);
-      border-color: var(--text-muted);
-      transform: none;
-      font-weight: normal;
-    }
-
-    /* on-harness: HARNESS pole lit (accent teal), CONTEXT dimmed */
-    .lens-tracker.on-harness .pole-harness {
-      color: var(--bg-primary);
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: scale(1.05);
-      font-weight: 700;
-    }
-    .lens-tracker.on-harness .pole-context {
-      color: var(--text-muted);
-      background: var(--bg-secondary);
-      border-color: var(--text-muted);
-      transform: none;
-      font-weight: normal;
-    }
-
-    /* ------------------------------------------------------------------ */
-    /* SHARED HELPER: .tricotomia                                          */
-    /* 3-row progressive-reveal table. Add .show-1/.show-2/.show-3.       */
-    /* Columns: Rotulo | Mecanismo | Cuando paga contexto                  */
-    /* ------------------------------------------------------------------ */
-    .tricotomia {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr 1.4fr;
-      gap: var(--spacing-sm);
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .tricotomia .tcell {
-      padding: var(--spacing-xs) var(--spacing-sm);
-      font-size: 0.88rem;
-      color: var(--text-primary);
-    }
-
-    .tricotomia .tcell.thead {
-      color: var(--text-muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--text-muted);
-    }
-
-    /* Default: all data rows dimmed */
-    .tricotomia .trow-1,
-    .tricotomia .trow-2,
-    .tricotomia .trow-3 {
-      display: contents; /* grid children must not be wrapped; cells are direct grid items */
-    }
-
-    .tricotomia .trow-1 .tcell,
-    .tricotomia .trow-2 .tcell,
-    .tricotomia .trow-3 .tcell {
-      opacity: 0.25;
-      transition: opacity 0.4s ease, background 0.4s ease;
-      border-radius: 6px;
-    }
-
-    /* Lit row styling applied to each cell inside a lit row */
-    .tricotomia .trow-1.lit .tcell,
-    .tricotomia .trow-2.lit .tcell,
-    .tricotomia .trow-3.lit .tcell {
-      opacity: 1;
-      background: var(--bg-secondary);
-    }
-
-    /* First cell of a lit row gets accent color and left border treatment */
-    .tricotomia .trow-1.lit .tcell:first-child,
-    .tricotomia .trow-2.lit .tcell:first-child,
-    .tricotomia .trow-3.lit .tcell:first-child {
-      color: var(--accent);
-      border-left: 3px solid var(--accent-secondary);
-      padding-left: calc(var(--spacing-sm) - 3px);
-    }
-
-    /* show-1 (§4 teaser): the three rotulos visible, mechanisms blank.
-       All first cells lit; columns 2-3 dimmed across every row. */
-    .tricotomia.show-1 .trow-1 .tcell:first-child,
-    .tricotomia.show-1 .trow-2 .tcell:first-child,
-    .tricotomia.show-1 .trow-3 .tcell:first-child {
-      opacity: 1;
-      background: var(--bg-secondary);
-      color: var(--accent);
-      border-left: 3px solid var(--accent-secondary);
-      padding-left: calc(var(--spacing-sm) - 3px);
-    }
-    .tricotomia.show-1 .trow-1 .tcell:not(:first-child),
-    .tricotomia.show-1 .trow-2 .tcell:not(:first-child),
-    .tricotomia.show-1 .trow-3 .tcell:not(:first-child) {
-      opacity: 0.3;
-    }
-
-    /* show-2 (§8): rows 1-2 fully lit; row 3 only its rotulo lit */
-    .tricotomia.show-2 .trow-1 .tcell,
-    .tricotomia.show-2 .trow-2 .tcell {
-      opacity: 1;
-      background: var(--bg-secondary);
-    }
-    .tricotomia.show-2 .trow-3 .tcell:first-child {
-      opacity: 1;
-      background: var(--bg-secondary);
-    }
-    .tricotomia.show-2 .trow-3 .tcell:not(:first-child) {
-      opacity: 0.3;
-    }
-    .tricotomia.show-2 .trow-1 .tcell:first-child,
-    .tricotomia.show-2 .trow-2 .tcell:first-child,
-    .tricotomia.show-2 .trow-3 .tcell:first-child {
-      color: var(--accent);
-      border-left: 3px solid var(--accent-secondary);
-      padding-left: calc(var(--spacing-sm) - 3px);
-    }
-
-    /* show-3: all three rows fully lit */
-    .tricotomia.show-3 .trow-1 .tcell,
-    .tricotomia.show-3 .trow-2 .tcell,
-    .tricotomia.show-3 .trow-3 .tcell {
-      opacity: 1;
-      background: var(--bg-secondary);
-    }
-    .tricotomia.show-3 .trow-1 .tcell:first-child,
-    .tricotomia.show-3 .trow-2 .tcell:first-child,
-    .tricotomia.show-3 .trow-3 .tcell:first-child {
-      color: var(--accent);
-      border-left: 3px solid var(--accent-secondary);
-      padding-left: calc(var(--spacing-sm) - 3px);
-    }
-
-    /* C6 — Part 1 loop animation host (logically persistent across §2-§6) */
-    #part1-loop-overlay {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 50;
-      pointer-events: none;
-      width: max-content;
-      display: none;
-    }
-    #part1-loop-overlay.visible {
-      display: block;
-    }
-    #part1-loop {
-      /* fourLoopAnim renders here */
-    }
   </style>
 </head>
 <body>
@@ -261,19 +60,19 @@
       <!-- INJECT_SECTION_2 -->
       <!-- /§2 -->
 
-      <!-- ===== §3 — Tools: las manos del agente ===== -->
+      <!-- ===== §3 — Las tres ingenierías ===== -->
       <!-- INJECT_SECTION_3 -->
       <!-- /§3 -->
 
-      <!-- ===== §4 — La ventana de contexto es finita ===== -->
+      <!-- ===== §4 — Context engineering ===== -->
       <!-- INJECT_SECTION_4 -->
       <!-- /§4 -->
 
-      <!-- ===== §5 — Cuando el agente falla ===== -->
+      <!-- ===== §5 — Harness engineering ===== -->
       <!-- INJECT_SECTION_5 -->
       <!-- /§5 -->
 
-      <!-- ===== §6 — Claude Code es ese loop ===== -->
+      <!-- ===== §6 — Claude Code ===== -->
       <!-- INJECT_SECTION_6 -->
       <!-- /§6 -->
 
@@ -314,9 +113,6 @@
     </div>
   </div>
 
-  <div id="part1-loop-overlay">
-    <div id="part1-loop"></div>
-  </div>
 
   <script src="../../../node_modules/reveal.js/dist/reveal.js"></script>
   <script src="../../../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
@@ -331,51 +127,6 @@
       margin: 0.02,
       plugins: [RevealHighlight, RevealNotes]
     });
-  </script>
-  <script>
-    // C6 — Sync the part1-loop animation with the current slide's data-loop-* attrs
-    (function() {
-      var part1Initialized = false;
-
-      function syncPart1Loop() {
-        var slide = (typeof Reveal !== 'undefined') ? Reveal.getCurrentSlide() : null;
-        var overlay = document.getElementById('part1-loop-overlay');
-        if (!slide || !overlay) return;
-
-        var mode = slide.dataset.loopMode;
-        var phase = slide.dataset.loopPhase || 'none';
-        var fillRaw = slide.dataset.loopFill;
-        var fillPercent = fillRaw ? parseInt(fillRaw, 10) : undefined;
-
-        if (!mode) {
-          overlay.classList.remove('visible');
-          return;
-        }
-
-        overlay.classList.add('visible');
-
-        var opts = {
-          containerId: 'part1-loop',
-          mode: mode
-        };
-        if (phase !== 'none') opts.phase = phase;
-        if (fillPercent !== undefined && !isNaN(fillPercent)) opts.fillPercent = fillPercent;
-
-        if (!part1Initialized) {
-          if (window.initFourLoop) {
-            window.initFourLoop(opts);
-            part1Initialized = true;
-          }
-        } else {
-          if (window.updateFourLoop) window.updateFourLoop(opts);
-        }
-      }
-
-      if (typeof Reveal !== 'undefined') {
-        Reveal.on('ready', syncPart1Loop);
-        Reveal.on('slidechanged', syncPart1Loop);
-      }
-    })();
   </script>
 </body>
 </html>
