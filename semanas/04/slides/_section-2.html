@@ -1,7 +1,7 @@
 <style>
 /* Scoped styles for §2 only */
 
-/* §2.4 — trace */
+/* §2.3 — trace */
 .s2-trace {
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@
   font-style: italic;
 }
 
-/* §2.5 — cuatro piezas */
+/* §2.4 — cuatro piezas */
 .reveal .s2-pipe-lede {
   display: block;
   text-align: center !important;
@@ -159,7 +159,7 @@
   font-style: italic;
 }
 
-/* §2.6 — condiciones de corte */
+/* §2.5 — condiciones de corte */
 .s2-corte-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -192,13 +192,13 @@
   line-height: 1.5;
 }
 
-/* §2.3 — loop anim container sizing */
+/* §2.2 — loop anim container sizing */
 .s2-loop-wrap {
   margin: 18px auto 0;
   max-width: 720px;
 }
 
-/* §2.3 — phase definition card */
+/* §2.2 — phase definition card */
 .s2-phase-card {
   background: var(--bg-secondary);
   border-radius: 8px;
@@ -234,7 +234,7 @@
   border-top: 1px solid #2a3a5a;
   padding-top: 8px;
 }
-/* §2.3 — consolidated phase slide. Los tres h2 y las tres cards se apilan en
+/* §2.2 — consolidated phase slide. Los tres h2 y las tres cards se apilan en
    el mismo lugar: el primero (Pensar) fluye y reserva espacio; los fragments
    se superponen en absoluto. Cuando cualquier fragment está visible, el
    primero se oculta (sin esto, los títulos se imprimen encimados). */
@@ -271,95 +271,8 @@
   visibility: hidden;
 }
 
-/* §2.1 bridge — tools para consultar (continuity with §1.1 visual idiom) */
-.s2-bridge-section h2 {
-  font-size: 1.35em;
-  margin-bottom: 8px;
-}
-.s2-bridge-pipe {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  margin: 14px auto 0;
-  max-width: 720px;
-}
-.s2-bridge-io {
-  font-family: var(--font-mono);
-  font-size: 0.62em;
-  color: var(--text-muted);
-  text-align: center;
-}
-.s2-bridge-arrow {
-  color: var(--text-muted);
-  font-size: 0.95em;
-  line-height: 1;
-}
-.s2-bridge-runtime {
-  border: 1px dashed var(--accent-secondary);
-  border-radius: 8px;
-  padding: 14px 22px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  background: rgba(130, 170, 255, 0.04);
-  width: 100%;
-  max-width: 720px;
-  box-sizing: border-box;
-}
-.s2-bridge-runtime-label {
-  font-family: var(--font-mono);
-  font-size: 0.52em;
-  color: var(--accent-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-align: center;
-}
-.reveal .s2-bridge-runtime-rule {
-  font-size: 0.62em;
-  color: var(--accent-secondary);
-  text-align: center;
-  margin: 0;
-  line-height: 1.5;
-}
-.reveal .s2-bridge-runtime-rule code {
-  font-family: var(--font-mono);
-  font-variant-ligatures: none;
-  color: var(--accent);
-  font-size: 0.95em;
-}
-.s2-bridge-box {
-  background: var(--bg-code);
-  border: 1px solid var(--accent);
-  border-radius: 5px;
-  padding: 6px 16px;
-  font-size: 0.72em;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  text-align: center;
-  font-weight: 700;
-  align-self: center;
-  min-width: 90px;
-}
-.reveal .s2-bridge-caption {
-  display: block;
-  text-align: center !important;
-  max-width: 720px;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-top: 14px;
-  margin-bottom: 0;
-  font-size: 0.66em;
-  color: var(--text-muted);
-  font-style: italic;
-  line-height: 1.55;
-}
-.reveal .s2-bridge-caption + .s2-bridge-caption {
-  margin-top: 4px;
-}
 
-/* §2.2 — ReAct intro layout */
+/* §2.1 — ReAct intro layout */
 .reveal .s2-react-lede {
   display: block;
   text-align: center !important;
@@ -426,36 +339,7 @@
 }
 </style>
 
-<!-- §2.1 · Bridge desde §1 — tools para consultar y responder -->
-<section class="s2-bridge-section">
-  <h2>Tools: consultar para responder</h2>
-
-  <div class="s2-bridge-pipe">
-    <div class="s2-bridge-io">"¿qué pasó hoy en las noticias?"</div>
-    <div class="s2-bridge-arrow">↓</div>
-
-    <div class="s2-bridge-runtime">
-      <span class="s2-bridge-runtime-label">programa externo</span>
-      <div class="s2-bridge-box">LLM + SFT + RL</div>
-      <p class="s2-bridge-runtime-rule">cuando el LLM emite <code>&lt;search&gt;...&lt;/search&gt;</code> (u otra tool):</p>
-      <p class="s2-bridge-runtime-rule">pausa · ejecuta · inyecta el resultado · el LLM sigue redactando</p>
-    </div>
-
-    <div class="s2-bridge-arrow">↓</div>
-    <div class="s2-bridge-io">respuesta informada por la búsqueda</div>
-  </div>
-
-  <p class="s2-bridge-caption">Las tools consultan el mundo: traen información para redactar una respuesta.</p>
-  <p class="s2-bridge-caption">Termina cuando termina el texto.</p>
-
-  <aside class="notes">
-    <p><strong>Slide corta. No repetir la mecánica de tool call.</strong></p>
-    <p><u>Tools como otra responsabilidad del programa externo, al servicio de una respuesta.</u></p>
-    <p><em>"Las tools ya las conocen de la semana 1. El LLM emite un token de tool call, por ejemplo &lt;search&gt;, el programa lo detecta, ejecuta la búsqueda, inyecta el resultado, y el LLM sigue redactando con esa información delante. Puede llamar varias: buscar dos cosas, leer un documento, hacer una cuenta. Y sí, lee los resultados y los usa. Pero fijate para qué: para redactar una respuesta. Las tools consultan el mundo, no lo cambian. Y el trabajo termina cuando termina el texto: el modelo emite &lt;END&gt; y listo, nadie verifica si algo quedó resuelto. Muchas tareas reales piden otra cosa: tocar un entorno, ver qué pasó, y seguir hasta que el problema esté resuelto."</em></p>
-  </aside>
-</section>
-
-<!-- §2.2 · ReAct: actuar sobre un entorno, en loop -->
+<!-- §2.1 · ReAct: actuar sobre un entorno, en loop -->
 <section>
   <h2>ReAct: actuar hasta terminar</h2>
 
@@ -485,11 +369,11 @@
     <p><u>ReAct: tools que actúan sobre un entorno, en un loop con condición de corte.</u></p>
     <p><em>"Tomá una tarea como 'arreglá el bug en mi backend'. Una respuesta no alcanza, por más tools que llame el modelo mientras la redacta. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, cambiarlo, correr los tests de nuevo. La decisión de qué hacer en cada paso depende de lo que pasó en el anterior. Esa arquitectura se llama ReAct, de Reasoning + Acting entrelazados."</em></p>
     <p><em>"El programa externo entra en un loop. Tres fases que se alternan vuelta a vuelta: el LLM piensa, actúa usando tools, observa los resultados, y eso alimenta la próxima vuelta de pensar. Abajo del ciclo hay cuatro chips: son las condiciones de corte, cuándo el programa decide que el loop terminó. Las abrimos al final de la sección: objetivo alcanzado, límite de pasos, el agente pide ayuda, falla no recuperable."</em></p>
-    <p><em>"El contraste con la slide anterior no es 'ver o no ver los resultados': en los dos casos el modelo los lee. La diferencia es para qué y hasta cuándo. Antes, las tools consultaban para redactar una respuesta, y todo terminaba con el texto. Ahora las tools actúan sobre un entorno: leen archivos, pero también los editan, corren comandos, cambian cosas. Y el loop no termina cuando el modelo terminó de escribir: sigue, vuelta a vuelta, decidiendo la próxima acción según lo que observó, hasta una condición de corte. Eso es lo que lo hace agente."</em></p>
+    <p><em>"El contraste con el chat del principio, el que llama tools mientras redacta, no es 'ver o no ver los resultados': en los dos casos el modelo los lee. La diferencia es para qué y hasta cuándo. Antes, las tools consultaban para redactar una respuesta, y todo terminaba con el texto. Ahora las tools actúan sobre un entorno: leen archivos, pero también los editan, corren comandos, cambian cosas. Y el loop no termina cuando el modelo terminó de escribir: sigue, vuelta a vuelta, decidiendo la próxima acción según lo que observó, hasta una condición de corte. Eso es lo que lo hace agente."</em></p>
   </aside>
 </section>
 
-<!-- §2.3 · Tres fases (consolidado: Pensar / Actuar / Observar) -->
+<!-- §2.2 · Tres fases (consolidado: Pensar / Actuar / Observar) -->
 <section>
   <div class="s2-h2-stack">
     <h2 data-phase-h2="pensar" class="s2-h2-phase s2-phase-base">Pensar: formular el próximo paso</h2>
@@ -528,7 +412,7 @@
   </aside>
 </section>
 
-<!-- §2.4 · El trace concreto — un 404 local -->
+<!-- §2.3 · El trace concreto — un 404 local -->
 <section>
   <h2>El loop en acto: un 404 en /tasks/</h2>
 
@@ -591,7 +475,7 @@
   </aside>
 </section>
 
-<!-- §2.5 · Un agente = LLM + loop + tools + entorno -->
+<!-- §2.4 · Un agente = LLM + loop + tools + entorno -->
 <section>
   <h2>Un agente son cuatro piezas</h2>
 
@@ -633,7 +517,7 @@
   </aside>
 </section>
 
-<!-- §2.6 · Condiciones de corte (cierre de sección) -->
+<!-- §2.5 · Condiciones de corte (cierre de sección) -->
 <section>
   <h2>Condiciones de corte</h2>
 
