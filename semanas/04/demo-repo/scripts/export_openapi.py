@@ -2,8 +2,14 @@
 
 Usage: uv run python scripts/export_openapi.py
 """
+import sys
+from pathlib import Path
+
 import yaml
-from backend.main import app
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from backend.main import app  # noqa: E402
 
 if __name__ == "__main__":
     schema = app.openapi()

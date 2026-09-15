@@ -1,19 +1,17 @@
 {
-  "model": "claude-sonnet-4-6",
+  "model": "sonnet",
   "env": {
     "DEMO_BEARER_TOKEN": "changeme-in-real-env"
   },
-  "includeCoAuthoredBy": true,
+  "attribution": {
+    "pr": ""
+  },
   "cleanupPeriodDays": 30,
   "permissions": {
     "allow": [
-      "Bash(uv run pytest)",
-      "Bash(uv run pytest *)",
       "Bash(uv run uvicorn *)",
-      "Bash(uv run python *)",
+      "Bash(uv run python scripts/export_openapi.py)",
       "Bash(uv sync)",
-      "Bash(uv sync *)",
-      "Read(./**)",
       "Edit(./backend/**)",
       "Edit(./frontend/**)",
       "Edit(./tests/**)",

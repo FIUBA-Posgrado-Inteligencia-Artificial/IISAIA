@@ -25,6 +25,5 @@ API REST con FastAPI + frontend chico para demostrar features del runtime de Cla
 
 ## Workflow
 
-- Cambios en endpoints → regenerar `openapi.yaml` con `uv run python scripts/export_openapi.py`.
 - Antes de un PR, correr `uv run pytest` y verificar que pasa.
 - `settings.local.json` siempre al `.gitignore` (ya está).

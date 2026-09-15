@@ -1,7 +1,5 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(open http://localhost:8000)"
-    ]
+  "env": {
+    "DEMO_BEARER_TOKEN": "mi-token-local"
   }
 }

@@ -10,8 +10,8 @@ regeneración de la especificación OpenAPI.
 
 ## Fases
 
-1. **Decidir verbo y path**
-   - Confirmar con el usuario verbo HTTP, path y body si aplica.
+1. **Decidir method y path**
+   - Confirmar con el usuario method HTTP, path y body si aplica.
    - Para escritura (POST/PUT/DELETE), agregar `dependencies=[Depends(require_bearer)]`.
 
 2. **Schemas**
@@ -21,6 +21,8 @@ regeneración de la especificación OpenAPI.
 3. **Router**
    - Agregar la función en el router correspondiente (`backend/routers/<resource>.py`).
    - Declarar `response_model` y `status_code` explícito.
+   - Si el endpoint necesita una consulta que el store no tiene, agregar el método en
+     `backend/db/client.py`.
 
 4. **Test**
    - Agregar al menos dos tests en `tests/test_<resource>.py`: happy path + error

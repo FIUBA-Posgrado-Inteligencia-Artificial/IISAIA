@@ -9,7 +9,7 @@ dependencies = [
     "pydantic>=2.6",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "pytest>=8.0",
     "httpx>=0.27",
