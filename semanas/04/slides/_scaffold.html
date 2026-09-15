@@ -18,6 +18,11 @@
       overflow-y: auto;
       max-height: 100%;
     }
+    /* Demo slides (clickable-steps) open an overlay panel below the
+       steps row; the panel must not be clipped by the scroll box. */
+    .reveal .slides section:has(.cs-step) {
+      overflow: visible;
+    }
     /* Make all <pre>/<code> blocks respect their containing card.
        Reveal.js defaults: pre at width: 90%, and `pre code` with
        overflow: auto + word-wrap: normal — that forces a horizontal

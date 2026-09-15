@@ -1,10 +1,12 @@
 <style>
 /* Scoped styles for §2 only */
+
+/* §2.4 — trace */
 .s2-trace {
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 680px;
+  max-width: 760px;
   margin: 0 auto;
 }
 .s2-trace-row {
@@ -74,15 +76,32 @@
   width: 2px;
   background: #2a3a5a;
 }
-.s2-trace-close {
-  text-align: center;
+.reveal .s2-trace-close {
+  display: block;
+  text-align: center !important;
+  max-width: 760px;
+  margin-left: auto !important;
+  margin-right: auto !important;
   margin-top: 14px;
+  margin-bottom: 0;
   font-size: 0.72em;
   color: var(--text-muted);
   font-style: italic;
 }
 
-/* Four-piece pipeline for §2 */
+/* §2.5 — cuatro piezas */
+.reveal .s2-pipe-lede {
+  display: block;
+  text-align: center !important;
+  max-width: 900px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 0.72em;
+  color: var(--accent-secondary);
+  font-style: italic;
+}
 .s2-four-pipe {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
@@ -103,20 +122,20 @@
   color: var(--accent);
   margin: 0 0 6px;
 }
-.s2-pipe-card .s2-aporta {
+.reveal .s2-pipe-card .s2-aporta {
   font-size: 0.6em;
   color: var(--text-primary);
   line-height: 1.4;
-  margin-bottom: 6px;
+  margin: 0 0 6px;
 }
-.s2-pipe-card .s2-falta {
+.reveal .s2-pipe-card .s2-falta {
   font-size: 0.58em;
   color: var(--text-muted);
   font-style: italic;
   line-height: 1.4;
   border-top: 1px solid #2a3a5a;
   padding-top: 6px;
-  margin-top: 2px;
+  margin: 2px 0 0;
 }
 .s2-pipe-sep {
   display: flex;
@@ -127,15 +146,20 @@
   font-size: 1.2em;
   padding-top: 30px;
 }
-.s2-pipe-close {
-  text-align: center;
+.reveal .s2-pipe-close {
+  display: block;
+  text-align: center !important;
+  max-width: 900px;
+  margin-left: auto !important;
+  margin-right: auto !important;
   margin-top: 14px;
+  margin-bottom: 0;
   font-size: 0.72em;
   color: var(--accent-secondary);
   font-style: italic;
 }
 
-/* Condiciones de corte cards */
+/* §2.6 — condiciones de corte */
 .s2-corte-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -152,7 +176,7 @@
   padding: 14px 16px;
 }
 .s2-corte-card h3 {
-  font-size: 0.72em;
+  font-size: 0.75em;
   font-weight: 700;
   margin: 0 0 5px;
   color: var(--accent);
@@ -167,28 +191,22 @@
   margin: 0;
   line-height: 1.5;
 }
-.s2-corte-close {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 0.72em;
-  color: var(--text-muted);
-  font-style: italic;
-}
 
-/* Loop anim container sizing */
+/* §2.3 — loop anim container sizing */
 .s2-loop-wrap {
   margin: 18px auto 0;
   max-width: 720px;
 }
 
-/* Phase definition card */
+/* §2.3 — phase definition card */
 .s2-phase-card {
   background: var(--bg-secondary);
   border-radius: 8px;
   padding: 20px 28px;
-  max-width: 580px;
+  max-width: 640px;
   margin: 18px auto 0;
   border-left: 3px solid var(--accent);
+  box-sizing: border-box;
 }
 .s2-phase-card.actuar { border-left-color: var(--accent-secondary); }
 .s2-phase-card.observar { border-left-color: #ffcb6b; }
@@ -204,59 +222,56 @@
 .s2-phase-card.observar h3 { color: #ffcb6b; }
 .s2-phase-card p {
   font-size: 0.74em;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-primary);
   margin: 0 0 8px;
 }
-.s2-phase-card .s2-produces {
+.reveal .s2-phase-card .s2-produces {
   font-size: 0.66em;
   color: var(--text-muted);
   font-style: italic;
-  margin: 0;
+  margin: 4px 0 0;
   border-top: 1px solid #2a3a5a;
   padding-top: 8px;
-  margin-top: 4px;
 }
-/* C1 — consolidated phase slide: prevent vertical jump between fragments */
-.s2-phase-card-stage {
-  min-height: 180px;
-}
-/* Stack the three h2 variants so only the current-visible one shows in flow */
-.s2-h2-phase.fragment.current-visible {
-  /* Reveal handles visibility via .visible / .current-fragment classes;
-     this only needs to ensure they layer at the same position. */
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  margin: 0;
-}
-/* Wrap container for the h2 stack so position:absolute children have a relative parent */
+/* §2.3 — consolidated phase slide. Los tres h2 y las tres cards se apilan en
+   el mismo lugar: el primero (Pensar) fluye y reserva espacio; los fragments
+   se superponen en absoluto. Cuando cualquier fragment está visible, el
+   primero se oculta (sin esto, los títulos se imprimen encimados). */
 .s2-h2-stack {
   position: relative;
   min-height: 1.6em;
   margin-bottom: 0.4em;
 }
-/* Wrap container for the card stack: base card flows, fragment cards layer on top */
+.s2-h2-stack .s2-h2-phase.fragment.current-visible {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0;
+}
 .s2-card-stack {
   position: relative;
-  min-height: 220px;
-  max-width: 580px;
+  min-height: 310px;
+  max-width: 640px;
   margin: 18px auto 0;
 }
-.s2-card-stack .s2-phase-card.s2-phase-card-stage {
-  /* Base card flows normally; fragment cards stack on top via absolute. */
+.s2-card-stack .s2-phase-card {
   margin: 0 auto;
+  min-height: 310px;
 }
-.s2-card-stack .s2-phase-card.s2-phase-card-stage.fragment.current-visible {
+.s2-card-stack .s2-phase-card.fragment.current-visible {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  margin: 0 auto;
+}
+.s2-h2-stack:has(.fragment.visible) > .s2-phase-base,
+.s2-card-stack:has(.fragment.visible) > .s2-phase-base {
+  visibility: hidden;
 }
 
-/* §2.1 bridge — tool use single-turn (continuity with §1.1 visual idiom) */
+/* §2.1 bridge — tools para consultar (continuity with §1.1 visual idiom) */
 .s2-bridge-section h2 {
   font-size: 1.35em;
   margin-bottom: 8px;
@@ -267,7 +282,7 @@
   align-items: center;
   gap: 6px;
   margin: 14px auto 0;
-  max-width: 820px;
+  max-width: 720px;
 }
 .s2-bridge-io {
   font-family: var(--font-mono);
@@ -291,6 +306,7 @@
   background: rgba(130, 170, 255, 0.04);
   width: 100%;
   max-width: 720px;
+  box-sizing: border-box;
 }
 .s2-bridge-runtime-label {
   font-family: var(--font-mono);
@@ -300,32 +316,18 @@
   letter-spacing: 0.1em;
   text-align: center;
 }
-.s2-bridge-runtime-rule {
+.reveal .s2-bridge-runtime-rule {
   font-size: 0.62em;
   color: var(--accent-secondary);
   text-align: center;
   margin: 0;
   line-height: 1.5;
 }
-.s2-bridge-runtime-rule.recap {
-  color: var(--text-muted);
-  font-style: italic;
-}
-.s2-bridge-runtime-rule.new {
-  color: var(--accent);
-  font-weight: 700;
-  border-top: 1px solid rgba(100, 255, 218, 0.22);
-  padding-top: 10px;
-  font-style: normal;
-}
-.s2-bridge-runtime-rule code {
+.reveal .s2-bridge-runtime-rule code {
   font-family: var(--font-mono);
+  font-variant-ligatures: none;
   color: var(--accent);
   font-size: 0.95em;
-}
-.s2-bridge-runtime-rule.recap code,
-.s2-bridge-runtime-rule.new code {
-  color: var(--accent);
 }
 .s2-bridge-box {
   background: var(--bg-code);
@@ -340,24 +342,35 @@
   align-self: center;
   min-width: 90px;
 }
-.s2-bridge-caption {
-  margin: 14px auto 0;
+.reveal .s2-bridge-caption {
+  display: block;
+  text-align: center !important;
+  max-width: 720px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 14px;
+  margin-bottom: 0;
   font-size: 0.66em;
   color: var(--text-muted);
-  text-align: center;
   font-style: italic;
-  max-width: 720px;
   line-height: 1.55;
 }
+.reveal .s2-bridge-caption + .s2-bridge-caption {
+  margin-top: 4px;
+}
 
-/* §2.2 ReAct intro layout */
-.s2-react-lede {
-  max-width: 880px;
-  margin: 6px auto 10px;
+/* §2.2 — ReAct intro layout */
+.reveal .s2-react-lede {
+  display: block;
+  text-align: center !important;
+  max-width: 920px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 6px;
+  margin-bottom: 10px;
   font-size: 0.72em;
   color: var(--text-primary);
   line-height: 1.55;
-  text-align: center;
 }
 .s2-react-lede strong {
   color: var(--accent);
@@ -413,9 +426,9 @@
 }
 </style>
 
-<!-- §2.1 · Bridge desde §1 — tool use single-turn (no agentic) -->
+<!-- §2.1 · Bridge desde §1 — tools para consultar y responder -->
 <section class="s2-bridge-section">
-  <h2>Tools: una vuelta, sin loop</h2>
+  <h2>Tools: consultar para responder</h2>
 
   <div class="s2-bridge-pipe">
     <div class="s2-bridge-io">"¿qué pasó hoy en las noticias?"</div>
@@ -424,33 +437,32 @@
     <div class="s2-bridge-runtime">
       <span class="s2-bridge-runtime-label">programa externo</span>
       <div class="s2-bridge-box">LLM + SFT + RL</div>
-      <p class="s2-bridge-runtime-rule">cuando el LLM emite <code>&lt;search&gt;...&lt;/search&gt;</code> (o cualquier tool):<br>
-        pausa · ejecuta · inyecta el resultado · el LLM continúa generando</p>
+      <p class="s2-bridge-runtime-rule">cuando el LLM emite <code>&lt;search&gt;...&lt;/search&gt;</code> (u otra tool):</p>
+      <p class="s2-bridge-runtime-rule">pausa · ejecuta · inyecta el resultado · el LLM sigue redactando</p>
     </div>
 
     <div class="s2-bridge-arrow">↓</div>
     <div class="s2-bridge-io">respuesta informada por la búsqueda</div>
   </div>
 
-  <p class="s2-bridge-caption">
-    Las tools que vieron en S1, ubicadas en el programa externo.<br>
-    Una sola vuelta del LLM. Sin iteración, sin agente todavía.
-  </p>
+  <p class="s2-bridge-caption">Las tools consultan el mundo: traen información para redactar una respuesta.</p>
+  <p class="s2-bridge-caption">Termina cuando termina el texto.</p>
 
   <aside class="notes">
-    <p><strong>Slide corto. La mecánica de tool call la conocen de S1 — no repetirla. El punto acá es ubicar las tools en el programa externo del §1 y marcar la diferencia con lo que viene: una vuelta vs múltiples vueltas.</strong></p>
-    <p><u>Bridge entre §1 y ReAct. Ya saben qué es una tool y cómo funciona (S1). Lo que se agrega es ubicarlas como otra responsabilidad del programa externo y dejar claro que esto sigue siendo una sola respuesta del LLM — el contraste con ReAct es lo que importa.</u></p>
-    <p><em>"Las tools ya las conocen de la semana 1. La idea es la misma: el LLM emite un token de tool call — <code>&lt;search&gt;</code>, una llamada a calculadora, una lectura de archivo —, el programa lo detecta, ejecuta la tool, inyecta el resultado, el LLM sigue generando informado. Y una sola respuesta del LLM puede llamar varias tools — buscar dos cosas, leer un archivo y hacer una cuenta —, no es que esté limitado a una. Es otra responsabilidad del programa externo que venimos armando. Lo que importa subrayar es esto: aunque el LLM llame varias tools, sigue siendo una sola vuelta de generación. Termina con <code>&lt;END&gt;</code>, fin. No hay loop, no hay decisión nueva del modelo después de ver los resultados. Y muchas tareas reales necesitan exactamente eso: decidir qué hacer en base a lo observado."</em></p>
+    <p><strong>Slide corta. No repetir la mecánica de tool call.</strong></p>
+    <p><u>Tools como otra responsabilidad del programa externo, al servicio de una respuesta.</u></p>
+    <p><em>"Las tools ya las conocen de la semana 1. El LLM emite un token de tool call, por ejemplo &lt;search&gt;, el programa lo detecta, ejecuta la búsqueda, inyecta el resultado, y el LLM sigue redactando con esa información delante. Puede llamar varias: buscar dos cosas, leer un documento, hacer una cuenta. Y sí, lee los resultados y los usa. Pero fijate para qué: para redactar una respuesta. Las tools consultan el mundo, no lo cambian. Y el trabajo termina cuando termina el texto: el modelo emite &lt;END&gt; y listo, nadie verifica si algo quedó resuelto. Muchas tareas reales piden otra cosa: tocar un entorno, ver qué pasó, y seguir hasta que el problema esté resuelto."</em></p>
   </aside>
 </section>
 
-<!-- §2.2 · ReAct: cuando una vuelta no alcanza -->
+<!-- §2.2 · ReAct: actuar sobre un entorno, en loop -->
 <section>
-  <h2>ReAct: cuando una vuelta no alcanza</h2>
+  <h2>ReAct: actuar hasta terminar</h2>
 
   <p class="s2-react-lede">
-    El programa externo entra en un loop: el LLM <strong>piensa</strong>, <strong>actúa</strong> usando tools,
-    <strong>observa</strong> los resultados, y decide la próxima acción. Vuelta a vuelta, hasta una condición de corte.
+    ReAct (Reasoning + Acting): el programa externo entra en un loop. El LLM <strong>piensa</strong>,
+    <strong>actúa</strong> con tools sobre un entorno, <strong>observa</strong> el resultado y decide la próxima acción,
+    vuelta a vuelta, hasta una condición de corte.
   </p>
 
   <div class="s2-react-loop-host fragment fade-in" data-fragment-index="1">
@@ -459,30 +471,30 @@
 
   <div class="s2-react-contrast fragment fade-in" data-fragment-index="2">
     <div class="s2-react-card prev">
-      <span class="s2-react-card-label">antes — una vuelta</span>
-      <p>El LLM puede llamar una o varias tools dentro de una sola respuesta y termina. El modelo no decide qué hacer con los resultados.</p>
+      <span class="s2-react-card-label">tools para responder</span>
+      <p>Traen información para redactar una respuesta. Consultan el mundo, no lo cambian. Termina cuando termina el texto.</p>
     </div>
     <div class="s2-react-card now">
-      <span class="s2-react-card-label">ahora — ReAct</span>
-      <p>Múltiples vueltas. Después de cada observación, el LLM piensa de nuevo y elige el próximo paso a partir de lo que vio.</p>
+      <span class="s2-react-card-label">ReAct</span>
+      <p>Las tools leen y modifican un entorno: archivos, comandos, tests. Entre vuelta y vuelta, el modelo decide la próxima acción a partir de lo que observó.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Tres estados, dos reveals: arranca con título y lede, después aparecen animación → cards de contraste. Bridge con el slide anterior en el primer em.</strong></p>
-    <p><u>Introducción de ReAct como la siguiente arquitectura del programa externo: en lugar de una respuesta con tools dentro, el LLM puede iterar — pensar, actuar (tools), observar el resultado, pensar de nuevo, actuar otra vez, hasta resolver la tarea. La diferencia con single-turn no es la cantidad de tools — un LLM puede llamar varias tools en una sola respuesta — sino la iteración: el modelo decide qué hacer entre vuelta y vuelta. Animación local (no usa el overlay del part1-loop) para poder revelarla progresivamente.</u></p>
-    <p><em>"Y acá está la arquitectura que resuelve eso. Tomá una tarea como 'arreglá el bug en mi backend': una sola vuelta no alcanza, por más tools que llame el modelo en esa vuelta. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, proponer un cambio, correr los tests de nuevo. La decisión de qué hacer en cada paso depende de lo que se observó en el anterior. Esa arquitectura tiene un nombre — ReAct, de Reasoning + Acting entrelazados — y se ve así."</em></p>
-    <p><em>"El programa externo entra en un loop. Tres fases que se alternan vuelta a vuelta: el LLM piensa, actúa usando tools, observa los resultados, y eso alimenta la próxima vuelta de pensar. Y abajo del ciclo hay cuatro chips: son las condiciones de corte — cuándo el programa decide que el loop terminó. Las vamos a ver en detalle más adelante, pero adelanto: objetivo alcanzado, límite de pasos, el agente pide ayuda, falla no recuperable."</em></p>
-    <p><em>"El contraste con el slide anterior. Antes — una sola vuelta del LLM, con una o varias tools llamadas dentro. Sin iteración: el modelo emite los tool calls, recibe los resultados, genera la respuesta final, termina. Ahora — múltiples vueltas. Después de cada observación, el modelo decide qué hacer a continuación. Esa decisión es lo que lo hace agente: no solo usa tools, las orquesta vuelta a vuelta según lo que va viendo."</em></p>
+    <p><strong>Lede al entrar. Click: animación. Click: contraste.</strong></p>
+    <p><u>ReAct: tools que actúan sobre un entorno, en un loop con condición de corte.</u></p>
+    <p><em>"Tomá una tarea como 'arreglá el bug en mi backend'. Una respuesta no alcanza, por más tools que llame el modelo mientras la redacta. Necesitás correr los tests, ver el output, decidir dónde mirar según el error, leer un archivo, cambiarlo, correr los tests de nuevo. La decisión de qué hacer en cada paso depende de lo que pasó en el anterior. Esa arquitectura se llama ReAct, de Reasoning + Acting entrelazados."</em></p>
+    <p><em>"El programa externo entra en un loop. Tres fases que se alternan vuelta a vuelta: el LLM piensa, actúa usando tools, observa los resultados, y eso alimenta la próxima vuelta de pensar. Abajo del ciclo hay cuatro chips: son las condiciones de corte, cuándo el programa decide que el loop terminó. Las abrimos al final de la sección: objetivo alcanzado, límite de pasos, el agente pide ayuda, falla no recuperable."</em></p>
+    <p><em>"El contraste con la slide anterior no es 'ver o no ver los resultados': en los dos casos el modelo los lee. La diferencia es para qué y hasta cuándo. Antes, las tools consultaban para redactar una respuesta, y todo terminaba con el texto. Ahora las tools actúan sobre un entorno: leen archivos, pero también los editan, corren comandos, cambian cosas. Y el loop no termina cuando el modelo terminó de escribir: sigue, vuelta a vuelta, decidiendo la próxima acción según lo que observó, hasta una condición de corte. Eso es lo que lo hace agente."</em></p>
   </aside>
 </section>
 
 <!-- §2.3 · Tres fases (consolidado: Pensar / Actuar / Observar) -->
 <section>
   <div class="s2-h2-stack">
-    <h2 data-phase-h2="pensar" class="s2-h2-phase">Pensar — formular el próximo paso</h2>
-    <h2 data-phase-h2="actuar" class="s2-h2-phase fragment current-visible" data-fragment-index="1">Actuar — invocar herramientas</h2>
-    <h2 data-phase-h2="observar" class="s2-h2-phase fragment current-visible" data-fragment-index="2">Observar — leer el resultado</h2>
+    <h2 data-phase-h2="pensar" class="s2-h2-phase s2-phase-base">Pensar: formular el próximo paso</h2>
+    <h2 data-phase-h2="actuar" class="s2-h2-phase fragment current-visible" data-fragment-index="1">Actuar: invocar tools</h2>
+    <h2 data-phase-h2="observar" class="s2-h2-phase fragment current-visible" data-fragment-index="2">Observar: leer el resultado</h2>
   </div>
 
   <div class="s2-loop-wrap">
@@ -490,42 +502,42 @@
   </div>
 
   <div class="s2-card-stack">
-    <div class="s2-phase-card s2-phase-card-stage" data-phase-card="pensar">
+    <div class="s2-phase-card s2-phase-base" data-phase-card="pensar">
       <h3>Pensar</h3>
-      <p>El agente razona sobre el estado actual: qué sabe, qué le falta saber, qué hipótesis tiene. No es pensamiento lineal — es el modelo formulando el próximo paso en función de lo que observó antes.</p>
+      <p>El agente razona sobre el estado actual: qué sabe, qué le falta saber, qué hipótesis tiene. Formula el próximo paso en función de lo que observó antes.</p>
       <p class="s2-produces">Produce: una decisión sobre qué acción tomar a continuación.</p>
     </div>
-    <div class="s2-phase-card s2-phase-card-stage actuar fragment current-visible" data-phase-card="actuar" data-fragment-index="1">
+    <div class="s2-phase-card actuar fragment current-visible" data-phase-card="actuar" data-fragment-index="1">
       <h3>Actuar</h3>
-      <p>El agente invoca una o varias herramientas: corre comandos, edita archivos, llama APIs, lee directorios. Las acciones producen un efecto en el entorno.</p>
-      <p class="s2-produces">Produce: un cambio en el entorno — algo que antes no era verdad, ahora lo es.</p>
+      <p>El agente invoca una o varias tools. Algunas consultan el entorno: leen archivos, listan directorios. Otras lo modifican: editan archivos, corren comandos, llaman APIs que cambian estado.</p>
+      <p class="s2-produces">Produce: información leída o un cambio en el entorno, que no siempre se puede deshacer.</p>
     </div>
-    <div class="s2-phase-card s2-phase-card-stage observar fragment current-visible" data-phase-card="observar" data-fragment-index="2">
+    <div class="s2-phase-card observar fragment current-visible" data-phase-card="observar" data-fragment-index="2">
       <h3>Observar</h3>
-      <p>El agente lee el resultado de la acción: el output del comando, el contenido del archivo, la respuesta HTTP. Eso nuevo entra a su contexto y alimenta la próxima vuelta de pensar.</p>
-      <p class="s2-produces">Produce: información nueva en el contexto — el insumo de la siguiente vuelta.</p>
+      <p>El agente lee el resultado de la acción: el output del comando, el contenido del archivo, la respuesta HTTP. Eso entra a su contexto y alimenta la próxima vuelta de pensar.</p>
+      <p class="s2-produces">Produce: información nueva en el contexto, el insumo de la siguiente vuelta.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Cada press abajo cambia simultáneamente h2, fase iluminada en la animación, y card. Tres estados; entrar al slide ya es el primer estado (pensar). Señalar el nodo iluminado en cada estado.</strong></p>
-    <p><u>Slide consolidado de las tres fases del loop. Reemplaza tres slides previos (Pensar/Actuar/Observar). La animación persiste; solo cambia la fase iluminada. El card de abajo se reemplaza también (no se acumula).</u></p>
-    <p><em>"La primera fase se llama pensar. El agente recibe lo que hay en su contexto — el objetivo original, lo que observó en la vuelta anterior, la historia de lo que hizo — y razona sobre eso. No es lineal: no sigue un script. El modelo formula cuál es el próximo paso útil dado todo lo que sabe en ese momento. Qué hipótesis tiene, qué le falta ver, qué tiene sentido probar ahora. Lo que produce esta fase es una decisión: qué acción viene a continuación."</em></p>
-    <p><em>"La segunda fase es actuar. Y acá hay algo importante: actuar no significa 'escribir texto'. Significa invocar herramientas — una o varias en la misma vuelta. Correr un comando en la terminal, editar un archivo, hacer una llamada HTTP, leer un directorio. Las herramientas producen efectos en el entorno: algo que antes no era verdad, ahora lo es. El archivo tiene una línea nueva. El test corrió. El servidor respondió. Las tools en detalle las vemos en la siguiente sección — por ahora lo que importa es que actuar siempre toca algo concreto fuera del modelo."</em></p>
-    <p><em>"Tercera fase: observar. El agente lee el resultado de lo que acaba de hacer. El output del comando, el contenido del archivo, el código HTTP de la respuesta. Todo eso entra a su contexto. Y eso es clave: no es que el agente 'vio' el resultado y lo olvidó. Lo que observa queda en la ventana, disponible para el próximo pensar. Eso es lo que hace que cada vuelta del loop sepa más que la anterior. Y después repite — hasta que una condición de corte decide que terminó. ¿Qué se ve cuando el loop completo trabaja sobre un problema real?"</em></p>
+    <p><strong>Cada click cambia título, fase iluminada y card a la vez.</strong></p>
+    <p><u>Las tres fases del loop en una sola slide; la card se reemplaza, no se acumula.</u></p>
+    <p><em>"La primera fase se llama pensar. El agente recibe lo que hay en su contexto: el objetivo original, lo que observó en la vuelta anterior, la historia de lo que hizo. Y razona sobre eso. No sigue un script: formula cuál es el próximo paso útil dado todo lo que sabe en ese momento. Qué hipótesis tiene, qué le falta ver, qué tiene sentido probar ahora. Lo que produce esta fase es una decisión: qué acción viene a continuación."</em></p>
+    <p><em>"La segunda fase es actuar. Actuar no significa 'escribir texto': significa invocar tools, una o varias en la misma vuelta. Y acá conviene separar dos tipos. Las que consultan, como leer un archivo o listar un directorio, no cambian nada: si leyó el archivo equivocado, lee otro. Las que modifican, como editar un archivo, correr un comando o borrar algo, dejan el entorno distinto, y no siempre hay deshacer. Esa diferencia la vamos a necesitar enseguida."</em></p>
+    <p><em>"Tercera fase: observar. El agente lee el resultado de lo que acaba de hacer: el output del comando, el contenido del archivo, el status code de la respuesta. Todo eso entra a su contexto. No es que lo 'vio' y lo olvidó: lo que observa queda en la ventana, disponible para el próximo pensar. Por eso cada vuelta del loop sabe más que la anterior. Y después repite, hasta que una condición de corte decide que terminó. ¿Qué se ve cuando el loop completo trabaja sobre un problema real?"</em></p>
   </aside>
 </section>
 
-<!-- §2.6 · El trace concreto — un 404 en producción -->
+<!-- §2.4 · El trace concreto — un 404 local -->
 <section>
-  <h2>El loop en acto — un 404 en producción</h2>
+  <h2>El loop en acto: un 404 en /tasks/</h2>
 
   <div class="s2-trace">
     <div class="s2-trace-row">
       <div class="s2-trace-phase pensar">pensar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>El endpoint <code>/tasks</code> devuelve 404 en producción. No sé qué lo causa — necesito ver los logs del servidor.</p>
+        <p><code>GET /tasks/</code> devuelve 404. No sé si falla el request o cómo está registrado el endpoint.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -533,7 +545,7 @@
       <div class="s2-trace-phase actuar">actuar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>Abre los logs con <code>tail -n 100 access.log</code>.</p>
+        <p>Corre <code>curl -i localhost:8000/tasks/</code> y lee <code>routers/tasks.py</code>.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -541,7 +553,7 @@
       <div class="s2-trace-phase observar">observar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>Cada <code>GET /tasks/</code> devuelve 404. Revisa la config del router y encuentra la ruta registrada como <code>/tasks//</code> — slash duplicado.</p>
+        <p>El curl confirma el 404. En el router, el path está registrado como <code>/tasks//</code> (slash duplicado).</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -565,30 +577,25 @@
       <div class="s2-trace-phase observar">observar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>Hace un <code>curl</code> al endpoint: devuelve 200. El 404 en producción se resolvió.</p>
+        <p>Repite el <code>curl</code> local: devuelve 200. Objetivo alcanzado.</p>
       </div>
     </div>
   </div>
 
-  <p class="s2-trace-close">Dos vueltas: la primera identificó, la segunda corrigió y confirmó.</p>
+  <p class="s2-trace-close">Dos vueltas: la primera identificó la causa, la segunda corrigió y verificó.</p>
 
   <aside class="notes">
-    <p><strong>Leer el trace despacio, señalando cada fase con el puntero. Hacer pausa en el observar de la vuelta 1 — esa línea cambia todo lo que sigue.</strong></p>
-    <p><u>Trace de 6 pasos sobre un escenario de debugging en producción. Cada fase tiene su color. Sin animación JS — el puntero del docente navega el trace.</u></p>
-    <p><em>"Veámoslo concreto. La tarea: 'hay 404s en el endpoint /tasks en producción, encontrá por qué.' El agente no tiene información de partida — solo el objetivo."</em></p>
-    <p><em>"Primera vuelta: pensar — no sé qué pasa, necesito ver los logs. Actuar — abre los logs del servidor. Observar — cada /tasks/ devuelve 404, y revisando el router encuentra que la ruta está registrada con un slash duplicado: /tasks//. Esa observación entró al contexto."</em></p>
-    <p><em>"Segunda vuelta: pensar — ya sé qué es y dónde está. Actuar — edita el router. Observar — curl al endpoint devuelve 200. Condición de corte: objetivo alcanzado."</em></p>
-    <p><em>"Dos vueltas. La primera no resolvió nada: identificó la causa. La segunda corrigió y confirmó. Un agente que devuelve un texto después del primer prompt no completó ninguna de esas vueltas — te delegó el trabajo a vos."</em></p>
+    <p><strong>Leer el trace despacio, fase por fase, con el puntero.</strong></p>
+    <p><u>Trace de dos vueltas sobre un 404 local; leer el router es parte de actuar.</u></p>
+    <p><em>"Veámoslo concreto, en tu máquina. La tarea: 'arreglá el 404 en /tasks/'. El agente no tiene más información que el objetivo. Primera vuelta. Pensar: no sé si el problema está en el request o en cómo se registró el endpoint. Actuar: dos tools en la misma vuelta, un curl al endpoint y una lectura del archivo del router. Observar: el curl confirma el 404, y en el router el path quedó registrado con un slash duplicado, /tasks//. Esa observación entró al contexto. Segunda vuelta. Pensar: ya sé qué es y dónde está. Actuar: edita el router. Observar: repite el curl y devuelve 200. Condición de corte: objetivo alcanzado. Dos vueltas. La primera no arregló nada: identificó la causa. La segunda corrigió y verificó. Un chat que te devuelve un texto después del primer prompt no completó ninguna de esas vueltas: te delegó el trabajo a vos."</em></p>
   </aside>
 </section>
 
-<!-- §2.8 · Un agente = LLM + loop + tools + entorno -->
+<!-- §2.5 · Un agente = LLM + loop + tools + entorno -->
 <section>
   <h2>Un agente son cuatro piezas</h2>
 
-  <p style="text-align:center;margin:8px auto 0;max-width:780px;font-size:0.72em;color:var(--accent-secondary);font-style:italic;">
-    El programa que envolvía al LLM ahora se abre — cada pieza, necesaria.
-  </p>
+  <p class="s2-pipe-lede">El LLM, el programa que lo envuelve (loop + tools) y el entorno sobre el que actúa.</p>
 
   <div class="s2-four-pipe">
     <div class="s2-pipe-card">
@@ -605,7 +612,7 @@
     <div class="s2-pipe-sep">+</div>
     <div class="s2-pipe-card">
       <h3>tools</h3>
-      <p class="s2-aporta">Las manos del agente. Editar archivos, correr comandos, llamar servicios.</p>
+      <p class="s2-aporta">Las manos del agente: leen y editan archivos, corren comandos, llaman servicios.</p>
       <p class="s2-falta">Sin ellas: razona sobre lo que haría, pero no toca nada.</p>
     </div>
     <div class="s2-pipe-sep">+</div>
@@ -619,22 +626,21 @@
   <p class="s2-pipe-close fragment fade-in">Cuando algo no funciona como esperás: ¿cuál de las cuatro piezas está fallando?</p>
 
   <aside class="notes">
-    <p><strong>Recorrer las cuatro tarjetas izquierda a derecha. Para en cada "sin él" — esa línea es el diagnóstico. Click para la pregunta final.</strong></p>
-    <p><u>Cuatro cards en pipeline horizontal. Cada una tiene qué aporta y qué falla si falta. La pregunta de cierre planta el hábito de diagnóstico.</u></p>
-    <p><em>"Acuérdense del programa externo del §1 — esa caja punteada que envolvía al LLM y ya hacía un montón de cosas. Hasta acá la tratamos como un bloque. Ahora la abrimos: un agente son cuatro piezas, y las cuatro son necesarias en conjunto. Sacale una y deja de funcionar de formas específicas."</em></p>
-    <p><em>"El LLM decide: recibe el contexto y determina qué hacer. El loop hace que itere: sin loop, el LLM da una respuesta y para. Las tools son las manos: sin ellas puede razonar sobre lo que haría pero no hace nada. El entorno es la realidad sobre la que actúa: sin entorno no hay nada que observar ni nada que cambiar."</em></p>
+    <p><strong>Recorrer las cuatro cards; click para la pregunta final.</strong></p>
+    <p><u>Qué aporta cada pieza y qué falla si falta.</u></p>
+    <p><em>"Juntemos todo. Un agente son cuatro piezas: el LLM, el programa que lo envuelve, que ahora trae loop y tools, y el entorno sobre el que actúa. Las cuatro son necesarias en conjunto; sacale una y deja de funcionar de formas específicas. El LLM decide: recibe el contexto y determina qué hacer. El loop hace que itere: sin loop, el LLM da una respuesta y para. Las tools son las manos: sin ellas puede razonar sobre lo que haría, pero no hace nada. El entorno es la realidad sobre la que actúa: sin entorno no hay nada que observar ni nada que cambiar."</em></p>
     <p><em>"La pregunta que te conviene tener siempre lista: cuando algo no funciona como esperás, ¿cuál de las cuatro está fallando? Es el punto de partida del diagnóstico."</em></p>
   </aside>
 </section>
 
-<!-- §2.10 · Condiciones de corte (cierre de sección) -->
+<!-- §2.6 · Condiciones de corte (cierre de sección) -->
 <section>
   <h2>Condiciones de corte</h2>
 
   <div class="s2-corte-grid">
     <div class="s2-corte-card ideal">
       <h3>Objetivo alcanzado</h3>
-      <p>El estado del entorno coincide con lo pedido. Los tests pasan, el endpoint responde 200. Condición ideal.</p>
+      <p>El agente verifica que el entorno coincide con lo pedido: los tests pasan, el endpoint responde 200. Condición ideal.</p>
     </div>
     <div class="s2-corte-card limit">
       <h3>Límite de pasos</h3>
@@ -642,7 +648,7 @@
     </div>
     <div class="s2-corte-card human">
       <h3>Pide ayuda</h3>
-      <p>El agente no puede continuar sin input humano — falta un secreto, no tiene permiso, hay ambigüedad. El loop se suspende.</p>
+      <p>El agente no puede continuar sin input humano: falta un secreto, no tiene permiso, hay ambigüedad. El loop se suspende.</p>
     </div>
     <div class="s2-corte-card fail">
       <h3>Falla no recuperable</h3>
@@ -651,17 +657,15 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las cuatro tarjetas. Slide de cierre de §2.</strong></p>
-    <p><u>Slide de cierre de §2. Cuatro cards con las condiciones de corte que ya se habían anunciado en los chips de la animación al introducir ReAct; acá se desarrollan.</u></p>
-    <p><em>"Cerramos el loop con la pregunta que lo hace operativo: ¿cuándo termina? Ya lo adelantaron los cuatro chips de salida del diagrama de ReAct. Acá los abrimos."</em></p>
-    <p><em>"Objetivo alcanzado: la ideal. El estado del entorno coincide con lo pedido — los tests pasan, el endpoint responde 200, el archivo tiene la línea nueva. El agente reporta y termina. Límite de pasos: hay un techo configurado y se alcanzó sin resolver. El agente cuenta qué hizo y hasta dónde llegó. Pide ayuda: encontró algo que no puede resolver solo — falta un secreto, no tiene permiso, hay ambigüedad — y suspende el loop hasta que alguien intervenga. Falla no recuperable: detecta un estado del que no sabe cómo salir y para."</em></p>
-    <p><em>"La condición de corte no es un detalle de implementación. Es lo que separa un agente que trabaja de un agente que da vueltas. Con esto cerramos el loop: tres fases, cuatro salidas, un programa externo que lo orquesta. Lo que pasa cuando ninguna de esas salidas se cumple — el loop infinito, la deriva, la alucinación que actúa — es uno de los temas que vienen más adelante. Por ahora, el esqueleto está armado."</em></p>
+    <p><strong>Recorrer las cuatro cards.</strong></p>
+    <p><u>Cierre de la sección: las cuatro salidas del loop que anunciaban los chips.</u></p>
+    <p><em>"Cerramos el loop con la pregunta que lo hace operativo: ¿cuándo termina? Lo adelantaban los cuatro chips del diagrama de ReAct; acá los abrimos. Objetivo alcanzado: la ideal. El agente verifica que el entorno coincide con lo pedido: los tests pasan, el endpoint responde 200. Ojo con el 'verifica': el loop corta cuando el agente considera que terminó, y lo ideal es que lo haya comprobado, no que lo suponga. Límite de pasos: hay un techo configurado y se alcanzó sin resolver. El agente cuenta qué hizo y hasta dónde llegó. Pide ayuda: encontró algo que no puede resolver solo, como un secreto que falta, un permiso que no tiene o una ambigüedad, y suspende el loop hasta que alguien intervenga. Falla no recuperable: detecta un estado del que no sabe cómo salir y para. La condición de corte no es un detalle de implementación: es lo que separa un agente que trabaja de uno que da vueltas. Con esto el esqueleto está armado: tres fases, cuatro salidas, un programa externo que lo orquesta."</em></p>
   </aside>
 </section>
 
 <!-- INIT-SCRIPTS-§2-START -->
 <script>
-  // C1 — consolidated phase slide (kept local: fragment-driven phase changes)
+  // §2.3 — consolidated phase slide (kept local: fragment-driven phase changes)
   if (document.getElementById('s2-loop-phases')) {
     initFourLoop({ containerId: 's2-loop-phases', mode: 'intro', phase: 'pensar' });
   }

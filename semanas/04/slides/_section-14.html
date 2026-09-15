@@ -1,31 +1,36 @@
 <style>
-/* Scoped styles for §12 only */
+/* Scoped styles for §14 only */
 
-/* Hook card — opening slide */
-.s12-hook-card {
-  max-width: 680px;
-  margin: 28px auto 0;
+.reveal .slides .s14-slide { text-align: center; }
+.reveal .slides .s14-slide h2 {
+  font-size: 0.9em;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.s14-slide code, .s14-entrega-tag { font-variant-ligatures: none; }
+
+/* §14.1 · Hook: las tres piezas */
+.s14-hook-card {
+  max-width: 720px;
+  margin: 36px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent);
+  border-top: 3px solid var(--accent);
   border-radius: 8px;
   padding: 30px 38px;
   text-align: center;
 }
-.s12-hook-card-main {
-  font-size: 0.92em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.75;
-  margin: 0 0 20px;
-}
-.s12-hook-tres {
+.s14-hook-tres {
   display: flex;
   gap: 14px;
   justify-content: center;
   flex-wrap: wrap;
 }
-.s12-hook-pieza {
+.s14-hook-pieza {
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 7px;
@@ -36,370 +41,22 @@
   font-weight: 700;
   letter-spacing: 0.04em;
 }
-
-/* Pipeline de las tres piezas */
-.s12-pipeline-wrap {
-  max-width: 720px;
-  margin: 26px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.s12-pipeline-row {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-.s12-pieza-box {
-  flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 18px 22px;
-}
-.s12-pieza-box.modelo-box {
-  border-left: 3px solid var(--accent);
-}
-.s12-pieza-box.rol-box {
-  border-left: 3px solid var(--accent-secondary);
-}
-.s12-pieza-box.runtime-box {
-  border-left: 3px solid #c792ea;
-}
-.s12-pieza-label {
-  font-size: 0.52em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 5px;
-}
-.s12-pieza-title {
-  font-size: 0.82em;
-  font-weight: 700;
-  margin-bottom: 7px;
-}
-.s12-pieza-box.modelo-box .s12-pieza-title { color: var(--accent); }
-.s12-pieza-box.rol-box .s12-pieza-title { color: var(--accent-secondary); }
-.s12-pieza-box.runtime-box .s12-pieza-title { color: #c792ea; }
-.s12-pieza-sin {
-  font-size: 0.67em;
-  color: var(--text-muted);
-  line-height: 1.6;
-  font-style: italic;
-}
-.s12-pipeline-arrow-v {
-  text-align: center;
-  font-size: 1.0em;
-  color: var(--text-muted);
-  padding: 2px 0;
-  line-height: 1;
-}
-.s12-pipeline-coda {
-  background: rgba(100, 255, 218, 0.06);
-  border: 1px solid rgba(100, 255, 218, 0.22);
-  border-radius: 7px;
-  padding: 13px 22px;
-  font-size: 0.76em;
-  color: var(--accent);
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.6;
-}
-
-/* Qué vas a construir — single focus card */
-.s12-construir-wrap {
-  max-width: 640px;
-  margin: 30px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.s12-forma-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 26px 32px;
-  text-align: center;
-}
-.s12-forma-tagline {
-  font-size: 0.76em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 14px;
-}
-.s12-forma-spec {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-.s12-forma-tag {
-  background: var(--bg-code);
-  border: 1px solid #2a3a5a;
-  border-radius: 6px;
-  padding: 8px 18px;
-  font-size: 0.74em;
-  font-family: var(--font-mono);
-  color: var(--text-primary);
-}
-.s12-forma-nota {
+.reveal .s14-hook-line {
   font-size: 0.72em;
   color: var(--text-muted);
-  line-height: 1.7;
-}
-.s12-construir-callout {
-  background: rgba(100, 255, 218, 0.06);
-  border: 1px solid rgba(100, 255, 218, 0.22);
-  border-radius: 7px;
-  padding: 14px 24px;
-  font-size: 0.82em;
-  font-weight: 700;
-  color: var(--accent);
-  text-align: center;
   line-height: 1.6;
-}
-
-/* Por qué conecta — cards layout */
-.s12-conexion-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.s12-conexion-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 18px 24px;
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-}
-.s12-conexion-card-label {
-  font-size: 0.56em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--text-muted);
-  flex-shrink: 0;
-  width: 90px;
-  padding-top: 2px;
-}
-.s12-conexion-card-body {
-  font-size: 0.76em;
-  color: var(--text-primary);
-  line-height: 1.75;
-}
-.s12-conexion-card-body em {
-  color: var(--accent);
-  font-style: normal;
-  font-weight: 700;
-}
-.s12-conexion-callout {
-  background: rgba(100, 255, 218, 0.06);
-  border: 1px solid rgba(100, 255, 218, 0.22);
-  border-radius: 7px;
-  padding: 13px 22px;
-  font-size: 0.76em;
-  color: var(--accent);
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.6;
-}
-
-/* Qué se evalúa — three verbs */
-.s12-eval-wrap {
-  max-width: 680px;
-  margin: 28px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.s12-eval-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 22px 30px;
-}
-.s12-eval-card-intro {
-  font-size: 0.78em;
-  color: var(--text-muted);
-  line-height: 1.75;
-  margin-bottom: 18px;
-}
-.s12-eval-verbs {
-  display: flex;
-  gap: 12px;
-}
-.s12-eval-verb {
-  flex: 1;
-  background: var(--bg-code);
-  border-radius: 7px;
-  padding: 14px 10px;
-  text-align: center;
-  border-top: 2px solid var(--accent);
-}
-.s12-eval-verb-word {
-  font-size: 0.85em;
-  font-weight: 700;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  display: block;
-  margin-bottom: 6px;
-}
-.s12-eval-verb-desc {
-  font-size: 0.62em;
-  color: var(--text-muted);
-  line-height: 1.55;
-}
-.s12-eval-nota {
-  font-size: 0.72em;
-  color: var(--text-muted);
-  line-height: 1.7;
-  font-style: italic;
-  text-align: center;
-}
-
-/* Lo que NO se decide hoy — cards */
-.s12-nodecide-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.s12-nodecide-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.s12-nodecide-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 16px 20px;
-}
-.s12-nodecide-card-title {
-  font-size: 0.68em;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-  font-family: var(--font-mono);
-}
-.s12-nodecide-card-body {
-  font-size: 0.66em;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-.s12-nodecide-coda {
-  background: var(--bg-code);
-  border: 1px solid #2a3a5a;
-  border-radius: 7px;
-  padding: 14px 22px;
-  font-size: 0.74em;
-  color: var(--text-muted);
-  line-height: 1.75;
+  margin: 22px 0 0;
   text-align: center;
   font-style: italic;
 }
-.s12-nodecide-coda em {
-  color: var(--text-primary);
-  font-style: normal;
-}
 
-/* El arco — closing slide */
-.s12-arco-wrap {
-  max-width: 700px;
-  margin: 22px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.s12-arco-steps {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-.s12-arco-step {
-  flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 14px 16px;
-  text-align: center;
-}
-.s12-arco-step-num {
-  font-size: 0.52em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 5px;
-}
-.s12-arco-step-label {
-  font-size: 0.76em;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.s12-arco-step-sub {
-  font-size: 0.6em;
-  color: var(--text-muted);
-  margin-top: 4px;
-  display: block;
-  line-height: 1.5;
-}
-.s12-arco-arrow {
-  font-size: 1.0em;
-  color: var(--text-muted);
-  padding: 0 6px;
-  flex-shrink: 0;
-}
-.s12-arco-tracker-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  justify-content: center;
-}
-.s12-arco-tracker-caption {
-  font-size: 0.68em;
-  color: var(--text-muted);
-  font-style: italic;
-}
-.s12-arco-closer {
-  background: rgba(100, 255, 218, 0.05);
-  border: 1px solid rgba(100, 255, 218, 0.18);
-  border-radius: 8px;
-  padding: 20px 28px;
-  text-align: center;
-}
-.s12-arco-closer-main {
-  font-size: 0.84em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.75;
-  margin: 0;
-}
-.s12-arco-closer-main em {
-  color: var(--accent);
-  font-style: normal;
-}
-
-/* §14.2 — Qué entregás (el repo) */
+/* §14.2 / §14.3 · Qué se entrega */
 .s14-entrega-wrap {
-  max-width: 740px;
-  margin: 14px auto 0;
+  max-width: 760px;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: center;
 }
 .s14-entrega-card {
   background: var(--bg-secondary);
@@ -407,7 +64,6 @@
   border-left: 3px solid var(--accent);
   border-radius: 8px;
   padding: 12px 20px;
-  width: 100%;
   box-sizing: border-box;
   text-align: left;
 }
@@ -418,276 +74,331 @@
   text-transform: uppercase;
   color: var(--accent);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
-.s14-entrega-body {
+.reveal .s14-entrega-body {
   font-size: 0.6em;
   color: var(--text-muted);
-  line-height: 1.65;
+  line-height: 1.6;
   margin: 0;
 }
 .s14-entrega-body strong { color: var(--text-primary); }
-.s14-entrega-features {
+.reveal .s14-entrega-features {
   padding-left: 22px;
-  margin: 6px 0 0;
-  font-size: 0.58em;
-  line-height: 1.6;
+  margin: 4px 0 0;
+  font-size: 0.6em;
+  line-height: 1.55;
   color: var(--text-muted);
   list-style: disc;
 }
-.s14-entrega-features li { padding-left: 4px; margin-bottom: 4px; }
+.s14-entrega-features li { padding-left: 4px; margin-bottom: 5px; }
 .s14-entrega-features li::marker { color: var(--accent); }
+.s14-entrega-features strong { color: var(--text-primary); }
 .s14-entrega-features code,
-.s14-entrega-body code {
+.s14-entrega-body code,
+.s14-entrega-lead code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
 }
-.s14-entrega-callout {
+.reveal .s14-entrega-lead {
+  font-size: 0.62em;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 760px;
+  margin: 16px auto 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.reveal .s14-callout {
   background: rgba(100, 255, 218, 0.06);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
+  border: 1px solid rgba(100, 255, 218, 0.22);
+  border-radius: 7px;
   padding: 10px 18px;
-  font-size: 0.7em;
+  font-size: 0.62em;
   color: var(--accent);
   font-weight: 700;
-  margin: 0;
   line-height: 1.55;
   text-align: center;
-  max-width: 720px;
+  width: 100%;
+  max-width: 760px;
+  box-sizing: border-box;
+  margin: 0 auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+.s14-callout code { font-family: var(--font-mono); color: var(--accent); }
 
-/* §14.3 — Cómo se mide */
+/* §14.4 / §14.5 · Lead + lista + coda */
 .s14-mide-wrap {
-  max-width: 740px;
-  margin: 14px auto 0;
+  max-width: 760px;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
   align-items: center;
 }
-.s14-mide-lead {
-  font-size: 0.74em;
+.reveal .s14-mide-lead {
+  font-size: 0.66em;
   color: var(--text-primary);
-  line-height: 1.65;
+  line-height: 1.6;
   text-align: center;
-  margin: 0;
+  max-width: 760px;
+  margin: 0 !important;
 }
-.s14-mide-list {
+.s14-mide-lead strong { color: var(--accent); }
+.reveal .s14-mide-list {
   display: inline-block;
   text-align: left;
-  max-width: 680px;
+  max-width: 760px;
   padding-left: 28px;
   margin: 0;
-  font-size: 0.62em;
-  line-height: 1.65;
+  font-size: 0.6em;
+  line-height: 1.6;
   color: var(--text-muted);
   list-style: disc;
 }
 .s14-mide-list li { padding-left: 4px; margin-bottom: 8px; }
 .s14-mide-list li::marker { color: var(--accent); }
 .s14-mide-list strong { color: var(--text-primary); }
-.s14-mide-list li.is-not::marker { color: #ff7676; }
-.s14-mide-list li.is-not strong { color: #ff7676; }
-.s14-mide-coda {
-  font-size: 0.72em;
+.reveal .s14-mide-coda {
+  font-size: 0.66em;
   color: var(--text-primary);
   font-style: italic;
   text-align: center;
   line-height: 1.55;
-  margin: 6px 0 0;
-  max-width: 680px;
+  max-width: 760px;
+  margin: 4px 0 0 !important;
 }
 .s14-mide-coda strong { color: var(--accent); font-style: normal; }
 
-/* Próximo paso — presentación 5 min */
-.s14-prox-wrap {
-  max-width: 720px;
-  margin: 22px auto 0;
+/* §14.6 · El arco completo */
+.s14-arco-wrap {
+  max-width: 940px;
+  margin: 26px auto 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  align-items: center;
+  gap: 24px;
 }
-.s14-prox-lead {
-  font-size: 0.78em;
-  color: var(--text-primary);
-  line-height: 1.65;
+.s14-arco-steps {
+  display: flex;
+  align-items: stretch;
+}
+.s14-arco-step {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 14px 12px;
   text-align: center;
+}
+.s14-arco-step.is-final {
+  border-color: var(--accent);
+}
+.s14-arco-step-label {
+  font-size: 0.68em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.s14-arco-step.is-final .s14-arco-step-label { color: var(--accent); }
+.s14-arco-step-sub {
+  font-size: 0.55em;
+  color: var(--text-muted);
+  margin-top: 6px;
+  display: block;
+  line-height: 1.45;
+}
+.s14-arco-arrow {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  padding: 0 5px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.s14-arco-closer {
+  max-width: 760px;
+  margin: 0 auto;
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.18);
+  border-radius: 8px;
+  padding: 18px 28px;
+  text-align: center;
+}
+.reveal .s14-arco-closer-main {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
   margin: 0;
 }
-.s14-prox-lead strong { color: var(--accent); }
-.s14-prox-list {
-  display: inline-block;
-  text-align: left;
-  max-width: 640px;
-  padding-left: 36px;
-  margin: 6px 0;
-  font-size: 0.66em;
-  line-height: 1.7;
-  color: var(--text-muted);
-  list-style: disc;
-}
-.s14-prox-list li { padding-left: 4px; margin-bottom: 8px; }
-.s14-prox-list li::marker { color: var(--accent); }
-.s14-prox-list strong { color: var(--text-primary); }
-.s14-prox-cierre {
-  background: rgba(100, 255, 218, 0.06);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-  padding: 10px 18px;
-  font-size: 0.72em;
+.s14-arco-closer-main em {
   color: var(--accent);
-  font-weight: 700;
-  margin: 6px 0 0;
-  line-height: 1.55;
-  text-align: center;
+  font-style: normal;
 }
 </style>
 
-<!-- §14.1 · Hook + arc — las tres cosas, al mismo tiempo -->
-<section>
-  <h2>Cuatro semanas. Tres cosas. Todo al mismo tiempo.</h2>
+<!-- §14.1 · Hook: las tres piezas, al mismo tiempo -->
+<section class="s14-slide">
+  <h2>Tres piezas, al mismo tiempo</h2>
 
-  <div class="s12-hook-card">
-    <div class="s12-hook-tres">
-      <div class="s12-hook-pieza">modelo · S1</div>
-      <div class="s12-hook-pieza">rol + vocabulario · S2–S3</div>
-      <div class="s12-hook-pieza">runtime · S4</div>
+  <div class="s14-hook-card">
+    <div class="s14-hook-tres">
+      <div class="s14-hook-pieza">modelo</div>
+      <div class="s14-hook-pieza">rol + vocabulario</div>
+      <div class="s14-hook-pieza">runtime</div>
     </div>
-    <p style="font-size:0.72em;color:var(--text-muted);line-height:1.6;margin:18px 0 0;text-align:center;font-style:italic;">
-      El trabajo final es donde las tres se usan al mismo tiempo.
-    </p>
+    <p class="s14-hook-line">El trabajo final es donde las tres se usan juntas.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar los tres chips en orden. Pausa antes de la línea de cierre.</strong></p>
-    <p><u>Opener de §14. Las tres piezas del curso + el cierre operativo "el trabajo final las usa juntas". Setup para los slides que definen el trabajo final concretamente.</u></p>
-    <p><em>"Tres piezas en estas cuatro semanas. El modelo, semana 1 — cómo predice tokens, qué es la ventana de contexto. El rol y el vocabulario, semanas 2 y 3 — cómo dictar en lugar de aceptar lo primero que el agente devuelve. El runtime, hoy — cómo configurar y controlar el loop entero."</em></p>
-    <p><em>"Las tres no funcionan bien por separado — funcionan juntas. Y el trabajo final es exactamente el lugar donde las tres se usan al mismo tiempo. Vamos a ver qué significa eso en concreto."</em></p>
+    <p><strong>Señalar las tres piezas en orden y cerrar con la línea de abajo.</strong></p>
+    <p><u>Apertura de §14: el trabajo final junta lo armado desde la semana 1.</u></p>
+    <p><em>"Tres piezas hasta acá. El modelo, semana 1: cómo predice tokens, qué es la ventana de contexto. El rol y el vocabulario, semanas 2 y 3: cómo dictar en lugar de aceptar lo primero que devuelve el agente. Y el runtime, estas dos clases: cómo configurar y controlar el loop. Por separado sirven poco. El trabajo final es donde las tres se usan al mismo tiempo, y ahora vemos qué significa eso en concreto."</em></p>
   </aside>
 </section>
 
-<!-- §14.2 · Qué entregás (el repo) -->
-<section>
-  <h2>Qué entregás: el repo</h2>
+<!-- §14.2 · Qué se entrega: tp-final/ -->
+<section class="s14-slide">
+  <h2>Qué se entrega: la carpeta <code>tp-final/</code></h2>
 
   <div class="s14-entrega-wrap">
     <div class="s14-entrega-card">
       <span class="s14-entrega-tag">Producto</span>
       <p class="s14-entrega-body">
-        <strong>Backend:</strong> una API REST u otro estilo que tenga sentido para el dominio.<br>
-        <strong>Frontend:</strong> con o sin dependencias externas — vanilla, framework, lo que corresponda.<br>
-        <strong>Persistencia:</strong> base de datos, archivos, lo que el producto necesite.
+        Una aplicación con <strong>interfaz, servidor y datos que persisten</strong>. Stack libre: REST u otro estilo, vanilla o framework, base de datos o archivos.
       </p>
     </div>
     <div class="s14-entrega-card">
-      <span class="s14-entrega-tag">.claude/ — parte del producto, no andamiaje</span>
-      <p class="s14-entrega-body">
-        Los siete features que recorrimos hoy tienen que estar presentes y configurados con intención:
-      </p>
+      <span class="s14-entrega-tag">Adentro de tp-final/</span>
       <ul class="s14-entrega-features">
-        <li><code>CLAUDE.md</code> con folder map y convenciones del proyecto</li>
-        <li><code>.claude/rules/</code> con al menos una rule path-scoped</li>
-        <li><code>.claude/settings.json</code> con <code>permissions</code> (<code>allow</code> / <code>deny</code> / <code>ask</code>) configurados</li>
-        <li>Al menos una skill propia + un slash command que la invoca</li>
-        <li>Sub-agent definido si la complejidad del proyecto lo justifica</li>
-        <li>Uso de plan mode durante el desarrollo (vivencia, no archivo)</li>
+        <li><strong><code>README.md</code> como informe:</strong> cómo se ejecuta, arquitectura, decisiones propias, gestión del contexto, qué salió mal.</li>
+        <li><strong>Evidencia del proceso:</strong> spec y plan en disco, commits, branches y pull requests.</li>
+        <li><strong>Configuración del agente versionada:</strong> <code>.claude/</code> o el equivalente de tu herramienta.</li>
       </ul>
     </div>
-    <p class="s14-entrega-callout">
-      El <code>.claude/</code> también es producto. Se entrega y se explica.
-    </p>
-    <p style="font-size:0.58em;color:var(--text-muted);text-align:center;margin:8px 0 0;font-style:italic;max-width:680px;">
-      Hasta tres personas o individual — vos elegís.
+    <p class="s14-callout">
+      Grupos de 2. La carpeta vive en el repo de uno de los integrantes; el otro entra como colaborador.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las dos cards. En la primera, marcar la libertad de forma (backend cualquier estilo, frontend cualquier stack). En la segunda, leer los seis bullets terse — son los features de hoy, ahora obligatorios en el repo. Cerrar con el callout despacio.</strong></p>
-    <p><u>Slide central de §14. Define el entregable concreto. Dos cards: producto (con forma libre dentro de un marco) y .claude/ (con los features de hoy explícitos). El callout sella la idea: el .claude/ no es invisible — es parte del repo que se entrega y se explica.</u></p>
-    <p><em>"Lo que se entrega es un repo. Dos partes."</em></p>
-    <p><em>"La primera, el producto: un backend, un frontend, persistencia. El backend puede ser una API REST o no — si para tu dominio tiene sentido otro estilo, va. El frontend puede ser vanilla sin dependencias o usar un framework — depende del caso. La persistencia es lo que el producto necesite. No hay un stack obligatorio."</em></p>
-    <p><em>"La segunda parte es la carpeta .claude/. Y acá sí hay obligatoriedad: los siete features que recorrimos hoy tienen que estar presentes en el repo y usados con intención. CLAUDE.md con folder map. Al menos una rule path-scoped en .claude/rules/. settings.json con permisos configurados de verdad. Una skill propia con su slash command. Un sub-agent si la complejidad lo pide. Y uso de plan mode durante el desarrollo — eso último no es archivo, es práctica."</em></p>
-    <p><em>"El .claude/ no es andamiaje invisible. Es parte del producto que entregás. Se ve, se entiende y — como vamos a ver en la próxima — se explica el último día."</em></p>
+    <p><strong>Producto con forma libre; la carpeta con informe, evidencia y configuración; grupos de 2.</strong></p>
+    <p><u>Mismo repositorio de siempre, carpeta tp-final/ con la estructura de referencia.</u></p>
+    <p><em>"Qué se entrega. Primero el producto: una aplicación con interfaz, servidor y datos que persisten. El stack es libre: el backend puede ser REST o no, el frontend vanilla o con framework, y la persistencia lo que el producto necesite. Segundo, la carpeta tp-final, en el mismo repo de siempre, con la estructura que ya tenés en el repo de referencia. Adentro, el README es el informe: cómo se ejecuta, la arquitectura, qué decidiste vos y no el modelo, cómo gestionaste el contexto y qué salió mal. Además, la evidencia del proceso: la spec y el plan como archivos, los commits, las branches y los pull requests; eso no se fabrica la noche anterior. Y la configuración del agente versionada, que vemos en la próxima. Y un cambio respecto de los TPs anteriores: el trabajo final es en grupos de dos. La carpeta vive en el repo de uno de los dos y el otro entra como colaborador, así los commits de los dos quedan en el mismo historial."</em></p>
   </aside>
 </section>
 
-<!-- §14.3 · Cómo se mide — la presentación final -->
-<section>
-  <h2>Cómo se mide: el último día explicás</h2>
+<!-- §14.3 · La configuración del agente también es producto -->
+<section class="s14-slide">
+  <h2>La configuración del agente también es producto</h2>
+
+  <p class="s14-entrega-lead">En <code>.claude/</code> o el equivalente de tu herramienta, cada pieza puesta con intención:</p>
+
+  <div class="s14-entrega-wrap">
+    <div class="s14-entrega-card">
+      <ul class="s14-entrega-features">
+        <li><code>CLAUDE.md</code> con folder map y convenciones del proyecto</li>
+        <li><code>.claude/rules/</code> con al menos una rule con <code>paths:</code></li>
+        <li><code>.claude/settings.json</code> con <code>permissions</code> (<code>allow</code> / <code>deny</code> / <code>ask</code>) pensados para el proyecto</li>
+        <li>Al menos una skill propia, invocable como slash command</li>
+        <li>Un sub-agent, si la complejidad del proyecto lo justifica</li>
+        <li>Plan mode durante el desarrollo (se ve en el proceso, no en un archivo)</li>
+      </ul>
+    </div>
+    <p class="s14-callout">Se versiona con el código y se explica en la defensa.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer las seis piezas rápido: son las de la Parte 2, ahora como parte del repo.</strong></p>
+    <p><u>La configuración del agente no es andamiaje invisible: se entrega y se explica.</u></p>
+    <p><em>"La configuración del agente también es producto. Si usás Claude Code, vive en la carpeta .claude; si usás otra herramienta, en su equivalente. Seis piezas. CLAUDE.md con el folder map y las convenciones. Al menos una rule que se active por path. settings.json con permisos pensados para este proyecto, no copiados. Una skill propia que se pueda invocar como comando. Un sub-agent si el proyecto lo pide; si no, no hace falta inventarlo. Y plan mode durante el desarrollo: eso no es un archivo, se ve en cómo trabajaste. No es decoración: se versiona con el código y en la defensa tenés que poder contar por qué está cada cosa."</em></p>
+  </aside>
+</section>
+
+<!-- §14.4 · Cómo se evalúa: la defensa -->
+<section class="s14-slide">
+  <h2>Cómo se evalúa: la defensa en el Demo Day</h2>
 
   <div class="s14-mide-wrap">
-    <p class="s14-mide-lead">
-      En la presentación final, sobre el repo terminado:
-    </p>
+    <p class="s14-mide-lead">Defensa <strong>conjunta</strong> sobre el repo terminado. Se evalúa al grupo.</p>
     <ul class="s14-mide-list">
-      <li><strong>El uso de cada feature de Claude Code:</strong> qué hay en tu <code>.claude/</code>, con qué intención lo pusiste, qué efecto tuvo durante el desarrollo.</li>
-      <li><strong>La estructura general del código:</strong> qué carpetas, qué módulos, qué contratos, qué responsabilidad tiene cada parte.</li>
-      <li class="is-not"><strong>No entrás en qué hace el código línea a línea.</strong> La presentación es de arquitectura y runtime, no de lógica.</li>
+      <li><strong>Especificación:</strong> cómo se definió qué construir antes de que el agente escribiera código.</li>
+      <li><strong>Gestión del contexto:</strong> qué se persistió y qué se aisló para que el agente no perdiera el hilo entre sesiones.</li>
+      <li><strong>Deriva:</strong> dónde se desvió el agente, cómo se detectó y cómo se corrigió.</li>
+      <li><strong>Evidencia:</strong> el flujo visible en el repo (spec, plan, commits, branches, PRs) y la configuración del agente.</li>
     </ul>
-    <p class="s14-mide-coda">
-      <strong>Apropiación</strong> = poder dar cuenta de las decisiones, no haber escrito todas las líneas.
-    </p>
+    <p class="s14-mide-coda"><strong>Apropiación</strong> = poder explicar, corregir y extender lo que el agente escribió.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el lead. Recorrer los tres bullets — el primero (features) y el segundo (estructura) con énfasis, el tercero (lo que NO) con voz más baja y pausada. Cerrar con la coda apoyando "apropiación".</strong></p>
-    <p><u>Slide que define el criterio operativo de evaluación. La presentación final es la instancia donde se mide la apropiación. Los tres bullets dejan en claro qué entra y qué no entra: uso de features + estructura entran; código línea a línea, no. La coda formaliza el término.</u></p>
-    <p><em>"El último día de cursada presentan el trabajo final. Y en esa presentación tienen que hacer dos cosas — y no hacer una tercera."</em></p>
-    <p><em>"La primera: explicar cómo usaron cada feature de Claude Code en su repo. Qué pusieron en CLAUDE.md y por qué. Qué rules son path-scoped y qué glob las activa. Qué permisos configuraron y por qué eligieron esos. Qué skill armaron y qué problema resuelve. Si hay un sub-agent, qué aisla. Y cómo usaron plan mode mientras desarrollaban."</em></p>
-    <p><em>"La segunda: explicar la estructura general del código. Qué carpetas tiene el repo. Qué módulos hay. Qué responsabilidad tiene cada parte. Cuáles son los contratos entre frontend, backend y persistencia."</em></p>
-    <p><em>"Lo que no se hace: meterse en qué hace cada función línea a línea. La presentación es de arquitectura y de runtime — no es un walkthrough de código. Si en la presentación están explicando un if dentro de una función, se desviaron del foco."</em></p>
-    <p><em>"Y la palabra para resumir todo esto: apropiación. Que el producto sea tuyo aunque el agente haya escrito la mayoría de las líneas. Apropiación se mide por la capacidad de dar cuenta de las decisiones, no por cuántas líneas tipeaste con tu teclado."</em></p>
+    <p><strong>Cuatro criterios del programa y la definición de apropiación.</strong></p>
+    <p><u>Que funcione no alcanza: se evalúa si el grupo puede contar y sostener el proceso.</u></p>
+    <p><em>"Cómo se evalúa. En el Demo Day, la última clase, cada grupo defiende su trabajo sobre el repo terminado, los dos juntos, y la nota es del grupo. Que funcione no alcanza. Se miran cuatro cosas. Especificación: cómo definiste qué construir antes de que el agente escribiera la primera línea. Gestión del contexto: un proyecto de varios archivos y varias sesiones no entra entero en la ventana, entonces qué dejaste en CLAUDE.md, qué aislaste en sub-agents, cómo hiciste para que el agente no perdiera el hilo. Deriva: dónde se fue para otro lado, cómo te diste cuenta y qué hiciste. Y evidencia: que todo eso se vea en el repo, en la spec, el plan, los commits, las branches, los PRs y la configuración. Y la palabra que resume todo: apropiación. Que el producto sea tuyo aunque el agente haya escrito la mayoría del código. Se mide en si podés explicarlo, corregirlo y extenderlo cuando te pregunto, no en cuántas líneas tipeaste. Y en grupo eso vale para los dos: cualquiera de los dos tiene que poder responder por cualquier parte."</em></p>
   </aside>
 </section>
 
-<!-- §14.4 · El arco completo — cierre del curso -->
-<section>
+<!-- §14.5 · Antes de implementar: exponer la idea -->
+<section class="s14-slide">
+  <h2>Antes de implementar: exponer la idea</h2>
+
+  <div class="s14-mide-wrap">
+    <p class="s14-mide-lead">Cada grupo presenta su idea en <strong>5 minutos</strong>:</p>
+    <ul class="s14-mide-list">
+      <li><strong>Problema:</strong> qué resuelve la aplicación.</li>
+      <li><strong>Usuarios:</strong> para quién es.</li>
+      <li><strong>MVP:</strong> las funcionalidades mínimas sin las que no sirve.</li>
+      <li><strong>Stack:</strong> con qué se construyen interfaz, servidor y datos.</li>
+    </ul>
+    <p class="s14-callout">La devolución es sobre alcance y viabilidad: si entra hasta el Demo Day y qué recortar antes de empezar.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Consigna de la exposición de ideas: cuatro puntos, cinco minutos por grupo.</strong></p>
+    <p><u>La devolución llega antes de implementar, cuando recortar alcance todavía es barato.</u></p>
+    <p><em>"Antes de escribir una línea, cada grupo expone su idea. Cinco minutos, cuatro puntos. El problema: qué resuelve. Los usuarios: para quién es. El MVP: las funcionalidades mínimas sin las cuales la aplicación no sirve, no la lista de todo lo que les gustaría. Y el stack: con qué vas a hacer la interfaz, el servidor y los datos. Lo que te devuelvo es sobre alcance y viabilidad: si eso entra en el tiempo que queda hasta el Demo Day y qué conviene recortar. Es el mismo movimiento que plan mode: corregir el rumbo cuando corregir cuesta una conversación, no semanas de código."</em></p>
+  </aside>
+</section>
+
+<!-- §14.6 · El arco completo -->
+<section class="s14-slide">
   <h2>El arco completo</h2>
 
-  <div class="s12-arco-wrap">
-    <div class="s12-arco-steps">
-      <div class="s12-arco-step">
-        <span class="s12-arco-step-num">inicio</span>
-        <div class="s12-arco-step-label">Modelo</div>
-        <span class="s12-arco-step-sub">predice tokens — la máquina que corre</span>
+  <div class="s14-arco-wrap">
+    <div class="s14-arco-steps">
+      <div class="s14-arco-step">
+        <div class="s14-arco-step-label">Modelo</div>
+        <span class="s14-arco-step-sub">la máquina que predice tokens</span>
       </div>
-      <div class="s12-arco-arrow">→</div>
-      <div class="s12-arco-step">
-        <span class="s12-arco-step-num">S2–S3</span>
-        <div class="s12-arco-step-label">Rol</div>
-        <span class="s12-arco-step-sub">nombrar las piezas — vocabulario para dirigir</span>
+      <div class="s14-arco-arrow">→</div>
+      <div class="s14-arco-step">
+        <div class="s14-arco-step-label">Rol</div>
+        <span class="s14-arco-step-sub">vocabulario para dirigir</span>
       </div>
-      <div class="s12-arco-arrow">→</div>
-      <div class="s12-arco-step">
-        <span class="s12-arco-step-num">S4</span>
-        <div class="s12-arco-step-label">Runtime</div>
-        <span class="s12-arco-step-sub">controlar el loop — actuar sobre las palancas</span>
+      <div class="s14-arco-arrow">→</div>
+      <div class="s14-arco-step">
+        <div class="s14-arco-step-label">Runtime</div>
+        <span class="s14-arco-step-sub">controlar el loop</span>
       </div>
-      <div class="s12-arco-arrow">→</div>
-      <div class="s12-arco-step" style="border-color: var(--accent); border-left: 1px solid var(--accent);">
-        <span class="s12-arco-step-num">trabajo final</span>
-        <div class="s12-arco-step-label" style="color:var(--accent);">Los tres</div>
-        <span class="s12-arco-step-sub">al mismo tiempo</span>
+      <div class="s14-arco-arrow">→</div>
+      <div class="s14-arco-step">
+        <div class="s14-arco-step-label">Flujo e integraciones</div>
+        <span class="s14-arco-step-sub">plugins · specs · MCP</span>
+      </div>
+      <div class="s14-arco-arrow">→</div>
+      <div class="s14-arco-step is-final">
+        <div class="s14-arco-step-label">Trabajo final</div>
+        <span class="s14-arco-step-sub">todo al mismo tiempo</span>
       </div>
     </div>
 
-    <div class="s12-arco-closer">
-      <p class="s12-arco-closer-main">
-        No son herramientas separadas.<br>
-        Son el <em>mismo supervisor</em> trabajando en distintas capas al mismo tiempo.
-      </p>
+    <div class="s14-arco-closer">
+      <p class="s14-arco-closer-main">No son herramientas separadas.</p>
+      <p class="s14-arco-closer-main">Son el <em>mismo supervisor</em> trabajando en distintas capas.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Señalar cada paso del arco en orden — modelo, rol, runtime, los tres juntos. Leer la coda final despacio. Última diapositiva del curso — pausa, sin apurar.</strong></p>
-    <p><u>Slide de cierre del curso. La secuencia horizontal materializa el arco en cuatro pasos. La coda cierra con la línea principal del mensaje: las tres capas no son herramientas separadas, son el mismo supervisor en distintos niveles.</u></p>
-    <p><em>"Empezamos con un modelo que predice tokens. No era una metáfora — era literal. La primera pregunta fue '¿qué va a venir después?' y la respuesta llegó de las probabilidades sobre el vocabulario."</em></p>
-    <p><em>"Después aprendieron a nombrar las piezas de lo que ese modelo construye. Componentes. Endpoints. Contratos. Status codes. Las palabras para dictar en lugar de reaccionar."</em></p>
-    <p><em>"Después aprendieron a controlar el loop con el que trabaja. El contexto finito. Las palancas sobre lo que entra y sobre cuánto le dejás hacer. CLAUDE.md, plan mode, sub-agents, permisos."</em></p>
-    <p><em>"No son herramientas separadas. Son el mismo supervisor trabajando en distintas capas al mismo tiempo."</em></p>
-    <p><em>"Eso es todo. Nos vemos en el trabajo final."</em></p>
+    <p><strong>Recorrer el arco en orden y leer el cierre despacio.</strong></p>
+    <p><u>Cierre de la unidad de runtime, no del curso: siguen plugins y spec-driven, MCP y el Demo Day.</u></p>
+    <p><em>"Empezamos con un modelo que predice tokens, y no era una metáfora. Después aprendiste a nombrar las piezas de lo que ese modelo construye: componentes, endpoints, contratos, status codes. Y en estas dos clases, a controlar el loop con el que trabaja: el contexto finito, CLAUDE.md, rules, permisos, skills, sub-agents, plan mode. Falta un tramo antes del trabajo final: empaquetar un flujo de trabajo completo, de la spec al pull request, y conectar el agente con sistemas que están fuera de tu máquina. Eso son las próximas dos clases. Y el trabajo final usa todo a la vez. No son herramientas separadas: es el mismo supervisor trabajando en distintas capas. Ahora, las ideas."</em></p>
   </aside>
 </section>

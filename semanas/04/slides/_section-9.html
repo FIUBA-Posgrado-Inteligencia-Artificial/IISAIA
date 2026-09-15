@@ -19,7 +19,7 @@
   margin: 0 0 16px;
   line-height: 1.2;
 }
-.s9-five-q-grid {
+.reveal .s9-five-q-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 7px;
@@ -63,12 +63,13 @@
   line-height: 1.3;
 }
 .s9-five-q-hint {
-  font-size: 0.44em;
+  font-size: 0.53em;
   color: var(--text-muted);
   line-height: 1.4;
+  text-align: left;
 }
 /* Mini variant */
-.s9-five-q-grid.is-mini {
+.reveal .s9-five-q-grid.is-mini {
   grid-template-columns: repeat(5, auto);
   justify-content: center;
   gap: 4px;
@@ -87,14 +88,21 @@
   border-left: 1px solid var(--accent);
 }
 .s9-five-q-grid.is-mini .s9-five-q-num {
-  font-size: 0.42em;
+  font-size: 0.43em;
 }
 .s9-five-q-grid.is-mini .s9-five-q-label {
   font-size: 0.5em;
 }
 
+/* Inline code in headings */
+.reveal .slides .s9-slide h2 code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
+
 /* Qué es — bulletpoint list para §9.2 */
-.s9-qe-list {
+.reveal .s9-qe-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
@@ -105,9 +113,10 @@
   line-height: 1.6;
   color: var(--text-muted);
 }
-.s9-qe-list li {
+.reveal .s9-qe-list li {
   padding-left: 6px;
   margin-bottom: 10px;
+  color: var(--text-muted);
 }
 .s9-qe-list li::marker {
   color: var(--accent);
@@ -116,12 +125,12 @@
   color: var(--text-primary);
   font-weight: 700;
 }
-.s9-qe-list code {
+.reveal .s9-qe-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s9-qe-list li.s9-qe-callout {
+.reveal .s9-qe-list li.s9-qe-callout {
   list-style: none;
   margin-left: -32px;
   margin-top: 10px;
@@ -133,17 +142,17 @@
   font-weight: 700;
 }
 
-/* Jerarquía — cascade layout (4 niveles para §9.3) */
+/* Jerarquía — cascade layout (5 niveles para §9.3) */
 .s9-hierarchy {
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 820px;
+  max-width: 860px;
   margin: 10px auto 0;
 }
 .s9-hier-row {
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 150px 1fr;
   gap: 0;
   align-items: stretch;
 }
@@ -152,7 +161,7 @@
   border: 1px solid #2a3a5a;
   border-right: none;
   border-bottom: none;
-  padding: 7px 9px;
+  padding: 6px 9px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -172,7 +181,7 @@
   color: var(--text-muted);
 }
 .s9-hier-level-name {
-  font-size: 0.52em;
+  font-size: 0.55em;
   font-weight: 700;
   color: var(--accent-secondary);
   text-align: center;
@@ -182,116 +191,91 @@
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-bottom: none;
-  padding: 7px 14px;
+  padding: 6px 16px;
   display: flex;
   flex-direction: column;
   gap: 2px;
   justify-content: center;
+  text-align: left;
 }
 .s9-hier-row:first-child .s9-hier-content { border-radius: 0 8px 0 0; }
 .s9-hier-row:last-child .s9-hier-content {
   border-radius: 0 0 8px 0;
   border-bottom: 1px solid #2a3a5a;
 }
-.s9-hier-title {
-  font-size: 0.58em;
-  font-weight: 700;
-  color: var(--text-primary);
-}
 .s9-hier-paths {
-  font-size: 0.5em;
+  font-size: 0.55em;
   font-family: var(--font-mono);
-  color: var(--text-muted);
-  line-height: 1.55;
+  color: var(--accent);
+  line-height: 1.45;
 }
 .s9-hier-use {
-  font-size: 0.48em;
+  font-size: 0.55em;
   color: var(--text-muted);
   line-height: 1.45;
-  margin-top: 1px;
 }
-.s9-hier-note {
-  display: inline-block;
-  max-width: 760px;
-  margin: 8px 0 0;
-  font-size: 0.5em;
+.reveal .s9-hier-note {
+  max-width: 860px;
+  margin: 12px auto 0 !important;
+  font-size: 0.55em;
   color: var(--text-muted);
   text-align: center;
-  font-style: italic;
   line-height: 1.5;
 }
-.s9-hier-note strong { color: var(--text-primary); font-style: normal; }
+.reveal .s9-hier-note.is-tight { margin-top: 2px !important; }
+.s9-hier-note strong { color: var(--text-primary); }
+.reveal .s9-hier-note code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
 
-/* Pirámide de precedencia — §9.4 */
-.s9-prec-wrap {
-  max-width: 760px;
-  margin: 10px auto 0;
+/* Cuándo aplica — dos cards (§9.4) */
+.s9-when-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  align-items: stretch;
+  gap: 16px;
+  max-width: 860px;
+  margin: 18px auto 0;
 }
-.s9-prec-pyramid {
+.s9-when-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
+  border-top: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
+  padding: 16px 20px;
+  text-align: left;
 }
-.s9-prec-tier {
-  border: 1px solid #2a3a5a;
-  border-radius: 6px;
-  padding: 5px 12px;
+.s9-when-card.is-model { border-top-color: var(--accent-secondary); }
+.s9-when-tag {
   font-family: var(--font-mono);
-  font-size: 0.5em;
-  color: var(--text-primary);
-  background: var(--bg-code);
-  text-align: center;
-  letter-spacing: 0.04em;
-}
-.s9-prec-tier.is-top {
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 700;
-  width: 60%;
-}
-.s9-prec-tier.is-2 { width: 70%; color: var(--accent-secondary); border-color: var(--accent-secondary); }
-.s9-prec-tier.is-3 { width: 82%; }
-.s9-prec-tier.is-4 { width: 94%; }
-.s9-prec-arrow {
-  font-family: var(--font-mono);
-  font-size: 0.42em;
-  color: var(--text-muted);
+  font-size: 0.45em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 6px;
+  color: var(--text-muted);
 }
-.s9-prec-notes {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.reveal .s9-when-title {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 6px 0 8px;
+  line-height: 1.25;
 }
-.s9-prec-note {
-  font-size: 0.52em;
+.reveal .s9-when-body {
+  font-size: 0.55em;
   color: var(--text-muted);
   line-height: 1.55;
   margin: 0;
 }
-.s9-prec-note strong { color: var(--text-primary); }
-.s9-prec-note .accent { color: var(--accent); font-weight: 700; }
+.reveal .s9-when-body code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
 
 /* Fields table — §9.5 */
 .s9-fields-wrap {
-  max-width: 940px;
+  max-width: 900px;
   margin: 10px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
@@ -301,26 +285,27 @@
 .s9-fields-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.5em;
+  font-size: 0.55em;
   line-height: 1.45;
 }
 .s9-fields-table thead th {
   background: var(--bg-code);
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.95em;
+  font-size: 0.85em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   text-align: left;
-  padding: 7px 12px;
+  padding: 7px 14px;
   border-bottom: 1px solid #2a3a5a;
 }
 .s9-fields-table tbody td {
-  padding: 6px 12px;
+  padding: 8px 14px;
   vertical-align: top;
+  text-align: left;
   border-bottom: 1px solid #1e2a48;
-  color: var(--text-muted);
+  color: var(--text-primary);
 }
 .s9-fields-table tbody tr:last-child td { border-bottom: none; }
 .s9-fields-table tbody tr.is-highlight td {
@@ -331,41 +316,17 @@
   color: var(--accent);
   font-weight: 700;
   white-space: nowrap;
-  width: 22%;
+  width: 28%;
 }
-.s9-fields-table td.s9-field-what {
-  color: var(--text-primary);
-  width: 38%;
-}
-.s9-fields-table td.s9-field-demo {
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-  width: 40%;
-}
-.s9-fields-table td.s9-field-demo code {
+.s9-fields-table td code {
   color: var(--accent-secondary);
   font-family: var(--font-mono);
 }
-.s9-fields-table tr.is-highlight td.s9-field-name { color: var(--accent); }
-.s9-fields-table tr.is-future td.s9-field-name {
-  color: var(--accent-secondary);
-}
-.s9-fields-note {
-  display: inline-block;
-  max-width: 880px;
-  margin: 8px 0 0;
-  font-size: 0.46em;
-  color: var(--text-muted);
-  font-style: italic;
-  text-align: center;
-}
-.s9-fields-note strong { color: var(--text-primary); font-style: normal; }
 
-/* Walkthrough — §9.6 — bullet list de los 4 bloques del settings.json */
+/* Walkthrough — §9.6 — campos top del settings.json del demo-repo */
 .s9-walk-path {
   display: inline-block;
-  max-width: 760px;
-  margin: 0 auto 10px;
+  margin: 4px auto 6px;
   background: var(--bg-code);
   border-radius: 6px;
   padding: 5px 12px;
@@ -374,40 +335,38 @@
   color: var(--accent);
   text-align: center;
 }
-.s9-walk-list {
+.reveal .s9-walk-list {
   list-style: disc;
-  display: inline-block;
+  display: block;
   text-align: left;
-  max-width: 820px;
+  max-width: 860px;
   margin: 8px auto 0;
   padding-left: 36px;
   font-size: 0.58em;
-  line-height: 1.65;
+  line-height: 1.55;
   color: var(--text-muted);
 }
-.s9-walk-list li {
+.reveal .s9-walk-list li {
   padding-left: 4px;
   margin-bottom: 10px;
+  color: var(--text-muted);
 }
+.s9-walk-list li::marker { color: var(--accent); }
 .s9-walk-list strong {
   color: var(--text-primary);
 }
-.s9-walk-list code {
+.reveal .s9-walk-list code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
-.s9-walk-list li.is-allow::marker { color: var(--accent); }
-.s9-walk-list li.is-deny::marker  { color: #ff7676; }
-.s9-walk-list li.is-deny code      { color: #ff7676; }
-.s9-walk-list li.is-ask::marker   { color: var(--accent-secondary); }
 
-/* Qué confunde — grid 1×3 — copia exacta de §8 */
+/* Qué confunde — grid 1×3 */
 .s9-cases-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-width: 940px;
+  gap: 12px;
+  max-width: 980px;
   margin: 12px auto 0;
 }
 .s9-case-card {
@@ -415,48 +374,59 @@
   border: 1px solid #2a3a5a;
   border-top: 3px solid var(--accent-secondary);
   border-radius: 8px;
-  padding: 12px 14px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  text-align: left;
 }
 .s9-case-tag {
   font-family: var(--font-mono);
-  font-size: 0.44em;
+  font-size: 0.45em;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 .reveal .slides .s9-slide .s9-case-h3 {
-  font-size: 0.6em;
+  font-size: 0.75em;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.3;
+  line-height: 1.25;
   margin: 0;
   text-transform: none;
   letter-spacing: 0;
 }
-.s9-case-body {
-  font-size: 0.5em;
+.reveal .s9-case-body {
+  font-size: 0.55em;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
 }
-.s9-case-body code {
+.s9-case-body strong { color: var(--text-primary); }
+.reveal .s9-case-body code,
+.reveal .slides .s9-slide .s9-case-h3 code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
 
-/* Demo wrap */
-.s9-demo-wrap {
-  max-width: 760px;
+/* Demo */
+.reveal .s9-demo-sub {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  margin: 14px auto 0;
+  font-style: italic;
+}
+.reveal .s9-demo-wrap {
+  max-width: 1040px;
   margin: 16px auto 0;
 }
+.reveal .s9-demo-wrap .cs-step { min-width: 0; }
+.reveal .s9-demo-wrap code { overflow-wrap: anywhere; }
 
 /* Cierre */
 .s9-close-card {
-  max-width: 720px;
+  max-width: 760px;
   margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
@@ -464,14 +434,14 @@
   padding: 16px 24px;
   text-align: center;
 }
-.s9-close-main {
+.reveal .s9-close-main {
   font-size: 0.66em;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--text-primary);
   margin: 0 0 12px;
 }
 .s9-close-main strong { color: var(--accent); }
-.s9-close-bridge {
+.reveal .s9-close-bridge {
   font-size: 0.58em;
   color: var(--text-muted);
   line-height: 1.6;
@@ -479,15 +449,11 @@
   padding-top: 11px;
   margin: 0;
 }
-.s9-close-bridge em {
-  color: var(--accent);
-  font-style: normal;
-  font-weight: 700;
-}
-.s9-close-bridge code {
+.reveal .s9-close-main code,
+.reveal .s9-close-bridge code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
 </style>
 
@@ -524,10 +490,9 @@
   </ol>
 
   <aside class="notes">
-    <p><strong>Misma apertura que las dos anteriores. No leer las preguntas — el título arriba ya nombra la sección. Ritmo rápido, la plantilla ya la tienen incorporada.</strong></p>
-    <p><u>Apertura de §9 con el mismo dispositivo. Cinco preguntas otra vez, "Qué es" lit, cambia el título. El cambio de naturaleza respecto a §7 y §8 — pasamos de Markdown a JSON, de instrucciones a configuración — no se anuncia acá; se desarrolla en el primer slide de contenido.</u></p>
-    <p><em>"settings.json. Tercera vuelta con la misma plantilla."</em></p>
-    <p><em>"Acá hay un cambio de naturaleza que vale la pena marcar antes de entrar: hasta acá vimos archivos Markdown — instrucciones para el agente. Lo que sigue es un JSON, y le habla a otra cosa."</em></p>
+    <p><strong>Ritmo rápido: la plantilla ya es conocida; no leer las preguntas.</strong></p>
+    <p><u>Tercera vuelta de la plantilla; cambia la naturaleza del archivo (de Markdown a JSON).</u></p>
+    <p><em>"settings.json. Tercera vuelta con la misma plantilla. Y un cambio de naturaleza que conviene marcar antes de entrar: hasta acá vimos archivos Markdown, instrucciones para el agente. Lo que sigue es un JSON, y le habla a otra cosa."</em></p>
   </aside>
 </section>
 
@@ -544,23 +509,20 @@
   <h2>Config del runtime, no instrucciones para el agente</h2>
 
   <ul class="s9-qe-list">
-    <li><strong>Archivo JSON</strong> que configura el <strong>runtime</strong> de Claude Code — el programa que envuelve al LLM.</li>
-    <li><strong>No</strong> son instrucciones para el agente. Eso es <code>CLAUDE.md</code> y <code>.claude/rules/</code>. Acá van parámetros del runtime: qué model usar, qué environment variables inyectar, qué puede ejecutar sin pedir confirmación.</li>
+    <li><strong>Archivo JSON</strong> que configura el <strong>runtime</strong> de Claude Code: el programa que envuelve al LLM.</li>
+    <li><strong>No</strong> son instrucciones para el agente. Eso es <code>CLAUDE.md</code> y <code>.claude/rules/</code>. Acá van parámetros del runtime: qué modelo usar, qué environment variables pasar, qué tools puede ejecutar sin pedir confirmación.</li>
     <li><strong><code>CLAUDE.md</code> dice "cómo comportarse"</strong>; <strong><code>settings.json</code> dice "cómo ejecutar a Claude"</strong>. Dos canales distintos hacia dos destinatarios distintos.</li>
     <li class="s9-qe-callout">→ Una instrucción textual puede ser ignorada o mal interpretada; una regla de runtime no puede.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Leer los tres ítems pausando entre cada uno. Marcar el contraste del tercero — "cómo comportarse" vs "cómo ejecutar a Claude". Pausa antes del callout. El callout es la línea que justifica que exista el archivo.</strong></p>
-    <p><u>Slide de definición. Mini-strip con "Qué es" lit. Lista de tres ítems + callout, mismo patrón que §8.2. La propiedad central: settings.json no es texto para el modelo, es config para el programa que corre al modelo. El callout vuelve más fuerte porque es el argumento de por qué este canal existe — algunas reglas tienen que ser determinísticas, y el lenguaje natural no es determinístico.</u></p>
-    <p><em>"Primera pregunta. Qué es. La respuesta corta: settings.json es un archivo JSON que configura el runtime de Claude Code. El runtime es el programa que envuelve al LLM — el sistema que abre la sesión, le carga el contexto, ejecuta las tools, devuelve los resultados al modelo. Ese programa tiene parámetros, y los parámetros viven en este archivo."</em></p>
-    <p><em>"Lo más importante para tener claro desde el primer minuto: no son instrucciones para el agente. Las instrucciones para el agente las vimos en §7 y §8 — markdown que le habla al modelo. settings.json le habla a otra cosa: al programa que corre al modelo. Qué model usar, qué environment variables inyectar, qué comandos puede correr sin pedir confirmación."</em></p>
-    <p><em>"La línea que vale la pena retener: CLAUDE.md dice cómo comportarse; settings.json dice cómo ejecutar a Claude. Dos canales distintos hacia dos destinatarios distintos."</em></p>
-    <p><em>"Y el callout es la razón por la que este canal existe. Si querés que Claude nunca corra git push sin tu aprobación, no lo ponés en CLAUDE.md — una instrucción textual puede ser ignorada, sobreescrita por contexto posterior, o simplemente reinterpretada. Lo ponés en settings.json como regla de runtime. El runtime la aplica antes de que Claude llegue a intentarlo. Una instrucción textual es opinable; una regla de runtime no."</em></p>
+    <p><strong>Marcar el contraste "cómo comportarse" / "cómo ejecutar a Claude".</strong></p>
+    <p><u>Propiedad central: texto para el modelo vs config para el programa que corre al modelo.</u></p>
+    <p><em>"Primera pregunta. Qué es. settings.json es un archivo JSON que configura el runtime de Claude Code: el programa que abre la sesión, carga el contexto, ejecuta las tools y le devuelve los resultados al modelo. Ese programa tiene parámetros, y viven acá. No son instrucciones para el agente; eso lo vimos en §7 y §8, Markdown que le habla al modelo. Este archivo le habla al programa: qué modelo usar, qué environment variables pasar, qué comandos puede correr sin preguntarte. CLAUDE.md dice cómo comportarse; settings.json dice cómo ejecutar a Claude. Y el callout es la razón de que exista este canal: si querés que Claude nunca haga git push, no lo escribís en CLAUDE.md, donde una instrucción puede quedar tapada por contexto posterior o reinterpretarse. Lo ponés en settings.json como regla deny, y el runtime la aplica antes de que Claude llegue a intentarlo."</em></p>
   </aside>
 </section>
 
-<!-- §9.3 · Dónde vive — 4 niveles en cascada -->
+<!-- §9.3 · Dónde vive — 5 niveles en cascada -->
 <section class="s9-slide">
   <ol class="s9-five-q-grid is-mini">
     <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
@@ -570,7 +532,7 @@
     <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Cuatro niveles, de mayor a menor precedencia</h2>
+  <h2>Cinco niveles, de mayor a menor precedencia</h2>
 
   <div class="s9-hierarchy">
     <div class="s9-hier-row">
@@ -579,63 +541,63 @@
         <span class="s9-hier-level-name">Managed</span>
       </div>
       <div class="s9-hier-content">
-        <span class="s9-hier-title">Política de la organización — fija el techo</span>
-        <span class="s9-hier-paths">administrado por la org (enterprise)</span>
-        <span class="s9-hier-use">Lo que define un admin para todos los usuarios. Puede bloquear permisos que ningún nivel inferior puede levantar.</span>
+        <span class="s9-hier-paths">lo instala un admin de la organización</span>
+        <span class="s9-hier-use">Fija el techo: lo que define no se pisa desde ningún nivel de abajo.</span>
       </div>
     </div>
     <div class="s9-hier-row">
       <div class="s9-hier-level">
         <span class="s9-hier-level-num">Nivel 2</span>
-        <span class="s9-hier-level-name">Local del proyecto</span>
+        <span class="s9-hier-level-name">Línea de comandos</span>
       </div>
       <div class="s9-hier-content">
-        <span class="s9-hier-title">Tu copia personal del proyecto — no se versiona</span>
-        <span class="s9-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.local.json</code> &nbsp;·&nbsp; va al <code style="font-family:var(--font-mono);">.gitignore</code></span>
-        <span class="s9-hier-use">Tokens reales, paths de tu máquina, permisos puntuales que solo tienen sentido en tu entorno.</span>
+        <span class="s9-hier-paths">claude --model haiku · --settings archivo.json</span>
+        <span class="s9-hier-use">Vale solo para esa ejecución.</span>
       </div>
     </div>
     <div class="s9-hier-row">
       <div class="s9-hier-level">
         <span class="s9-hier-level-num">Nivel 3</span>
-        <span class="s9-hier-level-name">Proyecto</span>
+        <span class="s9-hier-level-name">Local</span>
       </div>
       <div class="s9-hier-content">
-        <span class="s9-hier-title">Config compartida del repo — versionada</span>
-        <span class="s9-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.json</code> &nbsp;·&nbsp; commiteado</span>
-        <span class="s9-hier-use">Lo que aplica a todos los colaboradores: model, env con placeholders, permisos base, hooks.</span>
+        <span class="s9-hier-paths">.claude/settings.local.json · en .gitignore</span>
+        <span class="s9-hier-use">Tu override personal en este repo. No se versiona.</span>
       </div>
     </div>
     <div class="s9-hier-row">
       <div class="s9-hier-level">
         <span class="s9-hier-level-num">Nivel 4</span>
+        <span class="s9-hier-level-name">Proyecto</span>
+      </div>
+      <div class="s9-hier-content">
+        <span class="s9-hier-paths">.claude/settings.json · commiteado</span>
+        <span class="s9-hier-use">Config compartida: la ve todo el que clona el repo.</span>
+      </div>
+    </div>
+    <div class="s9-hier-row">
+      <div class="s9-hier-level">
+        <span class="s9-hier-level-num">Nivel 5</span>
         <span class="s9-hier-level-name">Usuario</span>
       </div>
       <div class="s9-hier-content">
-        <span class="s9-hier-title">Tu config personal — todos tus proyectos</span>
-        <span class="s9-hier-paths"><code style="font-family:var(--font-mono);">~/.claude/settings.json</code></span>
-        <span class="s9-hier-use">Defaults tuyos que viajan de un repo al otro. No los ve el equipo.</span>
+        <span class="s9-hier-paths">~/.claude/settings.json</span>
+        <span class="s9-hier-use">Tus defaults, en todos tus repos. No los ve el equipo.</span>
       </div>
     </div>
   </div>
 
-  <p class="s9-hier-note">
-    Los cuatro niveles se <strong>mergean al arranque</strong>. Cuando un mismo campo aparece en más de un nivel, <strong>el más alto gana</strong>.
-  </p>
+  <p class="s9-hier-note"><strong>Valores escalares</strong> (<code>model</code>, <code>env.X</code>, <code>cleanupPeriodDays</code>): gana el nivel más alto.</p>
+  <p class="s9-hier-note is-tight"><strong>Listas de <code>permissions</code></strong> (<code>allow</code>, <code>deny</code>, <code>ask</code>): se suman entre niveles.</p>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro niveles de arriba abajo. Marcar que el orden no es por dónde vive el archivo en disco sino por precedencia. Pausa en el nivel 2 — explicar el .gitignore como regla, no como detalle. Cerrar con la línea del merge.</strong></p>
-    <p><u>Slide de jerarquía con 4 niveles, en orden de precedencia descendente. La cabecera del visual marca el orden: Managed > Local > Project > User. El demo-repo no usa nivel Managed — vive en organizaciones enterprise — pero importa nombrarlo porque define el techo que ningún proyecto puede levantar.</u></p>
-    <p><em>"Segunda pregunta. Dónde vive. Cuatro niveles, los voy a leer de mayor a menor precedencia."</em></p>
-    <p><em>"Nivel uno, Managed. Es el nivel enterprise — lo fija un administrador de la organización. No lo vamos a tocar nunca en un proyecto personal, pero importa que sepan que existe porque cuando aparece, fija un techo: puede declarar permisos denegados que ningún nivel inferior puede levantar. En equipos corporativos es la política de seguridad base."</em></p>
-    <p><em>"Nivel dos, local del proyecto. Vive en .claude/settings.local.json. La regla de oro: va al .gitignore, siempre, sin excepción. Acá guardás todo lo específico de tu máquina — tokens reales, paths absolutos, permisos puntuales como abrir el browser. Si lo commiteás por accidente con un token real, ese token queda en el historial de git y hay que rotarlo."</em></p>
-    <p><em>"Nivel tres, proyecto. Vive en .claude/settings.json y va commiteado al repo. Es la config compartida del equipo: qué model usan todos, qué environment variables son necesarias con placeholder, qué permisos base operan en el proyecto. Lo que abre cualquiera que clona el repo."</em></p>
-    <p><em>"Nivel cuatro, usuario. Vive en ~/.claude/settings.json — tu home. Son tus defaults personales, los que te seguís de un proyecto al otro. No los ve nadie del equipo."</em></p>
-    <p><em>"Los cuatro se mergean al arranque. Si el mismo campo aparece en más de un nivel, gana el más alto. Si tenés model en tu nivel usuario y model en el proyecto, gana el proyecto. Eso permite que el repo fije la base compartida y vos agregues lo tuyo encima sin pisar nada."</em></p>
+    <p><strong>Recorrer de arriba abajo; cerrar en la diferencia escalares / listas.</strong></p>
+    <p><u>Cinco niveles por precedencia; pisar (escalares) no es lo mismo que sumar (listas de permisos).</u></p>
+    <p><em>"Segunda pregunta. Dónde vive. Cinco niveles, de mayor a menor precedencia. Managed lo instala un admin en organizaciones grandes y fija el techo; en un proyecto personal no aparece. Después, los flags de la línea de comandos: claude --model haiku vale solo para esa ejecución. Local, en .claude/settings.local.json: tu override personal para este repo, y va al .gitignore siempre. Proyecto, en .claude/settings.json, commiteado: lo que comparte el equipo. Usuario, en tu home: tus defaults, que te siguen a todos los repos. Y la regla de combinación tiene dos partes. Para valores escalares, como model o una variable de env, gana el nivel más alto: si el proyecto dice sonnet y tu usuario dice haiku, corre sonnet. Para las listas de permissions no hay pisada: se suman. Si tu local agrega un allow, no borra los deny del proyecto."</em></p>
   </aside>
 </section>
 
-<!-- §9.4 · Cuándo se carga + precedencia — pirámide + notas -->
+<!-- §9.4 · Cuándo se carga — recarga en caliente salvo model -->
 <section class="s9-slide">
   <ol class="s9-five-q-grid is-mini">
     <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
@@ -645,29 +607,25 @@
     <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Al arranque de cada sesión — sin recarga en caliente</h2>
+  <h2>Se recarga en caliente, salvo <code>model</code></h2>
 
-  <div class="s9-prec-wrap">
-    <div class="s9-prec-pyramid">
-      <div class="s9-prec-tier is-top">Managed</div>
-      <div class="s9-prec-tier is-2">Local</div>
-      <div class="s9-prec-tier is-3">Proyecto</div>
-      <div class="s9-prec-tier is-4">Usuario</div>
-      <span class="s9-prec-arrow">↑ mayor precedencia</span>
+  <div class="s9-when-grid">
+    <div class="s9-when-card">
+      <span class="s9-when-tag">Durante la sesión</span>
+      <p class="s9-when-title">Casi todo aplica al guardar</p>
+      <p class="s9-when-body">Claude Code vigila los archivos de settings. Si editás <code>permissions</code> o <code>hooks</code> con la sesión abierta, el cambio aplica sin reiniciar.</p>
     </div>
-    <div class="s9-prec-notes">
-      <p class="s9-prec-note"><strong>Cuándo:</strong> al arranque de cada sesión. El runtime lee los cuatro archivos disponibles, los mergea, y aplica la config resultante antes de procesar tu primer mensaje.</p>
-      <p class="s9-prec-note"><strong>No hay recarga en caliente.</strong> Un cambio en cualquier <code style="font-family:var(--font-mono);">settings.json</code> toma efecto en la <strong>próxima sesión</strong>, no en la actual.</p>
-      <p class="s9-prec-note"><strong>Merge por campo:</strong> cuando el mismo campo aparece en más de un nivel, gana el más alto. <span class="accent">Managed puede bloquear</span> completamente niveles inferiores en materia de permisos.</p>
+    <div class="s9-when-card is-model">
+      <span class="s9-when-tag">Al arrancar</span>
+      <p class="s9-when-title"><code>model</code> se fija al abrir la sesión</p>
+      <p class="s9-when-body">Un cambio de <code>model</code> en el archivo se ve en la próxima sesión. Para confirmar qué modelo corre: <code>/status</code> o el banner de inicio.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Mostrar la pirámide de izquierda — la base más ancha es Usuario, la punta más alta es Managed. Leer las tres notas de la derecha en orden. Marcar "próxima sesión" como la mecánica operativa más importante.</strong></p>
-    <p><u>Slide de mecánica de carga + precedencia visual. La pirámide está invertida respecto a la lectura intuitiva — abajo el nivel más amplio (Usuario), arriba el más restrictivo (Managed). Las tres notas de la derecha son operativas: cuándo, cómo se actualiza, qué pasa cuando colisionan dos niveles.</u></p>
-    <p><em>"Tercera pregunta. Cuándo se carga. La respuesta es simple: al arranque de cada sesión. El runtime lee los cuatro archivos disponibles, los mergea, y aplica la config resultante antes de procesar tu primer mensaje. No hay nada que importar, nada que invocar — está vivo desde el primer prompt."</em></p>
-    <p><em>"El detalle operativo más importante: no hay recarga en caliente. Si cambiás cualquier campo en mitad de una sesión, esa sesión no se entera. Toma efecto en la próxima. Es deliberado — el merge se calcula una vez al arranque, no por cada turno."</em></p>
-    <p><em>"Y la regla de colisión, que ya nombramos en el slide anterior pero vale la pena repetir con la pirámide en pantalla: cuando el mismo campo aparece en más de un nivel, gana el más alto. Managed gana sobre todos. Y en materia de permisos, Managed no solo gana — puede bloquear: un deny en el nivel managed no se puede sobreescribir desde abajo, ni en local, ni en proyecto, ni en usuario."</em></p>
+    <p><strong>La excepción a retener es <code>model</code>: pide sesión nueva.</strong></p>
+    <p><u>Mecánica de carga: watch de archivos con recarga en caliente, excepto el modelo.</u></p>
+    <p><em>"Tercera pregunta. Cuándo se carga. Al arrancar la sesión, el runtime lee todos los niveles y los combina. Pero no se queda con esa foto: vigila los archivos. Si con la sesión abierta editás permissions o hooks y guardás, el cambio aplica en ese momento, sin reiniciar. La excepción es model: el modelo se fija cuando abrís la sesión. Si cambiás model en el archivo, lo vas a ver recién en una sesión nueva, y para confirmar qué modelo está corriendo tenés /status o el banner de inicio. Lo vamos a hacer en el demo."</em></p>
   </aside>
 </section>
 
@@ -681,7 +639,7 @@
     <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Siete campos típicos — uno de ellos vale una sección entera</h2>
+  <h2>Seis campos típicos del archivo</h2>
 
   <div class="s9-fields-wrap">
     <table class="s9-fields-table">
@@ -689,99 +647,62 @@
         <tr>
           <th>Campo</th>
           <th>Qué controla</th>
-          <th>En el demo-repo</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="s9-field-name">model</td>
-          <td class="s9-field-what">Qué modelo de Claude usa esta sesión.</td>
-          <td class="s9-field-demo"><code>"claude-sonnet-4-6"</code></td>
+          <td>Modelo de la sesión. Acepta alias: <code>"sonnet"</code>, <code>"opus"</code>, <code>"haiku"</code>.</td>
         </tr>
         <tr>
           <td class="s9-field-name">env</td>
-          <td class="s9-field-what">Environment variables inyectadas a Claude Code y a los tools.</td>
-          <td class="s9-field-demo"><code>{ DEMO_BEARER_TOKEN: "changeme-in-real-env" }</code></td>
+          <td>Environment variables para los procesos que lanza Claude (servidor, tests, scripts).</td>
         </tr>
         <tr class="is-highlight">
           <td class="s9-field-name">permissions</td>
-          <td class="s9-field-what">Qué puede ejecutar Claude sin pedir confirmación. Tres listas: <code>allow</code> / <code>deny</code> / <code>ask</code>.</td>
-          <td class="s9-field-demo">tres listas con 12 / 3 / 2 entradas &nbsp;→&nbsp; <code>§10</code></td>
-        </tr>
-        <tr class="is-future">
-          <td class="s9-field-name">permissionMode</td>
-          <td class="s9-field-what">Modo default al arrancar: <code>default</code> / <code>acceptEdits</code> / <code>plan</code> / <code>bypassPermissions</code>.</td>
-          <td class="s9-field-demo">no fijado &nbsp;→&nbsp; <code>§13</code></td>
+          <td>Reglas <code>allow</code> / <code>deny</code> / <code>ask</code> por tool, y el modo de arranque en <code>defaultMode</code>.</td>
         </tr>
         <tr>
           <td class="s9-field-name">hooks</td>
-          <td class="s9-field-what">Scripts del ciclo de vida del runtime — antes o después de un evento.</td>
-          <td class="s9-field-demo">no fijado en este repo</td>
+          <td>Scripts que corren ante eventos del runtime: antes o después de una tool call, al arrancar la sesión.</td>
         </tr>
         <tr>
-          <td class="s9-field-name">includeCoAuthoredBy</td>
-          <td class="s9-field-what">Agrega la línea <code>Co-Authored-By: Claude</code> en commits que genera el agente.</td>
-          <td class="s9-field-demo"><code>true</code></td>
+          <td class="s9-field-name">attribution</td>
+          <td>Cambia u oculta la atribución a Claude en commits (<code>"commit"</code>) y PRs (<code>"pr"</code>).</td>
         </tr>
         <tr>
           <td class="s9-field-name">cleanupPeriodDays</td>
-          <td class="s9-field-what">Retención de logs y transcripts locales, en días.</td>
-          <td class="s9-field-demo"><code>30</code></td>
+          <td>Cuántos días se guardan los transcripts locales de las sesiones.</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <p class="s9-fields-note">
-    <strong>permissions</strong> sale resaltado: la diferencia entre un agente que puede hacer <code style="font-family:var(--font-mono);">git push</code> sin confirmación y uno que siempre pregunta vive ahí. Vuelve completo en §10.
-  </p>
-
   <aside class="notes">
-    <p><strong>Recorrer fila por fila, sin leerlas todas en voz alta. Marcar permissions como la fila resaltada — vale una sección propia. Marcar permissionMode como la fila secundaria con color distinto — se va a desarrollar en §13. hooks se nombra y se sigue de largo, queda fuera del alcance.</strong></p>
-    <p><u>Slide de campos clave. Tabla de tres columnas: campo / qué controla / valor en el demo-repo. Dos filas con tratamiento visual distinto: permissions resaltada en verde (anticipo §10), permissionMode en color secundario (anticipo §13). El resto son neutrales. La nota al pie consolida que permissions es el campo que más impacta y por qué vale una sección entera.</u></p>
-    <p><em>"Cuarta pregunta. Cómo se usa. La forma más rápida de bajar a tierra es esta tabla: siete campos típicos, uno por fila. No los voy a leer todos — los recorro y me detengo en los que vale la pena."</em></p>
-    <p><em>"model arriba. Define qué modelo usa la sesión. El demo-repo fija Sonnet 4.6, lo que garantiza que cualquier colaborador que clone el repo trabaje con el mismo modelo, sin depender de su nivel usuario."</em></p>
-    <p><em>"env, environment variables que el runtime inyecta. Acá vive un patrón importante: el placeholder en el proyecto, el valor real en el local. La variable existe en el nivel proyecto para documentar que es necesaria; el valor sensible vive solo en local."</em></p>
-    <p><em>"permissions resaltada. Es el campo más impactante de todo el archivo. Tres listas: allow, lo que ejecuta sin preguntar; deny, lo que bloquea sin importar lo que el agente proponga; ask, lo que requiere confirmación explícita. Vuelve completo en §10."</em></p>
-    <p><em>"permissionMode en color distinto porque también queda en deuda — se desarrolla en §13. Es el modo default que arranca la sesión: default es el clásico pregunta-antes-de-actuar, acceptEdits acepta ediciones automático, plan separa pensar de actuar, bypassPermissions desactiva todo. Es el modo overlay sobre las listas de permisos."</em></p>
-    <p><em>"hooks, scripts del ciclo de vida — antes o después de un evento del runtime. Existen, los nombramos, no entramos al detalle hoy."</em></p>
-    <p><em>"Y los dos chicos del final: includeCoAuthoredBy, agrega la línea Co-Authored-By en cada commit que genera Claude — el demo lo tiene en true. cleanupPeriodDays, retención de logs locales, en este caso treinta días. Afecta solo al storage local, no al comportamiento del agente."</em></p>
+    <p><strong>Recorrer sin leer todo; detenerse en <code>permissions</code>.</strong></p>
+    <p><u>Seis campos típicos; <code>permissions</code> resaltado porque tiene sección propia.</u></p>
+    <p><em>"Cuarta pregunta. Cómo se usa. Seis campos típicos. model define el modelo de la sesión y acepta alias como sonnet, opus o haiku, así no dependés del nombre completo de la versión. env son environment variables para los procesos que lanza Claude: cuando corre uvicorn o pytest, esas variables están ahí. permissions es el campo resaltado: las listas allow, deny y ask, y adentro también defaultMode, el modo con el que arranca la sesión. Lo vemos completo en §10. hooks son scripts que el runtime dispara ante eventos, como antes de una tool call o al arrancar la sesión; los nombramos y seguimos. attribution controla la línea de atribución a Claude en commits y PRs; reemplaza a includeCoAuthoredBy, que quizás encuentren en ejemplos viejos. Y cleanupPeriodDays, cuántos días se guardan los transcripts locales."</em></p>
   </aside>
 </section>
 
 <!-- §9.6 · Walkthrough del demo-repo settings.json — sin mini-strip (zoom-in concreto) -->
 <section class="s9-slide">
-  <h2>El <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">settings.json</code> del demo-repo, en cuatro bloques</h2>
+  <h2>El <code>settings.json</code> del demo-repo</h2>
 
   <div class="s9-walk-path">.claude/settings.json</div>
 
   <ul class="s9-walk-list">
-    <li>
-      <strong>Top — identidad del runtime.</strong>
-      <code>model: "claude-sonnet-4-6"</code> · <code>env.DEMO_BEARER_TOKEN</code> (placeholder; valor real en <code>local.json</code>) · <code>includeCoAuthoredBy: true</code> · <code>cleanupPeriodDays: 30</code>.
-    </li>
-    <li class="is-allow">
-      <strong><code>permissions.allow</code> — corre sin preguntar.</strong>
-      Comandos uv (<code>pytest</code>, <code>uvicorn</code>, <code>python</code>, <code>sync</code>), <code>Read(./**)</code>, <code>Edit</code> acotado a <code>backend/</code> · <code>frontend/</code> · <code>tests/</code> · <code>openapi.yaml</code>, <code>WebFetch</code> a un solo dominio.
-    </li>
-    <li class="is-deny">
-      <strong><code>permissions.deny</code> — bloqueado pase lo que pase.</strong>
-      <code>Read(./.env)</code> · <code>Bash(rm -rf *)</code> · <code>Bash(git push *)</code>. Una regla de runtime no se ignora — el callout de §9.2 cobra sentido acá.
-    </li>
-    <li class="is-ask">
-      <strong><code>permissions.ask</code> — pide confirmación cada vez.</strong>
-      <code>Bash(uv add *)</code> · <code>Bash(uv remove *)</code>. Reversibles pero no triviales: humano en el loop antes de modificar dependencias.
-    </li>
+    <li><strong><code>"model": "sonnet"</code></strong> · todo el que abre el repo trabaja con el mismo modelo.</li>
+    <li><strong><code>"env"</code></strong> · <code>DEMO_BEARER_TOKEN</code> con placeholder. Para correr la app a mano, el valor real va en <code>.env</code>. Tu <code>settings.local.json</code> puede pisarlo para los procesos que lanza Claude; es lo que muestra el <code>.example</code>.</li>
+    <li><strong><code>"attribution": { "pr": "" }</code></strong> · los PRs que abre Claude salen sin línea de atribución.</li>
+    <li><strong><code>"cleanupPeriodDays": 30</code></strong> · un mes de transcripts locales.</li>
+    <li><strong><code>"permissions"</code></strong> · 8 reglas <code>allow</code>, 3 <code>deny</code>, 2 <code>ask</code>.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro bloques de arriba hacia abajo. Detener en deny — leer las tres líneas. Detener en ask — explicar el criterio "reversible pero no trivial".</strong></p>
-    <p><u>Walkthrough del settings.json del demo-repo en cuatro bullets. Cada uno corresponde a un bloque del JSON real: identidad arriba, las tres listas de permisos abajo. Sin mini-strip porque es zoom-in concreto al archivo, no responde una pregunta nueva de la plantilla. El bullet deny lleva color rojo para hacer visible el contraste.</u></p>
-    <p><em>"Vamos al archivo real. Este es el .claude/settings.json del demo-repo entero, leído en cuatro bloques."</em></p>
-    <p><em>"Top: la identidad del runtime. Cuatro líneas, cuatro decisiones explícitas. Model fija Sonnet 4.6 — el mismo para todos los que abran el repo. Env declara una environment variable necesaria con placeholder; el valor real vive en el local.json de cada uno. includeCoAuthoredBy true para que los commits queden firmados. cleanupPeriodDays treinta días de retención de logs."</em></p>
-    <p><em>"Allow: lo que el runtime ejecuta sin preguntar nunca. Comandos de uv — pytest, uvicorn, python, sync. Read del proyecto entero. Edit acotado a backend, frontend, tests y al openapi.yaml — los lugares donde el agente puede modificar. Y un WebFetch a un solo dominio: la doc de FastAPI. Cualquier otra URL pide confirmación."</em></p>
-    <p><em>"Deny: tres líneas chicas y críticas. Read del .env — Claude no lee credenciales nunca. Bash rm -rf — bloqueado. Bash git push — bloqueado. Sin importar lo que se le pida. Acá cobra sentido el callout del slide dos: cuando la decisión tiene que ser determinística, no va en CLAUDE.md como instrucción de texto — va en settings.json como regla de runtime."</em></p>
-    <p><em>"Ask: uv add y uv remove. Acciones reversibles pero no triviales. Si el agente quiere agregar una dependencia nueva al proyecto, quiero enterarme antes. No las bloqueo, pero no las dejo automáticas. Ese es el lugar de ask: reversible, con humano en el loop."</em></p>
+    <p><strong>Detenerse en <code>env</code>: placeholder en proyecto, valor real fuera del repo.</strong></p>
+    <p><u>Los campos top del archivo real; el bloque <code>permissions</code> se abre en §10.</u></p>
+    <p><em>"Vamos al archivo real del demo-repo. model en sonnet: el mismo modelo para todos. env declara DEMO_BEARER_TOKEN con un placeholder; el archivo commiteado documenta que la variable existe, pero el valor real no viaja al repo. Para levantar la app a mano, el backend lo lee del .env. Y si querés que los procesos que lanza Claude usen otro valor, lo ponés en tu settings.local.json: como env.DEMO_BEARER_TOKEN es un escalar, gana el local. Eso es exactamente lo que trae el settings.local.json.example. attribution con pr vacío: los PRs que abra Claude no llevan la línea de atribución. cleanupPeriodDays en treinta. Y permissions: ocho reglas allow, tres deny, dos ask. Ese bloque lo abrimos entero en la sección de permisos."</em></p>
   </aside>
 </section>
 
@@ -800,94 +721,97 @@
   <div class="s9-cases-grid">
     <div class="s9-case-card">
       <span class="s9-case-tag">Caso 1</span>
-      <h3 class="s9-case-h3">Managed fija un techo, no un default</h3>
+      <h3 class="s9-case-h3">Pisar no es sumar</h3>
       <p class="s9-case-body">
-        En equipos enterprise, el admin puede declarar un <code>deny</code> en el nivel Managed que <strong>ningún proyecto ni usuario puede levantar</strong>. No es un default que vos sobreescribís: es un piso de política que limita lo que cualquier nivel inferior puede pedir. En proyectos personales no aparece; en una org sí.
+        Si tu <code>settings.local.json</code> define <code>env.DEMO_BEARER_TOKEN</code>, <strong>pisa</strong> el valor del proyecto. Si define <code>permissions.allow</code>, esas reglas <strong>se suman</strong> a las del proyecto: no borran sus <code>deny</code>.
       </p>
     </div>
     <div class="s9-case-card">
       <span class="s9-case-tag">Caso 2</span>
       <h3 class="s9-case-h3"><code>.local.json</code> al <code>.gitignore</code>, siempre</h3>
       <p class="s9-case-body">
-        Es la única forma de que el esquema de niveles funcione bien en equipo. Si commiteás <code>.claude/settings.local.json</code> con un token real, ese token <strong>queda en el historial de git</strong> — no alcanza con borrarlo en el próximo commit. Hay que rotarlo. El <code>.gitignore</code> del demo-repo ya tiene esa línea desde el primer commit.
+        Si commiteás <code>.claude/settings.local.json</code> con un token real, el token <strong>queda en el historial de git</strong>. Borrarlo en el próximo commit no alcanza: hay que rotarlo. El <code>.gitignore</code> del demo-repo ya lo lista.
       </p>
     </div>
     <div class="s9-case-card">
       <span class="s9-case-tag">Caso 3</span>
-      <h3 class="s9-case-h3">No confundir con <code>mcp.json</code></h3>
+      <h3 class="s9-case-h3">MCP no se configura acá</h3>
       <p class="s9-case-body">
-        Los servidores MCP tienen su <strong>propio archivo</strong> (<code>mcp.json</code>) y su propio mecanismo. No son un campo de <code>settings.json</code>; los dos coexisten en <code>.claude/</code> sin reemplazarse. Si buscás cómo conectar un MCP server y caés en <code>settings.json</code>, estás en el archivo equivocado.
+        Los servers MCP del proyecto se declaran en <code>.mcp.json</code>, en la <strong>raíz del repo</strong> (no en <code>.claude/</code>). <code>settings.json</code> solo tiene claves para habilitarlos, como <code>enableAllProjectMcpServers</code>.
       </p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las tres cards en orden. La uno se nombra rápido — relevante en orgs, no en proyectos personales. La dos es la que más vale la pena marcar — si pasa una vez, el token queda en git para siempre. La tres es preventiva: gente que busca configurar MCP y termina editando settings.json.</strong></p>
-    <p><u>Slide de quinta pregunta. Tres confusiones, grid 1×3 idéntico al de §8.7. Cada card es tag + título-tesis + cuerpo. La dos lleva la marca de seguridad operativa más importante de la sección.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Tres cosas, las mismas tres que veo cada vez."</em></p>
-    <p><em>"Una. Managed fija un techo, no un default. Esto importa en organizaciones enterprise: un admin puede declarar permisos denegados que ningún nivel inferior puede levantar. No es un default que vos podés sobreescribir — es un piso de política. En proyectos personales no aparece nunca, en una org corporativa define el espacio de lo posible."</em></p>
-    <p><em>"Dos. Y esta es la importante: el .local.json siempre, siempre, al .gitignore. Es la única forma de que el esquema de niveles funcione bien en equipo. Y atención al detalle operativo: si por accidente commiteás ese archivo con un token real, ese token queda en el historial de git. No alcanza con borrar el archivo en el siguiente commit — el token sigue ahí, en commits viejos, accesible para cualquiera que clone el repo. Hay que rotarlo. El demo-repo ya tiene la línea en el .gitignore desde el primer commit por esa razón."</em></p>
-    <p><em>"Tres. No confundir con mcp.json. Los servidores MCP tienen su propio archivo de configuración y su propio mecanismo. No son un campo de settings.json — los dos coexisten, ninguno reemplaza al otro. Lo digo porque ya vi gente buscando cómo configurar un MCP y editando settings.json al pedo. Cuando lleguemos a MCP, vamos al archivo de MCP."</em></p>
+    <p><strong>El caso 2 es el que más vale marcar: un token commiteado se rota.</strong></p>
+    <p><u>Tres confusiones: pisar vs sumar, el local fuera de git, MCP en otro archivo.</u></p>
+    <p><em>"Quinta pregunta. Qué confunde. Una: pisar no es sumar. Lo que es un valor, como una variable de env o el modelo, lo pisa el nivel más alto. Lo que es una lista de permisos se suma: tu local puede agregar reglas, pero no borra los deny del proyecto. Dos, la importante: el settings.local.json va al .gitignore siempre. Si lo commiteás con un token real, el token queda en commits viejos, accesible para cualquiera que clone el repo; borrarlo después no alcanza, hay que rotarlo. Tres: MCP no se configura en settings.json. Los servers del proyecto van en .mcp.json, en la raíz del repo, no dentro de .claude. En settings.json hay alguna clave para habilitarlos, nada más. Si buscás dónde conectar un server y abriste settings.json, estás en el archivo equivocado."</em></p>
   </aside>
 </section>
 
 <!-- §9.8 · Demo · los 3 archivos lado a lado (section-divider + clickable-steps) -->
 <section class="section-divider">
   <h2>Demo · los tres archivos lado a lado</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Hacer visible la convención: <strong>qué va en cada nivel y por qué</strong>.</p>
+  <p class="s9-demo-sub">Qué va en cada nivel, cuándo aplica un cambio y qué ve git.</p>
 
   <div class="s9-demo-wrap">
     <div id="s9-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup antes del slide: VS Code con tres archivos abiertos en paneles lado a lado — ~/.claude/settings.json (usuario), .claude/settings.json del demo-repo (proyecto), .claude/settings.local.json (local, o el .example si el local no existe en esta máquina). Terminal con cwd en una copia del demo-repo, Claude Code listo para abrir nueva sesión. Click recorre los tres pasos; la narración vive en vivo.</strong></p>
-    <p><u>Demo de la sección. Tres pasos sobre los archivos abiertos en paralelo: recorrer qué va en cada nivel (Paso 1), cambiar un campo y mostrar que toma efecto en próxima sesión (Paso 2), abrir el .gitignore y mostrar que el .local no se trackea (Paso 3). El objetivo del demo no es la mecánica de cada paso — es asentar la convención de qué decisión va en qué nivel. Plan B vive en notes del Paso 3.</u></p>
-    <p><em>"Vamos al demo. Tres pasos sobre los mismos tres archivos abiertos en paralelo. El objetivo no es ver el runtime hacer fuegos artificiales — es ver con qué criterio decidís qué va en cada nivel."</em></p>
+    <p><strong>Antes de proyectar: revisar el <code>~/.claude/settings.json</code> personal que se va a ver en pantalla.</strong></p>
+    <p><u>Tres pasos: niveles en paralelo, cambio de <code>model</code> con sesión nueva, <code>git status</code> sin el local.</u></p>
+    <p><em>"Vamos al demo. Tres archivos abiertos en paralelo, uno por nivel. No buscamos que el runtime haga nada vistoso: queremos ver con qué criterio va cada cosa en cada nivel, y cuándo toma efecto un cambio."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Paso 1 — Los tres archivos abiertos en paralelo</strong></p>
+    <p><strong>Setup de siempre (antes de la clase):</strong></p>
+    <ol>
+      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
+      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code></li>
+      <li><code>cp .env.example .env</code> y <code>uv sync</code></li>
+      <li>Abrir Claude Code con <code>claude --permission-mode default</code> (en Pro/Max/Team el arranque por defecto es <code>auto</code> y taparía los prompts; en la UI <code>default</code> se llama Manual).</li>
+      <li>Para ver qué cargó el runtime: <code>/context</code>. Ojo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen.</li>
+    </ol>
+    <p><strong>Paso 1 · Los tres niveles abiertos</strong></p>
     <ul>
-      <li>VS Code: abrir lado a lado <code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></li>
-      <li>Narrar: qué campo va en cada nivel y por qué</li>
-      <li>Mirar: tres niveles, tres responsabilidades</li>
+      <li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code>: <code>cp .claude/settings.local.json.example .claude/settings.local.json</code></li>
+      <li><strong>VS Code:</strong> los tres archivos de settings lado a lado: <code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></li>
+      <li><strong>Mirar:</strong> el token en proyecto (<code>changeme-in-real-env</code>) y en local (<code>mi-token-local</code>)</li>
     </ul>
-    <p><strong>Paso 2 — Cambiar el model y ver el efecto en próxima sesión</strong></p>
+    <p><strong>Paso 2 · Cambiar model</strong></p>
     <ul>
-      <li>VS Code: editar <code>.claude/settings.json</code></li>
-      <li>Cambiar <code>"model"</code> de <code>claude-sonnet-4-6</code> a <code>claude-haiku-4-5</code>, guardar</li>
-      <li>Terminal: cerrar Claude Code y abrir sesión nueva</li>
-      <li>Mirar: barra inferior muestra Haiku 4.5</li>
-      <li>Revertir el cambio</li>
+      <li><strong>VS Code:</strong> <code>model</code> de <code>"sonnet"</code> a <code>"haiku"</code> en <code>.claude/settings.json</code>, guardar</li>
+      <li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva con <code>claude --permission-mode default</code></li>
+      <li><strong>Mirar:</strong> <code>/status</code> (o el banner) muestra Haiku</li>
+      <li><strong>VS Code:</strong> volver a <code>"sonnet"</code> y guardar (si no, <code>git status</code> del paso 3 lo muestra modificado)</li>
     </ul>
-    <p><strong>Paso 3 — El .gitignore lo confirma</strong></p>
+    <p><strong>Paso 3 · git no ve el archivo local</strong></p>
     <ul>
-      <li>VS Code: abrir <code>.gitignore</code>, buscar línea <code>.claude/settings.local.json</code></li>
-      <li>Terminal: <code>git status</code></li>
-      <li>Mirar: el <code>.local.json</code> no aparece — git lo ignora</li>
+      <li><strong>Terminal:</strong> <code>git status</code></li>
+      <li><strong>Mirar:</strong> el archivo local no aparece</li>
+      <li><strong>VS Code:</strong> la línea <code>.claude/settings.local.json</code> en <code>.gitignore</code></li>
     </ul>
-    <p><em>Plan B (si el demo se traba en algún paso): los tres archivos abiertos sostienen el argumento solos. Leer cada uno en voz alta — proyecto define la base compartida, local agrega lo específico de la máquina, usuario persiste entre proyectos.</em></p>
+    <p><em>Plan B (si algo se traba): con los tres archivos abiertos, leer cada uno en voz alta. Proyecto define la base compartida, local pisa el token solo en esta máquina, usuario te sigue a todos los repos. El .gitignore se muestra abriéndolo, sin correr nada.</em></p>
   </aside>
 </section>
 
 <!-- §9.9 · Cierre + bridge a §10 -->
 <section class="s9-slide">
-  <h2>Config del runtime, no instrucciones para el agente</h2>
+  <h2>Parámetros del programa, aplicados sin interpretación</h2>
 
   <div class="s9-close-card">
     <p class="s9-close-main">
-      <code>settings.json</code> configura el <strong>runtime</strong> de Claude Code, no al agente. Define qué model corre, qué environment variables se inyectan, qué hooks se ejecutan en el ciclo de vida, y — sobre todo — qué tools puede ejecutar Claude sin pedir confirmación. Una regla de runtime es <strong>determinística</strong>: no se ignora ni se reinterpreta.
+      <code>settings.json</code> configura el <strong>runtime</strong> de Claude Code, no al agente: qué modelo corre, qué environment variables reciben los procesos, qué hooks se disparan y qué tools se ejecutan sin preguntarte. Una regla de runtime es <strong>determinística</strong>: no se ignora ni se reinterpreta.
     </p>
     <p class="s9-close-bridge">
-      El campo más impactante de todo lo que vimos es <code>permissions</code>. Define exactamente qué puede hacer el agente sin pedirte confirmación — y la diferencia entre un agente que ejecuta <em>git push</em> sin avisarte y uno que siempre pregunta vive en tres líneas. Vale una sección propia.
+      El campo con más consecuencias es <code>permissions</code>. La diferencia entre un agente que puede hacer <code>git push</code> y uno que tiene prohibido intentarlo es una línea de <code>deny</code>.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal apoyando "runtime" y "determinística" — son las dos palabras a retener. Pausa antes del bridge. Marcar el contraste git push sin avisar / pregunta siempre con la voz.</strong></p>
-    <p><u>Cierre de §9 + bridge a §10. La línea principal consolida la propiedad central de la sección (config del runtime, no del agente) y rescata la palabra clave "determinística" del callout de §9.2. El bridge anuncia §10 anclándolo en el campo que dejamos resaltado en §9.5 (permissions) y en el ejemplo más operativo posible (git push).</u></p>
-    <p><em>"Cerramos §9. La propiedad central a retener es esta: settings.json configura el runtime, no al agente. Define qué model corre, qué environment variables se inyectan, qué hooks se disparan, y qué tools puede ejecutar Claude sin pedir confirmación. Una regla de runtime es determinística — no se ignora, no se reinterpreta."</em></p>
-    <p><em>"Y dejamos algo en deuda. El campo más impactante de todo lo que vimos es permissions. La diferencia entre un agente que puede correr git push sin avisarte y uno que siempre pregunta antes vive en tres líneas de settings.json. Tres listas, una lógica de evaluación, y un puñado de gotchas que vale la pena ver al detalle. Vale una sección propia."</em></p>
+    <p><strong>Apoyar "runtime" y "determinística".</strong></p>
+    <p><u>Cierre de §9 y puente a permisos.</u></p>
+    <p><em>"Cerramos settings.json. Lo que hay que retener: configura el runtime, no al agente. Qué modelo corre, qué variables reciben los procesos, qué hooks se disparan y qué tools se ejecutan sin preguntarte. Y una regla de runtime es determinística: no se ignora ni se reinterpreta. El campo con más consecuencias es permissions. La diferencia entre un agente que puede hacer git push y uno que tiene prohibido intentarlo es una sola línea de deny. Tres listas, un orden de evaluación y varias sutilezas: le dedicamos la sección que sigue."</em></p>
   </aside>
 </section>
 
@@ -895,19 +819,19 @@
 <script>
   initClickableSteps({containerId: 's9-demo-steps', steps: [
     {
-      title: 'Paso 1 — Los tres archivos abiertos en paralelo',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir lado a lado <code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></li><li><strong>Narrar:</strong> qué campo va en cada nivel y por qué</li><li><strong>Mirar:</strong> tres niveles, tres responsabilidades</li></ul>',
-      example: 'model en el proyecto porque todos los colaboradores deberían usar el mismo. DEMO_BEARER_TOKEN con placeholder en el proyecto, valor real en local. Los permisos de Bash(open http://localhost:8000) en local porque abrir el browser es una operación de tu máquina, sin sentido en un servidor de CI ni en la de otro colaborador. Tres niveles, tres responsabilidades.'
+      title: 'Paso 1 · Los tres niveles abiertos',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code></li><li><strong>VS Code:</strong> los tres archivos de settings lado a lado</li><li><strong>Mirar:</strong> el token en proyecto y en local</li></ul>',
+      example: 'El proyecto fija <code>model</code>, <code>permissions</code> y el placeholder del token. El local redefine <code>env.DEMO_BEARER_TOKEN</code> con <code>mi-token-local</code>: como es un valor escalar, en esta máquina gana el local. El de usuario tiene tus defaults, los que viajan a cualquier repo.'
     },
     {
-      title: 'Paso 2 — Cambiar el model y ver el efecto en próxima sesión',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> editar <code>.claude/settings.json</code></li><li><strong>Cambiar</strong> <code>"model"</code> de <code>claude-sonnet-4-6</code> a <code>claude-haiku-4-5</code>, guardar</li><li><strong>Terminal:</strong> cerrar Claude Code y abrir sesión nueva</li><li><strong>Mirar:</strong> barra inferior muestra Haiku 4.5</li><li><strong>Revertir</strong> el cambio</li></ul>',
-      example: 'Lo que mostramos no es el campo en sí — es la mecánica del runtime. Los settings se leen al arranque, no en caliente. Un cambio guardado mientras hay una sesión abierta no afecta esa sesión. Toma efecto la próxima vez que abrís Claude Code. El indicador del modelo en la UI es la forma más simple de verlo: cambia el archivo, abrís nueva sesión, el indicador refleja el cambio.'
+      title: 'Paso 2 · Cambiar model',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> <code>model</code> de <code>"sonnet"</code> a <code>"haiku"</code></li><li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva</li><li><strong>Mirar:</strong> <code>/status</code> muestra Haiku</li><li><strong>VS Code:</strong> volver a <code>"sonnet"</code></li></ul>',
+      example: 'Con la sesión abierta, el cambio de <code>model</code> no se nota: el modelo se fija al arrancar. En la sesión nueva, <code>/status</code> muestra Haiku. Un cambio en <code>permissions</code> o <code>hooks</code>, en cambio, se hubiera recargado sin reiniciar.'
     },
     {
-      title: 'Paso 3 — El .gitignore lo confirma',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.gitignore</code>, buscar línea <code>.claude/settings.local.json</code></li><li><strong>Terminal:</strong> <code>git status</code></li><li><strong>Mirar:</strong> el <code>.local.json</code> no aparece — git lo ignora</li></ul>',
-      example: 'La convención no es opinable: ese archivo puede contener tokens reales, paths de tu máquina, permisos que solo tienen sentido en tu entorno. Si viajara al repo, contaminaría la config del equipo y podría exponer credenciales. Por eso el .gitignore lo lista desde el primer commit.\n\nPLAN B (si el demo se traba en algún paso): los tres archivos abiertos sostienen el argumento solos. Leer cada uno en voz alta — proyecto define la base compartida, local agrega lo específico de la máquina, usuario persiste entre proyectos. No hace falta ejecutar nada para que el punto quede claro: la convención es qué va dónde y por qué.'
+      title: 'Paso 3 · git no ve el archivo local',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>git status</code></li><li><strong>Mirar:</strong> el archivo local no aparece</li><li><strong>VS Code:</strong> la línea en <code>.gitignore</code></li></ul>',
+      example: '<code>git status</code> no lista el archivo local aunque existe: el <code>.gitignore</code> lo excluye. Si tuviera un token real y se commiteara, el token quedaría en el historial y habría que rotarlo.'
     }
   ]});
 </script>

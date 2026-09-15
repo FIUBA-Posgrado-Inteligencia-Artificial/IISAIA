@@ -11,6 +11,12 @@
   text-transform: none;
   letter-spacing: 0;
 }
+.reveal .slides .s10-slide h2 code,
+.reveal .section-divider h2 code.s10-h2-code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
 
 /* --- Five-questions card (full + mini) — calibrated identically to §9 --- */
 .reveal .slides .s10-slide h2.s10-five-q-title {
@@ -19,7 +25,7 @@
   margin: 0 0 16px;
   line-height: 1.2;
 }
-.s10-five-q-grid {
+.reveal .s10-five-q-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 7px;
@@ -63,12 +69,13 @@
   line-height: 1.3;
 }
 .s10-five-q-hint {
-  font-size: 0.44em;
+  font-size: 0.53em;
   color: var(--text-muted);
   line-height: 1.4;
+  text-align: left;
 }
 /* Mini variant */
-.s10-five-q-grid.is-mini {
+.reveal .s10-five-q-grid.is-mini {
   grid-template-columns: repeat(5, auto);
   justify-content: center;
   gap: 4px;
@@ -87,36 +94,37 @@
   border-left: 1px solid var(--accent);
 }
 .s10-five-q-grid.is-mini .s10-five-q-num {
-  font-size: 0.42em;
+  font-size: 0.43em;
 }
 .s10-five-q-grid.is-mini .s10-five-q-label {
   font-size: 0.5em;
 }
 
 /* Qué es — bullet list (definición + callout) */
-.s10-qe-list {
+.reveal .s10-qe-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
-  max-width: 720px;
+  max-width: 740px;
   margin: 16px auto 0;
   padding-left: 36px;
   font-size: 0.6em;
   line-height: 1.6;
   color: var(--text-muted);
 }
-.s10-qe-list li {
+.reveal .s10-qe-list li {
   padding-left: 6px;
   margin-bottom: 10px;
+  color: var(--text-muted);
 }
 .s10-qe-list li::marker { color: var(--accent); }
 .s10-qe-list strong { color: var(--text-primary); font-weight: 700; }
-.s10-qe-list code {
+.reveal .s10-qe-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s10-qe-list li.s10-qe-callout {
+.reveal .s10-qe-list li.s10-qe-callout {
   list-style: none;
   margin-left: -32px;
   margin-top: 10px;
@@ -128,101 +136,71 @@
   font-weight: 700;
 }
 
-/* Jerarquía — cascade reusada de §9 (renombrada al prefijo s10-) */
-.s10-hierarchy {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  max-width: 820px;
-  margin: 10px auto 0;
-}
-.s10-hier-row {
+/* Dónde vive — merge de listas entre archivos (§10.3) */
+.s10-merge {
   display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 0;
-  align-items: stretch;
-}
-.s10-hier-level {
-  background: var(--bg-code);
-  border: 1px solid #2a3a5a;
-  border-right: none;
-  border-bottom: none;
-  padding: 7px 9px;
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: 1fr auto 1fr auto 1.15fr;
   align-items: center;
-  justify-content: center;
-  gap: 2px;
+  gap: 10px;
+  max-width: 1080px;
+  margin: 22px auto 0;
 }
-.s10-hier-row:first-child .s10-hier-level { border-radius: 8px 0 0 0; }
-.s10-hier-row:last-child .s10-hier-level {
-  border-radius: 0 0 0 8px;
-  border-bottom: 1px solid #2a3a5a;
-}
-.s10-hier-level-num {
-  font-size: 0.46em;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-}
-.s10-hier-level-name {
-  font-size: 0.52em;
-  font-weight: 700;
-  color: var(--accent-secondary);
-  text-align: center;
-  line-height: 1.3;
-}
-.s10-hier-content {
+.s10-merge-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
-  border-bottom: none;
-  padding: 7px 14px;
+  border-top: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 12px 14px;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  justify-content: center;
+  gap: 6px;
+  align-self: stretch;
 }
-.s10-hier-row:first-child .s10-hier-content { border-radius: 0 8px 0 0; }
-.s10-hier-row:last-child .s10-hier-content {
-  border-radius: 0 0 8px 0;
-  border-bottom: 1px solid #2a3a5a;
-}
-.s10-hier-title {
-  font-size: 0.58em;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.s10-hier-paths {
-  font-size: 0.5em;
+.s10-merge-card.is-result { border-top-color: var(--accent); }
+.s10-merge-tag {
   font-family: var(--font-mono);
+  font-size: 0.45em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  line-height: 1.55;
 }
-.s10-hier-use {
-  font-size: 0.48em;
-  color: var(--text-muted);
-  line-height: 1.45;
-  margin-top: 1px;
-}
-.s10-hier-note {
-  display: inline-block;
-  max-width: 760px;
-  margin: 8px 0 0;
+.s10-merge-path {
+  font-family: var(--font-mono);
   font-size: 0.5em;
+  color: var(--accent-secondary);
+  margin-bottom: 4px;
+}
+.s10-merge-card.is-result .s10-merge-path { color: var(--accent); }
+.s10-merge-line {
+  font-family: var(--font-mono);
+  font-size: 0.5em;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+.s10-merge-key {
+  display: inline-block;
+  min-width: 3.6em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.s10-merge-key.is-deny { color: #ff7676; }
+.s10-merge-op {
+  font-family: var(--font-mono);
+  font-size: 1.1em;
+  color: var(--text-muted);
+}
+.reveal .s10-merge-note {
+  max-width: 860px;
+  margin: 18px auto 0 !important;
+  font-size: 0.55em;
   color: var(--text-muted);
   text-align: center;
-  font-style: italic;
   line-height: 1.5;
 }
-.s10-hier-note strong { color: var(--text-primary); font-style: normal; }
-.s10-hier-note code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-style: normal;
-}
+.s10-merge-note strong { color: var(--text-primary); }
 
-/* Logic table — §10.4 — y modes table — §10.9 */
+/* Logic table — §10.4 */
 .s10-logic-wrap {
   max-width: 880px;
   margin: 10px auto 0;
@@ -234,73 +212,72 @@
 .s10-logic-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.52em;
-  line-height: 1.5;
+  font-size: 0.55em;
+  line-height: 1.45;
 }
 .s10-logic-table thead th {
   background: var(--bg-code);
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.95em;
+  font-size: 0.85em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   text-align: left;
-  padding: 7px 12px;
+  padding: 7px 14px;
   border-bottom: 1px solid #2a3a5a;
 }
 .s10-logic-table tbody td {
-  padding: 7px 12px;
+  padding: 8px 14px;
   vertical-align: top;
+  text-align: left;
   border-bottom: 1px solid #1e2a48;
-  color: var(--text-muted);
+  color: var(--text-primary);
 }
 .s10-logic-table tbody tr:last-child td { border-bottom: none; }
-.s10-logic-table td.s10-logic-cond {
-  color: var(--text-primary);
-  width: 56%;
-}
-.s10-logic-table td.s10-logic-cond code {
+.s10-logic-table td code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.98em;
 }
-.s10-logic-table td.s10-logic-cond code.is-deny { color: #ff7676; }
-.s10-logic-table td.s10-logic-cond code.is-ask { color: var(--accent-secondary); }
-.s10-logic-table td.s10-logic-res {
-  font-weight: 700;
-  width: 44%;
+.s10-logic-table td code.is-deny { color: #ff7676; }
+.s10-logic-table td code.is-ask { color: var(--accent-secondary); }
+.s10-logic-table td.s10-logic-step {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  width: 6%;
 }
+.s10-logic-table td.s10-logic-cond { width: 50%; }
+.s10-logic-table td.s10-logic-res { font-weight: 700; width: 44%; }
 .s10-logic-table td.s10-logic-res.is-blocked { color: #ff7676; }
 .s10-logic-table td.s10-logic-res.is-run { color: var(--accent); }
 .s10-logic-table td.s10-logic-res.is-ask { color: var(--accent-secondary); }
-.s10-logic-callout {
-  display: inline-block;
-  max-width: 760px;
-  margin: 10px 0 0;
+.reveal .s10-logic-callout {
+  max-width: 880px;
+  margin: 14px auto 0 !important;
   background: rgba(255, 118, 118, 0.08);
   border-left: 3px solid #ff7676;
   border-radius: 4px;
-  padding: 7px 14px;
-  font-size: 0.52em;
+  padding: 8px 16px;
+  font-size: 0.55em;
   color: var(--text-primary);
   text-align: left;
   line-height: 1.55;
+  box-sizing: border-box;
 }
-.s10-logic-callout code {
+.reveal .s10-logic-callout code {
   font-family: var(--font-mono);
   color: #ff7676;
-  font-size: 0.98em;
+  font-size: 0.95em;
 }
 
-/* Sintaxis grande arriba + bullets de ejemplos */
+/* Sintaxis grande arriba + bullets de ejemplos — §10.5 */
 .s10-syntax {
   display: inline-block;
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 10px 22px;
-  margin: 12px auto 0;
+  padding: 8px 22px;
+  margin: 10px auto 0;
   font-family: var(--font-mono);
   font-size: 0.85em;
   color: var(--accent);
@@ -308,60 +285,75 @@
 }
 .s10-syntax .s10-syntax-tool { color: var(--text-primary); }
 .s10-syntax .s10-syntax-paren { color: var(--text-muted); }
-.s10-examples-list {
+.reveal .s10-examples-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
-  max-width: 740px;
+  max-width: 900px;
   margin: 14px auto 0;
   padding-left: 36px;
-  font-size: 0.55em;
-  line-height: 1.6;
+  font-size: 0.56em;
+  line-height: 1.5;
   color: var(--text-muted);
 }
-.s10-examples-list li {
+.reveal .s10-examples-list li {
   padding-left: 4px;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
 }
 .s10-examples-list li::marker { color: var(--accent); }
-.s10-examples-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 1em;
-}
-.s10-examples-list strong { color: var(--text-primary); font-weight: 700; }
-
-/* Demo-repo matrix — bullets list (igual estructura que §9.6) */
-.s10-matrix-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 820px;
-  margin: 12px auto 0;
-  padding-left: 36px;
-  font-size: 0.58em;
-  line-height: 1.65;
-  color: var(--text-muted);
-}
-.s10-matrix-list li {
-  padding-left: 4px;
-  margin-bottom: 10px;
-}
-.s10-matrix-list strong { color: var(--text-primary); }
-.s10-matrix-list code {
+.reveal .s10-examples-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s10-matrix-list li.is-allow::marker { color: var(--accent); }
-.s10-matrix-list li.is-deny::marker { color: #ff7676; }
-.s10-matrix-list li.is-deny code { color: #ff7676; }
-.s10-matrix-list li.is-ask::marker { color: var(--accent-secondary); }
-.s10-matrix-list li.is-ask code { color: var(--accent-secondary); }
+.s10-examples-list strong { color: var(--text-primary); font-weight: 700; }
 
-/* /permissions in-session card */
+/* Bloque permissions real — §10.6 */
+.s10-json-wrap {
+  max-width: 820px;
+  margin: 10px auto 0;
+  text-align: left;
+}
+.reveal .s10-json-wrap pre {
+  margin: 0;
+  font-size: 0.5em;
+  line-height: 1.4;
+}
+.reveal .s10-json-wrap pre code {
+  font-family: var(--font-mono);
+  padding: 12px 18px;
+  font-variant-ligatures: none;
+}
+.s10-read-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 820px;
+  margin: 12px auto 0;
+}
+.s10-read-item {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.55em;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.s10-read-item.is-deny { border-top-color: #ff7676; }
+.s10-read-item.is-ask { border-top-color: var(--accent-secondary); }
+.s10-read-item strong {
+  display: block;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+/* /permissions in-session card — §10.7 */
 .s10-perm-card {
-  max-width: 700px;
+  max-width: 760px;
   margin: 14px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
@@ -370,83 +362,99 @@
   padding: 14px 22px;
   text-align: left;
 }
-.s10-perm-card-title {
-  font-family: var(--font-mono);
-  font-size: 0.62em;
-  color: var(--accent);
-  margin: 0 0 8px;
-  letter-spacing: 0.04em;
-}
-.s10-perm-card-body {
+.reveal .s10-perm-card-body {
   font-size: 0.56em;
   color: var(--text-muted);
   line-height: 1.6;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
-.s10-perm-card-body:last-child { margin-bottom: 0; }
+.reveal .s10-perm-card-body:last-child { margin-bottom: 0; }
 .s10-perm-card-body strong { color: var(--text-primary); }
-.s10-perm-card-body code {
+.reveal .s10-perm-card-body code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
 
-/* Gotchas list — §10.8 (bullets, igual idea que §9.7 pero como list, no cards) */
-.s10-gotchas-list {
+/* Gotchas list — §10.8 */
+.reveal .s10-gotchas-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
-  max-width: 780px;
+  max-width: 860px;
   margin: 14px auto 0;
   padding-left: 36px;
   font-size: 0.56em;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-muted);
 }
-.s10-gotchas-list li {
+.reveal .s10-gotchas-list li {
   padding-left: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  color: var(--text-muted);
 }
 .s10-gotchas-list li::marker { color: var(--accent); }
 .s10-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.s10-gotchas-list code {
+.reveal .s10-gotchas-list code {
   font-family: var(--font-mono);
+  font-variant-ligatures: none;
   color: var(--accent);
   font-size: 0.95em;
 }
 
 /* Permission modes table — §10.9 */
+.s10-logic-wrap.s10-modes-wrap { max-width: 1000px; }
 .s10-modes-table tbody td.s10-mode-name {
   font-family: var(--font-mono);
   color: var(--accent);
   font-weight: 700;
   white-space: nowrap;
-  width: 28%;
+  width: 24%;
 }
 .s10-modes-table tbody td.s10-mode-name.is-danger { color: #ff7676; }
-.s10-modes-table tbody td.s10-mode-name.is-future { color: var(--accent-secondary); }
-.s10-modes-table tbody td.s10-mode-what {
+.s10-mode-ui {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1em;
   color: var(--text-muted);
-  width: 72%;
 }
-.s10-modes-table tbody td.s10-mode-what strong { color: var(--text-primary); }
-.s10-modes-table tbody td.s10-mode-what code {
+.s10-modes-table tbody td.s10-mode-what { width: 44%; }
+.s10-modes-table tbody td.s10-mode-why { width: 32%; color: var(--text-muted); }
+.s10-modes-table tbody tr.is-danger td { background: rgba(255, 118, 118, 0.05); }
+.reveal .s10-modes-foot {
+  max-width: 960px;
+  margin: 10px auto 0 !important;
+  font-size: 0.55em;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+.reveal .s10-modes-foot.is-tight { margin-top: 2px !important; }
+.s10-modes-foot strong { color: var(--text-primary); }
+.reveal .s10-modes-foot code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s10-modes-table tbody tr.is-danger td { background: rgba(255, 118, 118, 0.05); }
-.s10-modes-table tbody tr.is-future td { background: rgba(255, 200, 100, 0.04); }
 
-/* Demo wrap */
-.s10-demo-wrap {
-  max-width: 760px;
+/* Demo */
+.reveal .s10-demo-sub {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  margin: 14px auto 0;
+  font-style: italic;
+}
+.reveal .s10-demo-wrap {
+  max-width: 1040px;
   margin: 16px auto 0;
 }
+.reveal .s10-demo-wrap .cs-step { min-width: 0; }
+.reveal .s10-demo-wrap code { overflow-wrap: anywhere; }
 
 /* Cierre */
 .s10-close-card {
-  max-width: 740px;
+  max-width: 780px;
   margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
@@ -454,14 +462,14 @@
   padding: 16px 24px;
   text-align: center;
 }
-.s10-close-main {
+.reveal .s10-close-main {
   font-size: 0.64em;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--text-primary);
   margin: 0 0 12px;
 }
 .s10-close-main strong { color: var(--accent); }
-.s10-close-bridge {
+.reveal .s10-close-bridge {
   font-size: 0.56em;
   color: var(--text-muted);
   line-height: 1.6;
@@ -474,10 +482,11 @@
   font-style: normal;
   font-weight: 700;
 }
-.s10-close-bridge code {
+.reveal .s10-close-main code,
+.reveal .s10-close-bridge code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
 </style>
 
@@ -498,8 +507,8 @@
     </li>
     <li class="s10-five-q-card">
       <span class="s10-five-q-num">3</span>
-      <span class="s10-five-q-label">Cuándo se carga</span>
-      <span class="s10-five-q-hint">momento + trigger</span>
+      <span class="s10-five-q-label">Cuándo se evalúa</span>
+      <span class="s10-five-q-hint">momento + orden</span>
     </li>
     <li class="s10-five-q-card">
       <span class="s10-five-q-num">4</span>
@@ -514,10 +523,9 @@
   </ol>
 
   <aside class="notes">
-    <p><strong>Misma apertura que las tres anteriores. No leer las preguntas — el título arriba ya nombra la sección. Ritmo rápido, plantilla ya internalizada. Marcar que esta sección es el zoom-in al campo que dejamos resaltado en §9.5.</strong></p>
-    <p><u>Apertura de §10. Cuarta vuelta con el mismo dispositivo: cinco preguntas, "Qué es" lit, título cambia. El título dice solo "Permisos" — el campo del que venimos. La continuidad con §9 es clara: dijimos que permissions era el campo más impactante de settings.json; ahora le dedicamos sección entera.</u></p>
-    <p><em>"Permisos. Cuarta vuelta con la misma plantilla."</em></p>
-    <p><em>"Lo dejamos resaltado en §9 con razón: la diferencia entre un agente que puede correr git push sin avisarte y uno que siempre pregunta vive en este sistema. Vamos a verlo con las cinco preguntas de siempre."</em></p>
+    <p><strong>Ritmo rápido: plantilla conocida; es el zoom al campo resaltado en §9.</strong></p>
+    <p><u>Cuarta vuelta de la plantilla, ahora sobre <code>permissions</code>.</u></p>
+    <p><em>"Permisos. Cuarta vuelta con la misma plantilla. Lo dejamos resaltado en settings.json con razón: la diferencia entre un agente que puede hacer git push y uno que tiene prohibido intentarlo vive en este sistema. Vamos con las cinco preguntas de siempre."</em></p>
   </aside>
 </section>
 
@@ -534,23 +542,20 @@
   <h2>Reglas del runtime, evaluadas antes de cada tool call</h2>
 
   <ul class="s10-qe-list">
-    <li><strong>Mecanismo que decide qué tools puede ejecutar el agente <em style="font-style:normal;color:var(--text-primary);">sin pedirte confirmación</em></strong>. No es una sugerencia: es la respuesta del runtime cuando Claude pide usar una tool.</li>
-    <li><strong>Se aplica antes de cada tool call</strong> — <code>Read</code>, <code>Edit</code>, <code>Write</code>, <code>Bash</code>, <code>WebFetch</code>. Si la regla bloquea, la tool no corre, sin importar lo que el modelo haya decidido.</li>
-    <li><strong>Es regla del runtime, no instrucción para Claude.</strong> El modelo no puede ignorarla, malinterpretarla, ni olvidarla en deriva — no la lee, la encuentra cuando ya es tarde.</li>
+    <li><strong>Decide qué tools corre el agente sin pedirte confirmación</strong>, cuáles te pregunta y cuáles bloquea.</li>
+    <li><strong>Se evalúa antes de cada tool call</strong> (<code>Edit</code>, <code>Write</code>, <code>Bash</code>, <code>WebFetch</code>). Si la regla bloquea, la tool no corre, decida lo que decida el modelo.</li>
+    <li><strong>Es regla del runtime, no instrucción para Claude.</strong> El modelo no la lee: se la encuentra cuando intenta ejecutar.</li>
     <li class="s10-qe-callout">→ Actúa sobre el loop, no sobre el contexto.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Tres ítems con pausa entre cada uno. El tercero es el punto fuerte — marcar el contraste con CLAUDE.md. Pausa antes del callout. El callout es la línea a retener: permisos viven en el loop, no en la ventana de contexto.</strong></p>
-    <p><u>Slide de definición. Mini-strip con "Qué es" lit. Tres bullets + callout, mismo patrón que §8.2 y §9.2. Lo importante: marcar que permisos no son texto que el modelo lee — son un gate del runtime que el modelo encuentra cuando intenta ejecutar. La diferencia operativa con CLAUDE.md/rules es central para entender por qué existe este sistema.</u></p>
-    <p><em>"Primera pregunta. Qué es. La respuesta corta: el sistema de permisos es lo que el runtime usa para decidir qué tools puede ejecutar el agente sin pedirte confirmación. Antes de cada tool call — antes de leer un archivo, escribir uno, correr un comando Bash, hacer un fetch — el runtime evalúa las reglas configuradas y toma una decisión: ejecuta solo, pregunta, o bloquea."</em></p>
-    <p><em>"Aplica a toda tool: Read, Edit, Write, Bash, WebFetch. No hay excepciones. Si la regla bloquea, la tool no corre — sin importar lo que el modelo haya decidido. El gate está antes de la ejecución, no después."</em></p>
-    <p><em>"Y la propiedad importante: esto es regla del runtime, no instrucción para Claude. Una instrucción en CLAUDE.md le pide al modelo que sea cuidadoso — el modelo la lee, la puede ignorar, sobreescribir con contexto posterior, malinterpretar en deriva. Una regla de permisos no la lee: la encuentra cuando intenta ejecutar. No hay forma de saltearla desde adentro."</em></p>
-    <p><em>"El callout es la línea a retener: actúa sobre el loop, no sobre el contexto. Esa es la diferencia operativa con todo lo que vimos en §7 y §8. CLAUDE.md y rules llenan la ventana; permisos no entran a la ventana — están en otro plano."</em></p>
+    <p><strong>El tercer ítem es el fuerte: contraste con CLAUDE.md.</strong></p>
+    <p><u>Permisos no son texto en la ventana: son un gate del runtime antes de ejecutar.</u></p>
+    <p><em>"Primera pregunta. Qué es. El sistema de permisos es lo que usa el runtime para decidir qué tools corre el agente sin preguntarte, cuáles te pregunta y cuáles bloquea. Se evalúa antes de cada tool call: antes de editar un archivo, correr un comando o hacer un fetch. Si la regla bloquea, la tool no corre, decida lo que decida el modelo. Y la propiedad importante: es regla del runtime, no instrucción. Una instrucción en CLAUDE.md el modelo la lee y la puede perder en deriva o reinterpretar. Una regla de permisos no la lee: se la encuentra cuando intenta ejecutar. Por eso el callout: actúa sobre el loop, no sobre el contexto. CLAUDE.md y rules llenan la ventana; los permisos no entran a la ventana."</em></p>
   </aside>
 </section>
 
-<!-- §10.3 · Dónde vive — 4 niveles cascade + nota /permissions -->
+<!-- §10.3 · Dónde vive — las listas se suman entre archivos -->
 <section class="s10-slide">
   <ol class="s10-five-q-grid is-mini">
     <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
@@ -560,69 +565,41 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Dentro de <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">permissions</code> — los mismos cuatro niveles de §9</h2>
+  <h2>Dentro de <code>permissions</code>, en cualquier archivo de settings</h2>
 
-  <div class="s10-hierarchy">
-    <div class="s10-hier-row">
-      <div class="s10-hier-level">
-        <span class="s10-hier-level-num">Nivel 1</span>
-        <span class="s10-hier-level-name">Managed</span>
-      </div>
-      <div class="s10-hier-content">
-        <span class="s10-hier-title">Política de la organización — fija el techo</span>
-        <span class="s10-hier-paths">administrado por la org (enterprise)</span>
-        <span class="s10-hier-use">Un <code style="font-family:var(--font-mono);">deny</code> acá no se levanta desde ningún nivel inferior.</span>
-      </div>
+  <div class="s10-merge">
+    <div class="s10-merge-card">
+      <span class="s10-merge-tag">Proyecto</span>
+      <span class="s10-merge-path">.claude/settings.json</span>
+      <div class="s10-merge-line"><span class="s10-merge-key">allow</span> Bash(uv sync)</div>
+      <div class="s10-merge-line"><span class="s10-merge-key is-deny">deny</span> Bash(git push *)</div>
     </div>
-    <div class="s10-hier-row">
-      <div class="s10-hier-level">
-        <span class="s10-hier-level-num">Nivel 2</span>
-        <span class="s10-hier-level-name">Local del proyecto</span>
-      </div>
-      <div class="s10-hier-content">
-        <span class="s10-hier-title">Tu copia personal — no se versiona</span>
-        <span class="s10-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.local.json</code> &nbsp;·&nbsp; va al <code style="font-family:var(--font-mono);">.gitignore</code></span>
-        <span class="s10-hier-use">Permisos puntuales que solo tienen sentido en tu entorno.</span>
-      </div>
+    <span class="s10-merge-op">+</span>
+    <div class="s10-merge-card">
+      <span class="s10-merge-tag">Local</span>
+      <span class="s10-merge-path">.claude/settings.local.json</span>
+      <div class="s10-merge-line"><span class="s10-merge-key">allow</span> Bash(uv run pytest)</div>
     </div>
-    <div class="s10-hier-row">
-      <div class="s10-hier-level">
-        <span class="s10-hier-level-num">Nivel 3</span>
-        <span class="s10-hier-level-name">Proyecto</span>
-      </div>
-      <div class="s10-hier-content">
-        <span class="s10-hier-title">Config compartida del repo — versionada</span>
-        <span class="s10-hier-paths"><code style="font-family:var(--font-mono);">./.claude/settings.json</code> &nbsp;·&nbsp; commiteado</span>
-        <span class="s10-hier-use">La matriz base que aplica a todos los colaboradores.</span>
-      </div>
-    </div>
-    <div class="s10-hier-row">
-      <div class="s10-hier-level">
-        <span class="s10-hier-level-num">Nivel 4</span>
-        <span class="s10-hier-level-name">Usuario</span>
-      </div>
-      <div class="s10-hier-content">
-        <span class="s10-hier-title">Tu config personal — todos tus proyectos</span>
-        <span class="s10-hier-paths"><code style="font-family:var(--font-mono);">~/.claude/settings.json</code></span>
-        <span class="s10-hier-use">Defaults tuyos que viajan de un repo al otro.</span>
-      </div>
+    <span class="s10-merge-op">=</span>
+    <div class="s10-merge-card is-result">
+      <span class="s10-merge-tag">Lo que evalúa la sesión</span>
+      <span class="s10-merge-path">reglas combinadas</span>
+      <div class="s10-merge-line"><span class="s10-merge-key">allow</span> Bash(uv sync)</div>
+      <div class="s10-merge-line"><span class="s10-merge-key">allow</span> Bash(uv run pytest)</div>
+      <div class="s10-merge-line"><span class="s10-merge-key is-deny">deny</span> Bash(git push *)</div>
     </div>
   </div>
 
-  <p class="s10-hier-note">
-    Además del archivo: el comando <code>/permissions</code> ajusta la config <strong>durante una sesión activa</strong>, sin editar el JSON ni reiniciar.
-  </p>
+  <p class="s10-merge-note">Las listas <strong>se suman</strong> entre niveles. Agregar un <code>allow</code> en tu local no borra ningún <code>deny</code> del proyecto.</p>
 
   <aside class="notes">
-    <p><strong>Recorrer rápido — la jerarquía ya es conocida de §9. El énfasis está en que permisos vive dentro del campo permissions de cualquier nivel, no en un archivo aparte. Cerrar marcando la nota: /permissions es el escape hatch en vivo.</strong></p>
-    <p><u>Slide de jerarquía. La cascade es la misma de §9 — no la vamos a explicar de cero, vamos a reusarla. El twist es que las reglas de permisos viven dentro del campo permissions en cualquiera de los cuatro niveles. La nota de abajo introduce /permissions, que vuelve más adelante (§10.7).</u></p>
-    <p><em>"Segunda pregunta. Dónde vive. Y acá la respuesta es corta porque ya la dimos en §9: los mismos cuatro niveles, las mismas precedencias. Lo que cambia es que ahora miramos un campo específico — permissions — dentro de cada uno."</em></p>
-    <p><em>"Managed fija el techo: un deny en este nivel no se levanta desde abajo, ni en local, ni en proyecto, ni en usuario. Local del proyecto, en .claude/settings.local.json, gitignored — es donde van los permisos puntuales tuyos. Proyecto, en .claude/settings.json, commiteado — la matriz base que comparte el equipo. Usuario, en tu home, defaults personales."</em></p>
-    <p><em>"Y la nota de abajo: además del archivo, está el comando /permissions. Ajusta la config durante una sesión activa, sin que tengas que editar el JSON y reiniciar. Lo vamos a usar en el demo. Es el escape hatch en vivo cuando aparece un prompt y querés que no vuelva a aparecer."</em></p>
+    <p><strong>No repetir la cascada de §9: el punto es que las listas se suman.</strong></p>
+    <p><u>Las reglas pueden estar en cualquier nivel; la sesión evalúa la unión.</u></p>
+    <p><em>"Segunda pregunta. Dónde vive. En el campo permissions de cualquiera de los archivos de settings que vimos: usuario, proyecto, local, o el managed de una organización. Lo distinto respecto de un valor como model es que acá nada se pisa. Si el proyecto permite uv sync y prohíbe git push, y tu local agrega uv run pytest, la sesión evalúa las tres reglas juntas. Tu local puede sumar permisos para tu máquina, pero no borra un deny del equipo."</em></p>
   </aside>
 </section>
 
-<!-- §10.4 · Cuándo se evalúa — tabla de lógica + callout deny > allow -->
+<!-- §10.4 · Cuándo se evalúa — deny → ask → allow -->
 <section class="s10-slide">
   <ol class="s10-five-q-grid is-mini">
     <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
@@ -632,50 +609,50 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Antes de cada tool call — cuatro condiciones, en orden</h2>
+  <h2>Antes de cada tool call: <code>deny</code>, después <code>ask</code>, después <code>allow</code></h2>
 
   <div class="s10-logic-wrap">
     <table class="s10-logic-table">
       <thead>
         <tr>
-          <th>Condición</th>
+          <th></th>
+          <th>Si la tool call matchea…</th>
           <th>Resultado</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="s10-logic-cond">Matchea una regla <code class="is-deny">deny</code></td>
-          <td class="s10-logic-res is-blocked">Bloqueado — sin confirmación posible</td>
+          <td class="s10-logic-step">1</td>
+          <td class="s10-logic-cond">una regla <code class="is-deny">deny</code></td>
+          <td class="s10-logic-res is-blocked">Bloqueada, sin prompt</td>
         </tr>
         <tr>
-          <td class="s10-logic-cond">No matchea <code class="is-deny">deny</code>, matchea <code>allow</code></td>
-          <td class="s10-logic-res is-run">Ejecuta sin preguntar</td>
+          <td class="s10-logic-step">2</td>
+          <td class="s10-logic-cond">una regla <code class="is-ask">ask</code></td>
+          <td class="s10-logic-res is-ask">Pide confirmación, aunque también matchee <code>allow</code></td>
         </tr>
         <tr>
-          <td class="s10-logic-cond">No matchea <code class="is-deny">deny</code>, no matchea <code>allow</code>, matchea <code class="is-ask">ask</code></td>
-          <td class="s10-logic-res is-ask">Pide confirmación</td>
+          <td class="s10-logic-step">3</td>
+          <td class="s10-logic-cond">una regla <code>allow</code></td>
+          <td class="s10-logic-res is-run">Corre sin preguntar</td>
         </tr>
         <tr>
-          <td class="s10-logic-cond">No matchea ninguna regla</td>
-          <td class="s10-logic-res is-ask">Pide confirmación (el default)</td>
+          <td class="s10-logic-step">4</td>
+          <td class="s10-logic-cond">ninguna regla</td>
+          <td class="s10-logic-res is-ask">Decide el modo: en Manual (<code>default</code>), pregunta</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <p class="s10-logic-callout">
-    <strong><code>deny</code> &gt; <code>allow</code>:</strong> si una operación matchea ambas listas a la vez — porque tenés un <code>allow</code> amplio y un <code>deny</code> más específico, o al revés — <code>deny</code> gana siempre. El orden lo garantiza el runtime, no el modelo.
+    <strong>La primera coincidencia en ese orden decide.</strong> Un <code>deny</code> le gana a cualquier <code>allow</code>, sin importar cuál sea más específico ni en qué archivo esté cada uno.
   </p>
 
   <aside class="notes">
-    <p><strong>Recorrer las cuatro filas de arriba a abajo. La cuarta — "no matchea ninguna" — es la que más confunde: el default es preguntar, no negar. Pausa en el callout: deny gana sobre allow, siempre.</strong></p>
-    <p><u>Slide de lógica de evaluación. Tabla de cuatro filas que cubre todas las combinaciones posibles. La cuarta fila importa: el comportamiento por defecto, sin reglas configuradas, es preguntar — no bloquear. El callout reafirma la precedencia de deny sobre allow, que es la garantía que hace que el sistema sea seguro: un deny es un piso que no podés perforar por accidente con un allow demasiado amplio.</u></p>
-    <p><em>"Tercera pregunta. Cuándo se evalúa. La respuesta: antes de cada tool call. El runtime aplica esta lógica en orden, fila por fila."</em></p>
-    <p><em>"Una. Si la operación matchea una regla de deny — bloqueado. Sin confirmación posible, sin opción a aprobar. La tool no corre."</em></p>
-    <p><em>"Dos. Si no matchea deny y matchea allow — ejecuta sin preguntar. Esto es lo que hace que el flujo sea fluido: los comandos que ya sabés que querés autorizar pasan sin interrumpirte."</em></p>
-    <p><em>"Tres. Si no matchea deny, no matchea allow, pero matchea ask — pide confirmación. Es el lugar intermedio: cosas que no querés bloquear, pero tampoco automatizar."</em></p>
-    <p><em>"Y cuatro, la que confunde más. Si no matchea ninguna regla — pide confirmación. El default no es denegar, es preguntar. Sin ninguna config, Claude pregunta antes de cada acción que toca el mundo. Eso puede volverse lento; el propósito de allow es eliminar los prompts donde ya sabés que querés autonomía."</em></p>
-    <p><em>"Y el callout, que vale la pena marcar: deny gana sobre allow. Siempre. Si tenés un Read general en allow — Read(./**) — y un Read específico en deny — Read(./.env) — el .env queda bloqueado. Esa precedencia es la garantía que hace que el sistema sea seguro: un deny es un piso que no se perfora por accidente."</em></p>
+    <p><strong>El orden es fijo: deny, ask, allow. La especificidad no lo cambia.</strong></p>
+    <p><u>Evaluación por orden de lista; lo que no matchea nada lo resuelve el modo.</u></p>
+    <p><em>"Tercera pregunta. Cuándo se evalúa. Antes de cada tool call, y en un orden fijo. Primero deny: si matchea, bloqueada, sin prompt. Después ask: si matchea, te pregunta, aunque haya un allow que también la cubra. Después allow: corre sin preguntar. Y si no matchea ninguna regla, decide el modo de permisos; en Manual, que es default, te pregunta. La primera coincidencia en ese orden gana, y la especificidad no importa: si tenés Edit de openapi.yaml en el allow del proyecto y alguien pone el mismo Edit en un deny local, la edición queda bloqueada. Eso lo vamos a ver en el demo."</em></p>
   </aside>
 </section>
 
@@ -689,62 +666,67 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Sintaxis: <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">Tool(pattern)</code></h2>
+  <h2>Sintaxis: <code>Tool(pattern)</code></h2>
 
   <div class="s10-syntax">
     <span class="s10-syntax-tool">Tool</span><span class="s10-syntax-paren">(</span>pattern<span class="s10-syntax-paren">)</span>
   </div>
 
   <ul class="s10-examples-list">
-    <li><code>Bash(uv run pytest)</code> — <strong>comando exacto</strong>; solo matchea esa línea sin argumentos.</li>
-    <li><code>Bash(uv run pytest *)</code> — <strong>wildcard de argumentos</strong>; cubre <code>uv run pytest tests/ -v</code> y variantes.</li>
-    <li><code>Edit(./backend/**)</code> — <strong>glob de path</strong>; cualquier archivo bajo <code>backend/</code>, recursivo.</li>
-    <li><code>Read(./.env)</code> — <strong>archivo específico</strong>; útil en <code>deny</code> para impedir lectura de credenciales.</li>
-    <li><code>WebFetch(domain:fastapi.tiangolo.com)</code> — <strong>dominio único</strong>; sintaxis especial para WebFetch.</li>
+    <li><code>Bash(uv sync)</code> · <strong>comando exacto</strong>.</li>
+    <li><code>Bash(git push *)</code> · <strong>espacio y <code>*</code></strong>: matchea <code>git push origin main</code> y también <code>git push</code> a secas.</li>
+    <li><code>Bash</code> o <code>Bash(*)</code> · <strong>cualquier comando</strong> Bash.</li>
+    <li><code>Edit(./backend/**)</code> · <strong>glob de path</strong>: cualquier archivo bajo <code>backend/</code>, recursivo.</li>
+    <li><code>Read(./.env)</code> · <strong>un archivo</strong>; típico en <code>deny</code>.</li>
+    <li><code>WebFetch(domain:fastapi.tiangolo.com)</code> · <strong>un dominio</strong>.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Mostrar la sintaxis grande arriba, después recorrer los cinco ejemplos. Cada uno enseña un sabor distinto de pattern: exacto, wildcard de args, glob de path, archivo específico, dominio. Marcar que el wildcard solo cubre argumentos del mismo comando, no comandos arbitrarios.</strong></p>
-    <p><u>Slide de sintaxis y ejemplos. La sintaxis es simple — Tool(pattern) — pero los patterns tienen sabores distintos que vale la pena distinguir. Comando exacto vs wildcard de args vs glob de path vs archivo único vs dominio. Cubre los casos que aparecen en el settings.json del demo-repo, que abrimos en el slide siguiente.</u></p>
-    <p><em>"Cuarta pregunta. Cómo se usa. La sintaxis es una línea: Tool, paréntesis, pattern, paréntesis. El tool puede ser Bash, Edit, Read, WebFetch, Write, entre otros. El pattern es donde está la riqueza."</em></p>
-    <p><em>"Primer ejemplo. Bash(uv run pytest) sin nada más — comando exacto. Solo matchea esa línea, sin argumentos. Si alguien le pasa flags al pytest, no matchea."</em></p>
-    <p><em>"Segundo. Bash(uv run pytest *), con asterisco al final — wildcard de argumentos. Esto cubre uv run pytest tests/test_users.py menos uve, uv run pytest -k auth, todas las variantes del mismo comando con argumentos. El asterisco no es total — matchea argumentos de ese comando, no comandos arbitrarios. Volvemos sobre eso en gotchas."</em></p>
-    <p><em>"Tercero. Edit(./backend/**), con doble asterisco — glob de path. Cualquier archivo bajo backend, recursivo. Es la forma de darle autonomía sobre una carpeta entera sin enumerar archivo por archivo."</em></p>
-    <p><em>"Cuarto. Read(./.env), un archivo específico. Es el caso típico de deny: un solo archivo, sin wildcards. La lista deny suele ser corta y específica."</em></p>
-    <p><em>"Y quinto. WebFetch(domain:fastapi.tiangolo.com), sintaxis especial — prefijo domain dos puntos. Limita el WebFetch a un dominio en particular. Cualquier otra URL pide confirmación."</em></p>
+    <p><strong>Cada ejemplo es un tipo distinto de pattern.</strong></p>
+    <p><u>Comando exacto, wildcard, todo Bash, glob de path, archivo, dominio.</u></p>
+    <p><em>"Cuarta pregunta. Cómo se usa. La sintaxis es Tool, paréntesis, pattern. Bash(uv sync) es un comando exacto. Bash(git push *), con espacio y asterisco, matchea git push con cualquier argumento, y también git push a secas; el asterisco puede ir en cualquier posición y matchea cualquier texto. Ojo que Bash solo, o Bash(*), es cualquier comando: ponerlo en allow es darle la terminal entera. Edit(./backend/**) es un glob de path, cualquier archivo bajo backend. Read(./.env) es un archivo puntual, el caso típico de deny. Y WebFetch con domain dos puntos limita el fetch a un dominio."</em></p>
   </aside>
 </section>
 
-<!-- §10.6 · La matriz del demo-repo — bullets sin mini-strip (zoom-in) -->
+<!-- §10.6 · El bloque permissions del demo-repo — sin mini-strip (zoom-in) -->
 <section class="s10-slide">
-  <h2>Las tres listas del demo-repo</h2>
+  <h2>El bloque <code>permissions</code> del demo-repo</h2>
 
-  <ul class="s10-matrix-list">
-    <li class="is-allow">
-      <strong><code>allow</code> — corre sin preguntar.</strong>
-      Comandos <code>uv</code> (<code>pytest</code>, <code>uvicorn</code>, <code>python</code>, <code>sync</code>), <code>Read(./**)</code>, <code>Edit</code> acotado a <code>backend/</code> · <code>frontend/</code> · <code>tests/</code> · <code>openapi.yaml</code>, <code>WebFetch</code> a un dominio.
-    </li>
-    <li class="is-deny">
-      <strong><code>deny</code> — bloqueado pase lo que pase.</strong>
-      <code>Read(./.env)</code> · <code>Bash(rm -rf *)</code> · <code>Bash(git push *)</code>. Operaciones costosas o irreversibles que <strong>no</strong> queremos dejar a un prompt.
-    </li>
-    <li class="is-ask">
-      <strong><code>ask</code> — pide confirmación cada vez.</strong>
-      <code>Bash(uv add *)</code> · <code>Bash(uv remove *)</code>. Reversibles, pero no triviales: humano en el loop antes de modificar dependencias.
-    </li>
-  </ul>
+  <div class="s10-json-wrap">
+<pre><code class="language-json" data-trim>
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run uvicorn *)",
+      "Bash(uv run python scripts/export_openapi.py)",
+      "Bash(uv sync)",
+      "Edit(./backend/**)",
+      "Edit(./frontend/**)",
+      "Edit(./tests/**)",
+      "Edit(./openapi.yaml)",
+      "WebFetch(domain:fastapi.tiangolo.com)"
+    ],
+    "deny": ["Read(./.env)", "Bash(rm -rf *)", "Bash(git push *)"],
+    "ask": ["Bash(uv add *)", "Bash(uv remove *)"]
+  }
+}
+</code></pre>
+  </div>
+
+  <div class="s10-read-grid">
+    <div class="s10-read-item"><strong>allow · 8</strong>levantar el server, regenerar openapi, editar en cuatro lugares</div>
+    <div class="s10-read-item is-deny"><strong>deny · 3</strong>leer <code>.env</code>, borrar en masa, hacer push</div>
+    <div class="s10-read-item is-ask"><strong>ask · 2</strong>agregar o quitar dependencias pasa por vos</div>
+  </div>
 
   <aside class="notes">
-    <p><strong>Sin mini-strip — es zoom-in al archivo, no responde una pregunta nueva. Recorrer las tres listas de arriba a abajo. Detener en deny — leer las tres líneas. Detener en ask — explicar el criterio "reversible pero no trivial". El color rojo del bullet deny hace el contraste visible.</strong></p>
-    <p><u>Walkthrough del bloque permissions del settings.json del demo-repo. Tres bullets, una por lista, con la misma estructura que §9.6: lead phrase en strong, ejemplos en code, criterio al final. El color rojo en deny y secundario en ask hacen visible la jerarquía de riesgo. Esto baja la sintaxis del slide anterior a un archivo real que el alumno puede abrir.</u></p>
-    <p><em>"Vamos al archivo real. El bloque permissions completo del .claude/settings.json del demo-repo. Tres listas, las recorro de arriba a abajo."</em></p>
-    <p><em>"Allow. Lo que el runtime ejecuta sin preguntar nunca. Cuatro comandos uv — pytest, uvicorn para levantar el server, python directo, sync para resolver deps. Read del proyecto entero porque el agente tiene que poder leer cualquier código. Edit acotado: backend, frontend, tests, openapi.yaml — los lugares donde queremos que pueda modificar. Y un WebFetch a un solo dominio: la doc de FastAPI."</em></p>
-    <p><em>"Deny. Tres líneas chicas y críticas. Read del .env — Claude no lee credenciales nunca, sin importar lo que se le pida. Bash rm guion rf — bloqueado, porque un rm equivocado cuesta caro. Bash git push — bloqueado, porque un push accidental a una rama equivocada cuesta más caro todavía. Son operaciones costosas o irreversibles que no queremos dejar a un prompt de confirmación que se puede aceptar de apuro."</em></p>
-    <p><em>"Y ask. uv add y uv remove. El criterio: reversible, pero no trivial. Si el agente quiere agregar una dependencia nueva al proyecto, quiero enterarme antes — no porque sea irreversible, sino porque cambia el shape del proyecto. Humano en el loop, sin bloquearlo."</em></p>
+    <p><strong>Leer las tres listas; marcar que <code>uv run pytest</code> no está en ninguna.</strong></p>
+    <p><u>El JSON real: allow acotado, deny corto, ask para dependencias.</u></p>
+    <p><em>"Este es el bloque permissions real del demo-repo. Allow: levantar uvicorn, correr el script que regenera openapi.yaml y nada más de Python, uv sync, editar backend, frontend, tests y el openapi, y un fetch a la doc de FastAPI. Deny: leer el .env, rm -rf y git push. Ask: uv add y uv remove, porque agregar una dependencia cambia el proyecto y quiero enterarme antes. Fijate lo que no está: uv run pytest no aparece en ninguna lista. Eso es a propósito, lo usamos en el demo. Y tampoco hay reglas de Read para el proyecto: leer archivos no pide permiso."</em></p>
   </aside>
 </section>
 
-<!-- §10.7 · /permissions en vivo + dónde lo guarda -->
+<!-- §10.7 · /permissions y el prompt de permiso -->
 <section class="s10-slide">
   <ol class="s10-five-q-grid is-mini">
     <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
@@ -754,29 +736,28 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2><code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">/permissions</code> — el escape hatch en vivo</h2>
+  <h2>Cambiar reglas sin salir de la sesión</h2>
 
   <div class="s10-perm-card">
-    <p class="s10-perm-card-title">Comando interactivo, durante la sesión</p>
     <p class="s10-perm-card-body">
-      Cuando aparece un prompt de confirmación que no querés ver más — o cuando querés agregar un <code>deny</code> sin reiniciar — <code>/permissions</code> abre un editor en línea que te deja agregar, quitar o mover entradas entre <code>allow</code> / <code>deny</code> / <code>ask</code>.
+      <strong><code>/permissions</code>:</strong> lista las reglas activas, ya combinadas entre archivos, y te deja agregar o quitar reglas de <code>allow</code>, <code>ask</code> y <code>deny</code>. Al agregar una, elegís en qué archivo se guarda.
     </p>
     <p class="s10-perm-card-body">
-      <strong>Dónde lo guarda:</strong> por default escribe en <code>.claude/settings.local.json</code>. Eso es deliberado: los permisos puntuales de tu máquina <strong>no contaminan</strong> el <code>settings.json</code> que comparte el equipo. Si querés que un permiso sea compartido, lo movés al archivo del proyecto a mano.
+      <strong>Desde el prompt de permiso:</strong> "Yes, and don't ask again" guarda la regla en <code>.claude/settings.local.json</code>. Tu excepción personal no toca el <code>settings.json</code> del equipo.
+    </p>
+    <p class="s10-perm-card-body">
+      <strong>A mano:</strong> si editás el JSON con la sesión abierta, los cambios en <code>permissions</code> se recargan sin reiniciar.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Marcar fuerte el detalle: por default escribe en local, no en el archivo del proyecto. Ese es el comportamiento que evita que cada colaborador contamine la config compartida con sus preferencias personales.</strong></p>
-    <p><u>Slide complementario a la sintaxis: cómo se manipula la config en caliente. /permissions es la respuesta al "tengo este prompt que no quiero ver más, no me hagas ir a editar el JSON y reiniciar". Detalle operativo central: escribe en local por default, no en el proyecto. Esa decisión es la que hace que el comando sea seguro de usar en un repo compartido sin pensar.</u></p>
-    <p><em>"Una pieza más del cómo se usa, importante porque la vamos a ver en el demo. El comando /permissions."</em></p>
-    <p><em>"Se invoca durante una sesión activa. Abre un editor en línea que te deja agregar, quitar o mover entradas entre las tres listas — allow, deny, ask. Cuando aparece un prompt de confirmación que no querés ver más, /permissions es el atajo: lo agregás al allow ahí mismo, sin tocar el JSON, sin reiniciar."</em></p>
-    <p><em>"Y el detalle operativo que vale la pena saber: por default escribe en .claude/settings.local.json — el archivo local, gitignored. No en el settings.json del proyecto. Eso es deliberado: los permisos puntuales de tu máquina no contaminan la config compartida del equipo. Si yo agrego un permiso para abrir el browser en mi máquina, ese permiso no viaja al repo de otro colaborador que está corriendo el código en un server sin display."</em></p>
-    <p><em>"Si querés que un permiso sea compartido por todo el equipo, lo movés al settings.json del proyecto a mano. La decisión de qué es personal y qué es compartido sigue siendo tuya — el comando elige el lado conservador por default."</em></p>
+    <p><strong>Marcar dónde guarda "don't ask again": en local.</strong></p>
+    <p><u>Tres formas de cambiar reglas en vivo: <code>/permissions</code>, el prompt, el JSON a mano.</u></p>
+    <p><em>"Una pieza más del cómo se usa, porque la usamos en el demo. Hay tres formas de cambiar reglas sin reiniciar. /permissions te muestra las reglas activas, ya combinadas entre archivos, y te deja agregar o quitar; cuando agregás una, te pregunta en qué archivo guardarla. La segunda es el propio prompt de permiso: si elegís Yes, and don't ask again, la regla se guarda en settings.local.json, tu archivo, no el del equipo. Si querés que sea compartida, la pasás al settings.json del proyecto. Y la tercera es editar el JSON a mano: el runtime vigila el archivo y recarga los permisos al guardar."</em></p>
   </aside>
 </section>
 
-<!-- §10.8 · Casos límite — 4 gotchas (bullets) -->
+<!-- §10.8 · Qué confunde — 4 gotchas (bullets) -->
 <section class="s10-slide">
   <ol class="s10-five-q-grid is-mini">
     <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
@@ -789,127 +770,134 @@
   <h2>Cuatro cosas que confunden de permisos</h2>
 
   <ul class="s10-gotchas-list">
-    <li><strong><code>Bash(*)</code> no es wildcard total.</strong> No existe una entrada que le dé permiso para correr cualquier comando Bash. El asterisco matchea argumentos de un comando específico — <code>Bash(comando *)</code>, no <code>Bash(*)</code>. Para autonomía amplia en Bash, hay que ser explícito comando por comando.</li>
-    <li><strong>El default es preguntar, no denegar.</strong> Sin ninguna regla configurada, Claude pide confirmación antes de cada acción que toca el mundo. Eso suele ser lo que querés al arrancar — el propósito de <code>allow</code> es eliminar prompts donde ya decidiste dar autonomía.</li>
-    <li><strong>Los wildcards no atraviesan <code>;</code> ni <code>&amp;&amp;</code>.</strong> Si tenés <code>Bash(uv run pytest *)</code> en <code>allow</code>, eso <strong>no</strong> cubre <code>uv run pytest &amp;&amp; rm -rf .</code>. El runtime valida el comando exacto contra el pattern; no podés colar comandos por concatenación.</li>
-    <li><strong>Managed bloquea hacia abajo, sin escape.</strong> En un entorno corporativo, un admin puede fijar un <code>deny</code> en el nivel Managed que ningún proyecto ni usuario puede levantar. En proyectos personales no aplica; en equipos con políticas de seguridad, define el techo de lo posible.</li>
+    <li><strong>Un <code>deny</code> cubre una tool y un patrón, no una intención.</strong> <code>Read(./.env)</code> frena la tool <code>Read</code>, pero no un <code>cat .env</code> vía Bash ni un script de Python que abra el archivo, si esos comandos están permitidos. No es una frontera de seguridad.</li>
+    <li><strong>Las lecturas no piden permiso.</strong> Leer archivos, <code>Grep</code> y comandos de solo lectura (<code>ls</code>, <code>cat</code>, <code>git status</code>) corren sin prompt dentro del proyecto.</li>
+    <li><strong>Los wildcards no atraviesan <code>&amp;&amp;</code> ni <code>;</code>.</strong> <code>Bash(uv run uvicorn *)</code> en <code>allow</code> no cubre <code>uv run uvicorn app &amp;&amp; rm -rf .</code>: no se cuela un segundo comando por concatenación.</li>
+    <li><strong>Un <code>Bash(rm -rf *)</code> en <code>deny</code> no frena todas las formas de borrar.</strong> <code>/bin/rm -rf</code> o <code>sh -c '...'</code> no matchean el patrón. Lo que no querés que pase, mejor que tampoco esté habilitado por otro lado.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro gotchas. La uno se nombra rápido — es el error más común al empezar a configurar. La dos invierte una expectativa razonable (la gente espera que el default sea seguro = denegar). La tres es el dato de seguridad: no hay forma de pasar comandos extra por encadenación. La cuatro es el límite enterprise.</strong></p>
-    <p><u>Slide de quinta pregunta. Cuatro confusiones en formato bullet list — siguen la regla refinada de bullets: items peer cortos, misma estructura, no necesitan visual estructurado. Es enumeración pura. La uno y la tres son los datos técnicos; la dos es la expectativa invertida; la cuatro es el límite que aparece solo en orgs.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Cuatro cosas, en orden de frecuencia con que aparecen."</em></p>
-    <p><em>"Una. Bash con asterisco solo, Bash paréntesis asterisco paréntesis, no es un wildcard total. No existe una entrada que le dé al agente permiso para correr cualquier comando Bash sin restricciones. El asterisco matchea argumentos de un comando — Bash de comando espacio asterisco — no comandos arbitrarios. Para darle autonomía amplia en Bash, hay que ser explícito comando por comando: Bash de uv run pytest, Bash de git status, Bash de uv sync, cada uno por separado. Si intentás cubrir todo con Bash asterisco esperando que funcione, el comportamiento no va a ser el que esperás."</em></p>
-    <p><em>"Dos. El default es preguntar, no denegar. Esto invierte una expectativa razonable — uno asume que el sistema seguro arranca diciendo no a todo. Pero el default acá es preguntar, no negar. Sin ninguna regla configurada, Claude pide confirmación antes de cada acción que toca el mundo. Eso suele ser lo que querés al arrancar; el propósito de allow es eliminar prompts donde ya decidiste dar autonomía."</em></p>
-    <p><em>"Tres. Los wildcards no atraviesan punto y coma ni ampersand ampersand. Si tenés Bash de uv run pytest asterisco en allow, eso no cubre uv run pytest ampersand ampersand rm guion rf punto. El runtime valida el comando exacto contra el pattern; no podés colar comandos adicionales por concatenación. La inyección de comandos por encadenación no funciona — es un gate al nivel del comando completo, no del primer token."</em></p>
-    <p><em>"Cuatro. Managed bloquea hacia abajo, sin escape. Ya lo nombramos en el slide de dónde vive y vale la pena repetirlo: en un entorno corporativo, un admin puede fijar un deny en el nivel Managed que ningún proyecto ni usuario puede sobreescribir. Si tu organización bloqueó Bash de git push en el nivel Managed, no hay forma de habilitarlo desde el settings del proyecto. En proyectos personales no aparece; en equipos con políticas de seguridad, define el techo de lo posible."</em></p>
+    <p><strong>El primero es el más importante: deny no es sandbox.</strong></p>
+    <p><u>Límites reales del sistema: patrón vs intención, lecturas libres, encadenamiento, variantes de un comando.</u></p>
+    <p><em>"Quinta pregunta. Qué confunde. Uno: un deny cubre una tool y un patrón, no una intención. Read de .env bloquea la tool Read sobre ese archivo, pero si Claude puede correr cat por Bash, o un script de Python que lo abra, el deny no se entera. Por eso el demo-repo acota uv run python a un solo script. Dos: las lecturas no piden permiso. Leer archivos, grep, ls, git status, corren sin prompt dentro del proyecto; por eso no hace falta un Read del proyecto en allow. Tres: los wildcards no atraviesan && ni punto y coma. Un allow de uv run uvicorn con asterisco no cubre uvicorn seguido de rm -rf. Y cuatro: un deny de Bash matchea texto. /bin/rm -rf, o un sh -c con el comando adentro, no matchean rm -rf asterisco. Si algo no tiene que pasar nunca, la defensa real es no habilitar caminos alternativos, y para aislar de verdad, un contenedor."</em></p>
   </aside>
 </section>
 
-<!-- §10.9 · Permission modes overlay — sin mini-strip (zoom-in a tema relacionado) -->
+<!-- §10.9 · Permission modes — tabla única de 6 modes (sin mini-strip) -->
 <section class="s10-slide">
   <h2>Permission modes: el dial de autonomía</h2>
 
-  <div class="s10-logic-wrap">
+  <div class="s10-logic-wrap s10-modes-wrap">
     <table class="s10-logic-table s10-modes-table">
       <thead>
         <tr>
           <th>Mode</th>
-          <th>Qué hace</th>
+          <th>Qué corre sin preguntar</th>
+          <th>Para qué</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="s10-mode-name">default</td>
-          <td class="s10-mode-what">Aplica las listas <code>allow</code> / <code>deny</code> / <code>ask</code> normalmente — el modo del que venimos hablando toda la sección.</td>
+          <td class="s10-mode-name">plan</td>
+          <td class="s10-mode-what">Lecturas y exploración; no edita hasta que aprobás el plan</td>
+          <td class="s10-mode-why">Explorar y proponer antes de tocar</td>
+        </tr>
+        <tr>
+          <td class="s10-mode-name">default<span class="s10-mode-ui">en la UI: Manual</span></td>
+          <td class="s10-mode-what">Solo lecturas</td>
+          <td class="s10-mode-why">Revisar cada acción, trabajo sensible</td>
         </tr>
         <tr>
           <td class="s10-mode-name">acceptEdits</td>
-          <td class="s10-mode-what"><strong>Auto-acepta</strong> <code>Edit</code> y <code>Write</code> sin confirmación adicional. <code>Bash</code> y el resto siguen las listas normales. Útil cuando ya iteraste varias veces y querés que las ediciones fluyan.</td>
+          <td class="s10-mode-what">Lecturas, ediciones y comandos de filesystem comunes (<code>mkdir</code>, <code>mv</code>, <code>rm</code>…) en el working dir</td>
+          <td class="s10-mode-why">Iterar sobre código que estás revisando</td>
         </tr>
-        <tr class="is-future">
-          <td class="s10-mode-name is-future">plan</td>
-          <td class="s10-mode-what">Solo lectura hasta que aprobás un plan. El agente lee, propone, y espera tu OK antes de ejecutar nada. Se desarrolla completo en <strong>§13</strong>.</td>
+        <tr>
+          <td class="s10-mode-name">auto</td>
+          <td class="s10-mode-what">Todo, con un segundo modelo (clasificador) que revisa cada acción en vez de vos</td>
+          <td class="s10-mode-why">Tareas largas; arranque por defecto en Pro/Max/Team</td>
+        </tr>
+        <tr>
+          <td class="s10-mode-name">dontAsk</td>
+          <td class="s10-mode-what">Lecturas y lo pre-aprobado en <code>allow</code>; lo que preguntaría, se deniega</td>
+          <td class="s10-mode-why">CI y scripts cerrados</td>
         </tr>
         <tr class="is-danger">
           <td class="s10-mode-name is-danger">bypassPermissions</td>
-          <td class="s10-mode-what"><strong>Saltea todo</strong>, incluyendo <code>deny</code>. Existe para entornos automatizados con sandbox externo. Usarlo en desarrollo interactivo <strong>elimina todas las protecciones</strong>.</td>
+          <td class="s10-mode-what">Todo</td>
+          <td class="s10-mode-why">Solo contenedores o VMs aislados</td>
         </tr>
       </tbody>
     </table>
   </div>
 
+  <p class="s10-modes-foot"><strong>Los <code>deny</code> bloquean en todos los modos</strong>, incluido <code>bypassPermissions</code>.</p>
+  <p class="s10-modes-foot is-tight">Cambiar de modo: <code>Shift+Tab</code> en la sesión · <code>claude --permission-mode &lt;modo&gt;</code> · <code>permissions.defaultMode</code></p>
+
   <aside class="notes">
-    <p><strong>Recorrer las cuatro filas. default es el conocido — no requiere explicación extra. acceptEdits y plan son los útiles. bypassPermissions es el peligroso; marcar fuerte que saltea deny también, y que solo tiene sentido cuando hay otra capa de seguridad afuera (un sandbox, un container aislado).</strong></p>
-    <p><u>Slide sobre permission modes. Sin mini-strip — es zoom-in a un tema relacionado pero distinto a las cinco preguntas. Tabla de los cuatro modes con tratamiento visual diferenciado: plan en color secundario porque vuelve en §13, bypassPermissions en rojo porque es el modo que requiere advertencia. Es overlay: los modes se eligen una vez al arrancar la sesión y modifican cómo se aplican las listas durante toda la sesión.</u></p>
-    <p><em>"Una pieza más antes de cerrar la sección. Hasta acá vimos las listas allow, deny y ask como el sistema completo. Falta un overlay encima de las listas: el permissionMode."</em></p>
-    <p><em>"El mode se elige una vez al arrancar la sesión — con un flag al iniciar, con el campo permissionMode en settings.json, o con Shift Tab durante la sesión. Modifica cómo se aplican las listas durante toda la sesión. Cuatro modos."</em></p>
-    <p><em>"Uno. default. Aplica las listas como las venimos viendo. Es el modo del que venimos hablando toda la sección — no requiere explicación extra."</em></p>
-    <p><em>"Dos. acceptEdits. Auto-acepta Edit y Write sin confirmación adicional. Bash y el resto siguen las listas normales. Es útil cuando ya iteraste varias veces con el agente, sabés que las ediciones van bien encaminadas, y querés que las ediciones fluyan sin que cada una requiera un OK. Modificás el archivo y seguís. No te ahorra los prompts de Bash — solo los de modificar archivos."</em></p>
-    <p><em>"Tres. plan. Y este lo vamos a ver completo en §13. La idea corta: el agente entra en modo solo-lectura. Lee, investiga, propone un plan. No ejecuta nada hasta que vos apruebes el plan. Es la pausa explícita entre pensar y actuar. Es uno de los dispositivos más potentes para tareas grandes — pero lo desarrollamos a fondo en su propia sección."</em></p>
-    <p><em>"Y cuatro. bypassPermissions. Y este requiere advertencia explícita: saltea todo. Allow, deny, ask, todo. Incluyendo deny. Si tenés Read de .env en deny y arrancás con bypassPermissions, Claude lo lee. Existe para entornos automatizados donde el código que lo invoca ya garantiza seguridad por otro mecanismo — un sandbox, un container aislado, un servidor donde no hay credenciales. Usarlo en desarrollo interactivo, en tu máquina, sobre tu repo real, elimina todas las protecciones que vimos en esta sección entera. No es un atajo: es desactivar el sistema."</em></p>
+    <p><strong>Ordenados de más a menos control humano; <code>bypassPermissions</code> solo en entornos aislados.</strong></p>
+    <p><u>Modo y listas se combinan: las listas deciden sobre lo que matchean; el modo, sobre el resto.</u></p>
+    <p><em>"Falta una pieza encima de las listas: el modo de permisos. Las listas deciden qué pasa con lo que matchea una regla; el modo decide qué pasa con todo lo demás. Seis modos, de más a menos control humano. plan: lee y explora, pero no edita hasta que aprobás el plan; le dedicamos una sección en §13. default, que en la interfaz se llama Manual: solo las lecturas pasan sin preguntar. acceptEdits: además acepta ediciones y comandos de filesystem comunes dentro del proyecto; sirve cuando estás iterando y revisando el diff. auto: corre todo, pero un segundo modelo, un clasificador, revisa cada acción en lugar tuyo; en planes Pro, Max y Team es el modo con el que arranca Claude Code, y por eso en los demos arranco con --permission-mode default. dontAsk: solo pasa lo pre-aprobado, y lo que preguntaría se deniega; es para CI. Y bypassPermissions: todo, solo para contenedores o máquinas virtuales aisladas. Una garantía que atraviesa los seis: los deny bloquean en todos los modos, incluso en bypass. Para cambiar: Shift+Tab durante la sesión cicla entre default, acceptEdits y plan; el flag --permission-mode al arrancar; o defaultMode dentro de permissions en settings."</em></p>
   </aside>
 </section>
 
-<!-- §10.10 · Demo · prompt → /permissions → repetir (section-divider + clickable-steps) -->
+<!-- §10.10 · Demo · prompt → regla guardada → deny gana (section-divider + clickable-steps) -->
 <section class="section-divider">
-  <h2>Demo · prompt → <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">/permissions</code> → repetir</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Ver el ciclo completo: un comando que pregunta, una regla que lo libera, una regla que lo bloquea.</p>
+  <h2>Demo · del prompt al <code class="s10-h2-code">deny</code></h2>
+  <p class="s10-demo-sub">Un comando que pregunta, una regla que lo libera y un deny que le gana a un allow.</p>
 
   <div class="s10-demo-wrap">
     <div id="s10-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup antes del slide: terminal con cwd en una copia del demo-repo, en una sesión nueva. El .claude/settings.json del demo-repo, abierto en VS Code en una pestaña al lado, para mostrar los cambios que /permissions va escribiendo (en settings.local.json). Plan B en notes del último paso si algo falla en vivo.</strong></p>
-    <p><u>Demo de la sección. Tres pasos sobre la misma sesión, sin reiniciar. El primer paso muestra el comportamiento default cuando no hay regla; el segundo, allow agregado en vivo elimina el prompt; el tercero, deny agregado en vivo bloquea sin opción a confirmar. El objetivo es ver la diferencia entre ask y deny en pantalla, no contártela. Si el flujo en vivo falla, el Plan B sostiene el argumento leyendo las tres listas del settings.json — la lógica se sostiene sin ver el runtime ejecutarse.</u></p>
-    <p><em>"Vamos al demo. Tres pasos sobre una misma sesión, sin reiniciar. La idea es ver en pantalla el ciclo completo: un comando que pregunta, una regla que lo libera, una regla que lo bloquea."</em></p>
+    <p><strong>Setup de siempre; sesión con <code>claude --permission-mode default</code> y <code>.claude/settings.local.json</code> abierto en VS Code.</strong></p>
+    <p><u>Tres pasos en una misma sesión: prompt, "don't ask again" que escribe en local, deny local que bloquea un allow del proyecto.</u></p>
+    <p><em>"Vamos al demo. Una sola sesión, sin reiniciar. Vamos a ver un comando que pregunta, una regla que lo libera y un deny que le gana a un allow que está en otro archivo."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Paso 1 — Sin permiso: el prompt aparece</strong></p>
+    <p><strong>Setup:</strong> el de siempre (copia en <code>~/demo-repo</code> con <code>git init</code>, <code>.env</code>, <code>uv sync</code>). <code>.claude/settings.local.json</code> ya existe desde la demo de settings.json. Arrancar con <code>claude --permission-mode default</code>.</p>
+    <p><strong>Paso 1 · Aparece el prompt</strong></p>
     <ul>
-      <li>Setup: sesión nueva en el demo-repo, sin <code>Bash(uv run pytest)</code> en allow</li>
-      <li>En Claude: "corré los tests"</li>
-      <li>Mirar: prompt "¿Permitir Bash uv run pytest?"</li>
-      <li>Negar — Claude no ejecuta pero no rompe</li>
+      <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
+      <li><strong>En Claude:</strong> "corré los tests"</li>
+      <li><strong>Mirar:</strong> prompt para <code>uv run pytest</code> (no está en <code>allow</code>); no responder todavía</li>
     </ul>
-    <p><strong>Paso 2 — /permissions agrega allow: pasa sin prompt</strong></p>
+    <p><strong>Paso 2 · Guardar la regla</strong></p>
     <ul>
-      <li>En Claude: <code>/permissions</code></li>
-      <li>Agregar <code>Bash(uv run pytest)</code> a <code>allow</code> (escribe en <code>.local.json</code>)</li>
-      <li>En Claude: "corré los tests" (de nuevo)</li>
-      <li>Mirar: corre sin prompt</li>
-      <li>VS Code: ver el diff en <code>.local.json</code> abierto al lado</li>
+      <li><strong>En Claude:</strong> "Yes, and don't ask again"</li>
+      <li><strong>VS Code:</strong> regla nueva en <code>.claude/settings.local.json</code> (opcional: verla también en <code>/permissions</code>)</li>
+      <li><strong>En Claude:</strong> "corré los tests" otra vez</li>
+      <li><strong>Mirar:</strong> corre sin prompt</li>
     </ul>
-    <p><strong>Paso 3 — /permissions agrega deny: bloqueado sin opción</strong></p>
+    <p><strong>Paso 3 · Deny le gana a allow</strong></p>
     <ul>
-      <li>En Claude: <code>/permissions</code></li>
-      <li>Agregar <code>Read(./.env)</code> a <code>deny</code></li>
-      <li>En Claude: "mostrame el contenido de <code>.env</code>"</li>
-      <li>Mirar: bloqueado, sin prompt — Claude no puede rodearlo</li>
+      <li><strong>En Claude:</strong> <code>/permissions</code>, agregar a deny <code>Edit(./openapi.yaml)</code> guardada en local</li>
+      <li><strong>En Claude:</strong> "cambiá el title en openapi.yaml"</li>
+      <li><strong>Mirar:</strong> bloqueado sin prompt, aunque <code>Edit(./openapi.yaml)</code> está en el allow del proyecto</li>
     </ul>
-    <p><em>Plan B (si el flujo en vivo no coopera): abrir el .claude/settings.json del demo-repo y leer las tres listas — allow, deny, ask — en voz alta. Para cada entrada, explicar qué cubre y por qué está en esa lista.</em></p>
+    <p>Si Claude intenta rodearlo con Bash (<code>sed</code>, <code>python</code>), aparece un prompt: responder No, y usarlo para recordar que un deny cubre una tool y un patrón. Al terminar: quitar el deny con <code>/permissions</code> (o restaurar el local con <code>cp .claude/settings.local.json.example .claude/settings.local.json</code>).</p>
+    <p><em>Plan B (si /permissions o el prompt no cooperan): editar .claude/settings.local.json a mano con la sesión abierta, agregando "Bash(uv run pytest)" en allow y "Edit(./openapi.yaml)" en deny. La recarga en caliente toma el cambio sin reiniciar; repetir los pedidos.</em></p>
   </aside>
 </section>
 
 <!-- §10.11 · Cierre + bridge a §11 -->
 <section class="s10-slide">
-  <h2>Reglas del runtime, deterministas, antes de cada tool call</h2>
+  <h2>Reglas del runtime, determinísticas, antes de cada tool call</h2>
 
   <div class="s10-close-card">
     <p class="s10-close-main">
-      Los permisos son <strong>reglas del runtime</strong>, evaluadas <strong>antes de cada tool call</strong>. Tres listas — <code>allow</code> / <code>deny</code> / <code>ask</code> — y una precedencia: <code>deny</code> gana sobre <code>allow</code>. Una regla escrita acá <strong>no se ignora</strong> ni se reinterpreta. Es el contrato más duro que tenés sobre lo que el agente puede hacer.
+      Los permisos son <strong>reglas del runtime</strong> evaluadas <strong>antes de cada tool call</strong>: primero <code>deny</code>, después <code>ask</code>, después <code>allow</code>; lo que no matchea lo decide el modo. Una regla escrita acá no se ignora ni se reinterpreta, pero cubre una tool y un patrón, no una intención.
     </p>
     <p class="s10-close-bridge">
-      Los permisos <em>limitan</em> qué tools usa el agente. Las skills hacen lo contrario: le dan procedimientos que no traía. El agente sabe correr comandos — las skills le enseñan <em>cuándo</em> y <em>en qué orden</em>.
+      Los permisos <em>limitan</em> qué hace el agente. Las skills van del otro lado: le dan procedimientos que no traía, <em>cuándo</em> hacer cada paso y <em>en qué orden</em>.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal apoyando "reglas del runtime" y "antes de cada tool call" — las dos frases a retener. Pausa antes del bridge. Marcar el contraste limitar/dar con la voz.</strong></p>
-    <p><u>Cierre de §10 + bridge a §11. La línea principal consolida la propiedad central: permisos son gate del runtime, no instrucción para el modelo. El bridge a §11 abre el contraste estructural: §10 fue sobre acotar, §11 va a ser sobre extender. Las dos caras del mismo problema — qué puede hacer el agente.</u></p>
-    <p><em>"Cerramos §10. La propiedad central a retener: los permisos son reglas del runtime, evaluadas antes de cada tool call. Tres listas — allow, deny, ask — y una precedencia: deny gana sobre allow. Una regla escrita acá no se ignora ni se reinterpreta. Es el contrato más duro que tenés sobre lo que el agente puede hacer."</em></p>
-    <p><em>"Y el bridge a §11. Toda esta sección fue sobre limitar — sobre acotar qué tools usa el agente. La próxima sección hace lo contrario: las skills le dan procedimientos que no traía. El agente ya sabe correr comandos; las skills le enseñan cuándo correrlos y en qué orden. Son las dos caras del mismo problema — qué puede hacer el agente — atacadas desde lados opuestos. Limitamos por un lado, extendemos por el otro."</em></p>
+    <p><strong>Apoyar el orden deny, ask, allow y el límite "patrón, no intención".</strong></p>
+    <p><u>Cierre de §10 y puente a skills: limitar vs extender.</u></p>
+    <p><em>"Cerramos permisos. Son reglas del runtime evaluadas antes de cada tool call, en un orden fijo: deny, ask, allow; y lo que no matchea ninguna lo decide el modo. Una regla escrita acá no se ignora ni se reinterpreta, con un límite claro: cubre una tool y un patrón, no una intención. Y el puente a lo que sigue: todo esto fue sobre limitar qué hace el agente. Las skills van del otro lado: le dan procedimientos que no traía, cuándo hacer cada paso y en qué orden. Limitamos por un lado, extendemos por el otro."</em></p>
   </aside>
 </section>
 
@@ -917,19 +905,19 @@
 <script>
   initClickableSteps({containerId: 's10-demo-steps', steps: [
     {
-      title: 'Paso 1 — Sin permiso: el prompt aparece',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en el demo-repo, sin <code>Bash(uv run pytest)</code> en allow</li><li><strong>En Claude:</strong> "corré los tests"</li><li><strong>Mirar:</strong> prompt "¿Permitir Bash uv run pytest?"</li><li><strong>Negar</strong> — Claude no ejecuta pero no rompe</li></ul>',
-      example: 'El punto del paso uno: el default no es bloquear, es preguntar. Y la negación no produjo un error — Claude recibe la denegación como respuesta, dice "no pude ejecutar el comando", y sigue funcionando. Sin reglas, cada acción que toca el mundo es una pregunta.'
+      title: 'Paso 1 · Aparece el prompt',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> "corré los tests"</li><li><strong>Mirar:</strong> prompt para <code>uv run pytest</code></li></ul>',
+      example: 'Claude propone <code>uv run pytest</code> y el runtime lo frena antes de ejecutar. El comando no matchea ninguna regla del proyecto, y en Manual lo que no está pre-aprobado se pregunta.'
     },
     {
-      title: 'Paso 2 — /permissions agrega allow: pasa sin prompt',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code></li><li><strong>Agregar</strong> <code>Bash(uv run pytest)</code> a <code>allow</code> (escribe en <code>.local.json</code>)</li><li><strong>En Claude:</strong> "corré los tests" (de nuevo)</li><li><strong>Mirar:</strong> corre sin prompt</li><li><strong>VS Code:</strong> ver el diff en <code>.local.json</code> abierto al lado</li></ul>',
-      example: 'Lo importante no es solo que pase — es ver dónde escribió el cambio. /permissions tocó settings.local.json, no settings.json. La autonomía que yo le di a Claude en mi máquina no contamina la config del equipo. Misma tarea, mismo agente, distinto nivel de autonomía configurado, y el archivo compartido del repo intacto.'
+      title: 'Paso 2 · Guardar la regla',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "Yes, and don&#39;t ask again"</li><li><strong>VS Code:</strong> regla nueva en <code>settings.local.json</code></li><li><strong>En Claude:</strong> "corré los tests" otra vez</li><li><strong>Mirar:</strong> corre sin prompt</li></ul>',
+      example: 'La regla quedó escrita en <code>.claude/settings.local.json</code>, junto al <code>env</code> que ya tenía. El <code>settings.json</code> del proyecto no cambió. La segunda vez, los tests corren sin preguntar.'
     },
     {
-      title: 'Paso 3 — /permissions agrega deny: bloqueado sin opción',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code></li><li><strong>Agregar</strong> <code>Read(./.env)</code> a <code>deny</code></li><li><strong>En Claude:</strong> "mostrame el contenido de <code>.env</code>"</li><li><strong>Mirar:</strong> bloqueado, sin prompt — Claude no puede rodearlo</li></ul>',
-      example: 'Acá se ve la diferencia entre ask y deny. Ask es un prompt — un humano puede aprobar. Deny es un muro — no hay prompt, no hay aprobación posible. Y Claude no puede pedirlo de otra forma, no puede argumentar, no puede insistir: el bloqueo es del runtime, no del modelo. El modelo simplemente recibe "tool no disponible" como respuesta.\n\nPLAN B (si el flujo en vivo no coopera): abrir el .claude/settings.json del demo-repo y leer las tres listas — allow, deny, ask — en voz alta. Para cada entrada, explicar qué cubre y por qué está en esa lista. El argumento no necesita que veas el runtime ejecutarse: la lógica de allow/deny/ask y la precedencia de deny se sostienen con la lectura.'
+      title: 'Paso 3 · Deny le gana a allow',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code>, deny <code>Edit(./openapi.yaml)</code> en local</li><li><strong>En Claude:</strong> "cambiá el title en openapi.yaml"</li><li><strong>Mirar:</strong> bloqueado, aunque el proyecto tiene el allow</li></ul>',
+      example: 'El <code>allow</code> vive en <code>settings.json</code> y el <code>deny</code> en <code>settings.local.json</code>. El runtime combina las listas de los dos archivos y evalúa <code>deny</code> primero: la edición no corre y Claude recibe el rechazo como resultado de la tool.'
     }
   ]});
 </script>

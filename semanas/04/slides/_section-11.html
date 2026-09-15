@@ -11,15 +11,20 @@
   text-transform: none;
   letter-spacing: 0;
 }
+.reveal .slides .s11-slide h2 .s11-h2-code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
 
-/* --- Five-questions card (full + mini) — calibrated identically to §10 --- */
+/* --- Five-questions card (full + mini) --- */
 .reveal .slides .s11-slide h2.s11-five-q-title {
   font-size: 1.05em;
   text-align: center;
   margin: 0 0 16px;
   line-height: 1.2;
 }
-.s11-five-q-grid {
+.reveal .s11-five-q-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 7px;
@@ -28,7 +33,7 @@
   margin: 0 auto;
   max-width: 900px;
 }
-.s11-five-q-card {
+.reveal .s11-five-q-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 6px;
@@ -40,42 +45,43 @@
   opacity: 0.45;
   transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
-.s11-five-q-card.is-active {
+.reveal .s11-five-q-card.is-active {
   opacity: 1;
   border-color: var(--accent);
   border-left: 3px solid var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(100, 255, 218, 0.08);
 }
-.s11-five-q-num {
+.reveal .s11-five-q-num {
   font-family: var(--font-mono);
   font-size: 0.5em;
   letter-spacing: 0.08em;
   color: var(--text-muted);
 }
-.s11-five-q-card.is-active .s11-five-q-num {
+.reveal .s11-five-q-card.is-active .s11-five-q-num {
   color: var(--accent);
 }
-.s11-five-q-label {
+.reveal .s11-five-q-label {
   font-size: 0.56em;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
 }
-.s11-five-q-hint {
-  font-size: 0.44em;
+.reveal .s11-five-q-hint {
+  font-size: 0.53em;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.35;
+  text-align: left;
 }
 /* Mini variant */
-.s11-five-q-grid.is-mini {
+.reveal .s11-five-q-grid.is-mini {
   grid-template-columns: repeat(5, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
   margin: 0 auto 8px;
 }
-.s11-five-q-grid.is-mini .s11-five-q-card {
+.reveal .s11-five-q-grid.is-mini .s11-five-q-card {
   padding: 3px 9px;
   border-radius: 999px;
   border-left-width: 1px;
@@ -83,40 +89,40 @@
   align-items: center;
   gap: 5px;
 }
-.s11-five-q-grid.is-mini .s11-five-q-card.is-active {
+.reveal .s11-five-q-grid.is-mini .s11-five-q-card.is-active {
   border-left: 1px solid var(--accent);
 }
-.s11-five-q-grid.is-mini .s11-five-q-num {
-  font-size: 0.42em;
+.reveal .s11-five-q-grid.is-mini .s11-five-q-num {
+  font-size: 0.43em;
 }
-.s11-five-q-grid.is-mini .s11-five-q-label {
+.reveal .s11-five-q-grid.is-mini .s11-five-q-label {
   font-size: 0.5em;
 }
 
 /* Qué es — bullet list (definición + callout) */
-.s11-qe-list {
+.reveal .s11-qe-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
-  max-width: 720px;
+  max-width: 760px;
   margin: 16px auto 0;
   padding-left: 36px;
   font-size: 0.6em;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-muted);
 }
-.s11-qe-list li {
+.reveal .s11-qe-list li {
   padding-left: 6px;
   margin-bottom: 10px;
 }
-.s11-qe-list li::marker { color: var(--accent); }
-.s11-qe-list strong { color: var(--text-primary); font-weight: 700; }
-.s11-qe-list code {
+.reveal .s11-qe-list li::marker { color: var(--accent); }
+.reveal .s11-qe-list strong { color: var(--text-primary); font-weight: 700; }
+.reveal .s11-qe-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s11-qe-list li.s11-qe-callout {
+.reveal .s11-qe-list li.s11-qe-callout {
   list-style: none;
   margin-left: -32px;
   margin-top: 10px;
@@ -128,262 +134,307 @@
   font-weight: 700;
 }
 
-/* Dónde vive — 2×3 matrix table */
-.s11-matrix-wrap {
-  max-width: 880px;
+/* Dónde vive — matrix table */
+.reveal .s11-matrix-wrap {
+  max-width: 860px;
   margin: 12px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
   overflow: hidden;
 }
-.s11-matrix-table {
+.reveal .s11-matrix-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.5em;
-  line-height: 1.5;
+  font-size: 0.55em;
+  line-height: 1.45;
   text-align: left;
 }
-.s11-matrix-table thead th {
+.reveal .s11-matrix-table thead th {
   background: var(--bg-code);
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.95em;
+  font-size: 0.8em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 8px 12px;
   border-bottom: 1px solid #2a3a5a;
 }
-.s11-matrix-table thead th.s11-matrix-rowhead { width: 22%; }
-.s11-matrix-table tbody td {
+.reveal .s11-matrix-table thead th.s11-matrix-rowhead { width: 20%; }
+.reveal .s11-matrix-table tbody td {
   padding: 9px 12px;
   vertical-align: top;
   border-bottom: 1px solid #1e2a48;
   color: var(--text-muted);
 }
-.s11-matrix-table tbody tr:last-child td { border-bottom: none; }
-.s11-matrix-table tbody td.s11-matrix-rowname {
+.reveal .s11-matrix-table tbody tr:last-child td { border-bottom: none; }
+.reveal .s11-matrix-table tbody td.s11-matrix-rowname {
   color: var(--text-primary);
   font-weight: 700;
-  font-size: 1.05em;
   vertical-align: middle;
 }
-.s11-matrix-table tbody td code {
+.reveal .s11-matrix-table tbody td code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.98em;
+  font-size: 0.92em;
 }
-.s11-matrix-note {
-  display: inline-block;
-  max-width: 760px;
-  margin: 10px 0 0;
-  font-size: 0.5em;
+.reveal .s11-matrix-note {
+  display: block;
+  max-width: 860px;
+  margin-top: 12px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-size: 0.53em;
   color: var(--text-muted);
   text-align: center;
   font-style: italic;
   line-height: 1.5;
 }
-.s11-matrix-note strong { color: var(--text-primary); font-style: normal; }
-.s11-matrix-note code {
+.reveal .s11-matrix-note strong { color: var(--text-primary); font-style: normal; }
+.reveal .s11-matrix-note code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-style: normal;
 }
 
-/* Cuándo se carga — callout grande + bullets */
-.s11-when-callout {
-  display: inline-block;
+/* Cuándo se carga — callout + bullets */
+.reveal .s11-when-callout {
+  display: block;
   max-width: 760px;
-  margin: 14px auto 0;
+  margin-top: 14px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
   background: rgba(100, 255, 218, 0.08);
   border-left: 3px solid var(--accent);
   border-radius: 6px;
-  padding: 14px 22px;
-  font-size: 0.72em;
+  padding: 12px 20px;
+  font-size: 0.66em;
   color: var(--text-primary);
   font-weight: 700;
   line-height: 1.5;
   text-align: left;
 }
-.s11-when-callout strong { color: var(--accent); }
-.s11-when-list {
+.reveal .s11-when-callout code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+.reveal .s11-when-list {
   list-style: disc;
-  display: inline-block;
+  display: block;
   text-align: left;
-  max-width: 720px;
+  max-width: 760px;
   margin: 14px auto 0;
   padding-left: 36px;
   font-size: 0.56em;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-muted);
+  box-sizing: border-box;
 }
-.s11-when-list li {
+.reveal .s11-when-list li {
   padding-left: 4px;
   margin-bottom: 8px;
 }
-.s11-when-list li::marker { color: var(--accent); }
-.s11-when-list strong { color: var(--text-primary); }
-.s11-when-list code {
+.reveal .s11-when-list li::marker { color: var(--accent); }
+.reveal .s11-when-list strong { color: var(--text-primary); }
+.reveal .s11-when-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s11-when-bottom {
-  display: inline-block;
-  max-width: 720px;
-  margin: 12px auto 0;
+.reveal .s11-when-bottom {
+  display: block;
+  max-width: 760px;
+  margin-top: 12px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
   font-size: 0.55em;
   color: var(--text-muted);
   font-style: italic;
   line-height: 1.5;
+  text-align: center;
 }
-.s11-when-bottom strong { color: var(--text-primary); font-style: normal; }
+.reveal .s11-when-bottom strong { color: var(--text-primary); font-style: normal; }
 
 /* Code walkthrough — frontmatter + phases */
-.s11-code-block {
+.reveal .s11-code-block {
   display: block;
+  font-weight: 400;
   max-width: 760px;
-  margin: 12px auto 0;
+  margin: 10px auto 0;
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 12px 18px;
+  padding: 10px 18px;
   font-family: var(--font-mono);
   font-size: 0.5em;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--text-muted);
   text-align: left;
-  overflow: hidden;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+  box-shadow: none;
 }
-.s11-code-block .s11-code-key { color: var(--accent-secondary); }
-.s11-code-block .s11-code-val { color: var(--text-primary); }
-.s11-code-block .s11-code-fence { color: var(--text-muted); opacity: 0.7; }
-.s11-code-block .s11-code-comment { color: var(--text-muted); font-style: italic; }
-.s11-phases-list {
+.reveal .s11-code-block .s11-code-key { color: var(--accent-secondary); }
+.reveal .s11-code-block .s11-code-val { color: var(--text-primary); }
+.reveal .s11-code-block .s11-code-fence { color: var(--text-muted); opacity: 0.7; }
+.reveal .s11-phases-list {
   list-style: decimal;
-  display: inline-block;
+  display: block;
   text-align: left;
-  max-width: 720px;
-  margin: 12px auto 0;
+  max-width: 760px;
+  margin: 10px auto 0;
   padding-left: 36px;
-  font-size: 0.54em;
-  line-height: 1.55;
+  font-size: 0.55em;
+  line-height: 1.45;
   color: var(--text-muted);
+  box-sizing: border-box;
 }
-.s11-phases-list li {
+.reveal .s11-phases-list li {
   padding-left: 4px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
-.s11-phases-list li::marker { color: var(--accent); font-family: var(--font-mono); }
-.s11-phases-list strong { color: var(--text-primary); }
-.s11-phases-list code {
+.reveal .s11-phases-list li::marker { color: var(--accent); font-family: var(--font-mono); }
+.reveal .s11-phases-list strong { color: var(--text-primary); }
+.reveal .s11-phases-list code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.96em;
+  font-size: 0.94em;
 }
-.s11-anti-card {
-  display: inline-block;
-  max-width: 720px;
-  margin: 10px auto 0;
+.reveal .s11-anti-card {
+  display: block;
+  max-width: 760px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
   background: rgba(255, 118, 118, 0.06);
   border-left: 3px solid #ff7676;
   border-radius: 4px;
   padding: 8px 16px;
   text-align: left;
-  font-size: 0.5em;
+  font-size: 0.53em;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.5;
+  box-sizing: border-box;
 }
-.s11-anti-card strong {
+.reveal .s11-anti-card strong {
   color: #ff7676;
   font-family: var(--font-mono);
   font-size: 0.95em;
 }
+.reveal .s11-anti-card code {
+  font-family: var(--font-mono);
+  color: #ff7676;
+  font-size: 0.95em;
+}
 
-/* Slash command literal walkthrough (no mini-strip) */
-.s11-slash-block {
+/* Command de un archivo — literal */
+.reveal .s11-slash-block {
   display: block;
-  max-width: 720px;
-  margin: 14px auto 0;
+  font-weight: 400;
+  max-width: 860px;
+  margin: 12px auto 0;
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 14px 20px;
+  padding: 12px 20px;
   font-family: var(--font-mono);
   font-size: 0.54em;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-muted);
   text-align: left;
   white-space: pre-wrap;
+  box-sizing: border-box;
+  box-shadow: none;
 }
-.s11-slash-block .s11-code-key { color: var(--accent-secondary); }
-.s11-slash-block .s11-code-val { color: var(--text-primary); }
-.s11-slash-block .s11-code-fence { color: var(--text-muted); opacity: 0.7; }
-.s11-slash-tag {
-  display: inline-block;
-  max-width: 720px;
-  margin: 12px auto 0;
+.reveal .s11-slash-block .s11-code-key { color: var(--accent-secondary); }
+.reveal .s11-slash-block .s11-code-val { color: var(--text-primary); }
+.reveal .s11-slash-block .s11-code-fence { color: var(--text-muted); opacity: 0.7; }
+.reveal .s11-slash-tag {
+  display: block;
+  max-width: 860px;
+  margin-top: 12px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
   font-size: 0.56em;
   color: var(--text-primary);
   line-height: 1.55;
-  text-align: left;
+  text-align: center;
 }
-.s11-slash-tag strong { color: var(--accent); }
-.s11-slash-tag code {
+.reveal .s11-slash-tag strong { color: var(--accent); }
+.reveal .s11-slash-tag code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
 
 /* Qué confunde — 3 bullets */
-.s11-gotchas-list {
+.reveal .s11-gotchas-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
   max-width: 780px;
   margin: 14px auto 0;
   padding-left: 36px;
-  font-size: 0.56em;
-  line-height: 1.6;
+  font-size: 0.58em;
+  line-height: 1.55;
   color: var(--text-muted);
 }
-.s11-gotchas-list li {
+.reveal .s11-gotchas-list li {
   padding-left: 4px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
-.s11-gotchas-list li::marker { color: var(--accent); }
-.s11-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.s11-gotchas-list code {
+.reveal .s11-gotchas-list li::marker { color: var(--accent); }
+.reveal .s11-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
+.reveal .s11-gotchas-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
 
-/* Demo wrap */
-.s11-demo-wrap {
+/* Demo */
+.reveal .s11-demo-sub {
   max-width: 760px;
+  margin-top: 14px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+}
+.reveal .s11-demo-wrap {
+  max-width: 1040px;
   margin: 16px auto 0;
 }
+.reveal .s11-demo-wrap .cs-step { min-width: 0; }
+.reveal .s11-demo-wrap code { overflow-wrap: anywhere; }
 
 /* Cierre */
-.s11-close-card {
+.reveal .s11-close-card {
   max-width: 740px;
   margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
+  border-top: 3px solid var(--accent);
   border-radius: 8px;
   padding: 16px 24px;
   text-align: center;
 }
-.s11-close-main {
+.reveal .s11-close-main {
   font-size: 0.64em;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--text-primary);
   margin: 0 0 12px;
 }
-.s11-close-main strong { color: var(--accent); }
-.s11-close-bridge {
+.reveal .s11-close-main strong { color: var(--accent); }
+.reveal .s11-close-bridge {
   font-size: 0.56em;
   color: var(--text-muted);
   line-height: 1.6;
@@ -391,15 +442,10 @@
   padding-top: 11px;
   margin: 0;
 }
-.s11-close-bridge em {
+.reveal .s11-close-bridge em {
   color: var(--accent);
   font-style: normal;
   font-weight: 700;
-}
-.s11-close-bridge code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
 }
 </style>
 
@@ -436,14 +482,13 @@
   </ol>
 
   <aside class="notes">
-    <p><strong>Quinta vuelta con el mismo dispositivo. Ritmo rápido — la plantilla ya está internalizada. No leer las cinco preguntas; el título arriba alcanza para encuadrar.</strong></p>
-    <p><u>Apertura de §11. La sección anterior trató permisos — gates del runtime que limitan qué puede hacer el agente. Skills hacen lo contrario: agregan procedimientos completos. La misma plantilla baja sobre un objeto nuevo.</u></p>
-    <p><em>"Skills y slash commands. Quinta vuelta con la misma plantilla."</em></p>
-    <p><em>"Y un cambio de foco respecto a la sección anterior. Permisos limitan qué tools puede usar el agente. Skills hacen lo contrario: le dan procedimientos completos que de otra forma no tendría. Vamos a verlo con las cinco preguntas de siempre."</em></p>
+    <p><strong>Ritmo rápido: no leer las cinco preguntas.</strong></p>
+    <p><u>Apertura de §11. Quinta vuelta con la misma plantilla.</u></p>
+    <p><em>"Skills y slash commands. Quinta vuelta con la misma plantilla. Y un cambio de foco respecto a permisos: los permisos limitan qué tools puede usar el agente; las skills le dan procedimientos completos que de otra forma no tendría. Vamos con las cinco preguntas de siempre."</em></p>
   </aside>
 </section>
 
-<!-- §11.2 · Qué es — definición + callout -->
+<!-- §11.2 · Qué es — un mecanismo, dos formas -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
@@ -453,26 +498,23 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Dos objetos distintos — un procedimiento y su disparador</h2>
+  <h2>Un mismo mecanismo, dos formas: skill y command</h2>
 
   <ul class="s11-qe-list">
-    <li><strong>Skill</strong> — procedimiento completo empaquetado como objeto de conocimiento: fases numeradas, checkpoints de verificación, lista explícita de anti-patterns. No es una instrucción suelta ni una preferencia de estilo: describe exhaustivamente cómo se hace un tipo de tarea.</li>
-    <li><strong>Slash command</strong> — atajo. Puede invocar una skill, ejecutar instrucciones inline, o disparar un comportamiento built-in del runtime. Su cuerpo es mínimo por diseño.</li>
-    <li><strong>Skill ≠ slash command.</strong> Una skill puede existir sin slash command (se activa por relevancia). Un slash command puede existir sin skill (instrucciones inline, atajos a features del sistema).</li>
-    <li class="s11-qe-callout">→ La skill es el conocimiento. El slash command es el disparador.</li>
+    <li><strong>Skill:</strong> un directorio con <code>SKILL.md</code>. Empaqueta un procedimiento completo (frontmatter, fases, anti-patterns, archivos de soporte). Claude puede cargarla por su cuenta cuando la tarea matchea su <code>description</code>.</li>
+    <li><strong>Command:</strong> un solo archivo en <code>.claude/commands/</code>. Es la forma corta, ideal para un atajo que disparás vos.</li>
+    <li><strong>Las dos crean <code>/nombre</code>.</strong> El nombre sale del directorio o del archivo. Si una skill y un command se llaman igual, gana la skill.</li>
+    <li class="s11-qe-callout">→ La skill es la forma completa. El command es la forma de un archivo.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Tres ítems con pausa entre cada uno. El tercero es el que más confunde — repetir "skill ≠ slash command" para fijarlo. Pausa antes del callout. El callout es la línea a retener.</strong></p>
-    <p><u>Slide de definición. Mini-strip con "Qué es" lit. Tres bullets + callout, mismo patrón que §10.2. El objetivo es separar dos cosas que la mayoría asume que son lo mismo: la skill (procedimiento) y el slash command (disparador). Esa separación define toda la sección.</u></p>
-    <p><em>"Primera pregunta. Qué es. Y acá la respuesta tiene dos partes porque son dos objetos distintos."</em></p>
-    <p><em>"Una skill es un procedimiento completo empaquetado como objeto de conocimiento. Tiene fases numeradas, checkpoints de verificación, una lista explícita de anti-patterns. No es una instrucción suelta — no es 'usá tabs en vez de espacios'. Es la descripción exhaustiva de cómo ejecutar un tipo de tarea: agregar un endpoint, generar slides, revisar código."</em></p>
-    <p><em>"Un slash command es un atajo. Tres formas: puede invocar una skill, puede ejecutar instrucciones inline directamente, o puede disparar un comportamiento built-in del runtime — como /memory o /context, que no tienen skill detrás. Su cuerpo es mínimo por diseño."</em></p>
-    <p><em>"Y la distinción central, la que más confunde al arranque: skill no es igual a slash command. Una skill puede existir sin slash command — Claude la activa por relevancia cuando la tarea matchea su descripción. Un slash command puede existir sin skill — solo ejecuta instrucciones inline o llama un feature del sistema. Cuando se usan juntos, la skill lleva el procedimiento y el slash command lleva la orden de invocación. Y eso es exactamente el callout: la skill es el conocimiento, el slash command es el disparador."</em></p>
+    <p><strong>Tres ítems y el callout; el tercero es el que se confunde.</strong></p>
+    <p><u>Skills y commands se fusionaron: son dos formas del mismo mecanismo.</u></p>
+    <p><em>"Primera pregunta: qué es. Mucha documentación vieja las presenta como dos cosas separadas, pero hoy son el mismo mecanismo con dos formas. Una skill es un directorio con un SKILL.md adentro: empaqueta un procedimiento completo, con frontmatter, fases, anti-patterns y, si hace falta, archivos de soporte al lado. Y tiene algo que la forma corta no aprovecha: Claude puede cargarla por su cuenta cuando la tarea que le pedís matchea su description. Un command es un solo archivo markdown en .claude/commands. Es la forma corta: un atajo que disparás vos. Las dos crean un slash command con el mismo formato, /nombre, y el nombre sale del directorio de la skill o del nombre del archivo. Si una skill y un command se llaman igual, gana la skill. La skill es la forma completa; el command, la forma de un archivo."</em></p>
   </aside>
 </section>
 
-<!-- §11.3 · Dónde viven — tabla 2×3 (skill / slash command × proyecto / usuario / plugins) -->
+<!-- §11.3 · Dónde vive — tabla (skill / command × proyecto / usuario / plugins) -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">
     <li class="s11-five-q-card"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
@@ -482,27 +524,27 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Dos artefactos, tres scopes — archivos de markdown</h2>
+  <h2>Dos formas, los mismos lugares</h2>
 
   <div class="s11-matrix-wrap">
     <table class="s11-matrix-table">
       <thead>
         <tr>
-          <th class="s11-matrix-rowhead">Artefacto</th>
-          <th>Scope de proyecto</th>
-          <th>Scope de usuario</th>
+          <th class="s11-matrix-rowhead">Forma</th>
+          <th>Proyecto</th>
+          <th>Usuario</th>
           <th>Plugins</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="s11-matrix-rowname">Skill</td>
+          <td class="s11-matrix-rowname">Skill (directorio)</td>
           <td><code>.claude/skills/&lt;nombre&gt;/SKILL.md</code></td>
-          <td><code>~/.claude/skills/&lt;nombre&gt;/</code></td>
+          <td><code>~/.claude/skills/&lt;nombre&gt;/SKILL.md</code></td>
           <td>vía plugin instalado</td>
         </tr>
         <tr>
-          <td class="s11-matrix-rowname">Slash command</td>
+          <td class="s11-matrix-rowname">Command (un archivo)</td>
           <td><code>.claude/commands/&lt;nombre&gt;.md</code></td>
           <td><code>~/.claude/commands/&lt;nombre&gt;.md</code></td>
           <td>vía plugin instalado</td>
@@ -512,20 +554,17 @@
   </div>
 
   <p class="s11-matrix-note">
-    Las de <strong>usuario</strong> están disponibles en cualquier proyecto donde trabajes. Las de <strong>proyecto</strong>, solo en ese repo — y se versionan con el equipo. El demo-repo tiene su skill en <code>.claude/skills/add-endpoint/</code>.
+    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El demo-repo trae una de cada: la skill <code>add-endpoint</code> y el command <code>pre-pr</code>.
   </p>
 
   <aside class="notes">
-    <p><strong>Recorrer la tabla por filas. Marcar que la diferencia user vs proyecto es la misma idea que en §7 (CLAUDE.md) y §9 (settings.json): user viaja con vos, proyecto se commitea. Cerrar nombrando el archivo del demo-repo que vamos a abrir en §11.5.</strong></p>
-    <p><u>Slide de jerarquía. Tabla 2×3 — dos artefactos × tres scopes. La estructura es paralela: skills y slash commands viven en archivos hermanos, con scopes idénticos. La diferencia conceptual no es de ubicación, es de contenido — eso lo vamos a desarrollar slide a slide.</u></p>
-    <p><em>"Segunda pregunta. Dónde viven. Y la respuesta es ordenada: dos artefactos, tres scopes, todo archivos markdown."</em></p>
-    <p><em>"Skill. En scope de proyecto vive en .claude/skills/nombre/SKILL.md — una carpeta por skill, dentro de .claude/skills/. En scope de usuario, en tu home, tilde .claude/skills/nombre — disponible en cualquier proyecto donde trabajes. Y se distribuye también vía plugins instalados."</em></p>
-    <p><em>"Slash command. Misma estructura, archivo distinto. En scope de proyecto, .claude/commands/nombre.md — un archivo por comando. En scope de usuario, tilde .claude/commands/nombre.md. Y también vía plugins."</em></p>
-    <p><em>"La diferencia user versus proyecto es la misma idea que vimos en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo, lo de proyecto se commitea y lo comparte el equipo. El demo-repo tiene su skill en .claude/skills/add-endpoint — la vamos a abrir en el slide del cómo se usa."</em></p>
+    <p><strong>Recorrer la tabla por filas.</strong></p>
+    <p><u>Mismo reparto user / proyecto que CLAUDE.md y settings.json.</u></p>
+    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El demo-repo trae una de cada forma: la skill add-endpoint, que abrimos en un momento, y el command pre-pr."</em></p>
   </aside>
 </section>
 
-<!-- §11.4 · Cuándo se cargan — el punto clave (callout + bullets) -->
+<!-- §11.4 · Cuándo se carga — índice vs cuerpo -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">
     <li class="s11-five-q-card"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
@@ -538,28 +577,23 @@
   <h2>Al arranque entra el índice, no el procedimiento</h2>
 
   <p class="s11-when-callout">
-    De cada skill, al arranque entra solo <strong><code>name</code> + <code>description</code></strong>.<br>
-    <strong>El cuerpo</strong> — fases, checklists, anti-patterns — entra <strong>cuando se invoca</strong>.
+    De cada skill, al arranque entra solo su nombre y su <code>description</code>. El cuerpo (fases, anti-patterns) entra cuando se invoca.
   </p>
 
   <ul class="s11-when-list">
-    <li><strong>En <code>/context</code> las vas a ver listadas</strong> — con ~60–110 tokens cada una. Eso es el índice (name + description) que Claude necesita para decidir si activarla por relevancia.</li>
-    <li><strong>El SKILL.md completo</strong> (varios cientos o miles de tokens) entra a la ventana al invocarse explícitamente o al matchear el <code>description</code> con la tarea actual.</li>
-    <li><strong>Slash commands</strong> aparecen en el autocomplete cuando escribís <code>/</code>. Tampoco cargan su cuerpo hasta invocación.</li>
+    <li><strong>En <code>/context</code> la ves listada</strong> con pocos tokens. Ese índice es lo que Claude usa para decidir si la carga por relevancia.</li>
+    <li><strong>El <code>SKILL.md</code> completo</strong> entra cuando escribís <code>/nombre</code> o cuando Claude decide que la tarea matchea el <code>description</code>. Entra a la <strong>misma ventana</strong>: la carga se difiere, no se aísla.</li>
+    <li><strong>Commands de un archivo:</strong> aparecen en el autocomplete al escribir <code>/</code>, y su cuerpo entra al invocarlos.</li>
   </ul>
 
   <p class="s11-when-bottom">
-    <strong>Diseño, no limitación.</strong> Tenés cinco skills instaladas: pagás cinco descripciones cortas siempre, y el cuerpo de la única que usás esa sesión. Las otras cuatro no se expanden.
+    <strong>Diseño, no limitación.</strong> Con cinco skills instaladas pagás cinco descripciones cortas siempre, y el cuerpo solo de la que usás.
   </p>
 
   <aside class="notes">
-    <p><strong>El callout es la línea de toda la sección. Leerlo pausado, marcando la asimetría entre "índice" y "cuerpo". Después las tres bullets de arriba a abajo — la primera es la que más se confunde y la que vale la pena anticipar (sí, /context las muestra).</strong></p>
-    <p><u>Slide central de §11. Es la razón estructural por la que skills son una pieza distinta de CLAUDE.md o rules: el cuerpo no entra al contexto si no se usa. CLAUDE.md siempre paga su contenido entero; rules path-scoped pagan el contenido entero al matchear; skills pagan el índice (name+description) siempre, pero el cuerpo solo al invocarse. Esa es la diferencia operativa con todo lo visto hasta acá.</u></p>
-    <p><em>"Tercera pregunta. Cuándo se cargan. Y acá está el punto que más importa de toda la sección, el que define el modelo de contexto de las skills. Y también es donde más fácil se interpreta mal."</em></p>
-    <p><em>"De cada skill instalada, al arranque entra solo el name y el description — un par de líneas por skill, lo que Claude necesita para decidir si la skill aplica a la tarea actual. El cuerpo — las fases numeradas, los checklists, los anti-patterns — eso no entra al arranque. Entra solo cuando se invoca el comando, o cuando Claude determina por relevancia que la tarea la requiere matcheando el description."</em></p>
-    <p><em>"Adelanto un detalle que se ve apenas corrés /context: las skills aparecen listadas, con sesenta a ciento diez tokens cada una. Eso es el índice — el name + description que entró al arranque. No es el cuerpo. Por eso el costo aparece chico: el SKILL.md completo del demo-repo puede ser varios miles de tokens, pero en /context vas a ver una línea de cien."</em></p>
-    <p><em>"Los slash commands tienen el mismo comportamiento. Aparecen en el autocomplete cuando escribís slash, pero el cuerpo del comando no entra al contexto hasta que lo invocás."</em></p>
-    <p><em>"Y la línea de cierre: esto es diseño, no limitación. Si tenés cinco skills instaladas, pagás cinco descripciones cortas siempre, y el cuerpo solo de las que efectivamente usás en esta sesión. Compará con CLAUDE.md, que siempre carga su contenido entero desde el arranque, o con rules sin frontmatter, que también siempre cargan entero. Skills es el primer mecanismo donde el cuerpo es opt-in por tarea."</em></p>
+    <p><strong>Leer el callout marcando la asimetría índice / cuerpo.</strong></p>
+    <p><u>El cuerpo de una skill es opt-in por tarea, pero entra a la misma ventana.</u></p>
+    <p><em>"Tercera pregunta: cuándo se carga. Y es el punto que más importa de la sección. De cada skill instalada, al arranque entra solo el nombre y la description: un par de líneas, lo que Claude necesita para decidir si aplica. Las fases y los anti-patterns no entran. Si corrés /context apenas abrís la sesión, vas a ver las skills listadas con pocos tokens cada una: eso es el índice, no el cuerpo. El SKILL.md completo entra cuando escribís /nombre o cuando Claude decide, leyendo la description, que tu pedido la necesita. Y ojo con esto: entra a la misma ventana que todo lo demás. La skill difiere la carga; no aísla nada. Los commands de un archivo se comportan igual: aparecen en el autocomplete y su cuerpo entra cuando los invocás. Esto es diseño: con cinco skills instaladas pagás cinco descripciones cortas siempre y el cuerpo solo de la que usás. Comparalo con CLAUDE.md o las rules sin frontmatter, que cargan enteras desde el arranque."</em></p>
   </aside>
 </section>
 
@@ -573,59 +607,57 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Anatomía del <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">SKILL.md</code> — <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">add-endpoint</code> del demo-repo</h2>
+  <h2>Anatomía de <code class="s11-h2-code">.claude/skills/add-endpoint/SKILL.md</code></h2>
 
-  <pre class="s11-code-block"><span class="s11-code-fence">---</span>
+  <div class="s11-code-block"><span class="s11-code-fence">---</span>
 <span class="s11-code-key">name:</span> <span class="s11-code-val">add-endpoint</span>
 <span class="s11-code-key">description:</span> <span class="s11-code-val">Use when the user asks to add a new REST endpoint to the demo-repo backend. Adds the route, the schema if missing, the test, and regenerates openapi.yaml.</span>
-<span class="s11-code-fence">---</span></pre>
+<span class="s11-code-fence">---</span></div>
 
   <ol class="s11-phases-list">
-    <li><strong>Decidir verbo y path</strong> — confirmar con el usuario; escrituras requieren <code>Depends(require_bearer)</code>.</li>
-    <li><strong>Schemas</strong> — si hace falta, agregar modelos en <code>backend/schemas/models.py</code>.</li>
-    <li><strong>Router</strong> — función en <code>backend/routers/&lt;resource&gt;.py</code> con <code>response_model</code> y <code>status_code</code> explícitos.</li>
-    <li><strong>Test</strong> — happy path + error esperado en <code>tests/test_&lt;resource&gt;.py</code>.</li>
-    <li><strong>OpenAPI</strong> — <code>uv run python scripts/export_openapi.py</code>.</li>
-    <li><strong>Verificación</strong> — <code>uv run pytest -v</code> pasa entero; mostrar diff del <code>openapi.yaml</code>.</li>
+    <li><strong>Decidir method y path:</strong> confirmar con el usuario; las escrituras llevan <code>Depends(require_bearer)</code>.</li>
+    <li><strong>Schemas:</strong> si hace falta, modelos en <code>backend/schemas/models.py</code>.</li>
+    <li><strong>Router:</strong> función en <code>backend/routers/&lt;resource&gt;.py</code> con <code>response_model</code> y <code>status_code</code>; método en el store si falta.</li>
+    <li><strong>Test:</strong> happy path + error esperado en <code>tests/test_&lt;resource&gt;.py</code>.</li>
+    <li><strong>OpenAPI:</strong> <code>uv run python scripts/export_openapi.py</code>.</li>
+    <li><strong>Verificación:</strong> <code>uv run pytest -v</code> pasa entero; mostrar el diff de <code>openapi.yaml</code>.</li>
   </ol>
 
   <p class="s11-anti-card">
-    <strong>Anti-patterns:</strong> crear el endpoint sin test · olvidar regenerar <code style="font-family:var(--font-mono);color:#ff7676;font-size:0.95em;">openapi.yaml</code> · dejarlo sin <code style="font-family:var(--font-mono);color:#ff7676;font-size:0.95em;">response_model</code> · hardcodear constantes que pertenecen a <code style="font-family:var(--font-mono);color:#ff7676;font-size:0.95em;">models.py</code> o a una env var.
+    <strong>Anti-patterns:</strong> endpoint sin test · no regenerar <code>openapi.yaml</code> · endpoint sin <code>response_model</code> · constantes hardcodeadas que van en <code>models.py</code> o en una env var.
   </p>
 
   <aside class="notes">
-    <p><strong>Recorrer arriba a abajo: frontmatter primero — marcar el name y el description, particularmente la convención "Use when X". Después las seis fases en orden, una línea por fase. Cerrar con la card de anti-patterns, en rojo, marcando que la lista explícita es parte del contrato de la skill.</strong></p>
-    <p><u>Slide de walkthrough. La pieza concreta que materializa todas las definiciones anteriores. La estructura es siempre la misma: frontmatter con name + description, cuerpo con fases ordenadas, lista explícita de anti-patterns. Esto es lo que un alumno va a escribir cuando empiece a producir sus propias skills.</u></p>
-    <p><em>"Cuarta pregunta. Cómo se usa. Y la mejor forma de mostrarlo es abrir una skill concreta — la skill add-endpoint del demo-repo."</em></p>
-    <p><em>"Arriba, el frontmatter YAML entre triple guion. Dos campos. name, el identificador — add-endpoint. Description, la frase que el runtime lee para decidir si la skill aplica. Acá dice 'Use when the user asks to add a new REST endpoint to the demo-repo backend' — sigue una convención: 'Use when X'. Ese formato no es estilo, es contrato — Claude lo lee y decide activación. Una description vaga activa mal."</em></p>
-    <p><em>"Abajo, el cuerpo. Seis fases ordenadas. Uno, decidir verbo y path con el usuario, y para escrituras agregar la dependencia de auth. Dos, schemas — si la ruta usa modelos nuevos, agregarlos en models.py. Tres, router — escribir la función en el archivo correspondiente, con response_model y status_code explícitos. Cuatro, test — al menos dos, happy path y error esperado. Cinco, OpenAPI — correr el script de export que regenera openapi.yaml. Seis, verificación — pytest pasa entero, mostrar el diff del schema."</em></p>
-    <p><em>"Y abajo en rojo, la lista de anti-patterns. La pieza explícita: crear el endpoint sin test, olvidar regenerar el openapi, dejarlo sin response_model, hardcodear constantes. Cada anti-pattern es algo que el agente puede hacer si no se lo prohibe explícitamente. La lista no es decorativa — es la diferencia entre 'esperar que Claude se acuerde' y 'tener escrito que no'."</em></p>
+    <p><strong>Frontmatter, seis fases, anti-patterns: arriba a abajo.</strong></p>
+    <p><u>El comando /add-endpoint sale del nombre del directorio; name es solo etiqueta.</u></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Abrimos la skill add-endpoint del demo-repo. Arriba, el frontmatter. El name es una etiqueta; el comando /add-endpoint sale del nombre del directorio. La description es la frase que Claude lee para decidir si la skill aplica, y sigue una convención: 'Use when X'. Una description vaga activa mal. Abajo, el cuerpo: seis fases. Decidir method y path con el usuario, y para escrituras agregar la dependency de auth. Schemas, si hacen falta modelos nuevos. Router, con response_model y status_code explícitos, y si el store no tiene la consulta, agregar el método. Tests: happy path y error esperado. Regenerar openapi.yaml con el script. Y verificar: pytest pasa entero y se muestra el diff. Al final, en rojo, los anti-patterns: lo que el agente podría hacer si nadie lo escribe. Esa lista convierte 'esperar que Claude se acuerde' en 'tenerlo escrito'."</em></p>
   </aside>
 </section>
 
-<!-- §11.6 · El slash command literal — code-walkthrough (sin mini-strip, zoom-in concreto) -->
+<!-- §11.6 · La forma de un archivo — pre-pr.md -->
 <section class="s11-slide">
-  <h2>Y el slash command que lo dispara</h2>
+  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/pre-pr.md</code></h2>
 
-  <pre class="s11-slash-block"><span class="s11-code-fence">---</span>
-<span class="s11-code-key">description:</span> <span class="s11-code-val">Agregá un endpoint nuevo siguiendo la skill add-endpoint</span>
+  <div class="s11-slash-block"><span class="s11-code-fence">---</span>
+<span class="s11-code-key">description:</span> <span class="s11-code-val">Chequeo antes de abrir un PR (tests + openapi + diff)</span>
 <span class="s11-code-fence">---</span>
 
-El usuario quiere agregar un endpoint al backend del demo-repo. Invocá la skill
-`add-endpoint` y seguí sus fases.
+Antes de abrir un PR:
 
-Si el usuario no especificó verbo, path o body, preguntale antes de empezar.</pre>
+1. Corré `uv run pytest` y reportá si pasa.
+2. Regenerá `openapi.yaml` con `uv run python scripts/export_openapi.py`.
+3. Mostrá `git diff --stat`.
+
+No hagas commits ni push.</div>
 
   <p class="s11-slash-tag">
-    <strong>Nueve líneas.</strong> El procedimiento vive en la skill — fases, anti-patterns, todo lo del slide anterior. El comando solo sabe que tiene que invocarla. Si mañana cambia el procedimiento, se actualiza la skill, no el comando.
+    <strong>Once líneas, sin directorio.</strong> Crea <code>/pre-pr</code> igual que una skill. Para un atajo corto que disparás vos alcanza; si necesitás archivos de soporte o que Claude lo cargue por relevancia, conviene la skill.
   </p>
 
   <aside class="notes">
-    <p><strong>Sin mini-strip — es zoom-in al archivo, sigue siendo "cómo se usa". Leer el archivo entero en voz alta, son nueve líneas. Pausa en la tag de abajo. Marcar el contraste de tamaño: SKILL.md son decenas de líneas con fases y anti-patterns; el slash command son nueve líneas. Esa asimetría es deliberada.</strong></p>
-    <p><u>Slide complementario al anterior. Mostrar literal el archivo .claude/commands/add-endpoint.md del demo-repo. Es el contrapunto al SKILL.md: cuerpo mínimo, una sola orden — invocá la skill. Refuerza la separación conocimiento / disparador.</u></p>
-    <p><em>"Y este es el slash command que dispara la skill. Punto .claude barra commands barra add-endpoint punto md. El archivo entero, completo, son nueve líneas — las recorro."</em></p>
-    <p><em>"Frontmatter con un solo campo, description: 'Agregá un endpoint nuevo siguiendo la skill add-endpoint'. Eso es lo que aparece en el autocomplete cuando el alumno escribe slash. Cuerpo: tres líneas. 'El usuario quiere agregar un endpoint al backend del demo-repo. Invocá la skill add-endpoint y seguí sus fases.' Y un addendum: 'Si el usuario no especificó verbo, path o body, preguntale antes de empezar.' Eso es todo."</em></p>
-    <p><em>"Nueve líneas. El procedimiento entero — las seis fases, los checkpoints, los anti-patterns — vive en la skill. El comando solo sabe que tiene que invocarla. Si mañana cambia el procedimiento de cómo agregamos un endpoint, se actualiza el SKILL.md y el slash command no se toca. Esa asimetría es la razón estructural por la que existen los dos."</em></p>
+    <p><strong>Leer el archivo entero: son once líneas.</strong></p>
+    <p><u>Zoom-in sin mini-strip: contrapunto de tamaño con SKILL.md.</u></p>
+    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-pr punto md. Un archivo, once líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con tres pasos: correr pytest, regenerar el openapi, mostrar el diff. Crea /pre-pr igual que una skill crea /add-endpoint. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
   </aside>
 </section>
 
@@ -639,81 +671,91 @@ Si el usuario no especificó verbo, path o body, preguntale antes de empezar.</p
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Tres cosas que confunden de skills y slash commands</h2>
+  <h2>Tres cosas que confunden de skills y commands</h2>
 
   <ul class="s11-gotchas-list">
-    <li><strong>No todo slash command invoca una skill.</strong> <code>/memory</code>, <code>/context</code>, <code>/permissions</code> son atajos a comportamientos built-in del runtime. No hay skill detrás de ellos. El mecanismo es el mismo — un archivo en <code>.claude/commands/</code> — pero el cuerpo ejecuta instrucciones directas o llama features del sistema.</li>
-    <li><strong>El <code>description</code> es contrato de activación, no estilo.</strong> Cuando Claude decide si una skill aplica, lee ese campo. Vago activa mal — la skill entra cuando no corresponde, o no entra cuando sí. La convención <code>Use when X</code> no es preferencia estética: es la forma del contrato.</li>
-    <li><strong>El flow de ejecución es lineal.</strong> Cuando Claude entra en una skill, lee <code>SKILL.md</code> completo y ejecuta las fases en orden. Seis fases, las seis. No saltea, no reordena, no improvisa dentro del procedimiento. Esa garantía es la razón de usar una skill en lugar de escribir un prompt libre.</li>
+    <li><strong><code>/memory</code>, <code>/context</code> y <code>/permissions</code> no son archivos.</strong> Son built-ins del CLI: no hay skill ni command detrás que puedas abrir.</li>
+    <li><strong>El <code>description</code> decide la activación.</strong> Si es vago, la skill entra cuando no corresponde o no entra cuando sí. La convención <code>Use when X</code> lo vuelve específico.</li>
+    <li><strong>Una skill no es una garantía.</strong> Son instrucciones en contexto: el modelo sigue las fases con mucha más consistencia, y vos podés auditar cuál se salteó. Lo que tiene que cumplirse siempre va en settings y permisos.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer los tres bullets. El primero desarma una falsa equivalencia común. El segundo es operativo — si escribís skills propias, este es el punto que más impacta su utilidad. El tercero es la propiedad estructural — la razón por la que vale la pena empaquetar un procedimiento como skill.</strong></p>
-    <p><u>Slide de quinta pregunta. Tres confusiones en formato bullet list — siguen la regla de bullets: items peer cortos, misma estructura. Eligiendo tres en vez de cuatro porque cubren lo esencial sin diluir.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Tres cosas, en orden de cuánto cuestan cuando te olvidás de cada una."</em></p>
-    <p><em>"Una. No todo slash command invoca una skill. Slash memory, slash context, slash permissions — los que vinimos usando esta sección y las anteriores — son atajos a comportamientos built-in del runtime de Claude Code. No hay ninguna skill detrás de ellos. El mecanismo del archivo es el mismo — un archivo markdown en .claude/commands — pero el cuerpo ejecuta instrucciones directas o llama features del sistema, no invoca una skill. Es importante porque la equivalencia 'slash command igual a skill' suena natural y no es cierta."</em></p>
-    <p><em>"Dos. El description del frontmatter de la skill no es estilo: es contrato de activación. Cuando Claude decide si una skill aplica a la tarea actual, lo único que lee del cuerpo es ese campo. Si dice 'add endpoint' y nada más, Claude la va a activar para cualquier pedido que tenga las palabras endpoint o add — incluyendo cosas que no son backend. Si dice 'Use when the user asks to add a new REST endpoint to the demo-repo backend', el match es específico. La convención 'Use when X' no es preferencia estética, es la forma del contrato. Vago activa mal — la skill entra cuando no corresponde, o no entra cuando sí."</em></p>
-    <p><em>"Y tres. El flow de ejecución es lineal. Cuando Claude entra en una skill, lee el SKILL.md completo y ejecuta las fases en orden. Si la skill tiene seis fases, Claude ejecuta las seis, en el orden listado. No saltea, no reordena, no improvisa dentro del procedimiento. Esa garantía es la razón estructural de usar una skill en lugar de un prompt libre: el prompt libre es lotería sobre qué fases hace y en qué orden; la skill es determinismo sobre el procedimiento. Lo vamos a ver explícito en el demo."</em></p>
+    <p><strong>El tercer bullet es el que más importa.</strong></p>
+    <p><u>Skill = instrucciones en contexto; el enforcement determinístico vive en settings y permisos.</u></p>
+    <p><em>"Quinta pregunta: qué confunde. Una: /memory, /context, /permissions no son archivos. Son lógica del CLI; no hay skill ni command detrás que puedas abrir o editar. Dos: la description de la skill decide la activación. Si dice solo 'add endpoint', puede entrar en pedidos que no son de backend, o no entrar cuando sí correspondía. 'Use when the user asks to add a new REST endpoint to the demo-repo backend' es específico. Y tres, la más importante: una skill no es una garantía. Es texto que entra a la ventana, igual que CLAUDE.md. El modelo tiende a seguir las fases con mucha más consistencia que con un prompt suelto, y vos tenés un procedimiento escrito contra el cual auditar qué fase se salteó. Pero sigue siendo un LLM. Si algo tiene que cumplirse siempre, sin excepción, eso no va en una skill: va en settings y permisos, que el runtime aplica de forma determinística."</em></p>
   </aside>
 </section>
 
-<!-- §11.9 · Demo · sin skill → con skill (section-divider + clickable-steps) -->
+<!-- §11.8 · Demo · la skill entra por relevancia (section-divider + clickable-steps) -->
 <section class="section-divider">
-  <h2>Demo · invocar skill vs sesión sin skill</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Ver la diferencia entre un procedimiento garantizado y un flow improvisado por el modelo.</p>
+  <h2>Demo · la skill entra por relevancia</h2>
+  <p class="s11-demo-sub">Misma tarea con la skill y sin ella: qué fases aparecen en cada caso.</p>
 
   <div class="s11-demo-wrap">
     <div id="s11-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup antes del slide: terminal con dos sesiones de Claude Code listas en pestañas separadas — una abierta en el demo-repo (que tiene .claude/skills/add-endpoint/), otra abierta en un directorio temporal vacío sin skill instalada. VS Code abierto al lado con backend/routers/ visible. Plan B en el último paso si la activación por relevancia falla.</strong></p>
-    <p><u>Demo de cierre de la sección. Tres pasos en orden: primero mostrar que la skill existe en el repo pero no está cargada en la sesión nueva; después invocarla y ver el flow lineal de las seis fases; finalmente repetir la misma tarea en una sesión sin skill y mostrar el contraste — sin garantía de procedimiento. El objetivo es ver en pantalla la diferencia entre "procedimiento empaquetado" y "el modelo decide qué hacer".</u></p>
-    <p><em>"Vamos al demo. Tres pasos. El objetivo es hacer visible la diferencia entre un procedimiento garantizado y un flow improvisado. Misma tarea — agregar un endpoint POST barra comments — ejecutada con la skill y sin ella."</em></p>
+    <p><strong>Tres pasos: índice, activación por relevancia, contraste sin skill.</strong></p>
+    <p><u>Setup completo abajo; hacerlo antes de la clase.</u></p>
+    <p><em>"Vamos al demo. Una tarea que entra justo en las fases de la skill: agregar GET /users/{user_id}/posts. Primero miramos qué cargó la sesión, después la pedimos en prosa y vemos si la skill entra sola, y al final repetimos la tarea en una copia del repo sin la skill."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Paso 1 — La skill existe, la sesión no la conoce</strong></p>
+    <p><strong>Setup (antes de la clase)</strong></p>
+    <ol>
+      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
+      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
+      <li><code>cp .env.example .env</code> y <code>uv sync</code>.</li>
+      <li>Abrir Claude Code con <code>claude --permission-mode default</code>: en Pro/Max/Team el modo de arranque es <code>auto</code>, que taparía los prompts de permiso. En la UI, <code>default</code> se llama Manual.</li>
+      <li>Para ver qué cargó el runtime: <code>/context</code> (no <code>/memory</code>, que lista ubicaciones posibles aunque no existan).</li>
+      <li>Ojo en vivo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen como fuentes.</li>
+    </ol>
+    <p><strong>Paso 1 · La skill está en el índice</strong></p>
     <ul>
-      <li>Terminal: <code>cd ~/demo-repo</code></li>
-      <li>Terminal: <code>claude</code> (sesión nueva)</li>
-      <li>En Claude: <code>/context</code></li>
-      <li>Mirar: <code>SKILL.md</code> NO aparece como fuente cargada — solo <code>CLAUDE.md</code> + rules activas</li>
+      <li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li>
+      <li><strong>En Claude:</strong> <code>/context</code></li>
+      <li><strong>Mirar:</strong> <code>add-endpoint</code> listada entre las skills</li>
+      <li><strong>Mirar:</strong> las fases todavía no están</li>
     </ul>
-    <p><strong>Paso 2 — Invocar la skill: ejecuta las 6 fases en orden</strong></p>
+    <p><strong>Paso 2 · Pedido en prosa</strong></p>
     <ul>
-      <li>En Claude: <code>/add-endpoint POST /comments</code> (o en prosa: "agregá un endpoint POST /comments con title y body")</li>
-      <li>Mirar: Claude confirma verbo + path → schema → router → test → openapi → pytest</li>
-      <li>Mirar: las seis fases del <code>SKILL.md</code>, en orden, sin saltear</li>
+      <li><strong>En Claude:</strong> "agregá un endpoint GET /users/{user_id}/posts que devuelva los posts de un usuario"</li>
+      <li><strong>Mirar:</strong> carga <code>add-endpoint</code> sin que la nombres</li>
+      <li><strong>Mirar:</strong> method y path → router + store → tests → openapi → pytest</li>
     </ul>
-    <p><strong>Paso 3 — La misma tarea sin la skill</strong></p>
+    <p><strong>Paso 3 · Sin la skill</strong></p>
     <ul>
-      <li>Terminal: <code>cd ~/tmp-sin-skill</code> (sesión limpia, sin <code>.claude/skills/</code>)</li>
-      <li>Terminal: <code>claude</code></li>
-      <li>En Claude: "agregá un endpoint POST /comments"</li>
-      <li>Mirar: flow inventado — puede agregar el endpoint, puede olvidar tests, puede olvidar regenerar openapi</li>
+      <li><strong>Terminal:</strong> <code>cp -r ~/demo-repo ~/demo-repo-sin-skill &amp;&amp; cd ~/demo-repo-sin-skill</code></li>
+      <li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li>
+      <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
+      <li><strong>En Claude:</strong> el mismo pedido</li>
+      <li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li>
     </ul>
-    <p><em>Plan B (si la activación por relevancia no entra al pedido en prosa del paso 2): usar el slash command directo <code>/add-endpoint</code> — fuerza la entrada de la skill al contexto sin depender del match por descripción. El argumento se sostiene: invocada explícitamente, el procedimiento es el mismo.</em></p>
+    <p>En el Paso 2, Claude confirma method y path con vos: respondé que sí. pytest pide permiso porque no está en <code>allow</code>. El schema no hace falta (reutiliza <code>Post</code>).</p>
+    <p><strong>Contraste parcial:</strong></p>
+    <p>Sin la skill siguen cargados CLAUDE.md y las rules (<code>api.md</code> pide <code>response_model</code> y regenerar <code>openapi.yaml</code>; <code>testing.md</code> pide happy path + error). Algunas fases pueden aparecer igual. Lo que cambia es que nada las ordena en un procedimiento único. El <code>git checkout . &amp;&amp; git clean -fd</code> descarta en la copia lo que Claude hizo en el Paso 2. Si <code>uv</code> se queja del <code>.venv</code> copiado, correr <code>uv sync</code>.</p>
+    <p><strong>Plan B:</strong></p>
+    <p>Si en el Paso 2 la skill no entra por relevancia, invocarla directo: <code>/add-endpoint GET /users/{user_id}/posts</code>. El procedimiento que se ve es el mismo.</p>
   </aside>
 </section>
 
-<!-- §11.10 · Cierre + bridge a §12 -->
+<!-- §11.9 · Cierre + bridge a §12 -->
 <section class="s11-slide">
-  <h2>Skills aíslan un procedimiento — entran cuando se necesitan</h2>
+  <h2>Una skill difiere la carga de un procedimiento</h2>
 
   <div class="s11-close-card">
     <p class="s11-close-main">
-      Las skills <strong>aíslan un procedimiento</strong>: fases, checkpoints, anti-patterns, todo empaquetado. Entran al contexto <strong>cuando se invocan</strong>, no antes. Lo que el agente no usó <strong>no paga tokens</strong>. Y cuando entran, el flow es lineal — fases en orden, sin improvisación.
+      Una skill <strong>empaqueta un procedimiento</strong>: fases, anti-patterns y archivos de soporte. Al arranque pagás solo su descripción; el cuerpo entra a la ventana <strong>cuando se invoca</strong>. El modelo lo sigue con mucha más consistencia, y vos podés <strong>auditar cada fase</strong>.
     </p>
     <p class="s11-close-bridge">
-      Las skills aíslan <em>un procedimiento</em>. Los <em>sub-agents</em> aíslan un loop entero — el mismo principio (aislar para proteger el contexto del padre) aplicado a una unidad más grande.
+      La skill difiere la carga dentro de <em>la misma ventana</em>. Un sub-agent trabaja en <em>otra ventana</em>: lo que explora no vuelve al padre.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal apoyando "aíslan un procedimiento" y "no paga tokens" — las dos frases a retener. Pausa antes del bridge. Marcar el paralelismo con la voz: skills aíslan un procedimiento, sub-agents aíslan un loop entero.</strong></p>
-    <p><u>Cierre de §11 + bridge a §12. La línea principal consolida la propiedad central: skills son la primera pieza del runtime con costo de contexto opt-in por tarea. El bridge a §12 abre la idea de aislamiento a escala mayor — sub-agents aplican el mismo principio a una unidad más grande.</u></p>
-    <p><em>"Cerramos §11. La propiedad central a retener: las skills aíslan un procedimiento. Fases, checkpoints, anti-patterns, todo empaquetado. Entran al contexto cuando se invocan, no antes. Lo que el agente no usó no paga tokens. Y cuando entran, el flow es lineal — las fases se ejecutan en el orden listado, sin improvisación dentro del procedimiento."</em></p>
-    <p><em>"Y el bridge a la próxima sección. Las skills aíslan un procedimiento. Los sub-agents aíslan un loop entero. Mismo principio — aislar para proteger el contexto del padre — aplicado a una unidad más grande. Una skill empaqueta un how-to; un sub-agent empaqueta una sesión completa con su propia ventana de contexto. La unidad escala; el motivo es el mismo."</em></p>
+    <p><strong>Apoyar "difiere la carga" y "otra ventana".</strong></p>
+    <p><u>Cierre de §11 y bridge a §12: diferir la carga vs aislar.</u></p>
+    <p><em>"Cerramos. Una skill empaqueta un procedimiento: fases, anti-patterns, archivos de soporte. Al arranque pagás solo la descripción; el cuerpo entra cuando se invoca. Y no es magia ni garantía: el modelo lo sigue con mucha más consistencia y vos tenés contra qué auditar. Pero fijate dónde entra el cuerpo: en la misma ventana. La skill difiere la carga; no aísla. Lo que sigue es la pieza que sí aísla: un sub-agent corre en otra ventana, y lo que lee para resolver la tarea no vuelve a la tuya."</em></p>
   </aside>
 </section>
 
@@ -721,19 +763,19 @@ Si el usuario no especificó verbo, path o body, preguntale antes de empezar.</p
 <script>
   initClickableSteps({containerId: 's11-demo-steps', steps: [
     {
-      title: 'Paso 1 — La skill existe, la sesión no la conoce',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li><li><strong>Terminal:</strong> <code>claude</code> (sesión nueva)</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>SKILL.md</code> NO aparece como fuente cargada — solo <code>CLAUDE.md</code> + rules activas</li></ul>',
-      example: 'El punto del paso uno: la skill add-endpoint existe en el repo, está instalada, está disponible — pero no está en el contexto. La ventana solo tiene el nombre y la descripción, no las seis fases. Hasta que la invoquemos, para esta sesión la skill no existe. Esa es la propiedad operativa de "no paga tokens hasta que se usa".'
+      title: 'Paso 1 · La skill está en el índice',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>add-endpoint</code> listada entre las skills</li><li><strong>Mirar:</strong> las fases todavía no están</li></ul>',
+      example: '<code>/context</code> lista <code>add-endpoint</code> entre las skills con pocos tokens: nombre y descripción. Las seis fases y los anti-patterns del <code>SKILL.md</code> todavía no ocupan la ventana.'
     },
     {
-      title: 'Paso 2 — Invocar la skill: ejecuta las 6 fases en orden',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/add-endpoint POST /comments</code> (o en prosa: "agregá un endpoint POST /comments con title y body")</li><li><strong>Mirar:</strong> Claude confirma verbo + path → schema → router → test → openapi → pytest</li><li><strong>Mirar:</strong> las seis fases del <code>SKILL.md</code>, en orden, sin saltear</li></ul>',
-      example: 'Recién ahora la skill paga su lugar en el contexto. Y miren el flow: Claude no inventa un orden propio. Confirma verbo y path primero — fase uno. Revisa schemas — fase dos. Agrega el router con response_model — fase tres. Tests — fase cuatro. Regenera openapi — fase cinco. Corre pytest — fase seis. Las seis fases del SKILL.md, en el orden listado. Esa es la garantía estructural: el procedimiento no depende de que Claude se acuerde de cada paso.'
+      title: 'Paso 2 · Pedido en prosa',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "agregá un endpoint GET /users/{user_id}/posts que devuelva los posts de un usuario"</li><li><strong>Mirar:</strong> carga <code>add-endpoint</code> sin que la nombres</li><li><strong>Mirar:</strong> method y path → router + store → tests → openapi → pytest</li></ul>',
+      example: 'Claude detecta que el pedido matchea la <code>description</code> y carga la skill. Confirma <code>GET /users/{user_id}/posts</code>, reutiliza <code>Post</code> como response, agrega la consulta al store y la función al router, suma happy path y 404, regenera <code>openapi.yaml</code> y corre pytest (que pide permiso).'
     },
     {
-      title: 'Paso 3 — La misma tarea sin la skill',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/tmp-sin-skill</code> (sesión limpia, sin <code>.claude/skills/</code>)</li><li><strong>Terminal:</strong> <code>claude</code></li><li><strong>En Claude:</strong> "agregá un endpoint POST /comments"</li><li><strong>Mirar:</strong> flow inventado — puede agregar el endpoint, puede olvidar tests, puede olvidar regenerar openapi</li></ul>',
-      example: 'Sin la skill, Claude inventa un flow propio. Puede agregar el endpoint, puede no agregar los tests, puede olvidar regenerar openapi.yaml. El resultado puede ser correcto o puede no serlo. No es que el modelo sea peor — es que sin el procedimiento empaquetado, no hay garantía de que las seis fases ocurran. La skill no agrega capacidad nueva: agrega garantía sobre un procedimiento que el modelo ya podía improvisar.\n\nPLAN B (si la activación por relevancia no responde al pedido en prosa del paso 2): usar el slash command directo /add-endpoint. Eso fuerza la entrada de la skill al contexto sin depender del match por descripción. El argumento se sostiene: invocada explícitamente, el procedimiento es exactamente el mismo.'
+      title: 'Paso 3 · Sin la skill',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cp -r ~/demo-repo ~/demo-repo-sin-skill &amp;&amp; cd ~/demo-repo-sin-skill</code></li><li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> el mismo pedido</li><li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li></ul>',
+      example: 'Sin la skill, Claude resuelve con CLAUDE.md y las rules, que cubren parte del procedimiento. Algunas fases pueden aparecer igual; otras (confirmar el path, correr pytest, mostrar el diff) quedan libradas a cada corrida.'
     }
   ]});
 </script>

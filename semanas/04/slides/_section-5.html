@@ -1,16 +1,22 @@
 <style>
-/* Scoped styles for §5 — harness engineering */
+/* Scoped styles for §5 — harness engineering.
+   Selectors on <p> are prefixed with .reveal: the theme's `.reveal p`
+   (margin + color) otherwise wins over a single-class selector. */
 
 /* §5.1 opener — horse metaphor */
-.s5-opener-etym {
-  max-width: 800px;
-  margin: 16px auto 0;
+.reveal .s5-opener-etym {
+  display: block;
+  max-width: 820px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
   font-size: 0.78em;
   color: var(--text-primary);
-  text-align: center;
+  text-align: center !important;
   line-height: 1.6;
 }
-.s5-opener-etym em {
+.reveal .s5-opener-etym em {
   color: var(--accent);
   font-style: normal;
   font-weight: 700;
@@ -36,7 +42,7 @@
   border-radius: 10px;
   border: 1px solid #2a3a5a;
 }
-.s5-horse-caption-bad {
+.reveal .s5-horse-caption-bad {
   font-size: 0.86em;
   color: #e74c3c;
   font-style: italic;
@@ -46,7 +52,7 @@
 }
 .s5-horse-caption-bad::before { content: '"'; }
 .s5-horse-caption-bad::after { content: '"'; }
-.s5-horse-caption-good {
+.reveal .s5-horse-caption-good {
   font-size: 1em;
   color: var(--accent);
   font-weight: 700;
@@ -56,10 +62,14 @@
 }
 
 /* §5.2 — six dimensions grid */
-.s5-dim-intro {
-  text-align: center;
-  margin: 14px auto 0;
-  max-width: 760px;
+.reveal .s5-dim-intro {
+  display: block;
+  text-align: center !important;
+  margin-top: 14px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 1080px;
   font-size: 0.74em;
   color: var(--text-muted);
   font-style: italic;
@@ -80,16 +90,14 @@
   display: flex;
   flex-direction: column;
 }
-.s5-dim-title {
+.reveal .s5-dim-title {
   font-family: var(--font-mono);
-  font-size: 0.74em;
+  font-size: 0.75em;
   font-weight: 700;
   color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   margin: 0 0 8px;
 }
-.s5-dim-body {
+.reveal .s5-dim-body {
   font-size: 0.66em;
   color: var(--text-primary);
   line-height: 1.55;
@@ -136,62 +144,10 @@
   color: var(--text-muted);
   font-style: italic;
 }
+.reveal .s5-frontier-p { margin: 0; }
+.reveal .s5-frontier-p + .s5-frontier-p { margin-top: 10px; }
 
-/* §5.4 — harness en Claude Code */
-.s5-cc-intro {
-  text-align: center;
-  margin: 14px auto 0;
-  max-width: 800px;
-  font-size: 0.74em;
-  color: var(--text-muted);
-  font-style: italic;
-}
-.s5-cc-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 1080px;
-  margin: 16px auto 0;
-}
-.s5-cc-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--accent-secondary);
-  border-radius: 8px;
-  padding: 14px 16px 16px;
-  display: flex;
-  flex-direction: column;
-}
-.s5-cc-feature {
-  font-family: var(--font-mono);
-  font-size: 0.76em;
-  font-weight: 700;
-  color: var(--accent-secondary);
-  margin: 0 0 6px;
-}
-.s5-cc-feature code {
-  color: var(--accent-secondary);
-  background: var(--bg-code);
-  padding: 1px 6px;
-  border-radius: 3px;
-}
-.s5-cc-maps-to {
-  font-size: 0.62em;
-  color: var(--text-primary);
-  line-height: 1.55;
-  margin: 0;
-}
-.s5-cc-bridge {
-  text-align: center;
-  margin: 18px auto 0;
-  font-size: 0.76em;
-  color: var(--accent);
-  font-style: italic;
-  font-weight: 700;
-  max-width: 800px;
-}
-
-/* §5.5 — tres ingenierías recap */
+/* §5.4 — tres ingenierías recap */
 .s5-eng-recap {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -208,16 +164,16 @@
 .s5-eng-recap-card.prompt { border-left: 3px solid var(--text-muted); }
 .s5-eng-recap-card.context { border-left: 3px solid var(--accent-secondary); }
 .s5-eng-recap-card.harness { border-left: 3px solid var(--accent); }
-.s5-eng-recap-title {
+.reveal .s5-eng-recap-title {
   font-family: var(--font-mono);
-  font-size: 0.74em;
+  font-size: 0.75em;
   font-weight: 700;
   margin: 0 0 6px;
 }
-.s5-eng-recap-card.prompt .s5-eng-recap-title { color: var(--text-muted); }
-.s5-eng-recap-card.context .s5-eng-recap-title { color: var(--accent-secondary); }
-.s5-eng-recap-card.harness .s5-eng-recap-title { color: var(--accent); }
-.s5-eng-recap-scope {
+.reveal .s5-eng-recap-card.prompt .s5-eng-recap-title { color: var(--text-muted); }
+.reveal .s5-eng-recap-card.context .s5-eng-recap-title { color: var(--accent-secondary); }
+.reveal .s5-eng-recap-card.harness .s5-eng-recap-title { color: var(--accent); }
+.reveal .s5-eng-recap-scope {
   font-family: var(--font-mono);
   font-size: 0.54em;
   color: var(--text-muted);
@@ -225,7 +181,7 @@
   letter-spacing: 0.08em;
   margin: 0 0 10px;
 }
-.s5-eng-recap-body {
+.reveal .s5-eng-recap-body {
   font-size: 0.62em;
   color: var(--text-primary);
   line-height: 1.55;
@@ -240,18 +196,18 @@
   padding: 22px 30px;
   text-align: center;
 }
-.s5-eng-recap-bridge-main {
+.reveal .s5-eng-recap-bridge-main {
   font-size: 0.9em;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.5;
   margin: 0 0 10px;
 }
-.s5-eng-recap-bridge-main em {
+.reveal .s5-eng-recap-bridge-main em {
   color: var(--accent);
   font-style: normal;
 }
-.s5-eng-recap-bridge-sub {
+.reveal .s5-eng-recap-bridge-sub {
   font-size: 0.7em;
   color: var(--text-muted);
   line-height: 1.6;
@@ -282,8 +238,8 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Entry: solo título y etimología. Click 1: aparece el caballo descontrolado con "no cometas errores". Click 2: aparece el caballo con arnés y la palabra "Harness Engineering".</strong></p>
-    <p><u>Opener de §5 con la metáfora del caballo en tres tiempos. Entry: la etimología. Primer tiempo: el caballo sin arnés y el prompt ingenuo "no cometas errores" — la estrategia que no funciona. Segundo tiempo: el caballo con arnés tirando de la carreta y el nombre de la disciplina. El contraste es entre "pedirle al modelo que se comporte" y "diseñarle el arnés para que tire en la dirección que querés".</u></p>
+    <p><strong>Entry: etimología. Click 1: caballo sin arnés. Click 2: caballo con arnés.</strong></p>
+    <p><u>Pedirle al modelo que se comporte vs. diseñarle el arnés.</u></p>
     <p><em>"Harness — la palabra en inglés tiene varios significados, pero uno es muy concreto. El arnés es lo que se le pone al caballo para que pueda tirar de una carreta en la dirección que querés."</em></p>
     <p><em>"Imagínense a este caballo. Potente. Libre. Y supongamos que la estrategia es pedirle que se comporte. Decirle 'no cometas errores'. Eso no funciona — ni con un caballo, ni con un modelo."</em></p>
     <p><em>"Lo que funciona es esto. La misma potencia, canalizada por un arnés. Tira de tu carreta hacia donde vos querés. Esa es la disciplina: harness engineering. No es pedirle al modelo que sea mejor — es diseñar el arnés que canaliza lo que ya hace."</em></p>
@@ -324,13 +280,13 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Entry: solo el título y la línea "decidir seis cosas". Cada click revela una tarjeta. Recorrerlas de a una con el comentario abajo.</strong></p>
-    <p><u>Slide central de §5 — la definición operativa del harness. Seis dimensiones que un diseñador del harness decide en conjunto. No son independientes: las decisiones se cruzan. La tarjeta de "cargás contexto" admite la frontera con context engineering — eso es honesto y prepara el slide siguiente.</u></p>
+    <p><strong>Cada click revela una card. Recorrerlas de a una.</strong></p>
+    <p><u>Definición operativa del harness: seis decisiones que se cruzan.</u></p>
     <p><em>"Diseñar un harness es decidir seis cosas. Las vamos viendo de a una."</em></p>
     <p><em>"Una: cómo estructurás el prompt del sistema. Las instrucciones fijas — la voz del modelo, las prioridades del diseñador, las convenciones del proyecto. Lo que persiste entre turnos sin cambiar."</em></p>
     <p><em>"Dos: qué tools exponés. Las acciones que el agente puede tomar — y, deliberadamente, las que no. Ese borde define qué clase de agente es."</em></p>
     <p><em>"Tres: qué contexto cargás. La información variable que entra cada turno — archivos leídos, resultados de búsquedas, salidas de comandos. Acá la frontera con context engineering se difumina; sobre eso hablamos en el slide siguiente."</em></p>
-    <p><em>"Cuatro: cómo armás los feedback loops. Esto es el cable de retorno — qué se hace después de cada acción del agente y qué resultado se le devuelve al modelo en el siguiente turno. El plumbing del loop."</em></p>
+    <p><em>"Cuatro: cómo armás los feedback loops. Es el cable de retorno — qué se hace después de cada acción del agente y qué resultado se le devuelve al modelo en el siguiente turno."</em></p>
     <p><em>"Cinco: cómo verificás los outputs. Esto es distinto del cable: es la vara. ¿Pasó el test? ¿Cumple el schema? ¿Compila contra el contrato? El criterio externo contra el que se mide lo que el modelo dice que hizo."</em></p>
     <p><em>"Seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención. Cómo el problema grande se rompe en piezas."</em></p>
   </aside>
@@ -342,18 +298,18 @@
 
   <div class="s5-frontier-wrap">
     <div class="s5-frontier-honesty">
-      <p style="margin:0;">
+      <p class="s5-frontier-p">
         Los límites son <em>difusos</em>. "Qué contexto cargás" es parte del harness <em>y</em> es lo que define context engineering. Hay solapamiento.
       </p>
     </div>
 
     <div class="s5-frontier-narrow">
-      <p style="margin:0 0 10px;">
+      <p class="s5-frontier-p">
         Algunos usan <strong>"harness"</strong> específicamente para <strong>todo lo que rodea al modelo en runtime</strong>:
         el system prompt, las definiciones de las tools, la lógica de reintentos,
         la orquestación de sub-agentes, los pasos de verificación.
       </p>
-      <p style="margin:0;">
+      <p class="s5-frontier-p">
         Eso, en esa lectura, es distinto del <em>modelo en sí</em> y de un <em>prompt suelto</em>.
         Es la capa de runtime que envuelve a los dos.
       </p>
@@ -361,59 +317,13 @@
   </div>
 
   <aside class="notes">
-    <p><strong>Leer las dos tarjetas en orden. La primera es la honestidad sobre el solape. La segunda da la lectura específica del harness como capa de runtime.</strong></p>
-    <p><u>Slide de honestidad disciplinaria. Reconoce que la división entre context y harness engineering no es limpia. La lectura más útil para Claude Code: harness = la capa de runtime que rodea al modelo, distinta del modelo y de prompts sueltos.</u></p>
-    <p><em>"Una aclaración honesta antes de seguir: los límites entre context engineering y harness engineering son difusos. Qué contexto cargás es parte del harness, pero también es lo que define context engineering. Y hay un tercer término que algunos usan, 'agent engineering', que se pisa con los dos."</em></p>
-    <p><em>"La lectura que nos sirve para Claude Code es ésta: algunos usan harness específicamente para todo lo que rodea al modelo en runtime — el system prompt, las definiciones de tools, la lógica de reintentos, la orquestación de sub-agentes, los pasos de verificación. Visto así, el harness es la capa de runtime que envuelve al modelo y a los prompts sueltos. No es el modelo, no es un prompt — es lo que los hace operativos como agente."</em></p>
-    <p><em>"En la parte 2 vamos a usar esa lectura. Cada feature de Claude Code que veamos va a ser una pieza de esa capa."</em></p>
+    <p><strong>Primera card: el solape. Segunda: la lectura de harness como capa de runtime.</strong></p>
+    <p><u>Honestidad disciplinaria: la división context / harness no es limpia.</u></p>
+    <p><em>"Una aclaración honesta antes de seguir: los límites entre context engineering y harness engineering son difusos. Qué contexto cargás es parte del harness, pero también es lo que define context engineering. Y hay un tercer término que algunos usan, 'agent engineering', que se pisa con los dos. La lectura que nos sirve es esta: algunos usan harness específicamente para todo lo que rodea al modelo en runtime — el system prompt, las definiciones de tools, la lógica de reintentos, la orquestación de sub-agentes, los pasos de verificación. Visto así, el harness es la capa de runtime que envuelve al modelo y a los prompts sueltos. No es el modelo, no es un prompt — es lo que los hace operativos como agente. Y si les suena, es porque es el programa externo del principio de la clase, visto ahora como algo que se diseña."</em></p>
   </aside>
 </section>
 
-<!-- §5.4 · Harness en Claude Code -->
-<section>
-  <h2>Harness en Claude Code</h2>
-
-  <p class="s5-cc-intro">Cada dimensión del harness aparece en Claude Code como una feature concreta:</p>
-
-  <div class="s5-cc-grid">
-    <div class="s5-cc-card">
-      <p class="s5-cc-feature"><code>CLAUDE.md</code></p>
-      <p class="s5-cc-maps-to">System prompt + contexto que se carga al arrancar cada sesión.</p>
-    </div>
-    <div class="s5-cc-card">
-      <p class="s5-cc-feature">Slash commands custom</p>
-      <p class="s5-cc-maps-to">Prompts reutilizables y atajos a workflows definidos por vos.</p>
-    </div>
-    <div class="s5-cc-card">
-      <p class="s5-cc-feature">Servidores MCP</p>
-      <p class="s5-cc-maps-to">Qué tools exponés al agente — y qué tools deliberadamente dejás afuera.</p>
-    </div>
-    <div class="s5-cc-card">
-      <p class="s5-cc-feature">Sub-agent workflows</p>
-      <p class="s5-cc-maps-to">Descomposición de tareas en contextos aislados con sus propias herramientas.</p>
-    </div>
-    <div class="s5-cc-card">
-      <p class="s5-cc-feature">Hooks</p>
-      <p class="s5-cc-maps-to">Scripts que corren antes o después de cada tool call — verificación + feedback automáticos.</p>
-    </div>
-    <div class="s5-cc-card">
-      <p class="s5-cc-feature">Eval loops</p>
-      <p class="s5-cc-maps-to">¿Los cambios que hacés al harness realmente sirven? Medir, no suponer.</p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Recorrer las seis tarjetas. Cada una es una pieza del harness en Claude Code.</strong></p>
-    <p><u>Slide de bridge a Parte 2. Mapea las seis dimensiones del harness a las features concretas de Claude Code. No es lista exhaustiva — son los puntos de palanca principales que la parte 2 va a abrir.</u></p>
-    <p><em>"En Claude Code, cada dimensión del harness aparece como una feature concreta. Repaso rápido."</em></p>
-    <p><em>"CLAUDE.md: el system prompt y el contexto que se carga al inicio de cada sesión. Es donde estructurás cómo Claude se presenta al problema. Slash commands custom: prompts reutilizables, atajos a workflows que vos definís — la dimensión de 'estructurás el prompt' llevada a comandos."</em></p>
-    <p><em>"Servidores MCP: qué tools tiene el agente a disposición. Conectás un MCP de base de datos, ahora puede consultar tu DB. No conectás un MCP de email, no puede mandar mails — y eso es deliberado. Sub-agent workflows: descomposición de tareas. Un agente que delega búsquedas a sub-agentes con contextos aislados."</em></p>
-    <p><em>"Hooks: scripts que corren antes o después de cada tool call. Acá vive la verificación automática y los feedback loops — linter después de un edit, tests después de un cambio, lo que sea. Eval loops: lo más sofisticado. Medir si los cambios que hacés al harness realmente sirven, en lugar de suponerlo."</em></p>
-    <p><em>"La parte 2 abre cada uno de estos en detalle. La pregunta de fondo, slide por slide, va a ser la misma: ¿en qué nivel del harness actúa esta feature?"</em></p>
-  </aside>
-</section>
-
-<!-- §5.5 · Cierre Parte 1 — recap tres ingenierías + bridge a Parte 2 -->
+<!-- §5.4 · Cierre Parte 1 — recap tres ingenierías -->
 <section>
   <h2>Tres niveles para dirigir un agente</h2>
 
@@ -422,7 +332,7 @@
       <p class="s5-eng-recap-title">Prompt engineering</p>
       <p class="s5-eng-recap-scope">una interacción</p>
       <p class="s5-eng-recap-body">
-        Diseñar el mejor input al modelo. Lo que vienen practicando desde antes.
+        El input bien diseñado: instrucciones, restricciones, ejemplos.
       </p>
     </div>
     <div class="s5-eng-recap-card context">
@@ -436,26 +346,25 @@
       <p class="s5-eng-recap-title">Harness engineering</p>
       <p class="s5-eng-recap-scope">múltiples sesiones</p>
       <p class="s5-eng-recap-body">
-        La capa de runtime: prompt, tools, contexto, feedback, verificación, descomposición.
+        La capa de runtime que persiste entre sesiones: prompt, tools, contexto, feedback, verificación, descomposición.
       </p>
     </div>
   </div>
 
   <div class="s5-eng-recap-bridge fragment fade-in">
     <p class="s5-eng-recap-bridge-main">
-      Cada feature de Claude Code que viene <em>llena</em> uno de estos tres niveles.
+      El programa externo que envuelve al modelo <em>se diseña</em>.
     </p>
     <p class="s5-eng-recap-bridge-sub">
-      Cuando veas una feature nueva, la pregunta ya no es "¿qué hace?" — es "¿en qué nivel actúa?"
+      Lo que persiste de una sesión a otra vive en archivos que podés leer y cambiar.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Recorrer las tres tarjetas izquierda a derecha. Pausa. Click revela el bridge a la Parte 2.</strong></p>
-    <p><u>Cierre de Parte 1. Las tres ingenierías quedaron definidas en §3.3 y desarrolladas en §4 y §5. El recap visual cierra el marco conceptual; el bridge prepara la Parte 2: Claude Code va a ser un caso concreto que llena cada nivel con features específicas.</u></p>
-    <p><em>"Cerramos la Parte 1 con las tres ingenierías. Prompt: una interacción. Context: una sesión. Harness: la capa de runtime que vimos en este §5 — prompt, tools, contexto, feedback, verificación, descomposición."</em></p>
-    <p><em>"Lo que viene a continuación — la Parte 2 — es Claude Code. Y la propuesta es ésta: cada feature que vas a ver, sin excepción, llena uno de estos tres niveles. CLAUDE.md, las rules, las skills, los sub-agents, plan mode, los permisos, los hooks. Cada uno actúa en prompt, context o harness."</em></p>
-    <p><em>"Por eso la pregunta ya no es '¿qué hace esa feature?'. Es '¿en qué nivel actúa?'. Si sabés eso, sabés qué problema te resuelve y cuándo usarla. Ese es el lente que recorre toda la Parte 2."</em></p>
+    <p><strong>Las tres cards. Click: el bridge.</strong></p>
+    <p><u>Cierre de Parte 1: tres niveles anidados; el harness es lo que persiste.</u></p>
+    <p><em>"Cerramos la Parte 1 con las tres ingenierías. Prompt: una interacción. Context: una sesión — qué entra, qué se mantiene, qué se suelta. Harness: la capa de runtime que persiste entre sesiones — prompt, tools, contexto, feedback, verificación, descomposición. Por eso su alcance son múltiples sesiones: la ventana de una sesión se va, el harness queda."</em></p>
+    <p><em>"Y fíjense que el harness no es algo nuevo en la clase: es el programa externo que dibujamos al principio, la caja punteada alrededor del LLM. La diferencia es que ahora lo vemos como algo que se diseña. Lo que persiste de una sesión a otra vive en archivos concretos, que podés abrir, leer y cambiar. En la Parte 2 vamos a abrir esos archivos uno por uno."</em></p>
   </aside>
 </section>
 

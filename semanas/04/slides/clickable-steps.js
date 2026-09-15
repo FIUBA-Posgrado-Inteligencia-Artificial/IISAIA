@@ -27,6 +27,30 @@ function initClickableSteps(opts) {
   var steps = opts.steps || [];
   var activeIdx = -1;
 
+  // The detail panel opens below the steps row. If that would cross the
+  // bottom edge of the slide, open it above the row instead, or cap its
+  // height to whichever side has more room.
+  function fitDetailPanel() {
+    var panel = container.querySelector('.cs-detail');
+    // Measure against the reveal canvas, not the <section>: with centered
+    // slides the section is only as tall as its content.
+    var slide = container.closest('.slides') || container.closest('section');
+    if (!panel || !slide) return;
+    var scale = (window.Reveal && Reveal.getScale) ? Reveal.getScale() : 1;
+    var row = panel.parentNode.getBoundingClientRect();
+    var slideRect = slide.getBoundingClientRect();
+    var margin = 8 * scale;
+    var below = slideRect.bottom - row.bottom - margin;
+    var above = row.top - slideRect.top - margin;
+    var needed = panel.getBoundingClientRect().height;
+    if (needed <= below) return;
+    if (above > below) {
+      panel.style.top = 'auto';
+      panel.style.bottom = 'calc(100% + 6px)';
+    }
+    panel.style.maxHeight = Math.max(below, above) / scale + 'px';
+  }
+
   function render() {
     // Wrapper provides positioning context for the absolute-positioned
     // detail panel — that way clicking a step does NOT push the slide's
@@ -75,7 +99,7 @@ function initClickableSteps(opts) {
     if (activeIdx >= 0 && steps[activeIdx].example) {
       var s = steps[activeIdx];
       var detailColor = s.color || 'var(--accent)';
-      html += '<div style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 100; '
+      html += '<div class="cs-detail" style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 100; '
         + 'background: var(--bg-code); border-radius: 6px; padding: 8px 12px; '
         + 'font-size: 0.53em; line-height: 1.45; '
         + 'border-left: 3px solid ' + detailColor + '; '
@@ -89,6 +113,7 @@ function initClickableSteps(opts) {
     html += '</div>'; // end position-relative wrapper
 
     container.innerHTML = html;
+    fitDetailPanel();
 
     // Bind click + keyboard handlers
     var boxes = container.querySelectorAll('.cs-step');

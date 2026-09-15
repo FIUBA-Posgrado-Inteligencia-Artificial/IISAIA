@@ -11,15 +11,21 @@
   text-transform: none;
   letter-spacing: 0;
 }
+.reveal .slides .s12-slide h2 code,
+.reveal .slides .s12-slide h2 .s12-h2-code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.95em;
+}
 
-/* --- Five-questions card (full + mini) — calibrated identically to §11 --- */
+/* --- Five-questions card (full + mini) --- */
 .reveal .slides .s12-slide h2.s12-five-q-title {
   font-size: 1.05em;
   text-align: center;
   margin: 0 0 16px;
   line-height: 1.2;
 }
-.s12-five-q-grid {
+.reveal .s12-five-q-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 7px;
@@ -28,7 +34,7 @@
   margin: 0 auto;
   max-width: 900px;
 }
-.s12-five-q-card {
+.reveal .s12-five-q-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 6px;
@@ -40,42 +46,43 @@
   opacity: 0.45;
   transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
-.s12-five-q-card.is-active {
+.reveal .s12-five-q-card.is-active {
   opacity: 1;
   border-color: var(--accent);
   border-left: 3px solid var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(100, 255, 218, 0.08);
 }
-.s12-five-q-num {
+.reveal .s12-five-q-num {
   font-family: var(--font-mono);
   font-size: 0.5em;
   letter-spacing: 0.08em;
   color: var(--text-muted);
 }
-.s12-five-q-card.is-active .s12-five-q-num {
+.reveal .s12-five-q-card.is-active .s12-five-q-num {
   color: var(--accent);
 }
-.s12-five-q-label {
+.reveal .s12-five-q-label {
   font-size: 0.56em;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
 }
-.s12-five-q-hint {
-  font-size: 0.44em;
+.reveal .s12-five-q-hint {
+  font-size: 0.53em;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.35;
+  text-align: left;
 }
 /* Mini variant */
-.s12-five-q-grid.is-mini {
+.reveal .s12-five-q-grid.is-mini {
   grid-template-columns: repeat(5, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
   margin: 0 auto 8px;
 }
-.s12-five-q-grid.is-mini .s12-five-q-card {
+.reveal .s12-five-q-grid.is-mini .s12-five-q-card {
   padding: 3px 9px;
   border-radius: 999px;
   border-left-width: 1px;
@@ -83,40 +90,40 @@
   align-items: center;
   gap: 5px;
 }
-.s12-five-q-grid.is-mini .s12-five-q-card.is-active {
+.reveal .s12-five-q-grid.is-mini .s12-five-q-card.is-active {
   border-left: 1px solid var(--accent);
 }
-.s12-five-q-grid.is-mini .s12-five-q-num {
-  font-size: 0.42em;
+.reveal .s12-five-q-grid.is-mini .s12-five-q-num {
+  font-size: 0.43em;
 }
-.s12-five-q-grid.is-mini .s12-five-q-label {
+.reveal .s12-five-q-grid.is-mini .s12-five-q-label {
   font-size: 0.5em;
 }
 
 /* Qué es — bullets + callout */
-.s12-qe-list {
+.reveal .s12-qe-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
-  max-width: 720px;
+  max-width: 760px;
   margin: 16px auto 0;
   padding-left: 36px;
   font-size: 0.6em;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-muted);
 }
-.s12-qe-list li {
+.reveal .s12-qe-list li {
   padding-left: 6px;
   margin-bottom: 10px;
 }
-.s12-qe-list li::marker { color: var(--accent); }
-.s12-qe-list strong { color: var(--text-primary); font-weight: 700; }
-.s12-qe-list code {
+.reveal .s12-qe-list li::marker { color: var(--accent); }
+.reveal .s12-qe-list strong { color: var(--text-primary); font-weight: 700; }
+.reveal .s12-qe-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
-.s12-qe-list li.s12-qe-callout {
+.reveal .s12-qe-list li.s12-qe-callout {
   list-style: none;
   margin-left: -32px;
   margin-top: 10px;
@@ -128,8 +135,8 @@
   font-weight: 700;
 }
 
-/* Dónde viven — 3-row table (alcance) */
-.s12-where-wrap {
+/* Dónde vive — tabla de orígenes */
+.reveal .s12-where-wrap {
   max-width: 820px;
   margin: 12px auto 0;
   background: var(--bg-secondary);
@@ -137,153 +144,148 @@
   border-radius: 8px;
   overflow: hidden;
 }
-.s12-where-table {
+.reveal .s12-where-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.52em;
-  line-height: 1.5;
+  font-size: 0.55em;
+  line-height: 1.45;
   text-align: left;
 }
-.s12-where-table thead th {
+.reveal .s12-where-table thead th {
   background: var(--bg-code);
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.95em;
+  font-size: 0.8em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 8px 14px;
   border-bottom: 1px solid #2a3a5a;
 }
-.s12-where-table thead th.s12-where-pathhead { width: 56%; }
-.s12-where-table tbody td {
-  padding: 10px 14px;
+.reveal .s12-where-table thead th.s12-where-pathhead { width: 48%; }
+.reveal .s12-where-table tbody td {
+  padding: 9px 14px;
   vertical-align: middle;
   border-bottom: 1px solid #1e2a48;
   color: var(--text-muted);
 }
-.s12-where-table tbody tr:last-child td { border-bottom: none; }
-.s12-where-table tbody td code {
+.reveal .s12-where-table tbody tr:last-child td { border-bottom: none; }
+.reveal .s12-where-table tbody td code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.98em;
+  font-size: 0.95em;
 }
-.s12-where-table tbody td.s12-where-scope {
+.reveal .s12-where-table tbody td.s12-where-scope {
   color: var(--text-primary);
-  font-weight: 700;
 }
-.s12-where-note {
-  display: inline-block;
-  max-width: 760px;
-  margin: 10px 0 0;
-  font-size: 0.5em;
+.reveal .s12-where-note {
+  display: block;
+  max-width: 820px;
+  margin-top: 12px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-size: 0.53em;
   color: var(--text-muted);
   text-align: center;
   font-style: italic;
   line-height: 1.5;
 }
-.s12-where-note strong { color: var(--text-primary); font-style: normal; }
-.s12-where-note code {
+.reveal .s12-where-note code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-style: normal;
 }
 
-/* Cuándo se invocan — bullets */
-.s12-when-list {
+/* Cuándo se invoca — bullets */
+.reveal .s12-when-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
-  max-width: 740px;
+  max-width: 760px;
   margin: 14px auto 0;
   padding-left: 36px;
   font-size: 0.58em;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-muted);
 }
-.s12-when-list li {
+.reveal .s12-when-list li {
   padding-left: 4px;
   margin-bottom: 10px;
 }
-.s12-when-list li::marker { color: var(--accent); }
-.s12-when-list strong { color: var(--text-primary); }
-.s12-when-list code {
+.reveal .s12-when-list li::marker { color: var(--accent); }
+.reveal .s12-when-list strong { color: var(--text-primary); }
+.reveal .s12-when-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
 
-/* Cómo se usa — code-walkthrough frontmatter + bullets */
-.s12-code-block {
+/* Cómo se usa — frontmatter + campos */
+.reveal .s12-code-block {
   display: block;
+  font-weight: 400;
   max-width: 760px;
-  margin: 12px auto 0;
+  margin: 10px auto 0;
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 12px 18px;
+  padding: 10px 18px;
   font-family: var(--font-mono);
   font-size: 0.5em;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--text-muted);
   text-align: left;
-  overflow: hidden;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+  box-shadow: none;
 }
-.s12-code-block .s12-code-key { color: var(--accent-secondary); }
-.s12-code-block .s12-code-val { color: var(--text-primary); }
-.s12-code-block .s12-code-fence { color: var(--text-muted); opacity: 0.7; }
-.s12-code-block .s12-code-comment { color: var(--text-muted); font-style: italic; }
-.s12-fields-list {
+.reveal .s12-code-block .s12-code-key { color: var(--accent-secondary); }
+.reveal .s12-code-block .s12-code-val { color: var(--text-primary); }
+.reveal .s12-code-block .s12-code-fence { color: var(--text-muted); opacity: 0.7; }
+.reveal .s12-fields-list {
   list-style: disc;
-  display: inline-block;
+  display: block;
   text-align: left;
-  max-width: 720px;
-  margin: 12px auto 0;
+  max-width: 760px;
+  margin: 10px auto 0;
   padding-left: 36px;
-  font-size: 0.54em;
-  line-height: 1.55;
+  font-size: 0.55em;
+  line-height: 1.45;
   color: var(--text-muted);
+  box-sizing: border-box;
 }
-.s12-fields-list li {
+.reveal .s12-fields-list li {
   padding-left: 4px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
-.s12-fields-list li::marker { color: var(--accent); }
-.s12-fields-list strong { color: var(--text-primary); }
-.s12-fields-list code {
+.reveal .s12-fields-list li::marker { color: var(--accent); }
+.reveal .s12-fields-list strong { color: var(--text-primary); }
+.reveal .s12-fields-list code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.96em;
+  font-size: 0.95em;
 }
-.s12-fields-list li.s12-fields-key strong { color: var(--accent); }
+.reveal .s12-fields-list li.s12-fields-key strong { color: var(--accent); }
 
 /* Diagrama padre / sub-agent — static CSS */
-.s12-diagram-wrap {
+.reveal .s12-diagram-wrap {
   max-width: 720px;
-  margin: 18px auto 0;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 4px;
 }
-.s12-window {
+.reveal .s12-window {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  padding: 14px 18px;
-  position: relative;
+  padding: 12px 18px;
 }
-.s12-window-parent {
-  border-left: 3px solid var(--accent);
-  min-height: 110px;
-  padding-bottom: 18px;
-}
-.s12-window-sub {
-  border-left: 3px solid var(--accent-secondary);
-  min-height: 70px;
-  margin-top: 4px;
-}
-.s12-window-label {
+.reveal .s12-window-parent { border-left: 3px solid var(--accent); }
+.reveal .s12-window-sub { border-left: 3px solid var(--accent-secondary); }
+.reveal .s12-window-label {
   font-family: var(--font-mono);
   font-size: 0.5em;
   letter-spacing: 0.08em;
@@ -292,122 +294,139 @@
   margin: 0 0 8px;
   text-align: left;
 }
-.s12-window-parent .s12-window-label { color: var(--accent); }
-.s12-window-sub .s12-window-label { color: var(--accent-secondary); }
-.s12-window-content {
+.reveal .s12-window-parent .s12-window-label { color: var(--accent); }
+.reveal .s12-window-sub .s12-window-label { color: var(--accent-secondary); }
+.reveal .s12-window-content {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.s12-ctx-chip {
+.reveal .s12-ctx-chip {
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
   border-radius: 4px;
   padding: 3px 9px;
   font-family: var(--font-mono);
-  font-size: 0.42em;
+  font-size: 0.45em;
   color: var(--text-muted);
   letter-spacing: 0.03em;
 }
-.s12-ctx-chip.is-result {
+.reveal .s12-ctx-chip.is-result {
   border-color: var(--accent);
   color: var(--accent);
   font-weight: 700;
 }
-.s12-ctx-chip.is-discard {
+.reveal .s12-ctx-chip.is-discard {
   border-color: #ff7676;
   color: #ff7676;
   text-decoration: line-through;
   opacity: 0.7;
 }
-.s12-arrow {
+.reveal .s12-arrows {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.46em;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-  line-height: 1.3;
+  gap: 56px;
   padding: 4px 0;
 }
-.s12-arrow .s12-arrow-glyph {
-  font-size: 1.6em;
-  color: var(--accent);
+.reveal .s12-arrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.53em;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+.reveal .s12-arrow-glyph {
+  font-size: 1.5em;
+  color: var(--accent-secondary);
   font-weight: 700;
 }
-.s12-arrow.is-return .s12-arrow-glyph {
-  color: var(--accent);
-  transform: rotate(180deg);
-}
-.s12-arrow-label { font-style: italic; }
-.s12-diagram-note {
-  display: inline-block;
+.reveal .s12-arrow.is-return .s12-arrow-glyph { color: var(--accent); }
+.reveal .s12-arrow.is-return .s12-arrow-label { color: var(--accent); font-weight: 700; }
+.reveal .s12-arrow-label { font-style: italic; }
+.reveal .s12-diagram-note {
+  display: block;
   max-width: 720px;
-  margin: 12px auto 0;
-  font-size: 0.52em;
+  margin-top: 12px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-size: 0.53em;
   color: var(--text-muted);
   font-style: italic;
-  line-height: 1.55;
+  line-height: 1.5;
   text-align: center;
 }
-.s12-diagram-note strong { color: var(--text-primary); font-style: normal; }
-.s12-diagram-note code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-style: normal;
-}
+.reveal .s12-diagram-note strong { color: var(--text-primary); font-style: normal; }
 
 /* Qué confunde — 4 bullets */
-.s12-gotchas-list {
+.reveal .s12-gotchas-list {
   list-style: disc;
   display: inline-block;
   text-align: left;
   max-width: 780px;
   margin: 14px auto 0;
   padding-left: 36px;
-  font-size: 0.56em;
-  line-height: 1.6;
+  font-size: 0.57em;
+  line-height: 1.5;
   color: var(--text-muted);
 }
-.s12-gotchas-list li {
+.reveal .s12-gotchas-list li {
   padding-left: 4px;
   margin-bottom: 10px;
 }
-.s12-gotchas-list li::marker { color: var(--accent); }
-.s12-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.s12-gotchas-list code {
+.reveal .s12-gotchas-list li::marker { color: var(--accent); }
+.reveal .s12-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
+.reveal .s12-gotchas-list code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
 }
 
-/* Demo wrap */
-.s12-demo-wrap {
+/* Demo */
+.reveal .s12-demo-sub {
   max-width: 760px;
+  margin-top: 14px;
+  margin-bottom: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-size: 0.72em;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+}
+.reveal .s12-demo-sub code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-style: normal;
+}
+.reveal .s12-demo-wrap {
+  max-width: 1040px;
   margin: 16px auto 0;
 }
+.reveal .s12-demo-wrap .cs-step { min-width: 0; }
+.reveal .s12-demo-wrap code { overflow-wrap: anywhere; }
 
 /* Cierre */
-.s12-close-card {
+.reveal .s12-close-card {
   max-width: 740px;
   margin: 18px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
+  border-top: 3px solid var(--accent);
   border-radius: 8px;
   padding: 16px 24px;
   text-align: center;
 }
-.s12-close-main {
+.reveal .s12-close-main {
   font-size: 0.64em;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--text-primary);
   margin: 0 0 12px;
 }
-.s12-close-main strong { color: var(--accent); }
-.s12-close-bridge {
+.reveal .s12-close-main strong { color: var(--accent); }
+.reveal .s12-close-bridge {
   font-size: 0.56em;
   color: var(--text-muted);
   line-height: 1.6;
@@ -415,15 +434,10 @@
   padding-top: 11px;
   margin: 0;
 }
-.s12-close-bridge em {
+.reveal .s12-close-bridge em {
   color: var(--accent);
   font-style: normal;
   font-weight: 700;
-}
-.s12-close-bridge code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
 }
 </style>
 
@@ -444,7 +458,7 @@
     </li>
     <li class="s12-five-q-card">
       <span class="s12-five-q-num">3</span>
-      <span class="s12-five-q-label">Cuándo se carga</span>
+      <span class="s12-five-q-label">Cuándo se invoca</span>
       <span class="s12-five-q-hint">momento + trigger</span>
     </li>
     <li class="s12-five-q-card">
@@ -460,10 +474,9 @@
   </ol>
 
   <aside class="notes">
-    <p><strong>Sexta vuelta con el mismo dispositivo. Ritmo muy rápido — no leer las cinco preguntas. El título de arriba alcanza para encuadrar.</strong></p>
-    <p><u>Apertura de §12. Skills empaquetaron un procedimiento; sub-agents empaquetan algo más grande — un loop entero con su propia ventana. Misma plantilla, objeto más grande.</u></p>
-    <p><em>"Sub-agents. Sexta vuelta con la misma plantilla."</em></p>
-    <p><em>"Las skills aíslan un procedimiento. Los sub-agents van un paso más: aíslan un loop entero, con su propia ventana de contexto. Mismas cinco preguntas para entenderlos."</em></p>
+    <p><strong>Ritmo muy rápido: no leer las cinco preguntas.</strong></p>
+    <p><u>Apertura de §12. La tercera pregunta pasa a "Cuándo se invoca": los sub-agents no se cargan al arranque.</u></p>
+    <p><em>"Sub-agents. Sexta vuelta con la misma plantilla. La skill difería la carga de un procedimiento dentro de tu ventana. El sub-agent va un paso más: corre un loop entero en otra ventana. Una sola adaptación en la plantilla: la tercera pregunta es cuándo se invoca, porque un sub-agent no se carga, se lanza."</em></p>
   </aside>
 </section>
 
@@ -472,7 +485,7 @@
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se carga</span></li>
+    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
@@ -480,76 +493,72 @@
   <h2>Una instancia separada del mismo loop, con su propia ventana</h2>
 
   <ul class="s12-qe-list">
-    <li>Instancia separada del <strong>mismo loop</strong>: mismo modelo, mismas tools disponibles, su propia <strong>ventana de contexto</strong>.</li>
-    <li>Al padre solo le vuelve el <strong>resultado</strong> — no el razonamiento, no los archivos leídos, no los pasos intermedios.</li>
-    <li>La ventana del sub-agent <strong>nace y muere con la tarea</strong>: todo lo que leyó y razonó desaparece al terminar.</li>
-    <li class="s12-qe-callout">→ No es "otra IA". Es la misma lógica — <code>LLM + loop + tools + entorno</code> — instanciada aparte.</li>
+    <li>Instancia separada del <strong>mismo loop</strong>: por default, el modelo del padre y sus tools (o una lista restringida), con su propia <strong>ventana de contexto</strong>.</li>
+    <li>Al padre solo le vuelve el <strong>resultado</strong>: no el razonamiento, ni los archivos leídos, ni los pasos intermedios.</li>
+    <li>La ventana del sub-agent <strong>se abre con la tarea y se cierra al terminar</strong>. Su transcript queda en disco, pero el padre no lo ve.</li>
+    <li class="s12-qe-callout">→ No es "otra IA". Es la misma lógica, <code>LLM + loop + tools + entorno</code>, instanciada aparte.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Tres bullets con pausa entre cada uno. El segundo es el que define el aislamiento — marcarlo. Pausa antes del callout. El callout desarma el malentendido principal: no es "otro asistente".</strong></p>
-    <p><u>Slide de definición. Mini-strip con "Qué es" lit. Tres bullets + callout, mismo patrón que §11.2. El objetivo es fijar que el sub-agent no es un objeto nuevo conceptualmente — es la misma máquina de §2 (LLM + loop + tools + entorno), corriendo en paralelo con ventana propia.</u></p>
-    <p><em>"Primera pregunta. Qué es. Y la respuesta arranca con una palabra clave: instancia."</em></p>
-    <p><em>"Un sub-agent es una instancia separada del mismo loop. Mismo modelo, mismas tools disponibles — todo lo que el padre podía hacer, el sub-agent en principio también. Lo único nuevo es la ventana de contexto: tiene la suya propia, independiente de la del padre."</em></p>
-    <p><em>"Al padre solo le vuelve el resultado. No el razonamiento, no los archivos que leyó, no los pasos intermedios. El sub-agent puede leer cincuenta archivos, generar mil tokens de razonamiento interno — al padre le llega un párrafo. Eso es lo que define el aislamiento."</em></p>
-    <p><em>"Y la ventana del sub-agent nace y muere con la tarea. Cuando termina, todo lo que leyó, todo lo que razonó, desaparece. No queda almacenado en ningún lado. Es exploración descartable."</em></p>
-    <p><em>"Y el callout, que desarma el malentendido más común: esto no es 'otra IA'. No es un asistente diferente con otra personalidad. Es la misma lógica de siempre — LLM más loop más tools más entorno, las cuatro piezas del §2 — instanciada aparte. La diferencia es de aislamiento, no de naturaleza."</em></p>
+    <p><strong>El segundo bullet define el aislamiento.</strong></p>
+    <p><u>Misma máquina de §2, con ventana propia.</u></p>
+    <p><em>"Primera pregunta: qué es. Un sub-agent es una instancia separada del mismo loop. Por default usa el mismo modelo que el padre y hereda sus tools, salvo que le declares una lista más chica. Lo nuevo es la ventana: tiene la suya, independiente. Al padre solo le vuelve el resultado. El sub-agent puede leer cincuenta archivos y razonar un buen rato; al padre le llega un párrafo. Esa ventana se abre con la tarea y se cierra cuando termina. El transcript queda guardado en disco, así que podés ir a mirarlo, pero el padre no lo tiene en su contexto. Y el malentendido más común: no es otra IA con otra personalidad. Es LLM más loop más tools más entorno, las cuatro piezas del §2, instanciadas aparte. La diferencia es de aislamiento, no de naturaleza."</em></p>
   </aside>
 </section>
 
-<!-- §12.3 · Dónde viven — tabla de 3 filas -->
+<!-- §12.3 · Dónde vive — tabla de orígenes -->
 <section class="s12-slide">
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se carga</span></li>
+    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Markdown con frontmatter — tres orígenes posibles</h2>
+  <h2>Archivos markdown, plugins o built-in</h2>
 
   <div class="s12-where-wrap">
     <table class="s12-where-table">
       <thead>
         <tr>
-          <th class="s12-where-pathhead">Path</th>
+          <th class="s12-where-pathhead">Origen</th>
           <th>Alcance</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><code>.claude/agents/&lt;nombre&gt;.md</code></td>
-          <td class="s12-where-scope">Solo el proyecto — se commitea con el repo</td>
+          <td class="s12-where-scope">Proyecto: se commitea con el repo</td>
         </tr>
         <tr>
           <td><code>~/.claude/agents/&lt;nombre&gt;.md</code></td>
-          <td class="s12-where-scope">Todos los proyectos del usuario</td>
+          <td class="s12-where-scope">Usuario: todos tus proyectos</td>
         </tr>
         <tr>
           <td>Plugins instalados</td>
-          <td class="s12-where-scope">Built-in del runtime — <code>Explore</code>, <code>Plan</code>, etc.</td>
+          <td class="s12-where-scope">Los sub-agents que traiga cada plugin</td>
+        </tr>
+        <tr>
+          <td>Built-in</td>
+          <td class="s12-where-scope"><code>Explore</code>, <code>Plan</code>, <code>general-purpose</code>: vienen con Claude Code</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <p class="s12-where-note">
-    El demo-repo tiene <code>researcher</code> en <code>.claude/agents/researcher.md</code> — alcance de proyecto, visible solo dentro del repo.
+    El demo-repo trae <code>researcher</code> en <code>.claude/agents/researcher.md</code>, con alcance de proyecto.
   </p>
 
   <aside class="notes">
-    <p><strong>Recorrer la tabla por filas. Marcar que la estructura user vs proyecto es la misma idea ya vista en CLAUDE.md, settings.json, skills. Cerrar nombrando el archivo del demo-repo que vamos a abrir más adelante.</strong></p>
-    <p><u>Slide de jerarquía. Tres orígenes posibles para un sub-agent: proyecto, usuario, plugins built-in. La estructura es paralela a las jerarquías de las secciones anteriores — la diferencia es solo qué objeto se define en el archivo markdown.</u></p>
-    <p><em>"Segunda pregunta. Dónde viven. Archivos markdown con frontmatter YAML, en tres ubicaciones posibles."</em></p>
-    <p><em>"Primera fila. Punto .claude barra agents barra nombre punto md, dentro del repo. Alcance de proyecto — solo ese repo lo ve, y se commitea con el equipo. Es lo más común para sub-agents específicos del proyecto."</em></p>
-    <p><em>"Segunda. Tilde punto .claude barra agents barra nombre punto md, en el home del usuario. Alcance de usuario — el sub-agent está disponible en cualquier proyecto donde abras Claude Code."</em></p>
-    <p><em>"Tercera. Plugins instalados. Sub-agents built-in del runtime, como Explore o Plan, que vienen empaquetados en plugins. No los definís vos — ya están listos para invocar."</em></p>
-    <p><em>"El demo-repo tiene el sub-agent researcher en .claude/agents/researcher.md, alcance de proyecto. Lo vamos a abrir en el slide del cómo se usa."</em></p>
+    <p><strong>Recorrer la tabla por filas.</strong></p>
+    <p><u>Mismo reparto user / proyecto que CLAUDE.md, settings y skills, más los built-in.</u></p>
+    <p><em>"Segunda pregunta: dónde viven. Los que definís vos son archivos markdown con frontmatter. En .claude/agents del repo, alcance de proyecto: se commitea y lo usa el equipo. En tu home, bajo .claude/agents, alcance de usuario: disponible en todos tus proyectos. Los plugins pueden traer los suyos. Y hay sub-agents built-in que vienen con Claude Code sin que definas nada: Explore, que busca en el código en modo solo lectura; Plan, que investiga durante plan mode; y general-purpose. El demo-repo trae uno propio, researcher, que abrimos en un momento."</em></p>
   </aside>
 </section>
 
-<!-- §12.4 · Cuándo se invocan -->
+<!-- §12.4 · Cuándo se invoca -->
 <section class="s12-slide">
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
@@ -559,21 +568,18 @@
     <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>El padre llama al tool <code>Agent</code> — o una skill lo hace por él</h2>
+  <h2>El padre llama a la tool <code>Agent</code>, a pedido tuyo o por su cuenta</h2>
 
   <ul class="s12-when-list">
-    <li>El padre invoca el tool <code>Agent</code> con un <code>subagent_type</code> — el nombre del sub-agent a instanciar.</li>
-    <li>Algunas skills lo invocan <strong>automáticamente</strong>: <code>Explore</code> entra solo ante preguntas exploratorias amplias, sin que el usuario lo pida.</li>
-    <li>El sub-agent toma el control de esa sub-tarea: <strong>corre su propio loop</strong>, usa sus tools, produce un resultado, y se lo devuelve al padre.</li>
+    <li><strong>A pedido tuyo:</strong> le pedís usar un sub-agent y el padre invoca la tool <code>Agent</code> con su nombre.</li>
+    <li><strong>Por su cuenta:</strong> si la tarea matchea el <code>description</code> de un sub-agent, el padre lo lanza sin que se lo pidas. Así usa <code>Explore</code>, el built-in de búsqueda, ante preguntas exploratorias amplias.</li>
+    <li>El sub-agent <strong>corre su propio loop</strong> con sus tools y, al terminar, le devuelve el resultado al padre, que lo espera.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Tres bullets en orden. El segundo es el menos obvio — marcar que la invocación puede ser implícita. El tercero refuerza el loop dentro del loop: el sub-agent es un agente completo corriendo en paralelo, no una función.</strong></p>
-    <u>Slide de mecánica. Mini-strip con "Cuándo se invoca" (adaptado del rótulo estándar "Cuándo se carga" — sub-agents se invocan, no se cargan al arranque). Tres ítems: invocación explícita, invocación implícita por skill, control del sub-loop. Esto prepara el slide del cómo se usa, donde vemos el archivo concreto.</u>
-    <p><em>"Tercera pregunta. Cuándo se invocan. Y la respuesta tiene dos formas: la explícita y la implícita."</em></p>
-    <p><em>"La explícita. El padre llama al tool Agent y le pasa un campo, subagent_type, que es el nombre del sub-agent a instanciar. Desde ese momento, el padre delega la sub-tarea al sub-agent y se queda esperando el resultado."</em></p>
-    <p><em>"La implícita. Algunas skills built-in invocan sub-agents de forma automática. Explore, por ejemplo, se activa solo ante preguntas exploratorias amplias — 'cómo está organizada la auth en este repo' — sin que el usuario pida nada de sub-agents. Para el alumno es transparente; lo que ve es que Claude responde sin inflar la ventana. Por debajo, Explore instanció un sub-agent."</em></p>
-    <p><em>"Y la línea de cierre: cuando el sub-agent se instancia, toma el control de esa sub-tarea. Corre su propio loop — pensar, actuar, observar, igual que el §2 — usa sus tools, produce un resultado, y se lo devuelve al padre. Es un agente completo corriendo en paralelo, no una función con un return."</em></p>
+    <p><strong>El segundo bullet es el menos obvio: la delegación puede ser implícita.</strong></p>
+    <p><u>Dos disparadores de la misma tool Agent: pedido explícito o match con la description.</u></p>
+    <p><em>"Tercera pregunta: cuándo se invocan. Hay dos caminos, y los dos terminan en la misma tool, Agent. El explícito: le decís 'usá el sub-agent researcher' y el padre llama a Agent con ese nombre. El implícito: el padre lee las descriptions de los sub-agents disponibles y, si tu pedido matchea una, delega por su cuenta. Así aparece Explore: le preguntás algo amplio como 'cómo está organizada la auth en este repo' y, sin que digas nada de sub-agents, el padre lanza Explore. Lo que ves es que responde sin llenar su ventana. En los dos casos, el sub-agent corre su propio loop, pensar, actuar, observar, con sus tools, y le devuelve el resultado al padre, que se queda esperando."</em></p>
   </aside>
 </section>
 
@@ -582,40 +588,34 @@
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se carga</span></li>
+    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
-  <h2>Anatomía de <code style="font-family:var(--font-mono);color:var(--accent);font-size:0.95em;">.claude/agents/researcher.md</code> — frontmatter del demo-repo</h2>
+  <h2>Anatomía de <code class="s12-h2-code">.claude/agents/researcher.md</code></h2>
 
-  <pre class="s12-code-block"><span class="s12-code-fence">---</span>
+  <div class="s12-code-block"><span class="s12-code-fence">---</span>
 <span class="s12-code-key">name:</span> <span class="s12-code-val">researcher</span>
 <span class="s12-code-key">description:</span> <span class="s12-code-val">Use when the user asks where something is implemented, how a concept is wired across files, or any exploratory question that requires reading many files. Returns a concise answer; does not modify code.</span>
 <span class="s12-code-key">tools:</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Read</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Grep</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Glob</span>
-<span class="s12-code-fence">---</span></pre>
+<span class="s12-code-fence">---</span></div>
 
   <ul class="s12-fields-list">
-    <li><strong><code>name</code></strong> — identificador del sub-agent. Es lo que el padre pasa como <code>subagent_type</code>.</li>
-    <li><strong><code>description</code></strong> — contrato de activación, mismo rol que en skills. Convención <code>Use when X</code>.</li>
-    <li class="s12-fields-key"><strong><code>tools</code></strong> — <strong>lista restringida</strong>. El sub-agent <strong>no hereda</strong> todas las tools del padre por default; solo puede usar las que se declaran acá. <code>researcher</code> tiene <code>Read</code>, <code>Grep</code>, <code>Glob</code> — puede leer y buscar, no puede escribir ni ejecutar comandos.</li>
-    <li><strong><code>model</code></strong> — opcional. Si se omite, usa el mismo modelo que el padre.</li>
-    <li><strong>Cuerpo del archivo</strong> — el system prompt del sub-agent. Define qué hace, qué no hace, en qué formato devuelve el resultado.</li>
+    <li><strong><code>name</code></strong>: identificador; es lo que el padre pasa a la tool <code>Agent</code>.</li>
+    <li><strong><code>description</code></strong>: cuándo usarlo. El padre la lee para delegar por su cuenta.</li>
+    <li class="s12-fields-key"><strong><code>tools</code></strong>: si lo omitís, <strong>hereda</strong> las tools del padre; si lo declarás, <strong>queda restringido</strong>. <code>researcher</code> lee y busca, pero no edita ni ejecuta comandos.</li>
+    <li><strong><code>model</code></strong>: opcional (no está en este archivo). Si falta, usa el del padre.</li>
+    <li><strong>Cuerpo</strong>: el system prompt del sub-agent (qué hace, qué no, cómo devuelve el resultado).</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer arriba a abajo. Frontmatter primero, leer name y description. Pausa larga en el bullet de tools — es el punto que define el aislamiento de capacidades. Marcar que sin Bash, este sub-agent no puede modificar código aunque quiera.</strong></p>
-    <p><u>Slide de walkthrough. La pieza concreta que materializa todas las definiciones anteriores. Frontmatter YAML con cuatro campos clave + cuerpo como system prompt. El bullet de tools es el más importante: define el alcance de capacidades del sub-agent.</u></p>
-    <p><em>"Cuarta pregunta. Cómo se usa. Y la mejor forma es abrir el archivo concreto. Punto .claude barra agents barra researcher punto md, del demo-repo."</em></p>
-    <p><em>"Arriba, el frontmatter YAML entre triple guion. Cuatro campos a notar."</em></p>
-    <p><em>"name. researcher. El identificador del sub-agent. Es lo que el padre pasa como subagent_type cuando llama al tool Agent."</em></p>
-    <p><em>"description. La frase que el runtime lee para decidir si el sub-agent aplica. Mismo rol que en skills, misma convención: 'Use when X'. Vago activa mal."</em></p>
-    <p><em>"tools. Y este es el campo central. Es una lista restringida — Read, Grep, Glob, nada más. El punto clave es lo que no aparece: el sub-agent no hereda todas las tools del padre por default. El padre puede tener Bash, Edit, Write, lo que sea — el sub-agent solo puede usar lo que aparece en su frontmatter. researcher puede leer archivos y buscar patrones; no puede escribir, no puede ejecutar comandos, no puede llamar a APIs. La restricción es intencional: define el alcance de lo que el sub-agent puede hacer y reduce el riesgo de efectos secundarios."</em></p>
-    <p><em>"model. Es opcional. Si se omite, usa el mismo modelo que el padre. Sirve cuando querés que un sub-agent corra con un modelo más chico — o más grande — para una sub-tarea específica."</em></p>
-    <p><em>"Y el cuerpo del archivo, abajo del frontmatter, es el system prompt del sub-agent. Es donde se define qué hace, qué no hace, en qué formato devuelve el resultado. En el caso de researcher: 'investigador de solo-lectura, devolvé respuesta corta — dónde está, en qué función, una frase de cómo se conecta'. El cuerpo es lo que da el carácter al sub-agent."</em></p>
+    <p><strong>Pausa larga en <code>tools</code>: omitido hereda, declarado restringe.</strong></p>
+    <p><u>Tres campos en el archivo, más model como opcional y el cuerpo como system prompt.</u></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Abrimos researcher.md del demo-repo. El frontmatter tiene tres campos. name: el identificador, lo que el padre le pasa a la tool Agent. description: cuándo conviene usarlo; el padre la lee para decidir si delega por su cuenta, igual que con las skills. Y tools, el campo central. Si no lo ponés, el sub-agent hereda todas las tools del padre. Si lo declarás, queda limitado a esa lista. researcher declara Read, Grep y Glob: puede leer y buscar, pero sin Edit, Write ni Bash no puede modificar código ni correr comandos. Esa restricción la elegís vos. Hay un cuarto campo que este archivo no usa: model. Si falta, usa el modelo del padre; sirve para correr una sub-tarea con un modelo más chico o más grande. Y abajo del frontmatter, el cuerpo es el system prompt: en este caso, investigador de solo lectura que devuelve dónde está algo, en qué función y una frase de cómo se conecta."</em></p>
   </aside>
 </section>
 
@@ -634,13 +634,19 @@
       </div>
     </div>
 
-    <div class="s12-arrow">
-      <span class="s12-arrow-glyph">↓</span>
-      <span class="s12-arrow-label">invocación con la tarea</span>
+    <div class="s12-arrows">
+      <div class="s12-arrow">
+        <span class="s12-arrow-glyph">↓</span>
+        <span class="s12-arrow-label">baja la tarea</span>
+      </div>
+      <div class="s12-arrow is-return">
+        <span class="s12-arrow-glyph">↑</span>
+        <span class="s12-arrow-label">sube solo el resultado</span>
+      </div>
     </div>
 
     <div class="s12-window s12-window-sub">
-      <p class="s12-window-label">Ventana del sub-agent · nace con la tarea, muere al terminar</p>
+      <p class="s12-window-label">Ventana del sub-agent · se cierra al terminar</p>
       <div class="s12-window-content">
         <span class="s12-ctx-chip is-discard">archivo 1</span>
         <span class="s12-ctx-chip is-discard">archivo 2</span>
@@ -649,25 +655,16 @@
         <span class="s12-ctx-chip is-discard">tool calls</span>
       </div>
     </div>
-
-    <div class="s12-arrow is-return">
-      <span class="s12-arrow-glyph">↓</span>
-      <span class="s12-arrow-label">solo el resultado vuelve al padre</span>
-    </div>
   </div>
 
   <p class="s12-diagram-note">
-    Todo lo que el sub-agent lee y razona vive <strong>solo en su ventana</strong>. Cuando termina, esa ventana desaparece. Al padre llega <code>un párrafo</code>, no <code>cincuenta archivos</code>.
+    Lo que el sub-agent lee y razona vive <strong>solo en su ventana</strong>. Al padre le llega un párrafo, no cincuenta archivos.
   </p>
 
   <aside class="notes">
-    <p><strong>Sin mini-strip — es zoom-in al mecanismo. No avanzar la quinta pregunta todavía. Recorrer el diagrama de arriba a abajo. Marcar el contraste visual: en la ventana del padre solo entra el resultado (verde); en la del sub-agent vive todo lo intermedio (rojo, tachado, porque se descarta). La flecha de retorno es chica, deliberadamente.</strong></p>
-    <p><u>Slide de zoom-in al mecanismo de aislamiento. Reemplaza el typical mini-strip porque no responde una pregunta nueva — visualiza la respuesta de la pregunta 1 que ya dimos en bullets. Diagrama CSS estático, no animado: dos ventanas con contenido distinto, dos flechas que muestran invocación + retorno asimétrico.</u></p>
-    <p><em>"Antes de pasar a la última pregunta, un slide de mecanismo. Ya dijimos que el padre recibe solo el resultado, pero verlo dibujado fija el porqué."</em></p>
-    <p><em>"Arriba, la ventana del padre. Lo que ya tiene: CLAUDE.md, rules, la conversación que vinieron teniendo. Y lo que va a recibir cuando el sub-agent termine: el resultado, marcado en verde."</em></p>
-    <p><em>"En el medio, una flecha hacia abajo: la invocación. El padre llama al tool Agent y le pasa la tarea — 'investigá dónde se maneja la auth'."</em></p>
-    <p><em>"Abajo, la ventana del sub-agent. Esta ventana es nueva, nace con la invocación. Mientras el sub-agent corre, su ventana se llena: leyó el archivo uno, el dos, el tres; razonó pasos intermedios; hizo tool calls. Todo eso vive ahí, en rojo y tachado, porque cuando el sub-agent termine, todo ese contenido desaparece. La ventana muere con la tarea."</em></p>
-    <p><em>"Y la flecha de retorno, hacia arriba. Notar que es la misma flecha — pero solo viaja una cosa: el resultado. Los cincuenta archivos que el sub-agent leyó no viajan. El razonamiento intermedio no viaja. Los tool calls no viajan. Al padre le llega un párrafo. La asimetría entre las dos flechas — bajó una tarea, subió un párrafo — es exactamente lo que protege el contexto del padre."</em></p>
+    <p><strong>Recorrer de arriba a abajo; marcar la asimetría entre las dos flechas.</strong></p>
+    <p><u>Zoom-in sin mini-strip: visualiza la respuesta a la pregunta 1.</u></p>
+    <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá dónde se maneja la auth'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
   </aside>
 </section>
 
@@ -676,7 +673,7 @@
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se carga</span></li>
+    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
@@ -684,85 +681,77 @@
   <h2>Cuatro cosas que confunden de sub-agents</h2>
 
   <ul class="s12-gotchas-list">
-    <li><strong>No es "otra IA".</strong> Es la misma lógica de <code>LLM + loop + tools + entorno</code>, instanciada aparte. La diferencia es de aislamiento, no de naturaleza — mismo modelo, mismas capacidades en principio.</li>
-    <li><strong>La delegación no exime de supervisar.</strong> Al padre llega solo el resultado, no los pasos. Eso cambia el trabajo del supervisor: ya no leés cada paso del sub-agent, leés el resumen y juzgás si es coherente con lo que sabés del proyecto.</li>
-    <li><strong>Paralelización es beneficio secundario.</strong> El padre puede invocar varios sub-agents en una sola respuesta y corren en paralelo — pero el motivo principal de usar sub-agents no es velocidad, es <strong>proteger el contexto del padre</strong>.</li>
-    <li><strong>El sub-agent no hereda tools por default.</strong> Hay que declararlas explícitamente en el frontmatter. Sin <code>Bash</code> en la lista, el sub-agent no puede ejecutar comandos aunque el padre pueda hacerlo — y esa restricción es deliberada.</li>
+    <li><strong>No es "otra IA".</strong> Es la misma lógica (<code>LLM + loop + tools + entorno</code>) instanciada aparte. La diferencia es de aislamiento, no de naturaleza.</li>
+    <li><strong>Delegar no exime de supervisar.</strong> Al padre llega el resultado, no los pasos. Tu trabajo pasa a ser juzgar si ese resumen es coherente con lo que sabés del proyecto.</li>
+    <li><strong>Paralelizar es un beneficio secundario.</strong> El padre puede lanzar varios sub-agents a la vez, pero el motivo principal es <strong>proteger su contexto</strong>.</li>
+    <li><strong>Sin <code>tools</code>, hereda todo.</strong> Un sub-agent de solo lectura se declara: <code>Read</code>, <code>Grep</code>, <code>Glob</code> y nada más. La restricción la elegís vos.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro bullets. El primero desarma el malentendido más común. El segundo cambia el rol del supervisor. El tercero es contraintuitivo. El cuarto es operativo — si escribís un sub-agent, este es el campo en el que pensar primero.</strong></p>
-    <p><u>Slide de quinta pregunta. Cuatro confusiones en formato bullet list — siguen la regla de bullets: items peer cortos, misma estructura. Cada bullet aborda un malentendido frecuente y le da el reframe correcto.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Cuatro cosas, las más comunes."</em></p>
-    <p><em>"Una. No es 'otra IA'. La intuición natural cuando te dicen 'sub-agent' es 'otro asistente diferente, con otra personalidad'. No. Es la misma lógica de loop, el mismo modelo, las mismas capacidades en principio. Lo único nuevo es que corre con su propia ventana de contexto, aislada. La diferencia es de aislamiento, no de naturaleza."</em></p>
-    <p><em>"Dos. La delegación no exime de supervisar. Al contrario — cambia cómo supervisás. Cuando trabajás inline, ves cada paso del agente: leyó este archivo, dijo esto, ejecutó este comando. Con un sub-agent, todo eso vive en su ventana y desaparece; al padre solo llega el resumen. Tu trabajo deja de ser leer cada paso y pasa a ser juzgar si el resumen es coherente con lo que vos sabés del proyecto. Es supervisión de output, no supervisión de proceso."</em></p>
-    <p><em>"Tres. La paralelización es un beneficio secundario. Es real: el padre puede invocar tres sub-agents en una sola respuesta y los tres corren en paralelo. Es útil. Pero no es la razón principal para usar sub-agents. La razón principal es proteger el contexto del padre. Si la tarea exploratoria se hace inline, todo lo que el agente lee queda en la ventana; con sub-agent, ese ruido nunca llega."</em></p>
-    <p><em>"Y cuatro. El sub-agent no hereda tools por default. Si en el frontmatter no aparece Bash, el sub-agent no puede ejecutar comandos — aunque el padre sí pueda. Hay que declarar explícitamente qué puede usar. Esta restricción es deliberada: el sub-agent define su alcance de capacidades. Si lo querés solo-lectura, le ponés Read, Grep, Glob y nada más. Si lo querés full-stack, le declarás Bash, Edit, Write. La omisión es la herramienta de control."</em></p>
+    <p><strong>El cuarto bullet es el operativo al escribir un sub-agent.</strong></p>
+    <p><u>Cuatro malentendidos frecuentes, cada uno con su reframe.</u></p>
+    <p><em>"Quinta pregunta: qué confunde. Una: no es otra IA. Mismo loop, mismo modelo por default, con su propia ventana. Dos: delegar no exime de supervisar; cambia cómo supervisás. Inline ves cada paso: qué archivo leyó, qué comando corrió. Con un sub-agent eso queda en su ventana y a vos te llega el resumen. Tu trabajo pasa a ser juzgar si ese resumen cierra con lo que sabés del proyecto, y si dudás, el transcript está en disco. Tres: paralelizar es real, el padre puede lanzar tres sub-agents en una misma respuesta y corren a la vez, pero no es la razón principal. La razón principal es que la exploración no llene la ventana del padre. Y cuatro: si no declarás tools, el sub-agent hereda todas las del padre, Bash y Edit incluidos. Si lo querés de solo lectura, tenés que decirlo: Read, Grep, Glob y nada más."</em></p>
   </aside>
 </section>
 
-<!-- §12.8 · Demo · inline vs delegado al sub-agent (section-divider + clickable-steps) -->
+<!-- §12.8 · Demo · inline vs sub-agent (section-divider + clickable-steps) -->
 <section class="section-divider">
-  <h2>Demo · inline vs delegado, /context antes y después</h2>
-  <p style="font-size:0.72em; color:var(--text-muted); margin-top:14px; font-style:italic;">Misma pregunta, dos formas de resolverla. La diferencia se ve en el delta de <code>/context</code>.</p>
+  <h2>Demo · inline vs sub-agent</h2>
+  <p class="s12-demo-sub">La misma pregunta dos veces, con <code>/context</code> antes y después.</p>
 
   <div class="s12-demo-wrap">
     <div id="s12-demo-steps"></div>
   </div>
 
   <aside class="notes">
-    <p><strong>Setup antes del slide: dos terminales con Claude Code listas, ambas en demo-repo. VS Code abierto al lado con <code>.claude/agents/researcher.md</code> en una pestaña. Plan B preparado: dos transcripts grabados de /context (uno inline con contexto inflado, uno con sub-agent con contexto casi sin cambios).</strong></p>
-    <p><u>Demo de cierre de §12. Tres pasos: primero la búsqueda inline con /context al final (la ventana se infla), después la misma búsqueda delegada al sub-agent researcher con /context (la ventana crece lo mínimo), finalmente abrir researcher.md y mostrar que tools está restringido a Read/Grep/Glob — no puede modificar código aunque quiera.</u></p>
-    <p><em>"Vamos al demo. Tres pasos. La misma pregunta — '¿dónde se maneja la auth en este repo?' — resuelta de dos formas, con /context entre medio para medir el costo en ventana."</em></p>
+    <p><strong>Tres pasos: inline, delegado, el archivo.</strong></p>
+    <p><u>Setup de siempre (ver demo de §11). El repo es chico: el delta va a ser de pocos miles de tokens.</u></p>
+    <p><em>"Vamos al demo. La misma pregunta, cómo funciona la auth de punta a punta, resuelta dos veces: primero leyendo todo en la ventana principal, después delegando al sub-agent researcher. Antes y después de cada una miramos /context. El repo es chico, así que no esperes una diferencia enorme: van a ser unos pocos miles de tokens. Lo que importa es de qué lado quedan."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Paso 1 — Búsqueda inline, sin delegar</strong></p>
+    <p><strong>Paso 1 · Inline, sin delegar</strong></p>
     <ul>
-      <li>Terminal: <code>cd ~/demo-repo</code></li>
-      <li>Terminal: <code>claude</code> (sesión nueva)</li>
-      <li>En Claude: <code>"encontrá dónde se maneja la auth en este repo"</code></li>
-      <li>Esperar: Claude busca, abre archivos, lee, rastrea imports</li>
-      <li>En Claude: <code>/context</code></li>
-      <li>Mirar: el delta respecto al inicio — los archivos leídos quedaron todos en la ventana</li>
+      <li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li>
+      <li><strong>En Claude:</strong> <code>/context</code> (línea base)</li>
+      <li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li>
+      <li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li>
     </ul>
-    <p><strong>Paso 2 — La misma búsqueda delegada al sub-agent <code>researcher</code></strong></p>
+    <p><strong>Paso 2 · Delegado a <code>researcher</code></strong></p>
     <ul>
-      <li>Terminal: <code>claude</code> (sesión nueva, otra pestaña)</li>
-      <li>En Claude: <code>"usando el sub-agent researcher, ¿dónde se maneja la auth en este repo?"</code></li>
-      <li>Mirar: el padre invoca el tool <code>Agent</code> → el sub-agent corre su loop con Read/Grep/Glob</li>
-      <li>Esperar: cuando el sub-agent termina, devuelve solo la respuesta</li>
-      <li>En Claude: <code>/context</code></li>
-      <li>Mirar: el delta es <strong>significativamente menor</strong> — la exploración vivió en la ventana del sub-agent, no en la del padre</li>
+      <li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li>
+      <li><strong>En Claude:</strong> <code>/context</code> (línea base)</li>
+      <li><strong>En Claude:</strong> "usá el sub-agent researcher y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li>
+        <li><strong>Mirar:</strong> <code>Agent</code> lanza <code>researcher</code>; <code>/context</code> de nuevo</li>
     </ul>
-    <p><strong>Paso 3 — El archivo detrás del sub-agent</strong></p>
+    <p><strong>Paso 3 · El archivo detrás</strong></p>
     <ul>
-      <li>VS Code: abrir <code>.claude/agents/researcher.md</code></li>
-      <li>Mirar: <code>tools: [Read, Grep, Glob]</code> en el frontmatter</li>
-      <li>Marcar: no aparece <code>Bash</code>, no aparece <code>Edit</code>, no aparece <code>Write</code></li>
-      <li>Cerrar: el sub-agent no puede modificar código aunque quiera — el frontmatter lo limita</li>
+      <li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li>
+      <li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li>
+      <li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li>
     </ul>
-    <p><em>Plan B (si el delta de /context no es dramático en vivo): sostener con dos transcripts preparados — uno de sesión inline con la ventana inflada al final, otro de sesión con sub-agent con la ventana casi sin cambios y el resultado devuelto. El cierre del Paso 3, mostrando researcher.md con tools restringidos, funciona en ambos casos.</em></p>
+    <p>Setup de siempre: copia en <code>~/demo-repo</code> con commit inicial, <code>.env</code> y <code>uv sync</code>, <code>claude --permission-mode default</code>. El delta real depende de cuántos archivos lea Claude en el Paso 1 (el backend entero pesa unos 4 KB). El transcript del sub-agent queda en disco, pero el padre no lo ve.</p>
+    <p><strong>Plan B:</strong></p>
+    <p>Si en el Paso 1 Claude delega igual (a <code>Explore</code> o <code>researcher</code>), cortar y repetir el pedido remarcando "sin sub-agents". Si el delta de <code>/context</code> no se distingue, mostrar dos capturas preparadas (sesión inline y sesión con sub-agent). El Paso 3 funciona igual en ambos casos.</p>
   </aside>
 </section>
 
 <!-- §12.9 · Cierre + bridge a §13 -->
 <section class="s12-slide">
-  <h2>Los sub-agents aíslan el contexto del padre</h2>
+  <h2>Explorar sin llenar la ventana del padre</h2>
 
   <div class="s12-close-card">
     <p class="s12-close-main">
-      Los sub-agents <strong>aíslan el contexto del padre</strong>. Lo que el sub-agent explora y descarta <strong>nunca llega</strong> a la ventana principal. El padre recibe el resultado — y nada más.
+      Los sub-agents <strong>aíslan el contexto del padre</strong>. Lo que el sub-agent explora y descarta <strong>nunca llega</strong> a la ventana principal: el padre recibe el resultado.
     </p>
     <p class="s12-close-bridge">
-      Sub-agents aíslan el contexto: gestión de <em>cuánto ruido entra</em>. Plan mode hace algo distinto — <em>detiene el loop antes de actuar</em>. No es gestión de contexto, es gestión de autonomía.
+      Los sub-agents deciden <em>cuánto ruido entra</em> a tu ventana. Plan mode frena el loop antes de modificar nada: <em>explora, propone y espera tu aprobación</em>.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer el párrafo principal apoyando "aíslan el contexto" y "nunca llega". Pausa antes del bridge. El bridge separa explícitamente dos dimensiones distintas — contexto vs autonomía — para preparar el cambio de eje de §13.</strong></p>
-    <p><u>Cierre de §12 + bridge a §13. La línea principal consolida la propiedad central: aislamiento del contexto. El bridge a §13 cambia el eje de discusión — pasa de "cuánto del entorno ve el agente" a "cuánta autonomía tiene para actuar". Plan mode no agrega aislamiento; agrega un gate antes de la acción.</u></p>
-    <p><em>"Cerramos §12. La propiedad central a retener: los sub-agents aíslan el contexto del padre. Lo que el sub-agent explora, lee, razona y descarta nunca llega a la ventana principal. El padre recibe el resultado y nada más. Es la forma más fuerte de gestión de contexto que vimos hasta acá."</em></p>
-    <p><em>"Y el bridge a la próxima sección. Hasta ahora venimos hablando de gestión de contexto: cuánto le entra al agente, qué carga, qué descarta, cómo evitar el ruido. Plan mode cambia de eje. No habla de cuánto ve el agente — habla de cuánto puede hacer sin pedir permiso. Detiene el loop antes de actuar y obliga a aprobar el plan. Es gestión de autonomía, no de contexto. Eso es §13."</em></p>
+    <p><strong>Apoyar "aíslan el contexto" y "nunca llega".</strong></p>
+    <p><u>Cierre de §12 y bridge a §13: de contexto a autonomía.</u></p>
+    <p><em>"Cerramos. Los sub-agents aíslan el contexto del padre: lo que el sub-agent lee, razona y descarta no llega a la ventana principal. El padre recibe el resultado. La skill difería la carga en la misma ventana; el sub-agent la saca a otra. Y lo que sigue cambia de eje, vuelve a la autonomía que empezamos a ver con permisos. Plan mode no gestiona cuánto ve el agente, sino cuándo puede modificar algo: lo deja leer y explorar, lo frena antes de editar, y espera a que apruebes el plan."</em></p>
   </aside>
 </section>
 
@@ -770,19 +759,19 @@
 <script>
   initClickableSteps({containerId: 's12-demo-steps', steps: [
     {
-      title: 'Paso 1 — Búsqueda inline, sin delegar',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li><li><strong>Terminal:</strong> <code>claude</code> (sesión nueva)</li><li><strong>En Claude:</strong> <code>"encontrá dónde se maneja la auth en este repo"</code></li><li><strong>Esperar:</strong> Claude busca, abre archivos, lee, rastrea imports</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> el delta respecto al inicio — los archivos leídos quedaron todos en la ventana</li></ul>',
-      example: 'El punto del paso uno: la búsqueda funciona, Claude encuentra la auth, da una respuesta correcta. Pero todo lo que tuvo que leer para responder — los routers, los middlewares, los archivos de config, los imports — queda en la ventana del padre. /context lo hace visible: el delta refleja el volumen de exploración. Esa es la baseline contra la que vamos a comparar el sub-agent.'
+      title: 'Paso 1 · Inline, sin delegar',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li><li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li></ul>',
+      example: 'Claude abre <code>auth.py</code>, los routers, los tests y <code>app.js</code>, y responde bien. Todo lo que leyó queda en la ventana principal: el segundo <code>/context</code> suma esos archivos al total.'
     },
     {
-      title: 'Paso 2 — La misma búsqueda delegada al sub-agent researcher',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>claude</code> (sesión nueva, otra pestaña)</li><li><strong>En Claude:</strong> <code>"usando el sub-agent researcher, ¿dónde se maneja la auth en este repo?"</code></li><li><strong>Mirar:</strong> el padre invoca el tool <code>Agent</code> → el sub-agent corre su loop con Read/Grep/Glob</li><li><strong>Esperar:</strong> cuando el sub-agent termina, devuelve solo la respuesta</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> el delta es significativamente menor — la exploración vivió en la ventana del sub-agent</li></ul>',
-      example: 'Misma pregunta, mismo repo, misma respuesta — pero el costo en ventana es muy distinto. El sub-agent leyó los mismos archivos que Claude leyó en el paso uno, pero todo ese trabajo vivió en su propia ventana. Cuando terminó, su ventana desapareció y al padre le llegó solo el párrafo final. /context lo confirma: el delta de la ventana del padre es mucho más chico. La exploración pasó, el ruido no llegó.'
+      title: 'Paso 2 · Delegado a researcher',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "usá el sub-agent researcher y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li><li><strong>Mirar:</strong> <code>Agent</code> lanza <code>researcher</code>; <code>/context</code> de nuevo</li></ul>',
+      example: 'El padre llama a la tool <code>Agent</code> y <code>researcher</code> lee los mismos archivos en su propia ventana. Al padre vuelve un resumen: el delta del segundo <code>/context</code> es más chico.'
     },
     {
-      title: 'Paso 3 — El archivo detrás del sub-agent',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li><li><strong>Mirar:</strong> <code>tools: [Read, Grep, Glob]</code> en el frontmatter</li><li><strong>Marcar:</strong> no aparece <code>Bash</code>, no aparece <code>Edit</code>, no aparece <code>Write</code></li><li><strong>Cerrar:</strong> el sub-agent no puede modificar código aunque quiera — el frontmatter lo limita</li></ul>',
-      example: 'No es magia: es un archivo de configuración con un system prompt acotado y una lista de tools restringida. Read, Grep, Glob — puede leer, puede buscar, puede listar archivos. No tiene Bash, no tiene Edit, no tiene Write. Aunque el padre tenga acceso a esas tools, el sub-agent no las hereda. Esa restricción se escribe explícitamente en el frontmatter, y es la otra mitad del aislamiento: aísla el contexto y aísla las capacidades.\n\nPLAN B (si el delta de /context no es dramático en vivo, o si el sub-agent no entra al pedido del paso 2): sostener con dos transcripts preparados — uno de sesión inline con la ventana inflada al final, otro de sesión con sub-agent con la ventana casi sin cambios y el resultado devuelto. El cierre del Paso 3, mostrando researcher.md con tools restringidos, funciona en ambos casos.'
+      title: 'Paso 3 · El archivo detrás',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li><li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li><li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li></ul>',
+      example: 'Un archivo markdown con un system prompt acotado y una lista de tools. Como <code>tools</code> está declarado, <code>researcher</code> no hereda las del padre: puede leer y buscar, no editar ni ejecutar comandos.'
     }
   ]});
 </script>
