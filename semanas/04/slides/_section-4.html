@@ -5,8 +5,8 @@
 
 /* §4.5 — context rot diagram */
 .s4-rot-diagram {
-  max-width: 600px;
-  margin: 16px auto 0;
+  max-width: 720px;
+  margin: 0 auto;
 }
 .s4-rot-layer {
   border-radius: 6px;
@@ -239,12 +239,8 @@
 
 /* §4.5 layout: progressive bar on the left + rot diagram on the right */
 .s4-rot-with-fill {
-  display: grid;
-  grid-template-columns: auto 2.6fr;
-  gap: 36px;
-  align-items: start;
-  max-width: 900px;
-  margin: 22px auto 0;
+  max-width: 720px;
+  margin: 18px auto 0;
 }
 .s4-rot-contradiction {
   max-width: 720px;
@@ -425,39 +421,9 @@
   </aside>
 </section>
 
-<!-- §4.2 · Parámetros vs ventana — working memory -->
+<!-- §4.2 · La sesión no arranca vacía y el loop la llena -->
 <section>
-  <h2>Parámetros vs. ventana</h2>
-
-  <div class="comparison-2col s4-param-grid">
-    <div class="bg-secondary-card s4-param-card">
-      <p class="s4-param-eyebrow">Parámetros del modelo</p>
-      <p class="s4-param-name">recuerdo vago</p>
-      <p class="s4-param-body">
-        Como algo que leíste hace un mes. El modelo lo aprendió en el preentrenamiento: está ahí de fondo, difuso, sin acceso directo.
-      </p>
-      <p class="s4-param-foot">No lo puede citar con precisión.</p>
-    </div>
-    <div class="bg-secondary-card s4-param-card is-window">
-      <p class="s4-param-eyebrow">Ventana de contexto</p>
-      <p class="s4-param-name">working memory, acceso directo</p>
-      <p class="s4-param-body">
-        Lo que está en el contexto, el modelo lo <em>ve</em>. No lo recuerda: está ahí, disponible en tiempo real, token por token.
-      </p>
-      <p class="s4-param-foot">El recurso que vas a administrar.</p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Izquierda, después derecha. Énfasis en "lo ve, no lo recuerda".</strong></p>
-    <p><u>Callback a S1: la ventana pasa a ser el recurso a gestionar.</u></p>
-    <p><em>"La distinción la vieron en la semana 1. Los parámetros del modelo son como algo que leíste hace un mes: tenés una impresión vaga, podés razonar sobre ello, pero no podés citar con precisión. La ventana de contexto es distinta. Lo que está en la ventana, el modelo lo ve. No lo recuerda — lo tiene delante, disponible en tiempo real. Es su working memory. Y a partir de ahora es el recurso que tenés que administrar."</em></p>
-  </aside>
-</section>
-
-<!-- §4.3 · El loop llena la ventana -->
-<section>
-  <h2>El loop llena la ventana</h2>
+  <h2>La sesión no arranca vacía</h2>
 
   <div class="s4-fill-layout">
     <div class="s4-context-bar-wrap">
@@ -469,12 +435,12 @@
 
     <div class="s4-token-annotations">
       <div class="s4-token-anno fragment" data-fill="5">
-        <span class="s4-token-anno-val">~50k tokens</span>
-        <span class="s4-token-anno-label">Tarea acotada: pocas vueltas, pocos archivos</span>
+        <span class="s4-token-anno-val">~15k tokens</span>
+        <span class="s4-token-anno-label">Arranque: instrucciones del proyecto, reglas y memoria, antes de tu primer mensaje</span>
       </div>
       <div class="s4-token-anno fragment" data-fill="50">
         <span class="s4-token-anno-val">~500k tokens</span>
-        <span class="s4-token-anno-label">Sesión normal: el loop acumula vuelta tras vuelta</span>
+        <span class="s4-token-anno-label">Sesión normal: cada vuelta deposita razonamiento, tool calls y outputs</span>
       </div>
       <div class="s4-token-anno fragment" data-fill="90">
         <span class="s4-token-anno-val">~900k tokens</span>
@@ -485,66 +451,41 @@
 
   <div class="fragment fade-in">
     <p class="s4-center-line is-accent s4-fill-cost">
-      Cada token cuenta dos veces: <strong>ocupa lugar</strong> en la ventana y se <strong>factura en cada vuelta del loop</strong>.
+      Ventanas más grandes <strong>desplazan</strong> el límite. No lo <strong>eliminan</strong>.
     </p>
-    <p class="s4-center-line is-sub s4-fill-cost">50 vueltas con la ventana al 90% (~900k) = ~45M tokens de input facturados.</p>
+    <p class="s4-center-line is-sub s4-fill-cost">Es finita por diseño: administrar ese límite es parte de dirigir un agente.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>Tres clicks llenan la barra (5 / 50 / 90%). El cuarto trae el costo.</strong></p>
+    <p><strong>Tres clicks llenan la barra (5 / 50 / 90%). El cuarto trae el cierre.</strong></p>
     <p><u>Órdenes de magnitud reales, no fórmulas exactas.</u></p>
-    <p><em>"Fíjense en la barra. Arranca casi vacía. Cada vuelta del loop deposita tokens — el razonamiento del modelo, las llamadas a tools, los outputs que vuelven. Todo se apila."</em></p>
-    <p><em>"Una tarea acotada — pocas vueltas, pocos archivos, una pregunta concreta — ronda los 50 mil tokens. Para tener referencia: un archivo de 300 líneas son aproximadamente 2 mil tokens, así que 50k es del orden de 25 archivos leídos, o su equivalente en observaciones. Un 5% de la ventana."</em></p>
-    <p><em>"Una sesión normal — más archivos, varias tools encadenadas, razonamiento acumulado vuelta tras vuelta — y ya estás en unos 500 mil tokens. La mitad de la ventana. La acumulación es más rápida de lo que intuís porque cada observación queda — no desaparece después de procesarla."</em></p>
-    <p><em>"Sesión larga — si el agente sigue iterando sobre la misma tarea, leyendo más archivos, ejecutando más comandos, el contexto llega a unos 900 mil tokens. La ventana de 1 millón que ofrecen los modelos actuales, que parecía enorme cuando empezaste, ya está casi saturada."</em></p>
-    <p><em>"Y un detalle del que conviene tener conciencia desde temprano: cada token cuenta dos veces. Ocupa lugar, y también se factura. Y se factura en cada llamada al modelo, porque cada vuelta del loop le manda al LLM el contexto completo. Si tu agente da cincuenta vueltas con la ventana al 90%, son 50 × 900.000 = 45 millones de tokens de input. Con caché, lo que se reenvía igual se cobra más barato — pero se cobra. Por eso context engineering no es solo una cuestión de calidad: también es de costo."</em></p>
+    <p><em>"Miren la barra: es la ventana de contexto de una sesión. Y ojo con esto, porque es lo primero que sorprende: no arranca vacía."</em></p>
+    <p><em>"Antes de que escribas tu primer mensaje, el runtime ya cargó cosas: las instrucciones del proyecto, las convenciones del equipo, lo que se guardó de sesiones anteriores. Pongamos quince mil tokens. Todavía no pediste nada y ya estás ocupando lugar. En la Parte 2 vamos a ver exactamente qué archivos son y cómo se controlan."</em></p>
+    <p><em>"Después entra el loop. Cada vuelta deposita tokens: el razonamiento del modelo, las llamadas a tools, los outputs que vuelven. Una sesión normal ronda el medio millón. Para tener referencia: un archivo de 300 líneas son unos dos mil tokens, así que estamos hablando de un par de cientos de archivos leídos, o su equivalente en observaciones. La acumulación es más rápida de lo que intuís, porque cada observación queda: no desaparece después de procesarla."</em></p>
+    <p><em>"Si el agente sigue iterando sobre la misma tarea, llegás a novecientos mil. La ventana de un millón, que parecía enorme cuando empezaste, ya está casi saturada."</em></p>
+    <p><em>"Y esto no se arregla esperando el próximo modelo. Cada generación ofrece ventanas más grandes, y eso desplaza el límite, no lo elimina. Es una propiedad estructural, no un descuido. Administrar ese límite es parte del trabajo de dirigir un agente."</em></p>
   </aside>
 </section>
 
-<!-- §4.4 · Finita por diseño — propiedad estructural -->
-<section>
-  <h2>Finita por diseño, no por descuido</h2>
-
-  <div class="s4-finite-wrap">
-    <p class="s4-finite-headline">El techo existe.</p>
-    <p class="s4-finite-headline">No es una ventana "grande": es una ventana <em>finita</em>.</p>
-    <p class="s4-finite-sub is-first">Ventanas más grandes <strong>desplazan</strong> el límite. No lo <strong>eliminan</strong>.</p>
-    <p class="s4-finite-sub">Diseñar para ese límite es parte del trabajo de dirigir un agente.</p>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Leer la card sin apurar. Énfasis en "desplazan, no eliminan".</strong></p>
-    <p><u>La finitud es estructural, no un bug que se arregla en la próxima versión.</u></p>
-    <p><em>"Conviene decirlo sin rodeos: la ventana es finita no por descuido sino por diseño. Es una propiedad estructural de cómo funcionan los transformers, no un defecto que va a desaparecer en la próxima versión del modelo. Cada modelo nuevo ofrece ventanas más grandes — 200k, 500k, un millón. Eso desplaza el límite, no lo elimina. Cuando el contexto acumulado supera la ventana, el sistema tiene que tomar una decisión: cortar desde el inicio, resumir, o detenerse. Diseñar para ese límite es parte del trabajo, no algo a evitar."</em></p>
-  </aside>
-</section>
-
-<!-- §4.5 · Context rot — el mecanismo de degradación -->
+<!-- §4.3 · Context rot — el mecanismo de degradación -->
 <section>
   <h2>Context rot: cómo ocurre</h2>
 
   <div class="s4-rot-with-fill">
-    <div class="s4-context-bar-wrap">
-      <div class="s4-context-bar">
-        <div class="s4-context-bar-fill" id="s4-rot-bar-fill" style="height:5%;"></div>
-      </div>
-      <p class="s4-context-bar-label">ventana de contexto</p>
-    </div>
-
     <div class="s4-rot-diagram">
-      <div class="s4-rot-layer obs-heavy fragment fade-in" data-fragment-index="2" data-rot-fill="85">
+      <div class="s4-rot-layer obs-heavy fragment fade-in" data-fragment-index="2">
         <span>vuelta 35 · output completo de tests</span>
         <span class="s4-rot-tag">2.100 tokens</span>
       </div>
-      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="2" data-rot-fill="85">
+      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="2">
         <span>vuelta 28 · lectura de config.yml</span>
         <span class="s4-rot-tag">800 tokens</span>
       </div>
-      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="1" data-rot-fill="40">
+      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="1">
         <span>vuelta 14 · respuesta del endpoint</span>
         <span class="s4-rot-tag">1.500 tokens</span>
       </div>
-      <div class="s4-rot-arrow fragment fade-in" data-fragment-index="2" data-rot-fill="85">↓ sepultada</div>
+      <div class="s4-rot-arrow fragment fade-in" data-fragment-index="2">↓ sepultada</div>
       <div class="s4-rot-layer buried">
         <span>instrucción original · "no uses dependencias externas"</span>
         <span class="s4-rot-tag">12 tokens</span>
@@ -552,62 +493,73 @@
     </div>
   </div>
 
-  <div class="s4-rot-contradiction fragment fade-in" data-fragment-index="3" data-rot-fill="95">
+  <div class="s4-rot-contradiction fragment fade-in" data-fragment-index="3">
     <span class="s4-rot-contradiction-label">Vuelta 42 · el agente decide:</span>
     <code class="s4-rot-contradiction-code">$ uv add requests pandas sqlalchemy</code>
     <span class="s4-rot-contradiction-note">contradice "no uses dependencias externas": la instrucción perdió peso</span>
   </div>
 
-  <p class="s4-center-line s4-rot-close fragment fade-in" data-fragment-index="4">
-    la instrucción no desapareció — pero la señal se diluyó en el ruido
+  <p class="s4-center-line is-secondary s4-rot-symptoms fragment fade-in" data-fragment-index="4">
+    Síntomas: contradice restricciones · repite trabajo hecho · respuestas genéricas · "no recuerda" lo que está ahí
+  </p>
+
+  <p class="s4-center-line s4-rot-close fragment fade-in" data-fragment-index="5">
+    la instrucción no desapareció, pero la señal se diluyó en el ruido
   </p>
 
   <aside class="notes">
-    <p><strong>Cuatro clicks. La barra crece 5 → 40 → 85 → 95%; el último trae la línea de cierre.</strong></p>
+    <p><strong>Cinco clicks: tres capas de ruido, los síntomas, y la línea de cierre.</strong></p>
     <p><u>12 tokens de señal contra miles de tokens de ruido.</u></p>
     <p><em>"Empezamos con esto: diste una instrucción al inicio de la sesión — pongamos 'no uses dependencias externas'. Acá está, en la base de la ventana. Doce tokens. La barra está casi vacía. El agente la leyó, y las primeras vueltas la respetó."</em></p>
     <p><em>"Vuelta 14: el agente hizo un request HTTP y la respuesta entró al contexto. Mil quinientos tokens encima de tus doce. La barra creció — todavía hay margen, todavía la instrucción se ve."</em></p>
     <p><em>"El agente siguió iterando. Vuelta 28: leyó un config. Vuelta 35: corrió tests y el output completo entró a la ventana. La barra está al 85%. La instrucción original sigue ahí, técnicamente — pero ahora está sepultada bajo miles de tokens de outputs."</em></p>
     <p><em>"Y acá está el síntoma concreto. Vuelta 42: el agente decide agregar tres dependencias con uv — exactamente lo que dijiste que no hiciera. No es que olvidó la instrucción: está en su working memory. Pero la señal compite con cada vez más ruido, y en esa decisión perdió."</em></p>
-    <p><em>"Esa es la definición operativa de context rot: la instrucción no desapareció, pero la señal se diluyó en el ruido. El modelo deja de respetarla y vos lo descubrís cuando ya pasó."</em></p>
+    <p><em>"Y estos son los síntomas que tenés que aprender a reconocer como supervisor. Contradice una restricción explícita. Repite trabajo que ya hizo. Se vuelve genérico donde antes era preciso. O 'no recuerda' algo que técnicamente sigue en la ventana. Si alguna vez vieron alguno, ahora tienen el nombre de lo que estaban mirando."</em></p>
+    <p><em>"Esa es la definición operativa de context rot: la instrucción no desapareció, pero la señal se diluyó en el ruido. Y ojo con el framing: no es que el modelo falló, es que la ventana está trabajando contra vos. Eso cambia dónde mirás para resolverlo."</em></p>
   </aside>
 </section>
 
-<!-- §4.6 · Síntomas que reconoce un supervisor -->
+<!-- §4.4 · Qué se paga: el contexto se reenvía entero, el cache lo abarata -->
 <section>
-  <h2>Síntomas que reconoce un supervisor</h2>
+  <h2>El contexto se reenvía entero en cada vuelta</h2>
 
-  <div class="s4-symptoms">
-    <div class="s4-symptom-card">
-      <div class="s4-symp-head">Contradice restricciones</div>
-      <p>Le pediste "no uses dependencias externas". Cuarenta vueltas después está instalando tres paquetes.</p>
+  <div class="s4-ops-grid">
+    <div class="s4-ops-card compact">
+      <p class="s4-ops-name">Se reenvía</p>
+      <p class="s4-ops-tagline">y se factura, vuelta tras vuelta</p>
+      <p class="s4-ops-body">
+        El modelo no guarda nada entre llamadas: cada vuelta del loop le manda el contexto completo. Cada token ocupa lugar en la ventana <strong>y</strong> se cobra de nuevo.
+      </p>
+      <p class="s4-ops-foot">
+        50 vueltas con la ventana al 90% (~900k) = ~45M tokens de input.
+      </p>
     </div>
-    <div class="s4-symptom-card">
-      <div class="s4-symp-head">Repite trabajo hecho</div>
-      <p>El agente vuelve a crear un archivo que ya completó, como si nunca lo hubiera escrito.</p>
-    </div>
-    <div class="s4-symptom-card">
-      <div class="s4-symp-head">Respuestas genéricas</div>
-      <p>Donde antes era específico y preciso, ahora propone cosas vagas o evasivas que no avanzan.</p>
-    </div>
-    <div class="s4-symptom-card">
-      <div class="s4-symp-head">"No recuerda" lo que está ahí</div>
-      <p>Le preguntás por algo del contexto inicial y actúa como si no lo tuviera, aunque técnicamente sigue ahí.</p>
+    <div class="s4-ops-card reset">
+      <p class="s4-ops-name">El cache abarata</p>
+      <p class="s4-ops-tagline">no elimina el costo</p>
+      <p class="s4-ops-body">
+        Los proveedores cachean el prefijo estable del contexto: leerlo cuesta cerca del <strong>10%</strong> del precio de input; escribirlo, un <strong>25% más</strong>.
+      </p>
+      <p class="s4-ops-foot">
+        Un cambio al principio del contexto invalida el cache desde ahí: se vuelve a pagar completo.
+      </p>
     </div>
   </div>
 
-  <p class="s4-center-line is-secondary s4-symp-close">
-    No es que el modelo falló: la ventana está trabajando contra vos.
+  <p class="s4-center-line s4-ops-close fragment fade-in">
+    Lo estable primero, lo que cambia al final: así el prefijo se mantiene cacheado.
   </p>
 
   <aside class="notes">
-    <p><strong>Recorrer las cuatro cards. Cerrar despacio con la última línea.</strong></p>
-    <p><u>La línea final invierte el framing: no es culpa del modelo.</u></p>
-    <p><em>"Si alguna vez vieron alguno de estos síntomas, ahora tienen el nombre de lo que estaban mirando. El agente contradice una restricción explícita. Repite trabajo que ya hizo. Se vuelve genérico donde antes era preciso. No 'recuerda' algo que técnicamente sigue en la ventana. Ninguno de estos síntomas significa que el modelo falló. Significa que la ventana está trabajando contra vos en vez de para vos — y eso cambia dónde mirás para resolverlo."</em></p>
+    <p><strong>Las dos cards. Click: la línea de cierre.</strong></p>
+    <p><u>El costo de una sesión larga, y por qué el orden del contexto importa.</u></p>
+    <p><em>"Acá va la parte que impacta en la factura. El modelo no guarda nada entre llamadas: cada vuelta del loop le manda el contexto completo otra vez. Por eso cada token cuenta dos veces, ocupa lugar y se cobra, y se cobra en cada vuelta. Si tu agente da cincuenta vueltas con la ventana al noventa por ciento, son cuarenta y cinco millones de tokens de input facturados en una sola sesión."</em></p>
+    <p><em>"Lo que lo hace viable es el cache. Los proveedores guardan el prefijo estable del contexto y, si la próxima llamada empieza igual, lo leen del cache: cuesta alrededor del diez por ciento del precio normal de input. Escribirlo cuesta un veinticinco por ciento más que un token normal, así que se paga solo si después lo leés al menos un par de veces."</em></p>
+    <p><em>"Y acá está la parte que a la larga les va a explicar saltos raros en el consumo: el cache es por prefijo. Si cambiás algo al principio, lo que sigue deja de servir y se vuelve a pagar completo. Por eso conviene que lo estable vaya primero, las instrucciones del proyecto, y lo que cambia vaya al final. Y por eso mismo compactar no es gratis: reescribe el contexto, así que la vuelta siguiente se paga sin cache."</em></p>
   </aside>
 </section>
 
-<!-- §4.7 · Las dos operaciones — compactar y resetear -->
+<!-- §4.5 · Las dos operaciones + cierre de la sección -->
 <section>
   <h2>Las dos operaciones: compactar y resetear</h2>
 
@@ -635,31 +587,20 @@
   </div>
 
   <p class="s4-center-line s4-ops-close fragment fade-in">
-    Ninguna es mejor en abstracto. Toda estrategia de context engineering combina las dos según el estado del contexto y la tarea.
+    Ninguna es mejor en abstracto: toda estrategia combina las dos según el estado del contexto y la tarea.
   </p>
 
-  <aside class="notes">
-    <p><strong>Las dos cards. Click: la línea final.</strong></p>
-    <p><u>Patrones agnósticos de herramienta, no comandos.</u></p>
-    <p><em>"Hay dos operaciones conceptuales que cualquier estrategia de context engineering implementa de alguna forma. La compactación: reemplazar el historial acumulado por un resumen más denso. No se borra todo — se condensa. Pero ojo: el resumen decide qué es señal, y lo que no entró al resumen se pierde. La sesión sigue, sobre ese resumen. El reset: empezar con contexto limpio, cargando solo lo necesario para la tarea siguiente. Perdés la conversación, pero arrancás fresco — tabla rasa deliberada."</em></p>
-    <p><em>"Ninguna es mejor en abstracto. Toda estrategia real combina las dos según el estado del contexto y la tarea: si vas a seguir el mismo hilo, compactás; si vas a empezar algo nuevo, reseteás cargando deliberadamente lo que vale la pena re-inyectar."</em></p>
-  </aside>
-</section>
-
-<!-- §4.8 · Cierre + bridge al siguiente nivel -->
-<section>
-  <h2>Context engineering en una línea</h2>
-
-  <div class="s4-close-wrap">
+  <div class="s4-close-wrap fragment fade-in">
     <p class="s4-close-line">Elegir qué entra a la ventana, mantener lo que sirve, soltar lo que pesa.</p>
-    <p class="s4-close-bridge is-first">Esto cubre lo que ve el modelo dentro de una sesión.</p>
-    <p class="s4-close-bridge">Pero el modelo opera sobre un entorno, y ese entorno también se diseña.</p>
+    <p class="s4-close-bridge">El modelo opera sobre un entorno, y ese entorno también se diseña.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>La línea principal con peso. Después el bridge al entorno.</strong></p>
-    <p><u>Cierre de context engineering y salto al nivel exterior: harness.</u></p>
-    <p><em>"Context engineering, en una línea: elegir qué entra a la ventana, mantener lo que sirve, soltar lo que pesa. Esto cubre todo lo que el modelo ve dentro de una sesión. Pero hay una capa más. El modelo no opera en el aire: opera sobre un entorno con tools, archivos, comandos, permisos. Y ese entorno también se diseña. Cuando algo sale mal dentro del loop, las protecciones no vienen del prompt ni del contexto — vienen del entorno que armaste alrededor. Ese es el siguiente nivel."</em></p>
+    <p><strong>Las dos cards. Click: la línea de las dos operaciones. Click: el cierre y el salto al entorno.</strong></p>
+    <p><u>Patrones agnósticos de herramienta, no comandos.</u></p>
+    <p><em>"Hay dos operaciones conceptuales que cualquier estrategia de context engineering implementa de alguna forma. La compactación: reemplazar el historial acumulado por un resumen más denso. No se borra todo — se condensa. Pero ojo: el resumen decide qué es señal, y lo que no entró al resumen se pierde. La sesión sigue, sobre ese resumen. El reset: empezar con contexto limpio, cargando solo lo necesario para la tarea siguiente. Perdés la conversación, pero arrancás fresco — tabla rasa deliberada."</em></p>
+    <p><em>"Ninguna es mejor en abstracto. Toda estrategia real combina las dos según el estado del contexto y la tarea: si vas a seguir el mismo hilo, compactás; si vas a empezar algo nuevo, reseteás cargando deliberadamente lo que vale la pena re-inyectar. Y con lo que acabamos de ver del cache: las dos reescriben el contexto, así que la vuelta siguiente se paga sin cache. Es un costo puntual que suele valer la pena frente a arrastrar una ventana podrida."</em></p>
+    <p><em>"Context engineering, en una línea: elegir qué entra a la ventana, mantener lo que sirve, soltar lo que pesa. Eso cubre lo que el modelo ve dentro de una sesión. Pero el modelo no opera en el aire: opera sobre un entorno con tools, archivos, comandos y permisos. Cuando algo sale mal dentro del loop, las protecciones no vienen del prompt ni del contexto: vienen del entorno que armaste alrededor. Ese es el nivel que sigue."</em></p>
   </aside>
 </section>
 
@@ -667,7 +608,6 @@
 <script>
   // §4.3 — CSS-only context bar, fragment-driven height.
   var S4_BAR_MIN = 2;
-  var S4_ROT_MIN = 5;
 
   function s4MaxFill(selector, attr, min, excluding) {
     var max = min;
@@ -684,16 +624,11 @@
     if (bar) bar.style.height = pct + '%';
   }
 
-  // §4.3 bar: recompute from the highest visible [data-fill] annotation.
-  // §4.5 bar: recompute from ALL visible [data-rot-fill] fragments (several
-  // share a data-fragment-index, so event order can't be trusted).
+  // Barra de §4.2: se recalcula desde la anotación [data-fill] visible más alta.
   Reveal.on('fragmentshown', function(e) {
     if (!e.fragment.dataset) return;
     if (e.fragment.dataset.fill) {
       s4SetHeight('s4-bar-fill', s4MaxFill('.s4-token-anno.visible[data-fill]', 'fill', S4_BAR_MIN, null));
-    }
-    if (e.fragment.dataset.rotFill) {
-      s4SetHeight('s4-rot-bar-fill', s4MaxFill('.fragment.visible[data-rot-fill]', 'rotFill', S4_ROT_MIN, null));
     }
   });
   Reveal.on('fragmenthidden', function(e) {
@@ -701,16 +636,12 @@
     if (e.fragment.dataset.fill) {
       s4SetHeight('s4-bar-fill', s4MaxFill('.s4-token-anno.visible[data-fill]', 'fill', S4_BAR_MIN, e.fragment));
     }
-    if (e.fragment.dataset.rotFill) {
-      s4SetHeight('s4-rot-bar-fill', s4MaxFill('.fragment.visible[data-rot-fill]', 'rotFill', S4_ROT_MIN, e.fragment));
-    }
   });
 
-  // Resync both bars on slide change so revisiting a slide doesn't start
+  // Resync de la barra al cambiar de slide para que volver no la deje
   // from a stale height (first press would shrink instead of grow).
   function s4SyncBars() {
     s4SetHeight('s4-bar-fill', s4MaxFill('.s4-token-anno.visible[data-fill]', 'fill', S4_BAR_MIN, null));
-    s4SetHeight('s4-rot-bar-fill', s4MaxFill('.fragment.visible[data-rot-fill]', 'rotFill', S4_ROT_MIN, null));
   }
   Reveal.on('slidechanged', s4SyncBars);
   Reveal.on('ready', s4SyncBars);
