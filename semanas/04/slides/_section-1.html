@@ -252,10 +252,9 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  max-width: 1180px;
-  margin: 8px auto 0;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
 }
 .s1-recap-stage4-label {
   display: block;
@@ -266,77 +265,151 @@
   letter-spacing: 0.08em;
   text-align: center;
 }
-.s1-recap-stage4-context {
+/* Flow: contexto → programa externo → respuesta */
+.s1-c5-flow {
   display: grid;
-  grid-template-columns: 1fr 1.6fr 1fr;
-  gap: 10px;
+  grid-template-columns: 470px 70px 300px 70px 290px;
   align-items: stretch;
+  width: 1200px;
+  max-width: 100%;
 }
-.s1-recap-stage4-block {
+.s1-c5-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s1-c5-arrow svg { display: block; }
+.s1-c5-ctx {
   background: var(--bg-code);
   border: 1px solid #2a3a5a;
-  border-radius: 7px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.s1-c5-title {
+  font-family: var(--font-mono);
+  font-size: 0.45em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+.s1-c5-seg {
+  border-left: 4px solid #2a3a5a;
+  background: rgba(255,255,255,0.02);
+  border-radius: 0 5px 5px 0;
+  padding: 6px 10px;
+  text-align: left;
+}
+.s1-c5-seg.sys { border-left-color: var(--accent-secondary); }
+.s1-c5-seg.hist { border-left-color: var(--text-muted); }
+.s1-c5-seg.new { border-left-color: var(--accent); }
+.s1-c5-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.45em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.s1-c5-seg.sys .s1-c5-tag { color: var(--accent-secondary); }
+.s1-c5-seg.new .s1-c5-tag { color: var(--accent); }
+.reveal .s1-c5-seg p {
+  margin: 0 !important;
+  font-size: 0.56em;
+  line-height: 1.45;
+  color: var(--text-primary);
+  text-align: left;
+}
+.reveal .s1-c5-seg p strong {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  color: var(--text-muted);
+  font-size: 0.92em;
+}
+.s1-c5-prog {
+  border: 1px dashed var(--accent-secondary);
+  border-radius: 8px;
+  background: rgba(130,170,255,0.04);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.s1-c5-prog .s1-recap-box.llm { font-size: 0.7em; padding: 6px 14px; }
+.reveal .s1-c5-rule {
+  margin: 0 !important;
+  font-size: 0.55em;
+  line-height: 1.4;
+  color: var(--accent-secondary);
+  text-align: center;
+}
+.reveal .s1-c5-rule code {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.s1-c5-out {
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-code);
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
 }
-.s1-recap-stage4-block.sys {
-  border-color: var(--accent-secondary);
-}
-.s1-recap-stage4-block.new-msg {
-  border-color: var(--accent);
-}
-.s1-recap-stage4-blocklabel {
-  font-family: var(--font-mono);
-  font-size: 0.55em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.s1-recap-stage4-block.sys .s1-recap-stage4-blocklabel { color: var(--accent-secondary); }
-.s1-recap-stage4-block.new-msg .s1-recap-stage4-blocklabel { color: var(--accent); }
-.s1-recap-stage4-block p {
-  margin: 0;
-  font-size: 0.62em;
+.s1-c5-out .s1-c5-title { color: var(--accent); }
+.reveal .s1-c5-out p {
+  margin: 0 !important;
+  font-size: 0.58em;
+  line-height: 1.45;
   color: var(--text-primary);
-  line-height: 1.5;
-}
-.s1-recap-stage4-block p strong {
-  color: var(--text-muted);
-  font-weight: 700;
-  font-family: var(--font-mono);
-  font-variant-ligatures: none;
-  font-size: 0.92em;
-}
-.s1-recap-stage4-arrow {
   text-align: center;
-  font-size: 0.6em;
+}
+/* Return path: respuesta → historial del próximo turno */
+.s1-c5-return {
+  position: relative;
+  width: 1200px;
+  max-width: 100%;
+  height: 78px;
+  margin-top: -14px;
+}
+.s1-c5-return-path {
+  position: absolute;
+  top: 0;
+  left: 235px;
+  width: 820px;
+  height: 34px;
+  border: 3px solid var(--accent-secondary);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+}
+.s1-c5-return-head {
+  position: absolute;
+  top: -4px;
+  left: 227px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 14px solid var(--accent-secondary);
+}
+.reveal .s1-c5-return-label {
+  position: absolute;
+  top: 42px;
+  left: 235px;
+  width: 820px;
+  margin: 0 !important;
+  font-size: 0.56em;
   color: var(--accent-secondary);
-}
-.s1-recap-runtime.wide {
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.s1-recap-stage4-output {
   text-align: center;
-  font-size: 0.62em;
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  border: 1px dashed var(--text-muted);
-  border-radius: 6px;
-  padding: 8px 14px;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.s1-recap-stage4-output .annot {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.86em;
-  color: var(--accent-secondary);
-  font-style: italic;
-  margin-top: 4px;
 }
 </style>
 
@@ -418,39 +491,52 @@
     <p class="s1-recap-infer fragment fade-in" data-fragment-index="4">Los pasos 2 a 4 los corre un <strong>servidor de inferencia</strong>: el backend del proveedor si usás Claude, ChatGPT o Gemini; tu propia máquina si corrés un modelo abierto.</p>
     </div>
 
-    <!-- Stage 5: appears alone with full width when the 4-col view fades out -->
+    <!-- Stage 5: appears alone with full width when the 4-col view fades out.
+         Flujo: contexto (un solo texto) → programa externo → respuesta,
+         y el retorno de la respuesta al historial del próximo turno. -->
     <div class="s1-recap-stage4 fragment fade-in" data-fragment-index="5">
       <span class="s1-recap-stage4-label">5 · conversación: el programa arma el contexto turno tras turno</span>
 
-      <div class="s1-recap-stage4-context">
-        <div class="s1-recap-stage4-block sys">
-          <span class="s1-recap-stage4-blocklabel">system prompt · fijo, va primero en cada turno</span>
-          <p>"Sos un asistente útil que responde con precisión y brevedad."</p>
+      <div class="s1-c5-flow">
+        <div class="s1-c5-ctx">
+          <span class="s1-c5-title">lo que recibe el LLM en cada turno</span>
+          <div class="s1-c5-seg sys">
+            <span class="s1-c5-tag">system prompt · fijo</span>
+            <p>"Sos un asistente útil que responde con precisión y brevedad."</p>
+          </div>
+          <div class="s1-c5-seg hist">
+            <span class="s1-c5-tag">historial · crece</span>
+            <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
+            <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje de programación interpretado…</p>
+          </div>
+          <div class="s1-c5-seg new">
+            <span class="s1-c5-tag">mensaje nuevo</span>
+            <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+            <p><strong>&lt;|assistant|&gt;</strong></p>
+          </div>
         </div>
-        <div class="s1-recap-stage4-block">
-          <span class="s1-recap-stage4-blocklabel">historial · crece turno tras turno</span>
-          <p><strong>&lt;|user|&gt;</strong> ¿qué es Python?</p>
-          <p><strong>&lt;|assistant|&gt;</strong> Un lenguaje de programación interpretado…</p>
+
+        <div class="s1-c5-arrow"><svg width="64" height="26" viewBox="0 0 64 26" aria-hidden="true"><path d="M4 13h50m0 0l-10-9m10 9l-10 9" stroke="var(--accent-secondary)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="s1-c5-prog">
+          <span class="s1-recap-runtime-label">programa externo</span>
+          <div class="s1-recap-box llm">LLM + SFT + RL</div>
+          <p class="s1-c5-rule">↺ genera hasta <code>&lt;END&gt;</code></p>
+          <p class="s1-c5-rule">filtra los <code>&lt;thinking&gt;</code></p>
         </div>
-        <div class="s1-recap-stage4-block new-msg">
-          <span class="s1-recap-stage4-blocklabel">mensaje nuevo</span>
-          <p><strong>&lt;|user|&gt;</strong> ¿cómo lo instalo?</p>
+
+        <div class="s1-c5-arrow"><svg width="64" height="26" viewBox="0 0 64 26" aria-hidden="true"><path d="M4 13h50m0 0l-10-9m10 9l-10 9" stroke="var(--accent-secondary)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="s1-c5-out">
+          <span class="s1-c5-title">respuesta</span>
+          <p>"Para instalar Python, descargá el instalador desde python.org…"</p>
         </div>
       </div>
 
-      <div class="s1-recap-stage4-arrow">↓ el programa envuelve cada mensaje con tokens de rol y concatena los tres bloques</div>
-
-      <div class="s1-recap-runtime wide">
-        <span class="s1-recap-runtime-label">programa externo</span>
-        <div class="s1-recap-box llm">LLM + SFT + RL</div>
-        <p class="s1-recap-runtime-rule">↺ concatena la salida a la entrada · corta al <code>&lt;END&gt;</code> · filtra los <code>&lt;thinking&gt;</code> del output · guarda el intercambio en el historial</p>
-      </div>
-
-      <div class="s1-recap-stage4-arrow">↓</div>
-
-      <div class="s1-recap-stage4-output">
-        "Para instalar Python, descargá el instalador desde python.org…"
-        <span class="annot">se concatena al historial para el próximo turno</span>
+      <div class="s1-c5-return" aria-hidden="true">
+        <div class="s1-c5-return-path"></div>
+        <div class="s1-c5-return-head"></div>
+        <p class="s1-c5-return-label">próximo turno: el mensaje y la respuesta pasan al historial</p>
       </div>
     </div>
   </div>
