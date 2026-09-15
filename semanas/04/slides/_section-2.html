@@ -414,14 +414,14 @@
 
 <!-- §2.3 · El trace concreto — un 404 local -->
 <section>
-  <h2>El loop en acto: un 404 en /tasks/</h2>
+  <h2>El loop en acto: un 404 en /projects/4/tasks</h2>
 
   <div class="s2-trace">
     <div class="s2-trace-row">
       <div class="s2-trace-phase pensar">pensar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p><code>GET /tasks/</code> devuelve 404. No sé si falla el request o cómo está registrado el endpoint.</p>
+        <p><code>GET /projects/4/tasks</code> devuelve 404. No sé si falla el request o cómo está registrado el endpoint.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -429,7 +429,7 @@
       <div class="s2-trace-phase actuar">actuar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>Corre <code>curl -i localhost:8000/tasks/</code> y lee <code>routers/tasks.py</code>.</p>
+        <p>Corre <code>curl -i localhost:8000/projects/4/tasks</code> y lee <code>routers/tasks.py</code>.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -437,7 +437,7 @@
       <div class="s2-trace-phase observar">observar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>El curl confirma el 404. En el router, el path está registrado como <code>/tasks//</code> (slash duplicado).</p>
+        <p>El curl confirma el 404. En el router, el <code>prefix</code> termina en <code>/</code>: el path queda registrado como <code>/projects/{id}//tasks</code>.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -453,7 +453,7 @@
       <div class="s2-trace-phase actuar">actuar</div>
       <div class="s2-trace-connector"></div>
       <div class="s2-trace-body">
-        <p>Edita el router: cambia <code>/tasks//</code> por <code>/tasks/</code>.</p>
+        <p>Edita el router: saca el slash del <code>prefix</code> y el path queda <code>/projects/{id}/tasks</code>.</p>
       </div>
     </div>
     <div class="s2-trace-gap"></div>
@@ -471,7 +471,7 @@
   <aside class="notes">
     <p><strong>Leer el trace despacio, fase por fase, con el puntero.</strong></p>
     <p><u>Trace de dos vueltas sobre un 404 local; leer el router es parte de actuar.</u></p>
-    <p><em>"Veámoslo concreto, en tu máquina. La tarea: 'arreglá el 404 en /tasks/'. El agente no tiene más información que el objetivo. Primera vuelta. Pensar: no sé si el problema está en el request o en cómo se registró el endpoint. Actuar: dos tools en la misma vuelta, un curl al endpoint y una lectura del archivo del router. Observar: el curl confirma el 404, y en el router el path quedó registrado con un slash duplicado, /tasks//. Esa observación entró al contexto. Segunda vuelta. Pensar: ya sé qué es y dónde está. Actuar: edita el router. Observar: repite el curl y devuelve 200. Condición de corte: objetivo alcanzado. Dos vueltas. La primera no arregló nada: identificó la causa. La segunda corrigió y verificó. Un chat que te devuelve un texto después del primer prompt no completó ninguna de esas vueltas: te delegó el trabajo a vos."</em></p>
+    <p><em>"Veámoslo concreto, en tu máquina. La tarea: 'arreglá el 404 en /projects/4/tasks'. El agente no tiene más información que el objetivo. Primera vuelta. Pensar: no sé si el problema está en el request o en cómo se registró el endpoint. Actuar: dos tools en la misma vuelta, un curl al endpoint y una lectura del archivo del router. Observar: el curl confirma el 404, y en el router el prefix termina en barra, así que el path quedó registrado como /projects/{id}//tasks, con el slash duplicado. Esa observación entró al contexto. Segunda vuelta. Pensar: ya sé qué es y dónde está. Actuar: edita el router. Observar: repite el curl y devuelve 200. Condición de corte: objetivo alcanzado. Dos vueltas. La primera no arregló nada: identificó la causa. La segunda corrigió y verificó. Un chat que te devuelve un texto después del primer prompt no completó ninguna de esas vueltas: te delegó el trabajo a vos."</em></p>
   </aside>
 </section>
 
