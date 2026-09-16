@@ -1,4 +1,4 @@
-import { finishGame } from "./finish.js";
+import { finishGame, onKeys } from "./common.js";
 
 const CELL = 20;
 const COLS = 24;
@@ -42,12 +42,11 @@ export class SnakeScene extends Phaser.Scene {
   }
 
   bindKeys() {
-    const keyboard = this.input.keyboard;
-    keyboard.enableGlobalCapture();
-    keyboard.addCapture("LEFT,RIGHT,UP,DOWN");
+    const handlers = {};
     for (const name of Object.keys(DIRECTIONS)) {
-      keyboard.on(`keydown-${name}`, () => this.turn(DIRECTIONS[name]));
+      handlers[name] = () => this.turn(DIRECTIONS[name]);
     }
+    onKeys(this, handlers);
   }
 
   turn(direction) {

@@ -1,6 +1,13 @@
 import { SNAKE_SIZE, SnakeScene } from "./games/snake.js";
+import { TETRIS_SIZE, TetrisScene } from "./games/tetris.js";
 
 const GAMES = {
+  tetris: {
+    name: "Tetris",
+    scene: TetrisScene,
+    size: TETRIS_SIZE,
+    controls: "Izquierda y derecha para mover, arriba para rotar, abajo para bajar más rápido y espacio para soltar la pieza.",
+  },
   snake: {
     name: "Snake",
     scene: SnakeScene,
