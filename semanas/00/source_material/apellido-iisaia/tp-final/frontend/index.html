@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plataforma de juegos</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Plataforma de juegos</h1>
+    <a href="/docs">Documentación de la API</a>
+  </header>
+  <main>
+    <p>Elegí un juego. Al terminar la partida podés guardar tu puntaje en el ranking.</p>
+    <p id="status" class="status">Cargando juegos...</p>
+    <button id="retry" class="button secondary" type="button" hidden>Reintentar</button>
+    <ul id="games" class="game-list"></ul>
+  </main>
+  <script type="module" src="js/home.js"></script>
+</body>
+</html>
