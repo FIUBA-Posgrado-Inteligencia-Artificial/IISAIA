@@ -4,6 +4,21 @@
    (margin + color) otherwise wins over a single-class selector. */
 
 /* §4.5 — context rot diagram */
+.s4-anno-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+.s4-anno-chip {
+  border: 1px solid #3a4a6a;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 0.48em;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: rgba(130,170,255,0.06);
+}
 .reveal .s4-token-anno-rule {
   display: block;
   margin: 6px 0 0 !important;
@@ -185,7 +200,7 @@
 .s4-context-bar {
   position: relative;
   width: 64px;
-  height: 240px;
+  height: 215px;
   border: 2px solid var(--text-muted);
   border-radius: 6px;
   background: var(--bg-code);
@@ -226,7 +241,7 @@
 .s4-token-annotations {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 9px;
 }
 .s4-token-anno {
   padding: 10px 16px;
@@ -414,7 +429,15 @@
       </div>
       <div class="s4-token-anno fragment" data-fragment-index="1" data-fill="50">
         <span class="s4-token-anno-val">~500k tokens</span>
-        <span class="s4-token-anno-label">Sesión normal: cada vuelta deposita razonamiento, tool calls y outputs</span>
+        <span class="s4-token-anno-label">Sesión normal: cada vuelta deposita algo, y nada se va</span>
+        <span class="s4-anno-chips">
+          <span class="s4-anno-chip">tokens de razonamiento</span>
+          <span class="s4-anno-chip">archivos leídos</span>
+          <span class="s4-anno-chip">documentación</span>
+          <span class="s4-anno-chip">logs y output de tests</span>
+          <span class="s4-anno-chip">preguntas y respuestas con vos</span>
+          <span class="s4-anno-chip">diffs aplicados</span>
+        </span>
       </div>
       <div class="s4-token-anno fragment" data-fragment-index="2" data-fill="90">
         <span class="s4-token-anno-val">~900k tokens</span>
@@ -458,7 +481,7 @@
     <p><u>Órdenes de magnitud reales, no fórmulas exactas.</u></p>
     <p><em>"Miren la barra: es la ventana de contexto de una sesión. Y ojo con esto, porque es lo primero que sorprende: no arranca vacía."</em></p>
     <p><em>"Antes de que escribas tu primer mensaje, el runtime ya cargó cosas: las instrucciones del proyecto, las convenciones del equipo, lo que se guardó de sesiones anteriores. Pongamos quince mil tokens. Todavía no pediste nada y ya estás ocupando lugar. En la Parte 2 vamos a ver exactamente qué archivos son y cómo se controlan."</em></p>
-    <p><em>"Después entra el loop. Cada vuelta deposita tokens: el razonamiento del modelo, las llamadas a tools, los outputs que vuelven. Una sesión normal ronda el medio millón. Para tener referencia: un archivo de 300 líneas son unos dos mil tokens, así que estamos hablando de un par de cientos de archivos leídos, o su equivalente en observaciones. La acumulación es más rápida de lo que intuís, porque cada observación queda: no desaparece después de procesarla."</em></p>
+    <p><em>"Después entra el loop, y acá conviene ser concreto con qué se apila. Los tokens de razonamiento del modelo, que en los modelos actuales son muchos. Cada archivo que leyó. La documentación que fue a buscar. Los logs y el output completo de los tests, que suelen ser enormes. Las preguntas que te hizo y lo que vos contestaste. Los diffs que aplicó. Una sesión normal ronda el medio millón. Para tener referencia: un archivo de 300 líneas son unos dos mil tokens, así que estamos hablando de un par de cientos de archivos leídos, o su equivalente en observaciones. La acumulación es más rápida de lo que intuís, porque cada observación queda: no desaparece después de procesarla."</em></p>
     <p><em>"Si el agente sigue iterando sobre la misma tarea, llegás a novecientos mil. La ventana de un millón, que parecía enorme cuando empezaste, ya está casi saturada."</em></p>
     <p><em>"Y esto no se arregla esperando el próximo modelo. Cada generación ofrece ventanas más grandes, y eso desplaza el límite, no lo elimina. Es una propiedad estructural, no un descuido. Administrar ese límite es parte del trabajo de dirigir un agente."</em></p>
     <p><em>"Ahora miren qué pasa con la ventana así de llena. Allá abajo, en esos quince mil tokens del arranque, estaba tu instrucción: no uses dependencias externas. Doce tokens. Y cada vuelta la ventana entera entra al modelo, esa instrucción incluida. Y llegado un punto el agente decide: uv add requests pandas sqlalchemy. Exactamente lo que dijiste que no hiciera. No es que la olvidó, la tiene delante. Pero doce tokens de señal compiten contra novecientos mil de ruido, y en esa decisión perdieron."</em></p>
