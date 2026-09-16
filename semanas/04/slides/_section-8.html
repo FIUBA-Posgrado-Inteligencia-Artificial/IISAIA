@@ -818,10 +818,10 @@
   <div class="s8-cases-grid">
     <div class="s8-case-card">
       <span class="s8-case-tag">Caso 1</span>
-      <h3 class="s8-case-h3">No es <code>.cursorrules</code></h3>
+      <h3 class="s8-case-h3">Otra herramienta no la lee</h3>
       <p class="s8-case-body">
-        Otras herramientas tienen su equivalente con formato propio (en Cursor, <code>.cursor/rules/</code>).
-        No son intercambiables: Claude Code lee <code>.claude/rules/</code>.
+        Cursor usa <code>.cursor/rules/</code>, con formato propio. OpenCode lee tu <code>CLAUDE.md</code>
+        y tus skills, pero no <code>.claude/rules/</code>.
       </p>
     </div>
     <div class="s8-case-card">
@@ -844,8 +844,8 @@
 
   <aside class="notes">
     <p><strong>Recorrer las tres cards de izquierda a derecha; la dos es la que más se confunde.</strong></p>
-    <p><u>Tres confusiones: otras herramientas, costo sin paths:, qué dispara la carga.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: no es punto cursorrules. Otras herramientas tienen su propio mecanismo de reglas, Cursor por ejemplo usa .cursor/rules/, con formato propio. Si googleás 'claude code rules' y te aparecen tutoriales mezclados, fijate de qué herramienta hablan: los archivos no son intercambiables. Dos, y es la que más confunde: sin paths, una rule cuesta lo mismo que CLAUDE.md. Mucha gente parte el CLAUDE.md en tres rules pensando que achicó la ventana, y la ventana queda igual; lo que ganó es orden. Tres: lo que activa la rule es leer un archivo, no que el path aparezca. Si Claude lista el directorio backend con un ls, eso no activa api.md; si corre un comando que imprime paths del backend, tampoco. Se activa cuando Claude lee el contenido de un archivo cuyo path cae en el glob."</em></p>
+    <p><u>Tres confusiones: hasta dónde llega la compatibilidad, costo sin paths:, qué dispara la carga.</u></p>
+    <p><em>"Quinta pregunta: qué confunde. Una: otra herramienta no la lee. Cursor tiene su propio mecanismo, .cursor/rules/, con formato propio. Y la compatibilidad entre herramientas es parcial: OpenCode, por ejemplo, lee tu CLAUDE.md y tus skills, pero no lee .claude/rules/. Si pasás un proyecto de una herramienta a otra, fijate pieza por pieza qué se lee y qué no, porque lo que no se lee falla en silencio. Dos, y es la que más confunde: sin paths, una rule cuesta lo mismo que CLAUDE.md. Mucha gente parte el CLAUDE.md en tres rules pensando que achicó la ventana, y la ventana queda igual; lo que ganó es orden. Tres: lo que activa la rule es leer un archivo, no que el path aparezca. Si Claude lista el directorio backend con un ls, eso no activa api.md; si corre un comando que imprime paths del backend, tampoco. Se activa cuando Claude lee el contenido de un archivo cuyo path cae en el glob."</em></p>
   </aside>
 </section>
 
@@ -897,6 +897,7 @@
     <p class="s8-close-main">
       Rules parte las instrucciones del agente en archivos chicos por tema,
       con la opción de declarar <strong>cuándo</strong> entra cada una al contexto, además de <strong>qué</strong> dice.
+      El concepto sirve en cualquier harness; declararlo por glob, hoy, solo en Claude Code.
     </p>
     <p class="s8-close-bridge">
       CLAUDE.md y rules son <em>instrucciones para el agente</em>: Markdown que le dice qué hacer.
@@ -907,7 +908,7 @@
   <aside class="notes">
     <p><strong>Apoyar "modulares por archivo, condicionales por path" y marcar el contraste instrucciones / configuración.</strong></p>
     <p><u>Cierre de §8 y salto a §9: de instrucciones en Markdown para el agente a configuración en JSON para el runtime.</u></p>
-    <p><em>"Cerramos rules. La propiedad central: partir las instrucciones en archivos chicos por tema, con la opción de declarar cuándo entra cada una al contexto, no solo qué dice. Modulares por archivo, condicionales por path. Y acá hay un salto que vale la pena marcar. CLAUDE.md y rules son instrucciones para el agente: Markdown que le habla al modelo, en lenguaje natural. Lo que sigue, settings.json, es distinto en naturaleza: es JSON y no le habla al agente, le habla al programa que lo corre. No es 'cuando trabajes en backend, hacé esto'; es 'cuando Claude termine un turno, ejecutá este hook'. Cambia el canal: del agente al sistema que lo corre."</em></p>
+    <p><em>"Cerramos rules. La propiedad central: partir las instrucciones en archivos chicos por tema, con la opción de declarar cuándo entra cada una al contexto, no solo qué dice. Modulares por archivo, condicionales por path. La idea de que una instrucción entre solo cuando importa la vas a buscar en cualquier herramienta; la forma de declararla con un glob, por ahora, es de Claude Code. Y acá hay un salto que vale la pena marcar. CLAUDE.md y rules son instrucciones para el agente: Markdown que le habla al modelo, en lenguaje natural. Lo que sigue, settings.json, es distinto en naturaleza: es JSON y no le habla al agente, le habla al programa que lo corre. No es 'cuando trabajes en backend, hacé esto'; es 'cuando Claude termine un turno, ejecutá este hook'. Cambia el canal: del agente al sistema que lo corre."</em></p>
   </aside>
 </section>
 

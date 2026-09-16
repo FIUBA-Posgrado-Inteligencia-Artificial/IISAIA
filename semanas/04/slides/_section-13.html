@@ -291,15 +291,15 @@
 <section class="s13-slide">
   <h2>La configuración del agente también es producto</h2>
 
-  <p class="s13-entrega-lead">En <code>.claude/</code> o el equivalente de tu herramienta, cada pieza puesta con intención:</p>
+  <p class="s13-entrega-lead">En la configuración de tu herramienta (<code>.claude/</code>, <code>.codex/</code>, <code>.opencode/</code>), cada pieza puesta con intención:</p>
 
   <div class="s13-entrega-wrap">
     <div class="s13-entrega-card">
       <ul class="s13-entrega-features">
-        <li><code>CLAUDE.md</code> con folder map y convenciones del proyecto</li>
-        <li><code>.claude/rules/</code> con al menos una rule con <code>paths:</code></li>
-        <li><code>.claude/settings.json</code> con <code>permissions</code> (<code>allow</code> / <code>deny</code> / <code>ask</code>) pensados para el proyecto</li>
-        <li>Al menos una skill propia, invocable como slash command</li>
+        <li>Instrucciones del proyecto (<code>CLAUDE.md</code> o <code>AGENTS.md</code>) con folder map y convenciones</li>
+        <li>Instrucciones por tema, con scope por path si tu herramienta lo permite</li>
+        <li>Configuración del runtime con permisos pensados para el proyecto</li>
+        <li>Al menos una skill propia</li>
         <li>Un sub-agent, si la complejidad del proyecto lo justifica</li>
         <li>Plan mode durante el desarrollo (se ve en el proceso, no en un archivo)</li>
       </ul>
@@ -310,7 +310,7 @@
   <aside class="notes">
     <p><strong>Leer las seis piezas rápido: son las de la Parte 2, ahora como parte del repo.</strong></p>
     <p><u>La configuración del agente no es andamiaje invisible: se entrega y se explica.</u></p>
-    <p><em>"La configuración del agente también es producto. Si usás Claude Code, vive en la carpeta .claude; si usás otra herramienta, en su equivalente. Seis piezas. CLAUDE.md con el folder map y las convenciones. Al menos una rule que se active por path. settings.json con permisos pensados para este proyecto, no copiados. Una skill propia que se pueda invocar como comando. Un sub-agent si el proyecto lo pide; si no, no hace falta inventarlo. Y plan mode durante el desarrollo: eso no es un archivo, se ve en cómo trabajaste. No es decoración: se versiona con el código y en la defensa tenés que poder contar por qué está cada cosa."</em></p>
+    <p><em>"La configuración del agente también es producto. Vive en la carpeta de tu herramienta: .claude si usás Claude Code, .codex o .opencode si usás otra. Seis piezas, nombradas por lo que son y no por el archivo. Las instrucciones del proyecto, CLAUDE.md o AGENTS.md, con el folder map y las convenciones. Instrucciones separadas por tema, y si tu herramienta deja cargarlas por path, usalo. La configuración del runtime con permisos pensados para este proyecto, no copiados; y si cambiaste de herramienta, revisá cómo evalúa las reglas. Una skill propia. Un sub-agent si el proyecto lo pide; si no, no hace falta inventarlo. Y plan mode durante el desarrollo: eso no es un archivo, se ve en cómo trabajaste. No es decoración: se versiona con el código y en la defensa tenés que poder contar por qué está cada cosa."</em></p>
   </aside>
 </section>
 

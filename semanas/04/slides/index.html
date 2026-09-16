@@ -5099,10 +5099,10 @@
   <div class="s8-cases-grid">
     <div class="s8-case-card">
       <span class="s8-case-tag">Caso 1</span>
-      <h3 class="s8-case-h3">No es <code>.cursorrules</code></h3>
+      <h3 class="s8-case-h3">Otra herramienta no la lee</h3>
       <p class="s8-case-body">
-        Otras herramientas tienen su equivalente con formato propio (en Cursor, <code>.cursor/rules/</code>).
-        No son intercambiables: Claude Code lee <code>.claude/rules/</code>.
+        Cursor usa <code>.cursor/rules/</code>, con formato propio. OpenCode lee tu <code>CLAUDE.md</code>
+        y tus skills, pero no <code>.claude/rules/</code>.
       </p>
     </div>
     <div class="s8-case-card">
@@ -5125,8 +5125,8 @@
 
   <aside class="notes">
     <p><strong>Recorrer las tres cards de izquierda a derecha; la dos es la que más se confunde.</strong></p>
-    <p><u>Tres confusiones: otras herramientas, costo sin paths:, qué dispara la carga.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: no es punto cursorrules. Otras herramientas tienen su propio mecanismo de reglas, Cursor por ejemplo usa .cursor/rules/, con formato propio. Si googleás 'claude code rules' y te aparecen tutoriales mezclados, fijate de qué herramienta hablan: los archivos no son intercambiables. Dos, y es la que más confunde: sin paths, una rule cuesta lo mismo que CLAUDE.md. Mucha gente parte el CLAUDE.md en tres rules pensando que achicó la ventana, y la ventana queda igual; lo que ganó es orden. Tres: lo que activa la rule es leer un archivo, no que el path aparezca. Si Claude lista el directorio backend con un ls, eso no activa api.md; si corre un comando que imprime paths del backend, tampoco. Se activa cuando Claude lee el contenido de un archivo cuyo path cae en el glob."</em></p>
+    <p><u>Tres confusiones: hasta dónde llega la compatibilidad, costo sin paths:, qué dispara la carga.</u></p>
+    <p><em>"Quinta pregunta: qué confunde. Una: otra herramienta no la lee. Cursor tiene su propio mecanismo, .cursor/rules/, con formato propio. Y la compatibilidad entre herramientas es parcial: OpenCode, por ejemplo, lee tu CLAUDE.md y tus skills, pero no lee .claude/rules/. Si pasás un proyecto de una herramienta a otra, fijate pieza por pieza qué se lee y qué no, porque lo que no se lee falla en silencio. Dos, y es la que más confunde: sin paths, una rule cuesta lo mismo que CLAUDE.md. Mucha gente parte el CLAUDE.md en tres rules pensando que achicó la ventana, y la ventana queda igual; lo que ganó es orden. Tres: lo que activa la rule es leer un archivo, no que el path aparezca. Si Claude lista el directorio backend con un ls, eso no activa api.md; si corre un comando que imprime paths del backend, tampoco. Se activa cuando Claude lee el contenido de un archivo cuyo path cae en el glob."</em></p>
   </aside>
 </section>
 
@@ -5178,6 +5178,7 @@
     <p class="s8-close-main">
       Rules parte las instrucciones del agente en archivos chicos por tema,
       con la opción de declarar <strong>cuándo</strong> entra cada una al contexto, además de <strong>qué</strong> dice.
+      El concepto sirve en cualquier harness; declararlo por glob, hoy, solo en Claude Code.
     </p>
     <p class="s8-close-bridge">
       CLAUDE.md y rules son <em>instrucciones para el agente</em>: Markdown que le dice qué hacer.
@@ -5188,7 +5189,7 @@
   <aside class="notes">
     <p><strong>Apoyar "modulares por archivo, condicionales por path" y marcar el contraste instrucciones / configuración.</strong></p>
     <p><u>Cierre de §8 y salto a §9: de instrucciones en Markdown para el agente a configuración en JSON para el runtime.</u></p>
-    <p><em>"Cerramos rules. La propiedad central: partir las instrucciones en archivos chicos por tema, con la opción de declarar cuándo entra cada una al contexto, no solo qué dice. Modulares por archivo, condicionales por path. Y acá hay un salto que vale la pena marcar. CLAUDE.md y rules son instrucciones para el agente: Markdown que le habla al modelo, en lenguaje natural. Lo que sigue, settings.json, es distinto en naturaleza: es JSON y no le habla al agente, le habla al programa que lo corre. No es 'cuando trabajes en backend, hacé esto'; es 'cuando Claude termine un turno, ejecutá este hook'. Cambia el canal: del agente al sistema que lo corre."</em></p>
+    <p><em>"Cerramos rules. La propiedad central: partir las instrucciones en archivos chicos por tema, con la opción de declarar cuándo entra cada una al contexto, no solo qué dice. Modulares por archivo, condicionales por path. La idea de que una instrucción entre solo cuando importa la vas a buscar en cualquier herramienta; la forma de declararla con un glob, por ahora, es de Claude Code. Y acá hay un salto que vale la pena marcar. CLAUDE.md y rules son instrucciones para el agente: Markdown que le habla al modelo, en lenguaje natural. Lo que sigue, settings.json, es distinto en naturaleza: es JSON y no le habla al agente, le habla al programa que lo corre. No es 'cuando trabajes en backend, hacé esto'; es 'cuando Claude termine un turno, ejecutá este hook'. Cambia el canal: del agente al sistema que lo corre."</em></p>
   </aside>
 </section>
 </section>
@@ -8769,15 +8770,15 @@ No hagas commits ni push.</div>
 <section class="s13-slide">
   <h2>La configuración del agente también es producto</h2>
 
-  <p class="s13-entrega-lead">En <code>.claude/</code> o el equivalente de tu herramienta, cada pieza puesta con intención:</p>
+  <p class="s13-entrega-lead">En la configuración de tu herramienta (<code>.claude/</code>, <code>.codex/</code>, <code>.opencode/</code>), cada pieza puesta con intención:</p>
 
   <div class="s13-entrega-wrap">
     <div class="s13-entrega-card">
       <ul class="s13-entrega-features">
-        <li><code>CLAUDE.md</code> con folder map y convenciones del proyecto</li>
-        <li><code>.claude/rules/</code> con al menos una rule con <code>paths:</code></li>
-        <li><code>.claude/settings.json</code> con <code>permissions</code> (<code>allow</code> / <code>deny</code> / <code>ask</code>) pensados para el proyecto</li>
-        <li>Al menos una skill propia, invocable como slash command</li>
+        <li>Instrucciones del proyecto (<code>CLAUDE.md</code> o <code>AGENTS.md</code>) con folder map y convenciones</li>
+        <li>Instrucciones por tema, con scope por path si tu herramienta lo permite</li>
+        <li>Configuración del runtime con permisos pensados para el proyecto</li>
+        <li>Al menos una skill propia</li>
         <li>Un sub-agent, si la complejidad del proyecto lo justifica</li>
         <li>Plan mode durante el desarrollo (se ve en el proceso, no en un archivo)</li>
       </ul>
@@ -8788,7 +8789,7 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>Leer las seis piezas rápido: son las de la Parte 2, ahora como parte del repo.</strong></p>
     <p><u>La configuración del agente no es andamiaje invisible: se entrega y se explica.</u></p>
-    <p><em>"La configuración del agente también es producto. Si usás Claude Code, vive en la carpeta .claude; si usás otra herramienta, en su equivalente. Seis piezas. CLAUDE.md con el folder map y las convenciones. Al menos una rule que se active por path. settings.json con permisos pensados para este proyecto, no copiados. Una skill propia que se pueda invocar como comando. Un sub-agent si el proyecto lo pide; si no, no hace falta inventarlo. Y plan mode durante el desarrollo: eso no es un archivo, se ve en cómo trabajaste. No es decoración: se versiona con el código y en la defensa tenés que poder contar por qué está cada cosa."</em></p>
+    <p><em>"La configuración del agente también es producto. Vive en la carpeta de tu herramienta: .claude si usás Claude Code, .codex o .opencode si usás otra. Seis piezas, nombradas por lo que son y no por el archivo. Las instrucciones del proyecto, CLAUDE.md o AGENTS.md, con el folder map y las convenciones. Instrucciones separadas por tema, y si tu herramienta deja cargarlas por path, usalo. La configuración del runtime con permisos pensados para este proyecto, no copiados; y si cambiaste de herramienta, revisá cómo evalúa las reglas. Una skill propia. Un sub-agent si el proyecto lo pide; si no, no hace falta inventarlo. Y plan mode durante el desarrollo: eso no es un archivo, se ve en cómo trabajaste. No es decoración: se versiona con el código y en la defensa tenés que poder contar por qué está cada cosa."</em></p>
   </aside>
 </section>
 
