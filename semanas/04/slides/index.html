@@ -3970,6 +3970,40 @@
   </aside>
 </section>
 
+<!-- §7.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s7-slide">
+  <h2>El mismo archivo, con otro nombre</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">CLAUDE.md</span>
+      <p class="harness-map-note">Cuatro niveles, de managed a local, que se concatenan. <code>@import</code> suma otros archivos.</p>
+      <p class="harness-map-note">Memoria automática: la escribe Claude en <code>~/.claude/projects/</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">AGENTS.md</span>
+      <p class="harness-map-note">Uno en <code>~/.codex/</code> y uno por directorio, desde la raíz del repo hasta donde estás. Se concatenan, sin <code>@import</code>.</p>
+      <p class="harness-map-note">Memoria automática: existe, apagada por defecto.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">AGENTS.md</span>
+      <p class="harness-map-note">Si no encuentra ninguno, <strong>lee <code>CLAUDE.md</code></strong>. En <code>opencode.json</code>, <code>instructions</code> suma archivos por glob.</p>
+      <p class="harness-map-note">Memoria automática: <strong>no tiene</strong>.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Cambia el nombre del archivo, no el mecanismo: texto tuyo que entra a la ventana en cada sesión.</p>
+
+  <aside class="notes">
+    <p><strong><code>AGENTS.md</code> es el nombre que comparten dos de los tres.</strong></p>
+    <p><u>Instrucciones persistentes en tres harness: mismo mecanismo, otro nombre; la memoria automática no está en todos.</u></p>
+    <p><em>"Antes de seguir con cuándo se carga, la misma pieza en los otros dos. En Codex y en OpenCode el archivo se llama AGENTS.md, y funciona igual: texto tuyo que entra a la ventana al arrancar. Codex lee uno en su carpeta de usuario y uno por cada directorio desde la raíz del repo hasta donde estás, y los concatena, igual que Claude Code; no tiene import. OpenCode lee AGENTS.md y, si no hay, lee el CLAUDE.md, así que un repo configurado para Claude Code ya le sirve. Además deja sumar archivos con instructions en su config. Donde no coinciden es en la memoria automática: Claude Code la tiene, Codex la tiene pero apagada, y OpenCode no la tiene. Si un proyecto tiene que funcionar con varias herramientas, lo que importa va en el archivo de instrucciones, no en la memoria."</em></p>
+  </aside>
+</section>
+
 <!-- §7.4 · Cuándo se carga — orden de carga, concatenación -->
 <section class="s7-slide">
   <ol class="s7-five-q-grid is-mini">
@@ -4886,6 +4920,37 @@
   </aside>
 </section>
 
+<!-- §8.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s8-slide">
+  <h2>Carga condicional: acá los tres no coinciden</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/rules/*.md</span>
+      <p class="harness-map-note">Con <code>paths:</code> en el frontmatter, la rule entra cuando se lee un archivo que matchea el glob.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">AGENTS.md por carpeta</span>
+      <p class="harness-map-note">Scope por directorio, no por glob. Se arma al arrancar según dónde abriste la sesión.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">instructions</span>
+      <p class="harness-map-note is-warn">Los globs eligen <strong>qué</strong> archivos cargar, no <strong>cuándo</strong>: entran todos al arrancar.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">El concepto es portable: instrucciones que entran solo cuando importan. La forma declarativa, por glob, hoy es de Claude Code.</p>
+
+  <aside class="notes">
+    <p><strong>La única pieza sin equivalente directo. Decirlo así, sin vueltas.</strong></p>
+    <p><u>Carga condicional por path: Claude Code la declara; Codex y OpenCode la aproximan.</u></p>
+    <p><em>"Acá los tres no coinciden, y conviene saberlo. Lo que hace rules con paths, cargar una instrucción recién cuando el agente lee un archivo que matchea un glob, no existe tal cual en los otros dos. Codex se acerca con un AGENTS.md por carpeta: si abrís la sesión adentro de backend, carga el de backend. Pero es por directorio, no por patrón, y se decide al arrancar. OpenCode tiene instructions con globs, pero el glob elige qué archivos cargar, no cuándo: entran todos al principio y cuestan contexto desde el primer mensaje. Así que el concepto viaja, instrucciones que entran solo cuando importan, pero si tu proyecto depende de eso y lo querés en otra herramienta, lo vas a tener que resolver con carpetas."</em></p>
+  </aside>
+</section>
+
 <!-- §8.4 · Cuándo se cargan — sin frontmatter vs con paths: -->
 <section class="s8-slide">
   <ol class="s8-five-q-grid is-mini">
@@ -5729,6 +5794,37 @@
   </aside>
 </section>
 
+<!-- §9.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s9-slide">
+  <h2>Config del runtime: otro formato, la misma cascada</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/settings.json</span>
+      <p class="harness-map-note">JSON en cinco niveles: managed, línea de comandos, local, proyecto y usuario.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">.codex/config.toml</span>
+      <p class="harness-map-note">TOML. El de usuario vive en <code>~/.codex/</code>; el del proyecto solo carga si marcaste el repo como confiable.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">opencode.json</span>
+      <p class="harness-map-note">JSON con comentarios. Global y proyecto se mergean, y los valores aceptan <code>{env:VAR}</code> y <code>{file:ruta}</code>.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Cambia el formato; la cascada de niveles y quién pisa a quién, no.</p>
+
+  <aside class="notes">
+    <p><strong>No leer los tres archivos: marcar la cascada común y la condición de confianza de Codex.</strong></p>
+    <p><u>El archivo de configuración del runtime existe en los tres, con formato distinto y la misma idea de niveles.</u></p>
+    <p><em>"La configuración del runtime también existe en los otros dos. Codex usa TOML, config.toml, con uno de usuario en su carpeta y uno de proyecto, con una condición que Claude Code no tiene: el de proyecto solo se carga si marcaste ese repo como confiable. Tiene sentido, porque un repo que clonás podría traer una config que le da más permisos al agente. OpenCode usa opencode.json, que acepta comentarios, mergea el global con el del proyecto y deja referenciar variables de entorno o archivos adentro de los valores, útil para no escribir una API key en el archivo. Tres formatos, pero la misma estructura: niveles, y el más específico pisa al más general."</em></p>
+  </aside>
+</section>
+
 <!-- §9.4 · Cuándo se carga — recarga en caliente salvo model -->
 <section class="s9-slide">
   <ol class="s9-five-q-grid is-mini">
@@ -6512,6 +6608,38 @@
     <p><strong>No repetir la cascada de §9: el punto es que las listas se suman.</strong></p>
     <p><u>Las reglas pueden estar en cualquier nivel; la sesión evalúa la unión.</u></p>
     <p><em>"Segunda pregunta. Dónde vive. En el campo permissions de cualquiera de los archivos de settings que vimos: usuario, proyecto, local, o el managed de una organización. Lo distinto respecto de un valor como model es que acá nada se pisa. Si el proyecto permite uv sync y prohíbe git push, y tu local agrega uv run pytest, la sesión evalúa las tres reglas juntas. Tu local puede sumar permisos para tu máquina, pero no borra un deny del equipo."</em></p>
+  </aside>
+</section>
+
+<!-- §10.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s10-slide">
+  <h2>El mismo gate, tres formas de resolver un conflicto</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">permissions</span>
+      <p class="harness-map-note"><code>deny</code>, después <code>ask</code>, después <code>allow</code>. Un <code>deny</code> gana siempre, esté en el archivo que esté.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">sandbox · rules</span>
+      <p class="harness-map-note">Tres sistemas: el sandbox limita qué puede tocar, <code>approval_policy</code> decide cuándo pregunta y los archivos <code>.rules</code> filtran comandos.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">permission</span>
+      <p class="harness-map-note"><code>"rm *": "deny",</code><br><code>"*": "allow"</code></p>
+      <p class="harness-map-note is-warn"><strong>Gana la última regla que matchea</strong>: en este orden, <code>rm -rf</code> pasa.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">El gate antes de ejecutar es universal. Cómo se resuelve un conflicto entre reglas no lo es: leé la semántica antes de copiar una config.</p>
+
+  <aside class="notes">
+    <p><strong>El ejemplo de OpenCode es el que queda: la misma regla, escrita igual, hace lo contrario.</strong></p>
+    <p><u>Permisos en tres harness: el concepto coincide, la forma de resolver conflictos no.</u></p>
+    <p><em>"Esta es la comparación que más importa de toda la parte. Los tres tienen un gate antes de ejecutar una tool. Pero fijate cómo resuelven un conflicto. En Claude Code, deny gana siempre, sin importar el orden ni el archivo. En Codex el mismo trabajo está repartido en tres sistemas: el sandbox limita qué archivos y qué red puede tocar, la approval policy decide cuándo te pregunta, y unos archivos de reglas filtran comandos. Y en OpenCode gana la última regla que matchea. Miren el ejemplo: deny para rm, y después allow para todo. Si lo leés con la cabeza de Claude Code, pensás que rm está bloqueado. En OpenCode, la última regla que matchea rm -rf es el asterisco, y pasa. La misma intención, escrita igual, hace lo contrario. Por eso: nunca copies una config de permisos de una herramienta a otra sin leer cómo evalúa."</em></p>
   </aside>
 </section>
 
@@ -7328,6 +7456,37 @@
   </aside>
 </section>
 
+<!-- §11.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s11-slide">
+  <h2>Skills: acá los tres convergieron</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/skills/</span>
+      <p class="harness-map-note">Comandos de un solo archivo en <code>.claude/commands/</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">.agents/skills/</span>
+      <p class="harness-map-note">Se invoca con <code>$nombre</code>. Los custom prompts quedaron deprecados en favor de las skills.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">.opencode/skills/</span>
+      <p class="harness-map-note"><strong>También lee <code>.claude/skills/</code></strong>. Comandos de un archivo en <code>.opencode/commands/</code>.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">El mismo formato en los tres: una carpeta por skill con un <code>SKILL.md</code>, nombre y descripción en el frontmatter, procedimiento en el cuerpo.</p>
+
+  <aside class="notes">
+    <p><strong>La contracara de rules: acá hubo convergencia real.</strong></p>
+    <p><u>Skills en tres harness: mismo formato SKILL.md, carpetas distintas.</u></p>
+    <p><em>"Si rules era la pieza donde no coinciden, skills es donde más coinciden. Los tres usan el mismo formato: una carpeta por skill con un SKILL.md adentro, nombre y descripción arriba, el procedimiento abajo. Y el mismo mecanismo: al arrancar entra la descripción, el cuerpo entra cuando se usa. Cambia la carpeta. Codex las busca en .agents/skills, y deprecó sus custom prompts para empujar todo hacia skills. OpenCode tiene su carpeta, y además lee la de Claude Code directamente, así que las skills del demo-repo ya le sirven. Una skill bien escrita es de las piezas que mejor viajan entre herramientas."</em></p>
+  </aside>
+</section>
+
 <!-- §11.4 · Cuándo se carga — índice vs cuerpo -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">
@@ -8083,6 +8242,37 @@ No hagas commits ni push.</div>
     <p><strong>Recorrer la tabla por filas.</strong></p>
     <p><u>Mismo reparto user / proyecto que CLAUDE.md, settings y skills, más los built-in.</u></p>
     <p><em>"Segunda pregunta: dónde viven. Los que definís vos son archivos markdown con frontmatter. En .claude/agents del repo, alcance de proyecto: se commitea y lo usa el equipo. En tu home, bajo .claude/agents, alcance de usuario: disponible en todos tus proyectos. Los plugins pueden traer los suyos. Y hay sub-agents built-in que vienen con Claude Code sin que definas nada: Explore, que busca en el código en modo solo lectura; Plan, que investiga durante plan mode; y general-purpose. El demo-repo trae uno propio, researcher, que abrimos en un momento."</em></p>
+  </aside>
+</section>
+
+<!-- §12.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s12-slide">
+  <h2>Sub-agents: el mismo aislamiento, distinto control</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/agents/*.md</span>
+      <p class="harness-map-note">Markdown con frontmatter: <code>description</code>, <code>tools</code>, <code>model</code>. Built-in: <code>Explore</code>, <code>Plan</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">.codex/agents/*.toml</span>
+      <p class="harness-map-note">Cada sub-agent es una capa de config completa: su propio modelo, effort y sandbox. Built-in: <code>explorer</code>, <code>worker</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">.opencode/agents/*.md</span>
+      <p class="harness-map-note">Se invocan con <code>@nombre</code> y abren una sesión hija que podés recorrer mientras trabaja.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Una tarea baja, un resultado sube. Lo que cambia es cuánto podés restringir al sub-agent y cuánto ves de lo que hace.</p>
+
+  <aside class="notes">
+    <p><strong>El aislamiento de ventana es el mismo en los tres; marcar las dos diferencias.</strong></p>
+    <p><u>Sub-agents en tres harness: el mismo aislamiento, distinto control y distinta visibilidad.</u></p>
+    <p><em>"Los sub-agents existen en los tres y con la misma idea: otra ventana, y al padre vuelve solo el resultado. Cambian dos cosas. Una, cuánto podés restringirlos. En Claude Code le das tools y modelo en el frontmatter. En Codex cada sub-agent es un archivo TOML que acepta casi cualquier opción de configuración: su propio modelo, su effort, su sandbox. Dos, cuánto ves. En Claude Code ves el resultado. En OpenCode cada sub-agent abre una sesión hija, y podés meterte a mirar lo que está haciendo mientras trabaja. Eso ataca de frente algo que vamos a ver en un rato: delegar no te exime de supervisar."</em></p>
   </aside>
 </section>
 

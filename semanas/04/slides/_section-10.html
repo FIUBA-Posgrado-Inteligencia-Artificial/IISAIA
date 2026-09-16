@@ -563,6 +563,38 @@
   </aside>
 </section>
 
+<!-- §10.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s10-slide">
+  <h2>El mismo gate, tres formas de resolver un conflicto</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">permissions</span>
+      <p class="harness-map-note"><code>deny</code>, después <code>ask</code>, después <code>allow</code>. Un <code>deny</code> gana siempre, esté en el archivo que esté.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">sandbox · rules</span>
+      <p class="harness-map-note">Tres sistemas: el sandbox limita qué puede tocar, <code>approval_policy</code> decide cuándo pregunta y los archivos <code>.rules</code> filtran comandos.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">permission</span>
+      <p class="harness-map-note"><code>"rm *": "deny",</code><br><code>"*": "allow"</code></p>
+      <p class="harness-map-note is-warn"><strong>Gana la última regla que matchea</strong>: en este orden, <code>rm -rf</code> pasa.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">El gate antes de ejecutar es universal. Cómo se resuelve un conflicto entre reglas no lo es: leé la semántica antes de copiar una config.</p>
+
+  <aside class="notes">
+    <p><strong>El ejemplo de OpenCode es el que queda: la misma regla, escrita igual, hace lo contrario.</strong></p>
+    <p><u>Permisos en tres harness: el concepto coincide, la forma de resolver conflictos no.</u></p>
+    <p><em>"Esta es la comparación que más importa de toda la parte. Los tres tienen un gate antes de ejecutar una tool. Pero fijate cómo resuelven un conflicto. En Claude Code, deny gana siempre, sin importar el orden ni el archivo. En Codex el mismo trabajo está repartido en tres sistemas: el sandbox limita qué archivos y qué red puede tocar, la approval policy decide cuándo te pregunta, y unos archivos de reglas filtran comandos. Y en OpenCode gana la última regla que matchea. Miren el ejemplo: deny para rm, y después allow para todo. Si lo leés con la cabeza de Claude Code, pensás que rm está bloqueado. En OpenCode, la última regla que matchea rm -rf es el asterisco, y pasa. La misma intención, escrita igual, hace lo contrario. Por eso: nunca copies una config de permisos de una herramienta a otra sin leer cómo evalúa."</em></p>
+  </aside>
+</section>
+
 <!-- §10.4 · Cuándo se evalúa — deny → ask → allow -->
 <section class="s10-slide">
   <ol class="s10-five-q-grid is-mini">

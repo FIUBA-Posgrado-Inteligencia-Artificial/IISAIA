@@ -640,6 +640,40 @@
   </aside>
 </section>
 
+<!-- §7.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s7-slide">
+  <h2>El mismo archivo, con otro nombre</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">CLAUDE.md</span>
+      <p class="harness-map-note">Cuatro niveles, de managed a local, que se concatenan. <code>@import</code> suma otros archivos.</p>
+      <p class="harness-map-note">Memoria automática: la escribe Claude en <code>~/.claude/projects/</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">AGENTS.md</span>
+      <p class="harness-map-note">Uno en <code>~/.codex/</code> y uno por directorio, desde la raíz del repo hasta donde estás. Se concatenan, sin <code>@import</code>.</p>
+      <p class="harness-map-note">Memoria automática: existe, apagada por defecto.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">AGENTS.md</span>
+      <p class="harness-map-note">Si no encuentra ninguno, <strong>lee <code>CLAUDE.md</code></strong>. En <code>opencode.json</code>, <code>instructions</code> suma archivos por glob.</p>
+      <p class="harness-map-note">Memoria automática: <strong>no tiene</strong>.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Cambia el nombre del archivo, no el mecanismo: texto tuyo que entra a la ventana en cada sesión.</p>
+
+  <aside class="notes">
+    <p><strong><code>AGENTS.md</code> es el nombre que comparten dos de los tres.</strong></p>
+    <p><u>Instrucciones persistentes en tres harness: mismo mecanismo, otro nombre; la memoria automática no está en todos.</u></p>
+    <p><em>"Antes de seguir con cuándo se carga, la misma pieza en los otros dos. En Codex y en OpenCode el archivo se llama AGENTS.md, y funciona igual: texto tuyo que entra a la ventana al arrancar. Codex lee uno en su carpeta de usuario y uno por cada directorio desde la raíz del repo hasta donde estás, y los concatena, igual que Claude Code; no tiene import. OpenCode lee AGENTS.md y, si no hay, lee el CLAUDE.md, así que un repo configurado para Claude Code ya le sirve. Además deja sumar archivos con instructions en su config. Donde no coinciden es en la memoria automática: Claude Code la tiene, Codex la tiene pero apagada, y OpenCode no la tiene. Si un proyecto tiene que funcionar con varias herramientas, lo que importa va en el archivo de instrucciones, no en la memoria."</em></p>
+  </aside>
+</section>
+
 <!-- §7.4 · Cuándo se carga — orden de carga, concatenación -->
 <section class="s7-slide">
   <ol class="s7-five-q-grid is-mini">

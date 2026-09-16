@@ -597,6 +597,37 @@
   </aside>
 </section>
 
+<!-- §9.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s9-slide">
+  <h2>Config del runtime: otro formato, la misma cascada</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/settings.json</span>
+      <p class="harness-map-note">JSON en cinco niveles: managed, línea de comandos, local, proyecto y usuario.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">.codex/config.toml</span>
+      <p class="harness-map-note">TOML. El de usuario vive en <code>~/.codex/</code>; el del proyecto solo carga si marcaste el repo como confiable.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">opencode.json</span>
+      <p class="harness-map-note">JSON con comentarios. Global y proyecto se mergean, y los valores aceptan <code>{env:VAR}</code> y <code>{file:ruta}</code>.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Cambia el formato; la cascada de niveles y quién pisa a quién, no.</p>
+
+  <aside class="notes">
+    <p><strong>No leer los tres archivos: marcar la cascada común y la condición de confianza de Codex.</strong></p>
+    <p><u>El archivo de configuración del runtime existe en los tres, con formato distinto y la misma idea de niveles.</u></p>
+    <p><em>"La configuración del runtime también existe en los otros dos. Codex usa TOML, config.toml, con uno de usuario en su carpeta y uno de proyecto, con una condición que Claude Code no tiene: el de proyecto solo se carga si marcaste ese repo como confiable. Tiene sentido, porque un repo que clonás podría traer una config que le da más permisos al agente. OpenCode usa opencode.json, que acepta comentarios, mergea el global con el del proyecto y deja referenciar variables de entorno o archivos adentro de los valores, útil para no escribir una API key en el archivo. Tres formatos, pero la misma estructura: niveles, y el más específico pisa al más general."</em></p>
+  </aside>
+</section>
+
 <!-- §9.4 · Cuándo se carga — recarga en caliente salvo model -->
 <section class="s9-slide">
   <ol class="s9-five-q-grid is-mini">

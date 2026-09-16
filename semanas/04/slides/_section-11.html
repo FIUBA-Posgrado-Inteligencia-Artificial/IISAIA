@@ -564,6 +564,37 @@
   </aside>
 </section>
 
+<!-- §11.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s11-slide">
+  <h2>Skills: acá los tres convergieron</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/skills/</span>
+      <p class="harness-map-note">Comandos de un solo archivo en <code>.claude/commands/</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">.agents/skills/</span>
+      <p class="harness-map-note">Se invoca con <code>$nombre</code>. Los custom prompts quedaron deprecados en favor de las skills.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">.opencode/skills/</span>
+      <p class="harness-map-note"><strong>También lee <code>.claude/skills/</code></strong>. Comandos de un archivo en <code>.opencode/commands/</code>.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">El mismo formato en los tres: una carpeta por skill con un <code>SKILL.md</code>, nombre y descripción en el frontmatter, procedimiento en el cuerpo.</p>
+
+  <aside class="notes">
+    <p><strong>La contracara de rules: acá hubo convergencia real.</strong></p>
+    <p><u>Skills en tres harness: mismo formato SKILL.md, carpetas distintas.</u></p>
+    <p><em>"Si rules era la pieza donde no coinciden, skills es donde más coinciden. Los tres usan el mismo formato: una carpeta por skill con un SKILL.md adentro, nombre y descripción arriba, el procedimiento abajo. Y el mismo mecanismo: al arrancar entra la descripción, el cuerpo entra cuando se usa. Cambia la carpeta. Codex las busca en .agents/skills, y deprecó sus custom prompts para empujar todo hacia skills. OpenCode tiene su carpeta, y además lee la de Claude Code directamente, así que las skills del demo-repo ya le sirven. Una skill bien escrita es de las piezas que mejor viajan entre herramientas."</em></p>
+  </aside>
+</section>
+
 <!-- §11.4 · Cuándo se carga — índice vs cuerpo -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">

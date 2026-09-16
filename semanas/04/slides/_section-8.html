@@ -639,6 +639,37 @@
   </aside>
 </section>
 
+<!-- §8.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s8-slide">
+  <h2>Carga condicional: acá los tres no coinciden</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/rules/*.md</span>
+      <p class="harness-map-note">Con <code>paths:</code> en el frontmatter, la rule entra cuando se lee un archivo que matchea el glob.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">AGENTS.md por carpeta</span>
+      <p class="harness-map-note">Scope por directorio, no por glob. Se arma al arrancar según dónde abriste la sesión.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">instructions</span>
+      <p class="harness-map-note is-warn">Los globs eligen <strong>qué</strong> archivos cargar, no <strong>cuándo</strong>: entran todos al arrancar.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">El concepto es portable: instrucciones que entran solo cuando importan. La forma declarativa, por glob, hoy es de Claude Code.</p>
+
+  <aside class="notes">
+    <p><strong>La única pieza sin equivalente directo. Decirlo así, sin vueltas.</strong></p>
+    <p><u>Carga condicional por path: Claude Code la declara; Codex y OpenCode la aproximan.</u></p>
+    <p><em>"Acá los tres no coinciden, y conviene saberlo. Lo que hace rules con paths, cargar una instrucción recién cuando el agente lee un archivo que matchea un glob, no existe tal cual en los otros dos. Codex se acerca con un AGENTS.md por carpeta: si abrís la sesión adentro de backend, carga el de backend. Pero es por directorio, no por patrón, y se decide al arrancar. OpenCode tiene instructions con globs, pero el glob elige qué archivos cargar, no cuándo: entran todos al principio y cuestan contexto desde el primer mensaje. Así que el concepto viaja, instrucciones que entran solo cuando importan, pero si tu proyecto depende de eso y lo querés en otra herramienta, lo vas a tener que resolver con carpetas."</em></p>
+  </aside>
+</section>
+
 <!-- §8.4 · Cuándo se cargan — sin frontmatter vs con paths: -->
 <section class="s8-slide">
   <ol class="s8-five-q-grid is-mini">

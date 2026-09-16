@@ -558,6 +558,37 @@
   </aside>
 </section>
 
+<!-- §12.3b · Equivalencias: la misma pieza en Codex y OpenCode (sin mini-strip) -->
+<section class="s12-slide">
+  <h2>Sub-agents: el mismo aislamiento, distinto control</h2>
+
+  <div class="harness-map is-large">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">.claude/agents/*.md</span>
+      <p class="harness-map-note">Markdown con frontmatter: <code>description</code>, <code>tools</code>, <code>model</code>. Built-in: <code>Explore</code>, <code>Plan</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">.codex/agents/*.toml</span>
+      <p class="harness-map-note">Cada sub-agent es una capa de config completa: su propio modelo, effort y sandbox. Built-in: <code>explorer</code>, <code>worker</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">.opencode/agents/*.md</span>
+      <p class="harness-map-note">Se invocan con <code>@nombre</code> y abren una sesión hija que podés recorrer mientras trabaja.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Una tarea baja, un resultado sube. Lo que cambia es cuánto podés restringir al sub-agent y cuánto ves de lo que hace.</p>
+
+  <aside class="notes">
+    <p><strong>El aislamiento de ventana es el mismo en los tres; marcar las dos diferencias.</strong></p>
+    <p><u>Sub-agents en tres harness: el mismo aislamiento, distinto control y distinta visibilidad.</u></p>
+    <p><em>"Los sub-agents existen en los tres y con la misma idea: otra ventana, y al padre vuelve solo el resultado. Cambian dos cosas. Una, cuánto podés restringirlos. En Claude Code le das tools y modelo en el frontmatter. En Codex cada sub-agent es un archivo TOML que acepta casi cualquier opción de configuración: su propio modelo, su effort, su sandbox. Dos, cuánto ves. En Claude Code ves el resultado. En OpenCode cada sub-agent abre una sesión hija, y podés meterte a mirar lo que está haciendo mientras trabaja. Eso ataca de frente algo que vamos a ver en un rato: delegar no te exime de supervisar."</em></p>
+  </aside>
+</section>
+
 <!-- §12.4 · Cuándo se invoca -->
 <section class="s12-slide">
   <ol class="s12-five-q-grid is-mini">
