@@ -219,6 +219,81 @@
   background-size: 11px 11px;
   transition: height 600ms ease, background-color 400ms ease;
 }
+.reveal .slides > section > section.s4-cost-section { min-height: 620px !important; }
+.s4-price-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  max-width: 900px;
+  margin: 10px auto 0;
+}
+.s4-price-card {
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  background: var(--bg-code);
+  padding: 8px 18px;
+  text-align: center;
+}
+.reveal .s4-price-label {
+  margin: 0 !important;
+  font-family: var(--font-mono);
+  font-size: 0.45em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.reveal .s4-price-val {
+  margin: 2px 0 0 !important;
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  color: var(--accent);
+}
+.s4-calc {
+  max-width: 940px;
+  margin: 14px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.s4-calc-row {
+  display: grid;
+  grid-template-columns: 210px 1fr 130px;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  padding: 9px 14px;
+  text-align: left;
+}
+.s4-calc-row.is-bad { border-color: #c94f4f; background: rgba(201,79,79,0.07); }
+.s4-calc-row.is-good { border-color: var(--accent); background: rgba(100,255,218,0.06); }
+.reveal .s4-calc-what {
+  margin: 0 !important;
+  font-size: 0.56em;
+  line-height: 1.3;
+  color: var(--text-primary);
+  text-align: left;
+}
+.reveal .s4-calc-how {
+  margin: 0 !important;
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.5em;
+  line-height: 1.35;
+  color: var(--text-muted);
+  text-align: left;
+}
+.reveal .s4-calc-total {
+  margin: 0 !important;
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  color: var(--text-primary);
+  text-align: right;
+}
+.s4-calc-row.is-bad .s4-calc-total { color: #e08585; }
+.s4-calc-row.is-good .s4-calc-total { color: var(--accent); }
+
 /* La slide de la barra crece con cada fragment; reveal centra una sola vez,
    así que le reservamos el alto del estado más alto y el contenido crece
    hacia abajo sin mover el título ni recortarse. */
@@ -531,43 +606,52 @@
   </aside>
 </section>
 
-<!-- §4.3 · Qué se paga: el contexto se reenvía entero, el cache lo abarata -->
-<section>
-  <h2>El contexto se reenvía entero en cada vuelta</h2>
+<!-- §4.3 · Qué se paga: precio por token, y la diferencia que hace el cache -->
+<section class="s4-cost-section">
+  <h2>Cómo se paga una sesión</h2>
 
-  <div class="s4-ops-grid">
-    <div class="s4-ops-card compact">
-      <p class="s4-ops-name">Se reenvía</p>
-      <p class="s4-ops-tagline">y se factura, vuelta tras vuelta</p>
-      <p class="s4-ops-body">
-        El modelo no guarda nada entre llamadas: cada vuelta del loop le manda el contexto completo. Cada token ocupa lugar en la ventana <strong>y</strong> se cobra de nuevo.
-      </p>
-      <p class="s4-ops-foot">
-        50 vueltas con la ventana al 90% (~900k) = ~45M tokens de input.
-      </p>
+  <div class="s4-price-row">
+    <div class="s4-price-card">
+      <p class="s4-price-label">entrada · todo lo que le mandás</p>
+      <p class="s4-price-val">$2 por 1M tokens</p>
     </div>
-    <div class="s4-ops-card reset">
-      <p class="s4-ops-name">El cache abarata</p>
-      <p class="s4-ops-tagline">no elimina el costo</p>
-      <p class="s4-ops-body">
-        Los proveedores cachean el prefijo estable del contexto: leerlo cuesta cerca del <strong>10%</strong> del precio de input; escribirlo, un <strong>25% más</strong>.
-      </p>
-      <p class="s4-ops-foot">
-        Un cambio al principio del contexto invalida el cache desde ahí: se vuelve a pagar completo.
-      </p>
+    <div class="s4-price-card">
+      <p class="s4-price-label">salida · lo que genera</p>
+      <p class="s4-price-val">$10 por 1M tokens</p>
+    </div>
+  </div>
+  <p class="s4-center-line is-sub s4-fill-cost">Precios de ejemplo. Se cobra por token, y la entrada es casi siempre el grueso.</p>
+
+  <div class="s4-calc">
+    <div class="s4-calc-row fragment fade-in s4-collapse-in" data-fragment-index="0">
+      <p class="s4-calc-what">Un mensaje suelto</p>
+      <p class="s4-calc-how">10k de entrada × $2/1M + 1k de salida × $10/1M</p>
+      <p class="s4-calc-total">$0,03</p>
+    </div>
+    <div class="s4-calc-row is-bad fragment fade-in s4-collapse-in" data-fragment-index="1">
+      <p class="s4-calc-what">20 vueltas con 500k en la ventana, sin cache</p>
+      <p class="s4-calc-how">20 × 500k = 10M de entrada × $2/1M</p>
+      <p class="s4-calc-total">$20</p>
+    </div>
+    <div class="s4-calc-row is-good fragment fade-in s4-collapse-in" data-fragment-index="2">
+      <p class="s4-calc-what">Las mismas 20 vueltas, manteniendo el cache</p>
+      <p class="s4-calc-how">1 escritura de 500k × $2,50/1M + 19 lecturas de 500k × $0,20/1M</p>
+      <p class="s4-calc-total">$3,15</p>
     </div>
   </div>
 
-  <p class="s4-center-line s4-ops-close fragment fade-in">
-    Lo estable primero, lo que cambia al final: así el prefijo se mantiene cacheado.
+  <p class="s4-center-line is-accent s4-fill-cost fragment fade-in s4-collapse-in" data-fragment-index="3">
+    El cache sirve mientras el principio del contexto no cambie: si cambia, se reescribe y esa vuelta vuelve a costar como la primera.
   </p>
 
   <aside class="notes">
-    <p><strong>Las dos cards. Click: la línea de cierre.</strong></p>
-    <p><u>El costo de una sesión larga, y por qué el orden del contexto importa.</u></p>
-    <p><em>"Acá va la parte que impacta en la factura. El modelo no guarda nada entre llamadas: cada vuelta del loop le manda el contexto completo otra vez. Por eso cada token cuenta dos veces, ocupa lugar y se cobra, y se cobra en cada vuelta. Si tu agente da cincuenta vueltas con la ventana al noventa por ciento, son cuarenta y cinco millones de tokens de input facturados en una sola sesión."</em></p>
-    <p><em>"Lo que lo hace viable es el cache. Los proveedores guardan el prefijo estable del contexto y, si la próxima llamada empieza igual, lo leen del cache: cuesta alrededor del diez por ciento del precio normal de input. Escribirlo cuesta un veinticinco por ciento más que un token normal, así que se paga solo si después lo leés al menos un par de veces."</em></p>
-    <p><em>"Y acá está la parte que a la larga les va a explicar saltos raros en el consumo: el cache es por prefijo. Si cambiás algo al principio, lo que sigue deja de servir y se vuelve a pagar completo. Por eso conviene que lo estable vaya primero, las instrucciones del proyecto, y lo que cambia vaya al final. Y por eso mismo compactar no es gratis: reescribe el contexto, así que la vuelta siguiente se paga sin cache."</em></p>
+    <p><strong>Precios arriba. Tres clicks: mensaje suelto, sin cache, con cache. Cuarto: la invalidación.</strong></p>
+    <p><u>Cómo se calcula el costo y qué cambia el cache.</u></p>
+    <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. La salida es bastante más cara por token, pero en el trabajo con agentes el grueso de la factura es la entrada, y ya van a ver por qué."</em></p>
+    <p><em>"Un mensaje suelto no es nada: diez mil tokens de entrada, mil de salida, tres centavos. Si la cuenta terminara acá, no habría tema."</em></p>
+    <p><em>"Pero no mandás un mensaje: corrés un loop, y cada vuelta reenvía el contexto entero. Veinte vueltas con medio millón en la ventana son diez millones de tokens de entrada facturados. Veinte dólares, en una sola sesión. Y fíjense que el trabajo del agente es el mismo: lo que se multiplica es el reenvío."</em></p>
+    <p><em>"Acá entra el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí. Escribirlo cuesta un poco más que un token normal, leerlo cuesta una fracción. Las mismas veinte vueltas: tres dólares con quince en vez de veinte. Seis veces más barato por hacer exactamente lo mismo."</em></p>
+    <p><em>"Con una condición: el cache es por prefijo. Sirve mientras el principio del contexto no cambie. Si cambia, lo que sigue deja de servir y esa vuelta se paga completa otra vez. Por eso conviene que lo estable vaya primero, las instrucciones del proyecto, y lo que cambia vaya al final. Y por eso compactar tampoco es gratis: reescribe el contexto."</em></p>
   </aside>
 </section>
 
