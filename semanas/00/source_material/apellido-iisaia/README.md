@@ -4,7 +4,7 @@ Repositorio del curso Introducción a la ingeniería de software asistida por In
 
 Esta es la estructura de referencia. Copiala tal cual en tu propio repositorio y reemplazá el contenido por el tuyo.
 
-Las carpetas `tp1/` y `tp2/` vienen con una entrega resuelta adentro, para que veas hasta dónde llega lo que se espera. La del trabajo final viene en blanco.
+Las tres carpetas vienen con una entrega resuelta adentro, para que veas hasta dónde llega lo que se espera.
 
 ## Entregas
 
@@ -12,7 +12,7 @@ Las carpetas `tp1/` y `tp2/` vienen con una entrega resuelta adentro, para que v
 |---------|---------|--------|
 | TP 1 | [tp1/](tp1/) | ejemplo resuelto |
 | TP 2 | [tp2/](tp2/) | ejemplo resuelto |
-| Trabajo Práctico Final | [tp-final/](tp-final/) | en blanco |
+| Trabajo Práctico Final | [tp-final/](tp-final/) | ejemplo resuelto |
 
 ## Cómo se usa esta estructura
 
