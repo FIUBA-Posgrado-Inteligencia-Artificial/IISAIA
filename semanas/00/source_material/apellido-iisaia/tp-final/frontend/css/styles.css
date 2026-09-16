@@ -106,10 +106,11 @@ main {
   background: var(--board);
   border-radius: var(--radius);
   overflow: hidden;
+  width: fit-content;
   line-height: 0;
 }
 
-.controls-hint { color: var(--muted); margin: var(--space-3) 0 0; }
+.controls-hint { color: var(--muted); margin: var(--space-3) 0 0; max-width: 48ch; }
 
 .panel {
   padding: var(--space-5);

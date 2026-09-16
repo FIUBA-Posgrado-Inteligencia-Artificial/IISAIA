@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jugar</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1 id="title">Jugar</h1>
+    <a href="index.html">Volver a los juegos</a>
+  </header>
+  <main>
+    <p id="page-error" class="status error" hidden></p>
+    <div id="game-layout" class="game-layout" hidden>
+      <div>
+        <div id="board" class="board"></div>
+        <p id="controls" class="controls-hint"></p>
+      </div>
+      <aside>
+        <section class="panel">
+          <h2>Partida</h2>
+          <p id="playing" class="status">Partida en curso.</p>
+          <div id="finished" hidden>
+            <p>Puntaje final: <strong id="final-score">0</strong></p>
+            <div class="form-actions">
+              <button id="restart" class="button secondary" type="button">Jugar de nuevo</button>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.90.0/phaser.min.js"></script>
+  <script type="module" src="js/game-page.js"></script>
+</body>
+</html>
