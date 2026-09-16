@@ -36,8 +36,14 @@ export class SnakeScene extends Phaser.Scene {
     this.food = this.randomFreeCell();
     this.graphics = this.add.graphics();
     this.scoreText = this.add.text(8, 4, "", { fontFamily: "system-ui, sans-serif", fontSize: "16px", color: "#e5e7eb" });
+    this.startHint = this.add
+      .text(SNAKE_SIZE.width / 2, SNAKE_SIZE.height / 2 + 2 * CELL, "Presioná una flecha para empezar", {
+        fontFamily: "system-ui, sans-serif",
+        fontSize: "18px",
+        color: "#e5e7eb",
+      })
+      .setOrigin(0.5);
     this.bindKeys();
-    this.startTimer(START_DELAY_MS);
     this.draw();
   }
 
@@ -50,6 +56,10 @@ export class SnakeScene extends Phaser.Scene {
   }
 
   turn(direction) {
+    if (this.timer === null) {
+      this.startHint.destroy();
+      this.startTimer(START_DELAY_MS);
+    }
     const reverses = direction.x === -this.direction.x && direction.y === -this.direction.y;
     if (!reverses) {
       this.nextDirection = direction;
