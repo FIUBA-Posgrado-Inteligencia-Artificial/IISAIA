@@ -1,3 +1,4 @@
+import { createScorePanel } from "./score-panel.js";
 import { SNAKE_SIZE, SnakeScene } from "./games/snake.js";
 import { TETRIS_SIZE, TetrisScene } from "./games/tetris.js";
 
@@ -12,7 +13,7 @@ const GAMES = {
     name: "Snake",
     scene: SnakeScene,
     size: SNAKE_SIZE,
-    controls: "Flechas para girar. La partida termina al chocar contra una pared o contra la cola.",
+    controls: "Flechas para empezar y girar. La partida termina al chocar contra una pared o contra la cola.",
   },
 };
 
@@ -39,12 +40,6 @@ function createGame(config) {
   });
 }
 
-function setFinished(finished, score = 0) {
-  el("playing").hidden = finished;
-  el("finished").hidden = !finished;
-  el("final-score").textContent = String(score);
-}
-
 function start() {
   const slug = new URLSearchParams(window.location.search).get("game");
   const config = GAMES[slug];
@@ -62,10 +57,11 @@ function start() {
   }
   el("game-layout").hidden = false;
 
-  game.events.on("gameover", (score) => setFinished(true, score));
+  const panel = createScorePanel(slug);
+  game.events.on("gameover", (score) => panel.showResult(score));
   el("restart").addEventListener("click", () => {
     document.activeElement?.blur();
-    setFinished(false);
+    panel.hideResult();
     game.scene.getScenes(false)[0].scene.restart();
   });
 }

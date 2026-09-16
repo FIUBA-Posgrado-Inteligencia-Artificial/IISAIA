@@ -25,10 +25,23 @@
           <p id="playing" class="status">Partida en curso.</p>
           <div id="finished" hidden>
             <p>Puntaje final: <strong id="final-score">0</strong></p>
-            <div class="form-actions">
-              <button id="restart" class="button secondary" type="button">Jugar de nuevo</button>
-            </div>
+            <form id="score-form" class="score-form" novalidate>
+              <label>Tu nombre (hasta 20 caracteres)
+                <input id="player" name="player" maxlength="20" autocomplete="nickname">
+              </label>
+              <p id="save-status" class="status" hidden></p>
+              <div class="form-actions">
+                <button id="save" class="button" type="submit">Guardar puntaje</button>
+                <button id="restart" class="button secondary" type="button">Jugar de nuevo</button>
+              </div>
+            </form>
           </div>
+        </section>
+        <section class="panel">
+          <h2>Mejores puntajes</h2>
+          <p id="ranking-status" class="status">Cargando ranking...</p>
+          <button id="ranking-retry" class="button secondary" type="button" hidden>Reintentar</button>
+          <ol id="ranking" class="ranking"></ol>
         </section>
       </aside>
     </div>
