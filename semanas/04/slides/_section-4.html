@@ -659,12 +659,12 @@
     <div class="s4-cost-col fragment fade-in" data-fragment-index="0">
       <p class="s4-cost-title">Un mensaje suelto</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 2%"></div></div>
-      <p class="s4-cost-ctx">1k de entrada<br>1k de salida</p>
+      <p class="s4-cost-ctx">10k de entrada<br>10k de salida</p>
       <div class="s4-cost-split">
-        <span>entrada</span><span class="is-in">$0,01</span>
-        <span>salida</span><span>$0,05</span>
+        <span>entrada</span><span class="is-in">$0,10</span>
+        <span>salida</span><span>$0,50</span>
       </div>
-      <p class="s4-cost-total">$0,06</p>
+      <p class="s4-cost-total">$0,60</p>
     </div>
     <div class="s4-cost-col fragment fade-in" data-fragment-index="1">
       <p class="s4-cost-title">El mismo mensaje, con la ventana llena</p>
@@ -710,8 +710,8 @@
     <p><strong>Precios arriba. Tres clicks para la progresión, el cuarto abre la pregunta, el quinto trae el cache.</strong></p>
     <p><u>El costo crece con la ventana; el cache cambia el precio de lo que ya viajó.</u></p>
     <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. Estos son los precios reales de Fable 5.1, el modelo más caro de Anthropic: diez dólares el millón de entrada, cincuenta el de salida."</em></p>
-    <p><em>"Empecemos por lo chico. Un mensaje suelto: mil tokens de entrada, mil de salida. Seis centavos. Nada."</em></p>
-    <p><em>"Ahora el mismo mensaje, pero con la sesión avanzada: quinientos mil tokens de contexto por delante. La salida es la misma, mil tokens. Cinco dólares con cinco, y miren el desglose: cinco dólares son de entrada y cinco centavos de salida. La salida no se movió en ninguna de las tres columnas; lo único que crece es lo que tiene que leer. El trabajo que le pedís es idéntico; lo que cambió es cuánto tuvo que leer para llegar."</em></p>
+    <p><em>"Empecemos por lo chico. Un mensaje suelto: diez mil tokens de entrada, diez mil de salida. Sesenta centavos, y fíjense que ahí la mayor parte es la salida: cincuenta centavos de los sesenta. Con poco contexto, lo que pesa es lo que genera."</em></p>
+    <p><em>"Ahora el mismo mensaje, pero con la sesión avanzada: quinientos mil tokens de contexto por delante. La salida es la misma, mil tokens. Cinco dólares con cinco, y miren el desglose: cinco dólares son de entrada y cinco centavos de salida. Se dio vuelta: con la ventana llena, la salida es ruido al lado de lo que cuesta leer el contexto. Y de acá en adelante la salida no se mueve; lo único que crece es lo que tiene que leer. El trabajo que le pedís es idéntico; lo que cambió es cuánto tuvo que leer para llegar."</em></p>
     <p><em>"Y la vuelta siguiente: quinientos un mil, porque se sumó lo último. Cinco dólares con seis. Cada vuelta paga la ventana entera de nuevo, no solo lo nuevo."</em></p>
     <p><em>"Entonces la pregunta obvia: ¿cuanto más grande la ventana, más caro sale cada mensaje? Sí. Literal. Y si fuera solo eso, trabajar con agentes sería carísimo."</em></p>
     <p><em>"Pero existe el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí: en Fable 5.1 esos tokens salen veinticinco centavos el millón en vez de diez dólares. La misma vuelta de recién: diecinueve centavos en lugar de cinco dólares. Escribir el cache la primera vez cuesta un veinticinco por ciento más de lo normal, así que se paga solo enseguida. La condición es que el principio del contexto no cambie: si cambia, lo que sigue deja de servir y esa vuelta se paga completa. Por eso lo estable va primero y lo que cambia, al final."</em></p>
