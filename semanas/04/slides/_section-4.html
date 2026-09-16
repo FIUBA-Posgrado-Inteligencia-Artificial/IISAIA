@@ -67,59 +67,7 @@
 }
 .s4-llm-arrow { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .s4-llm-arrow svg { display: block; }
-.s4-rot-diagram {
-  max-width: 720px;
-  margin: 0 auto;
-}
-.s4-rot-layer {
-  border-radius: 6px;
-  padding: 9px 16px;
-  margin-bottom: 6px;
-  font-size: 0.68em;
-  font-family: var(--font-mono);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.s4-rot-layer .s4-rot-tag {
-  font-size: 0.78em;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.8;
-  white-space: nowrap;
-}
-.s4-rot-layer.obs { background: var(--bg-secondary); border: 1px solid #2a3a5a; color: var(--text-muted); }
-.s4-rot-layer.obs-heavy { background: rgba(130,170,255,0.08); border: 1px solid rgba(130,170,255,0.25); color: var(--accent-secondary); }
-.s4-rot-layer.buried { background: rgba(100,255,218,0.04); border: 1px dashed rgba(100,255,218,0.2); color: rgba(100,255,218,0.45); }
-.s4-rot-arrow {
-  text-align: center;
-  font-size: 0.75em;
-  color: var(--text-muted);
-  margin: 2px 0;
-}
 
-/* §4.6 — symptom cards grid */
-.s4-symptoms {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  max-width: 760px;
-  margin: 18px auto 0;
-}
-.s4-symptom-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid #e74c3c;
-  border-radius: 7px;
-  padding: 12px 14px;
-}
-.s4-symptom-card .s4-symp-head {
-  font-size: 0.75em;
-  font-weight: 700;
-  color: #e74c3c;
-  margin: 0 0 5px;
-}
 .reveal .s4-symptom-card p {
   font-size: 0.6em;
   color: var(--text-primary);
@@ -301,45 +249,6 @@
 }
 .reveal .s4-fill-cost { max-width: 820px; }
 
-/* §4.5 layout: progressive bar on the left + rot diagram on the right */
-.s4-rot-with-fill {
-  max-width: 720px;
-  margin: 18px auto 0;
-}
-.s4-rot-contradiction {
-  max-width: 720px;
-  margin: 16px auto 0;
-  background: rgba(231, 76, 60, 0.08);
-  border: 1px solid rgba(231, 76, 60, 0.4);
-  border-left: 4px solid #e74c3c;
-  border-radius: 7px;
-  padding: 12px 18px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.s4-rot-contradiction-label {
-  font-family: var(--font-mono);
-  font-size: 0.58em;
-  color: #e74c3c;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-}
-.s4-rot-contradiction-code {
-  font-family: var(--font-mono);
-  background: var(--bg-code);
-  border-radius: 4px;
-  padding: 6px 10px;
-  color: var(--text-primary);
-  font-size: 0.74em;
-  display: inline-block;
-  width: fit-content;
-}
-.s4-rot-contradiction-note {
-  font-size: 0.66em;
-  color: #e74c3c;
-  font-style: italic;
-}
 .reveal .s4-rot-close { max-width: 900px; }
 
 /* §4.4 — finite + structural */
@@ -487,7 +396,7 @@
 
 <!-- §4.2 · La sesión no arranca vacía y el loop la llena -->
 <section>
-  <h2>La sesión no arranca vacía</h2>
+  <h2>La sesión no arranca vacía, y se llena sola</h2>
 
   <div class="s4-fill-layout">
     <div class="s4-context-bar-wrap">
@@ -527,6 +436,13 @@
     </div>
   </div>
 
+  <div class="fragment fade-in" data-fragment-index="5">
+    <p class="s4-center-line is-accent s4-fill-cost">
+      <strong>Context rot</strong>: la instrucción no desapareció, la señal se diluyó en el ruido.
+    </p>
+    <p class="s4-center-line is-sub s4-fill-cost">Síntomas: contradice restricciones · repite trabajo hecho · respuestas genéricas · "no recuerda" lo que está ahí</p>
+  </div>
+
   <div class="fragment fade-out" data-fragment-index="4">
     <div class="fragment fade-in" data-fragment-index="3">
       <p class="s4-center-line is-accent s4-fill-cost">
@@ -538,70 +454,19 @@
 
 
   <aside class="notes">
-    <p><strong>Tres clicks llenan la barra (5 / 50 / 90%). El cuarto, el cierre. El quinto lo reemplaza por el ejemplo del LLM.</strong></p>
+    <p><strong>Tres clicks llenan la barra (5 / 50 / 90%). El cuarto, el cierre. El quinto lo reemplaza por el ejemplo del LLM. El sexto nombra el context rot.</strong></p>
     <p><u>Órdenes de magnitud reales, no fórmulas exactas.</u></p>
     <p><em>"Miren la barra: es la ventana de contexto de una sesión. Y ojo con esto, porque es lo primero que sorprende: no arranca vacía."</em></p>
     <p><em>"Antes de que escribas tu primer mensaje, el runtime ya cargó cosas: las instrucciones del proyecto, las convenciones del equipo, lo que se guardó de sesiones anteriores. Pongamos quince mil tokens. Todavía no pediste nada y ya estás ocupando lugar. En la Parte 2 vamos a ver exactamente qué archivos son y cómo se controlan."</em></p>
     <p><em>"Después entra el loop. Cada vuelta deposita tokens: el razonamiento del modelo, las llamadas a tools, los outputs que vuelven. Una sesión normal ronda el medio millón. Para tener referencia: un archivo de 300 líneas son unos dos mil tokens, así que estamos hablando de un par de cientos de archivos leídos, o su equivalente en observaciones. La acumulación es más rápida de lo que intuís, porque cada observación queda: no desaparece después de procesarla."</em></p>
     <p><em>"Si el agente sigue iterando sobre la misma tarea, llegás a novecientos mil. La ventana de un millón, que parecía enorme cuando empezaste, ya está casi saturada."</em></p>
     <p><em>"Y esto no se arregla esperando el próximo modelo. Cada generación ofrece ventanas más grandes, y eso desplaza el límite, no lo elimina. Es una propiedad estructural, no un descuido. Administrar ese límite es parte del trabajo de dirigir un agente."</em></p>
-    <p><em>"Ahora miren qué pasa con la ventana así de llena. Allá abajo, en esos quince mil tokens del arranque, estaba tu instrucción: no uses dependencias externas. Doce tokens. Y cada vuelta la ventana entera entra al modelo, esa instrucción incluida. Vuelta cuarenta y dos, el agente decide: uv add requests pandas sqlalchemy. Exactamente lo que dijiste que no hiciera. No es que la olvidó, la tiene delante. Pero doce tokens de señal compiten contra novecientos mil de ruido, y en esa decisión perdieron. Eso tiene nombre."</em></p>
+    <p><em>"Ahora miren qué pasa con la ventana así de llena. Allá abajo, en esos quince mil tokens del arranque, estaba tu instrucción: no uses dependencias externas. Doce tokens. Y cada vuelta la ventana entera entra al modelo, esa instrucción incluida. Vuelta cuarenta y dos, el agente decide: uv add requests pandas sqlalchemy. Exactamente lo que dijiste que no hiciera. No es que la olvidó, la tiene delante. Pero doce tokens de señal compiten contra novecientos mil de ruido, y en esa decisión perdieron."</em></p>
+    <p><em>"Eso tiene nombre: context rot. La instrucción no desapareció, la señal se diluyó en el ruido. Y estos son los síntomas que tenés que reconocer como supervisor: contradice una restricción explícita, repite trabajo que ya hizo, se vuelve genérico donde antes era preciso, o 'no recuerda' algo que técnicamente sigue en la ventana. Si alguna vez vieron alguno, ahora tienen el nombre. Ojo con el framing: no es que el modelo falló, es que la ventana está trabajando contra vos, y eso cambia dónde mirás para resolverlo."</em></p>
   </aside>
 </section>
 
-<!-- §4.3 · Context rot — el mecanismo de degradación -->
-<section>
-  <h2>Context rot: cómo ocurre</h2>
-
-  <div class="s4-rot-with-fill">
-    <div class="s4-rot-diagram">
-      <div class="s4-rot-layer obs-heavy fragment fade-in" data-fragment-index="2">
-        <span>vuelta 35 · output completo de tests</span>
-        <span class="s4-rot-tag">2.100 tokens</span>
-      </div>
-      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="2">
-        <span>vuelta 28 · lectura de config.yml</span>
-        <span class="s4-rot-tag">800 tokens</span>
-      </div>
-      <div class="s4-rot-layer obs fragment fade-in" data-fragment-index="1">
-        <span>vuelta 14 · respuesta del endpoint</span>
-        <span class="s4-rot-tag">1.500 tokens</span>
-      </div>
-      <div class="s4-rot-arrow fragment fade-in" data-fragment-index="2">↓ sepultada</div>
-      <div class="s4-rot-layer buried">
-        <span>instrucción original · "no uses dependencias externas"</span>
-        <span class="s4-rot-tag">12 tokens</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="s4-rot-contradiction fragment fade-in" data-fragment-index="3">
-    <span class="s4-rot-contradiction-label">Vuelta 42 · el agente decide:</span>
-    <code class="s4-rot-contradiction-code">$ uv add requests pandas sqlalchemy</code>
-    <span class="s4-rot-contradiction-note">contradice "no uses dependencias externas": la instrucción perdió peso</span>
-  </div>
-
-  <p class="s4-center-line is-secondary s4-rot-symptoms fragment fade-in" data-fragment-index="4">
-    Síntomas: contradice restricciones · repite trabajo hecho · respuestas genéricas · "no recuerda" lo que está ahí
-  </p>
-
-  <p class="s4-center-line s4-rot-close fragment fade-in" data-fragment-index="5">
-    la instrucción no desapareció, pero la señal se diluyó en el ruido
-  </p>
-
-  <aside class="notes">
-    <p><strong>Cinco clicks: tres capas de ruido, los síntomas, y la línea de cierre.</strong></p>
-    <p><u>12 tokens de señal contra miles de tokens de ruido.</u></p>
-    <p><em>"Empezamos con esto: diste una instrucción al inicio de la sesión — pongamos 'no uses dependencias externas'. Acá está, en la base de la ventana. Doce tokens. La barra está casi vacía. El agente la leyó, y las primeras vueltas la respetó."</em></p>
-    <p><em>"Vuelta 14: el agente hizo un request HTTP y la respuesta entró al contexto. Mil quinientos tokens encima de tus doce. La barra creció — todavía hay margen, todavía la instrucción se ve."</em></p>
-    <p><em>"El agente siguió iterando. Vuelta 28: leyó un config. Vuelta 35: corrió tests y el output completo entró a la ventana. La barra está al 85%. La instrucción original sigue ahí, técnicamente — pero ahora está sepultada bajo miles de tokens de outputs."</em></p>
-    <p><em>"Y acá está el síntoma concreto. Vuelta 42: el agente decide agregar tres dependencias con uv — exactamente lo que dijiste que no hiciera. No es que olvidó la instrucción: está en su working memory. Pero la señal compite con cada vez más ruido, y en esa decisión perdió."</em></p>
-    <p><em>"Y estos son los síntomas que tenés que aprender a reconocer como supervisor. Contradice una restricción explícita. Repite trabajo que ya hizo. Se vuelve genérico donde antes era preciso. O 'no recuerda' algo que técnicamente sigue en la ventana. Si alguna vez vieron alguno, ahora tienen el nombre de lo que estaban mirando."</em></p>
-    <p><em>"Esa es la definición operativa de context rot: la instrucción no desapareció, pero la señal se diluyó en el ruido. Y ojo con el framing: no es que el modelo falló, es que la ventana está trabajando contra vos. Eso cambia dónde mirás para resolverlo."</em></p>
-  </aside>
-</section>
-
-<!-- §4.4 · Qué se paga: el contexto se reenvía entero, el cache lo abarata -->
+<!-- §4.3 · Qué se paga: el contexto se reenvía entero, el cache lo abarata -->
 <section>
   <h2>El contexto se reenvía entero en cada vuelta</h2>
 
@@ -641,7 +506,7 @@
   </aside>
 </section>
 
-<!-- §4.5 · Las dos operaciones + cierre de la sección -->
+<!-- §4.4 · Las dos operaciones + cierre de la sección -->
 <section>
   <h2>Las dos operaciones: compactar y resetear</h2>
 
