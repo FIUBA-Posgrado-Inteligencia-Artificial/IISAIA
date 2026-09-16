@@ -278,12 +278,12 @@
       <p class="s5-dim-body">Cuánto piensa antes de actuar. Se paga en tokens y en tiempo de espera.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Manejo del contexto</p>
-      <p class="s5-dim-body">Qué se carga, cuándo se compacta y qué se delega a una ventana aparte.</p>
+      <p class="s5-dim-title">Hooks</p>
+      <p class="s5-dim-body">Scripts que corren solos ante eventos del runtime: antes o después de una tool, al abrir o cerrar la sesión. Ahí viven los tests y linters automáticos.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Verificación automática</p>
-      <p class="s5-dim-body">Qué corre solo después de cada cambio: tests, linters, chequeos que devuelven señal.</p>
+      <p class="s5-dim-title">Sub-agentes</p>
+      <p class="s5-dim-body">Qué tareas se delegan a una ventana aparte, con sus propias tools y su propio modelo.</p>
     </div>
   </div>
 
@@ -297,8 +297,8 @@
     <p><em>"Cuatro: permisos. Qué corre sin preguntarte, qué pide confirmación y qué está prohibido. Es el único de los ocho que es una barrera dura, no una instrucción."</em></p>
     <p><em>"Cinco: qué modelo atiende cada tarea. No siempre querés el más caro: el más capaz para diseñar o depurar algo difícil, uno más barato y rápido para lo mecánico."</em></p>
     <p><em>"Seis: cuánto esfuerzo le pedís antes de actuar. Los modelos actuales tienen una perilla de cuánto razonan, y eso se paga en tokens y en tiempo de espera. Para un cambio trivial, poner el máximo es tirar plata."</em></p>
-    <p><em>"Siete: cómo manejás el contexto, que es todo lo que acabamos de ver: qué se carga, cuándo compactás y qué mandás a resolver en una ventana aparte para no ensuciar la principal."</em></p>
-    <p><em>"Y ocho: qué se verifica solo. Los tests, el linter, el chequeo que corre después de cada cambio y le devuelve el resultado al agente sin que vos lo pidas. Es lo que convierte 'creo que anda' en 'pasó'."</em></p>
+    <p><em>"Siete: los hooks. Scripts tuyos que el runtime dispara solo ante ciertos eventos: antes o después de una tool, al abrir la sesión, al terminar un turno. Es la única dimensión que no depende de que el modelo quiera colaborar, y es donde ponés los tests o el linter que corren sin que nadie los pida."</em></p>
+    <p><em>"Y ocho: qué tareas se delegan a una ventana aparte, con sus propias tools y hasta su propio modelo. Sirve para lo que ensucia mucho el contexto, como explorar un repo grande: al final vuelve el resultado y no las mil lecturas que hicieron falta para conseguirlo."</em></p>
   </aside>
 </section>
 
