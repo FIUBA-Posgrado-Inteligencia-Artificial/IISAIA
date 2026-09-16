@@ -1,10 +1,9 @@
 <style>
 /* Scoped styles for §13 only */
 
-/* Heading override scoped to §13 slides */
 .reveal .slides .s13-slide { text-align: center; }
 .reveal .slides .s13-slide h2 {
-  font-size: 0.82em;
+  font-size: 0.9em;
   line-height: 1.2;
   margin: 0 0 6px;
   text-align: center;
@@ -12,815 +11,394 @@
   letter-spacing: 0;
 }
 
-.s13-slide code, #s13-demo-steps code { font-variant-ligatures: none; }
+.s13-slide code, .s13-entrega-tag { font-variant-ligatures: none; }
 
-/* --- Five-questions card (full + mini) --- */
-.reveal .slides .s13-slide h2.s13-five-q-title {
-  font-size: 1.05em;
-  text-align: center;
-  margin: 0 0 16px;
-  line-height: 1.2;
-}
-.reveal .s13-five-q-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 7px;
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 900px;
-}
-.s13-five-q-card {
+/* §13.1 · Hook: las tres piezas */
+.s13-hook-card {
+  max-width: 720px;
+  margin: 36px auto 0;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
-  border-radius: 6px;
-  padding: 9px 10px 9px;
+  border-top: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 30px 38px;
+  text-align: center;
+}
+.s13-hook-tres {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.s13-hook-pieza {
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-radius: 7px;
+  padding: 10px 22px;
+  font-size: 0.78em;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.reveal .s13-hook-line {
+  font-size: 0.72em;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 22px 0 0;
+  text-align: center;
+  font-style: italic;
+}
+
+/* §13.2 / §13.3 · Qué se entrega */
+.s13-entrega-wrap {
+  max-width: 760px;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 3px;
-  opacity: 0.45;
-  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  gap: 12px;
 }
-.s13-five-q-card.is-active {
-  opacity: 1;
-  border-color: var(--accent);
+.s13-entrega-card {
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
   border-left: 3px solid var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(100, 255, 218, 0.08);
+  border-radius: 8px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  text-align: left;
 }
-.s13-five-q-num {
+.s13-entrega-tag {
   font-family: var(--font-mono);
   font-size: 0.5em;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
-}
-.s13-five-q-card.is-active .s13-five-q-num {
+  text-transform: uppercase;
   color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
 }
-.s13-five-q-label {
-  font-size: 0.56em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
-.s13-five-q-hint {
-  font-size: 0.53em;
-  color: var(--text-muted);
-  line-height: 1.35;
-}
-/* Mini variant */
-.reveal .s13-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
-  justify-content: center;
-  gap: 4px;
-  max-width: 100%;
-  margin: 0 auto 8px;
-}
-.reveal .s13-five-q-grid.is-mini .s13-five-q-card {
-  padding: 3px 9px;
-  border-radius: 999px;
-  border-left-width: 1px;
-  flex-direction: row;
-  align-items: center;
-  gap: 5px;
-}
-.s13-five-q-grid.is-mini .s13-five-q-card.is-active {
-  border-left: 1px solid var(--accent);
-}
-.s13-five-q-grid.is-mini .s13-five-q-num {
-  font-size: 0.43em;
-}
-.s13-five-q-grid.is-mini .s13-five-q-label {
-  font-size: 0.5em;
-}
-
-/* Qué es: bullets + callout */
-.reveal .s13-qe-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 720px;
-  margin: 16px auto 0;
-  padding-left: 36px;
+.reveal .s13-entrega-body {
   font-size: 0.6em;
+  color: var(--text-muted);
   line-height: 1.6;
-  color: var(--text-muted);
-}
-.s13-qe-list li {
-  padding-left: 6px;
-  margin-bottom: 10px;
-}
-.s13-qe-list li::marker { color: var(--accent); }
-.s13-qe-list strong { color: var(--text-primary); font-weight: 700; }
-.s13-qe-list em { font-style: normal; color: var(--text-primary); }
-.s13-qe-list li.s13-qe-callout {
-  list-style: none;
-  margin-left: -32px;
-  margin-top: 10px;
-  background: rgba(100, 255, 218, 0.06);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-  padding: 8px 14px;
-  color: var(--accent);
-  font-weight: 700;
-}
-
-/* Dónde vive: el dial de modes + card de plan */
-.reveal .s13-dial-lead {
-  font-size: 0.6em;
-  line-height: 1.55;
-  color: var(--text-muted);
-  max-width: 760px;
-  margin: 18px auto 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-.reveal .s13-dial {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  list-style: none;
-  padding: 0;
-  margin: 22px auto 0;
-  max-width: 760px;
-}
-.s13-dial-chip {
-  font-family: var(--font-mono);
-  font-size: 0.55em;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid #2a3a5a;
-  background: var(--bg-secondary);
-  color: var(--text-muted);
-}
-.s13-dial-chip.is-focus {
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 700;
-  box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.15);
-}
-.s13-dial-axis {
-  display: flex;
-  justify-content: space-between;
-  max-width: 760px;
-  margin: 8px auto 0;
-  font-size: 0.53em;
-  color: var(--text-muted);
-  font-style: italic;
-}
-.s13-focus-card {
-  max-width: 760px;
-  margin: 24px auto 0;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-top: 3px solid var(--accent);
-  border-radius: 8px;
-  padding: 14px 24px;
-  text-align: center;
-}
-.reveal .s13-focus-card p {
-  font-size: 0.62em;
-  line-height: 1.6;
-  color: var(--text-primary);
   margin: 0;
 }
-.s13-focus-card strong { color: var(--accent); }
-.s13-focus-card code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-}
-
-/* Cuándo se activa: regla + 4 vías */
-.reveal .s13-when-lead {
+.s13-entrega-body strong { color: var(--text-primary); }
+.reveal .s13-entrega-features {
+  padding-left: 22px;
+  margin: 4px 0 0;
   font-size: 0.6em;
   line-height: 1.55;
-  color: var(--text-primary);
-  max-width: 760px;
-  margin: 12px auto 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-.s13-when-lead strong { color: var(--accent); }
-.reveal .s13-when-list {
+  color: var(--text-muted);
   list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 760px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.58em;
-  line-height: 1.6;
-  color: var(--text-muted);
 }
-.s13-when-list li {
-  padding-left: 4px;
-  margin-bottom: 10px;
-}
-.s13-when-list li::marker { color: var(--accent); }
-.s13-when-list strong { color: var(--text-primary); }
-.s13-when-list code {
+.s13-entrega-features li { padding-left: 4px; margin-bottom: 5px; }
+.s13-entrega-features li::marker { color: var(--accent); }
+.s13-entrega-features strong { color: var(--text-primary); }
+.s13-entrega-features code,
+.s13-entrega-body code,
+.s13-entrega-lead code {
   font-family: var(--font-mono);
   color: var(--accent);
-  font-size: 0.95em;
 }
-.s13-when-list .s13-when-snippet {
-  display: block;
-  margin-top: 4px;
-  background: var(--bg-code);
-  border: 1px solid #2a3a5a;
-  border-radius: 4px;
-  padding: 5px 12px;
-  font-family: var(--font-mono);
-  font-size: 0.96em;
-  color: var(--accent);
-  width: fit-content;
-  max-width: 100%;
-}
-
-/* Cómo se usa: flujo numerado en 6 pasos */
-.reveal .s13-flow-list {
-  list-style: decimal;
-  display: inline-block;
-  text-align: left;
-  max-width: 760px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.56em;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-.s13-flow-list li {
-  padding-left: 6px;
-  margin-bottom: 6px;
-}
-.s13-flow-list li::marker {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-weight: 700;
-}
-.s13-flow-list strong { color: var(--text-primary); }
-.s13-flow-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.96em;
-}
-.reveal .s13-flow-close {
-  display: block;
-  max-width: 760px;
-  margin: 14px auto 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  background: rgba(100, 255, 218, 0.06);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 0.56em;
+.reveal .s13-entrega-lead {
+  font-size: 0.62em;
   color: var(--text-primary);
   line-height: 1.6;
-  text-align: left;
-  box-sizing: border-box;
-}
-.s13-flow-close strong { color: var(--accent); }
-
-/* Lo que un plan debería contener */
-.reveal pre.s13-plan-block {
-  display: block;
-  max-width: 740px !important;
-  margin: 14px auto 0;
-  background: var(--bg-code);
-  border: 1px solid #2a3a5a;
-  border-radius: 8px;
-  padding: 14px 22px;
-  font-family: var(--font-mono);
-  font-size: 0.55em;
-  line-height: 1.65;
-  color: var(--text-muted);
-  text-align: left;
-  overflow: hidden;
-  box-shadow: none;
-  font-variant-ligatures: none;
-}
-.s13-plan-block .s13-plan-key { color: var(--accent-secondary); font-weight: 700; }
-.s13-plan-block .s13-plan-val { color: var(--text-primary); }
-.s13-plan-block .s13-plan-check { color: var(--accent); }
-.reveal .s13-plan-note {
-  max-width: 740px;
-  margin: 12px auto 0 !important;
+  max-width: 760px;
+  margin: 16px auto 0 !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  font-size: 0.55em;
-  color: var(--text-muted);
-  text-align: center;
-  font-style: italic;
-  line-height: 1.55;
 }
-.s13-plan-note strong { color: var(--text-primary); font-style: normal; }
-.s13-plan-note code {
-  font-family: var(--font-mono);
+.reveal .s13-callout {
+  background: rgba(100, 255, 218, 0.06);
+  border: 1px solid rgba(100, 255, 218, 0.22);
+  border-radius: 7px;
+  padding: 10px 18px;
+  font-size: 0.62em;
   color: var(--accent);
-  font-style: normal;
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: center;
+  width: 100%;
+  max-width: 760px;
+  box-sizing: border-box;
+  margin: 0 auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+.s13-callout code { font-family: var(--font-mono); color: var(--accent); }
 
-/* Criterio por mode: tabla */
-.s13-modes-wrap {
-  max-width: 860px;
-  margin: 12px auto 0;
+/* §13.4 / §13.5 · Lead + lista + coda */
+.s13-mide-wrap {
+  max-width: 760px;
+  margin: 16px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+.reveal .s13-mide-lead {
+  font-size: 0.66em;
+  color: var(--text-primary);
+  line-height: 1.6;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 !important;
+}
+.s13-mide-lead strong { color: var(--accent); }
+.reveal .s13-mide-list {
+  display: inline-block;
+  text-align: left;
+  max-width: 760px;
+  padding-left: 28px;
+  margin: 0;
+  font-size: 0.6em;
+  line-height: 1.6;
+  color: var(--text-muted);
+  list-style: disc;
+}
+.s13-mide-list li { padding-left: 4px; margin-bottom: 8px; }
+.s13-mide-list li::marker { color: var(--accent); }
+.s13-mide-list strong { color: var(--text-primary); }
+.reveal .s13-mide-coda {
+  font-size: 0.66em;
+  color: var(--text-primary);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.55;
+  max-width: 760px;
+  margin: 4px 0 0 !important;
+}
+.s13-mide-coda strong { color: var(--accent); font-style: normal; }
+
+/* §13.6 · El arco completo */
+.s13-arco-wrap {
+  max-width: 940px;
+  margin: 26px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.s13-arco-steps {
+  display: flex;
+  align-items: stretch;
+}
+.s13-arco-step {
+  flex: 1;
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-radius: 8px;
-  overflow: hidden;
+  padding: 14px 12px;
+  text-align: center;
 }
-.s13-modes-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.56em;
-  line-height: 1.5;
-  text-align: left;
+.s13-arco-step.is-final {
+  border-color: var(--accent);
 }
-.s13-modes-table thead th {
-  background: var(--bg-code);
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.85em;
+.s13-arco-step-label {
+  font-size: 0.68em;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 8px 14px;
-  border-bottom: 1px solid #2a3a5a;
+  color: var(--text-primary);
 }
-.s13-modes-table tbody td {
-  padding: 9px 14px;
-  vertical-align: middle;
-  border-bottom: 1px solid #1e2a48;
+.s13-arco-step.is-final .s13-arco-step-label { color: var(--accent); }
+.s13-arco-step-sub {
+  font-size: 0.55em;
   color: var(--text-muted);
-}
-.s13-modes-table tbody tr:last-child td { border-bottom: none; }
-.s13-criteria-table tbody td.s13-crit-mode {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  width: 30%;
-}
-.s13-criteria-table tbody td.s13-crit-mode.is-plan { color: var(--accent); }
-.s13-criteria-table tbody td.s13-crit-mode.is-default { color: var(--text-primary); }
-.s13-criteria-table tbody td.s13-crit-mode.is-edits { color: var(--accent-secondary); }
-.s13-criteria-table tbody td.s13-crit-mode.is-auto { color: #c792ea; }
-.s13-criteria-table tbody td.s13-crit-mode.is-bypass { color: #ff7676; }
-.s13-crit-sub {
+  margin-top: 6px;
   display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
+  line-height: 1.45;
+}
+.s13-arco-arrow {
   font-size: 0.9em;
   color: var(--text-muted);
+  padding: 0 5px;
+  flex-shrink: 0;
+  align-self: center;
 }
-.s13-criteria-table tbody td.s13-crit-when strong { color: var(--text-primary); }
-.reveal .s13-criteria-callout {
-  display: block;
-  max-width: 860px;
-  margin: 12px auto 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  background: rgba(100, 255, 218, 0.06);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 0.56em;
-  color: var(--text-primary);
-  line-height: 1.6;
-  text-align: left;
-  box-sizing: border-box;
-}
-.s13-criteria-callout strong { color: var(--accent); }
-
-/* Qué confunde: bullets */
-.reveal .s13-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 780px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.58em;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-.s13-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 12px;
-}
-.s13-gotchas-list li::marker { color: var(--accent); }
-.s13-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.s13-gotchas-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
-/* Demo */
-.reveal .s13-demo-sub {
-  font-size: 0.72em;
-  color: var(--text-muted);
-  margin-top: 14px;
-  font-style: italic;
-}
-.s13-demo-sub strong { color: var(--text-primary); }
-.reveal .s13-demo-wrap {
-  max-width: 1040px;
-  margin: 16px auto 0;
-}
-.reveal .s13-demo-wrap .cs-step { min-width: 0; }
-.reveal .s13-demo-wrap code { overflow-wrap: anywhere; }
-
-/* Cierre */
-.s13-close-card {
-  max-width: 740px;
-  margin: 22px auto 0;
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-top: 3px solid var(--accent);
+.s13-arco-closer {
+  max-width: 760px;
+  margin: 0 auto;
+  background: rgba(100, 255, 218, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.18);
   border-radius: 8px;
-  padding: 18px 26px;
+  padding: 18px 28px;
   text-align: center;
 }
-.reveal .s13-close-main {
-  font-size: 0.66em;
-  line-height: 1.65;
+.reveal .s13-arco-closer-main {
+  font-size: 0.8em;
+  font-weight: 700;
   color: var(--text-primary);
-  margin: 0 0 12px;
-}
-.s13-close-main strong { color: var(--accent); }
-.reveal .s13-close-bridge {
-  font-size: 0.58em;
-  color: var(--text-muted);
   line-height: 1.6;
-  border-top: 1px solid #2a3a5a;
-  padding-top: 11px;
   margin: 0;
 }
-.s13-close-bridge em {
+.s13-arco-closer-main em {
   color: var(--accent);
   font-style: normal;
-  font-weight: 700;
 }
 </style>
 
-<!-- §13.1 · Apertura: tarjeta de 5 preguntas (full opener) -->
+<!-- §13.1 · Hook: las tres piezas, al mismo tiempo -->
 <section class="s13-slide">
-  <h2 class="s13-five-q-title">Plan mode</h2>
+  <h2>Tres piezas, al mismo tiempo</h2>
 
-  <ol class="s13-five-q-grid">
-    <li class="s13-five-q-card is-active">
-      <span class="s13-five-q-num">1</span>
-      <span class="s13-five-q-label">Qué es</span>
-      <span class="s13-five-q-hint">definición en una línea</span>
-    </li>
-    <li class="s13-five-q-card">
-      <span class="s13-five-q-num">2</span>
-      <span class="s13-five-q-label">Dónde vive</span>
-      <span class="s13-five-q-hint">entre los permission modes</span>
-    </li>
-    <li class="s13-five-q-card">
-      <span class="s13-five-q-num">3</span>
-      <span class="s13-five-q-label">Cuándo se activa</span>
-      <span class="s13-five-q-hint">momento + trigger</span>
-    </li>
-    <li class="s13-five-q-card">
-      <span class="s13-five-q-num">4</span>
-      <span class="s13-five-q-label">Cómo se usa</span>
-      <span class="s13-five-q-hint">flujo + ejemplo</span>
-    </li>
-    <li class="s13-five-q-card">
-      <span class="s13-five-q-num">5</span>
-      <span class="s13-five-q-label">Qué confunde</span>
-      <span class="s13-five-q-hint">casos límite</span>
-    </li>
-  </ol>
-
-  <aside class="notes">
-    <p><strong>Ritmo rápido: el título ya nombra el tema.</strong></p>
-    <p><u>Apertura de §13, última pieza del runtime antes del trabajo final.</u></p>
-    <p><em>"Plan mode. Última vuelta con la misma plantilla de cinco preguntas. Es uno de los permission modes que vimos en permisos, y a la vez el dispositivo más directo para decidir cuándo arranca a editar el agente. Una sola diferencia en la plantilla: la tercera pregunta es 'cuándo se activa', no 'cuándo se carga', porque un mode se prende, no se lee de un archivo."</em></p>
-  </aside>
-</section>
-
-<!-- §13.2 · Qué es: bullets + callout -->
-<section class="s13-slide">
-  <ol class="s13-five-q-grid is-mini">
-    <li class="s13-five-q-card is-active"><span class="s13-five-q-num">1</span><span class="s13-five-q-label">Qué es</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">2</span><span class="s13-five-q-label">Dónde vive</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">3</span><span class="s13-five-q-label">Cuándo se activa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">4</span><span class="s13-five-q-label">Cómo se usa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">5</span><span class="s13-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Un alto deliberado antes de editar</h2>
-
-  <ul class="s13-qe-list">
-    <li>Modo que separa <strong>proponer</strong> de <strong>ejecutar</strong>: Claude explora y escribe un plan, y no edita tu código hasta que lo aprobás.</li>
-    <li>Mientras planifica puede <strong>leer, buscar y correr comandos</strong> para entender el repo. Lo que espera tu OK es la edición.</li>
-    <li>Es un alto <strong>deliberado</strong>, no un resumen a posteriori. Entrás <em>antes</em> de la primera edición, no después.</li>
-    <li class="s13-qe-callout">→ Defensa más barata contra la <strong>deriva</strong> (que el agente se aleje de lo que pediste): si el plan está mal, lo corregís antes de que toque nada.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>La mecánica primero; el callout define deriva y es la línea a retener.</strong></p>
-    <p><u>Definición: plan mode no es "Claude más cuidadoso", es un gate entre proponer y editar.</u></p>
-    <p><em>"Qué es. Acordate de la animación del loop: pensar, actuar, observar, repetir. Normalmente el agente pasa de pensar a actuar sin pedirte nada: le das la tarea, elige la primera acción y cuando te das cuenta ya tocó tres archivos. Plan mode mete un alto en ese paso. Claude puede leer archivos, buscar, correr comandos para entender cómo está armado el repo, y con eso escribe un plan. Lo que no hace es editar tu código hasta que vos aprobás. Y es deliberado: no es que hace cosas y después te cuenta, es que te cuenta qué va a hacer y recién después lo hace. ¿Por qué importa? Por la deriva: el agente arranca yendo hacia B y a la décima vuelta está en D. Si eso pasa después de que escribió archivos, corregirlo sale caro. Con el plan adelante, si entendió mal la tarea lo ves en el plan, no en el diff."</em></p>
-  </aside>
-</section>
-
-<!-- §13.3 · Dónde vive: plan como uno de los permission modes -->
-<section class="s13-slide">
-  <ol class="s13-five-q-grid is-mini">
-    <li class="s13-five-q-card"><span class="s13-five-q-num">1</span><span class="s13-five-q-label">Qué es</span></li>
-    <li class="s13-five-q-card is-active"><span class="s13-five-q-num">2</span><span class="s13-five-q-label">Dónde vive</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">3</span><span class="s13-five-q-label">Cuándo se activa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">4</span><span class="s13-five-q-label">Cómo se usa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">5</span><span class="s13-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Uno de los permission modes</h2>
-
-  <p class="s13-dial-lead">El mode decide qué hace Claude con lo que tus permisos no pre-aprueban.</p>
-
-  <ul class="s13-dial">
-    <li class="s13-dial-chip is-focus">plan</li>
-    <li class="s13-dial-chip">default</li>
-    <li class="s13-dial-chip">acceptEdits</li>
-    <li class="s13-dial-chip">auto</li>
-    <li class="s13-dial-chip">dontAsk</li>
-    <li class="s13-dial-chip">bypassPermissions</li>
-  </ul>
-  <div class="s13-dial-axis"><span>← más control humano</span><span>menos control humano →</span></div>
-
-  <div class="s13-focus-card">
-    <p><strong>plan</strong>: lee y corre comandos para explorar. No edita hasta que aprobás.</p>
+  <div class="s13-hook-card">
+    <div class="s13-hook-tres">
+      <div class="s13-hook-pieza">modelo</div>
+      <div class="s13-hook-pieza">rol + vocabulario</div>
+      <div class="s13-hook-pieza">runtime</div>
+    </div>
+    <p class="s13-hook-line">El trabajo final es donde las tres se usan juntas.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>No redefinir los seis modes: la tabla está en permisos. Solo ubicar a plan en el extremo.</strong></p>
-    <p><u>Plan mode no es un archivo ni un nivel: es una posición en el dial de modes.</u></p>
-    <p><em>"Dónde vive. Plan mode no vive en un archivo: es uno de los seis permission modes que vimos en la tabla de permisos. Recordatorio de qué es un mode: las listas allow, deny y ask deciden qué pasa y qué se bloquea; el mode decide qué hace Claude con todo lo que no está pre-aprobado. Van de más control humano a menos. Plan está en la punta: lee, corre comandos para explorar, pero no edita nada hasta que aprobás. Del otro lado, bypassPermissions no pregunta nada. Default, que en la interfaz aparece como Manual, pregunta antes de cada acción que no sea lectura. Hoy nos quedamos con la punta izquierda."</em></p>
+    <p><strong>Señalar las tres piezas en orden y cerrar con la línea de abajo.</strong></p>
+    <p><u>Apertura de §13: el trabajo final junta lo armado desde la semana 1.</u></p>
+    <p><em>"Tres piezas hasta acá. El modelo, semana 1: cómo predice tokens, qué es la ventana de contexto. El rol y el vocabulario, semanas 2 y 3: cómo dictar en lugar de aceptar lo primero que devuelve el agente. Y el runtime, estas dos clases: cómo configurar y controlar el loop. Por separado sirven poco. El trabajo final es donde las tres se usan al mismo tiempo, y ahora vemos qué significa eso en concreto."</em></p>
   </aside>
 </section>
 
-<!-- §13.4 · Cuándo se activa: regla + 4 vías -->
+<!-- §13.2 · Qué se entrega: tp-final/ -->
 <section class="s13-slide">
-  <ol class="s13-five-q-grid is-mini">
-    <li class="s13-five-q-card"><span class="s13-five-q-num">1</span><span class="s13-five-q-label">Qué es</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">2</span><span class="s13-five-q-label">Dónde vive</span></li>
-    <li class="s13-five-q-card is-active"><span class="s13-five-q-num">3</span><span class="s13-five-q-label">Cuándo se activa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">4</span><span class="s13-five-q-label">Cómo se usa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">5</span><span class="s13-five-q-label">Qué confunde</span></li>
-  </ol>
+  <h2>Qué se entrega: la carpeta <code>tp-final/</code></h2>
 
-  <h2>Cuándo y cómo se activa</h2>
-
-  <p class="s13-when-lead">Cuanto <strong>menos reversible</strong> es la tarea, más vale entrar <strong>antes</strong> de la primera edición.</p>
-
-  <ul class="s13-when-list">
-    <li><strong><code>Shift+Tab</code> durante la sesión</strong>: cicla <code>default</code> → <code>acceptEdits</code> → <code>plan</code> sin reiniciar.</li>
-    <li><strong><code>/plan &lt;prompt&gt;</code></strong>: entra a plan mode con ese pedido.</li>
-    <li><strong>Flag al arranque</strong>, cuando ya sabés que la tarea pide la pausa:
-      <code class="s13-when-snippet">claude --permission-mode plan</code>
-    </li>
-    <li><strong>En <code>settings.json</code></strong>, como mode de arranque del proyecto o de tu usuario:
-      <code class="s13-when-snippet">"permissions": { "defaultMode": "plan" }</code>
-    </li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>La regla de reversibilidad responde "cuándo"; las cuatro vías, "cómo".</strong></p>
-    <p><u>Shift+Tab es la vía más usada en la práctica: frenar a mitad de sesión sin perderla.</u></p>
-    <p><em>"Cuándo conviene. La regla es la reversibilidad: si un error se arregla con un commit, la pausa está de más; si te obliga a revertir cinco archivos y rezar, leer un plan vale los treinta segundos. Y cómo se prende, cuatro formas. La más útil: Shift más Tab durante la sesión. Cicla default, acceptEdits, plan, y vuelve a default; la interfaz te muestra el mode activo abajo. Estás trabajando, ves que el agente va a encarar algo grande, Shift Tab hasta plan y lo próximo viene como propuesta. Segunda: barra plan seguido del pedido, que entra a plan mode directo con esa tarea. Tercera: el flag al arrancar, claude guion guion permission-mode plan, cuando ya sabés antes del primer prompt que querés la pausa. Y cuarta: en settings.json, dentro de permissions, defaultMode plan. Eso hace que todas las sesiones de ese proyecto, o todas las tuyas si va en user, arranquen en plan."</em></p>
-  </aside>
-</section>
-
-<!-- §13.5 · Cómo se usa: flujo en 6 pasos -->
-<section class="s13-slide">
-  <ol class="s13-five-q-grid is-mini">
-    <li class="s13-five-q-card"><span class="s13-five-q-num">1</span><span class="s13-five-q-label">Qué es</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">2</span><span class="s13-five-q-label">Dónde vive</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">3</span><span class="s13-five-q-label">Cuándo se activa</span></li>
-    <li class="s13-five-q-card is-active"><span class="s13-five-q-num">4</span><span class="s13-five-q-label">Cómo se usa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">5</span><span class="s13-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>El flujo del plan en seis pasos</h2>
-
-  <ol class="s13-flow-list">
-    <li><strong>Activar plan mode</strong> con cualquiera de las cuatro vías.</li>
-    <li><strong>Describir la tarea</strong>, como siempre.</li>
-    <li><strong>Claude explora y presenta el plan</strong> con la tool <code>ExitPlanMode</code>.</li>
-    <li><strong>Revisar.</strong> Si algo no cierra: <code>No, keep planning</code> y decís qué cambiar, o <code>Ctrl+G</code> para editar el plan en tu editor.</li>
-    <li><strong>Aprobar</strong> con <code>Yes, and use auto mode</code> o <code>Yes, manually approve edits</code>.</li>
-    <li><strong>Claude sale de plan mode</strong> y ejecuta en el mode que elegiste.</li>
-  </ol>
-
-  <p class="s13-flow-close">
-    <strong>El plan fija el rumbo, no firma cada acción.</strong> Las reglas <code>deny</code> y <code>ask</code> siguen aplicando en el mode al que pasaste.
-  </p>
-
-  <aside class="notes">
-    <p><strong>El protagonista es el paso 4: corregir antes de aprobar.</strong></p>
-    <p><u>Aprobar cambia de mode; los permisos no se apagan.</u></p>
-    <p><em>"Cómo se usa, en seis pasos. Activás plan mode y describís la tarea como siempre; el prompt no cambia. Claude lee, explora, y cuando tiene el plan te lo presenta: por debajo usa una tool que se llama ExitPlanMode, y en pantalla te aparecen opciones. El paso importante es el cuatro. Si algo no te cierra, elegís 'No, keep planning' y le decís qué cambiar: 'no toques tests', 'empezá por este módulo'. O apretás Control G y el plan se abre en tu editor para que lo edites a mano. El plan no se acepta o rechaza en bloque: se negocia. Cuando está como lo querés, aprobás. 'Yes, and use auto mode' deja que un clasificador revise cada acción; si auto no está disponible en tu plan, esa opción aparece como auto-accept edits. 'Yes, manually approve edits' te sigue preguntando por cada edición que no esté en allow. En los dos casos Claude sale de plan mode y ejecuta. Y la línea de abajo: aprobar el plan fija el rumbo, no firma cada acción. Deny y ask siguen funcionando igual que siempre."</em></p>
-  </aside>
-</section>
-
-<!-- §13.6 · Lo que un plan debería contener (sin mini-strip) -->
-<section class="s13-slide">
-  <h2>Lo que un plan debería contener</h2>
-
-  <pre class="s13-plan-block"><span class="s13-plan-key">Objetivo:</span> <span class="s13-plan-val">extraer el patrón get-or-404 de users.py y posts.py a un helper compartido</span>
-
-<span class="s13-plan-key">Archivos:</span>
-  <span class="s13-plan-val">- backend/routers/common.py (nuevo: get_or_404)</span>
-  <span class="s13-plan-val">- backend/routers/users.py</span>
-  <span class="s13-plan-val">- backend/routers/posts.py</span>
-
-<span class="s13-plan-key">Pasos:</span>
-  <span class="s13-plan-check">[ ]</span> <span class="s13-plan-val">1. Leer get_user y get_post en los dos routers</span>
-  <span class="s13-plan-check">[ ]</span> <span class="s13-plan-val">2. Crear get_or_404 en common.py</span>
-  <span class="s13-plan-check">[ ]</span> <span class="s13-plan-val">3. Reemplazar el if/raise por el helper en cada router</span>
-  <span class="s13-plan-check">[ ]</span> <span class="s13-plan-val">4. Correr la suite de tests</span>
-
-<span class="s13-plan-key">Verificación:</span> <span class="s13-plan-val">uv run pytest pasa sin regresiones</span></pre>
-
-  <p class="s13-plan-note">
-    Sin <strong>archivos</strong> explícitos no sabés qué se va a tocar. Sin <strong>verificación</strong> no sabés cómo te enterás de que terminó bien. Si el plan está flojo, pedí que lo complete antes de aprobar.
-  </p>
-
-  <aside class="notes">
-    <p><strong>No es el formato literal de la herramienta: es el checklist para leer cualquier plan.</strong></p>
-    <p><u>Ejemplo sobre la tarea real del demo: los dos routers repiten el if/raise 404.</u></p>
-    <p><em>"Antes de la última pregunta, qué tiene que traer un plan para que valga la pena aprobarlo. Claude no lo va a escribir con estos títulos exactos, pero la información tiene que estar. Uso la tarea que vamos a hacer en el demo: users.py y posts.py repiten lo mismo, buscan en el store y si no está tiran un 404. Objetivo: si no coincide con lo que pediste, entendió mal y frenás ahí. Archivos: qué va a tocar; acá un helper nuevo y los dos routers. Si ves que se mete con tests o con main.py y no querías, este es el lugar para corregirlo. Pasos: el orden, y si el orden está mal también se corrige acá. Y verificación: cómo te enterás de que salió bien, en este caso que uv run pytest pase. Si falta alguno de estos cuatro, no aprobés todavía: pedile que lo complete."</em></p>
-  </aside>
-</section>
-
-<!-- §13.7 · Cuál mode usar: tabla de criterios por costo de un error -->
-<section class="s13-slide">
-  <h2>Cuál mode usar</h2>
-
-  <div class="s13-modes-wrap">
-    <table class="s13-modes-table s13-criteria-table">
-      <thead>
-        <tr>
-          <th>Mode</th>
-          <th>Cuándo tiene sentido</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="s13-crit-mode is-plan">plan</td>
-          <td class="s13-crit-when">Tareas <strong>grandes o multi-archivo</strong>, o cuando no sabés si Claude entendió la consigna.</td>
-        </tr>
-        <tr>
-          <td class="s13-crit-mode is-default">default<span class="s13-crit-sub">(Manual)</span></td>
-          <td class="s13-crit-when">Trabajo <strong>sensible</strong>: querés revisar cada acción antes de que pase.</td>
-        </tr>
-        <tr>
-          <td class="s13-crit-mode is-edits">acceptEdits</td>
-          <td class="s13-crit-when">Iterar sobre código que estás revisando, con <strong>tests rápidos</strong> que detectan regresiones.</td>
-        </tr>
-        <tr>
-          <td class="s13-crit-mode is-auto">auto</td>
-          <td class="s13-crit-when">Tareas <strong>largas y reversibles</strong>: un segundo modelo revisa cada acción en vez de vos.</td>
-        </tr>
-        <tr>
-          <td class="s13-crit-mode is-bypass">dontAsk · bypassPermissions</td>
-          <td class="s13-crit-when"><strong>CI y entornos aislados</strong>: scripts cerrados, contenedores o VMs que podés tirar.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p class="s13-criteria-callout">
-    La pregunta no es <strong>"¿qué tan rápido quiero ir?"</strong>. Es <strong>"¿qué tan caro es un error?"</strong>
-  </p>
-
-  <aside class="notes">
-    <p><strong>Ir al criterio de cada fila, no leer las celdas.</strong></p>
-    <p><u>Mismo orden que la tabla de permisos: de más control humano a menos.</u></p>
-    <p><em>"Si los modes son un dial, ¿cuándo lo movés? Plan, para tareas grandes o multi-archivo, o cuando no estás seguro de que entendió: la pausa cuesta leer un plan, un loop mal orientado que ya escribió veinte archivos cuesta mucho más. Default, Manual, para lo sensible, donde querés ver cada acción. AcceptEdits, cuando estás iterando sobre código que igual vas a revisar y tenés tests rápidos que te avisan si algo se rompe. Auto, para tareas largas donde un error se revierte fácil: un clasificador mira cada acción por vos. Y dontAsk y bypassPermissions no son para tu máquina con tu repo real: son para CI, scripts cerrados, contenedores que tirás al terminar. La trampa es elegir por velocidad, el reflejo de 'saco los prompts y listo'. El criterio es cuánto cuesta el error que querés evitar."</em></p>
-  </aside>
-</section>
-
-<!-- §13.8 · Qué confunde: 3 cosas (bullets) -->
-<section class="s13-slide">
-  <ol class="s13-five-q-grid is-mini">
-    <li class="s13-five-q-card"><span class="s13-five-q-num">1</span><span class="s13-five-q-label">Qué es</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">2</span><span class="s13-five-q-label">Dónde vive</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">3</span><span class="s13-five-q-label">Cuándo se activa</span></li>
-    <li class="s13-five-q-card"><span class="s13-five-q-num">4</span><span class="s13-five-q-label">Cómo se usa</span></li>
-    <li class="s13-five-q-card is-active"><span class="s13-five-q-num">5</span><span class="s13-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Tres cosas que confunden de plan mode</h2>
-
-  <ul class="s13-gotchas-list">
-    <li><strong>Plan mode no es sandbox.</strong> Al aprobar, Claude sale de plan mode, pasa al mode que elegiste y edita de verdad. La protección dura hasta el OK.</li>
-    <li><strong>Aprobar el plan no aprueba cada comando.</strong> Depende de la opción: con <code>manually approve edits</code> te sigue preguntando. En cualquier caso, <code>deny</code> y <code>ask</code> siguen aplicando.</li>
-    <li><strong>Plan mode sí corre comandos.</strong> Para explorar el repo puede ejecutarlos. Lo que espera tu aprobación es la edición del código: "no edita" no es "no ejecuta".</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>Tres malentendidos, cada uno con su corrección.</strong></p>
-    <p><u>Plan mode es un gate antes de editar, no un entorno protegido.</u></p>
-    <p><em>"Tres cosas que confunden. Una: plan mode no es sandbox. La intuición es 'si estoy en plan, estoy protegido'. Mientras planifica, sí, no edita. Pero cuando aprobás, sale de plan mode, pasa al mode que elegiste y edita de verdad. Dos: aprobar el plan no aprueba cada comando. Si elegiste 'manually approve edits', cada edición que no esté en allow te pregunta. Y sea cual sea la opción, un deny sigue bloqueando y un ask sigue preguntando; si el plan dice 'corro uv add', el ask de ese comando te frena igual. Y tres: plan mode sí corre comandos. Para entender el repo puede listar, buscar, ejecutar lo que necesite para explorar. Lo que queda en pausa es tocar tu código. Por eso el plan no te exime de mirar qué corre mientras investiga."</em></p>
-  </aside>
-</section>
-
-<!-- §13.9 · Demo · plan mode (section-divider + clickable-steps) -->
-<section class="section-divider">
-  <h2>Demo · plan mode</h2>
-  <p class="s13-demo-sub">Mismo pedido, dos modes: mirá <strong>en qué momento entrás vos</strong>.</p>
-
-  <div class="s13-demo-wrap">
-    <div id="s13-demo-steps"></div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Claude Code abierto en ~/demo-repo con claude --permission-mode default; otra pestaña para git.</strong></p>
-    <p><u>Tres pasos: Manual edita solo, plan propone, corregir y aprobar.</u></p>
-    <p><em>"Último demo. El mismo pedido dos veces, extraer el patrón get-or-404 de los dos routers a un helper, para ver en qué momento entra el supervisor en cada caso."</em></p>
-    <hr>
-    <p><strong>Setup (antes de clase):</strong></p>
-    <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> y <code>git checkout .</code>).</li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code>.</li>
-      <li>Abrir Claude Code con <code>claude --permission-mode default</code>: en planes Pro/Max/Team el arranque por defecto es <code>auto</code>, que taparía los prompts. En la UI <code>default</code> se llama Manual.</li>
-      <li>Para ver qué cargó el runtime: <code>/context</code> (no <code>/memory</code>, que lista ubicaciones posibles aunque no existan).</li>
-      <li>Ojo en vivo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen como fuentes.</li>
-    </ol>
-    <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Paso 1 · Manual: edita sin preguntar</strong></p>
-    <ul>
-      <li><strong>En Claude:</strong> <code>extraé el patrón get-or-404 de users.py y posts.py a un helper compartido</code></li>
-      <li><strong>Mirar:</strong> lee los routers y empieza a editar sin preguntar (<code>Edit(./backend/**)</code> está en allow)</li>
-      <li><strong>En Claude:</strong> <code>Esc</code> para cortar</li>
-      <li><strong>Terminal:</strong> <code>git checkout .</code> (y borrar el helper si llegó a crearlo) para revertir</li>
-    </ul>
-    <p><strong>Paso 2 · Plan: propone sin editar</strong></p>
-    <ul>
-      <li><strong>En Claude:</strong> <code>/clear</code> para empezar con ventana limpia</li>
-      <li><strong>En Claude:</strong> <code>Shift+Tab</code> hasta ver "plan mode on" (o <code>/plan</code> + el pedido)</li>
-      <li><strong>En Claude:</strong> el mismo pedido</li>
-      <li><strong>Mirar:</strong> explora y presenta un plan, sin editar</li>
-      <li><strong>Terminal:</strong> <code>git status</code> en otra pestaña, sin cambios</li>
-    </ul>
-    <p><strong>Paso 3 · Corregir y aprobar</strong></p>
-    <ul>
-      <li><strong>En Claude:</strong> elegir <code>No, keep planning</code></li>
-      <li><strong>En Claude:</strong> <code>el helper va en backend/routers/common.py</code></li>
-      <li><strong>Mirar:</strong> presenta el plan corregido</li>
-      <li><strong>En Claude:</strong> elegir <code>Yes, manually approve edits</code></li>
-      <li><strong>Mirar:</strong> edita según el plan; si corre <code>uv run pytest</code>, te pide permiso (no está en allow)</li>
-    </ul>
-    <p><em>Plan B: si en el paso 1 Claude pregunta antes de editar (arrancó en otro mode o no cargó el allow), mostrar el prompt, elegir No y marcar que igual decidió estrategia y archivos antes de mostrártelos. Si Shift+Tab no llega a plan, usar /plan seguido del pedido. Si el plan ya pone el helper en common.py, corregir otra cosa concreta: "dejá los mensajes de error como están", "no toques main.py" o "llamalo get_or_404".</em></p>
-  </aside>
-</section>
-
-<!-- §13.10 · Cierre -->
-<section class="s13-slide">
-  <h2>Controlar el loop antes de la primera edición</h2>
-
-  <div class="s13-close-card">
-    <p class="s13-close-main">
-      Plan mode separa <strong>proponer</strong> de <strong>ejecutar</strong>: corregís el rumbo cuando el costo es leer un plan, no revertir veinte archivos. Durante la ejecución, las listas de permisos siguen decidiendo qué pasa.
-    </p>
-    <p class="s13-close-bridge">
-      <em>Modelo</em> + <em>rol</em> + <em>runtime</em>: las tres piezas, articuladas en un proyecto propio.
+  <div class="s13-entrega-wrap">
+    <div class="s13-entrega-card">
+      <span class="s13-entrega-tag">Producto</span>
+      <p class="s13-entrega-body">
+        Una aplicación con <strong>interfaz, servidor y datos que persisten</strong>. Stack libre: REST u otro estilo, vanilla o framework, base de datos o archivos.
+      </p>
+    </div>
+    <div class="s13-entrega-card">
+      <span class="s13-entrega-tag">Adentro de tp-final/</span>
+      <ul class="s13-entrega-features">
+        <li><strong><code>README.md</code> como informe:</strong> cómo se ejecuta, arquitectura, decisiones propias, gestión del contexto, qué salió mal.</li>
+        <li><strong>Evidencia del proceso:</strong> spec y plan en disco, commits, branches y pull requests.</li>
+        <li><strong>Configuración del agente versionada:</strong> <code>.claude/</code> o el equivalente de tu herramienta.</li>
+      </ul>
+    </div>
+    <p class="s13-callout">
+      Grupos de 2. La carpeta vive en el repo de uno de los integrantes; el otro entra como colaborador.
     </p>
   </div>
 
   <aside class="notes">
-    <p><strong>Cierre del runtime y puente al trabajo final.</strong></p>
-    <p><u>Plan mode decide cuándo arranca la edición; permisos, qué pasa mientras ejecuta.</u></p>
-    <p><em>"Lo que queda de plan mode: controlar el loop antes de la primera edición. Corregís el rumbo cuando corregir cuesta leer un plan, no cuando cuesta revertir veinte archivos. Y aprobar no apaga nada: durante la ejecución, deny y ask siguen mandando. Con esto cerramos la Parte 2: el loop, el contexto, las instrucciones, las reglas, la configuración, los permisos, los procedimientos, la delegación y el control sobre cuándo arranca. La última sección no agrega piezas: junta modelo, rol y runtime en el trabajo final."</em></p>
+    <p><strong>Producto con forma libre; la carpeta con informe, evidencia y configuración; grupos de 2.</strong></p>
+    <p><u>Mismo repositorio de siempre, carpeta tp-final/ con la estructura de referencia.</u></p>
+    <p><em>"Qué se entrega. Primero el producto: una aplicación con interfaz, servidor y datos que persisten. El stack es libre: el backend puede ser REST o no, el frontend vanilla o con framework, y la persistencia lo que el producto necesite. Segundo, la carpeta tp-final, en el mismo repo de siempre, con la estructura que ya tenés en el repo de referencia. Adentro, el README es el informe: cómo se ejecuta, la arquitectura, qué decidiste vos y no el modelo, cómo gestionaste el contexto y qué salió mal. Además, la evidencia del proceso: la spec y el plan como archivos, los commits, las branches y los pull requests; eso no se fabrica la noche anterior. Y la configuración del agente versionada, que vemos en la próxima. Y un cambio respecto de los TPs anteriores: el trabajo final es en grupos de dos. La carpeta vive en el repo de uno de los dos y el otro entra como colaborador, así los commits de los dos quedan en el mismo historial."</em></p>
   </aside>
 </section>
 
-<!-- INIT-SCRIPTS-§13-START -->
-<script>
-  initClickableSteps({containerId: 's13-demo-steps', steps: [
-    {
-      title: 'Paso 1 · Manual: edita sin preguntar',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>extraé el patrón get-or-404 de users.py y posts.py a un helper compartido</code></li><li><strong>Mirar:</strong> edita sin preguntar (<code>Edit(./backend/**)</code> en allow)</li><li><strong>En Claude:</strong> <code>Esc</code> para cortar</li><li><strong>Terminal:</strong> <code>git checkout .</code></li></ul>',
-      example: 'Claude lee users.py y posts.py, decide dónde va el helper, cómo se llama y en qué router empieza, y edita. No aparece ningún prompt de permiso: <code>Edit(./backend/**)</code> está en allow. Cuando cortás con Esc, esas decisiones ya estaban tomadas. <code>git checkout .</code> deja el repo como estaba.'
-    },
-    {
-      title: 'Paso 2 · Plan: propone sin editar',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/clear</code></li><li><strong>En Claude:</strong> <code>Shift+Tab</code> hasta "plan mode on"</li><li><strong>En Claude:</strong> el mismo pedido</li><li><strong>Mirar:</strong> presenta un plan, sin editar</li><li><strong>Terminal:</strong> <code>git status</code> sin cambios</li></ul>',
-      example: 'Mismo pedido, otro mode. Claude lee los dos routers, puede correr comandos para explorar y termina con un plan: qué archivos toca, en qué orden y cómo verifica. <code>git status</code> en otra pestaña no muestra cambios. La decisión de editar sigue siendo tuya.'
-    },
-    {
-      title: 'Paso 3 · Corregir y aprobar',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>No, keep planning</code></li><li><strong>En Claude:</strong> <code>el helper va en backend/routers/common.py</code></li><li><strong>Mirar:</strong> plan corregido</li><li><strong>En Claude:</strong> <code>Yes, manually approve edits</code></li><li><strong>Mirar:</strong> edita; <code>uv run pytest</code> igual pide permiso</li></ul>',
-      example: 'Con <code>No, keep planning</code> el plan vuelve a Claude con tu corrección: el helper en <code>backend/routers/common.py</code>. Claude presenta el plan nuevo. <code>Yes, manually approve edits</code> sale de plan mode y ejecuta.<br><br>Cuando llega a <code>uv run pytest</code>, te pregunta: no está en allow, y aprobar el plan no lo aprobó.'
-    }
-  ]});
-</script>
-<!-- INIT-SCRIPTS-§13-END -->
+<!-- §13.3 · La configuración del agente también es producto -->
+<section class="s13-slide">
+  <h2>La configuración del agente también es producto</h2>
+
+  <p class="s13-entrega-lead">En <code>.claude/</code> o el equivalente de tu herramienta, cada pieza puesta con intención:</p>
+
+  <div class="s13-entrega-wrap">
+    <div class="s13-entrega-card">
+      <ul class="s13-entrega-features">
+        <li><code>CLAUDE.md</code> con folder map y convenciones del proyecto</li>
+        <li><code>.claude/rules/</code> con al menos una rule con <code>paths:</code></li>
+        <li><code>.claude/settings.json</code> con <code>permissions</code> (<code>allow</code> / <code>deny</code> / <code>ask</code>) pensados para el proyecto</li>
+        <li>Al menos una skill propia, invocable como slash command</li>
+        <li>Un sub-agent, si la complejidad del proyecto lo justifica</li>
+        <li>Plan mode durante el desarrollo (se ve en el proceso, no en un archivo)</li>
+      </ul>
+    </div>
+    <p class="s13-callout">Se versiona con el código y se explica en la defensa.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Leer las seis piezas rápido: son las de la Parte 2, ahora como parte del repo.</strong></p>
+    <p><u>La configuración del agente no es andamiaje invisible: se entrega y se explica.</u></p>
+    <p><em>"La configuración del agente también es producto. Si usás Claude Code, vive en la carpeta .claude; si usás otra herramienta, en su equivalente. Seis piezas. CLAUDE.md con el folder map y las convenciones. Al menos una rule que se active por path. settings.json con permisos pensados para este proyecto, no copiados. Una skill propia que se pueda invocar como comando. Un sub-agent si el proyecto lo pide; si no, no hace falta inventarlo. Y plan mode durante el desarrollo: eso no es un archivo, se ve en cómo trabajaste. No es decoración: se versiona con el código y en la defensa tenés que poder contar por qué está cada cosa."</em></p>
+  </aside>
+</section>
+
+<!-- §13.4 · Cómo se evalúa: la defensa -->
+<section class="s13-slide">
+  <h2>Cómo se evalúa: la defensa en el Demo Day</h2>
+
+  <div class="s13-mide-wrap">
+    <p class="s13-mide-lead">Defensa <strong>conjunta</strong> sobre el repo terminado. Se evalúa al grupo.</p>
+    <ul class="s13-mide-list">
+      <li><strong>Especificación:</strong> cómo se definió qué construir antes de que el agente escribiera código.</li>
+      <li><strong>Gestión del contexto:</strong> qué se persistió y qué se aisló para que el agente no perdiera el hilo entre sesiones.</li>
+      <li><strong>Deriva:</strong> dónde se desvió el agente, cómo se detectó y cómo se corrigió.</li>
+      <li><strong>Evidencia:</strong> el flujo visible en el repo (spec, plan, commits, branches, PRs) y la configuración del agente.</li>
+    </ul>
+    <p class="s13-mide-coda"><strong>Apropiación</strong> = poder explicar, corregir y extender lo que el agente escribió.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Cuatro criterios del programa y la definición de apropiación.</strong></p>
+    <p><u>Que funcione no alcanza: se evalúa si el grupo puede contar y sostener el proceso.</u></p>
+    <p><em>"Cómo se evalúa. En el Demo Day, la última clase, cada grupo defiende su trabajo sobre el repo terminado, los dos juntos, y la nota es del grupo. Que funcione no alcanza. Se miran cuatro cosas. Especificación: cómo definiste qué construir antes de que el agente escribiera la primera línea. Gestión del contexto: un proyecto de varios archivos y varias sesiones no entra entero en la ventana, entonces qué dejaste en CLAUDE.md, qué aislaste en sub-agents, cómo hiciste para que el agente no perdiera el hilo. Deriva: dónde se fue para otro lado, cómo te diste cuenta y qué hiciste. Y evidencia: que todo eso se vea en el repo, en la spec, el plan, los commits, las branches, los PRs y la configuración. Y la palabra que resume todo: apropiación. Que el producto sea tuyo aunque el agente haya escrito la mayoría del código. Se mide en si podés explicarlo, corregirlo y extenderlo cuando te pregunto, no en cuántas líneas tipeaste. Y en grupo eso vale para los dos: cualquiera de los dos tiene que poder responder por cualquier parte."</em></p>
+  </aside>
+</section>
+
+<!-- §13.5 · Antes de implementar: exponer la idea -->
+<section class="s13-slide">
+  <h2>Antes de implementar: exponer la idea</h2>
+
+  <div class="s13-mide-wrap">
+    <p class="s13-mide-lead">Cada grupo presenta su idea en <strong>5 minutos</strong>:</p>
+    <ul class="s13-mide-list">
+      <li><strong>Problema:</strong> qué resuelve la aplicación.</li>
+      <li><strong>Usuarios:</strong> para quién es.</li>
+      <li><strong>MVP:</strong> las funcionalidades mínimas sin las que no sirve.</li>
+      <li><strong>Stack:</strong> con qué se construyen interfaz, servidor y datos.</li>
+    </ul>
+    <p class="s13-callout">La devolución es sobre alcance y viabilidad: si entra hasta el Demo Day y qué recortar antes de empezar.</p>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Consigna de la exposición de ideas: cuatro puntos, cinco minutos por grupo.</strong></p>
+    <p><u>La devolución llega antes de implementar, cuando recortar alcance todavía es barato.</u></p>
+    <p><em>"Antes de escribir una línea, cada grupo expone su idea. Cinco minutos, cuatro puntos. El problema: qué resuelve. Los usuarios: para quién es. El MVP: las funcionalidades mínimas sin las cuales la aplicación no sirve, no la lista de todo lo que les gustaría. Y el stack: con qué vas a hacer la interfaz, el servidor y los datos. Lo que te devuelvo es sobre alcance y viabilidad: si eso entra en el tiempo que queda hasta el Demo Day y qué conviene recortar. Es el mismo movimiento que plan mode: corregir el rumbo cuando corregir cuesta una conversación, no semanas de código."</em></p>
+  </aside>
+</section>
+
+<!-- §13.6 · El arco completo -->
+<section class="s13-slide">
+  <h2>El arco completo</h2>
+
+  <div class="s13-arco-wrap">
+    <div class="s13-arco-steps">
+      <div class="s13-arco-step">
+        <div class="s13-arco-step-label">Modelo</div>
+        <span class="s13-arco-step-sub">la máquina que predice tokens</span>
+      </div>
+      <div class="s13-arco-arrow">→</div>
+      <div class="s13-arco-step">
+        <div class="s13-arco-step-label">Rol</div>
+        <span class="s13-arco-step-sub">vocabulario para dirigir</span>
+      </div>
+      <div class="s13-arco-arrow">→</div>
+      <div class="s13-arco-step">
+        <div class="s13-arco-step-label">Runtime</div>
+        <span class="s13-arco-step-sub">controlar el loop</span>
+      </div>
+      <div class="s13-arco-arrow">→</div>
+      <div class="s13-arco-step">
+        <div class="s13-arco-step-label">Flujo e integraciones</div>
+        <span class="s13-arco-step-sub">plugins · specs · MCP</span>
+      </div>
+      <div class="s13-arco-arrow">→</div>
+      <div class="s13-arco-step is-final">
+        <div class="s13-arco-step-label">Trabajo final</div>
+        <span class="s13-arco-step-sub">todo al mismo tiempo</span>
+      </div>
+    </div>
+
+    <div class="s13-arco-closer">
+      <p class="s13-arco-closer-main">No son herramientas separadas.</p>
+      <p class="s13-arco-closer-main">Son el <em>mismo supervisor</em> trabajando en distintas capas.</p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    <p><strong>Recorrer el arco en orden y leer el cierre despacio.</strong></p>
+    <p><u>Cierre de la unidad de runtime, no del curso: siguen plugins y spec-driven, MCP y el Demo Day.</u></p>
+    <p><em>"Empezamos con un modelo que predice tokens, y no era una metáfora. Después aprendiste a nombrar las piezas de lo que ese modelo construye: componentes, endpoints, contratos, status codes. Y en estas dos clases, a controlar el loop con el que trabaja: el contexto finito, CLAUDE.md, rules, permisos, skills, sub-agents, plan mode. Falta un tramo antes del trabajo final: empaquetar un flujo de trabajo completo, de la spec al pull request, y conectar el agente con sistemas que están fuera de tu máquina. Eso son las próximas dos clases. Y el trabajo final usa todo a la vez. No son herramientas separadas: es el mismo supervisor trabajando en distintas capas. Ahora, las ideas."</em></p>
+  </aside>
+</section>

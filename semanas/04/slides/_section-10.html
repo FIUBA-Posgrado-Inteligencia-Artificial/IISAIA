@@ -402,42 +402,6 @@
   font-size: 0.95em;
 }
 
-/* Permission modes table — §10.9 */
-.s10-logic-wrap.s10-modes-wrap { max-width: 1000px; }
-.s10-modes-table tbody td.s10-mode-name {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-weight: 700;
-  white-space: nowrap;
-  width: 24%;
-}
-.s10-modes-table tbody td.s10-mode-name.is-danger { color: #ff7676; }
-.s10-mode-ui {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 1em;
-  color: var(--text-muted);
-}
-.s10-modes-table tbody td.s10-mode-what { width: 44%; }
-.s10-modes-table tbody td.s10-mode-why { width: 32%; color: var(--text-muted); }
-.s10-modes-table tbody tr.is-danger td { background: rgba(255, 118, 118, 0.05); }
-.reveal .s10-modes-foot {
-  max-width: 960px;
-  margin: 10px auto 0 !important;
-  font-size: 0.55em;
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.5;
-}
-.reveal .s10-modes-foot.is-tight { margin-top: 2px !important; }
-.s10-modes-foot strong { color: var(--text-primary); }
-.reveal .s10-modes-foot code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s10-demo-sub {
   font-size: 0.72em;
@@ -652,7 +616,7 @@
   <aside class="notes">
     <p><strong>El orden es fijo: deny, ask, allow. La especificidad no lo cambia.</strong></p>
     <p><u>Evaluación por orden de lista; lo que no matchea nada lo resuelve el modo.</u></p>
-    <p><em>"Tercera pregunta. Cuándo se evalúa. Antes de cada tool call, y en un orden fijo. Primero deny: si matchea, bloqueada, sin prompt. Después ask: si matchea, te pregunta, aunque haya un allow que también la cubra. Después allow: corre sin preguntar. Y si no matchea ninguna regla, decide el modo de permisos; en Manual, que es default, te pregunta. La primera coincidencia en ese orden gana, y la especificidad no importa: si tenés Edit de openapi.yaml en el allow del proyecto y alguien pone el mismo Edit en un deny local, la edición queda bloqueada. Eso lo vamos a ver en el demo."</em></p>
+    <p><em>"Tercera pregunta. Cuándo se evalúa. Antes de cada tool call, y en un orden fijo. Primero deny: si matchea, bloqueada, sin prompt. Después ask: si matchea, te pregunta, aunque haya un allow que también la cubra. Después allow: corre sin preguntar. Y si no matchea ninguna regla, decide el mode, el dial que vimos al abrir la sesión; en Manual, que es default, te pregunta. La primera coincidencia en ese orden gana, y la especificidad no importa: si tenés Edit de openapi.yaml en el allow del proyecto y alguien pone el mismo Edit en un deny local, la edición queda bloqueada. Eso lo vamos a ver en el demo."</em></p>
   </aside>
 </section>
 
@@ -783,65 +747,7 @@
   </aside>
 </section>
 
-<!-- §10.9 · Permission modes — tabla única de 6 modes (sin mini-strip) -->
-<section class="s10-slide">
-  <h2>Permission modes: el dial de autonomía</h2>
-
-  <div class="s10-logic-wrap s10-modes-wrap">
-    <table class="s10-logic-table s10-modes-table">
-      <thead>
-        <tr>
-          <th>Mode</th>
-          <th>Qué corre sin preguntar</th>
-          <th>Para qué</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="s10-mode-name">plan</td>
-          <td class="s10-mode-what">Lecturas y exploración; no edita hasta que aprobás el plan</td>
-          <td class="s10-mode-why">Explorar y proponer antes de tocar</td>
-        </tr>
-        <tr>
-          <td class="s10-mode-name">default<span class="s10-mode-ui">en la UI: Manual</span></td>
-          <td class="s10-mode-what">Solo lecturas</td>
-          <td class="s10-mode-why">Revisar cada acción, trabajo sensible</td>
-        </tr>
-        <tr>
-          <td class="s10-mode-name">acceptEdits</td>
-          <td class="s10-mode-what">Lecturas, ediciones y comandos de filesystem comunes (<code>mkdir</code>, <code>mv</code>, <code>rm</code>…) en el working dir</td>
-          <td class="s10-mode-why">Iterar sobre código que estás revisando</td>
-        </tr>
-        <tr>
-          <td class="s10-mode-name">auto</td>
-          <td class="s10-mode-what">Todo, con un segundo modelo (clasificador) que revisa cada acción en vez de vos</td>
-          <td class="s10-mode-why">Tareas largas; arranque por defecto en Pro/Max/Team</td>
-        </tr>
-        <tr>
-          <td class="s10-mode-name">dontAsk</td>
-          <td class="s10-mode-what">Lecturas y lo pre-aprobado en <code>allow</code>; lo que preguntaría, se deniega</td>
-          <td class="s10-mode-why">CI y scripts cerrados</td>
-        </tr>
-        <tr class="is-danger">
-          <td class="s10-mode-name is-danger">bypassPermissions</td>
-          <td class="s10-mode-what">Todo</td>
-          <td class="s10-mode-why">Solo contenedores o VMs aislados</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p class="s10-modes-foot"><strong>Los <code>deny</code> bloquean en todos los modos</strong>, incluido <code>bypassPermissions</code>.</p>
-  <p class="s10-modes-foot is-tight">Cambiar de modo: <code>Shift+Tab</code> en la sesión · <code>claude --permission-mode &lt;modo&gt;</code> · <code>permissions.defaultMode</code></p>
-
-  <aside class="notes">
-    <p><strong>Ordenados de más a menos control humano; <code>bypassPermissions</code> solo en entornos aislados.</strong></p>
-    <p><u>Modo y listas se combinan: las listas deciden sobre lo que matchean; el modo, sobre el resto.</u></p>
-    <p><em>"Falta una pieza encima de las listas: el modo de permisos. Las listas deciden qué pasa con lo que matchea una regla; el modo decide qué pasa con todo lo demás. Seis modos, de más a menos control humano. plan: lee y explora, pero no edita hasta que aprobás el plan; le dedicamos una sección en §13. default, que en la interfaz se llama Manual: solo las lecturas pasan sin preguntar. acceptEdits: además acepta ediciones y comandos de filesystem comunes dentro del proyecto; sirve cuando estás iterando y revisando el diff. auto: corre todo, pero un segundo modelo, un clasificador, revisa cada acción en lugar tuyo; en planes Pro, Max y Team es el modo con el que arranca Claude Code, y por eso en los demos arranco con --permission-mode default. dontAsk: solo pasa lo pre-aprobado, y lo que preguntaría se deniega; es para CI. Y bypassPermissions: todo, solo para contenedores o máquinas virtuales aisladas. Una garantía que atraviesa los seis: los deny bloquean en todos los modos, incluso en bypass. Para cambiar: Shift+Tab durante la sesión cicla entre default, acceptEdits y plan; el flag --permission-mode al arrancar; o defaultMode dentro de permissions en settings."</em></p>
-  </aside>
-</section>
-
-<!-- §10.10 · Demo · prompt → regla guardada → deny gana (section-divider + clickable-steps) -->
+<!-- §10.9 · Demo · prompt → regla guardada → deny gana (section-divider + clickable-steps) -->
 <section class="section-divider">
   <h2>Demo · del prompt al <code class="s10-h2-code">deny</code></h2>
   <p class="s10-demo-sub">Un comando que pregunta, una regla que lo libera y un deny que le gana a un allow.</p>
@@ -881,7 +787,7 @@
   </aside>
 </section>
 
-<!-- §10.11 · Cierre + bridge a §11 -->
+<!-- §10.10 · Cierre + bridge a §11 -->
 <section class="s10-slide">
   <h2>Reglas del runtime, determinísticas, antes de cada tool call</h2>
 

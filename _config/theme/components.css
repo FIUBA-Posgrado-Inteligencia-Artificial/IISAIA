@@ -545,3 +545,82 @@
 .protocol-matrix.state-nm .caption-nplusm,
 .protocol-matrix.state-nplusm .caption-nm { display: none; }
 
+
+/* ===== Harness map ======================================================
+   The same runtime piece in three harnesses, side by side: one column per
+   tool, the reference tool (the one the demos run on) marked with .is-ref.
+
+   <div class="harness-map">
+     <div class="harness-map-col is-ref">
+       <span class="harness-map-tool">Claude Code</span>
+       <span class="harness-map-path">CLAUDE.md</span>
+       <p class="harness-map-note">…</p>
+     </div>
+     …two more columns…
+   </div>
+   <p class="harness-map-foot">What carries over between the three.</p>
+
+   Selectors on <p> are prefixed with .reveal: the theme's `.reveal p`
+   margin and color otherwise win over a single class. */
+.harness-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 1100px;
+  margin: 16px auto 0;
+  text-align: left;
+}
+.harness-map-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-top: 3px solid var(--text-muted);
+  border-radius: 8px;
+  padding: 10px 16px 12px;
+}
+.harness-map-col.is-ref { border-top-color: var(--accent); }
+.harness-map-tool {
+  font-size: 0.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.harness-map-col.is-ref .harness-map-tool { color: var(--accent); }
+.harness-map-path {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.6em;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+.reveal .harness-map-note {
+  margin: 0;
+  font-size: 0.55em;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.harness-map-note strong { color: var(--text-primary); }
+.harness-map-note.is-warn strong { color: #ff7676; }
+.reveal .harness-map code {
+  background: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.95em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.reveal .harness-map-foot {
+  max-width: 1100px;
+  margin: 14px auto 0 !important;
+  font-size: 0.6em;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--accent);
+}

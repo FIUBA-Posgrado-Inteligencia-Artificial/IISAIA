@@ -52,13 +52,159 @@
   font-style: italic;
 }
 
-/* §6.5 — map of the 7 runtime pieces */
+/* §6.5 — the two session controls: model and effort */
+.s6-ctrl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 1100px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+.s6-ctrl-card {
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-left: 3px solid var(--accent-secondary);
+  border-radius: 8px;
+  padding: 10px 18px;
+}
+.s6-ctrl-name {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+}
+.reveal .s6-ctrl-what {
+  margin: 4px 0 0;
+  font-size: 0.58em;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+/* §6.6 / §6.7 — mode tables */
+.s6-modes-wrap {
+  max-width: 1000px;
+  margin: 12px auto 0;
+  background: var(--bg-secondary);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.s6-modes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.55em;
+  line-height: 1.45;
+  text-align: left;
+}
+.s6-modes-table thead th {
+  background: var(--bg-code);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-bottom: 1px solid #2a3a5a;
+}
+.s6-modes-table tbody td {
+  padding: 6px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #1e2a48;
+  color: var(--text-primary);
+}
+.s6-modes-table tbody tr:last-child td { border-bottom: none; }
+.s6-modes-table td code {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+.s6-modes-table tbody td.s6-mode-name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  width: 28%;
+}
+.s6-modes-table tbody td.s6-mode-name.is-danger { color: #ff7676; }
+.s6-modes-table tbody tr.is-danger td { background: rgba(255, 118, 118, 0.05); }
+.s6-mode-sub {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.s6-modes-table tbody td.s6-mode-what strong { color: var(--text-primary); }
+.s6-modes-table tbody td.s6-mode-what { color: var(--text-muted); }
+.reveal .s6-dial-lead {
+  max-width: 1000px;
+  margin: 10px auto 0 !important;
+  font-size: 0.6em;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: center;
+}
+.reveal .s6-callout {
+  display: block;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 12px auto 0 !important;
+  background: rgba(100, 255, 218, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 0.56em;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-align: left;
+}
+.s6-callout strong { color: var(--accent); }
+.s6-callout code { font-family: var(--font-mono); color: var(--accent); }
+
+/* §6.6 — the dial's equivalences are a tighter harness map */
+.s6-dial-map.harness-map { margin-top: 12px; }
+.s6-dial-map .harness-map-col { padding: 8px 14px 10px; gap: 4px; }
+
+/* §6.8 — what a plan should contain */
+.reveal pre.s6-plan-block {
+  display: block;
+  max-width: 740px !important;
+  margin: 12px auto 0;
+  background: var(--bg-code);
+  border: 1px solid #2a3a5a;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.55em;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: left;
+  overflow: hidden;
+  box-shadow: none;
+  font-variant-ligatures: none;
+}
+.s6-plan-block .s6-plan-key { color: var(--accent-secondary); font-weight: 700; }
+.s6-plan-block .s6-plan-val { color: var(--text-primary); }
+.s6-plan-block .s6-plan-check { color: var(--accent); }
+.reveal .s6-plan-note {
+  max-width: 740px;
+  margin: 12px auto 0 !important;
+  font-size: 0.55em;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.55;
+}
+.s6-plan-note strong { color: var(--text-primary); font-style: normal; }
+
+/* §6.9 — map of the six runtime pieces */
 .s6-pieces {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  max-width: 1040px;
+  max-width: 800px;
   margin: 18px auto 0;
 }
 .s6-piece {
@@ -100,7 +246,7 @@
 }
 .reveal .s6-pieces-foot {
   display: block;
-  max-width: 1040px;
+  max-width: 900px;
   margin-top: 14px;
   margin-bottom: 0;
   margin-left: auto !important;
@@ -114,12 +260,12 @@
 
 <!-- §6.1 · section-divider — costura Parte 1 / Parte 2 -->
 <section class="section-divider">
-  <h2>Parte 2 — Claude Code</h2>
-  <p class="s6-divider-sub">Pensar, actuar, observar: ahora con nombre propio.</p>
+  <h2>Parte 2 — Configurar el harness</h2>
+  <p class="s6-divider-sub">Las ocho dimensiones, en archivos que podés leer y cambiar.</p>
 
   <aside class="notes">
-    <p><u>Costura Parte 1 / Parte 2: primera vez que aparece el nombre. Dejar que el título caiga solo.</u></p>
-    <p><em>"Parte 2. Todo lo que construimos en la primera parte — el loop, las tools, la ventana finita, el harness — lo aprendimos sin nombrar ninguna herramienta. Ahora sí lo nombramos."</em></p>
+    <p><u>Costura Parte 1 / Parte 2: del concepto a la configuración. Dejar que el título caiga solo.</u></p>
+    <p><em>"Parte 2. Todo lo que construimos en la primera parte, el loop, las tools, la ventana finita, el harness, lo aprendimos sin nombrar ninguna herramienta. Ahora lo bajamos a archivos concretos. Los demos corren en Claude Code, que es la herramienta que usamos en el curso, pero cada pieza que veamos existe también en Codex, el agente de OpenAI, y en OpenCode, que es open source. Vamos a ver la pieza en Claude Code y enseguida cómo se llama y dónde vive en las otras dos."</em></p>
   </aside>
 </section>
 
@@ -132,12 +278,13 @@
     <li>Abre una <strong>sesión interactiva</strong>: vos escribís, el modelo trabaja y te responde, y seguís en la misma sesión.</li>
     <li>Adentro corre el <strong>loop</strong> pensar → actuar → observar, con tu repo como entorno real (no una simulación).</li>
     <li>Las <strong>tools</strong> que el modelo pide y el runtime ejecuta: <code>Read</code>, <code>Edit</code>, <code>Write</code>, <code>Bash</code>, <code>Grep</code>, <code>Glob</code>, <code>WebFetch</code>, entre otras.</li>
+    <li>Es <strong>un harness entre varios</strong>: Codex y OpenCode corren el mismo loop con sus propios archivos de configuración.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Marcar fuerte "entorno real, no simulación".</strong></p>
-    <p><u>Definición directa: CLI + sesión + loop + tools.</u></p>
-    <p><em>"Claude Code es una CLI. La instalás una vez y la corrés desde la terminal escribiendo claude. Cuando la ejecutás, abre una sesión interactiva con el modelo: vos escribís, el modelo trabaja, te responde, y seguís en la misma sesión. Adentro de esa sesión corre exactamente el loop que vimos en la parte 1: pensar, actuar, observar, repetir. Con tu repo como entorno real: cuando ejecuta tests, los tests corren de verdad; cuando edita un archivo, el archivo cambia. Y las tools son las del programa externo que ya conocen: el modelo pide Read, Edit, Write, Bash, Grep, Glob, WebFetch, y el runtime las ejecuta y le devuelve el resultado. Las vamos a ver una y otra vez en todo lo que sigue."</em></p>
+    <p><strong>Marcar fuerte "entorno real, no simulación". El último ítem abre la comparación.</strong></p>
+    <p><u>Definición directa: CLI + sesión + loop + tools, y una implementación entre varias.</u></p>
+    <p><em>"Claude Code es una CLI. La instalás una vez y la corrés desde la terminal escribiendo claude. Cuando la ejecutás, abre una sesión interactiva con el modelo: vos escribís, el modelo trabaja, te responde, y seguís en la misma sesión. Adentro de esa sesión corre exactamente el loop que vimos en la parte 1: pensar, actuar, observar, repetir. Con tu repo como entorno real: cuando ejecuta tests, los tests corren de verdad; cuando edita un archivo, el archivo cambia. Y las tools son las del programa externo que ya conocen: el modelo pide Read, Edit, Write, Bash, Grep, Glob, WebFetch, y el runtime las ejecuta y le devuelve el resultado. Y lo último: no es la única. Codex, de OpenAI, y OpenCode, que es open source, son el mismo tipo de programa. Cambian los nombres de los archivos y algunas reglas, pero lo que vamos a configurar existe en las tres."</em></p>
   </aside>
 </section>
 
@@ -181,9 +328,202 @@
   </aside>
 </section>
 
-<!-- §6.5 · Las siete piezas del runtime -->
+<!-- §6.5 · Los controles de la sesión: model y effort -->
 <section>
-  <h2>Siete piezas configurables del runtime</h2>
+  <h2>Lo primero que elegís: model y effort</h2>
+
+  <div class="s6-ctrl">
+    <div class="s6-ctrl-card">
+      <span class="s6-ctrl-name">model</span>
+      <p class="s6-ctrl-what">Qué modelo corre el loop. Uno más capaz resuelve mejor las tareas difíciles y cobra más por token; uno más chico responde más rápido y más barato.</p>
+    </div>
+    <div class="s6-ctrl-card">
+      <span class="s6-ctrl-name">effort</span>
+      <p class="s6-ctrl-what">Cuánto razona antes de cada acción. Más effort, más tokens de razonamiento: ocupan ventana y se cobran como salida.</p>
+    </div>
+  </div>
+
+  <div class="harness-map">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">/model · /effort</span>
+      <p class="harness-map-note">Al arrancar, <code>--model</code> y <code>--effort</code>. Por defecto, <code>model</code> y <code>effortLevel</code> en <code>settings.json</code>.</p>
+      <p class="harness-map-note">Effort: <code>low</code> · <code>medium</code> · <code>high</code> · <code>xhigh</code> · <code>max</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">/model</span>
+      <p class="harness-map-note">Elige modelo y effort juntos. En <code>config.toml</code>, <code>model</code> y <code>model_reasoning_effort</code>.</p>
+      <p class="harness-map-note">Plan mode tiene un effort propio: <code>plan_mode_reasoning_effort</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">/models · ctrl+t</span>
+      <p class="harness-map-note">En <code>opencode.json</code>, <code>"model": "proveedor/modelo"</code>.</p>
+      <p class="harness-map-note">El effort viene como <strong>variants</strong> de cada modelo, y <code>ctrl+t</code> cicla entre ellas.</p>
+    </div>
+  </div>
+
+  <p class="harness-map-foot">Los dos se eligen al arrancar y se cambian a mitad de sesión con un comando.</p>
+
+  <aside class="notes">
+    <p><strong>Conectar effort con §4: los tokens de razonamiento llenan la ventana y se pagan como salida.</strong></p>
+    <p><u>Model y effort son los dos controles que tocás antes de escribir; los tres harness los exponen.</u></p>
+    <p><em>"Antes de cualquier archivo de configuración, hay dos cosas que elegís apenas abrís una sesión. El modelo: cuál corre el loop. Uno grande resuelve mejor lo difícil y cobra más por token; uno chico es más rápido y más barato, y para tareas mecánicas alcanza. Y el effort: cuánto razona antes de actuar. Acuérdense de la barra de la ventana: uno de los chips que la llenaban eran los tokens de razonamiento. Más effort es más de esos tokens, que ocupan ventana y se cobran al precio de salida, el caro. En Claude Code tenés /model y /effort durante la sesión, --model y --effort al arrancar, y si querés un default, model y effortLevel en settings.json. Los niveles van de low a max; el default es high. En Codex, /model elige las dos cosas juntas, y en config.toml es model_reasoning_effort; tiene además un effort aparte para plan mode, que es una idea interesante: razonar más cuando planificás que cuando ejecutás. En OpenCode, /models, y el effort viene empaquetado como variantes del modelo que cambiás con control T. Tres interfaces, los mismos dos controles."</em></p>
+  </aside>
+</section>
+
+<!-- §6.6 · El dial de autonomía: los permission modes -->
+<section>
+  <h2>El dial de autonomía: los permission modes</h2>
+
+  <p class="s6-dial-lead">El mode decide qué hace el agente con cada acción que ninguna regla de permisos resuelve.</p>
+
+  <div class="s6-modes-wrap">
+    <table class="s6-modes-table">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Qué corre sin preguntar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="s6-mode-name">plan</td>
+          <td class="s6-mode-what"><strong>Lecturas y comandos para explorar.</strong> No edita hasta que aprobás el plan.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">default<span class="s6-mode-sub">en la UI: Manual</span></td>
+          <td class="s6-mode-what"><strong>Solo lecturas.</strong> Todo lo demás pregunta.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">acceptEdits</td>
+          <td class="s6-mode-what"><strong>Lecturas, ediciones</strong> y comandos de filesystem comunes (<code>mkdir</code>, <code>mv</code>, <code>cp</code>) en el working dir.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">auto</td>
+          <td class="s6-mode-what"><strong>Todo</strong>, con un segundo modelo que revisa cada acción en vez de vos. Arranque por defecto en Pro, Max y Team.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">dontAsk</td>
+          <td class="s6-mode-what"><strong>Solo lo pre-aprobado.</strong> Lo que preguntaría, se deniega.</td>
+        </tr>
+        <tr class="is-danger">
+          <td class="s6-mode-name is-danger">bypassPermissions</td>
+          <td class="s6-mode-what"><strong>Todo.</strong> Solo en contenedores o VMs aisladas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="harness-map s6-dial-map">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">Shift+Tab</span>
+      <p class="harness-map-note">Cicla <code>default</code> → <code>acceptEdits</code> → <code>plan</code>. Al arrancar, <code>--permission-mode</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">--sandbox · /plan</span>
+      <p class="harness-map-note">Dos ejes separados: qué puede tocar el agente y cuándo te pregunta (<code>--ask-for-approval</code>).</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">Tab · --auto</span>
+      <p class="harness-map-note is-warn"><code>plan</code> es un agente, no un mode, y <strong>deja bash abierto</strong> por defecto.</p>
+    </div>
+  </div>
+
+  <p class="s6-callout"><strong>Plan mode no es sandbox.</strong> Frena la edición, no la ejecución: mientras planifica puede correr comandos, y al aprobar pasás a otro mode.</p>
+
+  <aside class="notes">
+    <p><strong>De más a menos control humano. La columna de OpenCode es la que hay que marcar.</strong></p>
+    <p><u>El mode es la tercera cosa que elegís al abrir la sesión; en cada harness tiene otra forma.</u></p>
+    <p><em>"La tercera cosa que ves al abrir la sesión, abajo, en la barra de estado: el mode. Los permisos son reglas, las vemos más adelante; el mode decide qué pasa con todo lo que ninguna regla resuelve. Seis, de más a menos control humano. plan: lee, corre comandos para explorar, y no edita hasta que aprobás el plan. default, que en la interfaz se llama Manual: solo las lecturas pasan sin preguntar. acceptEdits: además acepta ediciones y comandos de archivos comunes dentro del proyecto. auto: corre todo, pero un segundo modelo, un clasificador, revisa cada acción en lugar tuyo; en planes Pro, Max y Team es el mode con el que arranca Claude Code, y por eso en los demos arranco con --permission-mode default. dontAsk: solo lo pre-aprobado, para CI. Y bypassPermissions: todo, solo en contenedores o máquinas virtuales. En Claude Code se cambia con Shift Tab, que cicla default, acceptEdits y plan, y la barra muestra el mode activo, por ejemplo 'plan mode on'. En Codex el dial está partido en dos: el sandbox dice qué puede tocar, y approval dice cuándo te pregunta; plan mode es /plan. Y en OpenCode, ojo: plan no es un mode, es otro agente, que cambiás con Tab. Y ese agente bloquea las ediciones pero deja bash abierto por defecto. Eso nos lleva a lo de abajo, que vale para los tres: plan mode no es sandbox. Frena la edición, no la ejecución. Mientras planifica puede correr comandos, y cuando aprobás pasás a otro mode y edita de verdad."</em></p>
+  </aside>
+</section>
+
+<!-- §6.7 · Cuál mode usar: criterio por costo de un error -->
+<section>
+  <h2>Cuál mode usar</h2>
+
+  <div class="s6-modes-wrap">
+    <table class="s6-modes-table">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Cuándo tiene sentido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="s6-mode-name">plan</td>
+          <td class="s6-mode-what">Tareas <strong>grandes o multi-archivo</strong>, o cuando no sabés si el agente entendió la consigna.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">default<span class="s6-mode-sub">(Manual)</span></td>
+          <td class="s6-mode-what">Trabajo <strong>sensible</strong>: querés revisar cada acción antes de que pase.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">acceptEdits</td>
+          <td class="s6-mode-what">Iterar sobre código que estás revisando, con <strong>tests rápidos</strong> que detectan regresiones.</td>
+        </tr>
+        <tr>
+          <td class="s6-mode-name">auto</td>
+          <td class="s6-mode-what">Tareas <strong>largas y reversibles</strong>: un segundo modelo revisa cada acción en vez de vos.</td>
+        </tr>
+        <tr class="is-danger">
+          <td class="s6-mode-name is-danger">dontAsk · bypassPermissions</td>
+          <td class="s6-mode-what"><strong>CI y entornos aislados</strong>: scripts cerrados, contenedores o VMs que podés tirar.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="s6-callout">La pregunta no es <strong>"¿qué tan rápido quiero ir?"</strong>. Es <strong>"¿qué tan caro es un error?"</strong></p>
+
+  <aside class="notes">
+    <p><strong>Ir al criterio de cada fila, no leer las celdas.</strong></p>
+    <p><u>Mismo orden que el dial: de más control humano a menos. El criterio vale en cualquier harness.</u></p>
+    <p><em>"Si los modes son un dial, ¿cuándo lo movés? Plan, para tareas grandes o multi-archivo, o cuando no estás seguro de que entendió: la pausa cuesta leer un plan, un loop mal orientado que ya escribió veinte archivos cuesta mucho más. Default, Manual, para lo sensible, donde querés ver cada acción. AcceptEdits, cuando estás iterando sobre código que igual vas a revisar y tenés tests rápidos que te avisan si algo se rompe. Auto, para tareas largas donde un error se revierte fácil: un clasificador mira cada acción por vos. Y dontAsk y bypassPermissions no son para tu máquina con tu repo real: son para CI, scripts cerrados, contenedores que tirás al terminar. La trampa es elegir por velocidad, el reflejo de 'saco los prompts y listo'. El criterio es cuánto cuesta el error que querés evitar. Y esto no depende de la herramienta: en Codex o en OpenCode los nombres cambian, la pregunta es la misma."</em></p>
+  </aside>
+</section>
+
+<!-- §6.8 · Lo que un plan debería contener -->
+<section>
+  <h2>Lo que un plan debería contener</h2>
+
+  <p class="s6-dial-lead">Un plan es la defensa más barata contra la <strong>deriva</strong>, que el agente se aleje de lo que pediste: corregirla en el plan cuesta leer; en el diff, revertir.</p>
+
+  <pre class="s6-plan-block"><span class="s6-plan-key">Objetivo:</span> <span class="s6-plan-val">extraer el patrón get-or-404 de users.py y posts.py a un helper compartido</span>
+
+<span class="s6-plan-key">Archivos:</span>
+  <span class="s6-plan-val">- backend/routers/common.py (nuevo: get_or_404)</span>
+  <span class="s6-plan-val">- backend/routers/users.py</span>
+  <span class="s6-plan-val">- backend/routers/posts.py</span>
+
+<span class="s6-plan-key">Pasos:</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">1. Leer get_user y get_post en los dos routers</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">2. Crear get_or_404 en common.py</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">3. Reemplazar el if/raise por el helper en cada router</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">4. Correr la suite de tests</span>
+
+<span class="s6-plan-key">Verificación:</span> <span class="s6-plan-val">uv run pytest pasa sin regresiones</span></pre>
+
+  <p class="s6-plan-note">
+    Sin <strong>archivos</strong> explícitos no sabés qué se va a tocar. Sin <strong>verificación</strong> no sabés cómo te enterás de que terminó bien. Si el plan está flojo, pedí que lo complete antes de aprobar.
+  </p>
+
+  <aside class="notes">
+    <p><strong>No es el formato literal de la herramienta: es el checklist para leer cualquier plan.</strong></p>
+    <p><u>Deriva primero; después las cuatro partes sobre una tarea real del demo-repo.</u></p>
+    <p><em>"Si vas a usar plan mode, tenés que saber leer un plan. Primero, para qué sirve: contra la deriva, que el agente arranque yendo hacia lo que pediste y a la décima vuelta esté en otro lado. Si eso lo ves en el plan, corregir cuesta leer; si lo ves en el diff, cuesta revertir. Ningún agente va a escribir el plan con estos títulos exactos, pero la información tiene que estar. Uso una tarea real del demo-repo: users.py y posts.py repiten lo mismo, buscan en el store y si no está tiran un 404. Objetivo: si no coincide con lo que pediste, entendió mal y frenás ahí. Archivos: qué va a tocar; acá un helper nuevo y los dos routers. Si ves que se mete con tests o con main.py y no querías, este es el lugar para corregirlo. Pasos: el orden. Y verificación: cómo te enterás de que salió bien, en este caso que uv run pytest pase. Si falta alguno de estos cuatro, no aprobés todavía. En Claude Code, cuando el plan está listo te aparecen tres opciones: 'Yes, and use auto mode', 'Yes, manually approve edits', y 'No, keep planning', que es la que usás para pedirle que lo corrija. Aprobar el plan fija el rumbo, no firma cada acción: las reglas de permisos siguen aplicando."</em></p>
+  </aside>
+</section>
+
+<!-- §6.9 · Las seis piezas del runtime -->
+<section>
+  <h2>Seis piezas configurables del runtime</h2>
 
   <div class="s6-pieces">
     <div class="s6-piece">
@@ -222,20 +562,14 @@
       <span class="s6-piece-what">Tareas delegadas a otra ventana; vuelve solo el resultado.</span>
       <span class="s6-piece-dim">sub-agentes</span>
     </div>
-    <div class="s6-piece">
-      <span class="s6-piece-num">7</span>
-      <span class="s6-piece-name">Plan mode</span>
-      <span class="s6-piece-what">Primero el plan; edita recién cuando lo aprobás.</span>
-      <span class="s6-piece-dim">permisos</span>
-    </div>
   </div>
 
-  <p class="s6-pieces-foot">Cada pieza se recorre con las mismas cinco preguntas: qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde.</p>
+  <p class="s6-pieces-foot">Cada pieza se recorre con las mismas cinco preguntas: qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde. Y con su equivalente en Codex y OpenCode.</p>
 
   <aside class="notes">
-    <p><strong>Recorrer las siete de pasada: nombre y dimensión. No presentar cada una.</strong></p>
-    <p><u>Las piezas del harness de Claude Code, cada una ligada a una dimensión.</u></p>
-    <p><em>"Lo que viene son siete piezas configurables del runtime, y cada una llena una de las dimensiones del harness que acabamos de ver. Las dos primeras, CLAUDE.md y rules, son las instrucciones persistentes. settings.json es donde se eligen el modelo, el effort y las tools. Los permisos son la barrera dura. Las skills y los comandos son los procedimientos guardados. Los sub-agents son su propia dimensión: mandan trabajo a otra ventana. Y plan mode es otra vuelta de permisos: no edita hasta que aprobás. De las ocho dimensiones quedan dos sin pieza propia acá: conectar tools nuevas por servidores externos y los hooks, que son tema de las clases que siguen."</em></p>
+    <p><strong>Recorrer las seis de pasada: nombre y dimensión. No presentar cada una.</strong></p>
+    <p><u>Las piezas del harness, con el nombre que tienen en Claude Code, cada una ligada a una dimensión.</u></p>
+    <p><em>"Model, effort y mode ya los vimos: son lo que elegís al abrir la sesión. Lo que viene son seis piezas que viven en archivos, y cada una llena una de las dimensiones del harness. Las dos primeras, CLAUDE.md y rules, son las instrucciones persistentes. settings.json es donde se fijan el modelo, el effort y las tools por defecto. Los permisos son la barrera dura. Las skills y los comandos son los procedimientos guardados. Y los sub-agents mandan trabajo a otra ventana. Uso los nombres de Claude Code porque ahí corren los demos, pero en cada sección vamos a ver cómo se llama y dónde vive la misma pieza en Codex y en OpenCode. De las ocho dimensiones quedan dos sin pieza propia acá: conectar tools nuevas por servidores externos y los hooks, que son tema de las clases que siguen."</em></p>
   </aside>
 </section>
 
