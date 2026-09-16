@@ -2942,6 +2942,7 @@
 /* §6.6 — the dial's equivalences are a tighter harness map */
 .s6-dial-map.harness-map { margin-top: 12px; }
 .s6-dial-map .harness-map-col { padding: 8px 14px 10px; gap: 4px; }
+.reveal .s6-list + .harness-map { margin-top: 20px; }
 
 /* §6.8 — what a plan should contain */
 .reveal pre.s6-plan-block {
@@ -3065,6 +3066,7 @@
         <span class="s6-tool-name">WebFetch</span><span class="s6-tool-what">trae el contenido de una URL</span>
         <span></span><span></span>
         <p class="s6-tools-note"><code>Grep</code> y <code>Glob</code> vienen en Windows; en macOS y Linux Claude busca con <code>grep</code> y <code>find</code> a través de <code>Bash</code>.</p>
+        <p class="s6-tools-note">En otro harness cambian los nombres (Codex edita con <code>apply_patch</code>), no las categorías: leer, editar, buscar, ejecutar, traer de la web.</p>
       </div>
     </li>
     <li>Es <strong>un harness entre varios</strong>: Codex y OpenCode corren el mismo loop con sus propios archivos de configuración.</li>
@@ -3073,7 +3075,7 @@
   <aside class="notes">
     <p><strong>Marcar fuerte "entorno real, no simulación". El último ítem abre la comparación.</strong></p>
     <p><u>Definición directa: CLI + sesión + loop + tools, y una implementación entre varias.</u></p>
-    <p><em>"Claude Code es una CLI. La instalás una vez y la corrés desde la terminal escribiendo claude. Cuando la ejecutás, abre una sesión interactiva con el modelo: vos escribís, el modelo trabaja, te responde, y seguís en la misma sesión. Adentro de esa sesión corre exactamente el loop que vimos en la parte 1: pensar, actuar, observar, repetir. Con tu repo como entorno real: cuando ejecuta tests, los tests corren de verdad; cuando edita un archivo, el archivo cambia. Y las tools son las del programa externo que ya conocen: el modelo las pide, el runtime las ejecuta y le devuelve el resultado. Read lee un archivo. Edit cambia un pedazo puntual de un archivo que ya existe, y Write crea uno nuevo o lo pisa entero. Bash corre un comando en la terminal: tests, git, uv, lo que sea. Grep busca texto adentro de los archivos y Glob encuentra archivos por nombre, como todos los .py. Y WebFetch trae una página web, por ejemplo documentación. Un detalle: Grep y Glob aparecen así en Windows; en Mac y Linux Claude Code hace esas mismas búsquedas con grep y find por Bash, así que ahí las van a ver como comandos de Bash. Leer y buscar no pide permiso; editar, escribir, traer URLs y los comandos que modifican algo, sí. Y lo último: no es la única. Codex, de OpenAI, y OpenCode, que es open source, son el mismo tipo de programa. Cambian los nombres de los archivos y algunas reglas, pero lo que vamos a configurar existe en las tres."</em></p>
+    <p><em>"Claude Code es una CLI. La instalás una vez y la corrés desde la terminal escribiendo claude. Cuando la ejecutás, abre una sesión interactiva con el modelo: vos escribís, el modelo trabaja, te responde, y seguís en la misma sesión. Adentro de esa sesión corre exactamente el loop que vimos en la parte 1: pensar, actuar, observar, repetir. Con tu repo como entorno real: cuando ejecuta tests, los tests corren de verdad; cuando edita un archivo, el archivo cambia. Y las tools son las del programa externo que ya conocen: el modelo las pide, el runtime las ejecuta y le devuelve el resultado. Read lee un archivo. Edit cambia un pedazo puntual de un archivo que ya existe, y Write crea uno nuevo o lo pisa entero. Bash corre un comando en la terminal: tests, git, uv, lo que sea. Grep busca texto adentro de los archivos y Glob encuentra archivos por nombre, como todos los .py. Y WebFetch trae una página web, por ejemplo documentación. Un detalle: Grep y Glob aparecen así en Windows; en Mac y Linux Claude Code hace esas mismas búsquedas con grep y find por Bash, así que ahí las van a ver como comandos de Bash. Leer y buscar no pide permiso; editar, escribir, traer URLs y los comandos que modifican algo, sí. Y si usan otra herramienta, los nombres cambian: Codex, por ejemplo, edita con una tool que se llama apply_patch. Lo que no cambia son las categorías: leer, editar, buscar, ejecutar y traer de la web están en las tres. Y lo último: no es la única. Codex, de OpenAI, y OpenCode, que es open source, son el mismo tipo de programa. Cambian los nombres de los archivos y algunas reglas, pero lo que vamos a configurar existe en las tres."</em></p>
   </aside>
 </section>
 
@@ -3089,12 +3091,30 @@
     <li>Abre una <strong>ventana de contexto</strong> con todo eso adentro y espera tu primer mensaje.</li>
   </ol>
 
-  <p class="s6-list-foot">Todo esto ya ocupa la ventana antes de que escribas la primera tecla.</p>
+  <div class="harness-map s6-dial-map">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">CLAUDE.md · settings.json</span>
+      <p class="harness-map-note">Más los índices de skills y sub-agents, y el de la memoria.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">AGENTS.md · config.toml</span>
+      <p class="harness-map-note">Más el índice de skills, y la memoria si la activaste.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">AGENTS.md · opencode.json</span>
+      <p class="harness-map-note">Más el índice de skills. No tiene memoria automática.</p>
+    </div>
+  </div>
+
+  <p class="s6-list-foot">En los tres, todo esto ya ocupa la ventana antes de que escribas la primera tecla.</p>
 
   <aside class="notes">
     <p><strong>Recorrer los cinco pasos. Cerrar con la línea final.</strong></p>
     <p><u>Qué carga el runtime al arrancar; el detalle de cada pieza viene en su sección.</u></p>
-    <p><em>"Cuando escribís claude y das enter, el runtime prepara la ventana antes de pedirte el primer mensaje. Primero, tus instrucciones: los CLAUDE.md — el de tu usuario, en tu home, y los del proyecto, desde la raíz del repo hasta el directorio donde estás — más las rules que no dependen de un path. Segundo, la configuración del runtime, settings.json: qué modelo usar, qué permisos hay, qué variables de entorno inyectar. Tercero, un índice de skills y sub-agents: solo nombre y descripción; el contenido entra cuando se usan. Cuarto, el índice de la memoria que Claude se escribe entre sesiones. Y quinto, con todo eso adentro, queda esperando. Lo que importa retener: la sesión arranca con una ventana que ya tiene contenido. Cada una de estas piezas tiene su sección más adelante."</em></p>
+    <p><em>"Cuando escribís claude y das enter, el runtime prepara la ventana antes de pedirte el primer mensaje. Primero, tus instrucciones: los CLAUDE.md — el de tu usuario, en tu home, y los del proyecto, desde la raíz del repo hasta el directorio donde estás — más las rules que no dependen de un path. Segundo, la configuración del runtime, settings.json: qué modelo usar, qué permisos hay, qué variables de entorno inyectar. Tercero, un índice de skills y sub-agents: solo nombre y descripción; el contenido entra cuando se usan. Cuarto, el índice de la memoria que Claude se escribe entre sesiones. Y quinto, con todo eso adentro, queda esperando. Y esto no es particular de Claude Code. Codex arranca leyendo AGENTS.md y config.toml, más el índice de skills, y la memoria si la activaste. OpenCode lee AGENTS.md y opencode.json, más el índice de skills, y no tiene memoria automática. Cambian los nombres de los archivos; el arranque es el mismo. Lo que importa retener: en cualquiera de los tres, la sesión arranca con una ventana que ya tiene contenido. Cada una de estas piezas tiene su sección más adelante."</em></p>
   </aside>
 </section>
 
@@ -3110,10 +3130,28 @@
     <li>Varias terminales son <strong>varias ventanas</strong>, pero sobre los mismos archivos del repo.</li>
   </ul>
 
+  <div class="harness-map s6-dial-map">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">/compact · /clear</span>
+      <p class="harness-map-note">Retomar: <code>claude --continue</code> o <code>--resume</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">/compact · /new</span>
+      <p class="harness-map-note">Retomar: <code>codex resume --last</code> o <code>/resume</code>.</p>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">/compact · /new</span>
+      <p class="harness-map-note">Retomar: <code>opencode --continue</code> o <code>/sessions</code>.</p>
+    </div>
+  </div>
+
   <aside class="notes">
     <p><strong>Marcar el bullet 4: lo que persiste vive en archivos.</strong></p>
     <p><u>Sesión = ventana; lo que sobrevive entre sesiones es el harness.</u></p>
-    <p><em>"Una sesión es una conversación con su propia ventana de contexto. Todo lo que pasa adentro — tu input, las respuestas, los outputs de los comandos — se acumula ahí, y por eso el modelo ve lo que hablaron antes. Las dos operaciones de context engineering tienen comando: /compact resume el historial y la sesión sigue sobre ese resumen — lo que no entró se pierde —, y /clear te deja la ventana limpia. Cuando salís, con /exit o Ctrl+D, la sesión no se tira: se guarda. claude --continue retoma la última, claude --resume te deja elegir cuál. Si abrís claude a secas, arrancás con ventana nueva. ¿Y qué sobrevive entre sesiones nuevas? Lo que vive en archivos: CLAUDE.md, rules, settings, skills, la memoria. Eso es exactamente el harness del que hablamos: lo que persiste más allá de una sesión. Un detalle práctico: podés abrir varias terminales, cada una con su ventana, pero ojo, si están en el mismo repo editan los mismos archivos. Para trabajar dos ramas en paralelo necesitás un git worktree o un clon aparte."</em></p>
+    <p><em>"Una sesión es una conversación con su propia ventana de contexto. Todo lo que pasa adentro — tu input, las respuestas, los outputs de los comandos — se acumula ahí, y por eso el modelo ve lo que hablaron antes. Las dos operaciones de context engineering tienen comando: /compact resume el historial y la sesión sigue sobre ese resumen — lo que no entró se pierde —, y /clear te deja la ventana limpia. Cuando salís, con /exit o Ctrl+D, la sesión no se tira: se guarda. claude --continue retoma la última, claude --resume te deja elegir cuál. Si abrís claude a secas, arrancás con ventana nueva. ¿Y qué sobrevive entre sesiones nuevas? Lo que vive en archivos: CLAUDE.md, rules, settings, skills, la memoria. Eso es exactamente el harness del que hablamos: lo que persiste más allá de una sesión. Un detalle práctico: podés abrir varias terminales, cada una con su ventana, pero ojo, si están en el mismo repo editan los mismos archivos. Para trabajar dos ramas en paralelo necesitás un git worktree o un clon aparte. Abajo, lo mismo en los otros dos: los tres tienen /compact; para la ventana limpia, Codex y OpenCode usan /new; y para retomar, Codex tiene codex resume y OpenCode opencode --continue o el listado de /sessions. Las dos operaciones de contexto son las mismas en los tres."</em></p>
   </aside>
 </section>
 
