@@ -1893,7 +1893,7 @@
   background-size: 11px 11px;
   transition: height 600ms ease, background-color 400ms ease;
 }
-.reveal .slides > section > section.s4-cost-section { min-height: 645px !important; }
+.reveal .slides > section > section.s4-cost-section { min-height: 655px !important; }
 .s4-price-row {
   display: flex;
   justify-content: center;
@@ -1979,16 +1979,23 @@
   color: var(--text-muted);
   text-align: center !important;
 }
-.reveal .s4-cost-how {
+.s4-cost-split {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1px 8px;
+  padding-top: 6px;
+  border-top: 1px dashed #3a4a6a;
+}
+.reveal .s4-cost-split span {
   margin: 0 !important;
   font-family: var(--font-mono);
-  font-variant-ligatures: none;
-  font-size: 0.46em;
-  line-height: 1.4;
+  font-size: 0.5em;
+  line-height: 1.5;
   color: var(--text-muted);
-  text-align: center !important;
-  min-height: 2.8em;
 }
+.reveal .s4-cost-split span:nth-child(even) { text-align: right; color: var(--text-primary); }
+.reveal .s4-cost-split .is-in { color: var(--accent-secondary); }
 .reveal .s4-cost-total {
   margin: 0 !important;
   font-family: var(--font-mono);
@@ -2327,28 +2334,40 @@
       <p class="s4-cost-title">Un mensaje suelto</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 2%"></div></div>
       <p class="s4-cost-ctx">1k de entrada<br>1k de salida</p>
-      <p class="s4-cost-how">1k × $10/1M<br>+ 1k × $50/1M</p>
+      <div class="s4-cost-split">
+        <span>entrada</span><span class="is-in">$0,01</span>
+        <span>salida</span><span>$0,05</span>
+      </div>
       <p class="s4-cost-total">$0,06</p>
     </div>
     <div class="s4-cost-col fragment fade-in" data-fragment-index="1">
       <p class="s4-cost-title">El mismo mensaje, con la ventana llena</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 50%"></div></div>
       <p class="s4-cost-ctx">500k de entrada<br>1k de salida</p>
-      <p class="s4-cost-how">500k × $10/1M<br>+ 1k × $50/1M</p>
+      <div class="s4-cost-split">
+        <span>entrada</span><span class="is-in">$5,00</span>
+        <span>salida</span><span>$0,05</span>
+      </div>
       <p class="s4-cost-total">$5,05</p>
     </div>
     <div class="s4-cost-col is-bad fragment fade-in" data-fragment-index="2">
       <p class="s4-cost-title">La vuelta siguiente</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 50%"></div></div>
       <p class="s4-cost-ctx">501k de entrada<br>1k de salida</p>
-      <p class="s4-cost-how">501k × $10/1M<br>+ 1k × $50/1M</p>
+      <div class="s4-cost-split">
+        <span>entrada</span><span class="is-in">$5,01</span>
+        <span>salida</span><span>$0,05</span>
+      </div>
       <p class="s4-cost-total">$5,06</p>
     </div>
     <div class="s4-cost-col is-good fragment fade-in" data-fragment-index="4">
       <p class="s4-cost-title">La misma vuelta, con el prefijo cacheado</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 50%"></div></div>
-      <p class="s4-cost-ctx">500k leídos del cache<br>+ 1k nuevo</p>
-      <p class="s4-cost-how">500k × $0,25/1M<br>+ 1k × $10/1M + 1k × $50/1M</p>
+      <p class="s4-cost-ctx">500k del cache a $0,25/1M<br>+ 1k nuevo a $10/1M</p>
+      <div class="s4-cost-split">
+        <span>entrada</span><span class="is-in">$0,14</span>
+        <span>salida</span><span>$0,05</span>
+      </div>
       <p class="s4-cost-total">$0,19</p>
     </div>
   </div>
@@ -2366,7 +2385,7 @@
     <p><u>El costo crece con la ventana; el cache cambia el precio de lo que ya viajó.</u></p>
     <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. Estos son los precios reales de Fable 5.1, el modelo más caro de Anthropic: diez dólares el millón de entrada, cincuenta el de salida."</em></p>
     <p><em>"Empecemos por lo chico. Un mensaje suelto: mil tokens de entrada, mil de salida. Seis centavos. Nada."</em></p>
-    <p><em>"Ahora el mismo mensaje, pero con la sesión avanzada: quinientos mil tokens de contexto por delante. La salida es la misma, mil tokens. Cinco dólares con cinco. El trabajo que le pedís es idéntico; lo que cambió es cuánto tuvo que leer para llegar."</em></p>
+    <p><em>"Ahora el mismo mensaje, pero con la sesión avanzada: quinientos mil tokens de contexto por delante. La salida es la misma, mil tokens. Cinco dólares con cinco, y miren el desglose: cinco dólares son de entrada y cinco centavos de salida. La salida no se movió en ninguna de las tres columnas; lo único que crece es lo que tiene que leer. El trabajo que le pedís es idéntico; lo que cambió es cuánto tuvo que leer para llegar."</em></p>
     <p><em>"Y la vuelta siguiente: quinientos un mil, porque se sumó lo último. Cinco dólares con seis. Cada vuelta paga la ventana entera de nuevo, no solo lo nuevo."</em></p>
     <p><em>"Entonces la pregunta obvia: ¿cuanto más grande la ventana, más caro sale cada mensaje? Sí. Literal. Y si fuera solo eso, trabajar con agentes sería carísimo."</em></p>
     <p><em>"Pero existe el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí: en Fable 5.1 esos tokens salen veinticinco centavos el millón en vez de diez dólares. La misma vuelta de recién: diecinueve centavos en lugar de cinco dólares. Escribir el cache la primera vez cuesta un veinticinco por ciento más de lo normal, así que se paga solo enseguida. La condición es que el principio del contexto no cambie: si cambia, lo que sigue deja de servir y esa vuelta se paga completa. Por eso lo estable va primero y lo que cambia, al final."</em></p>
