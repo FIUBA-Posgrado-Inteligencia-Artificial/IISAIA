@@ -613,30 +613,30 @@
   <div class="s4-price-row">
     <div class="s4-price-card">
       <p class="s4-price-label">entrada · todo lo que le mandás</p>
-      <p class="s4-price-val">$2 por 1M tokens</p>
+      <p class="s4-price-val">$10 por 1M tokens</p>
     </div>
     <div class="s4-price-card">
       <p class="s4-price-label">salida · lo que genera</p>
-      <p class="s4-price-val">$10 por 1M tokens</p>
+      <p class="s4-price-val">$50 por 1M tokens</p>
     </div>
   </div>
-  <p class="s4-center-line is-sub s4-fill-cost">Precios de ejemplo. Se cobra por token, y la entrada es casi siempre el grueso.</p>
+  <p class="s4-center-line is-sub s4-fill-cost">Precios de Claude Fable 5.1. Se cobra por token, y la entrada es casi siempre el grueso.</p>
 
   <div class="s4-calc">
     <div class="s4-calc-row fragment fade-in s4-collapse-in" data-fragment-index="0">
       <p class="s4-calc-what">Un mensaje suelto</p>
-      <p class="s4-calc-how">10k de entrada × $2/1M + 1k de salida × $10/1M</p>
-      <p class="s4-calc-total">$0,03</p>
+      <p class="s4-calc-how">10k de entrada × $10/1M + 1k de salida × $50/1M</p>
+      <p class="s4-calc-total">$0,15</p>
     </div>
     <div class="s4-calc-row is-bad fragment fade-in s4-collapse-in" data-fragment-index="1">
       <p class="s4-calc-what">20 vueltas con 500k en la ventana, sin cache</p>
-      <p class="s4-calc-how">20 × 500k = 10M de entrada × $2/1M</p>
-      <p class="s4-calc-total">$20</p>
+      <p class="s4-calc-how">20 × 500k = 10M de entrada × $10/1M</p>
+      <p class="s4-calc-total">$100</p>
     </div>
     <div class="s4-calc-row is-good fragment fade-in s4-collapse-in" data-fragment-index="2">
       <p class="s4-calc-what">Las mismas 20 vueltas, manteniendo el cache</p>
-      <p class="s4-calc-how">1 escritura de 500k × $2,50/1M + 19 lecturas de 500k × $0,20/1M</p>
-      <p class="s4-calc-total">$3,15</p>
+      <p class="s4-calc-how">1 escritura de 500k × $12,50/1M + 19 lecturas de 500k × $0,25/1M</p>
+      <p class="s4-calc-total">$8,63</p>
     </div>
   </div>
 
@@ -647,10 +647,10 @@
   <aside class="notes">
     <p><strong>Precios arriba. Tres clicks: mensaje suelto, sin cache, con cache. Cuarto: la invalidación.</strong></p>
     <p><u>Cómo se calcula el costo y qué cambia el cache.</u></p>
-    <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. La salida es bastante más cara por token, pero en el trabajo con agentes el grueso de la factura es la entrada, y ya van a ver por qué."</em></p>
-    <p><em>"Un mensaje suelto no es nada: diez mil tokens de entrada, mil de salida, tres centavos. Si la cuenta terminara acá, no habría tema."</em></p>
-    <p><em>"Pero no mandás un mensaje: corrés un loop, y cada vuelta reenvía el contexto entero. Veinte vueltas con medio millón en la ventana son diez millones de tokens de entrada facturados. Veinte dólares, en una sola sesión. Y fíjense que el trabajo del agente es el mismo: lo que se multiplica es el reenvío."</em></p>
-    <p><em>"Acá entra el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí. Escribirlo cuesta un poco más que un token normal, leerlo cuesta una fracción. Las mismas veinte vueltas: tres dólares con quince en vez de veinte. Seis veces más barato por hacer exactamente lo mismo."</em></p>
+    <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. Estos son los precios reales de Fable 5.1, el modelo más caro de Anthropic: diez dólares el millón de entrada, cincuenta el de salida. La salida es bastante más cara por token, pero en el trabajo con agentes el grueso de la factura es la entrada, y ya van a ver por qué."</em></p>
+    <p><em>"Un mensaje suelto no es nada: diez mil tokens de entrada, mil de salida, quince centavos. Si la cuenta terminara acá, no habría tema."</em></p>
+    <p><em>"Pero no mandás un mensaje: corrés un loop, y cada vuelta reenvía el contexto entero. Veinte vueltas con medio millón en la ventana son diez millones de tokens de entrada facturados. Cien dólares, en una sola sesión. Y fíjense que el trabajo del agente es el mismo: lo que se multiplica es el reenvío."</em></p>
+    <p><em>"Acá entra el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí. Escribirlo cuesta un veinticinco por ciento más que un token normal; leerlo, en Fable 5.1, sale veinticinco centavos el millón, una cuarentava parte. Las mismas veinte vueltas: ocho dólares con sesenta en vez de cien. Doce veces más barato por hacer exactamente lo mismo."</em></p>
     <p><em>"Con una condición: el cache es por prefijo. Sirve mientras el principio del contexto no cambie. Si cambia, lo que sigue deja de servir y esa vuelta se paga completa otra vez. Por eso conviene que lo estable vaya primero, las instrucciones del proyecto, y lo que cambia vaya al final. Y por eso compactar tampoco es gratis: reescribe el contexto."</em></p>
   </aside>
 </section>
