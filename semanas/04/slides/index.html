@@ -2105,7 +2105,7 @@
       <div class="s4-llm-arrow"><svg width="46" height="24" viewBox="0 0 46 24" aria-hidden="true"><path d="M2 12h34m0 0l-9-8m9 8l-9 8" stroke="var(--accent-secondary)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="s4-llm-out">
         <code>[...] $ uv add requests pandas sqlalchemy</code>
-        <p class="s4-llm-out-note">vuelta 42: contradice la instrucción del arranque, que sigue ahí abajo</p>
+        <p class="s4-llm-out-note">contradice la instrucción del arranque, que sigue ahí abajo</p>
       </div>
     </div>
   </div>
@@ -2135,7 +2135,7 @@
     <p><em>"Después entra el loop. Cada vuelta deposita tokens: el razonamiento del modelo, las llamadas a tools, los outputs que vuelven. Una sesión normal ronda el medio millón. Para tener referencia: un archivo de 300 líneas son unos dos mil tokens, así que estamos hablando de un par de cientos de archivos leídos, o su equivalente en observaciones. La acumulación es más rápida de lo que intuís, porque cada observación queda: no desaparece después de procesarla."</em></p>
     <p><em>"Si el agente sigue iterando sobre la misma tarea, llegás a novecientos mil. La ventana de un millón, que parecía enorme cuando empezaste, ya está casi saturada."</em></p>
     <p><em>"Y esto no se arregla esperando el próximo modelo. Cada generación ofrece ventanas más grandes, y eso desplaza el límite, no lo elimina. Es una propiedad estructural, no un descuido. Administrar ese límite es parte del trabajo de dirigir un agente."</em></p>
-    <p><em>"Ahora miren qué pasa con la ventana así de llena. Allá abajo, en esos quince mil tokens del arranque, estaba tu instrucción: no uses dependencias externas. Doce tokens. Y cada vuelta la ventana entera entra al modelo, esa instrucción incluida. Vuelta cuarenta y dos, el agente decide: uv add requests pandas sqlalchemy. Exactamente lo que dijiste que no hiciera. No es que la olvidó, la tiene delante. Pero doce tokens de señal compiten contra novecientos mil de ruido, y en esa decisión perdieron."</em></p>
+    <p><em>"Ahora miren qué pasa con la ventana así de llena. Allá abajo, en esos quince mil tokens del arranque, estaba tu instrucción: no uses dependencias externas. Doce tokens. Y cada vuelta la ventana entera entra al modelo, esa instrucción incluida. Y llegado un punto el agente decide: uv add requests pandas sqlalchemy. Exactamente lo que dijiste que no hiciera. No es que la olvidó, la tiene delante. Pero doce tokens de señal compiten contra novecientos mil de ruido, y en esa decisión perdieron."</em></p>
     <p><em>"Eso tiene nombre: context rot. La instrucción no desapareció, la señal se diluyó en el ruido. Y estos son los síntomas que tenés que reconocer como supervisor: contradice una restricción explícita, repite trabajo que ya hizo, se vuelve genérico donde antes era preciso, o 'no recuerda' algo que técnicamente sigue en la ventana. Si alguna vez vieron alguno, ahora tienen el nombre. Ojo con el framing: no es que el modelo falló, es que la ventana está trabajando contra vos, y eso cambia dónde mirás para resolverlo."</em></p>
   </aside>
 </section>
