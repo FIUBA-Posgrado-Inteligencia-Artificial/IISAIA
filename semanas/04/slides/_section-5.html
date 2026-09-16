@@ -104,48 +104,6 @@
   margin: 0;
 }
 
-/* §5.3 — frontier with context engineering */
-.s5-frontier-wrap {
-  max-width: 820px;
-  margin: 18px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.s5-frontier-honesty {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-left: 3px solid var(--text-muted);
-  border-radius: 8px;
-  padding: 16px 22px;
-  font-size: 0.78em;
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-.s5-frontier-honesty em {
-  color: var(--accent-secondary);
-  font-style: normal;
-  font-weight: 700;
-}
-.s5-frontier-narrow {
-  background: var(--bg-secondary);
-  border: 1px solid var(--accent);
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
-  padding: 16px 22px;
-  font-size: 0.78em;
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-.s5-frontier-narrow strong {
-  color: var(--accent);
-}
-.s5-frontier-narrow em {
-  color: var(--text-muted);
-  font-style: italic;
-}
-.reveal .s5-frontier-p { margin: 0; }
-.reveal .s5-frontier-p + .s5-frontier-p { margin-top: 10px; }
 
 /* §5.4 — tres ingenierías recap */
 .s5-eng-recap {
@@ -302,38 +260,7 @@
   </aside>
 </section>
 
-<!-- §5.3 · La frontera con context engineering -->
-<section>
-  <h2>La frontera con context engineering</h2>
-
-  <div class="s5-frontier-wrap">
-    <div class="s5-frontier-honesty">
-      <p class="s5-frontier-p">
-        Los límites son <em>difusos</em>. "Qué contexto cargás" es parte del harness <em>y</em> es lo que define context engineering. Hay solapamiento.
-      </p>
-    </div>
-
-    <div class="s5-frontier-narrow">
-      <p class="s5-frontier-p">
-        Algunos usan <strong>"harness"</strong> específicamente para <strong>todo lo que rodea al modelo en runtime</strong>:
-        el system prompt, las definiciones de las tools, la lógica de reintentos,
-        la orquestación de sub-agentes, los pasos de verificación.
-      </p>
-      <p class="s5-frontier-p">
-        Eso, en esa lectura, es distinto del <em>modelo en sí</em> y de un <em>prompt suelto</em>.
-        Es la capa de runtime que envuelve a los dos.
-      </p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Primera card: el solape. Segunda: la lectura de harness como capa de runtime.</strong></p>
-    <p><u>Honestidad disciplinaria: la división context / harness no es limpia.</u></p>
-    <p><em>"Una aclaración honesta antes de seguir: los límites entre context engineering y harness engineering son difusos. Qué contexto cargás es parte del harness, pero también es lo que define context engineering. Y hay un tercer término que algunos usan, 'agent engineering', que se pisa con los dos. La lectura que nos sirve es esta: algunos usan harness específicamente para todo lo que rodea al modelo en runtime — el system prompt, las definiciones de tools, la lógica de reintentos, la orquestación de sub-agentes, los pasos de verificación. Visto así, el harness es la capa de runtime que envuelve al modelo y a los prompts sueltos. No es el modelo, no es un prompt — es lo que los hace operativos como agente. Y si les suena, es porque es el programa externo del principio de la clase, visto ahora como algo que se diseña."</em></p>
-  </aside>
-</section>
-
-<!-- §5.4 · Cierre Parte 1 — recap tres ingenierías -->
+<!-- §5.3 · Cierre Parte 1 — recap tres ingenierías -->
 <section>
   <h2>Tres niveles para dirigir un agente</h2>
 
