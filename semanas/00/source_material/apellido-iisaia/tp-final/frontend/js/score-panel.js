@@ -20,60 +20,62 @@ function renderEntry(score) {
   return item;
 }
 
-export function createScorePanel(slug) {
-  let finalScore = 0;
+async function loadRanking(slug) {
+  const status = el("ranking-status");
+  const list = el("ranking");
+  setStatus(status, "Cargando ranking...");
+  el("ranking-retry").hidden = true;
+  try {
+    const scores = await getScores(slug);
+    list.replaceChildren(...scores.map(renderEntry));
+    setStatus(status, scores.length === 0 ? "Todavía no hay puntajes. El primero que guardes queda arriba." : "");
+  } catch (error) {
+    list.replaceChildren();
+    setStatus(status, `No se pudo cargar el ranking. ${error.message}`, true);
+    el("ranking-retry").hidden = false;
+  }
+}
+
+async function saveScore(slug, points) {
   const saveButton = el("save");
   const saveStatus = el("save-status");
-
-  async function loadRanking() {
-    const status = el("ranking-status");
-    const list = el("ranking");
-    setStatus(status, "Cargando ranking...");
-    el("ranking-retry").hidden = true;
-    try {
-      const scores = await getScores(slug);
-      list.replaceChildren(...scores.map(renderEntry));
-      setStatus(status, scores.length === 0 ? "Todavía no hay puntajes. El primero que guardes queda arriba." : "");
-    } catch (error) {
-      list.replaceChildren();
-      setStatus(status, `No se pudo cargar el ranking. ${error.message}`, true);
-      el("ranking-retry").hidden = false;
-    }
+  const player = el("player").value.trim();
+  if (player === "") {
+    setStatus(saveStatus, "Escribí un nombre para guardar el puntaje.", true);
+    return;
   }
+  saveButton.disabled = true;
+  saveButton.textContent = "Guardando...";
+  setStatus(saveStatus, "");
+  try {
+    await postScore(slug, player, points);
+    saveButton.hidden = true;
+    setStatus(saveStatus, "Puntaje guardado.");
+    loadRanking(slug);
+  } catch (error) {
+    setStatus(saveStatus, `No se pudo guardar. ${error.message}`, true);
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = "Guardar puntaje";
+  }
+}
 
-  async function save(event) {
+export function createScorePanel(slug) {
+  let finalScore = 0;
+
+  el("score-form").addEventListener("submit", (event) => {
     event.preventDefault();
-    const player = el("player").value.trim();
-    if (player === "") {
-      setStatus(saveStatus, "Escribí un nombre para guardar el puntaje.", true);
-      return;
-    }
-    saveButton.disabled = true;
-    saveButton.textContent = "Guardando...";
-    setStatus(saveStatus, "");
-    try {
-      await postScore(slug, player, finalScore);
-      saveButton.hidden = true;
-      setStatus(saveStatus, "Puntaje guardado.");
-      loadRanking();
-    } catch (error) {
-      setStatus(saveStatus, `No se pudo guardar. ${error.message}`, true);
-    } finally {
-      saveButton.disabled = false;
-      saveButton.textContent = "Guardar puntaje";
-    }
-  }
-
-  el("score-form").addEventListener("submit", save);
-  el("ranking-retry").addEventListener("click", loadRanking);
-  loadRanking();
+    saveScore(slug, finalScore);
+  });
+  el("ranking-retry").addEventListener("click", () => loadRanking(slug));
+  loadRanking(slug);
 
   return {
     showResult(score) {
       finalScore = score;
       el("final-score").textContent = String(score);
-      setStatus(saveStatus, "");
-      saveButton.hidden = false;
+      setStatus(el("save-status"), "");
+      el("save").hidden = false;
       el("playing").hidden = true;
       el("finished").hidden = false;
       el("player").focus();
