@@ -39,6 +39,31 @@
 .reveal .s6-list strong { color: var(--text-primary); }
 .reveal .s6-list code { color: var(--accent); }
 
+/* §6.2 — tool glossary inside the tools bullet */
+.s6-tools {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  column-gap: 12px;
+  row-gap: 4px;
+  margin: 8px 0 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+.s6-tools .s6-tool-name {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.s6-tools .s6-tool-what { color: var(--text-primary); }
+.reveal .s6-tools-note {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  font-size: 0.92em;
+  font-style: italic;
+  color: var(--text-muted);
+}
+.reveal .s6-tools-note code { background: none; padding: 0; font-style: normal; color: var(--accent); }
+
 .reveal .s6-list-foot {
   display: block;
   max-width: 800px;
@@ -277,14 +302,26 @@
     <li>Una <strong>CLI</strong>: la instalás una vez y la ejecutás como cualquier comando, <code>claude</code> en la terminal.</li>
     <li>Abre una <strong>sesión interactiva</strong>: vos escribís, el modelo trabaja y te responde, y seguís en la misma sesión.</li>
     <li>Adentro corre el <strong>loop</strong> pensar → actuar → observar, con tu repo como entorno real (no una simulación).</li>
-    <li>Las <strong>tools</strong> que el modelo pide y el runtime ejecuta: <code>Read</code>, <code>Edit</code>, <code>Write</code>, <code>Bash</code>, <code>Grep</code>, <code>Glob</code>, <code>WebFetch</code>, entre otras.</li>
+    <li>Las <strong>tools</strong> que el modelo pide y el runtime ejecuta, entre otras:
+      <div class="s6-tools">
+        <span class="s6-tool-name">Read</span><span class="s6-tool-what">lee el contenido de un archivo</span>
+        <span class="s6-tool-name">Grep</span><span class="s6-tool-what">busca un patrón dentro de los archivos</span>
+        <span class="s6-tool-name">Edit</span><span class="s6-tool-what">cambia una parte de un archivo</span>
+        <span class="s6-tool-name">Glob</span><span class="s6-tool-what">encuentra archivos por nombre</span>
+        <span class="s6-tool-name">Write</span><span class="s6-tool-what">crea un archivo o lo reescribe entero</span>
+        <span class="s6-tool-name">Bash</span><span class="s6-tool-what">corre un comando en la terminal</span>
+        <span class="s6-tool-name">WebFetch</span><span class="s6-tool-what">trae el contenido de una URL</span>
+        <span></span><span></span>
+        <p class="s6-tools-note"><code>Grep</code> y <code>Glob</code> vienen en Windows; en macOS y Linux Claude busca con <code>grep</code> y <code>find</code> a través de <code>Bash</code>.</p>
+      </div>
+    </li>
     <li>Es <strong>un harness entre varios</strong>: Codex y OpenCode corren el mismo loop con sus propios archivos de configuración.</li>
   </ul>
 
   <aside class="notes">
     <p><strong>Marcar fuerte "entorno real, no simulación". El último ítem abre la comparación.</strong></p>
     <p><u>Definición directa: CLI + sesión + loop + tools, y una implementación entre varias.</u></p>
-    <p><em>"Claude Code es una CLI. La instalás una vez y la corrés desde la terminal escribiendo claude. Cuando la ejecutás, abre una sesión interactiva con el modelo: vos escribís, el modelo trabaja, te responde, y seguís en la misma sesión. Adentro de esa sesión corre exactamente el loop que vimos en la parte 1: pensar, actuar, observar, repetir. Con tu repo como entorno real: cuando ejecuta tests, los tests corren de verdad; cuando edita un archivo, el archivo cambia. Y las tools son las del programa externo que ya conocen: el modelo pide Read, Edit, Write, Bash, Grep, Glob, WebFetch, y el runtime las ejecuta y le devuelve el resultado. Y lo último: no es la única. Codex, de OpenAI, y OpenCode, que es open source, son el mismo tipo de programa. Cambian los nombres de los archivos y algunas reglas, pero lo que vamos a configurar existe en las tres."</em></p>
+    <p><em>"Claude Code es una CLI. La instalás una vez y la corrés desde la terminal escribiendo claude. Cuando la ejecutás, abre una sesión interactiva con el modelo: vos escribís, el modelo trabaja, te responde, y seguís en la misma sesión. Adentro de esa sesión corre exactamente el loop que vimos en la parte 1: pensar, actuar, observar, repetir. Con tu repo como entorno real: cuando ejecuta tests, los tests corren de verdad; cuando edita un archivo, el archivo cambia. Y las tools son las del programa externo que ya conocen: el modelo las pide, el runtime las ejecuta y le devuelve el resultado. Read lee un archivo. Edit cambia un pedazo puntual de un archivo que ya existe, y Write crea uno nuevo o lo pisa entero. Bash corre un comando en la terminal: tests, git, uv, lo que sea. Grep busca texto adentro de los archivos y Glob encuentra archivos por nombre, como todos los .py. Y WebFetch trae una página web, por ejemplo documentación. Un detalle: Grep y Glob aparecen así en Windows; en Mac y Linux Claude Code hace esas mismas búsquedas con grep y find por Bash, así que ahí las van a ver como comandos de Bash. Leer y buscar no pide permiso; editar, escribir, traer URLs y los comandos que modifican algo, sí. Y lo último: no es la única. Codex, de OpenAI, y OpenCode, que es open source, son el mismo tipo de programa. Cambian los nombres de los archivos y algunas reglas, pero lo que vamos a configurar existe en las tres."</em></p>
   </aside>
 </section>
 
