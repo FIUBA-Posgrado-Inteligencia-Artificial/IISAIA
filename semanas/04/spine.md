@@ -1,13 +1,14 @@
 # Spine — Semana 04: Fundamentos de Agentic AI y Claude Code
 
-**Whole-week through-line:** Una IA que *actúa* (no que sugiere) se dirige con un set de herramientas conceptuales más amplio que "escribir un buen prompt". La parte 1 (§1–§5) construye un marco de **tres ingenierías anidadas** — `prompt ⊂ context ⊂ harness` — sin nombrar ninguna herramienta. La parte 2 (§6–§14) presenta las siete piezas configurables del runtime de Claude Code como piezas concretas del harness (§6.5), las recorre una por sección (§7–§13) y cierra con el trabajo final (§14). Prompt engineering ya lo venían practicando; lo que esta clase abre son los dos niveles nuevos.
+**Whole-week through-line:** Una IA que *actúa* (no que sugiere) se dirige con un set de herramientas conceptuales más amplio que "escribir un buen prompt". La parte 1 (§1–§5) construye un marco de **tres ingenierías anidadas** — `prompt ⊂ context ⊂ harness` — sin nombrar ninguna herramienta. La parte 2 (§6–§13) baja el harness a configuración: primero los controles que se eligen al abrir una sesión (model, effort, permission mode), después las seis piezas configurables del runtime (§6.9), una por sección (§7–§12), cada una con su equivalente en Codex y OpenCode, y cierra con el trabajo final (§13). Prompt engineering ya lo venían practicando; lo que esta clase abre son los dos niveles nuevos.
 
 **Dispositivos pedagógicos de toda la semana:**
-- **Las tres ingenierías como marco**: se introducen anidadas en §3.3 (`prompt ⊂ context ⊂ harness`), §4 desarrolla **context engineering** completo, §5 desarrolla **harness engineering** completo, §5.4 cierra Parte 1 con el recap de los 3 niveles. §6.5 mapea las siete piezas de Claude Code a las dimensiones del harness.
+- **Las tres ingenierías como marco**: se introducen anidadas en §3.3 (`prompt ⊂ context ⊂ harness`), §4 desarrolla **context engineering** completo, §5 desarrolla **harness engineering** completo, §5.4 cierra Parte 1 con el recap de los 3 niveles. §6.9 mapea las seis piezas del runtime a las dimensiones del harness.
 - **Animación del loop (bespoke, nueva)**: una sola animación JS nueva en todo el deck (`four-loop-anim.js`). Cicla pensar → actuar → observar → repetir con las 4 condiciones de corte como chips de salida. Se introduce en §2.1 (ReAct) y se re-conduce en §2.2 (fragment-driven highlight de cada fase). El modo `cc` quedó sin uso tras el rediseño de §6.
-- **Costura parte 1 / parte 2**: `section-divider` fuerte entre §5 y §6 ("Parte 2 — Claude Code"). §1–§5 nunca nombran Claude Code. §6 revela que el loop abstracto de §2 tiene nombre propio y mapea sus piezas configurables al harness de §5.
+- **Equivalencias entre harness (2026-09-16)**: cada pieza de la Parte 2 se muestra en Claude Code (donde corren las demos) y en Codex y OpenCode, con la clase compartida `.harness-map` de `_config/theme/components.css` (variante `is-large` cuando el mapa ocupa el slide solo). Las afirmaciones sobre Codex salen de `learn.chatgpt.com/docs` (la doc se mudó desde `developers.openai.com/codex`); las de OpenCode, de `opencode.ai/docs` y del código de `sst/opencode`. No entran a slides las que no se pudieron confirmar en documentación: el ciclo detallado de plan mode en Codex, el namespacing de commands en OpenCode, el orden de concatenación de `AGENTS.md` anidados y la carga de `AGENTS.md` anidados al leer archivos en OpenCode (está en el código, no en la doc).
+- **Costura parte 1 / parte 2**: `section-divider` fuerte entre §5 y §6 ("Parte 2 — Configurar el harness"). §1–§5 nunca nombran Claude Code. §6 revela que el loop abstracto de §2 tiene nombre propio, presenta Claude Code como un harness entre varios y mapea sus piezas configurables al harness de §5.
 
-**Nota de escala:** 14 secciones, ~220 min de contenido. Con tratamiento estructurado de 7 demos en vivo (uno por feature de Parte 2) el deck es grande (~120–140 slides). Es una clase larga, dictada en 2 sesiones; la costura parte 1 / parte 2 entre §5 y §6 es el corte natural.
+**Nota de escala:** 13 secciones, 97 slides. Seis demos en vivo en la Parte 2, una por sección de §7 a §12; la de plan mode se eliminó con su sección el 2026-09-16. Es una clase larga, dictada en 2 sesiones; la costura parte 1 / parte 2 entre §5 y §6 es el corte natural.
 
 **Nota sobre el rediseño de Parte 2 (2026-05-19):** la Parte 2 se rediseñó para cubrir 7 features de Claude Code como secciones independientes (§7–§13) siguiendo una plantilla documentation-walkthrough (qué es / dónde vive / cuándo se carga / cómo se usa / casos límite / mini-demo). El `.lens-tracker` se eliminó del deck (foco en cada feature por su propia anatomía, no por su ubicación en una taxonomía). El dispositivo recurrente nuevo es la **tarjeta de 5 preguntas** que abre cada sección. El demo se hace en un repo aparte (`semanas/04/demo-repo/`, FastAPI + frontend) que el profesor copia fuera del repo del curso antes de dictar para aislarlo.
 
@@ -64,26 +65,34 @@
 
 ## Section 5: Harness engineering
 **Source material:** **Reorganiza fuerte respecto a `source_material/05-cuando-el-agente-falla.md`.** El archivo del source_material trataba "modos de falla y el rol del supervisor"; el deck lo reemplazó por harness engineering. La motivación de "falla = entorno que ya cambió" sobrevive distribuida (en §3.2 "gran poder, gran responsabilidad", y en el lenguaje de guardrails / verificación de §5.2). No hay sección dedicada a los 4 modos de falla con el detalle del source.
-**Through-line:** Acabamos de cerrar context engineering. **Falta el nivel exterior**: el entorno donde opera el agente. Harness — literalmente, el arnés del caballo: lo que canaliza la potencia del modelo en la dirección que querés. **No es pedirle al modelo que se comporte ("no cometas errores"), es diseñar el entorno para que tire de la carreta**. La disciplina se divide en 6 dimensiones y cada una mapea a una feature concreta de Claude Code, motivando la Parte 2.
+**Through-line:** Acabamos de cerrar context engineering. **Falta el nivel exterior**: el entorno donde opera el agente. Harness — literalmente, el arnés del caballo: lo que canaliza la potencia del modelo en la dirección que querés. **No es pedirle al modelo que se comporte ("no cometas errores"), es diseñar el entorno para que tire de la carreta**. La disciplina se divide en 8 dimensiones y cada una tiene análogo en lo que se configura en un harness real, motivando la Parte 2.
 **Hook (§5.1):** Metáfora del caballo en 3 tiempos. Entry: solo la etimología ("harness = arnés"). Primer reveal: imagen `caballo-descontrolado.png` + caption irónico "no cometas errores" (en mono, como prompt fallido). Segundo reveal: imagen `caballlo-harness.png` + caption "Harness Engineering". El contraste visual hace el argumento sin texto explicativo.
 **What students walk away knowing:**
 - Harness engineering = **diseñar el arnés que canaliza al modelo**, no pedirle que se comporte solo.
 - **Ocho dimensiones** del harness (grid 4×2 con reveals progresivos), elegidas para que cada una tenga análogo directo en lo que se configura en un harness real (Claude Code, Codex, opencode): (1) instrucciones persistentes; (2) skills y comandos; (3) tools disponibles, incluidos servidores externos; (4) permisos; (5) selección de modelo; (6) selección de effort; (7) hooks (scripts que dispara el runtime ante eventos: antes/después de una tool, al abrir o cerrar sesión; ahí viven los tests y linters automáticos); (8) sub-agentes (qué se delega a otra ventana, con sus propias tools y modelo). "Manejo del contexto" se descartó el 2026-09-16 por ser context engineering, no harness. Rediseño del 2026-09-16: las anteriores eran abstractas ("estructurás el prompt", "armás feedback loops") y no mapeaban a nada configurable.
-- **Cierre de Parte 1** (recap tres ingenierías): grilla con prompt / context / harness ("la capa de runtime que persiste entre sesiones") y la línea bridge: el programa externo que envuelve al modelo *se diseña*, y lo que persiste de una sesión a otra vive en archivos que podés leer y cambiar. Sin nombrar Claude Code: el mapeo harness → piezas del runtime vive en §6.5.
+- **Cierre de Parte 1** (recap tres ingenierías): grilla con prompt / context / harness ("la capa de runtime que persiste entre sesiones") y la línea bridge: el programa externo que envuelve al modelo *se diseña*, y lo que persiste de una sesión a otra vive en archivos que podés leer y cambiar. Sin nombrar Claude Code: el mapeo harness → piezas del runtime vive en §6.9.
 **Animations / interactive:** CSS-only. Reveals progresivos en la metáfora del caballo (las dos imágenes aparecen una por una), en la grilla de 8 dimensiones (una card por reveal) y en el recap final (las 3 cards + bridge revealed). Sin JS de animación nuevo. Imágenes en `../img/caballo-descontrolado.png` y `../img/caballlo-harness.png`.
 **Slide budget actual:** 3 slides (opener caballo → 8 dimensiones → cierre tres ingenierías + bridge a Parte 2). La slide "Harness en Claude Code" se movió a §6.5 en la revisión del 2026-09-14; la slide "La frontera con context engineering" se eliminó el 2026-09-16: nombraba Claude Code antes del divider y mapeaba features que no se desarrollan (MCP, hooks, eval loops).
 
 ---
 
-# Parte 2 — Claude Code (§6–§14)
+# Parte 2 — Configurar el harness (§6–§13)
 
-> **Rediseño 2026-05-19.** Parte 2 cubre las 7 piezas configurables del runtime de Claude Code, una por sección (§7–§13), siguiendo plantilla documentation-walkthrough: *qué es / dónde vive / cuándo se carga / cómo se usa / casos límite / mini-demo*. La fuente canónica del contenido es `source_material/06-claude-code-es-el-loop.md` y `source_material/07-...md` a `13-...md`. **El `.lens-tracker` se eliminó.** El dispositivo recurrente es la tarjeta de 5 preguntas como divider de cada sección.
+> **Rediseño 2026-05-19.** Parte 2 recorre las piezas configurables del runtime, una por sección, con la plantilla documentation-walkthrough: *qué es / dónde vive / cuándo se carga / cómo se usa / qué confunde*, más una mini-demo como slide aparte. La tarjeta de 5 preguntas abre cada sección y se repite como mini-strip en los slides de contenido. **El `.lens-tracker` se eliminó.**
+>
+> **Rediseño 2026-09-16.** La Parte 2 deja de ser sobre Claude Code y pasa a ser sobre configurar un harness, con Claude Code como implementación de referencia (ahí corren las demos). Tres cambios: (1) model, effort y permission modes se presentan en §6, antes de las piezas, porque son lo primero que se ve al abrir una sesión; (2) plan mode deja de ser sección propia (era §13): es una posición del dial de modes, y lo portable de esa sección (cuál mode usar, qué debe contener un plan, la definición de deriva) pasó a §6; la demo de plan mode no se rescató; (3) cada sección §7–§12 suma un slide "§N.3b" después de "Dónde vive" con la misma pieza en Codex y OpenCode. El trabajo final pasó de §14 a §13.
 
-## Section 6: Claude Code es ese loop
-**Source material:** `source_material/06-claude-code-es-el-loop.md`
-**Through-line:** Claude Code no es un concepto nuevo: es el loop pensar → actuar → observar con nombre propio. Qué es (CLI; tools que el modelo pide y el runtime ejecuta), qué carga al arrancar (instrucciones, settings, índices de skills y sub-agents, índice de memoria), qué es una sesión (ventana propia; `/compact` y `/clear` como bajada de las dos operaciones de §4.7; `--continue`/`--resume`; lo que persiste entre sesiones vive en archivos, y eso es el harness), y el mapa de las siete piezas configurables con la dimensión del harness que llena cada una.
-**Animations / interactive:** CSS-only. `section-divider` fuerte para abrir la Parte 2. Grid 4+3 centrado en §6.5.
-**Slide budget actual:** 5 slides (divider → qué es → qué pasa al ejecutar `claude` → qué es una sesión → siete piezas del runtime).
+## Section 6: Claude Code es ese loop, y un harness entre varios
+**Source material:** `source_material/06-claude-code-es-el-loop.md`. No cubre effort, modes ni equivalencias: esas slides salen de la doc oficial de los tres harness, verificada el 2026-09-16.
+**Through-line:** Claude Code no es un concepto nuevo: es el loop pensar → actuar → observar con nombre propio, y uno de varios harness (Codex y OpenCode corren el mismo loop con sus propios archivos). Qué es, qué carga al arrancar, qué es una sesión. Después, los tres controles que elegís al abrir la sesión: model, effort y permission mode. Recién entonces el mapa de las seis piezas que viven en archivos.
+**What students walk away knowing:**
+- **Model y effort (§6.5):** model = qué modelo corre el loop; effort = cuánto razona antes de cada acción (más effort, más tokens de razonamiento: ocupan ventana y se cobran como salida; conecta con §4). Claude Code: `/model`, `/effort`, `--model`, `--effort`, `model` y `effortLevel` en settings; niveles `low` · `medium` · `high` · `xhigh` · `max`, default `high` (verificado en `code.claude.com/docs/en/model-config`; `ultracode` es un setting aparte, no un nivel). Codex: `/model` elige modelo y effort, `model_reasoning_effort` en `config.toml`, y `plan_mode_reasoning_effort` aparte. OpenCode: `/models`, `"model": "proveedor/modelo"`, effort como variants del modelo que se ciclan con `ctrl+t`.
+- **El dial de modes (§6.6, movido de §10.9):** tabla de dos columnas (mode / qué corre sin preguntar) con los seis modes; `auto` es el arranque en Pro/Max/Team. Equivalencias: Claude Code `Shift+Tab` cicla `default` → `acceptEdits` → `plan` (desde `auto`, el primer toque va a `default`; la barra de estado muestra `⏸ plan mode on`, `⏵⏵ accept edits on`, etc., verificado en `code.claude.com/docs/en/permission-modes`); Codex parte el dial en dos ejes (`--sandbox` y `--ask-for-approval`) y tiene `/plan`; en OpenCode `plan` es un agente que se cambia con `Tab`, y deja bash abierto por defecto. Callout: plan mode no es sandbox, frena la edición y no la ejecución.
+- **Cuál mode usar (§6.7, de la §13 vieja):** criterio por costo del error, no por velocidad.
+- **Lo que un plan debería contener (§6.8, de la §13 vieja):** deriva como motivación (se define acá; §13.4 la usa como criterio de evaluación), Objetivo / Archivos / Pasos / Verificación sobre la tarea get-or-404 del demo-repo. En notas, las tres opciones de aprobación de Claude Code ("Yes, and use auto mode" / "Yes, manually approve edits" / "No, keep planning").
+- **Seis piezas (§6.9):** `CLAUDE.md`, Rules, `settings.json`, Permisos, Skills y slash commands, Sub-agents, cada una con su dimensión del harness. Hooks y servidores externos quedan para las clases siguientes.
+**Animations / interactive:** CSS-only, sin fragments. `section-divider` fuerte para abrir la Parte 2. `.s6-ctrl` (dos cards) + `.harness-map` en §6.5; tabla `.s6-modes-table` + `.harness-map.s6-dial-map` + callout en §6.6 (el slide más alto de la sección: 717 px de 800).
+**Slide budget actual:** 9 slides (divider → qué es → qué pasa al ejecutar `claude` → qué es una sesión → model y effort → dial de modes → cuál mode usar → qué debe contener un plan → seis piezas).
 
 ## Section 7: CLAUDE.md y memoria automática
 **Source material:** `source_material/07-CLAUDE-md.md`
@@ -92,22 +101,23 @@
 - CLAUDE.md siempre cuesta contexto. Orden de carga: managed (path fijo por OS) → user (`~/.claude/CLAUDE.md`) → CLAUDE.md de cada directorio ancestro desde la raíz hasta el CWD → `CLAUDE.local.md`. Los de subdirectorios debajo del CWD cargan bajo demanda.
 - `@import` no ahorra contexto (hasta 4 saltos). Comentarios HTML descartados. Guía <200 líneas.
 - Auto memory: directorio `~/.claude/projects/<project>/memory/` con `MEMORY.md` como índice (se cargan las primeras 200 líneas o 25 KB) y archivos por tema leídos bajo demanda.
-**Plantilla obligatoria (6 sub-secciones):** Qué es / Dónde vive / Cuándo se carga / Cómo se usa / Casos límite / Mini-demo. Tarjeta de 5 preguntas como divider de apertura.
-**Animations / interactive:** Tarjeta de plantilla. Tabla de las 4 ubicaciones y diagrama del orden de carga. Extracto del `CLAUDE.md` del demo-repo.
+- **Equivalencias (§7.3b):** Codex y OpenCode usan `AGENTS.md`. Codex lee uno en `~/.codex/` y uno por directorio desde la raíz del repo hasta el CWD, y los concatena, sin `@import`. OpenCode lee `CLAUDE.md` si no encuentra `AGENTS.md`, y suma archivos con `instructions` en `opencode.json`. Memoria automática: Claude Code sí; Codex sí, apagada por defecto; OpenCode no tiene.
+**Animations / interactive:** Tarjeta de plantilla. Tabla de las 4 ubicaciones y diagrama del orden de carga. Extracto del `CLAUDE.md` del demo-repo. `.harness-map.is-large`.
 **Mini-demo (único bloque al final):** setup común (copia fuera del repo del curso, `git init`, `cp .env.example .env`, `uv sync`, `claude --permission-mode default`). `/context` muestra qué está cargado; `/memory` muestra las ubicaciones posibles; carpeta de auto memory (arranca vacía en la copia). Plan B en notas.
-**Slide budget actual:** 10 slides.
+**Slide budget actual:** 11 slides.
 
 ## Section 8: Rules (`.claude/rules/`)
 **Source material:** `source_material/08-rules.md`
-**Through-line:** Archivos `.md` modulares de instrucciones. Sin `paths:` = siempre cargados (ventaja organizativa sobre CLAUDE.md monolítico). Con `paths:` + globs = path-scoped: entran cuando Claude lee un archivo que matchea.
+**Through-line:** Archivos `.md` modulares de instrucciones. Sin `paths:` = siempre cargados (ventaja organizativa sobre CLAUDE.md monolítico). Con `paths:` + globs = path-scoped: entran cuando Claude lee un archivo que matchea. **Reencuadre 2026-09-16:** el concepto que se enseña es la carga condicional (instrucciones que entran solo cuando importan); la forma declarativa por glob es, hoy, exclusiva de Claude Code, y eso se dice.
 **What students walk away knowing:**
 - Estructura de `.claude/rules/` con un archivo por tema (`code-style.md`, `testing.md`, `security.md`, `api.md`); `~/.claude/rules/` a nivel usuario.
 - Frontmatter `paths:` activa la rule al leer un archivo en el glob (en el demo-repo, un `.py` bajo `backend/`).
-- Otras herramientas tienen su equivalente con formato propio (p. ej. `.cursor/rules/`); no son compatibles entre sí.
-**Plantilla obligatoria:** misma de 6 sub-secciones.
-**Animations / interactive:** Tarjeta de plantilla. Extracto textual de `api.md` con frontmatter. Lista con las 4 rules del demo-repo y su comportamiento.
+- **Equivalencias (§8.3b):** la única pieza sin equivalente directo. Codex aproxima con `AGENTS.md` por carpeta (scope por directorio, decidido al arrancar); OpenCode con `instructions`, cuyos globs eligen qué archivos cargar pero no cuándo (entran todos al arrancar).
+- La compatibilidad entre herramientas es parcial (§8.7, caso 1): Cursor usa `.cursor/rules/`; OpenCode lee `CLAUDE.md` y las skills, pero no `.claude/rules/`.
+**Plantilla obligatoria:** misma de 5 preguntas + demo.
+**Animations / interactive:** Tarjeta de plantilla. Extracto textual de `api.md` con frontmatter. Lista con las 4 rules del demo-repo y su comportamiento. `.harness-map.is-large`.
 **Mini-demo:** `/context` antes, durante y después de leer `backend/routers/users.py`. Plan B por comportamiento: la instrucción de regenerar `openapi.yaml` vive solo en `api.md` (se sacó del `CLAUDE.md` del demo-repo para que el contraste funcione).
-**Slide budget actual:** 9 slides.
+**Slide budget actual:** 10 slides.
 
 ## Section 9: `settings.json` (config del runtime)
 **Source material:** `source_material/09-settings-json.md`
@@ -115,23 +125,24 @@
 **What students walk away knowing:**
 - Precedencia: managed → línea de comandos → local (gitignored) → project → user. Escalares: gana el nivel más alto. Listas de `permissions`: se suman entre niveles.
 - Casi todo aplica al guardar (recarga en caliente); `model` se fija al abrir la sesión.
-- Campos típicos: `model` (acepta alias), `env`, `permissions` (con `defaultMode`), `hooks`, `attribution` (reemplaza a `includeCoAuthoredBy`), `cleanupPeriodDays`.
+- Campos típicos: `model` (acepta alias), `env`, `permissions` (con `defaultMode`), `hooks`, `attribution` (reemplaza a `includeCoAuthoredBy`), `cleanupPeriodDays`. Ojo: `defaultMode: "auto"` no tiene efecto desde el `settings.json` del proyecto, solo desde el de usuario o managed.
 - MCP no se configura acá: `.mcp.json` en la raíz del repo.
-**Plantilla obligatoria:** misma de 6 sub-secciones.
-**Animations / interactive:** Tarjeta de plantilla. Campos top del `.claude/settings.json` del demo-repo.
+- **Equivalencias (§9.3b):** Codex usa `config.toml` (TOML; el de proyecto solo carga si el repo está marcado como confiable); OpenCode usa `opencode.json` (JSON con comentarios, global y proyecto se mergean, acepta `{env:VAR}` y `{file:ruta}`). Cambia el formato, no la cascada.
+**Plantilla obligatoria:** misma de 5 preguntas + demo.
+**Animations / interactive:** Tarjeta de plantilla. Campos top del `.claude/settings.json` del demo-repo. `.harness-map.is-large`.
 **Mini-demo:** abrir user / project / local (copiado del `.example`), cambiar `model` de `sonnet` a `haiku` y abrir sesión nueva, `git status` no muestra el local.
-**Slide budget actual:** 9 slides.
+**Slide budget actual:** 10 slides.
 
 ## Section 10: Permisos (control de tools)
 **Source material:** `source_material/10-permisos.md`
 **Through-line:** Reglas del runtime que deciden qué tools corren sin preguntar. Viven en `permissions` dentro de settings. Tres listas: `allow` / `deny` / `ask`, evaluadas **deny → ask → allow** (la primera coincidencia decide). Un deny cubre una tool y un patrón, no una intención.
 **What students walk away knowing:**
 - Sintaxis `Tool(pattern)`: exacto, `Bash(git push *)` (también matchea `git push` a secas), `Bash`/`Bash(*)` = todo, globs de archivo, `WebFetch(domain:…)`.
-- Sin coincidencia decide el modo (en Manual, pregunta). Las lecturas no piden permiso.
+- Sin coincidencia decide el mode (el dial de §6.6; en Manual, pregunta). Las lecturas no piden permiso. La tabla de modes se movió a §6 el 2026-09-16.
 - Bloque `permissions` real del demo-repo (8 allow / 3 deny / 2 ask).
-- Seis permission modes en una sola tabla (`plan`, `default`/Manual, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`); `auto` es el arranque en planes Pro/Max/Team; los deny bloquean en todos los modos. `plan` se desarrolla en §13.
-**Plantilla obligatoria:** misma de 6 sub-secciones.
-**Animations / interactive:** Tarjeta de plantilla. Code block JSON del bloque `permissions`. Tabla de los 6 modes.
+- **Equivalencias (§10.3b), la más importante de la Parte 2:** el gate antes de ejecutar es universal; la resolución de conflictos no. Claude Code: `deny` gana siempre. Codex: tres sistemas (sandbox, `approval_policy`, archivos `.rules`). OpenCode: gana la última regla que matchea, así que `"rm *": "deny", "*": "allow"` deja pasar `rm -rf`.
+**Plantilla obligatoria:** misma de 5 preguntas + demo.
+**Animations / interactive:** Tarjeta de plantilla. Code block JSON del bloque `permissions`. `.harness-map.is-large`.
 **Mini-demo:** "corré los tests" → prompt de `uv run pytest` (no está en allow) → "Yes, and don't ask again" escribe la regla en local → repetir pasa sin prompt → deny local `Edit(./openapi.yaml)` le gana al allow del proyecto.
 **Slide budget actual:** 11 slides.
 
@@ -142,10 +153,11 @@
 - Estructura del SKILL.md (frontmatter + fases + anti-patterns). Ejemplo: `.claude/skills/add-endpoint/` del demo-repo.
 - Command de un archivo como atajo corto. Ejemplo: `.claude/commands/pre-pr.md`.
 - `/memory`, `/context`, `/permissions` son built-ins del CLI, no archivos.
-**Plantilla obligatoria:** misma de 6 sub-secciones.
-**Animations / interactive:** Tarjeta de plantilla. Tabla skill vs command. SKILL.md y `pre-pr.md` como código.
+- **Equivalencias (§11.3b):** la pieza donde más convergieron. Mismo formato `SKILL.md` en los tres. Codex en `.agents/skills/`, invocación con `$nombre`, custom prompts deprecados en favor de skills. OpenCode en `.opencode/skills/` y además lee `.claude/skills/`; commands en `.opencode/commands/`.
+**Plantilla obligatoria:** misma de 5 preguntas + demo.
+**Animations / interactive:** Tarjeta de plantilla. Tabla skill vs command. SKILL.md y `pre-pr.md` como código. `.harness-map.is-large`.
 **Mini-demo:** `/context` muestra la skill en el índice; pedido en prosa "agregá un endpoint GET /users/{user_id}/posts…" activa la skill y recorre las fases; contraste parcial en una copia sin `.claude/skills/` (CLAUDE.md y rules siguen cubriendo parte). Plan B: `/add-endpoint …` directo.
-**Slide budget actual:** 9 slides.
+**Slide budget actual:** 10 slides.
 
 ## Section 12: Sub-agents
 **Source material:** `source_material/12-sub-agents.md`
@@ -155,30 +167,20 @@
 - Definición con frontmatter: `name`, `description`, `tools` (si se omite hereda todas; si se declara, restringe), `model` opcional. Ejemplo: `.claude/agents/researcher.md` (Read, Grep, Glob).
 - Built-in: `Explore`, `Plan`, `general-purpose`. El padre invoca con la tool `Agent`, a pedido tuyo o por su cuenta según la `description`.
 - El padre ve solo el resultado, no el razonamiento → la delegación no exime de supervisar. Paralelización es beneficio secundario; el motivo principal es proteger el contexto.
-**Plantilla obligatoria:** misma de 6 sub-secciones.
-**Animations / interactive:** Tarjeta de plantilla. Diagrama del padre + sub-loop con flechas "baja la tarea" / "sube solo el resultado".
+- **Equivalencias (§12.3b):** mismo aislamiento en los tres. Codex define cada sub-agent en `.codex/agents/*.toml` como una capa de config completa (modelo, effort y sandbox propios; built-in `explorer`, `worker`). OpenCode en `.opencode/agents/*.md`, invocación con `@nombre` y sesiones hijas que se pueden recorrer mientras trabajan.
+**Plantilla obligatoria:** misma de 5 preguntas + demo.
+**Animations / interactive:** Tarjeta de plantilla. Diagrama del padre + sub-loop con flechas "baja la tarea" / "sube solo el resultado". `.harness-map.is-large`.
 **Mini-demo:** `/context` como línea base; "sin usar sub-agents, explicame cómo funciona la auth de punta a punta" inline vs la misma pregunta delegada a `researcher`; delta chico porque el repo es chico. Mostrar `tools:` en `researcher.md`.
-**Slide budget actual:** 9 slides.
-
-## Section 13: Plan mode
-**Source material:** `source_material/13-plan-mode.md`
-**Through-line:** Un alto deliberado antes de editar. Claude lee, corre comandos para explorar y propone; no edita hasta que aprobás. Uno de los seis permission modes (la tabla vive en §10).
-**What students walk away knowing:**
-- Activación: `Shift+Tab` (default → acceptEdits → plan), `/plan <prompt>`, `claude --permission-mode plan`, `permissions.defaultMode: "plan"`.
-- Flujo: Claude presenta el plan con `ExitPlanMode`; vos elegís "Yes, and use auto mode" / "Yes, manually approve edits" / "No, keep planning"; `Ctrl+G` edita el plan. Aprobar cambia al modo elegido; deny/ask siguen aplicando.
-- Criterios para elegir modo según el costo de un error. Plan mode = defensa más barata contra la deriva.
-- Plan mode no es sandbox; aprobar el plan no aprueba cada comando.
-**Plantilla obligatoria:** misma de 6 sub-secciones.
-**Animations / interactive:** Tarjeta de plantilla. Tabla de criterios por costo de error. Ejemplo de plan sobre la tarea real de la demo.
-**Mini-demo:** "extraé el patrón get-or-404 de users.py y posts.py a un helper compartido". En Manual edita de inmediato (`Edit(./backend/**)` está en allow) → Esc y `git checkout .`. En plan propone → "No, keep planning" con una corrección → "Yes, manually approve edits".
+**Cierre:** el bridge apunta al trabajo final (antes apuntaba a plan mode).
 **Slide budget actual:** 10 slides.
 
-## Section 14: El trabajo final
+## Section 13: El trabajo final
 **Source material:** `source_material/14-trabajo-final.md`
 **Through-line:** Modelo + rol + runtime (+ el flujo y las integraciones de las clases 6–7) se usan al mismo tiempo en un proyecto real. El trabajo final no examina sintaxis: examina si sabés *dirigir*. Apropiación = poder explicar, corregir y extender lo que el agente escribió.
 **What students walk away knowing:**
 - **Modalidad (cambio 2026-09-14):** grupos de 2. La carpeta `tp-final/` vive en el repo de uno de los integrantes; el otro es colaborador. Defensa conjunta. (`programa.md` y S00 todavía dicen "individual": pendiente deliberado.)
 - Qué se entrega: `tp-final/` con el producto, el README como informe, la evidencia del proceso (commits, branches, PRs) y la configuración del agente versionada (`.claude/` o el equivalente de otra herramienta).
+- **Checklist de la configuración (§13.3), por concepto desde 2026-09-16:** instrucciones del proyecto (`CLAUDE.md` o `AGENTS.md`), instrucciones por tema con scope por path si la herramienta lo permite, config del runtime con permisos pensados para el proyecto, al menos una skill propia, un sub-agent si se justifica, plan mode durante el desarrollo. Ya no exige `paths:` literal.
 - Criterios alineados con el Demo Day del programa: especificación, gestión de contexto, detección y corrección de la deriva, evidencia del flujo en el repo.
 - Exposición de la idea (clase 5): cada grupo presenta problema, usuarios, MVP y stack en 5 minutos y recibe devolución sobre alcance y viabilidad.
 **Animations / interactive:** Arco del curso sin etiquetas de semana (modelo → rol → runtime → flujo e integraciones → trabajo final). No es la última clase: cierra la unidad.
