@@ -14,6 +14,12 @@ uv run fastapi dev backend/main.py
 
 Abrir `http://127.0.0.1:8000`. La documentación interactiva de la API está en `http://127.0.0.1:8000/docs`.
 
+Si el servidor no arranca y muestra `[WinError 10013]` o `address already in use`, es que otro programa está usando el puerto 8000. En ese caso hay que levantarlo en otro puerto y abrir esa dirección:
+
+```bash
+uv run fastapi dev backend/main.py --port 8765
+```
+
 No hay variables de entorno. La base `scores.db` se crea al arrancar, con los dos juegos ya cargados. Para vaciar el ranking alcanza con borrar ese archivo.
 
 ## Arquitectura
