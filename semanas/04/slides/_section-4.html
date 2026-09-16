@@ -7,15 +7,15 @@
 .s4-anno-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 7px;
+  gap: 4px;
+  margin-top: 5px;
 }
 .s4-anno-chip {
   border: 1px solid #3a4a6a;
   border-radius: 999px;
   padding: 2px 9px;
   font-size: 0.48em;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text-primary);
   background: rgba(130,170,255,0.06);
 }
@@ -200,7 +200,7 @@
 .s4-context-bar {
   position: relative;
   width: 64px;
-  height: 215px;
+  height: 198px;
   border: 2px solid var(--text-muted);
   border-radius: 6px;
   background: var(--bg-code);
@@ -217,7 +217,41 @@
     linear-gradient(rgba(0,0,0,0.22) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,0,0,0.22) 1px, transparent 1px);
   background-size: 11px 11px;
-  transition: height 600ms ease;
+  transition: height 600ms ease, background-color 400ms ease;
+}
+/* La slide de la barra crece con cada fragment; reveal centra una sola vez,
+   así que le reservamos el alto del estado más alto y el contenido crece
+   hacia abajo sin mover el título ni recortarse. */
+.reveal .slides > section > section.s4-fill-section { min-height: 715px !important; }
+
+/* fragments que solo ocupan lugar mientras se ven */
+.reveal .fragment.s4-collapse-out.visible { display: none; }
+.reveal .fragment.s4-collapse-in:not(.visible) { display: none; }
+.s4-context-bar-fill.is-full { background-color: #c94f4f; }
+.s4-context-bar.is-full { border-color: #c94f4f; }
+.reveal .s4-context-bar-label.is-full { color: #e08585; }
+.s4-stop {
+  max-width: 760px;
+  margin: 16px auto 0;
+  border: 1px solid #c94f4f;
+  border-radius: 8px;
+  background: rgba(201,79,79,0.08);
+  padding: 10px 14px;
+}
+.reveal .s4-stop code {
+  display: block;
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  font-size: 0.58em;
+  color: #e08585;
+  text-align: center;
+}
+.reveal .s4-stop-note {
+  margin: 6px 0 0 !important;
+  font-size: 0.55em;
+  line-height: 1.35;
+  color: var(--text-primary);
+  text-align: center;
 }
 .reveal .s4-context-bar-label {
   font-family: var(--font-mono);
@@ -262,7 +296,7 @@
   color: var(--text-muted);
   margin-top: 4px;
 }
-.reveal .s4-fill-cost { max-width: 820px; }
+.reveal .s4-fill-cost { max-width: 900px; margin-top: 10px; }
 
 .reveal .s4-rot-close { max-width: 900px; }
 
@@ -410,7 +444,7 @@
 </section>
 
 <!-- §4.2 · La sesión no arranca vacía y el loop la llena -->
-<section>
+<section class="s4-fill-section">
   <h2>La sesión no arranca vacía, y se llena sola</h2>
 
   <div class="s4-fill-layout">
@@ -425,7 +459,7 @@
       <div class="s4-token-anno fragment" data-fragment-index="0" data-fill="5">
         <span class="s4-token-anno-val">~15k tokens</span>
         <span class="s4-token-anno-label">Arranque: instrucciones del proyecto, reglas y memoria, antes de tu primer mensaje</span>
-        <span class="s4-token-anno-rule fragment fade-in" data-fragment-index="4">"no uses dependencias externas"</span>
+        <span class="s4-token-anno-rule fragment fade-in s4-collapse-in" data-fragment-index="4">"no uses dependencias externas"</span>
       </div>
       <div class="s4-token-anno fragment" data-fragment-index="1" data-fill="50">
         <span class="s4-token-anno-val">~500k tokens</span>
@@ -445,11 +479,11 @@
       </div>
     </div>
 
-    <div class="s4-llm-elbow fragment fade-in" data-fragment-index="4">
+    <div class="s4-llm-elbow fragment fade-in s4-collapse-in" data-fragment-index="4">
       <div class="s4-elbow"></div>
     </div>
 
-    <div class="s4-llm-right fragment fade-in" data-fragment-index="4">
+    <div class="s4-llm-right fragment fade-in s4-collapse-in" data-fragment-index="4">
       <div class="s4-llm-box">LLM</div>
       <div class="s4-llm-arrow"><svg width="46" height="24" viewBox="0 0 46 24" aria-hidden="true"><path d="M2 12h34m0 0l-9-8m9 8l-9 8" stroke="var(--accent-secondary)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="s4-llm-out">
@@ -459,15 +493,22 @@
     </div>
   </div>
 
-  <div class="fragment fade-in" data-fragment-index="5">
-    <p class="s4-center-line is-accent s4-fill-cost">
-      <strong>Context rot</strong>: la instrucción no desapareció, la señal se diluyó en el ruido.
-    </p>
-    <p class="s4-center-line is-sub s4-fill-cost">Síntomas: contradice restricciones · repite trabajo hecho · respuestas genéricas · "no recuerda" lo que está ahí</p>
+  <div class="fragment fade-out s4-collapse-out" data-fragment-index="6">
+    <div class="fragment fade-in s4-collapse-in" data-fragment-index="5">
+      <p class="s4-center-line is-accent s4-fill-cost">
+        <strong>Context rot</strong>: la instrucción no desapareció, la señal se diluyó en el ruido.
+      </p>
+      <p class="s4-center-line is-sub s4-fill-cost">Síntomas: contradice restricciones · repite trabajo hecho · respuestas genéricas · "no recuerda" lo que está ahí</p>
+    </div>
   </div>
 
-  <div class="fragment fade-out" data-fragment-index="4">
-    <div class="fragment fade-in" data-fragment-index="3">
+  <div class="s4-stop fragment fade-in s4-collapse-in" data-fragment-index="6" data-fill="100" data-bar-full="1">
+    <code>Error: prompt is too long: 1.048.576 tokens &gt; 1.000.000 maximum</code>
+    <p class="s4-stop-note"><strong>1M tokens: la ventana se llenó.</strong> No entra el próximo mensaje, así que la sesión no puede seguir. Antes de llegar acá hay que compactar o arrancar de nuevo.</p>
+  </div>
+
+  <div class="fragment fade-out s4-collapse-out" data-fragment-index="4">
+    <div class="fragment fade-in s4-collapse-in" data-fragment-index="3">
       <p class="s4-center-line is-accent s4-fill-cost">
         Ventanas más grandes <strong>desplazan</strong> el límite. No lo <strong>eliminan</strong>.
       </p>
@@ -477,7 +518,7 @@
 
 
   <aside class="notes">
-    <p><strong>Tres clicks llenan la barra (5 / 50 / 90%). El cuarto, el cierre. El quinto lo reemplaza por el ejemplo del LLM. El sexto nombra el context rot.</strong></p>
+    <p><strong>Siete clicks: 5 / 50 / 90%, el cierre, el ejemplo del LLM, el context rot, y la ventana llena en rojo.</strong></p>
     <p><u>Órdenes de magnitud reales, no fórmulas exactas.</u></p>
     <p><em>"Miren la barra: es la ventana de contexto de una sesión. Y ojo con esto, porque es lo primero que sorprende: no arranca vacía."</em></p>
     <p><em>"Antes de que escribas tu primer mensaje, el runtime ya cargó cosas: las instrucciones del proyecto, las convenciones del equipo, lo que se guardó de sesiones anteriores. Pongamos quince mil tokens. Todavía no pediste nada y ya estás ocupando lugar. En la Parte 2 vamos a ver exactamente qué archivos son y cómo se controlan."</em></p>
@@ -486,6 +527,7 @@
     <p><em>"Y esto no se arregla esperando el próximo modelo. Cada generación ofrece ventanas más grandes, y eso desplaza el límite, no lo elimina. Es una propiedad estructural, no un descuido. Administrar ese límite es parte del trabajo de dirigir un agente."</em></p>
     <p><em>"Ahora miren qué pasa con la ventana así de llena. Allá abajo, en esos quince mil tokens del arranque, estaba tu instrucción: no uses dependencias externas. Doce tokens. Y cada vuelta la ventana entera entra al modelo, esa instrucción incluida. Y llegado un punto el agente decide: uv add requests pandas sqlalchemy. Exactamente lo que dijiste que no hiciera. No es que la olvidó, la tiene delante. Pero doce tokens de señal compiten contra novecientos mil de ruido, y en esa decisión perdieron."</em></p>
     <p><em>"Eso tiene nombre: context rot. La instrucción no desapareció, la señal se diluyó en el ruido. Y estos son los síntomas que tenés que reconocer como supervisor: contradice una restricción explícita, repite trabajo que ya hizo, se vuelve genérico donde antes era preciso, o 'no recuerda' algo que técnicamente sigue en la ventana. Si alguna vez vieron alguno, ahora tienen el nombre. Ojo con el framing: no es que el modelo falló, es que la ventana está trabajando contra vos, y eso cambia dónde mirás para resolverlo."</em></p>
+    <p><em>"Y esto es lo que pasa si nadie interviene: la barra llega al tope. Un millón de tokens, la ventana llena, y ahí ya no hay degradación: hay corte. El próximo mensaje no entra, el request falla con este error y la sesión no puede seguir. Fíjense en la diferencia: no es que responde peor, no responde. Por eso la respuesta no es esperar a ver qué pasa, es intervenir antes: compactar o arrancar de nuevo. Lo vemos en un minuto."</em></p>
   </aside>
 </section>
 
@@ -594,24 +636,39 @@
     if (bar) bar.style.height = pct + '%';
   }
 
-  // Barra de §4.2: se recalcula desde la anotación [data-fill] visible más alta.
+  function s4SetFull(excluding) {
+    var on = false;
+    document.querySelectorAll('.fragment.visible[data-bar-full]').forEach(function(el) {
+      if (el !== excluding) on = true;
+    });
+    var fill = document.getElementById('s4-bar-fill');
+    if (fill) fill.classList.toggle('is-full', on);
+    if (fill && fill.parentNode) fill.parentNode.classList.toggle('is-full', on);
+    var label = document.querySelector('.s4-fill-layout .s4-context-bar-label');
+    if (label) label.classList.toggle('is-full', on);
+  }
+
+  // Barra de §4.2: se recalcula desde el [data-fill] visible más alto.
   Reveal.on('fragmentshown', function(e) {
     if (!e.fragment.dataset) return;
     if (e.fragment.dataset.fill) {
-      s4SetHeight('s4-bar-fill', s4MaxFill('.s4-token-anno.visible[data-fill]', 'fill', S4_BAR_MIN, null));
+      s4SetHeight('s4-bar-fill', s4MaxFill('.fragment.visible[data-fill]', 'fill', S4_BAR_MIN, null));
+      s4SetFull(null);
     }
   });
   Reveal.on('fragmenthidden', function(e) {
     if (!e.fragment.dataset) return;
     if (e.fragment.dataset.fill) {
-      s4SetHeight('s4-bar-fill', s4MaxFill('.s4-token-anno.visible[data-fill]', 'fill', S4_BAR_MIN, e.fragment));
+      s4SetHeight('s4-bar-fill', s4MaxFill('.fragment.visible[data-fill]', 'fill', S4_BAR_MIN, e.fragment));
+      s4SetFull(e.fragment);
     }
   });
 
   // Resync de la barra al cambiar de slide para que volver no la deje
   // from a stale height (first press would shrink instead of grow).
   function s4SyncBars() {
-    s4SetHeight('s4-bar-fill', s4MaxFill('.s4-token-anno.visible[data-fill]', 'fill', S4_BAR_MIN, null));
+    s4SetHeight('s4-bar-fill', s4MaxFill('.fragment.visible[data-fill]', 'fill', S4_BAR_MIN, null));
+    s4SetFull(null);
   }
   Reveal.on('slidechanged', s4SyncBars);
   Reveal.on('ready', s4SyncBars);
