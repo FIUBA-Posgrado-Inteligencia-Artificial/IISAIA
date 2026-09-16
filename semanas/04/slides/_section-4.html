@@ -250,9 +250,9 @@
 }
 .s4-calc-cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 1000px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 1120px;
   margin: 16px auto 0;
 }
 .s4-cost-col {
@@ -269,7 +269,7 @@
 .s4-cost-col.is-good { border-color: var(--accent); background: rgba(100,255,218,0.06); }
 .reveal .s4-cost-title {
   margin: 0 !important;
-  font-size: 0.6em;
+  font-size: 0.56em;
   line-height: 1.3;
   color: var(--text-primary);
   text-align: center !important;
@@ -652,38 +652,50 @@
     <div class="s4-cost-col fragment fade-in" data-fragment-index="0">
       <p class="s4-cost-title">Un mensaje suelto</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 2%"></div></div>
-      <p class="s4-cost-ctx">10k de contexto<br>1 llamada</p>
-      <p class="s4-cost-how">10k × $10/1M<br>+ 1k de salida × $50/1M</p>
-      <p class="s4-cost-total">$0,15</p>
+      <p class="s4-cost-ctx">1k de entrada<br>1k de salida</p>
+      <p class="s4-cost-how">1k × $10/1M<br>+ 1k × $50/1M</p>
+      <p class="s4-cost-total">$0,06</p>
     </div>
-    <div class="s4-cost-col is-bad fragment fade-in" data-fragment-index="1">
-      <p class="s4-cost-title">20 vueltas sin cache</p>
+    <div class="s4-cost-col fragment fade-in" data-fragment-index="1">
+      <p class="s4-cost-title">El mismo mensaje, con la ventana llena</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 50%"></div></div>
-      <p class="s4-cost-ctx">500k de contexto<br>× 20 llamadas = 10M</p>
-      <p class="s4-cost-how">10M × $10/1M</p>
-      <p class="s4-cost-total">$100</p>
+      <p class="s4-cost-ctx">500k de entrada<br>1k de salida</p>
+      <p class="s4-cost-how">500k × $10/1M<br>+ 1k × $50/1M</p>
+      <p class="s4-cost-total">$5,05</p>
     </div>
-    <div class="s4-cost-col is-good fragment fade-in" data-fragment-index="2">
-      <p class="s4-cost-title">Las mismas 20 vueltas, con cache</p>
+    <div class="s4-cost-col is-bad fragment fade-in" data-fragment-index="2">
+      <p class="s4-cost-title">La vuelta siguiente</p>
       <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 50%"></div></div>
-      <p class="s4-cost-ctx">el mismo contexto<br>1 escritura + 19 lecturas</p>
-      <p class="s4-cost-how">500k × $12,50/1M<br>+ 9,5M × $0,25/1M</p>
-      <p class="s4-cost-total">$8,63</p>
+      <p class="s4-cost-ctx">501k de entrada<br>1k de salida</p>
+      <p class="s4-cost-how">501k × $10/1M<br>+ 1k × $50/1M</p>
+      <p class="s4-cost-total">$5,06</p>
+    </div>
+    <div class="s4-cost-col is-good fragment fade-in" data-fragment-index="4">
+      <p class="s4-cost-title">La misma vuelta, con el prefijo cacheado</p>
+      <div class="s4-cost-bar"><div class="s4-cost-bar-fill" style="height: 50%"></div></div>
+      <p class="s4-cost-ctx">500k leídos del cache<br>+ 1k nuevo</p>
+      <p class="s4-cost-how">500k × $0,25/1M<br>+ 1k × $10/1M + 1k × $50/1M</p>
+      <p class="s4-cost-total">$0,19</p>
     </div>
   </div>
 
-  <p class="s4-center-line is-accent s4-fill-cost fragment fade-in s4-collapse-in" data-fragment-index="3">
-    Mismo contexto, misma tarea: lo que cambia es el cache. Y el cache sirve mientras el principio del contexto no cambie.
+  <p class="s4-center-line is-accent s4-fill-cost fragment fade-out s4-collapse-out" data-fragment-index="4">
+    <span class="fragment fade-in s4-collapse-in" data-fragment-index="3">¿Entonces cuanto más grande la ventana, más caro sale cada mensaje?</span>
+  </p>
+
+  <p class="s4-center-line is-accent s4-fill-cost fragment fade-in s4-collapse-in" data-fragment-index="4">
+    Sí, salvo que el prefijo ya esté cacheado: lo que ya viajó se cobra a $0,25 el millón, no a $10.
   </p>
 
   <aside class="notes">
-    <p><strong>Precios arriba. Tres clicks: mensaje suelto, sin cache, con cache. Cuarto: la invalidación.</strong></p>
-    <p><u>Cómo se calcula el costo y qué cambia el cache.</u></p>
-    <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. Estos son los precios reales de Fable 5.1, el modelo más caro de Anthropic: diez dólares el millón de entrada, cincuenta el de salida. La salida es bastante más cara por token, pero en el trabajo con agentes el grueso de la factura es la entrada, y ya van a ver por qué."</em></p>
-    <p><em>"Un mensaje suelto no es nada: diez mil tokens de entrada, mil de salida, quince centavos. Si la cuenta terminara acá, no habría tema."</em></p>
-    <p><em>"Pero no mandás un mensaje: corrés un loop, y cada vuelta reenvía el contexto entero. Veinte vueltas con medio millón en la ventana son diez millones de tokens de entrada facturados. Cien dólares, en una sola sesión. Y fíjense que el trabajo del agente es el mismo: lo que se multiplica es el reenvío."</em></p>
-    <p><em>"Acá entra el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí. Escribirlo cuesta un veinticinco por ciento más que un token normal; leerlo, en Fable 5.1, sale veinticinco centavos el millón, una cuarentava parte. Las mismas veinte vueltas: ocho dólares con sesenta en vez de cien. Doce veces más barato por hacer exactamente lo mismo."</em></p>
-    <p><em>"Con una condición: el cache es por prefijo. Sirve mientras el principio del contexto no cambie. Si cambia, lo que sigue deja de servir y esa vuelta se paga completa otra vez. Por eso conviene que lo estable vaya primero, las instrucciones del proyecto, y lo que cambia vaya al final. Y por eso compactar tampoco es gratis: reescribe el contexto."</em></p>
+    <p><strong>Precios arriba. Tres clicks para la progresión, el cuarto abre la pregunta, el quinto trae el cache.</strong></p>
+    <p><u>El costo crece con la ventana; el cache cambia el precio de lo que ya viajó.</u></p>
+    <p><em>"Antes de seguir, cómo se paga esto, porque es más simple de lo que parece. Se cobra por token, con dos precios: uno por millón de tokens de entrada, todo lo que le mandás, y otro por millón de tokens de salida, lo que genera. Estos son los precios reales de Fable 5.1, el modelo más caro de Anthropic: diez dólares el millón de entrada, cincuenta el de salida."</em></p>
+    <p><em>"Empecemos por lo chico. Un mensaje suelto: mil tokens de entrada, mil de salida. Seis centavos. Nada."</em></p>
+    <p><em>"Ahora el mismo mensaje, pero con la sesión avanzada: quinientos mil tokens de contexto por delante. La salida es la misma, mil tokens. Cinco dólares con cinco. El trabajo que le pedís es idéntico; lo que cambió es cuánto tuvo que leer para llegar."</em></p>
+    <p><em>"Y la vuelta siguiente: quinientos un mil, porque se sumó lo último. Cinco dólares con seis. Cada vuelta paga la ventana entera de nuevo, no solo lo nuevo."</em></p>
+    <p><em>"Entonces la pregunta obvia: ¿cuanto más grande la ventana, más caro sale cada mensaje? Sí. Literal. Y si fuera solo eso, trabajar con agentes sería carísimo."</em></p>
+    <p><em>"Pero existe el cache. El proveedor guarda el prefijo del contexto, y si la próxima llamada empieza igual lo lee de ahí: en Fable 5.1 esos tokens salen veinticinco centavos el millón en vez de diez dólares. La misma vuelta de recién: diecinueve centavos en lugar de cinco dólares. Escribir el cache la primera vez cuesta un veinticinco por ciento más de lo normal, así que se paga solo enseguida. La condición es que el principio del contexto no cambie: si cambia, lo que sigue deja de servir y esa vuelta se paga completa. Por eso lo estable va primero y lo que cambia, al final."</em></p>
   </aside>
 </section>
 
