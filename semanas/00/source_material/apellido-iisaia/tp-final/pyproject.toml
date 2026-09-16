@@ -1,0 +1,12 @@
+[project]
+name = "plataforma-juegos"
+version = "0.1.0"
+description = "Plataforma web con Tetris y Snake que guarda los puntajes de cada partida"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]",
+    "sqlmodel",
+]
+
+[tool.uv]
+package = false
