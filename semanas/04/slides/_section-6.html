@@ -190,43 +190,43 @@
       <span class="s6-piece-num">1</span>
       <span class="s6-piece-name">CLAUDE.md</span>
       <span class="s6-piece-what">Instrucciones que entran al arrancar, y la memoria automática.</span>
-      <span class="s6-piece-dim">estructurás el prompt</span>
+      <span class="s6-piece-dim">instrucciones persistentes</span>
     </div>
     <div class="s6-piece">
       <span class="s6-piece-num">2</span>
       <span class="s6-piece-name">Rules</span>
       <span class="s6-piece-what">Instrucciones por tema, algunas solo para ciertos paths.</span>
-      <span class="s6-piece-dim">cargás contexto</span>
+      <span class="s6-piece-dim">instrucciones persistentes</span>
     </div>
     <div class="s6-piece">
       <span class="s6-piece-num">3</span>
       <span class="s6-piece-name">settings.json</span>
-      <span class="s6-piece-what">Configuración del runtime: modelo, env, permisos.</span>
-      <span class="s6-piece-dim">exponés tools</span>
+      <span class="s6-piece-what">Configuración del runtime: modelo, effort, variables, permisos.</span>
+      <span class="s6-piece-dim">modelo · effort · tools</span>
     </div>
     <div class="s6-piece">
       <span class="s6-piece-num">4</span>
       <span class="s6-piece-name">Permisos</span>
       <span class="s6-piece-what">Qué tools corren solas, cuáles preguntan, cuáles se bloquean.</span>
-      <span class="s6-piece-dim">guardrails</span>
+      <span class="s6-piece-dim">permisos</span>
     </div>
     <div class="s6-piece">
       <span class="s6-piece-num">5</span>
       <span class="s6-piece-name">Skills y slash commands</span>
       <span class="s6-piece-what">Workflows reutilizables que entran cuando se invocan.</span>
-      <span class="s6-piece-dim">contexto bajo demanda</span>
+      <span class="s6-piece-dim">skills y comandos</span>
     </div>
     <div class="s6-piece">
       <span class="s6-piece-num">6</span>
       <span class="s6-piece-name">Sub-agents</span>
       <span class="s6-piece-what">Tareas delegadas a otra ventana; vuelve solo el resultado.</span>
-      <span class="s6-piece-dim">descomponés tareas</span>
+      <span class="s6-piece-dim">manejo del contexto</span>
     </div>
     <div class="s6-piece">
       <span class="s6-piece-num">7</span>
       <span class="s6-piece-name">Plan mode</span>
       <span class="s6-piece-what">Primero el plan; edita recién cuando lo aprobás.</span>
-      <span class="s6-piece-dim">verificás antes de actuar</span>
+      <span class="s6-piece-dim">permisos</span>
     </div>
   </div>
 
@@ -235,7 +235,7 @@
   <aside class="notes">
     <p><strong>Recorrer las siete de pasada: nombre y dimensión. No presentar cada una.</strong></p>
     <p><u>Las piezas del harness de Claude Code, cada una ligada a una dimensión.</u></p>
-    <p><em>"Lo que viene son siete piezas configurables del runtime, y cada una llena una de las dimensiones del harness que vimos. CLAUDE.md estructura el prompt: las instrucciones fijas del proyecto, más la memoria que Claude se escribe solo. Las rules cargan contexto por tema, algunas solo cuando se toca cierto path. settings.json configura el runtime y define qué tools hay; los permisos son los guardrails: qué corre solo, qué pregunta, qué se bloquea. Skills y slash commands cargan contexto bajo demanda. Los sub-agents descomponen tareas en otra ventana. Y plan mode te hace verificar el plan antes de que toque código. Cada una con la misma plantilla de cinco preguntas — qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde — y al cierre un demo corto. La promesa no es 'aprendiste siete features': es poder abrir cualquier proyecto, mirar la carpeta .claude, y saber qué archivo es responsable de qué."</em></p>
+    <p><em>"Lo que viene son siete piezas configurables del runtime, y cada una llena una de las dimensiones del harness que acabamos de ver. Las dos primeras, CLAUDE.md y rules, son las instrucciones persistentes. settings.json es donde se eligen el modelo, el effort y las tools. Los permisos son la barrera dura. Las skills y los comandos son los procedimientos guardados. Los sub-agents son manejo de contexto: mandan trabajo a otra ventana. Y plan mode es otra vuelta de permisos: no edita hasta que aprobás. De las ocho dimensiones quedan dos sin pieza propia acá: conectar tools nuevas por servidores externos y la verificación automática, que son tema de las clases que siguen."</em></p>
   </aside>
 </section>
 

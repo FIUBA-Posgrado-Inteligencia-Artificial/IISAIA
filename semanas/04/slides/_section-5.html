@@ -76,31 +76,31 @@
 }
 .s5-dim-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 1080px;
-  margin: 16px auto 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 1160px;
+  margin: 14px auto 0;
 }
 .s5-dim-card {
   background: var(--bg-secondary);
   border: 1px solid #2a3a5a;
   border-left: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 14px 16px 16px;
+  padding: 11px 13px 13px;
   display: flex;
   flex-direction: column;
 }
 .reveal .s5-dim-title {
   font-family: var(--font-mono);
-  font-size: 0.75em;
+  font-size: 0.62em;
   font-weight: 700;
   color: var(--accent);
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 .reveal .s5-dim-body {
-  font-size: 0.66em;
+  font-size: 0.56em;
   color: var(--text-primary);
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -250,45 +250,55 @@
 <section>
   <h2>Las dimensiones del harness</h2>
 
-  <p class="s5-dim-intro">Diseñar un harness es decidir seis cosas:</p>
+  <p class="s5-dim-intro">Ocho decisiones, y cada una se configura en algún archivo del proyecto:</p>
 
   <div class="s5-dim-grid">
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Estructurás el prompt</p>
-      <p class="s5-dim-body">Las instrucciones fijas: voz, prioridades, convenciones.</p>
+      <p class="s5-dim-title">Instrucciones persistentes</p>
+      <p class="s5-dim-body">Lo que el agente lee al arrancar cada sesión: convenciones, restricciones, cómo se trabaja en este repo.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Exponés tools</p>
-      <p class="s5-dim-body">Las acciones que puede tomar. El borde de lo que sabe hacer.</p>
+      <p class="s5-dim-title">Skills y comandos</p>
+      <p class="s5-dim-body">Procedimientos guardados que se invocan por nombre: los escribís una vez y se repiten igual.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Cargás contexto</p>
-      <p class="s5-dim-body">La información variable que entra cada turno.</p>
+      <p class="s5-dim-title">Tools disponibles</p>
+      <p class="s5-dim-body">Qué puede ejecutar y qué no. Se amplía conectando servidores externos.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Armás feedback loops</p>
-      <p class="s5-dim-body">El canal que devuelve resultados al modelo entre turnos.</p>
+      <p class="s5-dim-title">Permisos</p>
+      <p class="s5-dim-body">Qué corre sin preguntarte, qué pide confirmación y qué queda bloqueado.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Verificás outputs</p>
-      <p class="s5-dim-body">El criterio externo de correctitud: contratos, tests, schemas.</p>
+      <p class="s5-dim-title">Modelo</p>
+      <p class="s5-dim-body">Cuál atiende cada tarea: el más capaz para diseñar, uno más barato para lo mecánico.</p>
     </div>
     <div class="s5-dim-card fragment fade-in">
-      <p class="s5-dim-title">Descomponés tareas</p>
-      <p class="s5-dim-body">Cómo se rompe el problema en pasos o sub-agentes.</p>
+      <p class="s5-dim-title">Effort</p>
+      <p class="s5-dim-body">Cuánto piensa antes de actuar. Se paga en tokens y en tiempo de espera.</p>
+    </div>
+    <div class="s5-dim-card fragment fade-in">
+      <p class="s5-dim-title">Manejo del contexto</p>
+      <p class="s5-dim-body">Qué se carga, cuándo se compacta y qué se delega a una ventana aparte.</p>
+    </div>
+    <div class="s5-dim-card fragment fade-in">
+      <p class="s5-dim-title">Verificación automática</p>
+      <p class="s5-dim-body">Qué corre solo después de cada cambio: tests, linters, chequeos que devuelven señal.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Cada click revela una card. Recorrerlas de a una.</strong></p>
-    <p><u>Definición operativa del harness: seis decisiones que se cruzan.</u></p>
-    <p><em>"Diseñar un harness es decidir seis cosas. Las vamos viendo de a una."</em></p>
-    <p><em>"Una: cómo estructurás el prompt del sistema. Las instrucciones fijas — la voz del modelo, las prioridades del diseñador, las convenciones del proyecto. Lo que persiste entre turnos sin cambiar."</em></p>
-    <p><em>"Dos: qué tools exponés. Las acciones que el agente puede tomar — y, deliberadamente, las que no. Ese borde define qué clase de agente es."</em></p>
-    <p><em>"Tres: qué contexto cargás. La información variable que entra cada turno — archivos leídos, resultados de búsquedas, salidas de comandos. Acá la frontera con context engineering se difumina; sobre eso hablamos en el slide siguiente."</em></p>
-    <p><em>"Cuatro: cómo armás los feedback loops. Es el cable de retorno — qué se hace después de cada acción del agente y qué resultado se le devuelve al modelo en el siguiente turno."</em></p>
-    <p><em>"Cinco: cómo verificás los outputs. Esto es distinto del cable: es la vara. ¿Pasó el test? ¿Cumple el schema? ¿Compila contra el contrato? El criterio externo contra el que se mide lo que el modelo dice que hizo."</em></p>
-    <p><em>"Seis: cómo descomponés las tareas. Cuándo el agente delega a un sub-agente, cuándo invoca un script determinista, cuándo te pide intervención. Cómo el problema grande se rompe en piezas."</em></p>
+    <p><strong>Ocho clicks, una card cada uno. No leerlas: nombrar y seguir.</strong></p>
+    <p><u>Cada dimensión es algo que se configura, no una abstracción.</u></p>
+    <p><em>"Diseñar un harness es decidir ocho cosas, y lo importante es que ninguna es abstracta: cada una es un archivo o un parámetro que vas a tocar."</em></p>
+    <p><em>"Una: las instrucciones persistentes. Lo que el agente lee solo al arrancar cada sesión, sin que se lo pidas: las convenciones del proyecto, las restricciones, cómo se trabaja acá. Es lo primero que se escribe en cualquier repo con agentes."</em></p>
+    <p><em>"Dos: skills y comandos. Procedimientos guardados que se invocan por nombre. Si un flujo lo repetís tres veces, lo escribís una y de ahí en adelante sale igual siempre."</em></p>
+    <p><em>"Tres: qué tools tiene disponibles. Leer, editar, correr comandos, buscar en la web. Y se amplía conectando servidores externos que agregan tools nuevas: la base de datos, el tracker de tickets, lo que uses."</em></p>
+    <p><em>"Cuatro: permisos. Qué corre sin preguntarte, qué pide confirmación y qué está prohibido. Es el único de los ocho que es una barrera dura, no una instrucción."</em></p>
+    <p><em>"Cinco: qué modelo atiende cada tarea. No siempre querés el más caro: el más capaz para diseñar o depurar algo difícil, uno más barato y rápido para lo mecánico."</em></p>
+    <p><em>"Seis: cuánto esfuerzo le pedís antes de actuar. Los modelos actuales tienen una perilla de cuánto razonan, y eso se paga en tokens y en tiempo de espera. Para un cambio trivial, poner el máximo es tirar plata."</em></p>
+    <p><em>"Siete: cómo manejás el contexto, que es todo lo que acabamos de ver: qué se carga, cuándo compactás y qué mandás a resolver en una ventana aparte para no ensuciar la principal."</em></p>
+    <p><em>"Y ocho: qué se verifica solo. Los tests, el linter, el chequeo que corre después de cada cambio y le devuelve el resultado al agente sin que vos lo pidas. Es lo que convierte 'creo que anda' en 'pasó'."</em></p>
   </aside>
 </section>
 
