@@ -1,0 +1,26 @@
+{
+  "model": "sonnet",
+  "permissions": {
+    "allow": [
+      "Bash(uv sync)",
+      "Bash(uv run fastapi dev backend/main.py*)",
+      "Edit(./backend/**)",
+      "Edit(./frontend/**)",
+      "Edit(./README.md)",
+      "WebFetch(domain:docs.phaser.io)",
+      "WebFetch(domain:fastapi.tiangolo.com)"
+    ],
+    "deny": [
+      "Read(./scores.db)",
+      "Edit(./docs/plan.md)",
+      "Bash(rm -rf *)",
+      "Bash(git push *)"
+    ],
+    "ask": [
+      "Bash(uv add *)",
+      "Bash(uv remove *)"
+    ]
+  },
+  "attribution": { "pr": "" },
+  "cleanupPeriodDays": 30
+}

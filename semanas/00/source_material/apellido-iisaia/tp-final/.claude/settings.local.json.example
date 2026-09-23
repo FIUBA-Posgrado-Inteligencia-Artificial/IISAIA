@@ -1,0 +1,4 @@
+{
+  "model": "haiku",
+  "enabledMcpjsonServers": ["playwright"]
+}

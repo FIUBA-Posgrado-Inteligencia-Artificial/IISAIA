@@ -35,6 +35,16 @@ Este archivo es el panorama. El detalle de cada mitad vive al lado del código y
 
 Los `CLAUDE.md` describen cómo funciona el código; las reglas dicen qué hacer y qué no.
 
+Además hay tres piezas de configuración del agente, versionadas con el código:
+
+| Pieza | Qué hace |
+|-------|----------|
+| `.claude/settings.json` | Modelo y permisos: qué corre solo, qué pregunta y qué está bloqueado en este proyecto |
+| `.claude/skills/agregar-juego/` | El procedimiento completo para sumar un juego, en orden y con la verificación |
+| `.claude/agents/explorador.md` | Sub-agent de solo lectura para preguntas que cruzan backend y frontend |
+
+El comando `/pre-entrega` revisa que el trabajo esté en condiciones de entregarse.
+
 ## Arquitectura
 
 **Un solo proceso sirve todo.** `backend/main.py` registra el router de `/api` y recién después hace `app.mount("/", StaticFiles(...))`. El orden es obligatorio: el mount en `/` atrapa todo lo que se registre después. Por eso no hay CORS ni dos servidores.

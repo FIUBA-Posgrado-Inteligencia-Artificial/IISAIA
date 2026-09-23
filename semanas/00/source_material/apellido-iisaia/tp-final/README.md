@@ -106,6 +106,8 @@ Hice un commit por cada pieza que funcionaba: backend, home, Snake, Tetris y ran
 
 Mantuve los archivos por debajo de 300 líneas y las funciones por debajo de 50. `score-panel.js` se pasó y lo partí antes de seguir. Con archivos chicos alcanza con cargar el que hace falta: para arreglar Tetris no necesité tener la API en contexto, gracias al contrato de `gameover`.
 
+La configuración del agente está versionada junto al código: `.claude/settings.json` con los permisos de este proyecto (editar backend y frontend sí; `docs/plan.md` y `scores.db` no), una skill con el procedimiento para agregar un juego, un sub-agent de solo lectura para preguntas que cruzan las dos mitades y un comando `/pre-entrega` para la revisión final. Los `CLAUDE.md` describen el código; las reglas de `.claude/rules/` dicen qué hacer y qué no.
+
 La verificación la hizo el agente con el MCP de Playwright, habilitado en `.claude/settings.local.json`. Jugó las partidas, leyó el estado de cada escena desde el navegador (posición de la pieza, largo de la snake, puntaje), guardó puntajes y cortó el servidor para ver los mensajes de error.
 
 El plan y lo construido no coinciden del todo. El plan tenía un `finish.js`, que pasó a ser `common.js` cuando apareció el problema del teclado, y no tenía `score-panel.js`, que salió de separar el ranking de `game-page.js`. Dejé el plan como estaba y las diferencias quedan explicadas acá.
