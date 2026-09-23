@@ -22,6 +22,19 @@ uv run fastapi dev backend/main.py --port 8765   # si el 8000 está ocupado
 - No hay variables de entorno. `scores.db` se crea al arrancar con los dos juegos ya cargados; **borrar el archivo** vacía el ranking.
 - **No hay suite de tests.** La verificación es jugar en el navegador y leer el estado de la escena desde el DOM. El MCP de Playwright está habilitado en `.claude/settings.local.json` para eso. No agregues pytest sin pedirlo: la ausencia de tests es una decisión del TP.
 
+## Dónde seguir leyendo
+
+Este archivo es el panorama. El detalle de cada mitad vive al lado del código y se carga solo al trabajar ahí:
+
+| Archivo | Qué cubre |
+|---------|-----------|
+| `backend/CLAUDE.md` | arranque y seed, recorrido de un request, capas, cambiar el esquema, probar con curl |
+| `frontend/CLAUDE.md` | por qué no hay build, las dos páginas, quién llama a quién, ids del DOM, errores, CSS, `games/` |
+| `.claude/rules/escenas-de-juego.md` | reglas para escribir una `Phaser.Scene` |
+| `.claude/rules/api-y-datos.md` | reglas de endpoints, fechas, capas y migraciones |
+
+Los `CLAUDE.md` describen cómo funciona el código; las reglas dicen qué hacer y qué no.
+
 ## Arquitectura
 
 **Un solo proceso sirve todo.** `backend/main.py` registra el router de `/api` y recién después hace `app.mount("/", StaticFiles(...))`. El orden es obligatorio: el mount en `/` atrapa todo lo que se registre después. Por eso no hay CORS ni dos servidores.
@@ -58,6 +71,3 @@ Es un acoplamiento conocido y aceptado: sin escena registrada no hay nada que mo
 - Un commit por pieza que funciona y se puede abrir y probar (backend, home, Snake, Tetris, ranking), no por feature completa.
 - Los errores de red y de API se traducen a mensajes en castellano en `frontend/js/api.js`; el resto del frontend sólo muestra `error.message`.
 
-## Reglas adicionales
-
-Ver `.claude/rules/` para las reglas de escenas de juego y de la API.
