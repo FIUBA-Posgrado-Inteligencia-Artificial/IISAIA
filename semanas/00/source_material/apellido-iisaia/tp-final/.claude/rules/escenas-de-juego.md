@@ -1,6 +1,8 @@
 ---
 description: Reglas para escribir o modificar una Phaser.Scene de la plataforma. Aplicar al tocar frontend/js/games/.
-globs: ["frontend/js/games/**/*.js", "frontend/js/game-page.js"]
+paths:
+  - "frontend/js/games/**/*.js"
+  - "frontend/js/game-page.js"
 ---
 
 # Escenas de juego
