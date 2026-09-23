@@ -43,7 +43,7 @@ Además hay tres piezas de configuración del agente, versionadas con el código
 | `.claude/skills/agregar-juego/` | El procedimiento completo para sumar un juego, en orden y con la verificación |
 | `.claude/agents/explorador.md` | Sub-agent de solo lectura para preguntas que cruzan backend y frontend |
 
-El comando `/pre-entrega` revisa que el trabajo esté en condiciones de entregarse.
+Y dos comandos, que son atajos y no procedimientos: `/explicar <archivo>` resume en cinco líneas qué hace un archivo y quién lo llama, y `/pre-entrega` revisa que el trabajo esté en condiciones de entregarse.
 
 ## Arquitectura
 
