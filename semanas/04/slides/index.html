@@ -3402,7 +3402,7 @@
 }
 .reveal .s7-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -3452,7 +3452,7 @@
 }
 /* Mini variant */
 .reveal .s7-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -3674,51 +3674,6 @@
   font-size: 1.08em;
 }
 .s7-howto-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
-/* Casos límite — 4 confusion cards grid (2×2) */
-.s7-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  max-width: 900px;
-  margin: 12px auto 0;
-}
-.s7-case-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-top: 3px solid var(--accent-secondary);
-  border-radius: 8px;
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  text-align: left;
-}
-.s7-case-tag {
-  font-family: var(--font-mono);
-  font-size: 0.45em;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.s7-case-title {
-  font-size: 0.75em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
-}
-.reveal .s7-case-body {
-  font-size: 0.55em;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-.s7-case-body code,
-.s7-case-title code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
@@ -3992,7 +3947,7 @@
     </div>
   </div>
 
-  <p class="s7-pieces-foot">Cada pieza se recorre con las mismas cinco preguntas: qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde. Y con su equivalente en Codex y OpenCode.</p>
+  <p class="s7-pieces-foot">Cada pieza se recorre con las mismas cuatro preguntas: qué es, dónde vive, cuándo se carga, cómo se usa. Y con su equivalente en Codex y OpenCode.</p>
 
   <aside class="notes">
     <p><strong>Recorrer las seis de pasada: nombre y dimensión. No presentar cada una.</strong></p>
@@ -4026,17 +3981,12 @@
       <span class="s7-five-q-label">Cómo se usa</span>
       <span class="s7-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s7-five-q-card">
-      <span class="s7-five-q-num">5</span>
-      <span class="s7-five-q-label">Qué confunde</span>
-      <span class="s7-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
-    <p><strong>Presentar la tarjeta como dispositivo recurrente, sin leer las cinco preguntas.</strong></p>
+    <p><strong>Presentar la tarjeta como dispositivo recurrente, sin leer las cuatro preguntas.</strong></p>
     <p><u>Esta tarjeta abre las seis secciones de piezas; su versión mini queda arriba en cada slide.</u></p>
-    <p><em>"CLAUDE.md y memoria automática. Primera de las seis piezas, una por sección, todas con la misma plantilla y cada una con su equivalente en Codex y OpenCode. Cinco preguntas, en este orden: qué es, dónde vive, cuándo se carga, cómo se usa y qué confunde. Si al final de cada sección podés responder esas cinco, sabés operar la pieza; si te falta alguna, la pieza te va a sorprender en algún momento. Arrancamos por la más visible, la que más se confunde con 'configurar' al agente: CLAUDE.md y su pariente cercano, la memoria automática."</em></p>
+    <p><em>"CLAUDE.md y memoria automática. Primera de las seis piezas, una por sección, todas con la misma plantilla y cada una con su equivalente en Codex y OpenCode. Cuatro preguntas, en este orden: qué es, dónde vive, cuándo se carga y cómo se usa. Si al final de cada sección podés responder esas cuatro, sabés operar la pieza; si te falta alguna, la pieza te va a sorprender en algún momento. Arrancamos por la más visible, la que más se confunde con 'configurar' al agente: CLAUDE.md y su pariente cercano, la memoria automática."</em></p>
   </aside>
 </section>
 
@@ -4047,7 +3997,6 @@
     <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>CLAUDE.md es texto tuyo en la ventana desde el arranque</h2>
@@ -4073,7 +4022,6 @@
     <li class="s7-five-q-card is-active"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Cuatro niveles, de lo más amplio a lo más específico</h2>
@@ -4173,7 +4121,6 @@
     <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card is-active"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Al arrancar, en este orden: se concatenan, no hay override</h2>
@@ -4216,7 +4163,6 @@
     <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card is-active"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Tres decisiones al escribir el archivo</h2>
@@ -4240,48 +4186,6 @@
     <p><strong>Recorrer las tres decisiones; la primera es la que más tiempo lleva.</strong></p>
     <p><u>Tres decisiones independientes: cómo partir el archivo, cómo anotarlo, qué tamaño darle.</u></p>
     <p><em>"Cuarta pregunta: cómo se usa. Tres decisiones cuando estás escribiendo el archivo. Una, @import: arroba seguido del path, para partir el archivo en varios, uno por tema. Path relativo al que importa o absoluto, y los imports anidados llegan hasta cuatro saltos. Dos, comentarios HTML: lo que va entre menor-signo-de-exclamación se descarta antes de entrar a la ventana, así que podés dejar notas tipo 'no toques esto sin entender por qué está' sin gastar tokens. Tres, tamaño: la doc recomienda menos de doscientas líneas por archivo; más largo y el agente empieza a respetar menos lo que está escrito."</em></p>
-  </aside>
-</section>
-
-<!-- §7.6 · Qué confunde — cuatro casos límite -->
-<section class="s7-slide">
-  <ol class="s7-five-q-grid is-mini">
-    <li class="s7-five-q-card"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Cuatro cosas que confunden de CLAUDE.md</h2>
-
-  <div class="s7-cases-grid">
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 1</span>
-      <span class="s7-case-title">Las contradicciones no dan error</span>
-      <p class="s7-case-body">Si el nivel usuario dice "respondé en inglés" y el de proyecto "en español", entran las dos. Resultado: comportamiento impredecible.</p>
-    </div>
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 2</span>
-      <span class="s7-case-title"><code>@import</code> no ahorra contexto</span>
-      <p class="s7-case-body">Lo importado se expande y entra igual que si estuviera pegado. Partir en archivos mejora el mantenimiento, no el costo.</p>
-    </div>
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 3</span>
-      <span class="s7-case-title">En subdirectorios: bajo demanda</span>
-      <p class="s7-case-body">Un <code>backend/CLAUDE.md</code> no entra al arrancar. Entra cuando Claude lee un archivo dentro de <code>backend/</code>.</p>
-    </div>
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 4</span>
-      <span class="s7-case-title">No es el system prompt</span>
-      <p class="s7-case-body">Entra como mensaje de usuario, después del system prompt. Suma instrucciones a las del runtime, no las reemplaza.</p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Recorrer las cuatro cards en zig-zag.</strong></p>
-    <p><u>Cuatro confusiones frecuentes, cada una con título-tesis y una línea de cuerpo.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: las contradicciones entre niveles no fallan, fallan callado. Si dos niveles dicen cosas distintas, las dos entran y Claude resuelve para un lado o para el otro; no hay warning, lo detectás por el comportamiento raro. Dos: @import no ahorra contexto. La gente parte el CLAUDE.md en seis archivos esperando achicar la ventana, y la ventana queda igual; lo que ganás es mantenibilidad. Tres: los CLAUDE.md de subdirectorios no se cargan al arrancar. Un backend/CLAUDE.md no paga contexto hasta que Claude lee un archivo de backend; es el mismo espíritu que las rules path-scoped de la próxima sección. Y cuatro: CLAUDE.md no es el system prompt. El runtime tiene su propio system prompt, y tu CLAUDE.md entra después, como un mensaje más. Suma instrucciones; no borra las que Claude Code ya trae."</em></p>
   </aside>
 </section>
 
@@ -4469,7 +4373,7 @@
 }
 .reveal .s8-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -4519,7 +4423,7 @@
 }
 /* Mini variant */
 .reveal .s8-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -4874,54 +4778,6 @@
   color: var(--accent);
 }
 
-/* Qué confunde — grid 1×3 */
-.s8-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-width: 960px;
-  margin: 12px auto 0;
-}
-.s8-case-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-top: 3px solid var(--accent-secondary);
-  border-radius: 8px;
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  text-align: left;
-}
-.s8-case-tag {
-  font-family: var(--font-mono);
-  font-size: 0.45em;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.reveal .slides .s8-slide .s8-case-h3 {
-  font-size: 0.75em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
-  margin: 0;
-  text-transform: none;
-  letter-spacing: 0;
-}
-.reveal .s8-case-body {
-  font-size: 0.55em;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-.s8-case-body code,
-.s8-case-h3 code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s8-demo-lead {
   font-size: 0.72em;
@@ -4995,11 +4851,6 @@
       <span class="s8-five-q-label">Cómo se usa</span>
       <span class="s8-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s8-five-q-card">
-      <span class="s8-five-q-num">5</span>
-      <span class="s8-five-q-label">Qué confunde</span>
-      <span class="s8-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
@@ -5016,7 +4867,6 @@
     <li class="s8-five-q-card"><span class="s8-five-q-num">2</span><span class="s8-five-q-label">Dónde vive</span></li>
     <li class="s8-five-q-card"><span class="s8-five-q-num">3</span><span class="s8-five-q-label">Cuándo se carga</span></li>
     <li class="s8-five-q-card"><span class="s8-five-q-num">4</span><span class="s8-five-q-label">Cómo se usa</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">5</span><span class="s8-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Un archivo <code class="s8-h2-code">.md</code> por tema, organizable y opcionalmente condicional</h2>
@@ -5042,7 +4892,6 @@
     <li class="s8-five-q-card is-active"><span class="s8-five-q-num">2</span><span class="s8-five-q-label">Dónde vive</span></li>
     <li class="s8-five-q-card"><span class="s8-five-q-num">3</span><span class="s8-five-q-label">Cuándo se carga</span></li>
     <li class="s8-five-q-card"><span class="s8-five-q-num">4</span><span class="s8-five-q-label">Cómo se usa</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">5</span><span class="s8-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Dos ubicaciones, descubrimiento recursivo</h2>
@@ -5120,7 +4969,6 @@
     <li class="s8-five-q-card"><span class="s8-five-q-num">2</span><span class="s8-five-q-label">Dónde vive</span></li>
     <li class="s8-five-q-card is-active"><span class="s8-five-q-num">3</span><span class="s8-five-q-label">Cuándo se carga</span></li>
     <li class="s8-five-q-card"><span class="s8-five-q-num">4</span><span class="s8-five-q-label">Cómo se usa</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">5</span><span class="s8-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>El frontmatter decide cuándo entra la rule al contexto</h2>
@@ -5173,7 +5021,6 @@
     <li class="s8-five-q-card"><span class="s8-five-q-num">2</span><span class="s8-five-q-label">Dónde vive</span></li>
     <li class="s8-five-q-card"><span class="s8-five-q-num">3</span><span class="s8-five-q-label">Cuándo se carga</span></li>
     <li class="s8-five-q-card is-active"><span class="s8-five-q-num">4</span><span class="s8-five-q-label">Cómo se usa</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">5</span><span class="s8-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Frontmatter YAML arriba, cuerpo Markdown abajo</h2>
@@ -5243,52 +5090,6 @@
     <p><strong>Recorrer los cuatro ítems; el último es el único path-scoped y el que usa el demo.</strong></p>
     <p><u>Zoom al demo-repo: tres rules siempre cargadas y una path-scoped (marcador en otro color).</u></p>
     <p><em>"Bajemos a tierra. El demo-repo tiene cuatro rules: tres siempre cargadas y una path-scoped. Code-style, testing y security cubren convenciones de todo el codebase: cómo escribir Python, cómo escribir tests, cómo no filtrar secretos. Van sin frontmatter porque vale la pena que estén desde el arranque, y el costo es bajo porque cada una son pocas líneas. Api.md es la única scoped: solo entra cuando Claude lee un .py del backend. Lo que prescribe, response model explícito, auth en los endpoints de escritura y regenerar el openapi después de tocar un endpoint, solo tiene sentido en el backend. Y fíjense que esa instrucción del openapi no está en el CLAUDE.md del repo: vive únicamente en esta rule. Esta última es la que vamos a hacer aparecer en el demo."</em></p>
-  </aside>
-</section>
-
-<!-- §8.7 · Qué confunde — tres confusiones -->
-<section class="s8-slide">
-  <ol class="s8-five-q-grid is-mini">
-    <li class="s8-five-q-card"><span class="s8-five-q-num">1</span><span class="s8-five-q-label">Qué es</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">2</span><span class="s8-five-q-label">Dónde vive</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">3</span><span class="s8-five-q-label">Cuándo se carga</span></li>
-    <li class="s8-five-q-card"><span class="s8-five-q-num">4</span><span class="s8-five-q-label">Cómo se usa</span></li>
-    <li class="s8-five-q-card is-active"><span class="s8-five-q-num">5</span><span class="s8-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Tres cosas que confunden de Rules</h2>
-
-  <div class="s8-cases-grid">
-    <div class="s8-case-card">
-      <span class="s8-case-tag">Caso 1</span>
-      <h3 class="s8-case-h3">Otra herramienta no la lee</h3>
-      <p class="s8-case-body">
-        Cursor usa <code>.cursor/rules/</code>, con formato propio. OpenCode lee tu <code>CLAUDE.md</code>
-        y tus skills, pero no <code>.claude/rules/</code>.
-      </p>
-    </div>
-    <div class="s8-case-card">
-      <span class="s8-case-tag">Caso 2</span>
-      <h3 class="s8-case-h3">Sin <code>paths:</code>, cuesta lo mismo que CLAUDE.md</h3>
-      <p class="s8-case-body">
-        Partir en <code>code-style.md</code>, <code>testing.md</code> y <code>security.md</code> ordena el repo,
-        pero no baja los tokens. Para eso hace falta <code>paths:</code>.
-      </p>
-    </div>
-    <div class="s8-case-card">
-      <span class="s8-case-tag">Caso 3</span>
-      <h3 class="s8-case-h3">La activa leer un archivo, no nombrar su path</h3>
-      <p class="s8-case-body">
-        Un <code>ls</code> de <code>backend/</code> o un comando que imprime paths del backend no la activan.
-        La activa que Claude lea un archivo cuyo path matchea el glob.
-      </p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Recorrer las tres cards de izquierda a derecha; la dos es la que más se confunde.</strong></p>
-    <p><u>Tres confusiones: hasta dónde llega la compatibilidad, costo sin paths:, qué dispara la carga.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: otra herramienta no la lee. Cursor tiene su propio mecanismo, .cursor/rules/, con formato propio. Y la compatibilidad entre herramientas es parcial: OpenCode, por ejemplo, lee tu CLAUDE.md y tus skills, pero no lee .claude/rules/. Si pasás un proyecto de una herramienta a otra, fijate pieza por pieza qué se lee y qué no, porque lo que no se lee falla en silencio. Dos, y es la que más confunde: sin paths, una rule cuesta lo mismo que CLAUDE.md. Mucha gente parte el CLAUDE.md en tres rules pensando que achicó la ventana, y la ventana queda igual; lo que ganó es orden. Tres: lo que activa la rule es leer un archivo, no que el path aparezca. Si Claude lista el directorio backend con un ls, eso no activa api.md; si corre un comando que imprime paths del backend, tampoco. Se activa cuando Claude lee el contenido de un archivo cuyo path cae en el glob."</em></p>
   </aside>
 </section>
 
@@ -5381,7 +5182,7 @@
 }
 .reveal .s9-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -5430,7 +5231,7 @@
 }
 /* Mini variant */
 .reveal .s9-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -5721,55 +5522,6 @@
   font-size: 0.9em;
 }
 
-/* Qué confunde — grid 1×3 */
-.s9-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 980px;
-  margin: 12px auto 0;
-}
-.s9-case-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-top: 3px solid var(--accent-secondary);
-  border-radius: 8px;
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  text-align: left;
-}
-.s9-case-tag {
-  font-family: var(--font-mono);
-  font-size: 0.45em;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.reveal .slides .s9-slide .s9-case-h3 {
-  font-size: 0.75em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
-  margin: 0;
-  text-transform: none;
-  letter-spacing: 0;
-}
-.reveal .s9-case-body {
-  font-size: 0.55em;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-.s9-case-body strong { color: var(--text-primary); }
-.reveal .s9-case-body code,
-.reveal .slides .s9-slide .s9-case-h3 code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.9em;
-}
-
 /* Demo */
 .reveal .s9-demo-sub {
   font-size: 0.72em;
@@ -5842,11 +5594,6 @@
       <span class="s9-five-q-label">Cómo se usa</span>
       <span class="s9-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s9-five-q-card">
-      <span class="s9-five-q-num">5</span>
-      <span class="s9-five-q-label">Qué confunde</span>
-      <span class="s9-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
@@ -5863,7 +5610,6 @@
     <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
     <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
     <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Config del runtime, no instrucciones para el agente</h2>
@@ -5889,7 +5635,6 @@
     <li class="s9-five-q-card is-active"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
     <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
     <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Cinco niveles, de mayor a menor precedencia</h2>
@@ -5995,7 +5740,6 @@
     <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
     <li class="s9-five-q-card is-active"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
     <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Se recarga en caliente, salvo <code>model</code></h2>
@@ -6027,7 +5771,6 @@
     <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
     <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
     <li class="s9-five-q-card is-active"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Seis campos típicos del archivo</h2>
@@ -6094,49 +5837,6 @@
     <p><strong>Detenerse en <code>env</code>: placeholder en proyecto, valor real fuera del repo.</strong></p>
     <p><u>Los campos top del archivo real; el bloque <code>permissions</code> se abre en §10.</u></p>
     <p><em>"Vamos al archivo real del demo-repo. model en sonnet: el mismo modelo para todos. env declara DEMO_BEARER_TOKEN con un placeholder; el archivo commiteado documenta que la variable existe, pero el valor real no viaja al repo. Para levantar la app a mano, el backend lo lee del .env. Y si querés que los procesos que lanza Claude usen otro valor, lo ponés en tu settings.local.json: como env.DEMO_BEARER_TOKEN es un escalar, gana el local. Eso es exactamente lo que trae el settings.local.json.example. attribution con pr vacío: los PRs que abra Claude no llevan la línea de atribución. cleanupPeriodDays en treinta. Y permissions: ocho reglas allow, tres deny, dos ask. Ese bloque lo abrimos entero en la sección de permisos."</em></p>
-  </aside>
-</section>
-
-<!-- §9.7 · Qué confunde — tres confusiones -->
-<section class="s9-slide">
-  <ol class="s9-five-q-grid is-mini">
-    <li class="s9-five-q-card"><span class="s9-five-q-num">1</span><span class="s9-five-q-label">Qué es</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">2</span><span class="s9-five-q-label">Dónde vive</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">3</span><span class="s9-five-q-label">Cuándo se carga</span></li>
-    <li class="s9-five-q-card"><span class="s9-five-q-num">4</span><span class="s9-five-q-label">Cómo se usa</span></li>
-    <li class="s9-five-q-card is-active"><span class="s9-five-q-num">5</span><span class="s9-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Tres cosas que confunden de settings.json</h2>
-
-  <div class="s9-cases-grid">
-    <div class="s9-case-card">
-      <span class="s9-case-tag">Caso 1</span>
-      <h3 class="s9-case-h3">Pisar no es sumar</h3>
-      <p class="s9-case-body">
-        Si tu <code>settings.local.json</code> define <code>env.DEMO_BEARER_TOKEN</code>, <strong>pisa</strong> el valor del proyecto. Si define <code>permissions.allow</code>, esas reglas <strong>se suman</strong> a las del proyecto: no borran sus <code>deny</code>.
-      </p>
-    </div>
-    <div class="s9-case-card">
-      <span class="s9-case-tag">Caso 2</span>
-      <h3 class="s9-case-h3"><code>.local.json</code> al <code>.gitignore</code>, siempre</h3>
-      <p class="s9-case-body">
-        Si commiteás <code>.claude/settings.local.json</code> con un token real, el token <strong>queda en el historial de git</strong>. Borrarlo en el próximo commit no alcanza: hay que rotarlo. El <code>.gitignore</code> del demo-repo ya lo lista.
-      </p>
-    </div>
-    <div class="s9-case-card">
-      <span class="s9-case-tag">Caso 3</span>
-      <h3 class="s9-case-h3">MCP no se configura acá</h3>
-      <p class="s9-case-body">
-        Los servers MCP del proyecto se declaran en <code>.mcp.json</code>, en la <strong>raíz del repo</strong> (no en <code>.claude/</code>). <code>settings.json</code> solo tiene claves para habilitarlos, como <code>enableAllProjectMcpServers</code>.
-      </p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>El caso 2 es el que más vale marcar: un token commiteado se rota.</strong></p>
-    <p><u>Tres confusiones: pisar vs sumar, el local fuera de git, MCP en otro archivo.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Una: pisar no es sumar. Lo que es un valor, como una variable de env o el modelo, lo pisa el nivel más alto. Lo que es una lista de permisos se suma: tu local puede agregar reglas, pero no borra los deny del proyecto. Dos, la importante: el settings.local.json va al .gitignore siempre. Si lo commiteás con un token real, el token queda en commits viejos, accesible para cualquiera que clone el repo; borrarlo después no alcanza, hay que rotarlo. Tres: MCP no se configura en settings.json. Los servers del proyecto van en .mcp.json, en la raíz del repo, no dentro de .claude. En settings.json hay alguna clave para habilitarlos, nada más. Si buscás dónde conectar un server y abriste settings.json, estás en el archivo equivocado."</em></p>
   </aside>
 </section>
 
@@ -6238,7 +5938,7 @@
 }
 .reveal .s10-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -6287,7 +5987,7 @@
 }
 /* Mini variant */
 .reveal .s10-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -6587,32 +6287,6 @@
   font-size: 0.95em;
 }
 
-/* Gotchas list — §10.8 */
-.reveal .s10-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 860px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.56em;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
-.reveal .s10-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 12px;
-  color: var(--text-muted);
-}
-.s10-gotchas-list li::marker { color: var(--accent); }
-.s10-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.reveal .s10-gotchas-list code {
-  font-family: var(--font-mono);
-  font-variant-ligatures: none;
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s10-demo-sub {
   font-size: 0.72em;
@@ -6690,17 +6364,12 @@
       <span class="s10-five-q-label">Cómo se usa</span>
       <span class="s10-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s10-five-q-card">
-      <span class="s10-five-q-num">5</span>
-      <span class="s10-five-q-label">Qué confunde</span>
-      <span class="s10-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
     <p><strong>Ritmo rápido: plantilla conocida; es el zoom al campo resaltado en §9.</strong></p>
     <p><u>Cuarta vuelta de la plantilla, ahora sobre <code>permissions</code>.</u></p>
-    <p><em>"Permisos. Cuarta vuelta con la misma plantilla. Lo dejamos resaltado en settings.json con razón: la diferencia entre un agente que puede hacer git push y uno que tiene prohibido intentarlo vive en este sistema. Vamos con las cinco preguntas de siempre."</em></p>
+    <p><em>"Permisos. Cuarta vuelta con la misma plantilla. Lo dejamos resaltado en settings.json con razón: la diferencia entre un agente que puede hacer git push y uno que tiene prohibido intentarlo vive en este sistema. Vamos con las cuatro preguntas de siempre."</em></p>
   </aside>
 </section>
 
@@ -6711,7 +6380,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Reglas del runtime, evaluadas antes de cada tool call</h2>
@@ -6737,7 +6405,6 @@
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Dentro de <code>permissions</code>, en cualquier archivo de settings</h2>
@@ -6813,7 +6480,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Antes de cada tool call: <code>deny</code>, después <code>ask</code>, después <code>allow</code></h2>
@@ -6870,7 +6536,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Sintaxis: <code>Tool(pattern)</code></h2>
@@ -6940,7 +6605,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Cambiar reglas sin salir de la sesión</h2>
@@ -6961,32 +6625,6 @@
     <p><strong>Marcar dónde guarda "don't ask again": en local.</strong></p>
     <p><u>Tres formas de cambiar reglas en vivo: <code>/permissions</code>, el prompt, el JSON a mano.</u></p>
     <p><em>"Una pieza más del cómo se usa, porque la usamos en el demo. Hay tres formas de cambiar reglas sin reiniciar. /permissions te muestra las reglas activas, ya combinadas entre archivos, y te deja agregar o quitar; cuando agregás una, te pregunta en qué archivo guardarla. La segunda es el propio prompt de permiso: si elegís Yes, and don't ask again, la regla se guarda en settings.local.json, tu archivo, no el del equipo. Si querés que sea compartida, la pasás al settings.json del proyecto. Y la tercera es editar el JSON a mano: el runtime vigila el archivo y recarga los permisos al guardar."</em></p>
-  </aside>
-</section>
-
-<!-- §10.8 · Qué confunde — 4 gotchas (bullets) -->
-<section class="s10-slide">
-  <ol class="s10-five-q-grid is-mini">
-    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Cuatro cosas que confunden de permisos</h2>
-
-  <ul class="s10-gotchas-list">
-    <li><strong>Un <code>deny</code> cubre una tool y un patrón, no una intención.</strong> <code>Read(./.env)</code> frena la tool <code>Read</code>, pero no un <code>cat .env</code> vía Bash ni un script de Python que abra el archivo, si esos comandos están permitidos. No es una frontera de seguridad.</li>
-    <li><strong>Las lecturas no piden permiso.</strong> Leer archivos, <code>Grep</code> y comandos de solo lectura (<code>ls</code>, <code>cat</code>, <code>git status</code>) corren sin prompt dentro del proyecto.</li>
-    <li><strong>Los wildcards no atraviesan <code>&amp;&amp;</code> ni <code>;</code>.</strong> <code>Bash(uv run uvicorn *)</code> en <code>allow</code> no cubre <code>uv run uvicorn app &amp;&amp; rm -rf .</code>: no se cuela un segundo comando por concatenación.</li>
-    <li><strong>Un <code>Bash(rm -rf *)</code> en <code>deny</code> no frena todas las formas de borrar.</strong> <code>/bin/rm -rf</code> o <code>sh -c '...'</code> no matchean el patrón. Lo que no querés que pase, mejor que tampoco esté habilitado por otro lado.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>El primero es el más importante: deny no es sandbox.</strong></p>
-    <p><u>Límites reales del sistema: patrón vs intención, lecturas libres, encadenamiento, variantes de un comando.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Uno: un deny cubre una tool y un patrón, no una intención. Read de .env bloquea la tool Read sobre ese archivo, pero si Claude puede correr cat por Bash, o un script de Python que lo abra, el deny no se entera. Por eso el demo-repo acota uv run python a un solo script. Dos: las lecturas no piden permiso. Leer archivos, grep, ls, git status, corren sin prompt dentro del proyecto; por eso no hace falta un Read del proyecto en allow. Tres: los wildcards no atraviesan && ni punto y coma. Un allow de uv run uvicorn con asterisco no cubre uvicorn seguido de rm -rf. Y cuatro: un deny de Bash matchea texto. /bin/rm -rf, o un sh -c con el comando adentro, no matchean rm -rf asterisco. Si algo no tiene que pasar nunca, la defensa real es no habilitar caminos alternativos, y para aislar de verdad, un contenedor."</em></p>
   </aside>
 </section>
 
@@ -7081,7 +6719,7 @@
 }
 .reveal .s11-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -7130,7 +6768,7 @@
 }
 /* Mini variant */
 .reveal .s11-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -7428,30 +7066,6 @@
   font-size: 0.95em;
 }
 
-/* Qué confunde — 3 bullets */
-.reveal .s11-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 780px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.58em;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
-.reveal .s11-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 12px;
-}
-.reveal .s11-gotchas-list li::marker { color: var(--accent); }
-.reveal .s11-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.reveal .s11-gotchas-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s11-demo-sub {
   max-width: 760px;
@@ -7529,17 +7143,12 @@
       <span class="s11-five-q-label">Cómo se usa</span>
       <span class="s11-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s11-five-q-card">
-      <span class="s11-five-q-num">5</span>
-      <span class="s11-five-q-label">Qué confunde</span>
-      <span class="s11-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
-    <p><strong>Ritmo rápido: no leer las cinco preguntas.</strong></p>
+    <p><strong>Ritmo rápido: no leer las cuatro preguntas.</strong></p>
     <p><u>Apertura de §11. Quinta vuelta con la misma plantilla.</u></p>
-    <p><em>"Skills y slash commands. Quinta vuelta con la misma plantilla. Y un cambio de foco respecto a permisos: los permisos limitan qué tools puede usar el agente; las skills le dan procedimientos completos que de otra forma no tendría. Vamos con las cinco preguntas de siempre."</em></p>
+    <p><em>"Skills y slash commands. Quinta vuelta con la misma plantilla. Y un cambio de foco respecto a permisos: los permisos limitan qué tools puede usar el agente; las skills le dan procedimientos completos que de otra forma no tendría. Vamos con las cuatro preguntas de siempre."</em></p>
   </aside>
 </section>
 
@@ -7550,7 +7159,6 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Un mismo mecanismo, dos formas: skill y command</h2>
@@ -7576,7 +7184,6 @@
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Dos formas, los mismos lugares</h2>
@@ -7657,7 +7264,6 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Al arranque entra el índice, no el procedimiento</h2>
@@ -7690,7 +7296,6 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Anatomía de <code class="s11-h2-code">.claude/skills/add-endpoint/SKILL.md</code></h2>
@@ -7744,31 +7349,6 @@ No hagas commits ni push.</div>
     <p><strong>Leer el archivo entero: son once líneas.</strong></p>
     <p><u>Zoom-in sin mini-strip: contrapunto de tamaño con SKILL.md.</u></p>
     <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-pr punto md. Un archivo, once líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con tres pasos: correr pytest, regenerar el openapi, mostrar el diff. Crea /pre-pr igual que una skill crea /add-endpoint. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
-  </aside>
-</section>
-
-<!-- §11.7 · Qué confunde — 3 casos (bullets) -->
-<section class="s11-slide">
-  <ol class="s11-five-q-grid is-mini">
-    <li class="s11-five-q-card"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card is-active"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Tres cosas que confunden de skills y commands</h2>
-
-  <ul class="s11-gotchas-list">
-    <li><strong><code>/memory</code>, <code>/context</code> y <code>/permissions</code> no son archivos.</strong> Son built-ins del CLI: no hay skill ni command detrás que puedas abrir.</li>
-    <li><strong>El <code>description</code> decide la activación.</strong> Si es vago, la skill entra cuando no corresponde o no entra cuando sí. La convención <code>Use when X</code> lo vuelve específico.</li>
-    <li><strong>Una skill no es una garantía.</strong> Son instrucciones en contexto: el modelo sigue las fases con mucha más consistencia, y vos podés auditar cuál se salteó. Lo que tiene que cumplirse siempre va en settings y permisos.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>El tercer bullet es el que más importa.</strong></p>
-    <p><u>Skill = instrucciones en contexto; el enforcement determinístico vive en settings y permisos.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: /memory, /context, /permissions no son archivos. Son lógica del CLI; no hay skill ni command detrás que puedas abrir o editar. Dos: la description de la skill decide la activación. Si dice solo 'add endpoint', puede entrar en pedidos que no son de backend, o no entrar cuando sí correspondía. 'Use when the user asks to add a new REST endpoint to the demo-repo backend' es específico. Y tres, la más importante: una skill no es una garantía. Es texto que entra a la ventana, igual que CLAUDE.md. El modelo tiende a seguir las fases con mucha más consistencia que con un prompt suelto, y vos tenés un procedimiento escrito contra el cual auditar qué fase se salteó. Pero sigue siendo un LLM. Si algo tiene que cumplirse siempre, sin excepción, eso no va en una skill: va en settings y permisos, que el runtime aplica de forma determinística."</em></p>
   </aside>
 </section>
 
@@ -7877,7 +7457,7 @@ No hagas commits ni push.</div>
 }
 .reveal .s12-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -7926,7 +7506,7 @@ No hagas commits ni push.</div>
 }
 /* Mini variant */
 .reveal .s12-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -8210,30 +7790,6 @@ No hagas commits ni push.</div>
 }
 .reveal .s12-diagram-note strong { color: var(--text-primary); font-style: normal; }
 
-/* Qué confunde — 4 bullets */
-.reveal .s12-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 780px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.57em;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-.reveal .s12-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 10px;
-}
-.reveal .s12-gotchas-list li::marker { color: var(--accent); }
-.reveal .s12-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.reveal .s12-gotchas-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s12-demo-sub {
   max-width: 760px;
@@ -8316,15 +7872,10 @@ No hagas commits ni push.</div>
       <span class="s12-five-q-label">Cómo se usa</span>
       <span class="s12-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s12-five-q-card">
-      <span class="s12-five-q-num">5</span>
-      <span class="s12-five-q-label">Qué confunde</span>
-      <span class="s12-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
-    <p><strong>Ritmo muy rápido: no leer las cinco preguntas.</strong></p>
+    <p><strong>Ritmo muy rápido: no leer las cuatro preguntas.</strong></p>
     <p><u>Apertura de §12. La tercera pregunta pasa a "Cuándo se invoca": los sub-agents no se cargan al arranque.</u></p>
     <p><em>"Sub-agents. Sexta vuelta con la misma plantilla. La skill difería la carga de un procedimiento dentro de tu ventana. El sub-agent va un paso más: corre un loop entero en otra ventana. Una sola adaptación en la plantilla: la tercera pregunta es cuándo se invoca, porque un sub-agent no se carga, se lanza."</em></p>
   </aside>
@@ -8337,7 +7888,6 @@ No hagas commits ni push.</div>
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Una instancia separada del mismo loop, con su propia ventana</h2>
@@ -8363,7 +7913,6 @@ No hagas commits ni push.</div>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Archivos markdown, plugins o built-in</h2>
@@ -8446,7 +7995,6 @@ No hagas commits ni push.</div>
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>El padre llama a la tool <code>Agent</code>, a pedido tuyo o por su cuenta</h2>
@@ -8471,7 +8019,6 @@ No hagas commits ni push.</div>
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Anatomía de <code class="s12-h2-code">.claude/agents/researcher.md</code></h2>
@@ -8546,32 +8093,6 @@ No hagas commits ni push.</div>
     <p><strong>Recorrer de arriba a abajo; marcar la asimetría entre las dos flechas.</strong></p>
     <p><u>Zoom-in sin mini-strip: visualiza la respuesta a la pregunta 1.</u></p>
     <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá dónde se maneja la auth'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
-  </aside>
-</section>
-
-<!-- §12.7 · Qué confunde — 4 casos (bullets) -->
-<section class="s12-slide">
-  <ol class="s12-five-q-grid is-mini">
-    <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card is-active"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Cuatro cosas que confunden de sub-agents</h2>
-
-  <ul class="s12-gotchas-list">
-    <li><strong>No es "otra IA".</strong> Es la misma lógica (<code>LLM + loop + tools + entorno</code>) instanciada aparte. La diferencia es de aislamiento, no de naturaleza.</li>
-    <li><strong>Delegar no exime de supervisar.</strong> Al padre llega el resultado, no los pasos. Tu trabajo pasa a ser juzgar si ese resumen es coherente con lo que sabés del proyecto.</li>
-    <li><strong>Paralelizar es un beneficio secundario.</strong> El padre puede lanzar varios sub-agents a la vez, pero el motivo principal es <strong>proteger su contexto</strong>.</li>
-    <li><strong>Sin <code>tools</code>, hereda todo.</strong> Un sub-agent de solo lectura se declara: <code>Read</code>, <code>Grep</code>, <code>Glob</code> y nada más. La restricción la elegís vos.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>El cuarto bullet es el operativo al escribir un sub-agent.</strong></p>
-    <p><u>Cuatro malentendidos frecuentes, cada uno con su reframe.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: no es otra IA. Mismo loop, mismo modelo por default, con su propia ventana. Dos: delegar no exime de supervisar; cambia cómo supervisás. Inline ves cada paso: qué archivo leyó, qué comando corrió. Con un sub-agent eso queda en su ventana y a vos te llega el resumen. Tu trabajo pasa a ser juzgar si ese resumen cierra con lo que sabés del proyecto, y si dudás, el transcript está en disco. Tres: paralelizar es real, el padre puede lanzar tres sub-agents en una misma respuesta y corren a la vez, pero no es la razón principal. La razón principal es que la exploración no llene la ventana del padre. Y cuatro: si no declarás tools, el sub-agent hereda todas las del padre, Bash y Edit incluidos. Si lo querés de solo lectura, tenés que decirlo: Read, Grep, Glob y nada más."</em></p>
   </aside>
 </section>
 

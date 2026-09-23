@@ -27,7 +27,7 @@
 }
 .reveal .s12-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -76,7 +76,7 @@
 }
 /* Mini variant */
 .reveal .s12-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -360,30 +360,6 @@
 }
 .reveal .s12-diagram-note strong { color: var(--text-primary); font-style: normal; }
 
-/* Qué confunde — 4 bullets */
-.reveal .s12-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 780px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.57em;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-.reveal .s12-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 10px;
-}
-.reveal .s12-gotchas-list li::marker { color: var(--accent); }
-.reveal .s12-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.reveal .s12-gotchas-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s12-demo-sub {
   max-width: 760px;
@@ -466,15 +442,10 @@
       <span class="s12-five-q-label">Cómo se usa</span>
       <span class="s12-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s12-five-q-card">
-      <span class="s12-five-q-num">5</span>
-      <span class="s12-five-q-label">Qué confunde</span>
-      <span class="s12-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
-    <p><strong>Ritmo muy rápido: no leer las cinco preguntas.</strong></p>
+    <p><strong>Ritmo muy rápido: no leer las cuatro preguntas.</strong></p>
     <p><u>Apertura de §12. La tercera pregunta pasa a "Cuándo se invoca": los sub-agents no se cargan al arranque.</u></p>
     <p><em>"Sub-agents. Sexta vuelta con la misma plantilla. La skill difería la carga de un procedimiento dentro de tu ventana. El sub-agent va un paso más: corre un loop entero en otra ventana. Una sola adaptación en la plantilla: la tercera pregunta es cuándo se invoca, porque un sub-agent no se carga, se lanza."</em></p>
   </aside>
@@ -487,7 +458,6 @@
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Una instancia separada del mismo loop, con su propia ventana</h2>
@@ -513,7 +483,6 @@
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Archivos markdown, plugins o built-in</h2>
@@ -596,7 +565,6 @@
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>El padre llama a la tool <code>Agent</code>, a pedido tuyo o por su cuenta</h2>
@@ -621,7 +589,6 @@
     <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
     <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Anatomía de <code class="s12-h2-code">.claude/agents/researcher.md</code></h2>
@@ -696,32 +663,6 @@
     <p><strong>Recorrer de arriba a abajo; marcar la asimetría entre las dos flechas.</strong></p>
     <p><u>Zoom-in sin mini-strip: visualiza la respuesta a la pregunta 1.</u></p>
     <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá dónde se maneja la auth'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
-  </aside>
-</section>
-
-<!-- §12.7 · Qué confunde — 4 casos (bullets) -->
-<section class="s12-slide">
-  <ol class="s12-five-q-grid is-mini">
-    <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">2</span><span class="s12-five-q-label">Dónde vive</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">3</span><span class="s12-five-q-label">Cuándo se invoca</span></li>
-    <li class="s12-five-q-card"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
-    <li class="s12-five-q-card is-active"><span class="s12-five-q-num">5</span><span class="s12-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Cuatro cosas que confunden de sub-agents</h2>
-
-  <ul class="s12-gotchas-list">
-    <li><strong>No es "otra IA".</strong> Es la misma lógica (<code>LLM + loop + tools + entorno</code>) instanciada aparte. La diferencia es de aislamiento, no de naturaleza.</li>
-    <li><strong>Delegar no exime de supervisar.</strong> Al padre llega el resultado, no los pasos. Tu trabajo pasa a ser juzgar si ese resumen es coherente con lo que sabés del proyecto.</li>
-    <li><strong>Paralelizar es un beneficio secundario.</strong> El padre puede lanzar varios sub-agents a la vez, pero el motivo principal es <strong>proteger su contexto</strong>.</li>
-    <li><strong>Sin <code>tools</code>, hereda todo.</strong> Un sub-agent de solo lectura se declara: <code>Read</code>, <code>Grep</code>, <code>Glob</code> y nada más. La restricción la elegís vos.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>El cuarto bullet es el operativo al escribir un sub-agent.</strong></p>
-    <p><u>Cuatro malentendidos frecuentes, cada uno con su reframe.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: no es otra IA. Mismo loop, mismo modelo por default, con su propia ventana. Dos: delegar no exime de supervisar; cambia cómo supervisás. Inline ves cada paso: qué archivo leyó, qué comando corrió. Con un sub-agent eso queda en su ventana y a vos te llega el resumen. Tu trabajo pasa a ser juzgar si ese resumen cierra con lo que sabés del proyecto, y si dudás, el transcript está en disco. Tres: paralelizar es real, el padre puede lanzar tres sub-agents en una misma respuesta y corren a la vez, pero no es la razón principal. La razón principal es que la exploración no llene la ventana del padre. Y cuatro: si no declarás tools, el sub-agent hereda todas las del padre, Bash y Edit incluidos. Si lo querés de solo lectura, tenés que decirlo: Read, Grep, Glob y nada más."</em></p>
   </aside>
 </section>
 

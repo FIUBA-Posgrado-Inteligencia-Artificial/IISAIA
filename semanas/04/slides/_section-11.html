@@ -26,7 +26,7 @@
 }
 .reveal .s11-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -75,7 +75,7 @@
 }
 /* Mini variant */
 .reveal .s11-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -373,30 +373,6 @@
   font-size: 0.95em;
 }
 
-/* Qué confunde — 3 bullets */
-.reveal .s11-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 780px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.58em;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
-.reveal .s11-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 12px;
-}
-.reveal .s11-gotchas-list li::marker { color: var(--accent); }
-.reveal .s11-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.reveal .s11-gotchas-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s11-demo-sub {
   max-width: 760px;
@@ -474,17 +450,12 @@
       <span class="s11-five-q-label">Cómo se usa</span>
       <span class="s11-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s11-five-q-card">
-      <span class="s11-five-q-num">5</span>
-      <span class="s11-five-q-label">Qué confunde</span>
-      <span class="s11-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
-    <p><strong>Ritmo rápido: no leer las cinco preguntas.</strong></p>
+    <p><strong>Ritmo rápido: no leer las cuatro preguntas.</strong></p>
     <p><u>Apertura de §11. Quinta vuelta con la misma plantilla.</u></p>
-    <p><em>"Skills y slash commands. Quinta vuelta con la misma plantilla. Y un cambio de foco respecto a permisos: los permisos limitan qué tools puede usar el agente; las skills le dan procedimientos completos que de otra forma no tendría. Vamos con las cinco preguntas de siempre."</em></p>
+    <p><em>"Skills y slash commands. Quinta vuelta con la misma plantilla. Y un cambio de foco respecto a permisos: los permisos limitan qué tools puede usar el agente; las skills le dan procedimientos completos que de otra forma no tendría. Vamos con las cuatro preguntas de siempre."</em></p>
   </aside>
 </section>
 
@@ -495,7 +466,6 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Un mismo mecanismo, dos formas: skill y command</h2>
@@ -521,7 +491,6 @@
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Dos formas, los mismos lugares</h2>
@@ -602,7 +571,6 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Al arranque entra el índice, no el procedimiento</h2>
@@ -635,7 +603,6 @@
     <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
     <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Anatomía de <code class="s11-h2-code">.claude/skills/add-endpoint/SKILL.md</code></h2>
@@ -689,31 +656,6 @@ No hagas commits ni push.</div>
     <p><strong>Leer el archivo entero: son once líneas.</strong></p>
     <p><u>Zoom-in sin mini-strip: contrapunto de tamaño con SKILL.md.</u></p>
     <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-pr punto md. Un archivo, once líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con tres pasos: correr pytest, regenerar el openapi, mostrar el diff. Crea /pre-pr igual que una skill crea /add-endpoint. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
-  </aside>
-</section>
-
-<!-- §11.7 · Qué confunde — 3 casos (bullets) -->
-<section class="s11-slide">
-  <ol class="s11-five-q-grid is-mini">
-    <li class="s11-five-q-card"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">2</span><span class="s11-five-q-label">Dónde vive</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">3</span><span class="s11-five-q-label">Cuándo se carga</span></li>
-    <li class="s11-five-q-card"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
-    <li class="s11-five-q-card is-active"><span class="s11-five-q-num">5</span><span class="s11-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Tres cosas que confunden de skills y commands</h2>
-
-  <ul class="s11-gotchas-list">
-    <li><strong><code>/memory</code>, <code>/context</code> y <code>/permissions</code> no son archivos.</strong> Son built-ins del CLI: no hay skill ni command detrás que puedas abrir.</li>
-    <li><strong>El <code>description</code> decide la activación.</strong> Si es vago, la skill entra cuando no corresponde o no entra cuando sí. La convención <code>Use when X</code> lo vuelve específico.</li>
-    <li><strong>Una skill no es una garantía.</strong> Son instrucciones en contexto: el modelo sigue las fases con mucha más consistencia, y vos podés auditar cuál se salteó. Lo que tiene que cumplirse siempre va en settings y permisos.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>El tercer bullet es el que más importa.</strong></p>
-    <p><u>Skill = instrucciones en contexto; el enforcement determinístico vive en settings y permisos.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: /memory, /context, /permissions no son archivos. Son lógica del CLI; no hay skill ni command detrás que puedas abrir o editar. Dos: la description de la skill decide la activación. Si dice solo 'add endpoint', puede entrar en pedidos que no son de backend, o no entrar cuando sí correspondía. 'Use when the user asks to add a new REST endpoint to the demo-repo backend' es específico. Y tres, la más importante: una skill no es una garantía. Es texto que entra a la ventana, igual que CLAUDE.md. El modelo tiende a seguir las fases con mucha más consistencia que con un prompt suelto, y vos tenés un procedimiento escrito contra el cual auditar qué fase se salteó. Pero sigue siendo un LLM. Si algo tiene que cumplirse siempre, sin excepción, eso no va en una skill: va en settings y permisos, que el runtime aplica de forma determinística."</em></p>
   </aside>
 </section>
 

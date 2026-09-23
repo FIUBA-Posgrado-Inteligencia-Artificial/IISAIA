@@ -21,7 +21,7 @@
 }
 .reveal .s7-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -71,7 +71,7 @@
 }
 /* Mini variant */
 .reveal .s7-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -293,51 +293,6 @@
   font-size: 1.08em;
 }
 .s7-howto-list code {
-  font-family: var(--font-mono);
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
-/* Casos límite — 4 confusion cards grid (2×2) */
-.s7-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  max-width: 900px;
-  margin: 12px auto 0;
-}
-.s7-case-card {
-  background: var(--bg-secondary);
-  border: 1px solid #2a3a5a;
-  border-top: 3px solid var(--accent-secondary);
-  border-radius: 8px;
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  text-align: left;
-}
-.s7-case-tag {
-  font-family: var(--font-mono);
-  font-size: 0.45em;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.s7-case-title {
-  font-size: 0.75em;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
-}
-.reveal .s7-case-body {
-  font-size: 0.55em;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-.s7-case-body code,
-.s7-case-title code {
   font-family: var(--font-mono);
   color: var(--accent);
   font-size: 0.95em;
@@ -611,7 +566,7 @@
     </div>
   </div>
 
-  <p class="s7-pieces-foot">Cada pieza se recorre con las mismas cinco preguntas: qué es, dónde vive, cuándo se carga, cómo se usa, qué confunde. Y con su equivalente en Codex y OpenCode.</p>
+  <p class="s7-pieces-foot">Cada pieza se recorre con las mismas cuatro preguntas: qué es, dónde vive, cuándo se carga, cómo se usa. Y con su equivalente en Codex y OpenCode.</p>
 
   <aside class="notes">
     <p><strong>Recorrer las seis de pasada: nombre y dimensión. No presentar cada una.</strong></p>
@@ -645,17 +600,12 @@
       <span class="s7-five-q-label">Cómo se usa</span>
       <span class="s7-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s7-five-q-card">
-      <span class="s7-five-q-num">5</span>
-      <span class="s7-five-q-label">Qué confunde</span>
-      <span class="s7-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
-    <p><strong>Presentar la tarjeta como dispositivo recurrente, sin leer las cinco preguntas.</strong></p>
+    <p><strong>Presentar la tarjeta como dispositivo recurrente, sin leer las cuatro preguntas.</strong></p>
     <p><u>Esta tarjeta abre las seis secciones de piezas; su versión mini queda arriba en cada slide.</u></p>
-    <p><em>"CLAUDE.md y memoria automática. Primera de las seis piezas, una por sección, todas con la misma plantilla y cada una con su equivalente en Codex y OpenCode. Cinco preguntas, en este orden: qué es, dónde vive, cuándo se carga, cómo se usa y qué confunde. Si al final de cada sección podés responder esas cinco, sabés operar la pieza; si te falta alguna, la pieza te va a sorprender en algún momento. Arrancamos por la más visible, la que más se confunde con 'configurar' al agente: CLAUDE.md y su pariente cercano, la memoria automática."</em></p>
+    <p><em>"CLAUDE.md y memoria automática. Primera de las seis piezas, una por sección, todas con la misma plantilla y cada una con su equivalente en Codex y OpenCode. Cuatro preguntas, en este orden: qué es, dónde vive, cuándo se carga y cómo se usa. Si al final de cada sección podés responder esas cuatro, sabés operar la pieza; si te falta alguna, la pieza te va a sorprender en algún momento. Arrancamos por la más visible, la que más se confunde con 'configurar' al agente: CLAUDE.md y su pariente cercano, la memoria automática."</em></p>
   </aside>
 </section>
 
@@ -666,7 +616,6 @@
     <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>CLAUDE.md es texto tuyo en la ventana desde el arranque</h2>
@@ -692,7 +641,6 @@
     <li class="s7-five-q-card is-active"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Cuatro niveles, de lo más amplio a lo más específico</h2>
@@ -792,7 +740,6 @@
     <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card is-active"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Al arrancar, en este orden: se concatenan, no hay override</h2>
@@ -835,7 +782,6 @@
     <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
     <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
     <li class="s7-five-q-card is-active"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Tres decisiones al escribir el archivo</h2>
@@ -859,48 +805,6 @@
     <p><strong>Recorrer las tres decisiones; la primera es la que más tiempo lleva.</strong></p>
     <p><u>Tres decisiones independientes: cómo partir el archivo, cómo anotarlo, qué tamaño darle.</u></p>
     <p><em>"Cuarta pregunta: cómo se usa. Tres decisiones cuando estás escribiendo el archivo. Una, @import: arroba seguido del path, para partir el archivo en varios, uno por tema. Path relativo al que importa o absoluto, y los imports anidados llegan hasta cuatro saltos. Dos, comentarios HTML: lo que va entre menor-signo-de-exclamación se descarta antes de entrar a la ventana, así que podés dejar notas tipo 'no toques esto sin entender por qué está' sin gastar tokens. Tres, tamaño: la doc recomienda menos de doscientas líneas por archivo; más largo y el agente empieza a respetar menos lo que está escrito."</em></p>
-  </aside>
-</section>
-
-<!-- §7.6 · Qué confunde — cuatro casos límite -->
-<section class="s7-slide">
-  <ol class="s7-five-q-grid is-mini">
-    <li class="s7-five-q-card"><span class="s7-five-q-num">1</span><span class="s7-five-q-label">Qué es</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">2</span><span class="s7-five-q-label">Dónde vive</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">3</span><span class="s7-five-q-label">Cuándo se carga</span></li>
-    <li class="s7-five-q-card"><span class="s7-five-q-num">4</span><span class="s7-five-q-label">Cómo se usa</span></li>
-    <li class="s7-five-q-card is-active"><span class="s7-five-q-num">5</span><span class="s7-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Cuatro cosas que confunden de CLAUDE.md</h2>
-
-  <div class="s7-cases-grid">
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 1</span>
-      <span class="s7-case-title">Las contradicciones no dan error</span>
-      <p class="s7-case-body">Si el nivel usuario dice "respondé en inglés" y el de proyecto "en español", entran las dos. Resultado: comportamiento impredecible.</p>
-    </div>
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 2</span>
-      <span class="s7-case-title"><code>@import</code> no ahorra contexto</span>
-      <p class="s7-case-body">Lo importado se expande y entra igual que si estuviera pegado. Partir en archivos mejora el mantenimiento, no el costo.</p>
-    </div>
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 3</span>
-      <span class="s7-case-title">En subdirectorios: bajo demanda</span>
-      <p class="s7-case-body">Un <code>backend/CLAUDE.md</code> no entra al arrancar. Entra cuando Claude lee un archivo dentro de <code>backend/</code>.</p>
-    </div>
-    <div class="s7-case-card">
-      <span class="s7-case-tag">Caso 4</span>
-      <span class="s7-case-title">No es el system prompt</span>
-      <p class="s7-case-body">Entra como mensaje de usuario, después del system prompt. Suma instrucciones a las del runtime, no las reemplaza.</p>
-    </div>
-  </div>
-
-  <aside class="notes">
-    <p><strong>Recorrer las cuatro cards en zig-zag.</strong></p>
-    <p><u>Cuatro confusiones frecuentes, cada una con título-tesis y una línea de cuerpo.</u></p>
-    <p><em>"Quinta pregunta: qué confunde. Una: las contradicciones entre niveles no fallan, fallan callado. Si dos niveles dicen cosas distintas, las dos entran y Claude resuelve para un lado o para el otro; no hay warning, lo detectás por el comportamiento raro. Dos: @import no ahorra contexto. La gente parte el CLAUDE.md en seis archivos esperando achicar la ventana, y la ventana queda igual; lo que ganás es mantenibilidad. Tres: los CLAUDE.md de subdirectorios no se cargan al arrancar. Un backend/CLAUDE.md no paga contexto hasta que Claude lee un archivo de backend; es el mismo espíritu que las rules path-scoped de la próxima sección. Y cuatro: CLAUDE.md no es el system prompt. El runtime tiene su propio system prompt, y tu CLAUDE.md entra después, como un mensaje más. Suma instrucciones; no borra las que Claude Code ya trae."</em></p>
   </aside>
 </section>
 

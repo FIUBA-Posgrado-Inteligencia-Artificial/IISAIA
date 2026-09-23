@@ -27,7 +27,7 @@
 }
 .reveal .s10-five-q-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 7px;
   list-style: none;
   padding: 0;
@@ -76,7 +76,7 @@
 }
 /* Mini variant */
 .reveal .s10-five-q-grid.is-mini {
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   gap: 4px;
   max-width: 100%;
@@ -376,32 +376,6 @@
   font-size: 0.95em;
 }
 
-/* Gotchas list — §10.8 */
-.reveal .s10-gotchas-list {
-  list-style: disc;
-  display: inline-block;
-  text-align: left;
-  max-width: 860px;
-  margin: 14px auto 0;
-  padding-left: 36px;
-  font-size: 0.56em;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
-.reveal .s10-gotchas-list li {
-  padding-left: 4px;
-  margin-bottom: 12px;
-  color: var(--text-muted);
-}
-.s10-gotchas-list li::marker { color: var(--accent); }
-.s10-gotchas-list strong { color: var(--text-primary); font-weight: 700; }
-.reveal .s10-gotchas-list code {
-  font-family: var(--font-mono);
-  font-variant-ligatures: none;
-  color: var(--accent);
-  font-size: 0.95em;
-}
-
 /* Demo */
 .reveal .s10-demo-sub {
   font-size: 0.72em;
@@ -479,17 +453,12 @@
       <span class="s10-five-q-label">Cómo se usa</span>
       <span class="s10-five-q-hint">sintaxis + ejemplos</span>
     </li>
-    <li class="s10-five-q-card">
-      <span class="s10-five-q-num">5</span>
-      <span class="s10-five-q-label">Qué confunde</span>
-      <span class="s10-five-q-hint">casos límite</span>
-    </li>
   </ol>
 
   <aside class="notes">
     <p><strong>Ritmo rápido: plantilla conocida; es el zoom al campo resaltado en §9.</strong></p>
     <p><u>Cuarta vuelta de la plantilla, ahora sobre <code>permissions</code>.</u></p>
-    <p><em>"Permisos. Cuarta vuelta con la misma plantilla. Lo dejamos resaltado en settings.json con razón: la diferencia entre un agente que puede hacer git push y uno que tiene prohibido intentarlo vive en este sistema. Vamos con las cinco preguntas de siempre."</em></p>
+    <p><em>"Permisos. Cuarta vuelta con la misma plantilla. Lo dejamos resaltado en settings.json con razón: la diferencia entre un agente que puede hacer git push y uno que tiene prohibido intentarlo vive en este sistema. Vamos con las cuatro preguntas de siempre."</em></p>
   </aside>
 </section>
 
@@ -500,7 +469,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Reglas del runtime, evaluadas antes de cada tool call</h2>
@@ -526,7 +494,6 @@
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Dentro de <code>permissions</code>, en cualquier archivo de settings</h2>
@@ -602,7 +569,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Antes de cada tool call: <code>deny</code>, después <code>ask</code>, después <code>allow</code></h2>
@@ -659,7 +625,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Sintaxis: <code>Tool(pattern)</code></h2>
@@ -729,7 +694,6 @@
     <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
     <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
     <li class="s10-five-q-card is-active"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
   </ol>
 
   <h2>Cambiar reglas sin salir de la sesión</h2>
@@ -750,32 +714,6 @@
     <p><strong>Marcar dónde guarda "don't ask again": en local.</strong></p>
     <p><u>Tres formas de cambiar reglas en vivo: <code>/permissions</code>, el prompt, el JSON a mano.</u></p>
     <p><em>"Una pieza más del cómo se usa, porque la usamos en el demo. Hay tres formas de cambiar reglas sin reiniciar. /permissions te muestra las reglas activas, ya combinadas entre archivos, y te deja agregar o quitar; cuando agregás una, te pregunta en qué archivo guardarla. La segunda es el propio prompt de permiso: si elegís Yes, and don't ask again, la regla se guarda en settings.local.json, tu archivo, no el del equipo. Si querés que sea compartida, la pasás al settings.json del proyecto. Y la tercera es editar el JSON a mano: el runtime vigila el archivo y recarga los permisos al guardar."</em></p>
-  </aside>
-</section>
-
-<!-- §10.8 · Qué confunde — 4 gotchas (bullets) -->
-<section class="s10-slide">
-  <ol class="s10-five-q-grid is-mini">
-    <li class="s10-five-q-card"><span class="s10-five-q-num">1</span><span class="s10-five-q-label">Qué es</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">2</span><span class="s10-five-q-label">Dónde vive</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">3</span><span class="s10-five-q-label">Cuándo se evalúa</span></li>
-    <li class="s10-five-q-card"><span class="s10-five-q-num">4</span><span class="s10-five-q-label">Cómo se usa</span></li>
-    <li class="s10-five-q-card is-active"><span class="s10-five-q-num">5</span><span class="s10-five-q-label">Qué confunde</span></li>
-  </ol>
-
-  <h2>Cuatro cosas que confunden de permisos</h2>
-
-  <ul class="s10-gotchas-list">
-    <li><strong>Un <code>deny</code> cubre una tool y un patrón, no una intención.</strong> <code>Read(./.env)</code> frena la tool <code>Read</code>, pero no un <code>cat .env</code> vía Bash ni un script de Python que abra el archivo, si esos comandos están permitidos. No es una frontera de seguridad.</li>
-    <li><strong>Las lecturas no piden permiso.</strong> Leer archivos, <code>Grep</code> y comandos de solo lectura (<code>ls</code>, <code>cat</code>, <code>git status</code>) corren sin prompt dentro del proyecto.</li>
-    <li><strong>Los wildcards no atraviesan <code>&amp;&amp;</code> ni <code>;</code>.</strong> <code>Bash(uv run uvicorn *)</code> en <code>allow</code> no cubre <code>uv run uvicorn app &amp;&amp; rm -rf .</code>: no se cuela un segundo comando por concatenación.</li>
-    <li><strong>Un <code>Bash(rm -rf *)</code> en <code>deny</code> no frena todas las formas de borrar.</strong> <code>/bin/rm -rf</code> o <code>sh -c '...'</code> no matchean el patrón. Lo que no querés que pase, mejor que tampoco esté habilitado por otro lado.</li>
-  </ul>
-
-  <aside class="notes">
-    <p><strong>El primero es el más importante: deny no es sandbox.</strong></p>
-    <p><u>Límites reales del sistema: patrón vs intención, lecturas libres, encadenamiento, variantes de un comando.</u></p>
-    <p><em>"Quinta pregunta. Qué confunde. Uno: un deny cubre una tool y un patrón, no una intención. Read de .env bloquea la tool Read sobre ese archivo, pero si Claude puede correr cat por Bash, o un script de Python que lo abra, el deny no se entera. Por eso el demo-repo acota uv run python a un solo script. Dos: las lecturas no piden permiso. Leer archivos, grep, ls, git status, corren sin prompt dentro del proyecto; por eso no hace falta un Read del proyecto en allow. Tres: los wildcards no atraviesan && ni punto y coma. Un allow de uv run uvicorn con asterisco no cubre uvicorn seguido de rm -rf. Y cuatro: un deny de Bash matchea texto. /bin/rm -rf, o un sh -c con el comando adentro, no matchean rm -rf asterisco. Si algo no tiene que pasar nunca, la defensa real es no habilitar caminos alternativos, y para aislar de verdad, un contenedor."</em></p>
   </aside>
 </section>
 
