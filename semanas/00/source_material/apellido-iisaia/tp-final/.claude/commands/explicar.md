@@ -11,3 +11,5 @@ Leé `$1` y explicame, en no más de cinco líneas:
 - qué convención del proyecto hay que respetar si lo toco.
 
 No propongas cambios ni edites nada.
+
+Si no recibiste una ruta, pedímela antes de responder.
