@@ -1,6 +1,8 @@
 # Semana 4 — Fundamentos de Agentic AI y Claude Code
 
-Este es el material fuente de la clase de Semana 4. La presentación reveal.js se genera con `/build-class` a partir de estos archivos.
+Este es el material fuente de la clase de Semana 4. La presentación reveal.js se generó con `/build-class` a partir de estos archivos.
+
+> **Estado (2026-09-23).** El deck se siguió editando después de generarse y ya no coincide con este material; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). Lo principal que cambió: la Parte 2 pasó a ser "Configurar el harness" y muestra cada pieza también en Codex y OpenCode; plan mode dejó de ser sección propia (`13-plan-mode.md`) y el trabajo final es §13; se eliminó la slide "Qué confunde" de cada pieza; y las demos corren sobre el tp-final de referencia en vez del `demo-repo`, que se eliminó. Cada archivo de abajo tiene su propia nota.
 
 ## Orden de lectura
 

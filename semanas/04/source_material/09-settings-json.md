@@ -1,5 +1,7 @@
 # settings.json: configuración del runtime
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). El `settings.json` de abajo es el del demo-repo eliminado. El del tp-final no tiene `env` (el proyecto no usa variables de entorno) y la demo de precedencia usa `model`: el proyecto pone `sonnet` y el `settings.local.json` pone `haiku`. `includeCoAuthoredBy` quedó reemplazado por `attribution`. La slide "Qué confunde" se eliminó.
+
 ## §1 Qué es
 
 `settings.json` configura el **runtime** de Claude Code. No son instrucciones para el agente — eso es CLAUDE.md y `.claude/rules/`. Son parámetros del programa que envuelve al LLM: qué model usar, qué permisos tiene para ejecutar comandos, qué environment variables inyectar, qué scripts correr en cada evento del ciclo de vida.

@@ -1,5 +1,7 @@
 # Plan — Semana 04 Parte 2 (rediseñada)
 
+> **Estado (2026-09-23).** Plan de la etapa de construcción del deck, se conserva como registro. No describe el deck actual: la fuente canónica es [`spine.md`](spine.md). Cambios grandes desde entonces: la Parte 2 es "Configurar el harness" (§6–§13) y cada pieza se muestra también en Codex y OpenCode; model, effort y los permission modes se presentan en §6; plan mode dejó de ser sección; la plantilla pasó de cinco preguntas a cuatro (se eliminó "Qué confunde"); y las demos corren sobre `semanas/00/source_material/apellido-iisaia/tp-final/`, porque `semanas/04/demo-repo/` se eliminó.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: usar `superpowers:subagent-driven-development` (recomendado) o `superpowers:executing-plans` para ejecutar tarea por tarea. Steps usan checkbox `- [ ]`.
 
 **Goal:** Regenerar `_section-7.html` a `_section-13.html`, renombrar el actual `_section-12.html` (trabajo final) a `_section-14.html`, y actualizar el preview map de §6.6 + plumbing del scaffold. Salida final: `semanas/04/slides/index.html` ensamblado con §1–§14 coherentes.

@@ -1,5 +1,7 @@
 # §7 — CLAUDE.md
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). Cambió el repo de las demos: los ejemplos de abajo son del `semanas/04/demo-repo/` eliminado. Hoy la demo corre sobre el tp-final de referencia (`semanas/00/source_material/apellido-iisaia/tp-final/`), que además tiene `CLAUDE.md` anidados en `backend/` y `frontend/`, así que la demo también muestra la carga bajo demanda. La slide "Qué confunde" de esta sección se eliminó.
+
 ## §1 Qué es
 
 `CLAUDE.md` son archivos Markdown que Claude Code lee al arranque de cada sesión, antes del primer mensaje del usuario. Son texto que vos escribiste, inyectado directamente en la ventana de contexto.

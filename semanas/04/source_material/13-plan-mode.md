@@ -1,5 +1,7 @@
 # Plan mode y permission modes
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). **Esta sección ya no existe en el deck.** Plan mode es una posición del dial de permission modes y se presenta en §6, junto con model, effort y los modes. De este archivo sobreviven dos slides, también en §6: "Cuál mode usar" (criterio por costo del error) y "Lo que un plan debería contener". La demo de plan mode se eliminó.
+
 ## §1 — Qué es
 
 El loop del agente es **pensar → actuar → observar → repetir**. En modo normal, el agente pasa de "pensar" a "actuar" sin pedirte permiso: le diste la tarea, él eligió la primera acción, y cuando te diste cuenta ya tocó tres archivos.

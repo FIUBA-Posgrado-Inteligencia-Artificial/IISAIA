@@ -1,5 +1,7 @@
 # Rules: instrucciones modulares por tema
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). Los ejemplos de abajo (`code-style.md`, `testing.md`, `security.md`, `api.md`) son del demo-repo eliminado. El tp-final tiene dos rules: `api-y-datos.md` (sin frontmatter, siempre cargada) y `escenas-de-juego.md` (`paths:` a `frontend/js/games/**`). La slide "Qué confunde" se eliminó; su caso sobre compatibilidad entre herramientas vive ahora en el slide de equivalencias.
+
 ## §1 Qué es
 
 `.claude/rules/` es el siguiente paso después de un CLAUDE.md monolítico. En lugar de un único archivo que crece sin control, el mecanismo permite archivos `.md` independientes, uno por tema — `code-style.md`, `testing.md`, `security.md`, `api.md` — que el runtime descubre y aplica sin configuración adicional. La modularidad es organizativa desde el arranque, y condicional cuando le agregás frontmatter YAML.

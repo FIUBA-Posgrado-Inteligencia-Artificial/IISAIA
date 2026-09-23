@@ -1,5 +1,7 @@
 # §12 — Sub-agents
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). El sub-agent `researcher` era del demo-repo eliminado. El tp-final trae `explorador` (`Read`, `Grep`, `Glob`), y la pregunta de la demo es cómo viaja un puntaje desde la partida hasta el ranking. La slide "Qué confunde" se eliminó.
+
 ## §1 Qué es
 
 Un sub-agent es una instancia separada del mismo loop: mismo modelo, mismo ciclo de razonamiento, mismas herramientas disponibles — pero con su propia ventana de contexto, independiente de la del agente padre. Cuando el sub-agent termina su tarea, al padre le devuelve solo el resultado. No el razonamiento. No los archivos que leyó. No los pasos intermedios. El resultado y nada más.

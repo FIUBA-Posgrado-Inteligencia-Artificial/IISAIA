@@ -1,5 +1,7 @@
 # Skills y slash commands
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). La skill `add-endpoint` y el command `pre-pr` eran del demo-repo eliminado. El tp-final trae la skill `agregar-juego` (cinco fases, verificación jugando con el MCP de Playwright) y el command `pre-entrega`. La slide "Qué confunde" se eliminó.
+
 §10 mostró cómo las path-scoped rules cargan instrucciones cuando Claude toca ciertos archivos. Hay algo que ningún path puede capturar: un procedimiento completo — las fases, verificaciones y anti-patterns que definen cómo se hace un trabajo entero. Para eso existen las skills.
 
 ---

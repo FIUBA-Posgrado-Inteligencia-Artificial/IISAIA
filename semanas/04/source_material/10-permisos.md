@@ -1,5 +1,7 @@
 # Permisos: control de tools con allow/deny/ask
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). El bloque `permissions` de abajo es el del demo-repo eliminado. El del tp-final tiene 7 allow, 4 deny y 2 ask, y sus deny cuidan la base de puntajes y el plan congelado. La demo ya no usa `uv run pytest` (ese proyecto no tiene tests) sino `git commit`. La tabla de los seis permission modes se movió a §6 y la slide "Qué confunde" se eliminó.
+
 ## §1 Qué es
 
 El sistema de permisos de Claude Code es el mecanismo que decide qué tools puede ejecutar el agente **sin pedirte confirmación**. Antes de cada tool call — antes de escribir un archivo, correr un comando Bash, o hacer un fetch a una URL — el runtime evalúa las reglas configuradas y toma una decisión: ejecuta solo, pregunta, o bloquea.

@@ -1,5 +1,7 @@
 # El trabajo final
 
+> **Estado (2026-09-23).** El deck ya no sigue este archivo al pie de la letra; la descripción canónica de qué hay en cada slide es [`spine.md`](../spine.md). El trabajo final es §13 del deck (era §14). La consigna del planteo se adelantó al cierre de §6, para que los grupos la trabajen entre las dos sesiones de la clase.
+
 Hace cuatro semanas no sabías qué era un token. Hoy terminaste de armar tres cosas que, juntas, cambian cómo podés construir software.
 
 La primera es el **modelo**: cómo piensa un LLM, cómo predice el siguiente token, qué es la ventana de contexto, por qué el modelo no tiene memoria entre sesiones si no se la das. Sin eso, el agente es una caja negra: no podés anticipar cuándo falla ni por qué.
@@ -44,7 +46,7 @@ Eso es lo que prepara el Demo Day, sin entrar todavía en su rubrica concreta.
 
 Los detalles administrativos del trabajo final se comunican por separado. Hoy no quedan definidos:
 
-- **Equipos**: si se trabaja en grupos o individualmente, cómo se forman, de qué tamaño — eso se anuncia después.
+- **Equipos**: definido el 2026-09-23 — grupos de 2 o 3, `tp-final/` en el repo de uno de los integrantes y defensa conjunta.
 - **Fechas y entregas**: el calendario de hitos, cuándo se entrega qué, si hay entregas parciales — se comunica por separado.
 - **Dominio exacto**: si el tema es libre, semi-libre o acotado a un conjunto de opciones — se define después.
 - **Rubrica formal**: los criterios de evaluación detallados, el peso de cada parte — se entregan en otro momento.
