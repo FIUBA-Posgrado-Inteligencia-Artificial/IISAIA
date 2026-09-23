@@ -323,7 +323,7 @@
   font-family: var(--font-mono);
 }
 
-/* Walkthrough — §9.6 — campos top del settings.json del demo-repo */
+/* Walkthrough — §9.6 — campos top del settings.json del repo del TP */
 .s9-walk-path {
   display: inline-block;
   margin: 4px auto 6px;
@@ -658,24 +658,24 @@
   </aside>
 </section>
 
-<!-- §9.6 · Walkthrough del demo-repo settings.json — sin mini-strip (zoom-in concreto) -->
+<!-- §9.6 · Walkthrough del settings.json del TP — sin mini-strip (zoom-in concreto) -->
 <section class="s9-slide">
-  <h2>El <code>settings.json</code> del demo-repo</h2>
+  <h2>El <code>settings.json</code> del repo</h2>
 
   <div class="s9-walk-path">.claude/settings.json</div>
 
   <ul class="s9-walk-list">
-    <li><strong><code>"model": "sonnet"</code></strong> · todo el que abre el repo trabaja con el mismo modelo.</li>
-    <li><strong><code>"env"</code></strong> · <code>DEMO_BEARER_TOKEN</code> con placeholder. Para correr la app a mano, el valor real va en <code>.env</code>. Tu <code>settings.local.json</code> puede pisarlo para los procesos que lanza Claude; es lo que muestra el <code>.example</code>.</li>
+    <li><strong><code>"model": "sonnet"</code></strong> · todo el que abre el repo trabaja con el mismo modelo. Tu <code>settings.local.json</code> puede pisarlo en tu máquina; es lo que muestra el <code>.example</code>.</li>
     <li><strong><code>"attribution": { "pr": "" }</code></strong> · los PRs que abre Claude salen sin línea de atribución.</li>
     <li><strong><code>"cleanupPeriodDays": 30</code></strong> · un mes de transcripts locales.</li>
-    <li><strong><code>"permissions"</code></strong> · 8 reglas <code>allow</code>, 3 <code>deny</code>, 2 <code>ask</code>.</li>
+    <li><strong><code>"permissions"</code></strong> · 7 reglas <code>allow</code>, 4 <code>deny</code>, 2 <code>ask</code>.</li>
+    <li><strong>No hay <code>"env"</code></strong> · este proyecto no usa variables de entorno. Un campo que no aplica no se pone "por las dudas": cada línea de acá tiene que estar por una razón.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Detenerse en <code>env</code>: placeholder en proyecto, valor real fuera del repo.</strong></p>
+    <p><strong>Detenerse en <code>model</code>: el proyecto propone, tu local dispone.</strong></p>
     <p><u>Los campos top del archivo real; el bloque <code>permissions</code> se abre en §10.</u></p>
-    <p><em>"Vamos al archivo real del demo-repo. model en sonnet: el mismo modelo para todos. env declara DEMO_BEARER_TOKEN con un placeholder; el archivo commiteado documenta que la variable existe, pero el valor real no viaja al repo. Para levantar la app a mano, el backend lo lee del .env. Y si querés que los procesos que lanza Claude usen otro valor, lo ponés en tu settings.local.json: como env.DEMO_BEARER_TOKEN es un escalar, gana el local. Eso es exactamente lo que trae el settings.local.json.example. attribution con pr vacío: los PRs que abra Claude no llevan la línea de atribución. cleanupPeriodDays en treinta. Y permissions: ocho reglas allow, tres deny, dos ask. Ese bloque lo abrimos entero en la sección de permisos."</em></p>
+    <p><em>"Vamos al archivo real del repo del trabajo final. model en sonnet: el que abra el repo trabaja con ese modelo, salvo que su settings.local.json diga otra cosa; el .example que viene en el repo pone haiku, justamente para mostrar que el local pisa al proyecto. attribution con pr vacío: los PRs que abra Claude no llevan la línea de atribución. cleanupPeriodDays en treinta. Y permissions: siete reglas allow, cuatro deny, dos ask; ese bloque lo abrimos entero en la sección que sigue. Y miren lo que no está: no hay env, porque este proyecto no usa variables de entorno. Suena obvio, pero es una decisión: un archivo de configuración se llena de campos copiados de tutoriales, y cada línea que no tiene razón de ser es una línea que alguien va a interpretar mal después."</em></p>
   </aside>
 </section>
 
@@ -690,15 +690,15 @@
 
   <aside class="notes">
     <p><strong>Antes de proyectar: revisar el <code>~/.claude/settings.json</code> personal que se va a ver en pantalla.</strong></p>
-    <p><u>Tres pasos: niveles en paralelo, cambio de <code>model</code> con sesión nueva, <code>git status</code> sin el local.</u></p>
+    <p><u>Tres pasos: niveles en paralelo, quién gana en <code>model</code> con sesión nueva, <code>git status</code> sin el local.</u></p>
     <p><em>"Vamos al demo. Tres archivos abiertos en paralelo, uno por nivel. No buscamos que el runtime haga nada vistoso: queremos ver con qué criterio va cada cosa en cada nivel, y cuándo toma efecto un cambio."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Setup de siempre (antes de la clase):</strong></p>
     <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code></li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code></li>
+      <li>Copiar <code>semanas/00/source_material/apellido-iisaia/tp-final/</code> a <code>~/tp-final-demo</code> (fuera del repo del curso).</li>
+      <li><code>cd ~/tp-final-demo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code></li>
+      <li><code>uv sync</code></li>
       <li>Abrir Claude Code con <code>claude --permission-mode default</code> (en Pro/Max/Team el arranque por defecto es <code>auto</code> y taparía los prompts; en la UI <code>default</code> se llama Manual).</li>
       <li>Para ver qué cargó el runtime: <code>/context</code>. Ojo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen.</li>
     </ol>
@@ -706,22 +706,22 @@
     <ul>
       <li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code>: <code>cp .claude/settings.local.json.example .claude/settings.local.json</code></li>
       <li><strong>VS Code:</strong> los tres archivos de settings lado a lado: <code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></li>
-      <li><strong>Mirar:</strong> el token en proyecto (<code>changeme-in-real-env</code>) y en local (<code>mi-token-local</code>)</li>
+      <li><strong>Mirar:</strong> <code>model</code> en proyecto (<code>sonnet</code>) y en local (<code>haiku</code>)</li>
     </ul>
-    <p><strong>Paso 2 · Cambiar model</strong></p>
+    <p><strong>Paso 2 · Quién gana, y cuándo aplica</strong></p>
     <ul>
-      <li><strong>VS Code:</strong> <code>model</code> de <code>"sonnet"</code> a <code>"haiku"</code> en <code>.claude/settings.json</code>, guardar</li>
       <li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva con <code>claude --permission-mode default</code></li>
-      <li><strong>Mirar:</strong> <code>/status</code> (o el banner) muestra Haiku</li>
-      <li><strong>VS Code:</strong> volver a <code>"sonnet"</code> y guardar (si no, <code>git status</code> del paso 3 lo muestra modificado)</li>
+      <li><strong>Mirar:</strong> <code>/status</code> muestra Haiku: el local le gana al proyecto</li>
+      <li><strong>Terminal:</strong> borrar <code>.claude/settings.local.json</code> y abrir otra sesión</li>
+      <li><strong>Mirar:</strong> <code>/status</code> vuelve a Sonnet, el valor del proyecto</li>
     </ul>
     <p><strong>Paso 3 · git no ve el archivo local</strong></p>
     <ul>
       <li><strong>Terminal:</strong> <code>git status</code></li>
-      <li><strong>Mirar:</strong> el archivo local no aparece</li>
+      <li><strong>Mirar:</strong> el archivo local no aparece (volver a copiarlo del <code>.example</code> si lo borraste)</li>
       <li><strong>VS Code:</strong> la línea <code>.claude/settings.local.json</code> en <code>.gitignore</code></li>
     </ul>
-    <p><em>Plan B (si algo se traba): con los tres archivos abiertos, leer cada uno en voz alta. Proyecto define la base compartida, local pisa el token solo en esta máquina, usuario te sigue a todos los repos. El .gitignore se muestra abriéndolo, sin correr nada.</em></p>
+    <p><em>Plan B (si algo se traba): con los tres archivos abiertos, leer cada uno en voz alta. Proyecto define la base compartida, local pisa el modelo solo en esta máquina, usuario te sigue a todos los repos. El .gitignore se muestra abriéndolo, sin correr nada.</em></p>
   </aside>
 </section>
 
@@ -750,13 +750,13 @@
   initClickableSteps({containerId: 's9-demo-steps', steps: [
     {
       title: 'Paso 1 · Los tres niveles abiertos',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code></li><li><strong>VS Code:</strong> los tres archivos de settings lado a lado</li><li><strong>Mirar:</strong> el token en proyecto y en local</li></ul>',
-      example: 'El proyecto fija <code>model</code>, <code>permissions</code> y el placeholder del token. El local redefine <code>env.DEMO_BEARER_TOKEN</code> con <code>mi-token-local</code>: como es un valor escalar, en esta máquina gana el local. El de usuario tiene tus defaults, los que viajan a cualquier repo.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code></li><li><strong>VS Code:</strong> los tres archivos de settings lado a lado</li><li><strong>Mirar:</strong> <code>model</code> en proyecto y en local</li></ul>',
+      example: 'El proyecto fija <code>model</code>, <code>permissions</code>, <code>attribution</code> y <code>cleanupPeriodDays</code>. El local redefine <code>model</code> con <code>haiku</code>: como es un valor escalar, en esta máquina gana el local. El de usuario tiene tus defaults, los que viajan a cualquier repo.'
     },
     {
-      title: 'Paso 2 · Cambiar model',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> <code>model</code> de <code>"sonnet"</code> a <code>"haiku"</code></li><li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva</li><li><strong>Mirar:</strong> <code>/status</code> muestra Haiku</li><li><strong>VS Code:</strong> volver a <code>"sonnet"</code></li></ul>',
-      example: 'Con la sesión abierta, el cambio de <code>model</code> no se nota: el modelo se fija al arrancar. En la sesión nueva, <code>/status</code> muestra Haiku. Un cambio en <code>permissions</code> o <code>hooks</code>, en cambio, se hubiera recargado sin reiniciar.'
+      title: 'Paso 2 · Quién gana, y cuándo aplica',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva</li><li><strong>Mirar:</strong> <code>/status</code> muestra Haiku</li><li><strong>Terminal:</strong> borrar el local y abrir otra sesión</li><li><strong>Mirar:</strong> <code>/status</code> vuelve a Sonnet</li></ul>',
+      example: 'Los dos archivos declaran <code>model</code> y gana el más específico: el local. Y el cambio no se ve en la sesión abierta, porque el modelo se fija al arrancar; hay que abrir una nueva. Un cambio en <code>permissions</code>, en cambio, se hubiera recargado sin reiniciar.'
     },
     {
       title: 'Paso 3 · git no ve el archivo local',

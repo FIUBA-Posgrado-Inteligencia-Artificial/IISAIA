@@ -517,13 +517,13 @@
   </div>
 
   <p class="s12-where-note">
-    El demo-repo trae <code>researcher</code> en <code>.claude/agents/researcher.md</code>, con alcance de proyecto.
+    El repo del TP trae <code>explorador</code> en <code>.claude/agents/explorador.md</code>, con alcance de proyecto.
   </p>
 
   <aside class="notes">
     <p><strong>Recorrer la tabla por filas.</strong></p>
     <p><u>Mismo reparto user / proyecto que CLAUDE.md, settings y skills, más los built-in.</u></p>
-    <p><em>"Segunda pregunta: dónde viven. Los que definís vos son archivos markdown con frontmatter. En .claude/agents del repo, alcance de proyecto: se commitea y lo usa el equipo. En tu home, bajo .claude/agents, alcance de usuario: disponible en todos tus proyectos. Los plugins pueden traer los suyos. Y hay sub-agents built-in que vienen con Claude Code sin que definas nada: Explore, que busca en el código en modo solo lectura; Plan, que investiga durante plan mode; y general-purpose. El demo-repo trae uno propio, researcher, que abrimos en un momento."</em></p>
+    <p><em>"Segunda pregunta: dónde viven. Los que definís vos son archivos markdown con frontmatter. En .claude/agents del repo, alcance de proyecto: se commitea y lo usa el equipo. En tu home, bajo .claude/agents, alcance de usuario: disponible en todos tus proyectos. Los plugins pueden traer los suyos. Y hay sub-agents built-in que vienen con Claude Code sin que definas nada: Explore, que busca en el código en modo solo lectura; Plan, que investiga durante plan mode; y general-purpose. El repo del trabajo final trae uno propio, explorador, que abrimos en un momento."</em></p>
   </aside>
 </section>
 
@@ -578,11 +578,11 @@
   <aside class="notes">
     <p><strong>El segundo bullet es el menos obvio: la delegación puede ser implícita.</strong></p>
     <p><u>Dos disparadores de la misma tool Agent: pedido explícito o match con la description.</u></p>
-    <p><em>"Tercera pregunta: cuándo se invocan. Hay dos caminos, y los dos terminan en la misma tool, Agent. El explícito: le decís 'usá el sub-agent researcher' y el padre llama a Agent con ese nombre. El implícito: el padre lee las descriptions de los sub-agents disponibles y, si tu pedido matchea una, delega por su cuenta. Así aparece Explore: le preguntás algo amplio como 'cómo está organizada la auth en este repo' y, sin que digas nada de sub-agents, el padre lanza Explore. Lo que ves es que responde sin llenar su ventana. En los dos casos, el sub-agent corre su propio loop, pensar, actuar, observar, con sus tools, y le devuelve el resultado al padre, que se queda esperando."</em></p>
+    <p><em>"Tercera pregunta: cuándo se invocan. Hay dos caminos, y los dos terminan en la misma tool, Agent. El explícito: le decís 'usá el sub-agent explorador' y el padre llama a Agent con ese nombre. El implícito: el padre lee las descriptions de los sub-agents disponibles y, si tu pedido matchea una, delega por su cuenta. Así aparece Explore: le preguntás algo amplio como 'cómo está organizada la el ranking en este repo' y, sin que digas nada de sub-agents, el padre lanza Explore. Lo que ves es que responde sin llenar su ventana. En los dos casos, el sub-agent corre su propio loop, pensar, actuar, observar, con sus tools, y le devuelve el resultado al padre, que se queda esperando."</em></p>
   </aside>
 </section>
 
-<!-- §12.5 · Cómo se usa — walkthrough del frontmatter de researcher.md -->
+<!-- §12.5 · Cómo se usa — walkthrough del frontmatter de explorador.md -->
 <section class="s12-slide">
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
@@ -591,11 +591,11 @@
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
   </ol>
 
-  <h2>Anatomía de <code class="s12-h2-code">.claude/agents/researcher.md</code></h2>
+  <h2>Anatomía de <code class="s12-h2-code">.claude/agents/explorador.md</code></h2>
 
   <div class="s12-code-block"><span class="s12-code-fence">---</span>
-<span class="s12-code-key">name:</span> <span class="s12-code-val">researcher</span>
-<span class="s12-code-key">description:</span> <span class="s12-code-val">Use when the user asks where something is implemented, how a concept is wired across files, or any exploratory question that requires reading many files. Returns a concise answer; does not modify code.</span>
+<span class="s12-code-key">name:</span> <span class="s12-code-val">explorador</span>
+<span class="s12-code-key">description:</span> <span class="s12-code-val">Use when a question needs reading several files across the backend and the frontend to answer — how a feature works end to end, where something is defined, why two parts are connected. Reads and searches only; never edits.</span>
 <span class="s12-code-key">tools:</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Read</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Grep</span>
@@ -605,7 +605,7 @@
   <ul class="s12-fields-list">
     <li><strong><code>name</code></strong>: identificador; es lo que el padre pasa a la tool <code>Agent</code>.</li>
     <li><strong><code>description</code></strong>: cuándo usarlo. El padre la lee para delegar por su cuenta.</li>
-    <li class="s12-fields-key"><strong><code>tools</code></strong>: si lo omitís, <strong>hereda</strong> las tools del padre; si lo declarás, <strong>queda restringido</strong>. <code>researcher</code> lee y busca, pero no edita ni ejecuta comandos.</li>
+    <li class="s12-fields-key"><strong><code>tools</code></strong>: si lo omitís, <strong>hereda</strong> las tools del padre; si lo declarás, <strong>queda restringido</strong>. <code>explorador</code> lee y busca, pero no edita ni ejecuta comandos.</li>
     <li><strong><code>model</code></strong>: opcional (no está en este archivo). Si falta, usa el del padre.</li>
     <li><strong>Cuerpo</strong>: el system prompt del sub-agent (qué hace, qué no, cómo devuelve el resultado).</li>
   </ul>
@@ -613,7 +613,7 @@
   <aside class="notes">
     <p><strong>Pausa larga en <code>tools</code>: omitido hereda, declarado restringe.</strong></p>
     <p><u>Tres campos en el archivo, más model como opcional y el cuerpo como system prompt.</u></p>
-    <p><em>"Cuarta pregunta: cómo se usa. Abrimos researcher.md del demo-repo. El frontmatter tiene tres campos. name: el identificador, lo que el padre le pasa a la tool Agent. description: cuándo conviene usarlo; el padre la lee para decidir si delega por su cuenta, igual que con las skills. Y tools, el campo central. Si no lo ponés, el sub-agent hereda todas las tools del padre. Si lo declarás, queda limitado a esa lista. researcher declara Read, Grep y Glob: puede leer y buscar, pero sin Edit, Write ni Bash no puede modificar código ni correr comandos. Esa restricción la elegís vos. Hay un cuarto campo que este archivo no usa: model. Si falta, usa el modelo del padre; sirve para correr una sub-tarea con un modelo más chico o más grande. Y abajo del frontmatter, el cuerpo es el system prompt: en este caso, investigador de solo lectura que devuelve dónde está algo, en qué función y una frase de cómo se conecta."</em></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Abrimos explorador.md del repo del TP. El frontmatter tiene tres campos. name: el identificador, lo que el padre le pasa a la tool Agent. description: cuándo conviene usarlo; el padre la lee para decidir si delega por su cuenta, igual que con las skills. Y tools, el campo central. Si no lo ponés, el sub-agent hereda todas las tools del padre. Si lo declarás, queda limitado a esa lista. explorador declara Read, Grep y Glob: puede leer y buscar, pero sin Edit, Write ni Bash no puede modificar código ni correr comandos. Esa restricción la elegís vos. Hay un cuarto campo que este archivo no usa: model. Si falta, usa el modelo del padre; sirve para correr una sub-tarea con un modelo más chico o más grande. Y abajo del frontmatter, el cuerpo es el system prompt: en este caso, que arranque por los CLAUDE.md y las rules, que siga el recorrido real del dato y que cite archivo y símbolo en cada afirmación."</em></p>
   </aside>
 </section>
 
@@ -662,7 +662,7 @@
   <aside class="notes">
     <p><strong>Recorrer de arriba a abajo; marcar la asimetría entre las dos flechas.</strong></p>
     <p><u>Zoom-in sin mini-strip: visualiza la respuesta a la pregunta 1.</u></p>
-    <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá dónde se maneja la auth'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
+    <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá cómo se guarda un puntaje'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
   </aside>
 </section>
 
@@ -678,32 +678,32 @@
   <aside class="notes">
     <p><strong>Tres pasos: inline, delegado, el archivo.</strong></p>
     <p><u>Setup de siempre (ver demo de §11). El repo es chico: el delta va a ser de pocos miles de tokens.</u></p>
-    <p><em>"Vamos al demo. La misma pregunta, cómo funciona la auth de punta a punta, resuelta dos veces: primero leyendo todo en la ventana principal, después delegando al sub-agent researcher. Antes y después de cada una miramos /context. El repo es chico, así que no esperes una diferencia enorme: van a ser unos pocos miles de tokens. Lo que importa es de qué lado quedan."</em></p>
+    <p><em>"Vamos al demo. La misma pregunta, cómo viaja un puntaje desde la partida hasta el ranking, resuelta dos veces: primero leyendo todo en la ventana principal, después delegando al sub-agent explorador. Antes y después de cada una miramos /context. El repo es chico, así que no esperes una diferencia enorme: van a ser unos pocos miles de tokens. Lo que importa es de qué lado quedan."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Paso 1 · Inline, sin delegar</strong></p>
     <ul>
-      <li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li>
+      <li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li>
       <li><strong>En Claude:</strong> <code>/context</code> (línea base)</li>
-      <li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li>
+      <li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li>
       <li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li>
     </ul>
-    <p><strong>Paso 2 · Delegado a <code>researcher</code></strong></p>
+    <p><strong>Paso 2 · Delegado a <code>explorador</code></strong></p>
     <ul>
       <li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li>
       <li><strong>En Claude:</strong> <code>/context</code> (línea base)</li>
-      <li><strong>En Claude:</strong> "usá el sub-agent researcher y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li>
-        <li><strong>Mirar:</strong> <code>Agent</code> lanza <code>researcher</code>; <code>/context</code> de nuevo</li>
+      <li><strong>En Claude:</strong> "usá el sub-agent explorador y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li>
+        <li><strong>Mirar:</strong> <code>Agent</code> lanza <code>explorador</code>; <code>/context</code> de nuevo</li>
     </ul>
     <p><strong>Paso 3 · El archivo detrás</strong></p>
     <ul>
-      <li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li>
+      <li><strong>VS Code:</strong> abrir <code>.claude/agents/explorador.md</code></li>
       <li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li>
       <li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li>
     </ul>
-    <p>Setup de siempre: copia en <code>~/demo-repo</code> con commit inicial, <code>.env</code> y <code>uv sync</code>, <code>claude --permission-mode default</code>. El delta real depende de cuántos archivos lea Claude en el Paso 1 (el backend entero pesa unos 4 KB). El transcript del sub-agent queda en disco, pero el padre no lo ve.</p>
+    <p>Setup de siempre: copia en <code>~/tp-final-demo</code> con commit inicial y <code>uv sync</code>, <code>claude --permission-mode default</code>. El delta real depende de cuántos archivos lea Claude en el Paso 1: el recorrido cruza las dos mitades (<code>games/common.js</code>, <code>game-page.js</code>, <code>score-panel.js</code>, <code>api.js</code>, <code>routes.py</code>). El transcript del sub-agent queda en disco, pero el padre no lo ve.</p>
     <p><strong>Plan B:</strong></p>
-    <p>Si en el Paso 1 Claude delega igual (a <code>Explore</code> o <code>researcher</code>), cortar y repetir el pedido remarcando "sin sub-agents". Si el delta de <code>/context</code> no se distingue, mostrar dos capturas preparadas (sesión inline y sesión con sub-agent). El Paso 3 funciona igual en ambos casos.</p>
+    <p>Si en el Paso 1 Claude delega igual (a <code>Explore</code> o <code>explorador</code>), cortar y repetir el pedido remarcando "sin sub-agents". Si el delta de <code>/context</code> no se distingue, mostrar dos capturas preparadas (sesión inline y sesión con sub-agent). El Paso 3 funciona igual en ambos casos.</p>
   </aside>
 </section>
 
@@ -732,18 +732,18 @@
   initClickableSteps({containerId: 's12-demo-steps', steps: [
     {
       title: 'Paso 1 · Inline, sin delegar',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li><li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li></ul>',
-      example: 'Claude abre <code>auth.py</code>, los routers, los tests y <code>app.js</code>, y responde bien. Todo lo que leyó queda en la ventana principal: el segundo <code>/context</code> suma esos archivos al total.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li><li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li></ul>',
+      example: 'Claude abre <code>common.js</code>, <code>game-page.js</code>, <code>score-panel.js</code>, <code>api.js</code> y <code>routes.py</code>, y responde bien. Todo lo que leyó queda en la ventana principal: el segundo <code>/context</code> suma esos archivos al total.'
     },
     {
-      title: 'Paso 2 · Delegado a researcher',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "usá el sub-agent researcher y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li><li><strong>Mirar:</strong> <code>Agent</code> lanza <code>researcher</code>; <code>/context</code> de nuevo</li></ul>',
-      example: 'El padre llama a la tool <code>Agent</code> y <code>researcher</code> lee los mismos archivos en su propia ventana. Al padre vuelve un resumen: el delta del segundo <code>/context</code> es más chico.'
+      title: 'Paso 2 · Delegado a explorador',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "usá el sub-agent explorador y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li><li><strong>Mirar:</strong> <code>Agent</code> lanza <code>explorador</code>; <code>/context</code> de nuevo</li></ul>',
+      example: 'El padre llama a la tool <code>Agent</code> y <code>explorador</code> lee los mismos archivos en su propia ventana. Al padre vuelve un resumen: el delta del segundo <code>/context</code> es más chico.'
     },
     {
       title: 'Paso 3 · El archivo detrás',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li><li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li><li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li></ul>',
-      example: 'Un archivo markdown con un system prompt acotado y una lista de tools. Como <code>tools</code> está declarado, <code>researcher</code> no hereda las del padre: puede leer y buscar, no editar ni ejecutar comandos.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/agents/explorador.md</code></li><li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li><li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li></ul>',
+      example: 'Un archivo markdown con un system prompt acotado y una lista de tools. Como <code>tools</code> está declarado, <code>explorador</code> no hereda las del padre: puede leer y buscar, no editar ni ejecutar comandos.'
     }
   ]});
 </script>

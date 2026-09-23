@@ -317,7 +317,7 @@
 .s8-compare-col.is-always .s8-compare-cost strong { color: var(--accent-secondary); }
 .s8-compare-col.is-scoped .s8-compare-cost strong { color: var(--accent); }
 
-/* Cómo se usa — code-walkthrough del api.md */
+/* Cómo se usa — code-walkthrough de la rule scoped */
 .s8-howto-wrap {
   max-width: 920px;
   margin: 10px auto 0;
@@ -391,7 +391,7 @@
 }
 .s8-glob-text code { font-family: var(--font-mono); }
 
-/* Las 4 rules del demo-repo — lista */
+/* Las rules del repo — lista */
 .reveal .s8-rules-list {
   max-width: 860px;
   margin: 14px auto 0;
@@ -630,11 +630,11 @@
     <div class="s8-compare-col is-always">
       <span class="s8-compare-tag">Modo A</span>
       <h3 class="s8-compare-h3">Sin frontmatter: <strong>siempre cargada</strong></h3>
-      <span class="s8-compare-file">.claude/rules/code-style.md (extracto)</span>
-      <pre class="s8-compare-code"><span class="c"># Code style</span>
+      <span class="s8-compare-file">.claude/rules/api-y-datos.md (extracto)</span>
+      <pre class="s8-compare-code"><span class="c"># API y datos</span>
 
-- Líneas &lt;100 caracteres.
-- Funciones &lt;50 líneas; si una crece, extraé helpers.
+- El slug del juego viaja en el path y no se repite en el body.
+- `created_at` lo pone el servidor, nunca el cliente.
 <span class="c">…</span></pre>
       <p class="s8-compare-body">
         El archivo arranca directo con el cuerpo, sin bloque YAML adelante.
@@ -646,10 +646,11 @@
     <div class="s8-compare-col is-scoped">
       <span class="s8-compare-tag">Modo B</span>
       <h3 class="s8-compare-h3">Con <code>paths:</code>, <strong>path-scoped</strong></h3>
-      <span class="s8-compare-file">.claude/rules/api.md (extracto)</span>
+      <span class="s8-compare-file">.claude/rules/escenas-de-juego.md (extracto)</span>
       <pre class="s8-compare-code"><span class="c">---</span>
 <span class="k">paths:</span>
-  - <span class="y">"backend/**/*.py"</span>
+  - <span class="y">"frontend/js/games/**/*.js"</span>
+  - <span class="y">"frontend/js/game-page.js"</span>
 <span class="c">---</span>
 <span class="c">…</span></pre>
       <p class="s8-compare-body">
@@ -663,11 +664,11 @@
   <aside class="notes">
     <p><strong>Ir columna por columna, izquierda primero; en la derecha leer el glob completo.</strong></p>
     <p><u>Slide central de §8: siempre cargada (costo de CLAUDE.md) contra path-scoped (costo cero hasta que matchea).</u></p>
-    <p><em>"Tercera pregunta: cuándo se carga. Dos ramas, y la decisión vive en una sola cosa: si el archivo arranca con frontmatter YAML o no. Modo A, sin frontmatter: acá está el comienzo de code-style.md del demo-repo, arranca directo con el cuerpo. El runtime la carga al iniciar la sesión y queda en la ventana; cuesta lo mismo que si esas líneas estuvieran en CLAUDE.md. Modo B, con paths: el comienzo de api.md, un bloque YAML con un glob, backend doble asterisco barra asterisco punto py. La rule entra recién cuando Claude lee un archivo cuyo path cae en el glob. Si toda la sesión transcurre en el frontend, esta rule nunca aparece. Se parece al caso de los CLAUDE.md de subdirectorio que vimos antes, pero con otro mecanismo: CLAUDE.md lo hace por carpeta; rules, por glob explícito, que es más fino."</em></p>
+    <p><em>"Tercera pregunta: cuándo se carga. Dos ramas, y la decisión vive en una sola cosa: si el archivo arranca con frontmatter YAML o no. Modo A, sin frontmatter: acá está el comienzo de api-y-datos.md del repo del TP, arranca directo con el cuerpo. El runtime la carga al iniciar la sesión y queda en la ventana; cuesta lo mismo que si esas líneas estuvieran en CLAUDE.md. Modo B, con paths: el comienzo de escenas-de-juego.md, un bloque YAML con dos globs, los archivos de juegos y la página que los monta. La rule entra recién cuando Claude lee un archivo cuyo path cae en alguno de los dos. Si toda la sesión transcurre en el backend, esta rule nunca aparece. Se parece al caso de los CLAUDE.md de subdirectorio que vimos antes, pero con otro mecanismo: CLAUDE.md lo hace por carpeta; rules, por glob explícito, que es más fino."</em></p>
   </aside>
 </section>
 
-<!-- §8.5 · Cómo se usa — frontmatter del api.md + globs -->
+<!-- §8.5 · Cómo se usa — frontmatter de escenas-de-juego.md + globs -->
 <section class="s8-slide">
   <ol class="s8-five-q-grid is-mini">
     <li class="s8-five-q-card"><span class="s8-five-q-num">1</span><span class="s8-five-q-label">Qué es</span></li>
@@ -679,19 +680,19 @@
   <h2>Frontmatter YAML arriba, cuerpo Markdown abajo</h2>
 
   <div class="s8-howto-wrap">
-    <div class="s8-howto-path">.claude/rules/api.md (extracto, path-scoped al backend)</div>
+    <div class="s8-howto-path">.claude/rules/escenas-de-juego.md (extracto, path-scoped a los juegos)</div>
 
     <pre class="s8-howto-code"><span class="c">---</span>
+<span class="k">description:</span> Reglas para escribir o modificar una Phaser.Scene.
 <span class="k">paths:</span>
-  - <span class="y">"backend/**/*.py"</span>
+  - <span class="y">"frontend/js/games/**/*.js"</span>
+  - <span class="y">"frontend/js/game-page.js"</span>
 <span class="c">---</span>
 
-<span class="c"># API conventions</span>
+<span class="c"># Escenas de juego</span>
 <span class="c">…</span>
-- Cada endpoint declara su `response_model` y `status_code` explícito.
-<span class="c">…</span>
-- Si tocás un endpoint o agregás uno nuevo, regenerar `openapi.yaml` con
-  `uv run python scripts/export_openapi.py` y commitear el cambio en el mismo PR.
+- La escena no importa `api.js`, no hace `fetch` y no sabe que existe un ranking.
+- El teclado va por `onKeys()`, nunca `scene.input.keyboard.on(...)` directo.
 <span class="c">…</span></pre>
 
     <div class="s8-globs">
@@ -711,45 +712,37 @@
 
   <aside class="notes">
     <p><strong>Leer el frontmatter línea por línea, después el cuerpo, y cerrar con los cuatro patrones.</strong></p>
-    <p><u>Anatomía real de api.md (extracto) y los patrones de glob habituales.</u></p>
-    <p><em>"Cuarta pregunta: cómo se usa. Este es api.md del demo-repo; lo que ven es un extracto del archivo real. Arriba, frontmatter YAML, delimitado por tres guiones arriba y tres abajo; adentro, una clave paths con una lista de globs. Acá hay uno solo, y si querés más agregás ítems a la lista. Debajo del segundo separador empieza el cuerpo, Markdown común. El cuerpo es lo que entra al contexto cuando la rule se activa: convenciones sobre endpoints, incluida la de regenerar openapi.yaml después de tocar uno. Esa instrucción está solo en esta rule, no en CLAUDE.md, y la vamos a usar en el demo. Abajo, los patrones que vas a usar casi siempre: asterisco simple matchea dentro de un nivel, doble asterisco a cualquier profundidad, y las llaves expanden alternativas separadas por coma."</em></p>
+    <p><u>Anatomía real de escenas-de-juego.md (extracto) y los patrones de glob habituales.</u></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Este es escenas-de-juego.md del repo del TP; lo que ven es un extracto del archivo real. Arriba, frontmatter YAML, delimitado por tres guiones arriba y tres abajo; adentro, una descripción y una clave paths con dos globs. Debajo del segundo separador empieza el cuerpo, Markdown común. El cuerpo es lo que entra al contexto cuando la rule se activa: que la escena no habla con la API, y que el teclado va siempre por onKeys, que es la corrección de un bug real que está contado en el README. Esas instrucciones están solo en esta rule, no en CLAUDE.md, y las vamos a usar en el demo. Abajo, los patrones que vas a usar casi siempre: asterisco simple matchea dentro de un nivel, doble asterisco a cualquier profundidad, y las llaves expanden alternativas separadas por coma."</em></p>
   </aside>
 </section>
 
-<!-- §8.6 · Las 4 rules del demo-repo — lista (sin mini-strip) -->
+<!-- §8.6 · Las rules del repo — lista (sin mini-strip) -->
 <section class="s8-slide">
-  <h2>Las cuatro rules del demo-repo</h2>
+  <h2>Las dos rules del repo</h2>
 
   <ul class="s8-rules-list">
     <li>
-      <strong><code>code-style.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
-      Largo de línea y de funciones, imports, logging.
-    </li>
-    <li>
-      <strong><code>testing.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
-      TestClient de FastAPI, naming, fixture <code>reset_store</code>.
-    </li>
-    <li>
-      <strong><code>security.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
-      Bearer token y <code>.env</code>; no loggear el header <code>Authorization</code>.
+      <strong><code>api-y-datos.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
+      Contrato de los endpoints, status codes en uso, fechas del servidor, orden del ranking.
     </li>
     <li class="is-scoped">
-      <strong><code>api.md</code></strong>: <code>paths: ["backend/**/*.py"]</code>, <em>solo al leer un .py bajo backend/</em>.
-      <code>response_model</code> explícito, auth en escritura, regenerar <code>openapi.yaml</code>.
+      <strong><code>escenas-de-juego.md</code></strong>: <code>paths:</code> a <code>frontend/js/games/</code>, <em>solo al leer un archivo de juegos</em>.
+      La escena no habla con la API, el teclado va por <code>onKeys()</code>, cómo termina una partida.
     </li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro ítems; el último es el único path-scoped y el que usa el demo.</strong></p>
-    <p><u>Zoom al demo-repo: tres rules siempre cargadas y una path-scoped (marcador en otro color).</u></p>
-    <p><em>"Bajemos a tierra. El demo-repo tiene cuatro rules: tres siempre cargadas y una path-scoped. Code-style, testing y security cubren convenciones de todo el codebase: cómo escribir Python, cómo escribir tests, cómo no filtrar secretos. Van sin frontmatter porque vale la pena que estén desde el arranque, y el costo es bajo porque cada una son pocas líneas. Api.md es la única scoped: solo entra cuando Claude lee un .py del backend. Lo que prescribe, response model explícito, auth en los endpoints de escritura y regenerar el openapi después de tocar un endpoint, solo tiene sentido en el backend. Y fíjense que esa instrucción del openapi no está en el CLAUDE.md del repo: vive únicamente en esta rule. Esta última es la que vamos a hacer aparecer en el demo."</em></p>
+    <p><strong>Recorrer los dos ítems; el segundo es el path-scoped y el que usa el demo.</strong></p>
+    <p><u>Zoom al repo del TP: una rule siempre cargada y una path-scoped (marcador en otro color).</u></p>
+    <p><em>"Bajemos a tierra. El repo del TP tiene dos rules, una de cada tipo. Api-y-datos va sin frontmatter, así que está desde el arranque: el contrato de los endpoints, qué status codes se usan, que la fecha la pone el servidor, cómo se ordena el ranking. Son decisiones que valen para todo el proyecto y cuestan pocas líneas. Escenas-de-juego es la scoped: solo entra cuando Claude lee un archivo de los juegos. Lo que prescribe, que la escena no habla con la API y que el teclado va por onKeys, no le sirve de nada a alguien tocando el backend. Y fíjense que eso no está en el CLAUDE.md del repo: vive únicamente en esta rule. Esta es la que vamos a hacer aparecer en el demo."</em></p>
   </aside>
 </section>
 
 <!-- §8.8 · Demo · /context antes, durante y después (section-divider + clickable-steps) -->
 <section class="section-divider">
   <h2>Demo · /context antes, durante y después</h2>
-  <p class="s8-demo-lead">Hacer visible que <code>api.md</code> entra al contexto solo cuando Claude lee un archivo del backend.</p>
+  <p class="s8-demo-lead">Hacer visible que <code>escenas-de-juego.md</code> entra al contexto solo cuando Claude lee un archivo de los juegos.</p>
 
   <div class="s8-demo-wrap">
     <div id="s8-demo-steps"></div>
@@ -757,32 +750,32 @@
 
   <aside class="notes">
     <p><strong>Setup de siempre (ver §7.9), con VS Code mostrando .claude/rules/.</strong></p>
-    <p><u>Tres pasos sobre la misma sesión, con /context entre cada uno: api.md aparece recién en el último.</u></p>
-    <p><em>"Vamos al demo. Tres pasos sobre la misma sesión. El objetivo es ver, con /context, cómo api.md cambia de estado: no cargada, no cargada, cargada, y en qué momento exacto entra."</em></p>
+    <p><u>Tres pasos sobre la misma sesión, con /context entre cada uno: escenas-de-juego.md aparece recién en el último.</u></p>
+    <p><em>"Vamos al demo. Tres pasos sobre la misma sesión. El objetivo es ver, con /context, cómo escenas-de-juego.md cambia de estado: no cargada, no cargada, cargada, y en qué momento exacto entra."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p>Setup de siempre: <code>~/demo-repo</code> con git init, <code>claude --permission-mode default</code>. Van a aparecer también mi <code>~/.claude/CLAUDE.md</code> y mis rules de usuario entre los memory files.</p>
+    <p>Setup de siempre: <code>~/tp-final-demo</code> con git init, <code>claude --permission-mode default</code>. Van a aparecer también mi <code>~/.claude/CLAUDE.md</code> y mis rules de usuario entre los memory files.</p>
     <p><strong>Paso 1 · Sin leer nada del backend</strong></p>
     <ul>
       <li><strong>VS Code:</strong> abrir <code>.claude/rules/</code> y ver los 4 archivos</li>
-      <li><strong>VS Code:</strong> en <code>api.md</code>, señalar el frontmatter <code>paths:</code></li>
+      <li><strong>VS Code:</strong> en <code>escenas-de-juego.md</code>, señalar el frontmatter <code>paths:</code></li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>api.md</code> NO figura entre los memory files</li>
+      <li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> NO figura entre los memory files</li>
     </ul>
     <p><strong>Paso 2 · Un archivo que no matchea</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> "leé <code>frontend/index.html</code>"</li>
+      <li><strong>En Claude:</strong> "leé <code>backend/routes.py</code>"</li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>api.md</code> sigue sin aparecer</li>
+      <li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> sigue sin aparecer</li>
     </ul>
     <p><strong>Paso 3 · Un archivo que sí matchea</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> "leé <code>backend/routers/users.py</code>"</li>
+      <li><strong>En Claude:</strong> "leé <code>frontend/js/games/snake.js</code>"</li>
       <li><strong>Mirar:</strong> el aviso de carga de la rule en la terminal</li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>api.md</code> ahora figura entre los memory files</li>
+      <li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> ahora figura entre los memory files</li>
     </ul>
-    <p><em>Plan B (si /context no deja ver el cambio): demostrar por comportamiento. La instrucción de regenerar openapi.yaml está solo en api.md. Hacer /clear, pedirle a Claude que cambie un texto de frontend/index.html: no menciona el openapi. /clear otra vez, pedirle que agregue un campo opcional a la respuesta de GET /users en backend/routers/users.py: ahora propone regenerar openapi.yaml.</em></p>
+    <p><em>Plan B (si /context no deja ver el cambio): demostrar por comportamiento. La regla de onKeys() está solo en escenas-de-juego.md. Hacer /clear y pedirle a Claude, sin nombrar la rule, que agregue una tecla de pausa a Snake: tiene que usar onKeys() de common.js y no keyboard.on(). Contraste: /clear y pedirle un cambio en backend/routes.py; ahí esa rule nunca entra.</em></p>
   </aside>
 </section>
 
@@ -814,18 +807,18 @@
   initClickableSteps({containerId: 's8-demo-steps', steps: [
     {
       title: 'Paso 1 · Sin leer nada del backend',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/rules/</code> y ver los 4 archivos</li><li><strong>VS Code:</strong> en <code>api.md</code>, señalar el frontmatter <code>paths:</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>api.md</code> NO figura entre los memory files</li></ul>',
-      example: 'Entre los memory files de /context aparecen code-style.md, testing.md y security.md. api.md no: está en disco, abierta en VS Code, pero no en la ventana del agente.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/rules/</code> y ver los 2 archivos</li><li><strong>VS Code:</strong> en <code>escenas-de-juego.md</code>, señalar el frontmatter <code>paths:</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> NO figura entre los memory files</li></ul>',
+      example: 'Entre los memory files de /context aparece api-y-datos.md, la rule sin frontmatter. escenas-de-juego.md no: está en disco, abierta en VS Code, pero no en la ventana del agente.'
     },
     {
       title: 'Paso 2 · Un archivo que no matchea',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>frontend/index.html</code>"</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>api.md</code> sigue sin aparecer</li></ul>',
-      example: 'Claude leyó un archivo, pero no es un .py bajo backend/. El glob no matchea y api.md sigue fuera de la ventana.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>backend/routes.py</code>"</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> sigue sin aparecer</li></ul>',
+      example: 'Claude leyó un archivo, pero no es uno de los juegos. Ninguno de los dos globs matchea y escenas-de-juego.md sigue fuera de la ventana. Lo que sí entró es el CLAUDE.md de backend/, que carga al leer un archivo de esa carpeta.'
     },
     {
       title: 'Paso 3 · Un archivo que sí matchea',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>backend/routers/users.py</code>"</li><li><strong>Mirar:</strong> el aviso de carga de la rule en la terminal</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>api.md</code> ahora figura entre los memory files</li></ul>',
-      example: 'Al leer users.py, la terminal avisa que cargó .claude/rules/api.md y /context la muestra entre los memory files. Hasta este momento no ocupó nada de la ventana.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>frontend/js/games/snake.js</code>"</li><li><strong>Mirar:</strong> el aviso de carga de la rule en la terminal</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> ahora figura entre los memory files</li></ul>',
+      example: 'Al leer snake.js, la terminal avisa que cargó .claude/rules/escenas-de-juego.md y /context la muestra entre los memory files. Hasta este momento no ocupó nada de la ventana.'
     }
   ]});
 </script>

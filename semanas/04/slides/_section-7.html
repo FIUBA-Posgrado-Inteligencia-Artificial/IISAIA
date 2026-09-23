@@ -365,7 +365,7 @@
   text-decoration: none;
 }
 
-/* Repo vivo — demo-repo */
+/* Repo vivo — el TP de referencia */
 .s7-repo-wrap {
   max-width: 800px;
   margin: 12px auto 0;
@@ -852,41 +852,41 @@
   </aside>
 </section>
 
-<!-- §7.8 · Demo-repo como ejemplo vivo -->
+<!-- §7.8 · El repo del TP como ejemplo vivo -->
 <section class="s7-slide">
-  <h2>El demo-repo como instancia viva</h2>
+  <h2>El repo de referencia como instancia viva</h2>
 
   <div class="s7-repo-wrap">
     <div class="s7-repo-path">./CLAUDE.md (extracto) · Nivel 3, proyecto</div>
 
-    <pre class="s7-repo-code"><span class="c">## Folder map</span>
-| `backend/main.py` | Entry point de FastAPI (CORS + routers) |
-| `backend/routers/` | Endpoints HTTP (`users.py`, `posts.py`) |
-| `backend/middleware/auth.py` | Dependency de auth bearer |
+    <pre class="s7-repo-code"><span class="c">## Comandos</span>
+uv run fastapi dev backend/main.py    <span class="c"># API + frontend en :8000</span>
+- <span class="c">**No hay suite de tests.**</span> La verificación es jugar en el navegador.
 <span class="c">…</span>
 
-<span class="c">## Convenciones</span>
-- Python 3.11+. Type hints obligatorios en funciones públicas.
-- Auth: bearer token leído de `DEMO_BEARER_TOKEN`. En tests, se setea `test-token`.
+<span class="c">## Dónde seguir leyendo</span>
+| `backend/CLAUDE.md`                  | arranque y seed, recorrido de un request |
+| `frontend/CLAUDE.md`                 | las dos páginas, quién llama a quién     |
+| `.claude/rules/escenas-de-juego.md`  | reglas para escribir una Phaser.Scene    |
 <span class="c">…</span>
 
-<span class="c">## Workflow</span>
-- Antes de un PR, correr `uv run pytest` y verificar que pasa.
+<span class="c">## Trampas ya pagadas</span>
+- <span class="c">**Teclado de Phaser.**</span> Usá siempre `onKeys()`, nunca `keyboard.on(...)`.
 <span class="c">…</span></pre>
 
     <div class="s7-repo-connect">
       Cuando abrís Claude Code en este repo, ese archivo entra completo a la ventana antes de tu primer mensaje.
-      El agente ya sabe que los routers viven en <code>backend/routers/</code>,
-      que el bearer token se lee de <code>DEMO_BEARER_TOKEN</code>
-      y que antes de un PR hay que correr <code>uv run pytest</code>.
+      El agente ya sabe que <strong>no hay tests</strong> y que se verifica jugando,
+      dónde seguir leyendo según qué mitad toque,
+      y que el teclado va por <code>onKeys()</code>.
       <strong>Nada de eso lo dijiste vos en el chat; lo encontró en el archivo.</strong>
     </div>
   </div>
 
   <aside class="notes">
     <p><strong>Señalar el path, recorrer los tres bloques del extracto y cerrar con "no lo dijiste vos".</strong></p>
-    <p><u>Extracto real del CLAUDE.md del demo-repo (Nivel 3), el mismo que se abre en el demo.</u></p>
-    <p><em>"Vamos a un archivo concreto. Este es el CLAUDE.md del demo-repo que vamos a usar en un minuto: una API de FastAPI con un frontend chico. Es el nivel proyecto, versionado. Tiene tres bloques: un folder map que asocia paths con responsabilidades, convenciones de código (type hints, el bearer token leído de una variable de entorno) y workflow, como correr los tests antes de un PR. Lo que ven es un extracto; el archivo tiene más filas. Cuando abro Claude Code en este repo, ese archivo entra completo a la ventana antes de mi primer mensaje. Nada de eso se lo dije en el chat: lo encontró en el archivo. Eso es 'siempre cargado' en la práctica, y es lo que vamos a hacer visible ahora."</em></p>
+    <p><u>Extracto real del CLAUDE.md del TP de referencia (Nivel 3), el mismo que se abre en el demo.</u></p>
+    <p><em>"Vamos a un archivo concreto: el CLAUDE.md del trabajo final de referencia, el que tienen en el repo del curso. Una plataforma con dos juegos, frontend con Phaser y backend FastAPI. Es el nivel proyecto, versionado. Miren los tres bloques. Comandos: cómo se levanta, y una línea que vale oro, no hay suite de tests y la verificación es jugar en el navegador; sin eso, el agente inventa un pytest. Dónde seguir leyendo: una tabla que manda a los CLAUDE.md de backend y frontend y a las rules, según qué mitad toques. Y trampas ya pagadas: bugs que costaron caro una vez y que no se van a repetir, como el del teclado de Phaser. Cuando abro Claude Code en este repo, todo eso entra a la ventana antes de mi primer mensaje. No se lo dije en el chat: lo encontró en el archivo."</em></p>
   </aside>
 </section>
 
@@ -906,21 +906,22 @@
     <hr>
     <p><strong>Setup (común a todas las demos de Parte 2):</strong></p>
     <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code>.</li>
+      <li>Copiar <code>semanas/00/source_material/apellido-iisaia/tp-final/</code> a <code>~/tp-final-demo</code> (fuera del repo del curso), sin <code>.venv/</code> ni <code>scores.db</code>.</li>
+      <li><code>cd ~/tp-final-demo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
+      <li><code>uv sync</code>. Este proyecto no usa variables de entorno; <code>scores.db</code> se crea solo al arrancar la app.</li>
       <li>Abrir Claude Code con <code>claude --permission-mode default</code>: en planes Pro/Max/Team el modo de arranque por defecto es <code>auto</code>, que aprueba con un clasificador y taparía los prompts de permiso. En la UI, <code>default</code> se llama Manual.</li>
       <li>Para ver qué cargó el runtime: <code>/context</code>. <code>/memory</code> lista ubicaciones posibles, incluso archivos que no existen.</li>
       <li>Ojo en vivo: mi <code>~/.claude/CLAUDE.md</code> y mis rules de usuario (<code>~/.claude/rules/</code>) también aparecen como fuentes. Mencionarlo cuando salgan.</li>
-      <li>Auto memory: con el repo copiado a un path nuevo, <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code> arranca vacía. Correr antes una sesión en <code>~/demo-repo</code> que guarde algo (p. ej. "recordá que en este repo prefiero tests cortos"), o usar el Plan B.</li>
+      <li>Auto memory: con el repo copiado a un path nuevo, <code>~/.claude/projects/&lt;tp-final-demo&gt;/memory/</code> arranca vacía. Correr antes una sesión en <code>~/tp-final-demo</code> que guarde algo (p. ej. "recordá que en este repo la verificación es jugar, no correr tests"), o usar el Plan B.</li>
     </ol>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Paso 1 · /context: qué está cargado</strong></p>
     <ul>
-      <li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li>
+      <li><strong>Terminal:</strong> <code>cd ~/tp-final-demo</code></li>
       <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>CLAUDE.md</code> y las rules entre los memory files, con sus tokens</li>
+      <li><strong>Mirar:</strong> <code>CLAUDE.md</code> y <code>api-y-datos.md</code> entre los memory files, con sus tokens</li>
+      <li><strong>Mirar:</strong> los <code>CLAUDE.md</code> de <code>backend/</code> y <code>frontend/</code> <em>no</em> están todavía: cargan cuando Claude lea un archivo de esas carpetas</li>
     </ul>
     <p><strong>Paso 2 · /memory: ubicaciones</strong></p>
     <ul>
@@ -930,11 +931,11 @@
     </ul>
     <p><strong>Paso 3 · Carpeta de auto memory</strong></p>
     <ul>
-      <li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code></li>
+      <li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;tp-final-demo&gt;/memory/</code></li>
       <li><strong>VS Code:</strong> abrir <code>MEMORY.md</code></li>
       <li><strong>Mirar:</strong> índice que apunta a archivos por tema, escrito por Claude</li>
     </ul>
-    <p><em>Plan B (si la carpeta de memoria del demo-repo está vacía): abrir la de ~/.claude/projects/ del repo del curso, que ya tiene MEMORY.md con archivos por tema. Narrar: "esto lo fue escribiendo Claude en sesiones anteriores, no yo".</em></p>
+    <p><em>Plan B (si la carpeta de memoria del repo copiado está vacía): abrir la de ~/.claude/projects/ del repo del curso, que ya tiene MEMORY.md con archivos por tema. Narrar: "esto lo fue escribiendo Claude en sesiones anteriores, no yo".</em></p>
   </aside>
 </section>
 
@@ -966,8 +967,8 @@
   initClickableSteps({containerId: 's7-demo-steps', steps: [
     {
       title: 'Paso 1 · /context: qué está cargado',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>CLAUDE.md</code> y las rules entre los memory files, con sus tokens</li></ul>',
-      example: 'La salida de /context desglosa la ventana por categoría. Entre los memory files aparecen ./CLAUDE.md del demo-repo, sus rules sin frontmatter y el ~/.claude/CLAUDE.md de usuario, cada uno con los tokens que ocupa. Todavía no pediste nada y ese espacio ya está ocupado.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/tp-final-demo</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>CLAUDE.md</code> y las rules entre los memory files, con sus tokens</li></ul>',
+      example: 'La salida de /context desglosa la ventana por categoría. Entre los memory files aparecen ./CLAUDE.md del proyecto, la rule api-y-datos.md (que no tiene frontmatter) y el ~/.claude/CLAUDE.md de usuario, cada uno con los tokens que ocupa. Los CLAUDE.md de backend/ y frontend/ todavía no: esos cargan cuando Claude lee un archivo de esas carpetas. Y vos no pediste nada todavía.'
     },
     {
       title: 'Paso 2 · /memory: ubicaciones',
@@ -976,7 +977,7 @@
     },
     {
       title: 'Paso 3 · Carpeta de auto memory',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code></li><li><strong>VS Code:</strong> abrir <code>MEMORY.md</code></li><li><strong>Mirar:</strong> índice que apunta a archivos por tema, escrito por Claude</li></ul>',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;tp-final-demo&gt;/memory/</code></li><li><strong>VS Code:</strong> abrir <code>MEMORY.md</code></li><li><strong>Mirar:</strong> índice que apunta a archivos por tema, escrito por Claude</li></ul>',
       example: 'MEMORY.md es un índice: cada línea apunta a un archivo por tema dentro de memory/. Ninguno lo escribiste vos; los fue guardando Claude en sesiones anteriores.'
     }
   ]});

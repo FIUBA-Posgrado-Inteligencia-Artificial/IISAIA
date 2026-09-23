@@ -649,25 +649,29 @@
   </aside>
 </section>
 
-<!-- §10.6 · El bloque permissions del demo-repo — sin mini-strip (zoom-in) -->
+<!-- §10.6 · El bloque permissions del repo del TP — sin mini-strip (zoom-in) -->
 <section class="s10-slide">
-  <h2>El bloque <code>permissions</code> del demo-repo</h2>
+  <h2>El bloque <code>permissions</code> del repo</h2>
 
   <div class="s10-json-wrap">
 <pre><code class="language-json" data-trim>
 {
   "permissions": {
     "allow": [
-      "Bash(uv run uvicorn *)",
-      "Bash(uv run python scripts/export_openapi.py)",
       "Bash(uv sync)",
+      "Bash(uv run fastapi dev backend/main.py*)",
       "Edit(./backend/**)",
       "Edit(./frontend/**)",
-      "Edit(./tests/**)",
-      "Edit(./openapi.yaml)",
+      "Edit(./README.md)",
+      "WebFetch(domain:docs.phaser.io)",
       "WebFetch(domain:fastapi.tiangolo.com)"
     ],
-    "deny": ["Read(./.env)", "Bash(rm -rf *)", "Bash(git push *)"],
+    "deny": [
+      "Read(./scores.db)",
+      "Edit(./docs/plan.md)",
+      "Bash(rm -rf *)",
+      "Bash(git push *)"
+    ],
     "ask": ["Bash(uv add *)", "Bash(uv remove *)"]
   }
 }
@@ -675,15 +679,15 @@
   </div>
 
   <div class="s10-read-grid">
-    <div class="s10-read-item"><strong>allow · 8</strong>levantar el server, regenerar openapi, editar en cuatro lugares</div>
-    <div class="s10-read-item is-deny"><strong>deny · 3</strong>leer <code>.env</code>, borrar en masa, hacer push</div>
+    <div class="s10-read-item"><strong>allow · 7</strong>levantar la app, editar el código y el informe, dos dominios de doc</div>
+    <div class="s10-read-item is-deny"><strong>deny · 4</strong>la base, el plan congelado, borrar en masa, hacer push</div>
     <div class="s10-read-item is-ask"><strong>ask · 2</strong>agregar o quitar dependencias pasa por vos</div>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer las tres listas; marcar que <code>uv run pytest</code> no está en ninguna.</strong></p>
+    <p><strong>Leer las tres listas; marcar que <code>git commit</code> no está en ninguna.</strong></p>
     <p><u>El JSON real: allow acotado, deny corto, ask para dependencias.</u></p>
-    <p><em>"Este es el bloque permissions real del demo-repo. Allow: levantar uvicorn, correr el script que regenera openapi.yaml y nada más de Python, uv sync, editar backend, frontend, tests y el openapi, y un fetch a la doc de FastAPI. Deny: leer el .env, rm -rf y git push. Ask: uv add y uv remove, porque agregar una dependencia cambia el proyecto y quiero enterarme antes. Fijate lo que no está: uv run pytest no aparece en ninguna lista. Eso es a propósito, lo usamos en el demo. Y tampoco hay reglas de Read para el proyecto: leer archivos no pide permiso."</em></p>
+    <p><em>"Este es el bloque permissions real del repo del trabajo final. Allow: instalar dependencias, levantar la app, editar backend, frontend y el README, y traer documentación de Phaser y de FastAPI. Deny, y acá está lo interesante: leer scores.db, porque es la base con los puntajes y no tiene nada que el agente necesite; editar docs/plan.md, que es el plan congelado a propósito y tiene que quedar como estaba; rm -rf; y git push, porque publicar lo decido yo. Ask: uv add y uv remove, porque agregar una dependencia cambia el proyecto y quiero enterarme antes. Fíjense lo que no está en ninguna lista: git commit. Eso es a propósito, lo usamos en el demo. Y tampoco hay reglas de Read para el resto: leer archivos no pide permiso."</em></p>
   </aside>
 </section>
 
@@ -732,28 +736,28 @@
     <p><em>"Vamos al demo. Una sola sesión, sin reiniciar. Vamos a ver un comando que pregunta, una regla que lo libera y un deny que le gana a un allow que está en otro archivo."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Setup:</strong> el de siempre (copia en <code>~/demo-repo</code> con <code>git init</code>, <code>.env</code>, <code>uv sync</code>). <code>.claude/settings.local.json</code> ya existe desde la demo de settings.json. Arrancar con <code>claude --permission-mode default</code>.</p>
+    <p><strong>Setup:</strong> el de siempre (copia en <code>~/tp-final-demo</code> con <code>git init</code> y <code>uv sync</code>). <code>.claude/settings.local.json</code> ya existe desde la demo de settings.json; si lo borraste ahí, copiarlo otra vez del <code>.example</code>. Arrancar con <code>claude --permission-mode default</code>.</p>
     <p><strong>Paso 1 · Aparece el prompt</strong></p>
     <ul>
       <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
-      <li><strong>En Claude:</strong> "corré los tests"</li>
-      <li><strong>Mirar:</strong> prompt para <code>uv run pytest</code> (no está en <code>allow</code>); no responder todavía</li>
+      <li><strong>En Claude:</strong> "commiteá los cambios que hay"</li>
+      <li><strong>Mirar:</strong> prompt para <code>git commit</code> (no está en ninguna lista); no responder todavía</li>
     </ul>
     <p><strong>Paso 2 · Guardar la regla</strong></p>
     <ul>
       <li><strong>En Claude:</strong> "Yes, and don't ask again"</li>
       <li><strong>VS Code:</strong> regla nueva en <code>.claude/settings.local.json</code> (opcional: verla también en <code>/permissions</code>)</li>
-      <li><strong>En Claude:</strong> "corré los tests" otra vez</li>
+      <li><strong>En Claude:</strong> pedirle otro commit (tocá un archivo antes)</li>
       <li><strong>Mirar:</strong> corre sin prompt</li>
     </ul>
     <p><strong>Paso 3 · Deny le gana a allow</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> <code>/permissions</code>, agregar a deny <code>Edit(./openapi.yaml)</code> guardada en local</li>
-      <li><strong>En Claude:</strong> "cambiá el title en openapi.yaml"</li>
-      <li><strong>Mirar:</strong> bloqueado sin prompt, aunque <code>Edit(./openapi.yaml)</code> está en el allow del proyecto</li>
+      <li><strong>En Claude:</strong> <code>/permissions</code>, agregar a deny <code>Edit(./frontend/js/games/**)</code> guardada en local</li>
+      <li><strong>En Claude:</strong> "cambiá la velocidad inicial de Snake"</li>
+      <li><strong>Mirar:</strong> bloqueado sin prompt, aunque <code>Edit(./frontend/**)</code> está en el allow del proyecto</li>
     </ul>
-    <p>Si Claude intenta rodearlo con Bash (<code>sed</code>, <code>python</code>), aparece un prompt: responder No, y usarlo para recordar que un deny cubre una tool y un patrón. Al terminar: quitar el deny con <code>/permissions</code> (o restaurar el local con <code>cp .claude/settings.local.json.example .claude/settings.local.json</code>).</p>
-    <p><em>Plan B (si /permissions o el prompt no cooperan): editar .claude/settings.local.json a mano con la sesión abierta, agregando "Bash(uv run pytest)" en allow y "Edit(./openapi.yaml)" en deny. La recarga en caliente toma el cambio sin reiniciar; repetir los pedidos.</em></p>
+    <p>Si Claude intenta rodearlo con Bash (<code>sed</code>, <code>python</code>), aparece un prompt: responder No, y usarlo para marcar que un deny cubre una tool y un patrón, no una intención. Al terminar: quitar el deny con <code>/permissions</code> (o restaurar el local con <code>cp .claude/settings.local.json.example .claude/settings.local.json</code>).</p>
+    <p><em>Plan B (si /permissions o el prompt no cooperan): editar .claude/settings.local.json a mano con la sesión abierta, agregando "Bash(git commit *)" en allow y "Edit(./frontend/js/games/**)" en deny. La recarga en caliente toma el cambio sin reiniciar; repetir los pedidos.</em></p>
   </aside>
 </section>
 
@@ -782,18 +786,18 @@
   initClickableSteps({containerId: 's10-demo-steps', steps: [
     {
       title: 'Paso 1 · Aparece el prompt',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> "corré los tests"</li><li><strong>Mirar:</strong> prompt para <code>uv run pytest</code></li></ul>',
-      example: 'Claude propone <code>uv run pytest</code> y el runtime lo frena antes de ejecutar. El comando no matchea ninguna regla del proyecto, y en Manual lo que no está pre-aprobado se pregunta.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> "commiteá los cambios que hay"</li><li><strong>Mirar:</strong> prompt para <code>git commit</code></li></ul>',
+      example: 'Claude propone <code>git commit</code> y el runtime lo frena antes de ejecutar. El comando no matchea ninguna regla del proyecto, y en Manual lo que no está pre-aprobado se pregunta.'
     },
     {
       title: 'Paso 2 · Guardar la regla',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "Yes, and don&#39;t ask again"</li><li><strong>VS Code:</strong> regla nueva en <code>settings.local.json</code></li><li><strong>En Claude:</strong> "corré los tests" otra vez</li><li><strong>Mirar:</strong> corre sin prompt</li></ul>',
-      example: 'La regla quedó escrita en <code>.claude/settings.local.json</code>, junto al <code>env</code> que ya tenía. El <code>settings.json</code> del proyecto no cambió. La segunda vez, los tests corren sin preguntar.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "Yes, and don&#39;t ask again"</li><li><strong>VS Code:</strong> regla nueva en <code>settings.local.json</code></li><li><strong>En Claude:</strong> pedirle otro commit</li><li><strong>Mirar:</strong> corre sin prompt</li></ul>',
+      example: 'La regla quedó escrita en <code>.claude/settings.local.json</code>, junto al <code>model</code> que ya tenía. El <code>settings.json</code> del proyecto no cambió. La segunda vez, el commit corre sin preguntar.'
     },
     {
       title: 'Paso 3 · Deny le gana a allow',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code>, deny <code>Edit(./openapi.yaml)</code> en local</li><li><strong>En Claude:</strong> "cambiá el title en openapi.yaml"</li><li><strong>Mirar:</strong> bloqueado, aunque el proyecto tiene el allow</li></ul>',
-      example: 'El <code>allow</code> vive en <code>settings.json</code> y el <code>deny</code> en <code>settings.local.json</code>. El runtime combina las listas de los dos archivos y evalúa <code>deny</code> primero: la edición no corre y Claude recibe el rechazo como resultado de la tool.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code>, deny <code>Edit(./frontend/js/games/**)</code> en local</li><li><strong>En Claude:</strong> "cambiá la velocidad inicial de Snake"</li><li><strong>Mirar:</strong> bloqueado, aunque el proyecto tiene el allow</li></ul>',
+      example: 'El <code>allow</code> de <code>Edit(./frontend/**)</code> vive en <code>settings.json</code> y el <code>deny</code> más específico en <code>settings.local.json</code>. El runtime combina las listas de los dos archivos y evalúa <code>deny</code> primero: la edición no corre y Claude recibe el rechazo como resultado de la tool.'
     }
   ]});
 </script>

@@ -564,20 +564,20 @@
 
   <p class="s6-dial-lead">Un plan es la defensa más barata contra la <strong>deriva</strong>, que el agente se aleje de lo que pediste: corregirla en el plan cuesta leer; en el diff, revertir.</p>
 
-  <pre class="s6-plan-block"><span class="s6-plan-key">Objetivo:</span> <span class="s6-plan-val">extraer el patrón get-or-404 de users.py y posts.py a un helper compartido</span>
+  <pre class="s6-plan-block"><span class="s6-plan-key">Objetivo:</span> <span class="s6-plan-val">mostrar en la home el mejor puntaje de cada juego</span>
 
 <span class="s6-plan-key">Archivos:</span>
-  <span class="s6-plan-val">- backend/routers/common.py (nuevo: get_or_404)</span>
-  <span class="s6-plan-val">- backend/routers/users.py</span>
-  <span class="s6-plan-val">- backend/routers/posts.py</span>
+  <span class="s6-plan-val">- backend/schemas.py (GameOut suma top_score)</span>
+  <span class="s6-plan-val">- backend/routes.py (list_games lo calcula)</span>
+  <span class="s6-plan-val">- frontend/js/home.js (lo muestra en cada tarjeta)</span>
 
 <span class="s6-plan-key">Pasos:</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">1. Leer get_user y get_post en los dos routers</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">2. Crear get_or_404 en common.py</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">3. Reemplazar el if/raise por el helper en cada router</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">4. Correr la suite de tests</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">1. Leer list_games y GameOut</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">2. Agregar top_score al schema de salida</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">3. Calcularlo en la query, sin romper el orden del ranking</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">4. Mostrarlo en la tarjeta de cada juego</span>
 
-<span class="s6-plan-key">Verificación:</span> <span class="s6-plan-val">uv run pytest pasa sin regresiones</span></pre>
+<span class="s6-plan-key">Verificación:</span> <span class="s6-plan-val">jugar una partida, guardar el puntaje y recargar la home</span></pre>
 
   <p class="s6-plan-note">
     Sin <strong>archivos</strong> explícitos no sabés qué se va a tocar. Sin <strong>verificación</strong> no sabés cómo te enterás de que terminó bien. Si el plan está flojo, pedí que lo complete antes de aprobar.
@@ -585,8 +585,8 @@
 
   <aside class="notes">
     <p><strong>No es el formato literal de la herramienta: es el checklist para leer cualquier plan.</strong></p>
-    <p><u>Deriva primero; después las cuatro partes sobre una tarea real del demo-repo.</u></p>
-    <p><em>"Si vas a usar plan mode, tenés que saber leer un plan. Primero, para qué sirve: contra la deriva, que el agente arranque yendo hacia lo que pediste y a la décima vuelta esté en otro lado. Si eso lo ves en el plan, corregir cuesta leer; si lo ves en el diff, cuesta revertir. Ningún agente va a escribir el plan con estos títulos exactos, pero la información tiene que estar. Uso una tarea real del demo-repo: users.py y posts.py repiten lo mismo, buscan en el store y si no está tiran un 404. Objetivo: si no coincide con lo que pediste, entendió mal y frenás ahí. Archivos: qué va a tocar; acá un helper nuevo y los dos routers. Si ves que se mete con tests o con main.py y no querías, este es el lugar para corregirlo. Pasos: el orden. Y verificación: cómo te enterás de que salió bien, en este caso que uv run pytest pase. Si falta alguno de estos cuatro, no aprobés todavía. En Claude Code, cuando el plan está listo te aparecen tres opciones: 'Yes, and use auto mode', 'Yes, manually approve edits', y 'No, keep planning', que es la que usás para pedirle que lo corrija. Aprobar el plan fija el rumbo, no firma cada acción: las reglas de permisos siguen aplicando."</em></p>
+    <p><u>Deriva primero; después las cuatro partes sobre una tarea real del repo del TP.</u></p>
+    <p><em>"Si vas a usar plan mode, tenés que saber leer un plan. Primero, para qué sirve: contra la deriva, que el agente arranque yendo hacia lo que pediste y a la décima vuelta esté en otro lado. Si eso lo ves en el plan, corregir cuesta leer; si lo ves en el diff, cuesta revertir. Ningún agente va a escribir el plan con estos títulos exactos, pero la información tiene que estar. Uso una tarea real del repo del trabajo final: hoy la home lista los juegos pero no muestra el mejor puntaje de cada uno. Objetivo: si no coincide con lo que pediste, entendió mal y frenás ahí. Archivos: qué va a tocar; acá el schema y la query del backend, y el render de la home. Si ves que se mete con las escenas de los juegos y no querías, este es el lugar para corregirlo. Pasos: el orden. Y verificación: cómo te enterás de que salió bien. Ojo con esta, porque en este proyecto no hay tests: la verificación es jugar una partida, guardar el puntaje y recargar la home. Un plan que dice "correr los tests" en un repo sin tests es un plan que nadie leyó. Si falta alguno de estos cuatro, no aprobés todavía. En Claude Code, cuando el plan está listo te aparecen tres opciones: 'Yes, and use auto mode', 'Yes, manually approve edits', y 'No, keep planning', que es la que usás para pedirle que lo corrija. Aprobar el plan fija el rumbo, no firma cada acción: las reglas de permisos siguen aplicando."</em></p>
   </aside>
 </section>
 

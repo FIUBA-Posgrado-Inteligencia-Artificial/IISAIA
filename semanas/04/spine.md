@@ -8,9 +8,11 @@
 - **Equivalencias entre harness (2026-09-16)**: cada pieza de la Parte 2 se muestra en Claude Code (donde corren las demos) y en Codex y OpenCode, con la clase compartida `.harness-map` de `_config/theme/components.css` (variante `is-large` cuando el mapa ocupa el slide solo). Las afirmaciones sobre Codex salen de `learn.chatgpt.com/docs` (la doc se mudó desde `developers.openai.com/codex`); las de OpenCode, de `opencode.ai/docs` y del código de `sst/opencode`. No entran a slides las que no se pudieron confirmar en documentación: el ciclo detallado de plan mode en Codex, el namespacing de commands en OpenCode, el orden de concatenación de `AGENTS.md` anidados y la carga de `AGENTS.md` anidados al leer archivos en OpenCode (está en el código, no en la doc).
 - **Costura parte 1 / parte 2**: `section-divider` fuerte entre §5 y §6 ("Parte 2 — Configurar el harness"). §1–§5 nunca nombran Claude Code. §6 revela que el loop abstracto de §2 tiene nombre propio, presenta Claude Code como un harness entre varios y mapea sus piezas configurables al harness de §5.
 
+**Repo de las demos (cambio 2026-09-23):** las demos de la Parte 2 corren sobre `semanas/00/source_material/apellido-iisaia/tp-final/` (la plataforma de juegos que es el TP final de referencia), copiado a `~/tp-final-demo`. El viejo `semanas/04/demo-repo/` se eliminó. Al tp-final se le agregaron las piezas que la clase recorre y que no tenía: `.claude/settings.json` (modelo + permisos), `settings.local.json.example`, la skill `agregar-juego`, el command `pre-entrega` y el sub-agent `explorador`. Ya tenía `CLAUDE.md` en la raíz, en `backend/` y en `frontend/`, y dos rules: `api-y-datos.md` (sin frontmatter) y `escenas-de-juego.md` (con `paths:`).
+
 **Nota de escala:** 13 secciones, 92 slides. **Recorte 2026-09-23:** se eliminó la slide "Qué confunde" de §7 a §12 (seis slides) para acortar la Parte 2, y la plantilla pasó de cinco preguntas a cuatro. Los casos límite que quedaron sin slide están listados en cada sección de este spine, por si conviene rescatar alguno en el cierre. Seis demos en vivo en la Parte 2, una por sección de §7 a §12; la de plan mode se eliminó con su sección el 2026-09-16. Es una clase larga, dictada en 2 sesiones. Desde el 2026-09-16 la primera sesión termina en §6 con la consigna del planteo del trabajo final (§6.9), y la segunda arranca en §7 con el mapa de las seis piezas.
 
-**Nota sobre el rediseño de Parte 2 (2026-05-19):** la Parte 2 se rediseñó para cubrir 7 features de Claude Code como secciones independientes (§7–§13) siguiendo una plantilla documentation-walkthrough (qué es / dónde vive / cuándo se carga / cómo se usa / mini-demo). El `.lens-tracker` se eliminó del deck (foco en cada feature por su propia anatomía, no por su ubicación en una taxonomía). El dispositivo recurrente nuevo es la **tarjeta de preguntas** que abre cada sección. El demo se hace en un repo aparte (`semanas/04/demo-repo/`, FastAPI + frontend) que el profesor copia fuera del repo del curso antes de dictar para aislarlo.
+**Nota sobre el rediseño de Parte 2 (2026-05-19):** la Parte 2 se rediseñó para cubrir 7 features de Claude Code como secciones independientes (§7–§13) siguiendo una plantilla documentation-walkthrough (qué es / dónde vive / cuándo se carga / cómo se usa / mini-demo). El `.lens-tracker` se eliminó del deck (foco en cada feature por su propia anatomía, no por su ubicación en una taxonomía). El dispositivo recurrente nuevo es la **tarjeta de preguntas** que abre cada sección. El demo se hace en un repo aparte que el profesor copia fuera del repo del curso antes de dictar, para aislarlo; desde 2026-09-23 ese repo es el tp-final de referencia.
 
 **Nota sobre relación con `source_material/index.md`:** el material fuente todavía organiza Parte 1 alrededor de "loop + contexto" y trata §3 como "Tools — las manos del agente" y §5 como "Modos de falla". El deck reorganizó esos contenidos: las tools entraron en §2 (como bridge de single-turn → ReAct), §3 pasó a ser "Las tres ingenierías" (un slide marco nuevo), y §5 pasó a ser "Harness engineering" (el otro nivel nuevo). El espíritu del material fuente sobrevive (loop, finitud, tools como manos, supervisión, etc.) pero la organización es distinta — el spine es el contrato canónico de qué hay en cada sección.
 
@@ -90,7 +92,7 @@
 - **Model y effort (§6.5):** model = qué modelo corre el loop; effort = cuánto razona antes de cada acción (más effort, más tokens de razonamiento: ocupan ventana y se cobran como salida; conecta con §4). Claude Code: `/model`, `/effort`, `--model`, `--effort`, `model` y `effortLevel` en settings; niveles `low` · `medium` · `high` · `xhigh` · `max`, default `high` (verificado en `code.claude.com/docs/en/model-config`; `ultracode` es un setting aparte, no un nivel). Codex: `/model` elige modelo y effort, `model_reasoning_effort` en `config.toml`, y `plan_mode_reasoning_effort` aparte. OpenCode: `/models`, `"model": "proveedor/modelo"`, effort como variants del modelo que se ciclan con `ctrl+t`.
 - **El dial de modes (§6.6, movido de §10.9):** tabla de dos columnas (mode / qué corre sin preguntar) con los seis modes; `auto` es el arranque en Pro/Max/Team. Equivalencias: Claude Code `Shift+Tab` cicla `default` → `acceptEdits` → `plan` (desde `auto`, el primer toque va a `default`; la barra de estado muestra `⏸ plan mode on`, `⏵⏵ accept edits on`, etc., verificado en `code.claude.com/docs/en/permission-modes`); Codex parte el dial en dos ejes (`--sandbox` y `--ask-for-approval`) y tiene `/plan`; en OpenCode `plan` es un agente que se cambia con `Tab`, y deja bash abierto por defecto. Callout: plan mode no es sandbox, frena la edición y no la ejecución.
 - **Cuál mode usar (§6.7, de la §13 vieja):** criterio por costo del error, no por velocidad.
-- **Lo que un plan debería contener (§6.8, de la §13 vieja):** deriva como motivación (se define acá; §13.4 la usa como criterio de evaluación), Objetivo / Archivos / Pasos / Verificación sobre la tarea get-or-404 del demo-repo. En notas, las tres opciones de aprobación de Claude Code ("Yes, and use auto mode" / "Yes, manually approve edits" / "No, keep planning").
+- **Lo que un plan debería contener (§6.8, de la §13 vieja):** deriva como motivación (se define acá; §13.4 la usa como criterio de evaluación), Objetivo / Archivos / Pasos / Verificación sobre una tarea real del tp-final (mostrar el mejor puntaje en la home), con la verificación jugando y no corriendo tests. En notas, las tres opciones de aprobación de Claude Code ("Yes, and use auto mode" / "Yes, manually approve edits" / "No, keep planning").
 - **Consigna (§6.9, cierre de la primera sesión):** para la próxima clase, en grupos de 2, cada grupo presenta en 6 minutos la idea de su trabajo final (una aplicación con interfaz, servidor y datos que persisten): problema, usuarios, MVP y stack. Se presenta la idea, o como mucho un avance; no una versión terminada. La devolución es sobre alcance y viabilidad. La slide se entiende sola porque llega antes que §13, que desarrolla el trabajo final.
 **Animations / interactive:** CSS-only, sin fragments. `section-divider` fuerte para abrir la Parte 2. `.s6-ctrl` (dos cards) + `.harness-map` en §6.5; tabla `.s6-modes-table` + `.harness-map.s6-dial-map` + callout en §6.6 (el slide más alto de la sección: 717 px de 800).
 **Slide budget actual:** 9 slides (divider → qué es → qué pasa al ejecutar `claude` → qué es una sesión → model y effort → dial de modes → cuál mode usar → qué debe contener un plan → consigna del planteo del trabajo final). El mapa de las seis piezas pasó a §7.0 el 2026-09-16.
@@ -105,7 +107,7 @@
 - Auto memory: directorio `~/.claude/projects/<project>/memory/` con `MEMORY.md` como índice (se cargan las primeras 200 líneas o 25 KB) y archivos por tema leídos bajo demanda.
 - **Equivalencias (§7.3b):** Codex y OpenCode usan `AGENTS.md`. Codex lee uno en `~/.codex/` y uno por directorio desde la raíz del repo hasta el CWD, y los concatena, sin `@import`. OpenCode lee `CLAUDE.md` si no encuentra `AGENTS.md`, y suma archivos con `instructions` en `opencode.json`. Memoria automática: Claude Code sí; Codex sí, apagada por defecto; OpenCode no tiene.
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): contradicciones entre niveles que fallan en silencio; `@import` no ahorra contexto; los CLAUDE.md de subdirectorios cargan bajo demanda; **CLAUDE.md no es el system prompt** (entra como mensaje de usuario, después).
-**Animations / interactive:** Tarjeta de plantilla. Tabla de las 4 ubicaciones y diagrama del orden de carga. Extracto del `CLAUDE.md` del demo-repo. `.harness-map.is-large`.
+**Animations / interactive:** Tarjeta de plantilla. Tabla de las 4 ubicaciones y diagrama del orden de carga. Extracto del `CLAUDE.md` del tp-final (comandos, dónde seguir leyendo, trampas ya pagadas). `.harness-map.is-large`.
 **Mini-demo (único bloque al final):** setup común (copia fuera del repo del curso, `git init`, `cp .env.example .env`, `uv sync`, `claude --permission-mode default`). `/context` muestra qué está cargado; `/memory` muestra las ubicaciones posibles; carpeta de auto memory (arranca vacía en la copia). Plan B en notas.
 **Slide budget actual:** 11 slides (mapa de las seis piezas + opener + 9).
 
@@ -113,13 +115,13 @@
 **Source material:** `source_material/08-rules.md`
 **Through-line:** Archivos `.md` modulares de instrucciones. Sin `paths:` = siempre cargados (ventaja organizativa sobre CLAUDE.md monolítico). Con `paths:` + globs = path-scoped: entran cuando Claude lee un archivo que matchea. **Reencuadre 2026-09-16:** el concepto que se enseña es la carga condicional (instrucciones que entran solo cuando importan); la forma declarativa por glob es, hoy, exclusiva de Claude Code, y eso se dice.
 **What students walk away knowing:**
-- Estructura de `.claude/rules/` con un archivo por tema (`code-style.md`, `testing.md`, `security.md`, `api.md`); `~/.claude/rules/` a nivel usuario.
-- Frontmatter `paths:` activa la rule al leer un archivo en el glob (en el demo-repo, un `.py` bajo `backend/`).
+- Estructura de `.claude/rules/` con un archivo por tema (en el tp-final: `api-y-datos.md` y `escenas-de-juego.md`); `~/.claude/rules/` a nivel usuario.
+- Frontmatter `paths:` activa la rule al leer un archivo en el glob (en el tp-final, un `.js` bajo `frontend/js/games/`).
 - **Equivalencias (§8.3b):** la única pieza sin equivalente directo. Codex aproxima con `AGENTS.md` por carpeta (scope por directorio, decidido al arrancar); OpenCode con `instructions`, cuyos globs eligen qué archivos cargar pero no cuándo (entran todos al arrancar).
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): otra herramienta no lee `.claude/rules/` (Cursor usa `.cursor/rules/`; OpenCode lee `CLAUDE.md` y las skills, pero no las rules); sin `paths:` una rule cuesta lo mismo que CLAUDE.md; la activa que el agente **lea** un archivo que matchea, no que el path se nombre.
 **Plantilla obligatoria:** misma de 4 preguntas + demo.
-**Animations / interactive:** Tarjeta de plantilla. Extracto textual de `api.md` con frontmatter. Lista con las 4 rules del demo-repo y su comportamiento. `.harness-map.is-large`.
-**Mini-demo:** `/context` antes, durante y después de leer `backend/routers/users.py`. Plan B por comportamiento: la instrucción de regenerar `openapi.yaml` vive solo en `api.md` (se sacó del `CLAUDE.md` del demo-repo para que el contraste funcione).
+**Animations / interactive:** Tarjeta de plantilla. Extracto textual de `escenas-de-juego.md` con frontmatter. Lista con las 2 rules del tp-final y su comportamiento. `.harness-map.is-large`.
+**Mini-demo:** `/context` antes (no figura), después de leer `backend/routes.py` (sigue sin figurar) y después de leer `frontend/js/games/snake.js` (figura). Plan B por comportamiento: la regla de `onKeys()` vive solo en `escenas-de-juego.md`.
 **Slide budget actual:** 9 slides.
 
 ## Section 9: `settings.json` (config del runtime)
@@ -133,8 +135,8 @@
 - **Equivalencias (§9.3b):** Codex usa `config.toml` (TOML; el de proyecto solo carga si el repo está marcado como confiable); OpenCode usa `opencode.json` (JSON con comentarios, global y proyecto se mergean, acepta `{env:VAR}` y `{file:ruta}`). Cambia el formato, no la cascada.
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): pisar no es sumar; el `.local.json` va siempre al `.gitignore` (un token commiteado se rota); **MCP no se configura en settings**, va en `.mcp.json`.
 **Plantilla obligatoria:** misma de 4 preguntas + demo.
-**Animations / interactive:** Tarjeta de plantilla. Campos top del `.claude/settings.json` del demo-repo. `.harness-map.is-large`.
-**Mini-demo:** abrir user / project / local (copiado del `.example`), cambiar `model` de `sonnet` a `haiku` y abrir sesión nueva, `git status` no muestra el local.
+**Animations / interactive:** Tarjeta de plantilla. Campos top del `.claude/settings.json` del tp-final: `model`, `permissions`, `attribution`, `cleanupPeriodDays`, y la ausencia deliberada de `env`. `.harness-map.is-large`.
+**Mini-demo:** abrir user / project / local (copiado del `.example`); el local declara `model: haiku` y le gana al `sonnet` del proyecto en una sesión nueva; borrar el local y volver a Sonnet; `git status` no muestra el local.
 **Slide budget actual:** 9 slides.
 
 ## Section 10: Permisos (control de tools)
@@ -143,26 +145,26 @@
 **What students walk away knowing:**
 - Sintaxis `Tool(pattern)`: exacto, `Bash(git push *)` (también matchea `git push` a secas), `Bash`/`Bash(*)` = todo, globs de archivo, `WebFetch(domain:…)`.
 - Sin coincidencia decide el mode (el dial de §6.6; en Manual, pregunta). Las lecturas no piden permiso. La tabla de modes se movió a §6 el 2026-09-16.
-- Bloque `permissions` real del demo-repo (8 allow / 3 deny / 2 ask).
+- Bloque `permissions` real del tp-final (7 allow / 4 deny / 2 ask). Los deny cuentan una decisión: la base de puntajes y el plan congelado no se tocan.
 - **Equivalencias (§10.3b), la más importante de la Parte 2:** el gate antes de ejecutar es universal; la resolución de conflictos no. Claude Code: `deny` gana siempre. Codex: tres sistemas (sandbox, `approval_policy`, archivos `.rules`). OpenCode: gana la última regla que matchea, así que `"rm *": "deny", "*": "allow"` deja pasar `rm -rf`.
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): **un `deny` cubre una tool y un patrón, no una intención** (no es frontera de seguridad); las lecturas no piden permiso; los wildcards no atraviesan `&&` ni `;`; `Bash(rm -rf *)` no frena `/bin/rm` ni `sh -c`.
 **Plantilla obligatoria:** misma de 4 preguntas + demo.
 **Animations / interactive:** Tarjeta de plantilla. Code block JSON del bloque `permissions`. `.harness-map.is-large`.
-**Mini-demo:** "corré los tests" → prompt de `uv run pytest` (no está en allow) → "Yes, and don't ask again" escribe la regla en local → repetir pasa sin prompt → deny local `Edit(./openapi.yaml)` le gana al allow del proyecto.
+**Mini-demo:** "commiteá los cambios" → prompt de `git commit` (no está en ninguna lista) → "Yes, and don't ask again" escribe la regla en local → repetir pasa sin prompt → deny local `Edit(./frontend/js/games/**)` le gana al allow `Edit(./frontend/**)` del proyecto.
 **Slide budget actual:** 10 slides.
 
 ## Section 11: Skills y slash commands
 **Source material:** `source_material/11-skills-y-slash-commands.md`
 **Through-line:** Un mismo mecanismo, dos formas. Skill = directorio con SKILL.md (procedimiento completo, archivos de soporte, Claude puede cargarla por relevancia). Command = un solo archivo en `.claude/commands/`. Ambos crean `/nombre`; si comparten nombre gana la skill. Al arranque solo entra el índice (nombre + descripción); el cuerpo entra a la misma ventana al invocarla (difiere la carga, no aísla). Una skill no es una garantía: el enforcement determinístico está en settings/permisos.
 **What students walk away knowing:**
-- Estructura del SKILL.md (frontmatter + fases + anti-patterns). Ejemplo: `.claude/skills/add-endpoint/` del demo-repo.
-- Command de un archivo como atajo corto. Ejemplo: `.claude/commands/pre-pr.md`.
+- Estructura del SKILL.md (frontmatter + fases + anti-patterns). Ejemplo: `.claude/skills/agregar-juego/` del tp-final, cinco fases y verificación jugando con el MCP de Playwright.
+- Command de un archivo como atajo corto. Ejemplo: `.claude/commands/pre-entrega.md`, que revisa el estado antes de entregar y arranca con "no arregles nada todavía".
 - `/memory`, `/context`, `/permissions` son built-ins del CLI, no archivos.
 - **Equivalencias (§11.3b):** la pieza donde más convergieron. Mismo formato `SKILL.md` en los tres. Codex en `.agents/skills/`, invocación con `$nombre`, custom prompts deprecados en favor de skills. OpenCode en `.opencode/skills/` y además lee `.claude/skills/`; commands en `.opencode/commands/`.
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): `/memory`, `/context` y `/permissions` son built-ins sin archivo; la `description` decide la activación automática; **una skill no es una garantía**: el enforcement determinístico vive en permisos.
 **Plantilla obligatoria:** misma de 4 preguntas + demo.
-**Animations / interactive:** Tarjeta de plantilla. Tabla skill vs command. SKILL.md y `pre-pr.md` como código. `.harness-map.is-large`.
-**Mini-demo:** `/context` muestra la skill en el índice; pedido en prosa "agregá un endpoint GET /users/{user_id}/posts…" activa la skill y recorre las fases; contraste parcial en una copia sin `.claude/skills/` (CLAUDE.md y rules siguen cubriendo parte). Plan B: `/add-endpoint …` directo.
+**Animations / interactive:** Tarjeta de plantilla. Tabla skill vs command. SKILL.md y `pre-entrega.md` como código. `.harness-map.is-large`.
+**Mini-demo:** `/context` muestra la skill en el índice; pedido en prosa "quiero sumar un juego nuevo, un Pong" activa la skill y recorre las fases (no se termina el juego en vivo: alcanza con ver el orden); contraste parcial en una copia sin `.claude/skills/`, donde las rules siguen cubriendo parte pero el orden se improvisa. Plan B: `/agregar-juego …` directo.
 **Slide budget actual:** 9 slides.
 
 ## Section 12: Sub-agents
@@ -170,14 +172,14 @@
 **Through-line:** Instancia separada del loop con su propia ventana de contexto. Al padre solo vuelve el resultado.
 **What students walk away knowing:**
 - Sub-agent NO es "otra IA": por default usa el modelo del padre y hereda sus tools, aislado en otra ventana.
-- Definición con frontmatter: `name`, `description`, `tools` (si se omite hereda todas; si se declara, restringe), `model` opcional. Ejemplo: `.claude/agents/researcher.md` (Read, Grep, Glob).
+- Definición con frontmatter: `name`, `description`, `tools` (si se omite hereda todas; si se declara, restringe), `model` opcional. Ejemplo: `.claude/agents/explorador.md` del tp-final (Read, Grep, Glob).
 - Built-in: `Explore`, `Plan`, `general-purpose`. El padre invoca con la tool `Agent`, a pedido tuyo o por su cuenta según la `description`.
 - El padre ve solo el resultado, no el razonamiento → la delegación no exime de supervisar. Paralelización es beneficio secundario; el motivo principal es proteger el contexto.
 - **Equivalencias (§12.3b):** mismo aislamiento en los tres. Codex define cada sub-agent en `.codex/agents/*.toml` como una capa de config completa (modelo, effort y sandbox propios; built-in `explorer`, `worker`). OpenCode en `.opencode/agents/*.md`, invocación con `@nombre` y sesiones hijas que se pueden recorrer mientras trabajan.
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): un sub-agent no es "otra IA"; **delegar no exime de supervisar**; paralelizar es beneficio secundario; sin `tools` declaradas hereda todas.
 **Plantilla obligatoria:** misma de 4 preguntas + demo.
 **Animations / interactive:** Tarjeta de plantilla. Diagrama del padre + sub-loop con flechas "baja la tarea" / "sube solo el resultado". `.harness-map.is-large`.
-**Mini-demo:** `/context` como línea base; "sin usar sub-agents, explicame cómo funciona la auth de punta a punta" inline vs la misma pregunta delegada a `researcher`; delta chico porque el repo es chico. Mostrar `tools:` en `researcher.md`.
+**Mini-demo:** `/context` como línea base; "sin usar sub-agents, explicame cómo viaja un puntaje hasta el ranking" inline vs la misma pregunta delegada a `explorador`; delta chico porque el repo es chico, pero el recorrido cruza las dos mitades. Mostrar `tools:` en `explorador.md`.
 **Cierre:** el bridge apunta al trabajo final (antes apuntaba a plan mode).
 **Slide budget actual:** 9 slides.
 

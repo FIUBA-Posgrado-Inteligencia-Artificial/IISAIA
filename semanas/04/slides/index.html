@@ -3316,20 +3316,20 @@
 
   <p class="s6-dial-lead">Un plan es la defensa más barata contra la <strong>deriva</strong>, que el agente se aleje de lo que pediste: corregirla en el plan cuesta leer; en el diff, revertir.</p>
 
-  <pre class="s6-plan-block"><span class="s6-plan-key">Objetivo:</span> <span class="s6-plan-val">extraer el patrón get-or-404 de users.py y posts.py a un helper compartido</span>
+  <pre class="s6-plan-block"><span class="s6-plan-key">Objetivo:</span> <span class="s6-plan-val">mostrar en la home el mejor puntaje de cada juego</span>
 
 <span class="s6-plan-key">Archivos:</span>
-  <span class="s6-plan-val">- backend/routers/common.py (nuevo: get_or_404)</span>
-  <span class="s6-plan-val">- backend/routers/users.py</span>
-  <span class="s6-plan-val">- backend/routers/posts.py</span>
+  <span class="s6-plan-val">- backend/schemas.py (GameOut suma top_score)</span>
+  <span class="s6-plan-val">- backend/routes.py (list_games lo calcula)</span>
+  <span class="s6-plan-val">- frontend/js/home.js (lo muestra en cada tarjeta)</span>
 
 <span class="s6-plan-key">Pasos:</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">1. Leer get_user y get_post en los dos routers</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">2. Crear get_or_404 en common.py</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">3. Reemplazar el if/raise por el helper en cada router</span>
-  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">4. Correr la suite de tests</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">1. Leer list_games y GameOut</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">2. Agregar top_score al schema de salida</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">3. Calcularlo en la query, sin romper el orden del ranking</span>
+  <span class="s6-plan-check">[ ]</span> <span class="s6-plan-val">4. Mostrarlo en la tarjeta de cada juego</span>
 
-<span class="s6-plan-key">Verificación:</span> <span class="s6-plan-val">uv run pytest pasa sin regresiones</span></pre>
+<span class="s6-plan-key">Verificación:</span> <span class="s6-plan-val">jugar una partida, guardar el puntaje y recargar la home</span></pre>
 
   <p class="s6-plan-note">
     Sin <strong>archivos</strong> explícitos no sabés qué se va a tocar. Sin <strong>verificación</strong> no sabés cómo te enterás de que terminó bien. Si el plan está flojo, pedí que lo complete antes de aprobar.
@@ -3337,8 +3337,8 @@
 
   <aside class="notes">
     <p><strong>No es el formato literal de la herramienta: es el checklist para leer cualquier plan.</strong></p>
-    <p><u>Deriva primero; después las cuatro partes sobre una tarea real del demo-repo.</u></p>
-    <p><em>"Si vas a usar plan mode, tenés que saber leer un plan. Primero, para qué sirve: contra la deriva, que el agente arranque yendo hacia lo que pediste y a la décima vuelta esté en otro lado. Si eso lo ves en el plan, corregir cuesta leer; si lo ves en el diff, cuesta revertir. Ningún agente va a escribir el plan con estos títulos exactos, pero la información tiene que estar. Uso una tarea real del demo-repo: users.py y posts.py repiten lo mismo, buscan en el store y si no está tiran un 404. Objetivo: si no coincide con lo que pediste, entendió mal y frenás ahí. Archivos: qué va a tocar; acá un helper nuevo y los dos routers. Si ves que se mete con tests o con main.py y no querías, este es el lugar para corregirlo. Pasos: el orden. Y verificación: cómo te enterás de que salió bien, en este caso que uv run pytest pase. Si falta alguno de estos cuatro, no aprobés todavía. En Claude Code, cuando el plan está listo te aparecen tres opciones: 'Yes, and use auto mode', 'Yes, manually approve edits', y 'No, keep planning', que es la que usás para pedirle que lo corrija. Aprobar el plan fija el rumbo, no firma cada acción: las reglas de permisos siguen aplicando."</em></p>
+    <p><u>Deriva primero; después las cuatro partes sobre una tarea real del repo del TP.</u></p>
+    <p><em>"Si vas a usar plan mode, tenés que saber leer un plan. Primero, para qué sirve: contra la deriva, que el agente arranque yendo hacia lo que pediste y a la décima vuelta esté en otro lado. Si eso lo ves en el plan, corregir cuesta leer; si lo ves en el diff, cuesta revertir. Ningún agente va a escribir el plan con estos títulos exactos, pero la información tiene que estar. Uso una tarea real del repo del trabajo final: hoy la home lista los juegos pero no muestra el mejor puntaje de cada uno. Objetivo: si no coincide con lo que pediste, entendió mal y frenás ahí. Archivos: qué va a tocar; acá el schema y la query del backend, y el render de la home. Si ves que se mete con las escenas de los juegos y no querías, este es el lugar para corregirlo. Pasos: el orden. Y verificación: cómo te enterás de que salió bien. Ojo con esta, porque en este proyecto no hay tests: la verificación es jugar una partida, guardar el puntaje y recargar la home. Un plan que dice "correr los tests" en un repo sin tests es un plan que nadie leyó. Si falta alguno de estos cuatro, no aprobés todavía. En Claude Code, cuando el plan está listo te aparecen tres opciones: 'Yes, and use auto mode', 'Yes, manually approve edits', y 'No, keep planning', que es la que usás para pedirle que lo corrija. Aprobar el plan fija el rumbo, no firma cada acción: las reglas de permisos siguen aplicando."</em></p>
   </aside>
 </section>
 
@@ -3746,7 +3746,7 @@
   text-decoration: none;
 }
 
-/* Repo vivo — demo-repo */
+/* Repo vivo — el TP de referencia */
 .s7-repo-wrap {
   max-width: 800px;
   margin: 12px auto 0;
@@ -4233,41 +4233,41 @@
   </aside>
 </section>
 
-<!-- §7.8 · Demo-repo como ejemplo vivo -->
+<!-- §7.8 · El repo del TP como ejemplo vivo -->
 <section class="s7-slide">
-  <h2>El demo-repo como instancia viva</h2>
+  <h2>El repo de referencia como instancia viva</h2>
 
   <div class="s7-repo-wrap">
     <div class="s7-repo-path">./CLAUDE.md (extracto) · Nivel 3, proyecto</div>
 
-    <pre class="s7-repo-code"><span class="c">## Folder map</span>
-| `backend/main.py` | Entry point de FastAPI (CORS + routers) |
-| `backend/routers/` | Endpoints HTTP (`users.py`, `posts.py`) |
-| `backend/middleware/auth.py` | Dependency de auth bearer |
+    <pre class="s7-repo-code"><span class="c">## Comandos</span>
+uv run fastapi dev backend/main.py    <span class="c"># API + frontend en :8000</span>
+- <span class="c">**No hay suite de tests.**</span> La verificación es jugar en el navegador.
 <span class="c">…</span>
 
-<span class="c">## Convenciones</span>
-- Python 3.11+. Type hints obligatorios en funciones públicas.
-- Auth: bearer token leído de `DEMO_BEARER_TOKEN`. En tests, se setea `test-token`.
+<span class="c">## Dónde seguir leyendo</span>
+| `backend/CLAUDE.md`                  | arranque y seed, recorrido de un request |
+| `frontend/CLAUDE.md`                 | las dos páginas, quién llama a quién     |
+| `.claude/rules/escenas-de-juego.md`  | reglas para escribir una Phaser.Scene    |
 <span class="c">…</span>
 
-<span class="c">## Workflow</span>
-- Antes de un PR, correr `uv run pytest` y verificar que pasa.
+<span class="c">## Trampas ya pagadas</span>
+- <span class="c">**Teclado de Phaser.**</span> Usá siempre `onKeys()`, nunca `keyboard.on(...)`.
 <span class="c">…</span></pre>
 
     <div class="s7-repo-connect">
       Cuando abrís Claude Code en este repo, ese archivo entra completo a la ventana antes de tu primer mensaje.
-      El agente ya sabe que los routers viven en <code>backend/routers/</code>,
-      que el bearer token se lee de <code>DEMO_BEARER_TOKEN</code>
-      y que antes de un PR hay que correr <code>uv run pytest</code>.
+      El agente ya sabe que <strong>no hay tests</strong> y que se verifica jugando,
+      dónde seguir leyendo según qué mitad toque,
+      y que el teclado va por <code>onKeys()</code>.
       <strong>Nada de eso lo dijiste vos en el chat; lo encontró en el archivo.</strong>
     </div>
   </div>
 
   <aside class="notes">
     <p><strong>Señalar el path, recorrer los tres bloques del extracto y cerrar con "no lo dijiste vos".</strong></p>
-    <p><u>Extracto real del CLAUDE.md del demo-repo (Nivel 3), el mismo que se abre en el demo.</u></p>
-    <p><em>"Vamos a un archivo concreto. Este es el CLAUDE.md del demo-repo que vamos a usar en un minuto: una API de FastAPI con un frontend chico. Es el nivel proyecto, versionado. Tiene tres bloques: un folder map que asocia paths con responsabilidades, convenciones de código (type hints, el bearer token leído de una variable de entorno) y workflow, como correr los tests antes de un PR. Lo que ven es un extracto; el archivo tiene más filas. Cuando abro Claude Code en este repo, ese archivo entra completo a la ventana antes de mi primer mensaje. Nada de eso se lo dije en el chat: lo encontró en el archivo. Eso es 'siempre cargado' en la práctica, y es lo que vamos a hacer visible ahora."</em></p>
+    <p><u>Extracto real del CLAUDE.md del TP de referencia (Nivel 3), el mismo que se abre en el demo.</u></p>
+    <p><em>"Vamos a un archivo concreto: el CLAUDE.md del trabajo final de referencia, el que tienen en el repo del curso. Una plataforma con dos juegos, frontend con Phaser y backend FastAPI. Es el nivel proyecto, versionado. Miren los tres bloques. Comandos: cómo se levanta, y una línea que vale oro, no hay suite de tests y la verificación es jugar en el navegador; sin eso, el agente inventa un pytest. Dónde seguir leyendo: una tabla que manda a los CLAUDE.md de backend y frontend y a las rules, según qué mitad toques. Y trampas ya pagadas: bugs que costaron caro una vez y que no se van a repetir, como el del teclado de Phaser. Cuando abro Claude Code en este repo, todo eso entra a la ventana antes de mi primer mensaje. No se lo dije en el chat: lo encontró en el archivo."</em></p>
   </aside>
 </section>
 
@@ -4287,21 +4287,22 @@
     <hr>
     <p><strong>Setup (común a todas las demos de Parte 2):</strong></p>
     <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code>.</li>
+      <li>Copiar <code>semanas/00/source_material/apellido-iisaia/tp-final/</code> a <code>~/tp-final-demo</code> (fuera del repo del curso), sin <code>.venv/</code> ni <code>scores.db</code>.</li>
+      <li><code>cd ~/tp-final-demo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
+      <li><code>uv sync</code>. Este proyecto no usa variables de entorno; <code>scores.db</code> se crea solo al arrancar la app.</li>
       <li>Abrir Claude Code con <code>claude --permission-mode default</code>: en planes Pro/Max/Team el modo de arranque por defecto es <code>auto</code>, que aprueba con un clasificador y taparía los prompts de permiso. En la UI, <code>default</code> se llama Manual.</li>
       <li>Para ver qué cargó el runtime: <code>/context</code>. <code>/memory</code> lista ubicaciones posibles, incluso archivos que no existen.</li>
       <li>Ojo en vivo: mi <code>~/.claude/CLAUDE.md</code> y mis rules de usuario (<code>~/.claude/rules/</code>) también aparecen como fuentes. Mencionarlo cuando salgan.</li>
-      <li>Auto memory: con el repo copiado a un path nuevo, <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code> arranca vacía. Correr antes una sesión en <code>~/demo-repo</code> que guarde algo (p. ej. "recordá que en este repo prefiero tests cortos"), o usar el Plan B.</li>
+      <li>Auto memory: con el repo copiado a un path nuevo, <code>~/.claude/projects/&lt;tp-final-demo&gt;/memory/</code> arranca vacía. Correr antes una sesión en <code>~/tp-final-demo</code> que guarde algo (p. ej. "recordá que en este repo la verificación es jugar, no correr tests"), o usar el Plan B.</li>
     </ol>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Paso 1 · /context: qué está cargado</strong></p>
     <ul>
-      <li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li>
+      <li><strong>Terminal:</strong> <code>cd ~/tp-final-demo</code></li>
       <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>CLAUDE.md</code> y las rules entre los memory files, con sus tokens</li>
+      <li><strong>Mirar:</strong> <code>CLAUDE.md</code> y <code>api-y-datos.md</code> entre los memory files, con sus tokens</li>
+      <li><strong>Mirar:</strong> los <code>CLAUDE.md</code> de <code>backend/</code> y <code>frontend/</code> <em>no</em> están todavía: cargan cuando Claude lea un archivo de esas carpetas</li>
     </ul>
     <p><strong>Paso 2 · /memory: ubicaciones</strong></p>
     <ul>
@@ -4311,11 +4312,11 @@
     </ul>
     <p><strong>Paso 3 · Carpeta de auto memory</strong></p>
     <ul>
-      <li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code></li>
+      <li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;tp-final-demo&gt;/memory/</code></li>
       <li><strong>VS Code:</strong> abrir <code>MEMORY.md</code></li>
       <li><strong>Mirar:</strong> índice que apunta a archivos por tema, escrito por Claude</li>
     </ul>
-    <p><em>Plan B (si la carpeta de memoria del demo-repo está vacía): abrir la de ~/.claude/projects/ del repo del curso, que ya tiene MEMORY.md con archivos por tema. Narrar: "esto lo fue escribiendo Claude en sesiones anteriores, no yo".</em></p>
+    <p><em>Plan B (si la carpeta de memoria del repo copiado está vacía): abrir la de ~/.claude/projects/ del repo del curso, que ya tiene MEMORY.md con archivos por tema. Narrar: "esto lo fue escribiendo Claude en sesiones anteriores, no yo".</em></p>
   </aside>
 </section>
 
@@ -4664,7 +4665,7 @@
 .s8-compare-col.is-always .s8-compare-cost strong { color: var(--accent-secondary); }
 .s8-compare-col.is-scoped .s8-compare-cost strong { color: var(--accent); }
 
-/* Cómo se usa — code-walkthrough del api.md */
+/* Cómo se usa — code-walkthrough de la rule scoped */
 .s8-howto-wrap {
   max-width: 920px;
   margin: 10px auto 0;
@@ -4738,7 +4739,7 @@
 }
 .s8-glob-text code { font-family: var(--font-mono); }
 
-/* Las 4 rules del demo-repo — lista */
+/* Las rules del repo — lista */
 .reveal .s8-rules-list {
   max-width: 860px;
   margin: 14px auto 0;
@@ -4977,11 +4978,11 @@
     <div class="s8-compare-col is-always">
       <span class="s8-compare-tag">Modo A</span>
       <h3 class="s8-compare-h3">Sin frontmatter: <strong>siempre cargada</strong></h3>
-      <span class="s8-compare-file">.claude/rules/code-style.md (extracto)</span>
-      <pre class="s8-compare-code"><span class="c"># Code style</span>
+      <span class="s8-compare-file">.claude/rules/api-y-datos.md (extracto)</span>
+      <pre class="s8-compare-code"><span class="c"># API y datos</span>
 
-- Líneas &lt;100 caracteres.
-- Funciones &lt;50 líneas; si una crece, extraé helpers.
+- El slug del juego viaja en el path y no se repite en el body.
+- `created_at` lo pone el servidor, nunca el cliente.
 <span class="c">…</span></pre>
       <p class="s8-compare-body">
         El archivo arranca directo con el cuerpo, sin bloque YAML adelante.
@@ -4993,10 +4994,11 @@
     <div class="s8-compare-col is-scoped">
       <span class="s8-compare-tag">Modo B</span>
       <h3 class="s8-compare-h3">Con <code>paths:</code>, <strong>path-scoped</strong></h3>
-      <span class="s8-compare-file">.claude/rules/api.md (extracto)</span>
+      <span class="s8-compare-file">.claude/rules/escenas-de-juego.md (extracto)</span>
       <pre class="s8-compare-code"><span class="c">---</span>
 <span class="k">paths:</span>
-  - <span class="y">"backend/**/*.py"</span>
+  - <span class="y">"frontend/js/games/**/*.js"</span>
+  - <span class="y">"frontend/js/game-page.js"</span>
 <span class="c">---</span>
 <span class="c">…</span></pre>
       <p class="s8-compare-body">
@@ -5010,11 +5012,11 @@
   <aside class="notes">
     <p><strong>Ir columna por columna, izquierda primero; en la derecha leer el glob completo.</strong></p>
     <p><u>Slide central de §8: siempre cargada (costo de CLAUDE.md) contra path-scoped (costo cero hasta que matchea).</u></p>
-    <p><em>"Tercera pregunta: cuándo se carga. Dos ramas, y la decisión vive en una sola cosa: si el archivo arranca con frontmatter YAML o no. Modo A, sin frontmatter: acá está el comienzo de code-style.md del demo-repo, arranca directo con el cuerpo. El runtime la carga al iniciar la sesión y queda en la ventana; cuesta lo mismo que si esas líneas estuvieran en CLAUDE.md. Modo B, con paths: el comienzo de api.md, un bloque YAML con un glob, backend doble asterisco barra asterisco punto py. La rule entra recién cuando Claude lee un archivo cuyo path cae en el glob. Si toda la sesión transcurre en el frontend, esta rule nunca aparece. Se parece al caso de los CLAUDE.md de subdirectorio que vimos antes, pero con otro mecanismo: CLAUDE.md lo hace por carpeta; rules, por glob explícito, que es más fino."</em></p>
+    <p><em>"Tercera pregunta: cuándo se carga. Dos ramas, y la decisión vive en una sola cosa: si el archivo arranca con frontmatter YAML o no. Modo A, sin frontmatter: acá está el comienzo de api-y-datos.md del repo del TP, arranca directo con el cuerpo. El runtime la carga al iniciar la sesión y queda en la ventana; cuesta lo mismo que si esas líneas estuvieran en CLAUDE.md. Modo B, con paths: el comienzo de escenas-de-juego.md, un bloque YAML con dos globs, los archivos de juegos y la página que los monta. La rule entra recién cuando Claude lee un archivo cuyo path cae en alguno de los dos. Si toda la sesión transcurre en el backend, esta rule nunca aparece. Se parece al caso de los CLAUDE.md de subdirectorio que vimos antes, pero con otro mecanismo: CLAUDE.md lo hace por carpeta; rules, por glob explícito, que es más fino."</em></p>
   </aside>
 </section>
 
-<!-- §8.5 · Cómo se usa — frontmatter del api.md + globs -->
+<!-- §8.5 · Cómo se usa — frontmatter de escenas-de-juego.md + globs -->
 <section class="s8-slide">
   <ol class="s8-five-q-grid is-mini">
     <li class="s8-five-q-card"><span class="s8-five-q-num">1</span><span class="s8-five-q-label">Qué es</span></li>
@@ -5026,19 +5028,19 @@
   <h2>Frontmatter YAML arriba, cuerpo Markdown abajo</h2>
 
   <div class="s8-howto-wrap">
-    <div class="s8-howto-path">.claude/rules/api.md (extracto, path-scoped al backend)</div>
+    <div class="s8-howto-path">.claude/rules/escenas-de-juego.md (extracto, path-scoped a los juegos)</div>
 
     <pre class="s8-howto-code"><span class="c">---</span>
+<span class="k">description:</span> Reglas para escribir o modificar una Phaser.Scene.
 <span class="k">paths:</span>
-  - <span class="y">"backend/**/*.py"</span>
+  - <span class="y">"frontend/js/games/**/*.js"</span>
+  - <span class="y">"frontend/js/game-page.js"</span>
 <span class="c">---</span>
 
-<span class="c"># API conventions</span>
+<span class="c"># Escenas de juego</span>
 <span class="c">…</span>
-- Cada endpoint declara su `response_model` y `status_code` explícito.
-<span class="c">…</span>
-- Si tocás un endpoint o agregás uno nuevo, regenerar `openapi.yaml` con
-  `uv run python scripts/export_openapi.py` y commitear el cambio en el mismo PR.
+- La escena no importa `api.js`, no hace `fetch` y no sabe que existe un ranking.
+- El teclado va por `onKeys()`, nunca `scene.input.keyboard.on(...)` directo.
 <span class="c">…</span></pre>
 
     <div class="s8-globs">
@@ -5058,45 +5060,37 @@
 
   <aside class="notes">
     <p><strong>Leer el frontmatter línea por línea, después el cuerpo, y cerrar con los cuatro patrones.</strong></p>
-    <p><u>Anatomía real de api.md (extracto) y los patrones de glob habituales.</u></p>
-    <p><em>"Cuarta pregunta: cómo se usa. Este es api.md del demo-repo; lo que ven es un extracto del archivo real. Arriba, frontmatter YAML, delimitado por tres guiones arriba y tres abajo; adentro, una clave paths con una lista de globs. Acá hay uno solo, y si querés más agregás ítems a la lista. Debajo del segundo separador empieza el cuerpo, Markdown común. El cuerpo es lo que entra al contexto cuando la rule se activa: convenciones sobre endpoints, incluida la de regenerar openapi.yaml después de tocar uno. Esa instrucción está solo en esta rule, no en CLAUDE.md, y la vamos a usar en el demo. Abajo, los patrones que vas a usar casi siempre: asterisco simple matchea dentro de un nivel, doble asterisco a cualquier profundidad, y las llaves expanden alternativas separadas por coma."</em></p>
+    <p><u>Anatomía real de escenas-de-juego.md (extracto) y los patrones de glob habituales.</u></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Este es escenas-de-juego.md del repo del TP; lo que ven es un extracto del archivo real. Arriba, frontmatter YAML, delimitado por tres guiones arriba y tres abajo; adentro, una descripción y una clave paths con dos globs. Debajo del segundo separador empieza el cuerpo, Markdown común. El cuerpo es lo que entra al contexto cuando la rule se activa: que la escena no habla con la API, y que el teclado va siempre por onKeys, que es la corrección de un bug real que está contado en el README. Esas instrucciones están solo en esta rule, no en CLAUDE.md, y las vamos a usar en el demo. Abajo, los patrones que vas a usar casi siempre: asterisco simple matchea dentro de un nivel, doble asterisco a cualquier profundidad, y las llaves expanden alternativas separadas por coma."</em></p>
   </aside>
 </section>
 
-<!-- §8.6 · Las 4 rules del demo-repo — lista (sin mini-strip) -->
+<!-- §8.6 · Las rules del repo — lista (sin mini-strip) -->
 <section class="s8-slide">
-  <h2>Las cuatro rules del demo-repo</h2>
+  <h2>Las dos rules del repo</h2>
 
   <ul class="s8-rules-list">
     <li>
-      <strong><code>code-style.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
-      Largo de línea y de funciones, imports, logging.
-    </li>
-    <li>
-      <strong><code>testing.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
-      TestClient de FastAPI, naming, fixture <code>reset_store</code>.
-    </li>
-    <li>
-      <strong><code>security.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
-      Bearer token y <code>.env</code>; no loggear el header <code>Authorization</code>.
+      <strong><code>api-y-datos.md</code></strong>: sin frontmatter, <em>siempre cargada</em>.
+      Contrato de los endpoints, status codes en uso, fechas del servidor, orden del ranking.
     </li>
     <li class="is-scoped">
-      <strong><code>api.md</code></strong>: <code>paths: ["backend/**/*.py"]</code>, <em>solo al leer un .py bajo backend/</em>.
-      <code>response_model</code> explícito, auth en escritura, regenerar <code>openapi.yaml</code>.
+      <strong><code>escenas-de-juego.md</code></strong>: <code>paths:</code> a <code>frontend/js/games/</code>, <em>solo al leer un archivo de juegos</em>.
+      La escena no habla con la API, el teclado va por <code>onKeys()</code>, cómo termina una partida.
     </li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Recorrer los cuatro ítems; el último es el único path-scoped y el que usa el demo.</strong></p>
-    <p><u>Zoom al demo-repo: tres rules siempre cargadas y una path-scoped (marcador en otro color).</u></p>
-    <p><em>"Bajemos a tierra. El demo-repo tiene cuatro rules: tres siempre cargadas y una path-scoped. Code-style, testing y security cubren convenciones de todo el codebase: cómo escribir Python, cómo escribir tests, cómo no filtrar secretos. Van sin frontmatter porque vale la pena que estén desde el arranque, y el costo es bajo porque cada una son pocas líneas. Api.md es la única scoped: solo entra cuando Claude lee un .py del backend. Lo que prescribe, response model explícito, auth en los endpoints de escritura y regenerar el openapi después de tocar un endpoint, solo tiene sentido en el backend. Y fíjense que esa instrucción del openapi no está en el CLAUDE.md del repo: vive únicamente en esta rule. Esta última es la que vamos a hacer aparecer en el demo."</em></p>
+    <p><strong>Recorrer los dos ítems; el segundo es el path-scoped y el que usa el demo.</strong></p>
+    <p><u>Zoom al repo del TP: una rule siempre cargada y una path-scoped (marcador en otro color).</u></p>
+    <p><em>"Bajemos a tierra. El repo del TP tiene dos rules, una de cada tipo. Api-y-datos va sin frontmatter, así que está desde el arranque: el contrato de los endpoints, qué status codes se usan, que la fecha la pone el servidor, cómo se ordena el ranking. Son decisiones que valen para todo el proyecto y cuestan pocas líneas. Escenas-de-juego es la scoped: solo entra cuando Claude lee un archivo de los juegos. Lo que prescribe, que la escena no habla con la API y que el teclado va por onKeys, no le sirve de nada a alguien tocando el backend. Y fíjense que eso no está en el CLAUDE.md del repo: vive únicamente en esta rule. Esta es la que vamos a hacer aparecer en el demo."</em></p>
   </aside>
 </section>
 
 <!-- §8.8 · Demo · /context antes, durante y después (section-divider + clickable-steps) -->
 <section class="section-divider">
   <h2>Demo · /context antes, durante y después</h2>
-  <p class="s8-demo-lead">Hacer visible que <code>api.md</code> entra al contexto solo cuando Claude lee un archivo del backend.</p>
+  <p class="s8-demo-lead">Hacer visible que <code>escenas-de-juego.md</code> entra al contexto solo cuando Claude lee un archivo de los juegos.</p>
 
   <div class="s8-demo-wrap">
     <div id="s8-demo-steps"></div>
@@ -5104,32 +5098,32 @@
 
   <aside class="notes">
     <p><strong>Setup de siempre (ver §7.9), con VS Code mostrando .claude/rules/.</strong></p>
-    <p><u>Tres pasos sobre la misma sesión, con /context entre cada uno: api.md aparece recién en el último.</u></p>
-    <p><em>"Vamos al demo. Tres pasos sobre la misma sesión. El objetivo es ver, con /context, cómo api.md cambia de estado: no cargada, no cargada, cargada, y en qué momento exacto entra."</em></p>
+    <p><u>Tres pasos sobre la misma sesión, con /context entre cada uno: escenas-de-juego.md aparece recién en el último.</u></p>
+    <p><em>"Vamos al demo. Tres pasos sobre la misma sesión. El objetivo es ver, con /context, cómo escenas-de-juego.md cambia de estado: no cargada, no cargada, cargada, y en qué momento exacto entra."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p>Setup de siempre: <code>~/demo-repo</code> con git init, <code>claude --permission-mode default</code>. Van a aparecer también mi <code>~/.claude/CLAUDE.md</code> y mis rules de usuario entre los memory files.</p>
+    <p>Setup de siempre: <code>~/tp-final-demo</code> con git init, <code>claude --permission-mode default</code>. Van a aparecer también mi <code>~/.claude/CLAUDE.md</code> y mis rules de usuario entre los memory files.</p>
     <p><strong>Paso 1 · Sin leer nada del backend</strong></p>
     <ul>
       <li><strong>VS Code:</strong> abrir <code>.claude/rules/</code> y ver los 4 archivos</li>
-      <li><strong>VS Code:</strong> en <code>api.md</code>, señalar el frontmatter <code>paths:</code></li>
+      <li><strong>VS Code:</strong> en <code>escenas-de-juego.md</code>, señalar el frontmatter <code>paths:</code></li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>api.md</code> NO figura entre los memory files</li>
+      <li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> NO figura entre los memory files</li>
     </ul>
     <p><strong>Paso 2 · Un archivo que no matchea</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> "leé <code>frontend/index.html</code>"</li>
+      <li><strong>En Claude:</strong> "leé <code>backend/routes.py</code>"</li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>api.md</code> sigue sin aparecer</li>
+      <li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> sigue sin aparecer</li>
     </ul>
     <p><strong>Paso 3 · Un archivo que sí matchea</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> "leé <code>backend/routers/users.py</code>"</li>
+      <li><strong>En Claude:</strong> "leé <code>frontend/js/games/snake.js</code>"</li>
       <li><strong>Mirar:</strong> el aviso de carga de la rule en la terminal</li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>api.md</code> ahora figura entre los memory files</li>
+      <li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> ahora figura entre los memory files</li>
     </ul>
-    <p><em>Plan B (si /context no deja ver el cambio): demostrar por comportamiento. La instrucción de regenerar openapi.yaml está solo en api.md. Hacer /clear, pedirle a Claude que cambie un texto de frontend/index.html: no menciona el openapi. /clear otra vez, pedirle que agregue un campo opcional a la respuesta de GET /users en backend/routers/users.py: ahora propone regenerar openapi.yaml.</em></p>
+    <p><em>Plan B (si /context no deja ver el cambio): demostrar por comportamiento. La regla de onKeys() está solo en escenas-de-juego.md. Hacer /clear y pedirle a Claude, sin nombrar la rule, que agregue una tecla de pausa a Snake: tiene que usar onKeys() de common.js y no keyboard.on(). Contraste: /clear y pedirle un cambio en backend/routes.py; ahí esa rule nunca entra.</em></p>
   </aside>
 </section>
 
@@ -5484,7 +5478,7 @@
   font-family: var(--font-mono);
 }
 
-/* Walkthrough — §9.6 — campos top del settings.json del demo-repo */
+/* Walkthrough — §9.6 — campos top del settings.json del repo del TP */
 .s9-walk-path {
   display: inline-block;
   margin: 4px auto 6px;
@@ -5819,24 +5813,24 @@
   </aside>
 </section>
 
-<!-- §9.6 · Walkthrough del demo-repo settings.json — sin mini-strip (zoom-in concreto) -->
+<!-- §9.6 · Walkthrough del settings.json del TP — sin mini-strip (zoom-in concreto) -->
 <section class="s9-slide">
-  <h2>El <code>settings.json</code> del demo-repo</h2>
+  <h2>El <code>settings.json</code> del repo</h2>
 
   <div class="s9-walk-path">.claude/settings.json</div>
 
   <ul class="s9-walk-list">
-    <li><strong><code>"model": "sonnet"</code></strong> · todo el que abre el repo trabaja con el mismo modelo.</li>
-    <li><strong><code>"env"</code></strong> · <code>DEMO_BEARER_TOKEN</code> con placeholder. Para correr la app a mano, el valor real va en <code>.env</code>. Tu <code>settings.local.json</code> puede pisarlo para los procesos que lanza Claude; es lo que muestra el <code>.example</code>.</li>
+    <li><strong><code>"model": "sonnet"</code></strong> · todo el que abre el repo trabaja con el mismo modelo. Tu <code>settings.local.json</code> puede pisarlo en tu máquina; es lo que muestra el <code>.example</code>.</li>
     <li><strong><code>"attribution": { "pr": "" }</code></strong> · los PRs que abre Claude salen sin línea de atribución.</li>
     <li><strong><code>"cleanupPeriodDays": 30</code></strong> · un mes de transcripts locales.</li>
-    <li><strong><code>"permissions"</code></strong> · 8 reglas <code>allow</code>, 3 <code>deny</code>, 2 <code>ask</code>.</li>
+    <li><strong><code>"permissions"</code></strong> · 7 reglas <code>allow</code>, 4 <code>deny</code>, 2 <code>ask</code>.</li>
+    <li><strong>No hay <code>"env"</code></strong> · este proyecto no usa variables de entorno. Un campo que no aplica no se pone "por las dudas": cada línea de acá tiene que estar por una razón.</li>
   </ul>
 
   <aside class="notes">
-    <p><strong>Detenerse en <code>env</code>: placeholder en proyecto, valor real fuera del repo.</strong></p>
+    <p><strong>Detenerse en <code>model</code>: el proyecto propone, tu local dispone.</strong></p>
     <p><u>Los campos top del archivo real; el bloque <code>permissions</code> se abre en §10.</u></p>
-    <p><em>"Vamos al archivo real del demo-repo. model en sonnet: el mismo modelo para todos. env declara DEMO_BEARER_TOKEN con un placeholder; el archivo commiteado documenta que la variable existe, pero el valor real no viaja al repo. Para levantar la app a mano, el backend lo lee del .env. Y si querés que los procesos que lanza Claude usen otro valor, lo ponés en tu settings.local.json: como env.DEMO_BEARER_TOKEN es un escalar, gana el local. Eso es exactamente lo que trae el settings.local.json.example. attribution con pr vacío: los PRs que abra Claude no llevan la línea de atribución. cleanupPeriodDays en treinta. Y permissions: ocho reglas allow, tres deny, dos ask. Ese bloque lo abrimos entero en la sección de permisos."</em></p>
+    <p><em>"Vamos al archivo real del repo del trabajo final. model en sonnet: el que abra el repo trabaja con ese modelo, salvo que su settings.local.json diga otra cosa; el .example que viene en el repo pone haiku, justamente para mostrar que el local pisa al proyecto. attribution con pr vacío: los PRs que abra Claude no llevan la línea de atribución. cleanupPeriodDays en treinta. Y permissions: siete reglas allow, cuatro deny, dos ask; ese bloque lo abrimos entero en la sección que sigue. Y miren lo que no está: no hay env, porque este proyecto no usa variables de entorno. Suena obvio, pero es una decisión: un archivo de configuración se llena de campos copiados de tutoriales, y cada línea que no tiene razón de ser es una línea que alguien va a interpretar mal después."</em></p>
   </aside>
 </section>
 
@@ -5851,15 +5845,15 @@
 
   <aside class="notes">
     <p><strong>Antes de proyectar: revisar el <code>~/.claude/settings.json</code> personal que se va a ver en pantalla.</strong></p>
-    <p><u>Tres pasos: niveles en paralelo, cambio de <code>model</code> con sesión nueva, <code>git status</code> sin el local.</u></p>
+    <p><u>Tres pasos: niveles en paralelo, quién gana en <code>model</code> con sesión nueva, <code>git status</code> sin el local.</u></p>
     <p><em>"Vamos al demo. Tres archivos abiertos en paralelo, uno por nivel. No buscamos que el runtime haga nada vistoso: queremos ver con qué criterio va cada cosa en cada nivel, y cuándo toma efecto un cambio."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Setup de siempre (antes de la clase):</strong></p>
     <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code></li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code></li>
+      <li>Copiar <code>semanas/00/source_material/apellido-iisaia/tp-final/</code> a <code>~/tp-final-demo</code> (fuera del repo del curso).</li>
+      <li><code>cd ~/tp-final-demo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code></li>
+      <li><code>uv sync</code></li>
       <li>Abrir Claude Code con <code>claude --permission-mode default</code> (en Pro/Max/Team el arranque por defecto es <code>auto</code> y taparía los prompts; en la UI <code>default</code> se llama Manual).</li>
       <li>Para ver qué cargó el runtime: <code>/context</code>. Ojo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen.</li>
     </ol>
@@ -5867,22 +5861,22 @@
     <ul>
       <li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code>: <code>cp .claude/settings.local.json.example .claude/settings.local.json</code></li>
       <li><strong>VS Code:</strong> los tres archivos de settings lado a lado: <code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></li>
-      <li><strong>Mirar:</strong> el token en proyecto (<code>changeme-in-real-env</code>) y en local (<code>mi-token-local</code>)</li>
+      <li><strong>Mirar:</strong> <code>model</code> en proyecto (<code>sonnet</code>) y en local (<code>haiku</code>)</li>
     </ul>
-    <p><strong>Paso 2 · Cambiar model</strong></p>
+    <p><strong>Paso 2 · Quién gana, y cuándo aplica</strong></p>
     <ul>
-      <li><strong>VS Code:</strong> <code>model</code> de <code>"sonnet"</code> a <code>"haiku"</code> en <code>.claude/settings.json</code>, guardar</li>
       <li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva con <code>claude --permission-mode default</code></li>
-      <li><strong>Mirar:</strong> <code>/status</code> (o el banner) muestra Haiku</li>
-      <li><strong>VS Code:</strong> volver a <code>"sonnet"</code> y guardar (si no, <code>git status</code> del paso 3 lo muestra modificado)</li>
+      <li><strong>Mirar:</strong> <code>/status</code> muestra Haiku: el local le gana al proyecto</li>
+      <li><strong>Terminal:</strong> borrar <code>.claude/settings.local.json</code> y abrir otra sesión</li>
+      <li><strong>Mirar:</strong> <code>/status</code> vuelve a Sonnet, el valor del proyecto</li>
     </ul>
     <p><strong>Paso 3 · git no ve el archivo local</strong></p>
     <ul>
       <li><strong>Terminal:</strong> <code>git status</code></li>
-      <li><strong>Mirar:</strong> el archivo local no aparece</li>
+      <li><strong>Mirar:</strong> el archivo local no aparece (volver a copiarlo del <code>.example</code> si lo borraste)</li>
       <li><strong>VS Code:</strong> la línea <code>.claude/settings.local.json</code> en <code>.gitignore</code></li>
     </ul>
-    <p><em>Plan B (si algo se traba): con los tres archivos abiertos, leer cada uno en voz alta. Proyecto define la base compartida, local pisa el token solo en esta máquina, usuario te sigue a todos los repos. El .gitignore se muestra abriéndolo, sin correr nada.</em></p>
+    <p><em>Plan B (si algo se traba): con los tres archivos abiertos, leer cada uno en voz alta. Proyecto define la base compartida, local pisa el modelo solo en esta máquina, usuario te sigue a todos los repos. El .gitignore se muestra abriéndolo, sin correr nada.</em></p>
   </aside>
 </section>
 
@@ -6560,25 +6554,29 @@
   </aside>
 </section>
 
-<!-- §10.6 · El bloque permissions del demo-repo — sin mini-strip (zoom-in) -->
+<!-- §10.6 · El bloque permissions del repo del TP — sin mini-strip (zoom-in) -->
 <section class="s10-slide">
-  <h2>El bloque <code>permissions</code> del demo-repo</h2>
+  <h2>El bloque <code>permissions</code> del repo</h2>
 
   <div class="s10-json-wrap">
 <pre><code class="language-json" data-trim>
 {
   "permissions": {
     "allow": [
-      "Bash(uv run uvicorn *)",
-      "Bash(uv run python scripts/export_openapi.py)",
       "Bash(uv sync)",
+      "Bash(uv run fastapi dev backend/main.py*)",
       "Edit(./backend/**)",
       "Edit(./frontend/**)",
-      "Edit(./tests/**)",
-      "Edit(./openapi.yaml)",
+      "Edit(./README.md)",
+      "WebFetch(domain:docs.phaser.io)",
       "WebFetch(domain:fastapi.tiangolo.com)"
     ],
-    "deny": ["Read(./.env)", "Bash(rm -rf *)", "Bash(git push *)"],
+    "deny": [
+      "Read(./scores.db)",
+      "Edit(./docs/plan.md)",
+      "Bash(rm -rf *)",
+      "Bash(git push *)"
+    ],
     "ask": ["Bash(uv add *)", "Bash(uv remove *)"]
   }
 }
@@ -6586,15 +6584,15 @@
   </div>
 
   <div class="s10-read-grid">
-    <div class="s10-read-item"><strong>allow · 8</strong>levantar el server, regenerar openapi, editar en cuatro lugares</div>
-    <div class="s10-read-item is-deny"><strong>deny · 3</strong>leer <code>.env</code>, borrar en masa, hacer push</div>
+    <div class="s10-read-item"><strong>allow · 7</strong>levantar la app, editar el código y el informe, dos dominios de doc</div>
+    <div class="s10-read-item is-deny"><strong>deny · 4</strong>la base, el plan congelado, borrar en masa, hacer push</div>
     <div class="s10-read-item is-ask"><strong>ask · 2</strong>agregar o quitar dependencias pasa por vos</div>
   </div>
 
   <aside class="notes">
-    <p><strong>Leer las tres listas; marcar que <code>uv run pytest</code> no está en ninguna.</strong></p>
+    <p><strong>Leer las tres listas; marcar que <code>git commit</code> no está en ninguna.</strong></p>
     <p><u>El JSON real: allow acotado, deny corto, ask para dependencias.</u></p>
-    <p><em>"Este es el bloque permissions real del demo-repo. Allow: levantar uvicorn, correr el script que regenera openapi.yaml y nada más de Python, uv sync, editar backend, frontend, tests y el openapi, y un fetch a la doc de FastAPI. Deny: leer el .env, rm -rf y git push. Ask: uv add y uv remove, porque agregar una dependencia cambia el proyecto y quiero enterarme antes. Fijate lo que no está: uv run pytest no aparece en ninguna lista. Eso es a propósito, lo usamos en el demo. Y tampoco hay reglas de Read para el proyecto: leer archivos no pide permiso."</em></p>
+    <p><em>"Este es el bloque permissions real del repo del trabajo final. Allow: instalar dependencias, levantar la app, editar backend, frontend y el README, y traer documentación de Phaser y de FastAPI. Deny, y acá está lo interesante: leer scores.db, porque es la base con los puntajes y no tiene nada que el agente necesite; editar docs/plan.md, que es el plan congelado a propósito y tiene que quedar como estaba; rm -rf; y git push, porque publicar lo decido yo. Ask: uv add y uv remove, porque agregar una dependencia cambia el proyecto y quiero enterarme antes. Fíjense lo que no está en ninguna lista: git commit. Eso es a propósito, lo usamos en el demo. Y tampoco hay reglas de Read para el resto: leer archivos no pide permiso."</em></p>
   </aside>
 </section>
 
@@ -6643,28 +6641,28 @@
     <p><em>"Vamos al demo. Una sola sesión, sin reiniciar. Vamos a ver un comando que pregunta, una regla que lo libera y un deny que le gana a un allow que está en otro archivo."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
-    <p><strong>Setup:</strong> el de siempre (copia en <code>~/demo-repo</code> con <code>git init</code>, <code>.env</code>, <code>uv sync</code>). <code>.claude/settings.local.json</code> ya existe desde la demo de settings.json. Arrancar con <code>claude --permission-mode default</code>.</p>
+    <p><strong>Setup:</strong> el de siempre (copia en <code>~/tp-final-demo</code> con <code>git init</code> y <code>uv sync</code>). <code>.claude/settings.local.json</code> ya existe desde la demo de settings.json; si lo borraste ahí, copiarlo otra vez del <code>.example</code>. Arrancar con <code>claude --permission-mode default</code>.</p>
     <p><strong>Paso 1 · Aparece el prompt</strong></p>
     <ul>
       <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
-      <li><strong>En Claude:</strong> "corré los tests"</li>
-      <li><strong>Mirar:</strong> prompt para <code>uv run pytest</code> (no está en <code>allow</code>); no responder todavía</li>
+      <li><strong>En Claude:</strong> "commiteá los cambios que hay"</li>
+      <li><strong>Mirar:</strong> prompt para <code>git commit</code> (no está en ninguna lista); no responder todavía</li>
     </ul>
     <p><strong>Paso 2 · Guardar la regla</strong></p>
     <ul>
       <li><strong>En Claude:</strong> "Yes, and don't ask again"</li>
       <li><strong>VS Code:</strong> regla nueva en <code>.claude/settings.local.json</code> (opcional: verla también en <code>/permissions</code>)</li>
-      <li><strong>En Claude:</strong> "corré los tests" otra vez</li>
+      <li><strong>En Claude:</strong> pedirle otro commit (tocá un archivo antes)</li>
       <li><strong>Mirar:</strong> corre sin prompt</li>
     </ul>
     <p><strong>Paso 3 · Deny le gana a allow</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> <code>/permissions</code>, agregar a deny <code>Edit(./openapi.yaml)</code> guardada en local</li>
-      <li><strong>En Claude:</strong> "cambiá el title en openapi.yaml"</li>
-      <li><strong>Mirar:</strong> bloqueado sin prompt, aunque <code>Edit(./openapi.yaml)</code> está en el allow del proyecto</li>
+      <li><strong>En Claude:</strong> <code>/permissions</code>, agregar a deny <code>Edit(./frontend/js/games/**)</code> guardada en local</li>
+      <li><strong>En Claude:</strong> "cambiá la velocidad inicial de Snake"</li>
+      <li><strong>Mirar:</strong> bloqueado sin prompt, aunque <code>Edit(./frontend/**)</code> está en el allow del proyecto</li>
     </ul>
-    <p>Si Claude intenta rodearlo con Bash (<code>sed</code>, <code>python</code>), aparece un prompt: responder No, y usarlo para recordar que un deny cubre una tool y un patrón. Al terminar: quitar el deny con <code>/permissions</code> (o restaurar el local con <code>cp .claude/settings.local.json.example .claude/settings.local.json</code>).</p>
-    <p><em>Plan B (si /permissions o el prompt no cooperan): editar .claude/settings.local.json a mano con la sesión abierta, agregando "Bash(uv run pytest)" en allow y "Edit(./openapi.yaml)" en deny. La recarga en caliente toma el cambio sin reiniciar; repetir los pedidos.</em></p>
+    <p>Si Claude intenta rodearlo con Bash (<code>sed</code>, <code>python</code>), aparece un prompt: responder No, y usarlo para marcar que un deny cubre una tool y un patrón, no una intención. Al terminar: quitar el deny con <code>/permissions</code> (o restaurar el local con <code>cp .claude/settings.local.json.example .claude/settings.local.json</code>).</p>
+    <p><em>Plan B (si /permissions o el prompt no cooperan): editar .claude/settings.local.json a mano con la sesión abierta, agregando "Bash(git commit *)" en allow y "Edit(./frontend/js/games/**)" en deny. La recarga en caliente toma el cambio sin reiniciar; repetir los pedidos.</em></p>
   </aside>
 </section>
 
@@ -7216,13 +7214,13 @@
   </div>
 
   <p class="s11-matrix-note">
-    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El demo-repo trae una de cada: la skill <code>add-endpoint</code> y el command <code>pre-pr</code>.
+    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El repo del TP trae una de cada: la skill <code>agregar-juego</code> y el command <code>pre-entrega</code>.
   </p>
 
   <aside class="notes">
     <p><strong>Recorrer la tabla por filas.</strong></p>
     <p><u>Mismo reparto user / proyecto que CLAUDE.md y settings.json.</u></p>
-    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El demo-repo trae una de cada forma: la skill add-endpoint, que abrimos en un momento, y el command pre-pr."</em></p>
+    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El repo del trabajo final trae una de cada forma: la skill agregar-juego, que abrimos en un momento, y el command pre-entrega."</em></p>
   </aside>
 </section>
 
@@ -7253,7 +7251,7 @@
   <aside class="notes">
     <p><strong>La contracara de rules: acá hubo convergencia real.</strong></p>
     <p><u>Skills en tres harness: mismo formato SKILL.md, carpetas distintas.</u></p>
-    <p><em>"Si rules era la pieza donde no coinciden, skills es donde más coinciden. Los tres usan el mismo formato: una carpeta por skill con un SKILL.md adentro, nombre y descripción arriba, el procedimiento abajo. Y el mismo mecanismo: al arrancar entra la descripción, el cuerpo entra cuando se usa. Cambia la carpeta. Codex las busca en .agents/skills, y deprecó sus custom prompts para empujar todo hacia skills. OpenCode tiene su carpeta, y además lee la de Claude Code directamente, así que las skills del demo-repo ya le sirven. Una skill bien escrita es de las piezas que mejor viajan entre herramientas."</em></p>
+    <p><em>"Si rules era la pieza donde no coinciden, skills es donde más coinciden. Los tres usan el mismo formato: una carpeta por skill con un SKILL.md adentro, nombre y descripción arriba, el procedimiento abajo. Y el mismo mecanismo: al arrancar entra la descripción, el cuerpo entra cuando se usa. Cambia la carpeta. Codex las busca en .agents/skills, y deprecó sus custom prompts para empujar todo hacia skills. OpenCode tiene su carpeta, y además lee la de Claude Code directamente, así que las skills del repo del TP ya le sirven. Una skill bien escrita es de las piezas que mejor viajan entre herramientas."</em></p>
   </aside>
 </section>
 
@@ -7289,7 +7287,7 @@
   </aside>
 </section>
 
-<!-- §11.5 · Cómo se usa — walkthrough del SKILL.md de add-endpoint -->
+<!-- §11.5 · Cómo se usa — walkthrough del SKILL.md de agregar-juego -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">
     <li class="s11-five-q-card"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
@@ -7298,57 +7296,56 @@
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
   </ol>
 
-  <h2>Anatomía de <code class="s11-h2-code">.claude/skills/add-endpoint/SKILL.md</code></h2>
+  <h2>Anatomía de <code class="s11-h2-code">.claude/skills/agregar-juego/SKILL.md</code></h2>
 
   <div class="s11-code-block"><span class="s11-code-fence">---</span>
-<span class="s11-code-key">name:</span> <span class="s11-code-val">add-endpoint</span>
-<span class="s11-code-key">description:</span> <span class="s11-code-val">Use when the user asks to add a new REST endpoint to the demo-repo backend. Adds the route, the schema if missing, the test, and regenerates openapi.yaml.</span>
+<span class="s11-code-key">name:</span> <span class="s11-code-val">agregar-juego</span>
+<span class="s11-code-key">description:</span> <span class="s11-code-val">Use when adding a new game to the platform — creating a Phaser scene, seeding the game in the database and wiring it to the game page. Covers the order of the steps and the verification in the browser.</span>
 <span class="s11-code-fence">---</span></div>
 
   <ol class="s11-phases-list">
-    <li><strong>Decidir method y path:</strong> confirmar con el usuario; las escrituras llevan <code>Depends(require_bearer)</code>.</li>
-    <li><strong>Schemas:</strong> si hace falta, modelos en <code>backend/schemas/models.py</code>.</li>
-    <li><strong>Router:</strong> función en <code>backend/routers/&lt;resource&gt;.py</code> con <code>response_model</code> y <code>status_code</code>; método en el store si falta.</li>
-    <li><strong>Test:</strong> happy path + error esperado en <code>tests/test_&lt;resource&gt;.py</code>.</li>
-    <li><strong>OpenAPI:</strong> <code>uv run python scripts/export_openapi.py</code>.</li>
-    <li><strong>Verificación:</strong> <code>uv run pytest -v</code> pasa entero; mostrar el diff de <code>openapi.yaml</code>.</li>
+    <li><strong>Definir el juego:</strong> slug, nombre y descripción, confirmados con el usuario. El slug aparece en cuatro lugares.</li>
+    <li><strong>Seed:</strong> la entrada en <code>GAMES</code> de <code>backend/main.py</code>; <code>seed_games()</code> es idempotente.</li>
+    <li><strong>La escena:</strong> <code>frontend/js/games/&lt;slug&gt;.js</code>, siguiendo la rule de escenas.</li>
+    <li><strong>Conectar la página:</strong> la entrada en <code>GAMES</code> de <code>frontend/js/game-page.js</code>.</li>
+    <li><strong>Verificar jugando:</strong> con el MCP de Playwright, jugar hasta perder y guardar un puntaje.</li>
   </ol>
 
   <p class="s11-anti-card">
-    <strong>Anti-patterns:</strong> endpoint sin test · no regenerar <code>openapi.yaml</code> · endpoint sin <code>response_model</code> · constantes hardcodeadas que van en <code>models.py</code> o en una env var.
+    <strong>Anti-patterns:</strong> escribir la escena antes del seed · hacer <code>fetch</code> desde la escena · dar por hecho que anda porque la página no muestra errores · cambiar el slug a mitad de camino.
   </p>
 
   <aside class="notes">
     <p><strong>Frontmatter, seis fases, anti-patterns: arriba a abajo.</strong></p>
-    <p><u>El comando /add-endpoint sale del nombre del directorio; name es solo etiqueta.</u></p>
-    <p><em>"Cuarta pregunta: cómo se usa. Abrimos la skill add-endpoint del demo-repo. Arriba, el frontmatter. El name es una etiqueta; el comando /add-endpoint sale del nombre del directorio. La description es la frase que Claude lee para decidir si la skill aplica, y sigue una convención: 'Use when X'. Una description vaga activa mal. Abajo, el cuerpo: seis fases. Decidir method y path con el usuario, y para escrituras agregar la dependency de auth. Schemas, si hacen falta modelos nuevos. Router, con response_model y status_code explícitos, y si el store no tiene la consulta, agregar el método. Tests: happy path y error esperado. Regenerar openapi.yaml con el script. Y verificar: pytest pasa entero y se muestra el diff. Al final, en rojo, los anti-patterns: lo que el agente podría hacer si nadie lo escribe. Esa lista convierte 'esperar que Claude se acuerde' en 'tenerlo escrito'."</em></p>
+    <p><u>El comando /agregar-juego sale del nombre del directorio; name es solo etiqueta.</u></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Abrimos la skill agregar-juego del repo del trabajo final. Arriba, el frontmatter. El name es una etiqueta; el comando /agregar-juego sale del nombre del directorio. La description es la frase que Claude lee para decidir si la skill aplica, y sigue una convención: 'Use when X'. Una description vaga activa mal. Abajo, el cuerpo: cinco fases, y el orden es lo que más vale. Primero definir slug, nombre y descripción, confirmados conmigo, porque el slug aparece en cuatro lugares y renombrarlo después sale caro. Segundo el seed en el backend. Tercero la escena, que sigue la rule de escenas que ya vimos. Cuarto conectar la página. Y quinto verificar jugando con el MCP de Playwright, que en este proyecto reemplaza a los tests. Al final, en rojo, los anti-patterns: escribir la escena antes del seed, hacer fetch desde la escena, o dar por terminado porque la página no muestra errores. Eso convierte 'esperar que Claude se acuerde' en 'tenerlo escrito'."</em></p>
   </aside>
 </section>
 
-<!-- §11.6 · La forma de un archivo — pre-pr.md -->
+<!-- §11.6 · La forma de un archivo — pre-entrega.md -->
 <section class="s11-slide">
-  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/pre-pr.md</code></h2>
+  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/pre-entrega.md</code></h2>
 
   <div class="s11-slash-block"><span class="s11-code-fence">---</span>
-<span class="s11-code-key">description:</span> <span class="s11-code-val">Chequeo antes de abrir un PR (tests + openapi + diff)</span>
+<span class="s11-code-key">description:</span> <span class="s11-code-val">Revisa que el TP esté en condiciones de entregarse antes de commitear</span>
 <span class="s11-code-fence">---</span>
 
-Antes de abrir un PR:
+Revisá el estado del trabajo y reportá qué está listo y qué falta.
+No arregles nada todavía: primero el diagnóstico.
 
-1. Corré `uv run pytest` y reportá si pasa.
-2. Regenerá `openapi.yaml` con `uv run python scripts/export_openapi.py`.
-3. Mostrá `git diff --stat`.
-
-No hagas commits ni push.</div>
+1. `git status` y `git diff --stat`: qué cambió y qué quedó sin commitear.
+2. El README es el informe: ¿algún cambio invalidó lo que narra?
+3. `docs/plan.md` está congelado: avisá si aparece modificado.
+4. La app levanta y la home lista los juegos.</div>
 
   <p class="s11-slash-tag">
-    <strong>Once líneas, sin directorio.</strong> Crea <code>/pre-pr</code> igual que una skill. Para un atajo corto que disparás vos alcanza; si necesitás archivos de soporte o que Claude lo cargue por relevancia, conviene la skill.
+    <strong>Trece líneas, sin directorio.</strong> Crea <code>/pre-entrega</code> igual que una skill. Para un atajo corto que disparás vos alcanza; si necesitás archivos de soporte o que Claude lo cargue por relevancia, conviene la skill.
   </p>
 
   <aside class="notes">
-    <p><strong>Leer el archivo entero: son once líneas.</strong></p>
+    <p><strong>Leer el archivo entero: son trece líneas.</strong></p>
     <p><u>Zoom-in sin mini-strip: contrapunto de tamaño con SKILL.md.</u></p>
-    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-pr punto md. Un archivo, once líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con tres pasos: correr pytest, regenerar el openapi, mostrar el diff. Crea /pre-pr igual que una skill crea /add-endpoint. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
+    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-entrega punto md. Un archivo, trece líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con la revisión previa a entregar: qué cambió, si el README sigue siendo cierto, si el plan congelado quedó intacto y si la app levanta. Fíjense la primera línea del cuerpo: 'no arregles nada todavía, primero el diagnóstico'. Sin eso, el agente empieza a corregir lo que encuentra y perdés la foto del estado. Crea /pre-entrega igual que una skill crea /agregar-juego. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
   </aside>
 </section>
 
@@ -7364,44 +7361,44 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>Tres pasos: índice, activación por relevancia, contraste sin skill.</strong></p>
     <p><u>Setup completo abajo; hacerlo antes de la clase.</u></p>
-    <p><em>"Vamos al demo. Una tarea que entra justo en las fases de la skill: agregar GET /users/{user_id}/posts. Primero miramos qué cargó la sesión, después la pedimos en prosa y vemos si la skill entra sola, y al final repetimos la tarea en una copia del repo sin la skill."</em></p>
+    <p><em>"Vamos al demo. Una tarea que entra justo en las fases de la skill: sumar un juego nuevo a la plataforma. Primero miramos qué cargó la sesión, después lo pedimos en prosa y vemos si la skill entra sola, y al final repetimos el pedido en una copia del repo sin la skill. No vamos a terminar el juego en vivo: alcanza con ver el orden en el que encara el trabajo."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Setup (antes de la clase)</strong></p>
     <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code>.</li>
+      <li>Copiar <code>semanas/00/source_material/apellido-iisaia/tp-final/</code> a <code>~/tp-final-demo</code> (fuera del repo del curso).</li>
+      <li><code>cd ~/tp-final-demo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
+      <li><code>uv sync</code> y dejar la app levantada en otra terminal, para el paso de verificación.</li>
       <li>Abrir Claude Code con <code>claude --permission-mode default</code>: en Pro/Max/Team el modo de arranque es <code>auto</code>, que taparía los prompts de permiso. En la UI, <code>default</code> se llama Manual.</li>
       <li>Para ver qué cargó el runtime: <code>/context</code> (no <code>/memory</code>, que lista ubicaciones posibles aunque no existan).</li>
       <li>Ojo en vivo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen como fuentes.</li>
     </ol>
     <p><strong>Paso 1 · La skill está en el índice</strong></p>
     <ul>
-      <li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li>
+      <li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>add-endpoint</code> listada entre las skills</li>
+      <li><strong>Mirar:</strong> <code>agregar-juego</code> listada entre las skills</li>
       <li><strong>Mirar:</strong> las fases todavía no están</li>
     </ul>
     <p><strong>Paso 2 · Pedido en prosa</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> "agregá un endpoint GET /users/{user_id}/posts que devuelva los posts de un usuario"</li>
-      <li><strong>Mirar:</strong> carga <code>add-endpoint</code> sin que la nombres</li>
-      <li><strong>Mirar:</strong> method y path → router + store → tests → openapi → pytest</li>
+      <li><strong>En Claude:</strong> "quiero sumar un juego nuevo a la plataforma, un Pong de un jugador"</li>
+      <li><strong>Mirar:</strong> carga <code>agregar-juego</code> sin que la nombres</li>
+      <li><strong>Mirar:</strong> pregunta slug, nombre y descripción → seed → escena → página → verificación</li>
     </ul>
     <p><strong>Paso 3 · Sin la skill</strong></p>
     <ul>
-      <li><strong>Terminal:</strong> <code>cp -r ~/demo-repo ~/demo-repo-sin-skill &amp;&amp; cd ~/demo-repo-sin-skill</code></li>
+      <li><strong>Terminal:</strong> <code>cp -r ~/tp-final-demo ~/tp-final-sin-skill &amp;&amp; cd ~/tp-final-sin-skill</code></li>
       <li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li>
       <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
       <li><strong>En Claude:</strong> el mismo pedido</li>
       <li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li>
     </ul>
-    <p>En el Paso 2, Claude confirma method y path con vos: respondé que sí. pytest pide permiso porque no está en <code>allow</code>. El schema no hace falta (reutiliza <code>Post</code>).</p>
+    <p>En el Paso 2, Claude pregunta slug, nombre y descripción: respondé <code>pong</code>, "Pong" y una línea. Cortá cuando termine el seed y empiece la escena; el resto del procedimiento ya se ve en el SKILL.md.</p>
     <p><strong>Contraste parcial:</strong></p>
-    <p>Sin la skill siguen cargados CLAUDE.md y las rules (<code>api.md</code> pide <code>response_model</code> y regenerar <code>openapi.yaml</code>; <code>testing.md</code> pide happy path + error). Algunas fases pueden aparecer igual. Lo que cambia es que nada las ordena en un procedimiento único. El <code>git checkout . &amp;&amp; git clean -fd</code> descarta en la copia lo que Claude hizo en el Paso 2. Si <code>uv</code> se queja del <code>.venv</code> copiado, correr <code>uv sync</code>.</p>
+    <p>Sin la skill siguen cargados los CLAUDE.md y las rules: al tocar un archivo de <code>frontend/js/games/</code> entra <code>escenas-de-juego.md</code> y el agente igual usa <code>onKeys()</code>. Lo que cambia es el orden: sin el procedimiento escrito suele arrancar por la escena y dejar el seed para el final, que es justo el anti-pattern. El <code>git checkout . &amp;&amp; git clean -fd</code> descarta en la copia lo que Claude hizo en el Paso 2. Si <code>uv</code> se queja del <code>.venv</code> copiado, correr <code>uv sync</code>.</p>
     <p><strong>Plan B:</strong></p>
-    <p>Si en el Paso 2 la skill no entra por relevancia, invocarla directo: <code>/add-endpoint GET /users/{user_id}/posts</code>. El procedimiento que se ve es el mismo.</p>
+    <p>Si en el Paso 2 la skill no entra por relevancia, invocarla directo: <code>/agregar-juego un Pong de un jugador</code>. El procedimiento que se ve es el mismo.</p>
   </aside>
 </section>
 
@@ -7947,13 +7944,13 @@ No hagas commits ni push.</div>
   </div>
 
   <p class="s12-where-note">
-    El demo-repo trae <code>researcher</code> en <code>.claude/agents/researcher.md</code>, con alcance de proyecto.
+    El repo del TP trae <code>explorador</code> en <code>.claude/agents/explorador.md</code>, con alcance de proyecto.
   </p>
 
   <aside class="notes">
     <p><strong>Recorrer la tabla por filas.</strong></p>
     <p><u>Mismo reparto user / proyecto que CLAUDE.md, settings y skills, más los built-in.</u></p>
-    <p><em>"Segunda pregunta: dónde viven. Los que definís vos son archivos markdown con frontmatter. En .claude/agents del repo, alcance de proyecto: se commitea y lo usa el equipo. En tu home, bajo .claude/agents, alcance de usuario: disponible en todos tus proyectos. Los plugins pueden traer los suyos. Y hay sub-agents built-in que vienen con Claude Code sin que definas nada: Explore, que busca en el código en modo solo lectura; Plan, que investiga durante plan mode; y general-purpose. El demo-repo trae uno propio, researcher, que abrimos en un momento."</em></p>
+    <p><em>"Segunda pregunta: dónde viven. Los que definís vos son archivos markdown con frontmatter. En .claude/agents del repo, alcance de proyecto: se commitea y lo usa el equipo. En tu home, bajo .claude/agents, alcance de usuario: disponible en todos tus proyectos. Los plugins pueden traer los suyos. Y hay sub-agents built-in que vienen con Claude Code sin que definas nada: Explore, que busca en el código en modo solo lectura; Plan, que investiga durante plan mode; y general-purpose. El repo del trabajo final trae uno propio, explorador, que abrimos en un momento."</em></p>
   </aside>
 </section>
 
@@ -8008,11 +8005,11 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>El segundo bullet es el menos obvio: la delegación puede ser implícita.</strong></p>
     <p><u>Dos disparadores de la misma tool Agent: pedido explícito o match con la description.</u></p>
-    <p><em>"Tercera pregunta: cuándo se invocan. Hay dos caminos, y los dos terminan en la misma tool, Agent. El explícito: le decís 'usá el sub-agent researcher' y el padre llama a Agent con ese nombre. El implícito: el padre lee las descriptions de los sub-agents disponibles y, si tu pedido matchea una, delega por su cuenta. Así aparece Explore: le preguntás algo amplio como 'cómo está organizada la auth en este repo' y, sin que digas nada de sub-agents, el padre lanza Explore. Lo que ves es que responde sin llenar su ventana. En los dos casos, el sub-agent corre su propio loop, pensar, actuar, observar, con sus tools, y le devuelve el resultado al padre, que se queda esperando."</em></p>
+    <p><em>"Tercera pregunta: cuándo se invocan. Hay dos caminos, y los dos terminan en la misma tool, Agent. El explícito: le decís 'usá el sub-agent explorador' y el padre llama a Agent con ese nombre. El implícito: el padre lee las descriptions de los sub-agents disponibles y, si tu pedido matchea una, delega por su cuenta. Así aparece Explore: le preguntás algo amplio como 'cómo está organizada la el ranking en este repo' y, sin que digas nada de sub-agents, el padre lanza Explore. Lo que ves es que responde sin llenar su ventana. En los dos casos, el sub-agent corre su propio loop, pensar, actuar, observar, con sus tools, y le devuelve el resultado al padre, que se queda esperando."</em></p>
   </aside>
 </section>
 
-<!-- §12.5 · Cómo se usa — walkthrough del frontmatter de researcher.md -->
+<!-- §12.5 · Cómo se usa — walkthrough del frontmatter de explorador.md -->
 <section class="s12-slide">
   <ol class="s12-five-q-grid is-mini">
     <li class="s12-five-q-card"><span class="s12-five-q-num">1</span><span class="s12-five-q-label">Qué es</span></li>
@@ -8021,11 +8018,11 @@ No hagas commits ni push.</div>
     <li class="s12-five-q-card is-active"><span class="s12-five-q-num">4</span><span class="s12-five-q-label">Cómo se usa</span></li>
   </ol>
 
-  <h2>Anatomía de <code class="s12-h2-code">.claude/agents/researcher.md</code></h2>
+  <h2>Anatomía de <code class="s12-h2-code">.claude/agents/explorador.md</code></h2>
 
   <div class="s12-code-block"><span class="s12-code-fence">---</span>
-<span class="s12-code-key">name:</span> <span class="s12-code-val">researcher</span>
-<span class="s12-code-key">description:</span> <span class="s12-code-val">Use when the user asks where something is implemented, how a concept is wired across files, or any exploratory question that requires reading many files. Returns a concise answer; does not modify code.</span>
+<span class="s12-code-key">name:</span> <span class="s12-code-val">explorador</span>
+<span class="s12-code-key">description:</span> <span class="s12-code-val">Use when a question needs reading several files across the backend and the frontend to answer — how a feature works end to end, where something is defined, why two parts are connected. Reads and searches only; never edits.</span>
 <span class="s12-code-key">tools:</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Read</span>
   <span class="s12-code-key">-</span> <span class="s12-code-val">Grep</span>
@@ -8035,7 +8032,7 @@ No hagas commits ni push.</div>
   <ul class="s12-fields-list">
     <li><strong><code>name</code></strong>: identificador; es lo que el padre pasa a la tool <code>Agent</code>.</li>
     <li><strong><code>description</code></strong>: cuándo usarlo. El padre la lee para delegar por su cuenta.</li>
-    <li class="s12-fields-key"><strong><code>tools</code></strong>: si lo omitís, <strong>hereda</strong> las tools del padre; si lo declarás, <strong>queda restringido</strong>. <code>researcher</code> lee y busca, pero no edita ni ejecuta comandos.</li>
+    <li class="s12-fields-key"><strong><code>tools</code></strong>: si lo omitís, <strong>hereda</strong> las tools del padre; si lo declarás, <strong>queda restringido</strong>. <code>explorador</code> lee y busca, pero no edita ni ejecuta comandos.</li>
     <li><strong><code>model</code></strong>: opcional (no está en este archivo). Si falta, usa el del padre.</li>
     <li><strong>Cuerpo</strong>: el system prompt del sub-agent (qué hace, qué no, cómo devuelve el resultado).</li>
   </ul>
@@ -8043,7 +8040,7 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>Pausa larga en <code>tools</code>: omitido hereda, declarado restringe.</strong></p>
     <p><u>Tres campos en el archivo, más model como opcional y el cuerpo como system prompt.</u></p>
-    <p><em>"Cuarta pregunta: cómo se usa. Abrimos researcher.md del demo-repo. El frontmatter tiene tres campos. name: el identificador, lo que el padre le pasa a la tool Agent. description: cuándo conviene usarlo; el padre la lee para decidir si delega por su cuenta, igual que con las skills. Y tools, el campo central. Si no lo ponés, el sub-agent hereda todas las tools del padre. Si lo declarás, queda limitado a esa lista. researcher declara Read, Grep y Glob: puede leer y buscar, pero sin Edit, Write ni Bash no puede modificar código ni correr comandos. Esa restricción la elegís vos. Hay un cuarto campo que este archivo no usa: model. Si falta, usa el modelo del padre; sirve para correr una sub-tarea con un modelo más chico o más grande. Y abajo del frontmatter, el cuerpo es el system prompt: en este caso, investigador de solo lectura que devuelve dónde está algo, en qué función y una frase de cómo se conecta."</em></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Abrimos explorador.md del repo del TP. El frontmatter tiene tres campos. name: el identificador, lo que el padre le pasa a la tool Agent. description: cuándo conviene usarlo; el padre la lee para decidir si delega por su cuenta, igual que con las skills. Y tools, el campo central. Si no lo ponés, el sub-agent hereda todas las tools del padre. Si lo declarás, queda limitado a esa lista. explorador declara Read, Grep y Glob: puede leer y buscar, pero sin Edit, Write ni Bash no puede modificar código ni correr comandos. Esa restricción la elegís vos. Hay un cuarto campo que este archivo no usa: model. Si falta, usa el modelo del padre; sirve para correr una sub-tarea con un modelo más chico o más grande. Y abajo del frontmatter, el cuerpo es el system prompt: en este caso, que arranque por los CLAUDE.md y las rules, que siga el recorrido real del dato y que cite archivo y símbolo en cada afirmación."</em></p>
   </aside>
 </section>
 
@@ -8092,7 +8089,7 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>Recorrer de arriba a abajo; marcar la asimetría entre las dos flechas.</strong></p>
     <p><u>Zoom-in sin mini-strip: visualiza la respuesta a la pregunta 1.</u></p>
-    <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá dónde se maneja la auth'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
+    <p><em>"Antes de la última pregunta, el mecanismo dibujado. Arriba, la ventana del padre: CLAUDE.md, rules, la conversación, y lo único que va a recibir del sub-agent, el resultado, en verde. Abajo, la ventana del sub-agent, que se abre con la invocación. Mientras trabaja se llena: archivo uno, dos, tres, razonamiento intermedio, tool calls. Todo eso está en rojo y tachado porque, para el padre, no existe: cuando el sub-agent termina, esa ventana se cierra. En el medio, las dos flechas. Baja una tarea, 'investigá cómo se guarda un puntaje'. Sube solo el resultado. Los archivos leídos, el razonamiento y los tool calls no suben. Esa asimetría, baja una tarea y sube un párrafo, es lo que protege el contexto del padre."</em></p>
   </aside>
 </section>
 
@@ -8108,32 +8105,32 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>Tres pasos: inline, delegado, el archivo.</strong></p>
     <p><u>Setup de siempre (ver demo de §11). El repo es chico: el delta va a ser de pocos miles de tokens.</u></p>
-    <p><em>"Vamos al demo. La misma pregunta, cómo funciona la auth de punta a punta, resuelta dos veces: primero leyendo todo en la ventana principal, después delegando al sub-agent researcher. Antes y después de cada una miramos /context. El repo es chico, así que no esperes una diferencia enorme: van a ser unos pocos miles de tokens. Lo que importa es de qué lado quedan."</em></p>
+    <p><em>"Vamos al demo. La misma pregunta, cómo viaja un puntaje desde la partida hasta el ranking, resuelta dos veces: primero leyendo todo en la ventana principal, después delegando al sub-agent explorador. Antes y después de cada una miramos /context. El repo es chico, así que no esperes una diferencia enorme: van a ser unos pocos miles de tokens. Lo que importa es de qué lado quedan."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Paso 1 · Inline, sin delegar</strong></p>
     <ul>
-      <li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li>
+      <li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li>
       <li><strong>En Claude:</strong> <code>/context</code> (línea base)</li>
-      <li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li>
+      <li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li>
       <li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li>
     </ul>
-    <p><strong>Paso 2 · Delegado a <code>researcher</code></strong></p>
+    <p><strong>Paso 2 · Delegado a <code>explorador</code></strong></p>
     <ul>
       <li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li>
       <li><strong>En Claude:</strong> <code>/context</code> (línea base)</li>
-      <li><strong>En Claude:</strong> "usá el sub-agent researcher y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li>
-        <li><strong>Mirar:</strong> <code>Agent</code> lanza <code>researcher</code>; <code>/context</code> de nuevo</li>
+      <li><strong>En Claude:</strong> "usá el sub-agent explorador y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li>
+        <li><strong>Mirar:</strong> <code>Agent</code> lanza <code>explorador</code>; <code>/context</code> de nuevo</li>
     </ul>
     <p><strong>Paso 3 · El archivo detrás</strong></p>
     <ul>
-      <li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li>
+      <li><strong>VS Code:</strong> abrir <code>.claude/agents/explorador.md</code></li>
       <li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li>
       <li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li>
     </ul>
-    <p>Setup de siempre: copia en <code>~/demo-repo</code> con commit inicial, <code>.env</code> y <code>uv sync</code>, <code>claude --permission-mode default</code>. El delta real depende de cuántos archivos lea Claude en el Paso 1 (el backend entero pesa unos 4 KB). El transcript del sub-agent queda en disco, pero el padre no lo ve.</p>
+    <p>Setup de siempre: copia en <code>~/tp-final-demo</code> con commit inicial y <code>uv sync</code>, <code>claude --permission-mode default</code>. El delta real depende de cuántos archivos lea Claude en el Paso 1: el recorrido cruza las dos mitades (<code>games/common.js</code>, <code>game-page.js</code>, <code>score-panel.js</code>, <code>api.js</code>, <code>routes.py</code>). El transcript del sub-agent queda en disco, pero el padre no lo ve.</p>
     <p><strong>Plan B:</strong></p>
-    <p>Si en el Paso 1 Claude delega igual (a <code>Explore</code> o <code>researcher</code>), cortar y repetir el pedido remarcando "sin sub-agents". Si el delta de <code>/context</code> no se distingue, mostrar dos capturas preparadas (sesión inline y sesión con sub-agent). El Paso 3 funciona igual en ambos casos.</p>
+    <p>Si en el Paso 1 Claude delega igual (a <code>Explore</code> o <code>explorador</code>), cortar y repetir el pedido remarcando "sin sub-agents". Si el delta de <code>/context</code> no se distingue, mostrar dos capturas preparadas (sesión inline y sesión con sub-agent). El Paso 3 funciona igual en ambos casos.</p>
   </aside>
 </section>
 
@@ -8700,8 +8697,8 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's7-demo-steps', steps: [
     {
       title: 'Paso 1 · /context: qué está cargado',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/demo-repo</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>CLAUDE.md</code> y las rules entre los memory files, con sus tokens</li></ul>',
-      example: 'La salida de /context desglosa la ventana por categoría. Entre los memory files aparecen ./CLAUDE.md del demo-repo, sus rules sin frontmatter y el ~/.claude/CLAUDE.md de usuario, cada uno con los tokens que ocupa. Todavía no pediste nada y ese espacio ya está ocupado.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cd ~/tp-final-demo</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>CLAUDE.md</code> y las rules entre los memory files, con sus tokens</li></ul>',
+      example: 'La salida de /context desglosa la ventana por categoría. Entre los memory files aparecen ./CLAUDE.md del proyecto, la rule api-y-datos.md (que no tiene frontmatter) y el ~/.claude/CLAUDE.md de usuario, cada uno con los tokens que ocupa. Los CLAUDE.md de backend/ y frontend/ todavía no: esos cargan cuando Claude lee un archivo de esas carpetas. Y vos no pediste nada todavía.'
     },
     {
       title: 'Paso 2 · /memory: ubicaciones',
@@ -8710,7 +8707,7 @@ No hagas commits ni push.</div>
     },
     {
       title: 'Paso 3 · Carpeta de auto memory',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;demo-repo&gt;/memory/</code></li><li><strong>VS Code:</strong> abrir <code>MEMORY.md</code></li><li><strong>Mirar:</strong> índice que apunta a archivos por tema, escrito por Claude</li></ul>',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>~/.claude/projects/&lt;tp-final-demo&gt;/memory/</code></li><li><strong>VS Code:</strong> abrir <code>MEMORY.md</code></li><li><strong>Mirar:</strong> índice que apunta a archivos por tema, escrito por Claude</li></ul>',
       example: 'MEMORY.md es un índice: cada línea apunta a un archivo por tema dentro de memory/. Ninguno lo escribiste vos; los fue guardando Claude en sesiones anteriores.'
     }
   ]});
@@ -8721,18 +8718,18 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's8-demo-steps', steps: [
     {
       title: 'Paso 1 · Sin leer nada del backend',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/rules/</code> y ver los 4 archivos</li><li><strong>VS Code:</strong> en <code>api.md</code>, señalar el frontmatter <code>paths:</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>api.md</code> NO figura entre los memory files</li></ul>',
-      example: 'Entre los memory files de /context aparecen code-style.md, testing.md y security.md. api.md no: está en disco, abierta en VS Code, pero no en la ventana del agente.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/rules/</code> y ver los 2 archivos</li><li><strong>VS Code:</strong> en <code>escenas-de-juego.md</code>, señalar el frontmatter <code>paths:</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> NO figura entre los memory files</li></ul>',
+      example: 'Entre los memory files de /context aparece api-y-datos.md, la rule sin frontmatter. escenas-de-juego.md no: está en disco, abierta en VS Code, pero no en la ventana del agente.'
     },
     {
       title: 'Paso 2 · Un archivo que no matchea',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>frontend/index.html</code>"</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>api.md</code> sigue sin aparecer</li></ul>',
-      example: 'Claude leyó un archivo, pero no es un .py bajo backend/. El glob no matchea y api.md sigue fuera de la ventana.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>backend/routes.py</code>"</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> sigue sin aparecer</li></ul>',
+      example: 'Claude leyó un archivo, pero no es uno de los juegos. Ninguno de los dos globs matchea y escenas-de-juego.md sigue fuera de la ventana. Lo que sí entró es el CLAUDE.md de backend/, que carga al leer un archivo de esa carpeta.'
     },
     {
       title: 'Paso 3 · Un archivo que sí matchea',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>backend/routers/users.py</code>"</li><li><strong>Mirar:</strong> el aviso de carga de la rule en la terminal</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>api.md</code> ahora figura entre los memory files</li></ul>',
-      example: 'Al leer users.py, la terminal avisa que cargó .claude/rules/api.md y /context la muestra entre los memory files. Hasta este momento no ocupó nada de la ventana.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "leé <code>frontend/js/games/snake.js</code>"</li><li><strong>Mirar:</strong> el aviso de carga de la rule en la terminal</li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>escenas-de-juego.md</code> ahora figura entre los memory files</li></ul>',
+      example: 'Al leer snake.js, la terminal avisa que cargó .claude/rules/escenas-de-juego.md y /context la muestra entre los memory files. Hasta este momento no ocupó nada de la ventana.'
     }
   ]});
 </script>
@@ -8742,13 +8739,13 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's9-demo-steps', steps: [
     {
       title: 'Paso 1 · Los tres niveles abiertos',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code></li><li><strong>VS Code:</strong> los tres archivos de settings lado a lado</li><li><strong>Mirar:</strong> el token en proyecto y en local</li></ul>',
-      example: 'El proyecto fija <code>model</code>, <code>permissions</code> y el placeholder del token. El local redefine <code>env.DEMO_BEARER_TOKEN</code> con <code>mi-token-local</code>: como es un valor escalar, en esta máquina gana el local. El de usuario tiene tus defaults, los que viajan a cualquier repo.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> copiar el <code>.example</code> a <code>settings.local.json</code></li><li><strong>VS Code:</strong> los tres archivos de settings lado a lado</li><li><strong>Mirar:</strong> <code>model</code> en proyecto y en local</li></ul>',
+      example: 'El proyecto fija <code>model</code>, <code>permissions</code>, <code>attribution</code> y <code>cleanupPeriodDays</code>. El local redefine <code>model</code> con <code>haiku</code>: como es un valor escalar, en esta máquina gana el local. El de usuario tiene tus defaults, los que viajan a cualquier repo.'
     },
     {
-      title: 'Paso 2 · Cambiar model',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> <code>model</code> de <code>"sonnet"</code> a <code>"haiku"</code></li><li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva</li><li><strong>Mirar:</strong> <code>/status</code> muestra Haiku</li><li><strong>VS Code:</strong> volver a <code>"sonnet"</code></li></ul>',
-      example: 'Con la sesión abierta, el cambio de <code>model</code> no se nota: el modelo se fija al arrancar. En la sesión nueva, <code>/status</code> muestra Haiku. Un cambio en <code>permissions</code> o <code>hooks</code>, en cambio, se hubiera recargado sin reiniciar.'
+      title: 'Paso 2 · Quién gana, y cuándo aplica',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>/exit</code> y sesión nueva</li><li><strong>Mirar:</strong> <code>/status</code> muestra Haiku</li><li><strong>Terminal:</strong> borrar el local y abrir otra sesión</li><li><strong>Mirar:</strong> <code>/status</code> vuelve a Sonnet</li></ul>',
+      example: 'Los dos archivos declaran <code>model</code> y gana el más específico: el local. Y el cambio no se ve en la sesión abierta, porque el modelo se fija al arrancar; hay que abrir una nueva. Un cambio en <code>permissions</code>, en cambio, se hubiera recargado sin reiniciar.'
     },
     {
       title: 'Paso 3 · git no ve el archivo local',
@@ -8763,18 +8760,18 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's10-demo-steps', steps: [
     {
       title: 'Paso 1 · Aparece el prompt',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> "corré los tests"</li><li><strong>Mirar:</strong> prompt para <code>uv run pytest</code></li></ul>',
-      example: 'Claude propone <code>uv run pytest</code> y el runtime lo frena antes de ejecutar. El comando no matchea ninguna regla del proyecto, y en Manual lo que no está pre-aprobado se pregunta.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> "commiteá los cambios que hay"</li><li><strong>Mirar:</strong> prompt para <code>git commit</code></li></ul>',
+      example: 'Claude propone <code>git commit</code> y el runtime lo frena antes de ejecutar. El comando no matchea ninguna regla del proyecto, y en Manual lo que no está pre-aprobado se pregunta.'
     },
     {
       title: 'Paso 2 · Guardar la regla',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "Yes, and don&#39;t ask again"</li><li><strong>VS Code:</strong> regla nueva en <code>settings.local.json</code></li><li><strong>En Claude:</strong> "corré los tests" otra vez</li><li><strong>Mirar:</strong> corre sin prompt</li></ul>',
-      example: 'La regla quedó escrita en <code>.claude/settings.local.json</code>, junto al <code>env</code> que ya tenía. El <code>settings.json</code> del proyecto no cambió. La segunda vez, los tests corren sin preguntar.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "Yes, and don&#39;t ask again"</li><li><strong>VS Code:</strong> regla nueva en <code>settings.local.json</code></li><li><strong>En Claude:</strong> pedirle otro commit</li><li><strong>Mirar:</strong> corre sin prompt</li></ul>',
+      example: 'La regla quedó escrita en <code>.claude/settings.local.json</code>, junto al <code>model</code> que ya tenía. El <code>settings.json</code> del proyecto no cambió. La segunda vez, el commit corre sin preguntar.'
     },
     {
       title: 'Paso 3 · Deny le gana a allow',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code>, deny <code>Edit(./openapi.yaml)</code> en local</li><li><strong>En Claude:</strong> "cambiá el title en openapi.yaml"</li><li><strong>Mirar:</strong> bloqueado, aunque el proyecto tiene el allow</li></ul>',
-      example: 'El <code>allow</code> vive en <code>settings.json</code> y el <code>deny</code> en <code>settings.local.json</code>. El runtime combina las listas de los dos archivos y evalúa <code>deny</code> primero: la edición no corre y Claude recibe el rechazo como resultado de la tool.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/permissions</code>, deny <code>Edit(./frontend/js/games/**)</code> en local</li><li><strong>En Claude:</strong> "cambiá la velocidad inicial de Snake"</li><li><strong>Mirar:</strong> bloqueado, aunque el proyecto tiene el allow</li></ul>',
+      example: 'El <code>allow</code> de <code>Edit(./frontend/**)</code> vive en <code>settings.json</code> y el <code>deny</code> más específico en <code>settings.local.json</code>. El runtime combina las listas de los dos archivos y evalúa <code>deny</code> primero: la edición no corre y Claude recibe el rechazo como resultado de la tool.'
     }
   ]});
 </script>
@@ -8784,18 +8781,18 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's11-demo-steps', steps: [
     {
       title: 'Paso 1 · La skill está en el índice',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>add-endpoint</code> listada entre las skills</li><li><strong>Mirar:</strong> las fases todavía no están</li></ul>',
-      example: '<code>/context</code> lista <code>add-endpoint</code> entre las skills con pocos tokens: nombre y descripción. Las seis fases y los anti-patterns del <code>SKILL.md</code> todavía no ocupan la ventana.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>agregar-juego</code> listada entre las skills</li><li><strong>Mirar:</strong> las fases todavía no están</li></ul>',
+      example: '<code>/context</code> lista <code>agregar-juego</code> entre las skills con pocos tokens: nombre y descripción. Las cinco fases y los anti-patterns del <code>SKILL.md</code> todavía no ocupan la ventana.'
     },
     {
       title: 'Paso 2 · Pedido en prosa',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "agregá un endpoint GET /users/{user_id}/posts que devuelva los posts de un usuario"</li><li><strong>Mirar:</strong> carga <code>add-endpoint</code> sin que la nombres</li><li><strong>Mirar:</strong> method y path → router + store → tests → openapi → pytest</li></ul>',
-      example: 'Claude detecta que el pedido matchea la <code>description</code> y carga la skill. Confirma <code>GET /users/{user_id}/posts</code>, reutiliza <code>Post</code> como response, agrega la consulta al store y la función al router, suma happy path y 404, regenera <code>openapi.yaml</code> y corre pytest (que pide permiso).'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "quiero sumar un juego nuevo a la plataforma, un Pong de un jugador"</li><li><strong>Mirar:</strong> carga <code>agregar-juego</code> sin que la nombres</li><li><strong>Mirar:</strong> slug y nombre → seed → escena → página → verificación</li></ul>',
+      example: 'Claude detecta que el pedido matchea la <code>description</code> y carga la skill. Pregunta el slug, el nombre y la descripción antes de tocar nada, agrega la entrada al <code>GAMES</code> del backend y recién entonces escribe la escena. El orden no lo improvisa: lo lee del <code>SKILL.md</code>.'
     },
     {
       title: 'Paso 3 · Sin la skill',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cp -r ~/demo-repo ~/demo-repo-sin-skill &amp;&amp; cd ~/demo-repo-sin-skill</code></li><li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> el mismo pedido</li><li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li></ul>',
-      example: 'Sin la skill, Claude resuelve con CLAUDE.md y las rules, que cubren parte del procedimiento. Algunas fases pueden aparecer igual; otras (confirmar el path, correr pytest, mostrar el diff) quedan libradas a cada corrida.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cp -r ~/tp-final-demo ~/tp-final-sin-skill &amp;&amp; cd ~/tp-final-sin-skill</code></li><li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> el mismo pedido</li><li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li></ul>',
+      example: 'Sin la skill, Claude resuelve con los CLAUDE.md y las rules, que cubren parte: al tocar un archivo de juegos entra la rule de escenas y usa <code>onKeys()</code> igual. Lo que queda librado a cada corrida es el orden, y suele arrancar por la escena en vez del seed.'
     }
   ]});
 </script>
@@ -8805,18 +8802,18 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's12-demo-steps', steps: [
     {
       title: 'Paso 1 · Inline, sin delegar',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li><li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li></ul>',
-      example: 'Claude abre <code>auth.py</code>, los routers, los tests y <code>app.js</code>, y responde bien. Todo lo que leyó queda en la ventana principal: el segundo <code>/context</code> suma esos archivos al total.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "sin usar sub-agents, leé vos los archivos y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li><li><strong>Mirar:</strong> <code>/context</code> de nuevo: lo leído quedó en la ventana</li></ul>',
+      example: 'Claude abre <code>common.js</code>, <code>game-page.js</code>, <code>score-panel.js</code>, <code>api.js</code> y <code>routes.py</code>, y responde bien. Todo lo que leyó queda en la ventana principal: el segundo <code>/context</code> suma esos archivos al total.'
     },
     {
-      title: 'Paso 2 · Delegado a researcher',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "usá el sub-agent researcher y explicame cómo funciona la auth de punta a punta: dependency, routers, tests y frontend"</li><li><strong>Mirar:</strong> <code>Agent</code> lanza <code>researcher</code>; <code>/context</code> de nuevo</li></ul>',
-      example: 'El padre llama a la tool <code>Agent</code> y <code>researcher</code> lee los mismos archivos en su propia ventana. Al padre vuelve un resumen: el delta del segundo <code>/context</code> es más chico.'
+      title: 'Paso 2 · Delegado a explorador',
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> sesión nueva (<code>/exit</code> y <code>claude</code>)</li><li><strong>En Claude:</strong> <code>/context</code> (línea base)</li><li><strong>En Claude:</strong> "usá el sub-agent explorador y explicame cómo viaja un puntaje desde que termina la partida hasta el ranking: escena, game-page, score-panel y backend"</li><li><strong>Mirar:</strong> <code>Agent</code> lanza <code>explorador</code>; <code>/context</code> de nuevo</li></ul>',
+      example: 'El padre llama a la tool <code>Agent</code> y <code>explorador</code> lee los mismos archivos en su propia ventana. Al padre vuelve un resumen: el delta del segundo <code>/context</code> es más chico.'
     },
     {
       title: 'Paso 3 · El archivo detrás',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/agents/researcher.md</code></li><li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li><li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li></ul>',
-      example: 'Un archivo markdown con un system prompt acotado y una lista de tools. Como <code>tools</code> está declarado, <code>researcher</code> no hereda las del padre: puede leer y buscar, no editar ni ejecutar comandos.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>VS Code:</strong> abrir <code>.claude/agents/explorador.md</code></li><li><strong>Mirar:</strong> <code>tools:</code> con <code>- Read</code>, <code>- Grep</code>, <code>- Glob</code></li><li><strong>Mirar:</strong> no están <code>Edit</code>, <code>Write</code> ni <code>Bash</code></li></ul>',
+      example: 'Un archivo markdown con un system prompt acotado y una lista de tools. Como <code>tools</code> está declarado, <code>explorador</code> no hereda las del padre: puede leer y buscar, no editar ni ejecutar comandos.'
     }
   ]});
 </script>

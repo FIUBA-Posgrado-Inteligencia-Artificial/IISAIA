@@ -523,13 +523,13 @@
   </div>
 
   <p class="s11-matrix-note">
-    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El demo-repo trae una de cada: la skill <code>add-endpoint</code> y el command <code>pre-pr</code>.
+    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El repo del TP trae una de cada: la skill <code>agregar-juego</code> y el command <code>pre-entrega</code>.
   </p>
 
   <aside class="notes">
     <p><strong>Recorrer la tabla por filas.</strong></p>
     <p><u>Mismo reparto user / proyecto que CLAUDE.md y settings.json.</u></p>
-    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El demo-repo trae una de cada forma: la skill add-endpoint, que abrimos en un momento, y el command pre-pr."</em></p>
+    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El repo del trabajo final trae una de cada forma: la skill agregar-juego, que abrimos en un momento, y el command pre-entrega."</em></p>
   </aside>
 </section>
 
@@ -560,7 +560,7 @@
   <aside class="notes">
     <p><strong>La contracara de rules: acá hubo convergencia real.</strong></p>
     <p><u>Skills en tres harness: mismo formato SKILL.md, carpetas distintas.</u></p>
-    <p><em>"Si rules era la pieza donde no coinciden, skills es donde más coinciden. Los tres usan el mismo formato: una carpeta por skill con un SKILL.md adentro, nombre y descripción arriba, el procedimiento abajo. Y el mismo mecanismo: al arrancar entra la descripción, el cuerpo entra cuando se usa. Cambia la carpeta. Codex las busca en .agents/skills, y deprecó sus custom prompts para empujar todo hacia skills. OpenCode tiene su carpeta, y además lee la de Claude Code directamente, así que las skills del demo-repo ya le sirven. Una skill bien escrita es de las piezas que mejor viajan entre herramientas."</em></p>
+    <p><em>"Si rules era la pieza donde no coinciden, skills es donde más coinciden. Los tres usan el mismo formato: una carpeta por skill con un SKILL.md adentro, nombre y descripción arriba, el procedimiento abajo. Y el mismo mecanismo: al arrancar entra la descripción, el cuerpo entra cuando se usa. Cambia la carpeta. Codex las busca en .agents/skills, y deprecó sus custom prompts para empujar todo hacia skills. OpenCode tiene su carpeta, y además lee la de Claude Code directamente, así que las skills del repo del TP ya le sirven. Una skill bien escrita es de las piezas que mejor viajan entre herramientas."</em></p>
   </aside>
 </section>
 
@@ -596,7 +596,7 @@
   </aside>
 </section>
 
-<!-- §11.5 · Cómo se usa — walkthrough del SKILL.md de add-endpoint -->
+<!-- §11.5 · Cómo se usa — walkthrough del SKILL.md de agregar-juego -->
 <section class="s11-slide">
   <ol class="s11-five-q-grid is-mini">
     <li class="s11-five-q-card"><span class="s11-five-q-num">1</span><span class="s11-five-q-label">Qué es</span></li>
@@ -605,57 +605,56 @@
     <li class="s11-five-q-card is-active"><span class="s11-five-q-num">4</span><span class="s11-five-q-label">Cómo se usa</span></li>
   </ol>
 
-  <h2>Anatomía de <code class="s11-h2-code">.claude/skills/add-endpoint/SKILL.md</code></h2>
+  <h2>Anatomía de <code class="s11-h2-code">.claude/skills/agregar-juego/SKILL.md</code></h2>
 
   <div class="s11-code-block"><span class="s11-code-fence">---</span>
-<span class="s11-code-key">name:</span> <span class="s11-code-val">add-endpoint</span>
-<span class="s11-code-key">description:</span> <span class="s11-code-val">Use when the user asks to add a new REST endpoint to the demo-repo backend. Adds the route, the schema if missing, the test, and regenerates openapi.yaml.</span>
+<span class="s11-code-key">name:</span> <span class="s11-code-val">agregar-juego</span>
+<span class="s11-code-key">description:</span> <span class="s11-code-val">Use when adding a new game to the platform — creating a Phaser scene, seeding the game in the database and wiring it to the game page. Covers the order of the steps and the verification in the browser.</span>
 <span class="s11-code-fence">---</span></div>
 
   <ol class="s11-phases-list">
-    <li><strong>Decidir method y path:</strong> confirmar con el usuario; las escrituras llevan <code>Depends(require_bearer)</code>.</li>
-    <li><strong>Schemas:</strong> si hace falta, modelos en <code>backend/schemas/models.py</code>.</li>
-    <li><strong>Router:</strong> función en <code>backend/routers/&lt;resource&gt;.py</code> con <code>response_model</code> y <code>status_code</code>; método en el store si falta.</li>
-    <li><strong>Test:</strong> happy path + error esperado en <code>tests/test_&lt;resource&gt;.py</code>.</li>
-    <li><strong>OpenAPI:</strong> <code>uv run python scripts/export_openapi.py</code>.</li>
-    <li><strong>Verificación:</strong> <code>uv run pytest -v</code> pasa entero; mostrar el diff de <code>openapi.yaml</code>.</li>
+    <li><strong>Definir el juego:</strong> slug, nombre y descripción, confirmados con el usuario. El slug aparece en cuatro lugares.</li>
+    <li><strong>Seed:</strong> la entrada en <code>GAMES</code> de <code>backend/main.py</code>; <code>seed_games()</code> es idempotente.</li>
+    <li><strong>La escena:</strong> <code>frontend/js/games/&lt;slug&gt;.js</code>, siguiendo la rule de escenas.</li>
+    <li><strong>Conectar la página:</strong> la entrada en <code>GAMES</code> de <code>frontend/js/game-page.js</code>.</li>
+    <li><strong>Verificar jugando:</strong> con el MCP de Playwright, jugar hasta perder y guardar un puntaje.</li>
   </ol>
 
   <p class="s11-anti-card">
-    <strong>Anti-patterns:</strong> endpoint sin test · no regenerar <code>openapi.yaml</code> · endpoint sin <code>response_model</code> · constantes hardcodeadas que van en <code>models.py</code> o en una env var.
+    <strong>Anti-patterns:</strong> escribir la escena antes del seed · hacer <code>fetch</code> desde la escena · dar por hecho que anda porque la página no muestra errores · cambiar el slug a mitad de camino.
   </p>
 
   <aside class="notes">
     <p><strong>Frontmatter, seis fases, anti-patterns: arriba a abajo.</strong></p>
-    <p><u>El comando /add-endpoint sale del nombre del directorio; name es solo etiqueta.</u></p>
-    <p><em>"Cuarta pregunta: cómo se usa. Abrimos la skill add-endpoint del demo-repo. Arriba, el frontmatter. El name es una etiqueta; el comando /add-endpoint sale del nombre del directorio. La description es la frase que Claude lee para decidir si la skill aplica, y sigue una convención: 'Use when X'. Una description vaga activa mal. Abajo, el cuerpo: seis fases. Decidir method y path con el usuario, y para escrituras agregar la dependency de auth. Schemas, si hacen falta modelos nuevos. Router, con response_model y status_code explícitos, y si el store no tiene la consulta, agregar el método. Tests: happy path y error esperado. Regenerar openapi.yaml con el script. Y verificar: pytest pasa entero y se muestra el diff. Al final, en rojo, los anti-patterns: lo que el agente podría hacer si nadie lo escribe. Esa lista convierte 'esperar que Claude se acuerde' en 'tenerlo escrito'."</em></p>
+    <p><u>El comando /agregar-juego sale del nombre del directorio; name es solo etiqueta.</u></p>
+    <p><em>"Cuarta pregunta: cómo se usa. Abrimos la skill agregar-juego del repo del trabajo final. Arriba, el frontmatter. El name es una etiqueta; el comando /agregar-juego sale del nombre del directorio. La description es la frase que Claude lee para decidir si la skill aplica, y sigue una convención: 'Use when X'. Una description vaga activa mal. Abajo, el cuerpo: cinco fases, y el orden es lo que más vale. Primero definir slug, nombre y descripción, confirmados conmigo, porque el slug aparece en cuatro lugares y renombrarlo después sale caro. Segundo el seed en el backend. Tercero la escena, que sigue la rule de escenas que ya vimos. Cuarto conectar la página. Y quinto verificar jugando con el MCP de Playwright, que en este proyecto reemplaza a los tests. Al final, en rojo, los anti-patterns: escribir la escena antes del seed, hacer fetch desde la escena, o dar por terminado porque la página no muestra errores. Eso convierte 'esperar que Claude se acuerde' en 'tenerlo escrito'."</em></p>
   </aside>
 </section>
 
-<!-- §11.6 · La forma de un archivo — pre-pr.md -->
+<!-- §11.6 · La forma de un archivo — pre-entrega.md -->
 <section class="s11-slide">
-  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/pre-pr.md</code></h2>
+  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/pre-entrega.md</code></h2>
 
   <div class="s11-slash-block"><span class="s11-code-fence">---</span>
-<span class="s11-code-key">description:</span> <span class="s11-code-val">Chequeo antes de abrir un PR (tests + openapi + diff)</span>
+<span class="s11-code-key">description:</span> <span class="s11-code-val">Revisa que el TP esté en condiciones de entregarse antes de commitear</span>
 <span class="s11-code-fence">---</span>
 
-Antes de abrir un PR:
+Revisá el estado del trabajo y reportá qué está listo y qué falta.
+No arregles nada todavía: primero el diagnóstico.
 
-1. Corré `uv run pytest` y reportá si pasa.
-2. Regenerá `openapi.yaml` con `uv run python scripts/export_openapi.py`.
-3. Mostrá `git diff --stat`.
-
-No hagas commits ni push.</div>
+1. `git status` y `git diff --stat`: qué cambió y qué quedó sin commitear.
+2. El README es el informe: ¿algún cambio invalidó lo que narra?
+3. `docs/plan.md` está congelado: avisá si aparece modificado.
+4. La app levanta y la home lista los juegos.</div>
 
   <p class="s11-slash-tag">
-    <strong>Once líneas, sin directorio.</strong> Crea <code>/pre-pr</code> igual que una skill. Para un atajo corto que disparás vos alcanza; si necesitás archivos de soporte o que Claude lo cargue por relevancia, conviene la skill.
+    <strong>Trece líneas, sin directorio.</strong> Crea <code>/pre-entrega</code> igual que una skill. Para un atajo corto que disparás vos alcanza; si necesitás archivos de soporte o que Claude lo cargue por relevancia, conviene la skill.
   </p>
 
   <aside class="notes">
-    <p><strong>Leer el archivo entero: son once líneas.</strong></p>
+    <p><strong>Leer el archivo entero: son trece líneas.</strong></p>
     <p><u>Zoom-in sin mini-strip: contrapunto de tamaño con SKILL.md.</u></p>
-    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-pr punto md. Un archivo, once líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con tres pasos: correr pytest, regenerar el openapi, mostrar el diff. Crea /pre-pr igual que una skill crea /add-endpoint. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
+    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-entrega punto md. Un archivo, trece líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con la revisión previa a entregar: qué cambió, si el README sigue siendo cierto, si el plan congelado quedó intacto y si la app levanta. Fíjense la primera línea del cuerpo: 'no arregles nada todavía, primero el diagnóstico'. Sin eso, el agente empieza a corregir lo que encuentra y perdés la foto del estado. Crea /pre-entrega igual que una skill crea /agregar-juego. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
   </aside>
 </section>
 
@@ -671,44 +670,44 @@ No hagas commits ni push.</div>
   <aside class="notes">
     <p><strong>Tres pasos: índice, activación por relevancia, contraste sin skill.</strong></p>
     <p><u>Setup completo abajo; hacerlo antes de la clase.</u></p>
-    <p><em>"Vamos al demo. Una tarea que entra justo en las fases de la skill: agregar GET /users/{user_id}/posts. Primero miramos qué cargó la sesión, después la pedimos en prosa y vemos si la skill entra sola, y al final repetimos la tarea en una copia del repo sin la skill."</em></p>
+    <p><em>"Vamos al demo. Una tarea que entra justo en las fases de la skill: sumar un juego nuevo a la plataforma. Primero miramos qué cargó la sesión, después lo pedimos en prosa y vemos si la skill entra sola, y al final repetimos el pedido en una copia del repo sin la skill. No vamos a terminar el juego en vivo: alcanza con ver el orden en el que encara el trabajo."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Setup (antes de la clase)</strong></p>
     <ol>
-      <li>Copiar <code>semanas/04/demo-repo/</code> a <code>~/demo-repo</code> (fuera del repo del curso).</li>
-      <li><code>cd ~/demo-repo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
-      <li><code>cp .env.example .env</code> y <code>uv sync</code>.</li>
+      <li>Copiar <code>semanas/00/source_material/apellido-iisaia/tp-final/</code> a <code>~/tp-final-demo</code> (fuera del repo del curso).</li>
+      <li><code>cd ~/tp-final-demo &amp;&amp; git init &amp;&amp; git add -A &amp;&amp; git commit -m "estado inicial"</code> (hace falta para <code>git status</code> / <code>git checkout .</code>).</li>
+      <li><code>uv sync</code> y dejar la app levantada en otra terminal, para el paso de verificación.</li>
       <li>Abrir Claude Code con <code>claude --permission-mode default</code>: en Pro/Max/Team el modo de arranque es <code>auto</code>, que taparía los prompts de permiso. En la UI, <code>default</code> se llama Manual.</li>
       <li>Para ver qué cargó el runtime: <code>/context</code> (no <code>/memory</code>, que lista ubicaciones posibles aunque no existan).</li>
       <li>Ojo en vivo: el <code>~/.claude/CLAUDE.md</code> y las rules de usuario del profesor también aparecen como fuentes.</li>
     </ol>
     <p><strong>Paso 1 · La skill está en el índice</strong></p>
     <ul>
-      <li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li>
+      <li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li>
       <li><strong>En Claude:</strong> <code>/context</code></li>
-      <li><strong>Mirar:</strong> <code>add-endpoint</code> listada entre las skills</li>
+      <li><strong>Mirar:</strong> <code>agregar-juego</code> listada entre las skills</li>
       <li><strong>Mirar:</strong> las fases todavía no están</li>
     </ul>
     <p><strong>Paso 2 · Pedido en prosa</strong></p>
     <ul>
-      <li><strong>En Claude:</strong> "agregá un endpoint GET /users/{user_id}/posts que devuelva los posts de un usuario"</li>
-      <li><strong>Mirar:</strong> carga <code>add-endpoint</code> sin que la nombres</li>
-      <li><strong>Mirar:</strong> method y path → router + store → tests → openapi → pytest</li>
+      <li><strong>En Claude:</strong> "quiero sumar un juego nuevo a la plataforma, un Pong de un jugador"</li>
+      <li><strong>Mirar:</strong> carga <code>agregar-juego</code> sin que la nombres</li>
+      <li><strong>Mirar:</strong> pregunta slug, nombre y descripción → seed → escena → página → verificación</li>
     </ul>
     <p><strong>Paso 3 · Sin la skill</strong></p>
     <ul>
-      <li><strong>Terminal:</strong> <code>cp -r ~/demo-repo ~/demo-repo-sin-skill &amp;&amp; cd ~/demo-repo-sin-skill</code></li>
+      <li><strong>Terminal:</strong> <code>cp -r ~/tp-final-demo ~/tp-final-sin-skill &amp;&amp; cd ~/tp-final-sin-skill</code></li>
       <li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li>
       <li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li>
       <li><strong>En Claude:</strong> el mismo pedido</li>
       <li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li>
     </ul>
-    <p>En el Paso 2, Claude confirma method y path con vos: respondé que sí. pytest pide permiso porque no está en <code>allow</code>. El schema no hace falta (reutiliza <code>Post</code>).</p>
+    <p>En el Paso 2, Claude pregunta slug, nombre y descripción: respondé <code>pong</code>, "Pong" y una línea. Cortá cuando termine el seed y empiece la escena; el resto del procedimiento ya se ve en el SKILL.md.</p>
     <p><strong>Contraste parcial:</strong></p>
-    <p>Sin la skill siguen cargados CLAUDE.md y las rules (<code>api.md</code> pide <code>response_model</code> y regenerar <code>openapi.yaml</code>; <code>testing.md</code> pide happy path + error). Algunas fases pueden aparecer igual. Lo que cambia es que nada las ordena en un procedimiento único. El <code>git checkout . &amp;&amp; git clean -fd</code> descarta en la copia lo que Claude hizo en el Paso 2. Si <code>uv</code> se queja del <code>.venv</code> copiado, correr <code>uv sync</code>.</p>
+    <p>Sin la skill siguen cargados los CLAUDE.md y las rules: al tocar un archivo de <code>frontend/js/games/</code> entra <code>escenas-de-juego.md</code> y el agente igual usa <code>onKeys()</code>. Lo que cambia es el orden: sin el procedimiento escrito suele arrancar por la escena y dejar el seed para el final, que es justo el anti-pattern. El <code>git checkout . &amp;&amp; git clean -fd</code> descarta en la copia lo que Claude hizo en el Paso 2. Si <code>uv</code> se queja del <code>.venv</code> copiado, correr <code>uv sync</code>.</p>
     <p><strong>Plan B:</strong></p>
-    <p>Si en el Paso 2 la skill no entra por relevancia, invocarla directo: <code>/add-endpoint GET /users/{user_id}/posts</code>. El procedimiento que se ve es el mismo.</p>
+    <p>Si en el Paso 2 la skill no entra por relevancia, invocarla directo: <code>/agregar-juego un Pong de un jugador</code>. El procedimiento que se ve es el mismo.</p>
   </aside>
 </section>
 
@@ -737,18 +736,18 @@ No hagas commits ni push.</div>
   initClickableSteps({containerId: 's11-demo-steps', steps: [
     {
       title: 'Paso 1 · La skill está en el índice',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/demo-repo</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>add-endpoint</code> listada entre las skills</li><li><strong>Mirar:</strong> las fases todavía no están</li></ul>',
-      example: '<code>/context</code> lista <code>add-endpoint</code> entre las skills con pocos tokens: nombre y descripción. Las seis fases y los anti-patterns del <code>SKILL.md</code> todavía no ocupan la ventana.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Setup:</strong> sesión nueva en <code>~/tp-final-demo</code></li><li><strong>En Claude:</strong> <code>/context</code></li><li><strong>Mirar:</strong> <code>agregar-juego</code> listada entre las skills</li><li><strong>Mirar:</strong> las fases todavía no están</li></ul>',
+      example: '<code>/context</code> lista <code>agregar-juego</code> entre las skills con pocos tokens: nombre y descripción. Las cinco fases y los anti-patterns del <code>SKILL.md</code> todavía no ocupan la ventana.'
     },
     {
       title: 'Paso 2 · Pedido en prosa',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "agregá un endpoint GET /users/{user_id}/posts que devuelva los posts de un usuario"</li><li><strong>Mirar:</strong> carga <code>add-endpoint</code> sin que la nombres</li><li><strong>Mirar:</strong> method y path → router + store → tests → openapi → pytest</li></ul>',
-      example: 'Claude detecta que el pedido matchea la <code>description</code> y carga la skill. Confirma <code>GET /users/{user_id}/posts</code>, reutiliza <code>Post</code> como response, agrega la consulta al store y la función al router, suma happy path y 404, regenera <code>openapi.yaml</code> y corre pytest (que pide permiso).'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "quiero sumar un juego nuevo a la plataforma, un Pong de un jugador"</li><li><strong>Mirar:</strong> carga <code>agregar-juego</code> sin que la nombres</li><li><strong>Mirar:</strong> slug y nombre → seed → escena → página → verificación</li></ul>',
+      example: 'Claude detecta que el pedido matchea la <code>description</code> y carga la skill. Pregunta el slug, el nombre y la descripción antes de tocar nada, agrega la entrada al <code>GAMES</code> del backend y recién entonces escribe la escena. El orden no lo improvisa: lo lee del <code>SKILL.md</code>.'
     },
     {
       title: 'Paso 3 · Sin la skill',
-      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cp -r ~/demo-repo ~/demo-repo-sin-skill &amp;&amp; cd ~/demo-repo-sin-skill</code></li><li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> el mismo pedido</li><li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li></ul>',
-      example: 'Sin la skill, Claude resuelve con CLAUDE.md y las rules, que cubren parte del procedimiento. Algunas fases pueden aparecer igual; otras (confirmar el path, correr pytest, mostrar el diff) quedan libradas a cada corrida.'
+      summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>Terminal:</strong> <code>cp -r ~/tp-final-demo ~/tp-final-sin-skill &amp;&amp; cd ~/tp-final-sin-skill</code></li><li><strong>Terminal:</strong> <code>git checkout . &amp;&amp; git clean -fd &amp;&amp; rm -rf .claude/skills</code></li><li><strong>Terminal:</strong> <code>claude --permission-mode default</code></li><li><strong>En Claude:</strong> el mismo pedido</li><li><strong>Mirar:</strong> qué fases aparecen y cuáles no</li></ul>',
+      example: 'Sin la skill, Claude resuelve con los CLAUDE.md y las rules, que cubren parte: al tocar un archivo de juegos entra la rule de escenas y usa <code>onKeys()</code> igual. Lo que queda librado a cada corrida es el orden, y suele arrancar por la escena en vez del seed.'
     }
   ]});
 </script>
