@@ -7214,13 +7214,13 @@ uv run fastapi dev backend/main.py    <span class="c"># API + frontend en :8000<
   </div>
 
   <p class="s11-matrix-note">
-    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El repo del TP trae una de cada: la skill <code>agregar-juego</code> y el command <code>pre-entrega</code>.
+    Las de <strong>usuario</strong> sirven en cualquier proyecto. Las de <strong>proyecto</strong> se versionan con el repo. El repo del TP trae una de cada: la skill <code>agregar-juego</code> y los commands <code>explicar</code> y <code>pre-entrega</code>.
   </p>
 
   <aside class="notes">
     <p><strong>Recorrer la tabla por filas.</strong></p>
     <p><u>Mismo reparto user / proyecto que CLAUDE.md y settings.json.</u></p>
-    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El repo del trabajo final trae una de cada forma: la skill agregar-juego, que abrimos en un momento, y el command pre-entrega."</em></p>
+    <p><em>"Segunda pregunta: dónde viven. Todo es markdown. La skill, en proyecto, es una carpeta dentro de .claude/skills con un SKILL.md adentro; en usuario, lo mismo bajo tu home. El command es un archivo suelto: .claude/commands/nombre.md en el proyecto, o bajo tu home. Y los dos pueden venir empaquetados en un plugin. La diferencia user versus proyecto es la misma que en CLAUDE.md y settings.json: lo de usuario viaja con vos de repo en repo; lo de proyecto se commitea y lo comparte el equipo. El repo del trabajo final trae una de cada forma: la skill agregar-juego, que abrimos en un momento, y dos comandos cortos, explicar y pre-entrega."</em></p>
   </aside>
 </section>
 
@@ -7322,30 +7322,34 @@ uv run fastapi dev backend/main.py    <span class="c"># API + frontend en :8000<
   </aside>
 </section>
 
-<!-- §11.6 · La forma de un archivo — pre-entrega.md -->
+<!-- §11.6 · La forma de un archivo — explicar.md -->
 <section class="s11-slide">
-  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/pre-entrega.md</code></h2>
+  <h2>La forma de un archivo: <code class="s11-h2-code">.claude/commands/explicar.md</code></h2>
 
   <div class="s11-slash-block"><span class="s11-code-fence">---</span>
-<span class="s11-code-key">description:</span> <span class="s11-code-val">Revisa que el TP esté en condiciones de entregarse antes de commitear</span>
+<span class="s11-code-key">description:</span> <span class="s11-code-val">Explica en cinco líneas qué hace un archivo del proyecto y quién lo llama</span>
+<span class="s11-code-key">argument-hint:</span> <span class="s11-code-val">&lt;ruta/al/archivo&gt;</span>
+<span class="s11-code-key">disable-model-invocation:</span> <span class="s11-code-val">true</span>
 <span class="s11-code-fence">---</span>
 
-Revisá el estado del trabajo y reportá qué está listo y qué falta.
-No arregles nada todavía: primero el diagnóstico.
+Leé `$1` y explicame, en no más de cinco líneas:
 
-1. `git status` y `git diff --stat`: qué cambió y qué quedó sin commitear.
-2. El README es el informe: ¿algún cambio invalidó lo que narra?
-3. `docs/plan.md` está congelado: avisá si aparece modificado.
-4. La app levanta y la home lista los juegos.</div>
+- qué hace,
+- quién lo llama y a quién llama él,
+- qué convención del proyecto hay que respetar si lo toco.
+
+No propongas cambios ni edites nada.
+
+Si no recibiste una ruta, pedímela antes de responder.</div>
 
   <p class="s11-slash-tag">
-    <strong>Trece líneas, sin directorio.</strong> Crea <code>/pre-entrega</code> igual que una skill. Para un atajo corto que disparás vos alcanza; si necesitás archivos de soporte o que Claude lo cargue por relevancia, conviene la skill.
+    <strong>Quince líneas, sin fases y sin verificación.</strong> No es un procedimiento: es una pregunta que hacés seguido, escrita una vez. <code>$1</code> toma lo que escribís después del comando, y <code>disable-model-invocation</code> hace que <strong>solo vos</strong> puedas dispararlo: su descripción ni siquiera entra al contexto.
   </p>
 
   <aside class="notes">
-    <p><strong>Leer el archivo entero: son trece líneas.</strong></p>
-    <p><u>Zoom-in sin mini-strip: contrapunto de tamaño con SKILL.md.</u></p>
-    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra pre-entrega punto md. Un archivo, trece líneas. Frontmatter con una description, que es lo que ves en el autocomplete al escribir slash. Y un cuerpo con la revisión previa a entregar: qué cambió, si el README sigue siendo cierto, si el plan congelado quedó intacto y si la app levanta. Fíjense la primera línea del cuerpo: 'no arregles nada todavía, primero el diagnóstico'. Sin eso, el agente empieza a corregir lo que encuentra y perdés la foto del estado. Crea /pre-entrega igual que una skill crea /agregar-juego. ¿Cuándo usar cada forma? Para un atajo corto que siempre disparás vos, un archivo alcanza. Cuando el procedimiento crece, necesita archivos de soporte o querés que Claude lo cargue solo cuando la tarea lo pide, pasalo a skill."</em></p>
+    <p><strong>El contraste con la skill está en las tres líneas del frontmatter, no en el largo.</strong></p>
+    <p><u>Zoom-in sin mini-strip: atajo parametrizado contra procedimiento con fases.</u></p>
+    <p><em>"Y esta es la otra forma. Punto claude, barra commands, barra explicar punto md. Un archivo, quince líneas, y fíjense que no tiene fases, ni orden, ni verificación, ni anti-patterns: no es un procedimiento, es una pregunta que hago seguido y escribí una vez. El frontmatter tiene tres cosas. La description, que es lo que ves en el autocomplete. El argument-hint, que te recuerda qué va después del comando: /explicar frontend/js/score-panel.js, y esa ruta entra al cuerpo por el dólar uno. Y la tercera, que es la que más me gusta para entender la diferencia: disable-model-invocation en true. Eso significa que Claude no puede invocarlo solo, y va más lejos: la descripción ni siquiera entra al contexto, así que el agente no sabe que existe. Comparalo con la skill: la skill paga su descripción en la ventana desde que arranca la sesión, porque Claude tiene que poder decidir usarla. Este comando no cuesta nada hasta que lo tipeás. Ahí está el criterio: si querés que el agente lo elija, skill; si es un atajo tuyo, y más si tiene efectos que querés controlar, comando. La última línea del cuerpo, 'si no recibiste una ruta, pedímela', está porque si lo invocás sin argumento el dólar uno queda vacío."</em></p>
   </aside>
 </section>
 

@@ -158,12 +158,12 @@
 **Through-line:** Un mismo mecanismo, dos formas. Skill = directorio con SKILL.md (procedimiento completo, archivos de soporte, Claude puede cargarla por relevancia). Command = un solo archivo en `.claude/commands/`. Ambos crean `/nombre`; si comparten nombre gana la skill. Al arranque solo entra el índice (nombre + descripción); el cuerpo entra a la misma ventana al invocarla (difiere la carga, no aísla). Una skill no es una garantía: el enforcement determinístico está en settings/permisos.
 **What students walk away knowing:**
 - Estructura del SKILL.md (frontmatter + fases + anti-patterns). Ejemplo: `.claude/skills/agregar-juego/` del tp-final, cinco fases y verificación jugando con el MCP de Playwright.
-- Command de un archivo como atajo corto. Ejemplo: `.claude/commands/pre-entrega.md`, que revisa el estado antes de entregar y arranca con "no arregles nada todavía".
+- Command de un archivo como atajo corto. El slide muestra `.claude/commands/explicar.md`: quince líneas, sin fases, con `$1` y `disable-model-invocation: true` (solo lo dispara el usuario y su descripción no entra al contexto, al revés que la skill). El repo trae también `pre-entrega.md`.
 - `/memory`, `/context`, `/permissions` son built-ins del CLI, no archivos.
 - **Equivalencias (§11.3b):** la pieza donde más convergieron. Mismo formato `SKILL.md` en los tres. Codex en `.agents/skills/`, invocación con `$nombre`, custom prompts deprecados en favor de skills. OpenCode en `.opencode/skills/` y además lee `.claude/skills/`; commands en `.opencode/commands/`.
 - **Sin slide desde 2026-09-23** (estaban en "Qué confunde"): `/memory`, `/context` y `/permissions` son built-ins sin archivo; la `description` decide la activación automática; **una skill no es una garantía**: el enforcement determinístico vive en permisos.
 **Plantilla obligatoria:** misma de 4 preguntas + demo.
-**Animations / interactive:** Tarjeta de plantilla. Tabla skill vs command. SKILL.md y `pre-entrega.md` como código. `.harness-map.is-large`.
+**Animations / interactive:** Tarjeta de plantilla. Tabla skill vs command. SKILL.md y `explicar.md` como código. `.harness-map.is-large`.
 **Mini-demo:** `/context` muestra la skill en el índice; pedido en prosa "quiero sumar un juego nuevo, un Pong" activa la skill y recorre las fases (no se termina el juego en vivo: alcanza con ver el orden); contraste parcial en una copia sin `.claude/skills/`, donde las rules siguen cubriendo parte pero el orden se improvisa. Plan B: `/agregar-juego …` directo.
 **Slide budget actual:** 9 slides.
 
