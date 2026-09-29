@@ -46,7 +46,15 @@ La validación vive en los tipos de `schemas.py` y en los `Query(ge=..., le=...)
 
 No hay Alembic. `create_tables()` no toca tablas que ya existen: si agregás o cambiás una columna, borrá `scores.db` y dejá que el `lifespan` la recree con el seed. `*.db` está en `.gitignore`, así que no se pierde nada versionado.
 
-## Probar a mano
+## Probar
+
+```bash
+uv run pytest
+```
+
+Los tests usan `TestClient` y una base temporal: `DATABASE_URL` se fija en `tests/conftest.py` antes de importar la app, así que `scores.db` no se toca. `tests/test_scores.py` fija el contrato de los endpoints, incluida la zona horaria de `created_at`.
+
+A mano:
 
 ```bash
 uv run fastapi dev backend/main.py

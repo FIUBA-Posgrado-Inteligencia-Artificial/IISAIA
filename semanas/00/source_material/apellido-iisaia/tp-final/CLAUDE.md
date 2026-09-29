@@ -16,11 +16,12 @@ Vive dentro del repo del curso, en `semanas/00/source_material/apellido-iisaia/t
 uv sync                                    # instalar dependencias
 uv run fastapi dev backend/main.py         # levantar API + frontend en :8000
 uv run fastapi dev backend/main.py --port 8765   # si el 8000 está ocupado
+uv run pytest                              # tests de la API (base temporal, no toca scores.db)
 ```
 
 - App en `http://127.0.0.1:8000`, docs interactivas en `/docs`.
 - No hay variables de entorno. `scores.db` se crea al arrancar con los dos juegos ya cargados; **borrar el archivo** vacía el ranking.
-- **No hay suite de tests.** La verificación es jugar en el navegador y leer el estado de la escena desde el DOM. El MCP de Playwright está habilitado en `.claude/settings.local.json` para eso. No agregues pytest sin pedirlo: la ausencia de tests es una decisión del TP.
+- **Tests:** `uv run pytest` cubre la API con una base SQLite temporal (`tests/conftest.py` fija `DATABASE_URL` antes de importar la app). Los juegos se siguen verificando en el navegador leyendo el estado de la escena desde el DOM, con el MCP de Playwright habilitado en `.claude/settings.local.json`.
 
 ## Dónde seguir leyendo
 
@@ -28,7 +29,7 @@ Este archivo es el panorama. El detalle de cada mitad vive al lado del código y
 
 | Archivo | Qué cubre |
 |---------|-----------|
-| `backend/CLAUDE.md` | arranque y seed, recorrido de un request, capas, cambiar el esquema, probar con curl |
+| `backend/CLAUDE.md` | arranque y seed, recorrido de un request, capas, cambiar el esquema, probar con pytest y curl |
 | `frontend/CLAUDE.md` | por qué no hay build, las dos páginas, quién llama a quién, ids del DOM, errores, CSS, `games/` |
 | `.claude/rules/escenas-de-juego.md` | reglas para escribir una `Phaser.Scene` |
 | `.claude/rules/api-y-datos.md` | reglas de endpoints, fechas, capas y migraciones |

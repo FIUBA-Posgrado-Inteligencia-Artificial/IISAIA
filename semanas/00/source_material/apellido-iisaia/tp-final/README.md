@@ -22,6 +22,8 @@ uv run fastapi dev backend/main.py --port 8765
 
 No hay variables de entorno. La base `scores.db` se crea al arrancar, con los dos juegos ya cargados. Para vaciar el ranking alcanza con borrar ese archivo.
 
+Los tests de la API se corren con `uv run pytest`. Usan una base temporal, así que no tocan `scores.db`.
+
 ## Arquitectura
 
 Un solo proceso sirve la API bajo `/api` y los archivos del frontend desde `/`.
@@ -47,6 +49,7 @@ tp-final/
 │           ├── common.js   teclado y fin de partida
 │           ├── snake.js
 │           └── tetris.js
+├── tests/              pytest sobre la API
 └── docs/plan.md        el plan con el que arranqué
 ```
 
