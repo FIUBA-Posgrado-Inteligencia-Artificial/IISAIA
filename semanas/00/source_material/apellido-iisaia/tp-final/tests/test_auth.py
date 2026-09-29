@@ -72,6 +72,13 @@ def test_logout_borra_la_sesion_y_sale_de_auth0(user_client):
     assert user_client.get("/api/games").status_code == 401
 
 
+@pytest.mark.parametrize("path", ["/", "/game.html?game=snake"])
+def test_paginas_tienen_cerrar_sesion(user_client, path):
+    response = user_client.get(path)
+    assert response.status_code == 200
+    assert '<a href="/logout">Cerrar sesión</a>' in response.text
+
+
 @pytest.mark.parametrize("name", REQUIRED_VARS)
 def test_variable_faltante_frena_el_arranque(monkeypatch, name):
     monkeypatch.delenv(name)

@@ -19,6 +19,8 @@ Sin internet Phaser no carga. `game-page.js` chequea `typeof Phaser === "undefin
 
 `game.html` es genérico: el título, el texto de controles y el tamaño del canvas los completa `game-page.js` desde su mapa `GAMES`. No hay una página por juego.
 
+Las dos páginas están detrás del login: sin sesión el servidor redirige a `/login` antes de mandar el HTML, así que ningún módulo tiene que chequear si hay usuario. El header de las dos lleva `<a href="/logout">Cerrar sesión</a>`, un link común: el servidor borra la sesión y redirige a Auth0.
+
 ## Quién llama a quién
 
 ```
@@ -42,6 +44,8 @@ Mostrar y ocultar se hace con el atributo `hidden` (`el.hidden = true`), nunca c
 ## Errores
 
 `api.js` es la única capa que interpreta respuestas: convierte fallas de red y status codes en un `Error` con mensaje en castellano (`describeError`). El resto del frontend sólo muestra `error.message`.
+
+La excepción es el `401`: significa que la sesión se terminó con la página abierta. `request()` manda al navegador a `/login` y tira el `Error` igual, para que el código que llamó se corte sin seguir.
 
 El patrón de la UI es siempre el mismo: un `<p class="status">` para el estado, `.status.error` cuando falla, y un botón "Reintentar" que se revela al fallar. `setStatus()` en `score-panel.js` lo encapsula.
 

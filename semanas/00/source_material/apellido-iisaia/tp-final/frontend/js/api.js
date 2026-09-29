@@ -5,6 +5,10 @@ async function request(path, options = {}) {
   } catch {
     throw new Error("No se pudo conectar con el servidor.");
   }
+  if (response.status === 401) {
+    window.location.href = "/login";
+    throw new Error("Tu sesión terminó. Te llevamos a iniciar sesión.");
+  }
   const body = response.status === 204 ? null : await response.json().catch(() => null);
   if (!response.ok) {
     throw new Error(describeError(response.status, body));

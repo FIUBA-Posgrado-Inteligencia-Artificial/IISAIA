@@ -45,6 +45,7 @@ a { color: var(--accent); }
 
 .site-header h1 { margin: 0; font-size: 1.25rem; }
 .site-header a { text-decoration: none; }
+.header-links { display: flex; gap: var(--space-4); }
 
 main {
   max-width: 960px;
