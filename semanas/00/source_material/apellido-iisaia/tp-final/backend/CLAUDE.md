@@ -9,9 +9,16 @@ API FastAPI + SQLite que además sirve el frontend. Este archivo describe **cóm
 Después viene el orden que no se puede alterar:
 
 ```python
+app.middleware("http")(require_login)                           # exige sesión
+app.add_middleware(SessionMiddleware, secret_key=...)           # carga la sesión; corre antes que require_login
+app.include_router(auth_router)                                 # /login, /callback, /logout
 app.include_router(router)                                      # /api/...
 app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True))  # todo lo demás
 ```
+
+Starlette corre primero el último middleware agregado. Si `SessionMiddleware` se agregara antes que `require_login`, el middleware leería `request.session` sin sesión cargada y Starlette tiraría un `AssertionError`.
+
+`auth.py` llama a `load_settings()` al importarse: sin las cuatro variables del `.env` el proceso no arranca y el error dice cuáles faltan.
 
 El mount en `/` captura cualquier path que se registre después. Un endpoint nuevo agregado abajo del mount devolvería `index.html` en vez de JSON, sin error visible.
 
@@ -36,6 +43,7 @@ El orden del ranking es `points desc, created_at asc`: a igual puntaje gana el q
 | `models.py` | tablas `Game` y `Score`, con `created_at` por `default_factory` en UTC |
 | `schemas.py` | `GameOut` / `ScoreInput` / `ScoreOut`, separados de las tablas |
 | `routes.py` | los tres endpoints, `find_game()` y `to_score_out()` |
+| `auth.py` | settings de Auth0, cliente OAuth, `/login` `/callback` `/logout` y el middleware `require_login` |
 | `main.py` | app, `lifespan`, seed, montaje de estáticos |
 
 La separación modelo/schema no es ceremonia: `ScoreInput` deliberadamente **no** tiene `game` ni `created_at`, y `ScoreOut` expone `game` como slug en vez de `game_id`. Devolver un modelo de tabla directamente filtraría ambas cosas.
@@ -52,16 +60,15 @@ No hay Alembic. `create_tables()` no toca tablas que ya existen: si agregás o c
 uv run pytest
 ```
 
-Los tests usan `TestClient` y una base temporal: `DATABASE_URL` se fija en `tests/conftest.py` antes de importar la app, así que `scores.db` no se toca. `tests/test_scores.py` fija el contrato de los endpoints, incluida la zona horaria de `created_at`.
+Los tests usan `TestClient`, una base temporal y un Auth0 simulado: `tests/conftest.py` fija `DATABASE_URL` y las variables de Auth0 antes de importar la app, y reemplaza `load_server_metadata` y `authorize_access_token` del cliente OAuth. No necesitan `.env` ni red. El fixture `user_client` pasa por `/callback` y queda con la sesión iniciada. `tests/test_scores.py` fija el contrato de los endpoints, incluida la zona horaria de `created_at`, y `tests/test_auth.py` el login.
 
-A mano:
+A mano, `curl` ya no alcanza: sin la cookie de sesión la API responde `401`.
 
 ```bash
-uv run fastapi dev backend/main.py
-curl http://127.0.0.1:8000/api/games
-curl -X POST http://127.0.0.1:8000/api/games/snake/scores \
-  -H "Content-Type: application/json" -d '{"player":"Ana","points":70}'
+curl -i http://127.0.0.1:8000/api/games   # 401 {"detail": "Tenés que iniciar sesión."}
 ```
+
+Para ver respuestas crudas con sesión, iniciá sesión en el navegador y usá `/docs`.
 
 `/docs` tiene la UI interactiva. Cuando toques fechas, **leé la respuesta cruda**: el bug de la zona horaria daba `201` y se veía bien en el ranking; sólo se notaba mirando el JSON.
 

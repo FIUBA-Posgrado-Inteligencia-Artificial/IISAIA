@@ -5,7 +5,10 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from sqlmodel import Session, select
+from starlette.middleware.sessions import SessionMiddleware
 
+from backend.auth import require_login, settings
+from backend.auth import router as auth_router
 from backend.db import create_tables, engine
 from backend.models import Game
 from backend.routes import router
@@ -35,5 +38,10 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(title="Plataforma de juegos", lifespan=lifespan)
+# Starlette corre primero el último middleware agregado: la sesión tiene que
+# estar cargada antes de que require_login la lea.
+app.middleware("http")(require_login)
+app.add_middleware(SessionMiddleware, secret_key=settings.session_secret)
+app.include_router(auth_router)
 app.include_router(router)
 app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")

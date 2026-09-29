@@ -20,8 +20,8 @@ uv run pytest                              # tests de la API (base temporal, no 
 ```
 
 - App en `http://127.0.0.1:8000`, docs interactivas en `/docs`.
-- No hay variables de entorno. `scores.db` se crea al arrancar con los dos juegos ya cargados; **borrar el archivo** vacía el ranking.
-- **Tests:** `uv run pytest` cubre la API con una base SQLite temporal (`tests/conftest.py` fija `DATABASE_URL` antes de importar la app). Los juegos se siguen verificando en el navegador leyendo el estado de la escena desde el DOM, con el MCP de Playwright habilitado en `.claude/settings.local.json`.
+- Necesita un `.env` con `AUTH0_DOMAIN`, `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET` y `SESSION_SECRET` (ver `.env.example` y el README). Sin esas variables el servidor no arranca. `scores.db` se crea al arrancar con los dos juegos ya cargados; **borrar el archivo** vacía el ranking.
+- **Tests:** `uv run pytest` cubre la API y el login con una base SQLite temporal y Auth0 simulado (`tests/conftest.py` fija `DATABASE_URL` y las variables de Auth0 antes de importar la app). Los juegos se siguen verificando en el navegador leyendo el estado de la escena desde el DOM, con el MCP de Playwright habilitado en `.claude/settings.local.json`. El login real con Google no se automatiza: lo hace la persona en el navegador.
 
 ## Dónde seguir leyendo
 
@@ -50,7 +50,9 @@ Y dos comandos, que son atajos y no procedimientos: `/explicar <archivo>` resume
 
 **Un solo proceso sirve todo.** `backend/main.py` registra el router de `/api` y recién después hace `app.mount("/", StaticFiles(...))`. El orden es obligatorio: el mount en `/` atrapa todo lo que se registre después. Por eso no hay CORS ni dos servidores.
 
-Backend por capas: `db.py` (engine + sesión por request) → `models.py` (tablas `Game` y `Score`) → `schemas.py` (entrada/salida de la API, separadas de las tablas) → `routes.py` (los tres endpoints) → `main.py` (app, `lifespan` que crea tablas y hace el seed, montaje de estáticos).
+**Todo pide sesión.** `backend/auth.py` es el único archivo que conoce a Auth0: registra `/login`, `/callback` y `/logout`, y define `require_login`, el middleware que manda a `/login` cualquier request sin sesión y responde `401` en `/api/*`. El usuario vive en una cookie firmada por `SessionMiddleware`. En `main.py` el orden importa: Starlette corre primero el último middleware agregado, así que `SessionMiddleware` va después de `require_login` en el código. El router de auth, como el de `/api`, se registra antes del mount.
+
+Backend por capas: `db.py` (engine + sesión por request) → `models.py` (tablas `Game` y `Score`) → `schemas.py` (entrada/salida de la API, separadas de las tablas) → `routes.py` (los tres endpoints) → `auth.py` (login con Auth0 y middleware que exige sesión) → `main.py` (app, middlewares, `lifespan` que crea tablas y hace el seed, montaje de estáticos).
 
 Frontend sin build: ES modules nativos del navegador y Phaser `3.90.0` pinneado por CDN en `frontend/game.html`. Si Phaser no carga, `game-page.js` muestra un mensaje en vez de dejar la página en blanco.
 

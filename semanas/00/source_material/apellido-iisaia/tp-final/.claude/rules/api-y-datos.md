@@ -8,7 +8,7 @@ El slug del juego viaja en el path y **no se repite en el body**. `ScoreInput` l
 
 Si el juego del path no existe, `404` con el detalle en castellano — no una lista vacía. `[]` significa "el juego existe y nadie jugó todavía", que es otra situación.
 
-Status codes en uso: `201` al crear un puntaje, `422` para validación (nombre vacío o de más de 20 caracteres, puntaje negativo, `limit` fuera de 1 a 50), `404` para juego inexistente. Empatados en puntaje, arriba queda el que se guardó primero (`points desc, created_at asc`).
+Status codes en uso: `201` al crear un puntaje, `422` para validación (nombre vacío o de más de 20 caracteres, puntaje negativo, `limit` fuera de 1 a 50), `404` para juego inexistente, `401` sin sesión (lo responde el middleware de `auth.py`, no los endpoints). Empatados en puntaje, arriba queda el que se guardó primero (`points desc, created_at asc`).
 
 ## Fechas
 
@@ -20,7 +20,7 @@ Este bug no rompe nada visible: el `POST` devuelve `201` y el ranking se ve bien
 
 - `models.py` son las tablas. `schemas.py` es lo que entra y sale por la API. No devuelvas un `SQLModel` de tabla directamente como respuesta: cada endpoint declara su `response_model`.
 - La sesión se inyecta con `SessionDep` (`Annotated[Session, Depends(get_session)]`). No abras `Session(engine)` dentro de un endpoint.
-- Un router nuevo se registra **antes** de `app.mount("/", StaticFiles(...))` en `main.py`. El mount en `/` captura todo lo que se registre después y el endpoint nuevo devolvería el frontend.
+- Un router nuevo (también el de `auth.py`) se registra **antes** de `app.mount("/", StaticFiles(...))` en `main.py`. El mount en `/` captura todo lo que se registre después y el endpoint nuevo devolvería el frontend.
 - Juegos nuevos entran por la lista `GAMES` del seed en `main.py`. El seed es idempotente: compara por slug y sólo inserta los que faltan.
 
 ## Migraciones

@@ -51,6 +51,10 @@ Primero `uv run pytest`: confirma que la API sigue cumpliendo su contrato con el
 juego nuevo en el seed. Pero lo que valida el juego es jugarlo. Con la app
 levantada, y usando el MCP de Playwright:
 
+Todo el sitio pide login con Google. Si Playwright cae en la pantalla de Google,
+pedile a la persona que inicie sesión en esa ventana: el login real no se
+automatiza.
+
 1. Abrir la home y confirmar que el juego nuevo aparece en la lista.
 2. Entrar a su página, jugar hasta perder a propósito y ver el overlay de fin.
 3. Guardar un puntaje con un nombre y confirmar que entra al ranking.
