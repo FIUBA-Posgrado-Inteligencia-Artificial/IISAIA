@@ -41,8 +41,10 @@ Empezás desde `main` actualizado y abrís tu branch.
 **Cuando el feature está listo** (después de que `verification-before-completion` pasó):
 
 ```bash
-git push origin feature/<descripcion>
+git push -u origin feature/<descripcion>
 ```
+
+El `-u` (`--set-upstream`) conecta la branch local con la remota en el primer push: de ahí en adelante alcanza con `git push` / `git pull` sin argumentos. Sin `-u` el push funciona, pero el siguiente `git push` pelado falla con "has no upstream branch". Es también lo que corre `finishing-a-development-branch` en la opción de PR.
 
 **En la UI de GitHub:** abrís el PR. Título y descripción claros. Superpowers ya generó los commits con buenos mensajes; ahora vos contás la historia general en la descripción del PR.
 

@@ -349,7 +349,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
 
     <div class="s8-flow-phase fragment fade-in" data-fragment-index="2">
       <span class="s8-flow-tag">Cuando el feature está listo</span>
-      <pre class="s8-flow-cmd"><code>git push origin feature/&lt;descripcion&gt;</code></pre>
+      <pre class="s8-flow-cmd"><code>git push -u origin feature/&lt;descripcion&gt;</code></pre>
       <p class="s8-flow-narration" style="margin-top: var(--spacing-xs);">Después, en la UI de GitHub: abrís el PR. Título y descripción claros. Superpowers ya generó los commits con buenos mensajes; vos contás la historia general en la descripción del PR.</p>
     </div>
   </div>
@@ -359,7 +359,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
     <p><u>El workflow concreto. Tres fases: setup, trabajo, cierre.</u></p>
     <p><em>"Antes de arrancar la sesión: checkout main, pull para traer lo último, y checkout barra b feature barra descripcion. Empezás desde main actualizado y abrís tu branch. Esos tres comandos son el setup de cada sesión."</em></p>
     <p><em>"Durante el trabajo: Superpowers commitea por tarea automáticamente, sea con subagent-driven o en modo Native. Eso lo van a ver en detalle en la próxima sección."</em></p>
-    <p><em>"Cuando el feature está listo, después de que verification-before-completion pasó: push de la branch al origin. Y después, en la UI de GitHub, abrís el PR. Título y descripción claros. Una nota: Superpowers ya generó los commits con buenos mensajes durante la sesión; lo que ustedes hacen al cerrar es contar la historia general en la descripción del PR."</em></p>
+    <p><em>"Cuando el feature está listo, después de que verification-before-completion pasó: push de la branch al origin, con menos u. La u deja la branch local conectada con la remota: la primera vez la crea allá, y de ahí en adelante un git push o un git pull pelado ya saben adónde ir. Sin la u el push funciona igual, pero el próximo git push sin argumentos falla diciendo que la branch no tiene upstream. Y después, en la UI de GitHub, abrís el PR. Título y descripción claros. Una nota: Superpowers ya generó los commits con buenos mensajes durante la sesión; lo que ustedes hacen al cerrar es contar la historia general en la descripción del PR."</em></p>
   </aside>
 </section>
 
