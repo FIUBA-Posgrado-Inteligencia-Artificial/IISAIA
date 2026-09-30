@@ -1695,6 +1695,36 @@
     overflow-x: auto;
     margin: 0;
   }
+  .s5-planb-grid.is-split {
+    column-gap: var(--spacing-md);
+    row-gap: var(--spacing-sm);
+  }
+  .s5-planb-header.is-col {
+    margin: 0;
+  }
+  .s5-planb-grid.is-split .s5-planb-cmd {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .s5-planb-grid.is-split .s5-planb-cmd {
+    margin: var(--spacing-xs) 0 0 0;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    width: auto;
+    box-shadow: none;
+    font-size: 0.95rem;
+  }
+  .s5-planb-grid.is-split .s5-planb-cmd code {
+    padding: 0;
+    background: transparent;
+    font-size: inherit;
+    max-height: none;
+  }
+  .s5-planb-grid.is-split .s5-planb-when {
+    margin: 0;
+  }
+  .s5-planb-grid.is-split .s5-planb-card {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
 </style>
 <section>
 <!-- §5 — Instalar Superpowers (single slide para autoservicio + recreo) -->
@@ -1715,22 +1745,30 @@
       <span class="s5-step-tag">2. verificar</span>
       <div class="s5-step-cmd is-secondary">/plugin list</div>
       <div class="s5-expected">$ /plugin list
-
-<span class="s5-expected-hit">superpowers</span>  v5.1.0  <span class="s5-expected-mkt">claude-plugins-official</span>  enabled</div>
+<span class="s5-expected-hit">superpowers</span>  v6.4.1  <span class="s5-expected-mkt">claude-plugins-official</span>  enabled</div>
     </div>
 
-    <!-- Plan B section -->
+    <!-- Plan B + otros harnesses: una fila de cuatro cards -->
     <div class="s5-planb">
-      <p class="s5-planb-header">Si algo no coopera</p>
-      <div class="s5-planb-grid">
+      <div class="s5-planb-grid is-split">
+        <p class="s5-planb-header is-col">Si algo no coopera</p>
+        <p class="s5-planb-header is-col">En otro harness</p>
         <div class="s5-planb-card">
           <p class="s5-planb-when"><strong>El marketplace oficial no responde.</strong> Usá el comunitario:</p>
           <pre class="s5-planb-cmd"><code>/plugin marketplace add obra/superpowers-marketplace
 /plugin install superpowers@superpowers-marketplace</code></pre>
         </div>
         <div class="s5-planb-card">
-          <p class="s5-planb-when"><strong>El install terminó pero las skills no figuran</strong> en <code style="background: var(--bg-primary); border-radius: 3px; padding: 1px 6px; color: var(--accent-secondary);">/plugin list</code>:</p>
+          <p class="s5-planb-when"><strong>Codex:</strong> abrí el catálogo, buscá <em>superpowers</em> e instalalo.</p>
+          <pre class="s5-planb-cmd"><code>/plugins</code></pre>
+        </div>
+        <div class="s5-planb-card">
+          <p class="s5-planb-when"><strong>Las skills no figuran</strong> en <code style="background: var(--bg-primary); border-radius: 3px; padding: 1px 6px; color: var(--accent-secondary);">/plugin list</code>:</p>
           <pre class="s5-planb-cmd"><code>/reload-plugins</code></pre>
+        </div>
+        <div class="s5-planb-card">
+          <p class="s5-planb-when"><strong>OpenCode:</strong> sumalo a <code style="background: var(--bg-primary); border-radius: 3px; padding: 1px 6px; color: var(--accent-secondary);">opencode.json</code> y reiniciá.</p>
+          <pre class="s5-planb-cmd"><code>"plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]</code></pre>
         </div>
       </div>
     </div>
@@ -1743,6 +1781,8 @@
     <p><em>"Paso uno: el comando de install contra el marketplace oficial. Es el caso más común, anda con un solo comando."</em></p>
     <p><em>"Paso dos: verifican con <code>/plugin list</code>. Tiene que aparecer 'superpowers' con su versión, el marketplace 'claude-plugins-official', y estado 'enabled'. Si ven esos cuatro datos, está instalado."</em></p>
     <p><em>"Plan B si algo no responde — tienen dos contingencias en pantalla. Si el marketplace oficial está caído o timeoutea, hay un marketplace comunitario alternativo mantenido por el autor original; primero lo agregan, después instalan desde ahí. Si el install termina sin errores pero las skills no figuran en /plugin list, ejecutan /reload-plugins."</em></p>
+    <p><u>Abajo, para quien use otro harness: en Codex, <code>/plugins</code> abre el catálogo y Superpowers está en el marketplace oficial de Codex. En OpenCode no hay marketplace: se agrega el paquete git a la lista <code>"plugin"</code> de <code>opencode.json</code> (global o del proyecto) y se reinicia OpenCode. Para fijar versión se agrega <code>#v6.4.1</code> al final.</u></p>
+    <p><u>Windows: desde la 6.2 el hook de inicio de Superpowers corre con Git Bash. Si no está instalado, Claude Code avisa y pide instalarlo; sin eso las skills existen pero el flujo no arranca solo.</u></p>
     <p><em>"Cualquier duda durante el recreo me preguntan. Cuando volvamos, arrancamos con la primera skill del happy-path: brainstorming."</em></p>
   </aside>
 </section>
