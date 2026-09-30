@@ -16,7 +16,7 @@ writing-plans toma un spec aprobado y lo convierte en un implementation plan lis
 
 ## Cuándo se activa
 
-Se activa después del brainstorming y antes de tocar código. Si tenés un spec, esta skill lo convierte en plan ejecutable. También se activa si vos pedís un plan para una tarea grande sin haber pasado por brainstorming; en ese caso, lo primero que hace es recomendar volver atrás y producir el spec, porque sin spec el plan no tiene contra qué validarse.
+Se activa después del brainstorming y antes de tocar código. Si tenés un spec, esta skill lo convierte en plan ejecutable. Los cambios chicos no llegan acá: brainstorming los clasifica como *bounded* y los resuelve con un diseño corto en el chat. El plan escrito es para el trabajo *architectural*.
 
 ## Por qué importa
 
@@ -24,7 +24,7 @@ El plan es lo que permite que cualquier agente —vos mañana, un subagente, un 
 
 ## El punto crítico
 
-Tareas de 2 a 5 minutos con archivos exactos y código completo en cada step. Nada de "implementar similar al Task N" sin repetir el código, porque el ingeniero puede leer las tareas fuera de orden y necesita tener todo a mano en cada una. Nada de "agregar error handling apropiado" sin mostrar qué error handling concreto. Si un step describe qué hacer pero no muestra cómo, no es un step, es un placeholder.
+Steps de 2 a 5 minutos (cada tarea, del tamaño de su propio ciclo de test) con archivos exactos y código completo en cada step. Nada de "implementar similar al Task N" sin repetir el código, porque el ingeniero puede leer las tareas fuera de orden y necesita tener todo a mano en cada una. Nada de "agregar error handling apropiado" sin mostrar qué error handling concreto. Si un step describe qué hacer pero no muestra cómo, no es un step, es un placeholder.
 
 ## El artefacto: el plan en disco
 
@@ -32,7 +32,11 @@ El plan se persiste en `docs/superpowers/plans/YYYY-MM-DD-<feature>.md` y se com
 
 ## Punto de auto-review
 
-Después de escribir el plan y antes de pasártelo, la skill corre un Plan Self-Review interno con tres chequeos. Spec coverage: recorre cada requisito del spec y se pregunta si hay una tarea que lo implementa, listando gaps si los hay. Placeholder scan: busca en el plan red flags tipo "TBD", "TODO", "implement later", "add appropriate error handling", "similar to Task N" sin código repetido. Type consistency: verifica que los nombres de funciones, métodos y propiedades sean iguales entre tareas —si en la Task 3 llamaste a algo `clearLayers()`, en la Task 7 no puede aparecer como `clearFullLayers()`. Los issues encontrados se arreglan inline; no hay segunda vuelta de review.
+Después de escribir el plan y antes de pasártelo, la skill corre un Plan Self-Review interno con cuatro chequeos. Spec coverage: recorre cada requisito del spec y se pregunta si hay una tarea que lo implementa, listando gaps si los hay. Placeholder scan: busca en el plan red flags tipo "TBD", "TODO", "implement later", "add appropriate error handling", "similar to Task N" sin código repetido. Type consistency: verifica que los nombres de funciones, métodos y propiedades sean iguales entre tareas —si en la Task 3 llamaste a algo `clearLayers()`, en la Task 7 no puede aparecer como `clearFullLayers()`. Review Focus: hasta cinco casos borde que el spec implica pero ninguna tarea testea; cada uno queda clavado a un test en la tarea que corresponde. Los issues encontrados se arreglan inline; no hay segunda vuelta de review.
+
+## Estructura del plan y handoff (desde v6.0 / v6.4)
+
+Arriba de las tareas, el plan trae `Spec:` (puntero al spec), **Global Constraints** (las reglas que atan a todas las tareas, copiadas tal cual del spec) y **Review Focus**. Cada tarea declara sus **Interfaces** (qué consume de tareas anteriores y qué produce para las siguientes). Al terminar, la skill te pide que revises el plan guardado —aprobar la idea no es aprobar el plan— y ofrece dos modos de ejecución: **Subagent-driven** (subagent y reviewer por tarea, review final; más completo, más caro) o **Native** (la sesión implementa todo, una review final con el modelo más capaz; más barato). Recomienda uno con una razón sacada del plan.
 
 ## Anti-patrones a evitar
 
@@ -44,7 +48,6 @@ Después de escribir el plan y antes de pasártelo, la skill corre un Plan Self-
 
 `semanas/05/source_material/superpowers/skills/writing-plans/SKILL.md`
 
-<!-- INSERT-USER-CAPTURE -->
-<!-- Captura real: screenshot del archivo de plan resultante abierto en VS Code
-     (path docs/superpowers/plans/YYYY-MM-DD-<feature>.md), mostrando la estructura
-     task-by-task con archivos exactos y steps. -->
+## Caso real
+
+Plan del login con Auth0 sobre el tp-final (`tp-final/docs/superpowers/plans/2026-09-29-tp-final-auth0.md`): 3 tareas, Global Constraints, Review Focus con 5 casos borde. La skill recomendó Native; se eligió Subagent-driven.

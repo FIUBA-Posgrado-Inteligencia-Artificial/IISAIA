@@ -2720,8 +2720,8 @@
     </div>
     <div class="s7-chain-arrow">→</div>
     <div class="s7-chain-step">
-      <p class="s7-chain-name">subagent-driven</p>
-      <p class="s7-chain-art">consume plan, produce <strong>código</strong></p>
+      <p class="s7-chain-name">ejecución</p>
+      <p class="s7-chain-art">subagent-driven o Native: consume plan, produce <strong>código</strong></p>
     </div>
   </div>
 
@@ -2731,8 +2731,8 @@
 
   <aside class="notes">
     <p><u>Diagrama de la cadena. Cada skill produce un artefacto que la próxima consume como contrato.</u></p>
-    <p><em>"La cadena tiene tres skills. Brainstorming produce el spec. Writing-plans consume el spec y produce el plan. Subagent-driven consume el plan y produce el código."</em></p>
-    <p><em>"La idea clave: cada skill mira el artefacto previo como contrato cerrado. Writing-plans no re-discute el spec; lo toma como dado. Subagent-driven no re-discute el plan. Esto es lo que permite que el flujo escale: cada paso tiene una entrada bien definida y una salida bien definida."</em></p>
+    <p><em>"La cadena tiene tres skills. Brainstorming produce el spec. Writing-plans consume el spec y produce el plan. La ejecución — subagent-driven o su alternativa más barata, Native — consume el plan y produce el código."</em></p>
+    <p><em>"La idea clave: cada skill mira el artefacto previo como contrato cerrado. Writing-plans no re-discute el spec; lo toma como dado. La ejecución no re-discute el plan. Esto es lo que permite que el flujo escale: cada paso tiene una entrada bien definida y una salida bien definida."</em></p>
   </aside>
 </section>
 
@@ -2744,7 +2744,7 @@
     <p class="s6-sublabel" style="margin-top: var(--spacing-md);">Qué hace</p>
     <div class="s6-central" style="margin-top: 0;">
       <div class="s6-central-main">
-        Toma el spec aprobado y lo convierte en un <strong>plan markdown con tareas chicas</strong> — de 2 a 5 minutos cada una, con paths exactos, código completo en cada step, y comandos de verificación al lado.
+        Toma el spec aprobado y lo convierte en un <strong>plan markdown de tareas chicas</strong> — cada una del tamaño de su propio ciclo de test, partida en steps de 2 a 5 minutos, con paths exactos, código completo y comandos de verificación al lado.
       </div>
       <p class="s6-central-sub">
         Asunción agresiva: el ingeniero que va a ejecutar no conoce el codebase ni el dominio.
@@ -2761,7 +2761,7 @@
       </div>
       <div class="s6-compare-card is-no">
         <div class="s6-compare-tag">No, sin spec</div>
-        <p class="s6-compare-body">Si pedís plan para una tarea grande sin pasar por brainstorming, lo primero que hace es recomendar volver atrás y producir el spec.</p>
+        <p class="s6-compare-body">Cambios chicos: brainstorming los resuelve con un diseño corto en el chat, sin plan en disco.</p>
       </div>
     </div>
   </div>
@@ -2769,8 +2769,8 @@
   <aside class="notes">
     <p><strong>Dos reveals — uno por sub-sección.</strong></p>
     <p><u>Qué hace la skill + cuándo se activa.</u></p>
-    <p><em>"Qué hace en detalle: toma el spec aprobado y lo convierte en un plan markdown con tareas chicas — de 2 a 5 minutos cada una. Cada tarea lleva los paths exactos de los archivos que toca, el código completo de cada step, y los comandos de verificación al lado. La asunción es agresiva: el ingeniero que va a ejecutar el plan no conoce el codebase ni el dominio y necesita tenerlo todo a mano."</em></p>
-    <p><em>"Cuándo se activa: después de brainstorming, antes de tocar código. El spec aprobado es la entrada. Si pedís un plan para una tarea grande sin haber pasado por brainstorming, lo primero que hace la skill es recomendar volver atrás y producir el spec — sin spec, el plan no tiene contra qué validarse."</em></p>
+    <p><em>"Qué hace en detalle: toma el spec aprobado y lo convierte en un plan markdown de tareas chicas: cada tarea tiene el tamaño justo para su propio ciclo de test y su propia review, y se parte en steps de 2 a 5 minutos. Cada tarea lleva los paths exactos de los archivos que toca, el código completo de cada step, y los comandos de verificación al lado. La asunción es agresiva: el ingeniero que va a ejecutar el plan no conoce el codebase ni el dominio y necesita tenerlo todo a mano."</em></p>
+    <p><em>"Cuándo se activa: después de brainstorming, antes de tocar código. El spec aprobado es la entrada. Cuándo no: los cambios chicos. Brainstorming los clasifica como bounded y los resuelve con un diseño corto en el chat, sin spec ni plan en disco. El plan escrito es para el trabajo architectural."</em></p>
   </aside>
 </section>
 
@@ -2794,7 +2794,7 @@
     <p class="s6-sublabel">Punto crítico</p>
     <div class="s6-central" style="margin-top: 0;">
       <div class="s6-central-main">
-        Tareas de <strong>2 a 5 minutos</strong> con archivos exactos y <strong>código completo en cada step</strong>. Nada de &laquo;similar a la Task N&raquo; sin repetir el código. Nada de &laquo;add appropriate error handling&raquo; sin mostrar qué.
+        Steps de <strong>2 a 5 minutos</strong> con archivos exactos y <strong>código completo en cada step</strong>. Nada de &laquo;similar a la Task N&raquo; sin repetir el código. Nada de &laquo;add appropriate error handling&raquo; sin mostrar qué.
       </div>
       <p class="s6-central-sub">
         Razón: el ejecutor lee tareas fuera de orden, y un subagente arranca cada task con contexto fresco.
@@ -2806,7 +2806,7 @@
     <p><strong>Dos reveals — uno por sub-sección.</strong></p>
     <p><u>Por qué la skill vale + la regla no negociable.</u></p>
     <p><em>"Por qué importa: el plan persistido en disco es lo que permite que cualquier agente — vos mañana, un subagente, un colega que toma la posta — ejecute la implementación sin re-deducir nada. Es el contrato técnico que cierra la brecha entre la intención del spec y la ejecución en código. Sin esta skill, el plan queda en tu cabeza y se pierde cuando se acaba la ventana de contexto."</em></p>
-    <p><em>"Punto crítico: tareas de 2 a 5 minutos con archivos exactos y código completo en cada step. Nada de 'implementar similar al Task N' sin repetir el código, porque el ejecutor puede leer las tareas fuera de orden y necesita tener todo a mano. Nada de 'agregar error handling apropiado' sin mostrar qué error handling concreto. Si un step describe qué hacer pero no muestra cómo, no es un step — es un placeholder."</em></p>
+    <p><em>"Punto crítico: steps de 2 a 5 minutos con archivos exactos y código completo en cada step. Nada de 'implementar similar al Task N' sin repetir el código, porque el ejecutor puede leer las tareas fuera de orden y necesita tener todo a mano. Nada de 'agregar error handling apropiado' sin mostrar qué error handling concreto. Si un step describe qué hacer pero no muestra cómo, no es un step — es un placeholder."</em></p>
   </aside>
 </section>
 
@@ -2822,7 +2822,7 @@
         <p class="s6-split-body">El plan se persiste en:</p>
         <pre style="margin: var(--spacing-xs) 0; background: var(--bg-primary); border-radius: 4px; padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9rem; color: var(--accent-secondary); overflow-x: auto;"><code>docs/superpowers/plans/
   YYYY-MM-DD-&lt;feature&gt;.md</code></pre>
-        <p class="s6-split-body" style="margin-top: var(--spacing-xs);">Se commitea junto al spec. Ese par es lo que subagent-driven-development lee para ejecutar autónomamente.</p>
+        <p class="s6-split-body" style="margin-top: var(--spacing-xs);">Arriba de las tareas: <code>Spec:</code>, <strong>Global Constraints</strong> y <strong>Review Focus</strong>. Vos lo revisás antes de que corra nada.</p>
       </div>
       <div class="s6-split-card is-secondary">
         <div class="s6-split-tag">Plan Self-Review</div>
@@ -2831,6 +2831,7 @@
           <li><strong>Spec coverage</strong>: ¿hay tarea por cada requisito del spec?</li>
           <li><strong>Placeholders</strong>: <code>TBD</code>, <code>TODO</code>, &laquo;implement later&raquo;</li>
           <li><strong>Type consistency</strong>: <code>clearLayers()</code> en Task 3 no puede ser <code>clearFullLayers()</code> en Task 7</li>
+          <li><strong>Review Focus</strong>: ¿qué casos borde implica el spec que ninguna tarea testea?</li>
         </ul>
       </div>
     </div>
@@ -2854,68 +2855,62 @@
   <aside class="notes">
     <p><strong>Dos reveals — uno por sub-sección.</strong></p>
     <p><u>Slide doble: dos detalles operativos + tres anti-patrones a evitar.</u></p>
-    <p><em>"Dos cosas importantes. La primera: el plan se persiste en docs/superpowers/plans con el mismo patrón fecha + topic que vimos en el spec. Ese par — spec más plan — es lo que después lee subagent-driven-development para ejecutar autónomamente. Si querés cambiar el rumbo del feature, editás esos archivos y volvés a correr el flujo. La segunda: hay un Plan Self-Review interno con tres chequeos: spec coverage — ¿hay tarea por cada requisito del spec?; placeholder scan — TBD, TODO, implement later son red flags; type consistency — si en Task 3 llamaste a algo clearLayers, en Task 7 no puede aparecer como clearFullLayers."</em></p>
+    <p><em>"Dos cosas importantes. La primera: el plan se persiste en docs/superpowers/plans con el mismo patrón fecha + topic que vimos en el spec. Arriba de las tareas el plan trae tres bloques: un puntero al spec, las Global Constraints — las reglas que atan a todas las tareas, copiadas tal cual del spec — y el Review Focus, que ya vemos. Y antes de ejecutar nada, el plan guardado lo revisás vos: aprobar la idea no es aprobar un plan que no leíste. La segunda: hay un Plan Self-Review interno con cuatro chequeos: spec coverage — ¿hay tarea por cada requisito del spec?; placeholder scan — TBD, TODO, implement later son red flags; type consistency — si en Task 3 llamaste a algo clearLayers, en Task 7 no puede aparecer como clearFullLayers; y Review Focus — hasta cinco casos borde que el spec implica pero ninguna tarea testea, y a cada uno le suma un test en la tarea que corresponde."</em></p>
     <p><em>"Y tres anti-patrones del plan en sí. TBD, TODO, 'implement later' son fallas del plan, no pendientes legítimos — el plan se completa o se reduce su scope. 'Add appropriate error handling' sin mostrar qué error handling concreto: vago equivale a no implementable. 'Similar to Task N' sin repetir el código: la gente lee tareas fuera de orden, y un subagente arranca cada task con contexto fresco — repetí el código en cada step que lo necesita."</em></p>
   </aside>
 </section>
 
-<!-- §7.7 — Sesión real: el plan que produjo writing-plans en el demo-repo -->
+<!-- §7.7 — Sesión real: el plan que produjo writing-plans para el login con Auth0 -->
 <section>
-  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El plan del demo-repo, paso a paso</h2>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El plan del login, paso a paso</h2>
 
   <div class="s7-session">
     <div class="s7-session-row is-input">
-      <span class="s7-session-tag">Entrada</span>
+      <span class="s7-session-tag">Entrada → salida</span>
       <p class="s7-session-body">
-        Spec aprobado en brainstorming:
+        <code>docs/superpowers/specs/2026-09-29-tp-final-auth0-design.md</code>
         <br>
-        <code>docs/superpowers/specs/2026-05-24-bulk-csv-import-design.md</code>
+        → <code>docs/superpowers/plans/2026-09-29-tp-final-auth0.md</code> (commit <code>52ddf56</code>)
       </p>
     </div>
 
     <div class="s7-session-row is-output fragment fade-in" data-fragment-index="0">
-      <span class="s7-session-tag">Salida — plan en disco</span>
-      <p class="s7-session-body">
-        <code>docs/superpowers/plans/2026-05-24-bulk-csv-import.md</code>
-        <br>
-        Commit <code>9f93a27</code> en branch <code>feature/import-data</code>.
-      </p>
-    </div>
-
-    <div class="s7-session-row is-output fragment fade-in" data-fragment-index="1">
-      <span class="s7-session-tag">11 tareas, en TDD</span>
+      <span class="s7-session-tag">3 tareas, cada una con su commit</span>
       <div class="s7-task-grid">
-        <div class="s7-task">Mover <code>reset_store</code> a <code>conftest.py</code></div>
-        <div class="s7-task">Índices del store + <code>find_*</code></div>
-        <div class="s7-task"><code>snapshot()</code> / <code>restore()</code></div>
-        <div class="s7-task">Schemas <code>ImportResult</code> + errores</div>
-        <div class="s7-task">Adapters <code>UserAdapter</code> / <code>PostAdapter</code></div>
-        <div class="s7-task">Orquestador <code>run_import</code></div>
-        <div class="s7-task">Router <code>/import/{resource}</code></div>
-        <div class="s7-task"><code>admin.html</code></div>
-        <div class="s7-task"><code>admin.js</code></div>
-        <div class="s7-task">Estilos + link desde <code>index.html</code></div>
-        <div class="s7-task">Regenerar <code>openapi.yaml</code></div>
+        <div class="s7-task">Tests del API tal como está hoy</div>
+        <div class="s7-task">Login en el backend + sus tests</div>
+        <div class="s7-task">Cerrar sesión en el frontend + prueba en navegador</div>
       </div>
     </div>
 
-    <div class="s7-session-row is-review fragment fade-in" data-fragment-index="2">
-      <span class="s7-session-tag">Plan Self-Review — encontró 2 gaps</span>
+    <div class="s7-session-row is-review fragment fade-in" data-fragment-index="1">
+      <span class="s7-session-tag">Review Focus — 5 casos borde que el spec implica</span>
       <ul class="s7-review-list">
-        <li>Faltaba el test <code>test_import_missing_file</code> que el spec lista.</li>
-        <li>Task 4 dice &laquo;Append&raquo; pero <code>from typing import Literal</code> debería ir arriba con los otros imports.</li>
+        <li>Login cancelado en Google → <code>400</code> con link para reintentar, no un <code>500</code>.</li>
+        <li>Estáticos y <code>/docs</code> sin sesión → <code>302 /login</code>, nunca el archivo.</li>
+        <li>Guardar puntaje sin sesión → <code>401</code>, y no se guarda nada.</li>
+        <li>Variable vacía en <code>.env</code> → la app no arranca y dice cuál falta.</li>
+        <li>Sesión vencida con la página abierta → vuelve al login (se prueba en navegador).</li>
       </ul>
-      <p class="s7-session-body" style="margin-top: var(--spacing-xs); color: var(--text-muted); font-style: italic;">Los arregla inline. Yo nunca leí un &quot;TBD&quot; en mi propio plan.</p>
+    </div>
+
+    <div class="s7-session-row is-output fragment fade-in" data-fragment-index="2">
+      <span class="s7-session-tag">¿Cómo lo ejecuto?</span>
+      <p class="s7-session-body">
+        &laquo;Recomiendo <strong>Native</strong>: son solo tres tareas, cada una depende de la anterior y el plan ya trae el código.&raquo;
+        <br>
+        Elegí <strong>Subagent-driven</strong>.
+      </p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Tres reveals — plan generado, tareas, self-review.</strong></p>
-    <p><u>Caso real. La sesión existe en log; las tareas son las 11 reales del plan; el self-review encontró 2 gaps reales que fixeó inline.</u></p>
-    <p><em>"La entrada de writing-plans fue el spec que dejó brainstorming. La skill lo leyó y escribió el plan en este path."</em></p>
-    <p><em>"Salida: el plan en disco, commiteado. Si abrís el archivo, vas a ver 11 tareas en TDD, una por archivo o componente del feature."</em></p>
-    <p><em>"Acá están las 11 tareas en una vista resumen. Cada una tiene paths exactos, código completo, comandos de verificación al lado, y un commit chico al final. Las primeras tres son refactor previo necesario; de la cuatro en adelante van construyendo el feature pieza por pieza."</em></p>
-    <p><em>"Y acá el Plan Self-Review: la skill encontró sola dos gaps en su primer draft del plan y los corrigió antes de pasármelo. El test que faltaba aparecía en la lista del spec pero no en ninguna tarea — spec coverage gap. Y el import de Literal estaba mal ubicado en Task 4 — un placeholder de organización. Los dos quedaron arreglados inline, sin pedirme input. Por eso digo que nunca debería leer un TBD en mi propio plan."</em></p>
+    <p><strong>Tres reveals — tareas, Review Focus, elección del modo.</strong></p>
+    <p><u>Caso real, misma sesión del login con Auth0. La sesión fue en inglés; los textos son traducción del plan y de los mensajes de la skill.</u></p>
+    <p><em>"La entrada de writing-plans fue el spec que dejó brainstorming. La salida, el plan en disco, commiteado en la misma branch."</em></p>
+    <p><em>"Tres tareas, cada una termina en su propio commit. La primera escribe tests para el API tal como está, antes de tocar nada: así, cuando entre el login, cualquier cosa que se rompa se ve. La segunda es el login en el backend. La tercera, el frontend y la prueba en el navegador."</em></p>
+    <p><em>"Y acá el Review Focus: cinco casos que el spec implica pero no nombra. Qué pasa si cancelás en Google, si pedís un archivo estático sin sesión, si guardás un puntaje sin sesión, si dejás una variable vacía, si la sesión vence con la página abierta. Los cuatro primeros quedaron clavados a un test en la tarea dos; el quinto no tiene cómo testearse sin navegador, así que quedó como paso de la prueba manual."</em></p>
+    <p><em>"Al final la skill no arranca sola: te pide que revises el plan y te pregunta cómo ejecutarlo. Subagent-driven o Native, con lo que cuesta cada uno, y recomienda uno con una razón sacada del plan. Recomendó Native. Yo elegí subagent-driven igual. La recomendación es información; la decisión es tuya."</em></p>
   </aside>
 </section>
 </section>
