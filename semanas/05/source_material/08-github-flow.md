@@ -36,7 +36,7 @@ git checkout -b feature/<descripcion>
 
 Empezás desde `main` actualizado y abrís tu branch.
 
-**Durante el trabajo:** Superpowers, vía `subagent-driven-development` (la próxima skill), commitea por tarea automáticamente. Tu trabajo es revisar los commits que va generando entre tareas y aceptarlos. Si querés modificar algo a mano, podés; el flujo no te bloquea.
+**Durante el trabajo:** Superpowers commitea por tarea automáticamente, tanto con `subagent-driven-development` (la próxima skill) como en modo Native (`executing-plans`). Tu trabajo es revisar los commits que va generando entre tareas y aceptarlos. Si querés modificar algo a mano, podés; el flujo no te bloquea.
 
 **Cuando el feature está listo** (después de que `verification-before-completion` pasó):
 

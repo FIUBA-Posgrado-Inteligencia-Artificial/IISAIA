@@ -3136,6 +3136,13 @@
     color: var(--accent-secondary);
     font-size: 0.9em;
   }
+  /* reveal.js pisa los márgenes de <p>/<pre> con .reveal p; esto hace valer los de arriba */
+  .reveal .s8-concept-def,
+  .reveal .s8-concept-rule,
+  .reveal .s8-concept-cmd,
+  .reveal .s8-concept-cmd-note {
+    margin: 4px 0 0 0;
+  }
 </style>
 <section>
 <!-- §8.1 — Opener: git como envoltorio, no como skill -->
@@ -3196,7 +3203,7 @@
       <circle cx="380" cy="115" r="6" fill="var(--accent-secondary)"/>
       <circle cx="445" cy="115" r="6" fill="var(--accent-secondary)"/>
       <circle cx="510" cy="115" r="6" fill="var(--accent-secondary)"/>
-      <text x="380" y="148" font-size="12">feature/csv-import</text>
+      <text x="380" y="148" font-size="12">feature/auth0-login</text>
     </g>
 
     <!-- Reveal 2: branch merges back into main + merge commit + PR badge -->
@@ -3256,7 +3263,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
 
     <div class="s8-flow-phase fragment fade-in" data-fragment-index="1">
       <span class="s8-flow-tag is-during">Durante el trabajo</span>
-      <p class="s8-flow-narration">Superpowers, vía <strong>subagent-driven-development</strong>, commitea <strong>por tarea automáticamente</strong>.</p>
+      <p class="s8-flow-narration">Superpowers commitea <strong>por tarea automáticamente</strong>, en cualquiera de los dos modos de ejecución.</p>
     </div>
 
     <div class="s8-flow-phase fragment fade-in" data-fragment-index="2">
@@ -3270,7 +3277,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
     <p><strong>Tres reveals — uno por fase.</strong></p>
     <p><u>El workflow concreto. Tres fases: setup, trabajo, cierre.</u></p>
     <p><em>"Antes de arrancar la sesión: checkout main, pull para traer lo último, y checkout barra b feature barra descripcion. Empezás desde main actualizado y abrís tu branch. Esos tres comandos son el setup de cada sesión."</em></p>
-    <p><em>"Durante el trabajo: Superpowers, vía subagent-driven-development, commitea por tarea automáticamente. Eso lo van a ver en detalle en la próxima sección."</em></p>
+    <p><em>"Durante el trabajo: Superpowers commitea por tarea automáticamente, sea con subagent-driven o en modo Native. Eso lo van a ver en detalle en la próxima sección."</em></p>
     <p><em>"Cuando el feature está listo, después de que verification-before-completion pasó: push de la branch al origin. Y después, en la UI de GitHub, abrís el PR. Título y descripción claros. Una nota: Superpowers ya generó los commits con buenos mensajes durante la sesión; lo que ustedes hacen al cerrar es contar la historia general en la descripción del PR."</em></p>
   </aside>
 </section>
