@@ -21,8 +21,9 @@ secuencia es la misma.
   chicas, con criterios de aceptación por tarea. También sale al disco.
 - Arrancás la sesión de trabajo con `git checkout -b feature/<descripcion>` —
   la convención de GitHub Flow. Toda la implementación vive en esa branch.
-- Dejás correr `subagent-driven-development` con el plan; revisás entre
-  tareas, no después de un bloque grande.
+- Dejás correr `subagent-driven-development` con el plan (un review por tarea);
+  si el plan es corto, el modo Native hace lo mismo más barato, con una sola
+  review final.
 - TDD activa por defecto durante la implementación. Vas a ver el test rojo
   antes del cambio y verde después. Si nunca lo viste rojo, no estás midiendo
   nada — estás creyendo.

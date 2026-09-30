@@ -29,15 +29,19 @@ se te crucen y sepas dónde buscar más.
   defenderte ciegamente. Útil cuando vos sos el reviewee y querés un patrón
   disciplinado para iterar.
 
-- **`executing-plans`** — alternativa a `subagent-driven-development` (que vimos
-  antes): ejecuta el plan en la misma sesión, con checkpoints humanos en lugar de
-  subagentes paralelos. Más conservador. Útil cuando preferís ver cada step antes
-  de pasar al siguiente.
+- **`executing-plans`** — ya cubierta en §9 como modo **Native**: la misma sesión
+  implementa todo el plan sin pausas y una sola review final. No va en el slide.
 
 - **`using-git-worktrees`** — workflow de worktrees para trabajar en varias
   branches en paralelo en folders distintos (la mencionamos antes con la
   disclosure honesta de por qué no la usamos acá). Útil si en tu trabajo real
   necesitás contexto físicamente aislado entre branches.
+
+- **`diagnosing-superpowers`** (nueva en v6.4) — cuando una sesión salió mal
+  (repitió trabajo, ignoró el plan, una skill no se disparó, costó mucho más de lo
+  esperado), le pedís al agente que averigüe qué pasó: lee los transcripts en disco
+  y reporta con evidencia `path:line`. Si querés, arma el issue para los
+  mantenedores.
 
 ## Cómo se las invoca
 
@@ -45,5 +49,5 @@ No hace falta memorizarlas. Cada skill tiene su trigger declarado en el
 frontmatter de su `SKILL.md`; cuando hagas algo que coincida (mencionás un bug,
 pedís trabajar varios cambios en paralelo, querés crear una skill nueva), Claude
 las propone o las invoca solo. Si querés explorar una en particular, su archivo
-vive en `~/.claude/plugins/cache/claude-plugins-official/superpowers/skills/<nombre>/SKILL.md`
+vive en `~/.claude/plugins/cache/claude-plugins-official/superpowers/<versión>/skills/<nombre>/SKILL.md`
 — abrilo y leelo, es prosa, no magia.
