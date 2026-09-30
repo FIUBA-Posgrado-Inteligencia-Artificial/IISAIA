@@ -4,7 +4,7 @@
 
 Superpowers se define a sí mismo como "una metodología completa de desarrollo de software para tu coding agent, construida sobre un set de skills componibles". Esa frase tiene dos partes: skills componibles (lo que vimos en §02) y metodología (lo nuevo).
 
-El problema sin metodología es conocido. Le pedís al agente que construya algo y arranca a tipear código antes de saber qué estás construyendo. Si hay un mismatch entre lo que vos tenés en la cabeza y lo que él entendió, el mismatch aparece tarde — cuando ya hay archivos, tests, commits, y la conversación lleva veinte mensajes. Detectarlo en palabras es barato. Detectarlo en código ya escrito es caro.
+El problema sin metodología es conocido. Le pedís al agente que construya algo y arranca a tipear código antes de saber qué estás construyendo. Si hay un desfasaje entre lo que vos tenés en la cabeza y lo que él entendió, el desfasaje aparece tarde — cuando ya hay archivos, tests, commits, y la conversación lleva veinte mensajes. Detectarlo en palabras es barato. Detectarlo en código ya escrito es caro.
 
 Lo que cambia con Superpowers lo describe el README en una línea: "apenas ve que estás construyendo algo, no salta a escribir código. En vez de eso, da un paso atrás y te pregunta qué estás tratando de hacer realmente". El plugin fuerza un proceso: entendé qué construís, diseñalo, planificá, ejecutá, verificá, mergeá. Cada paso tiene un punto de control antes de pasar al siguiente.
 

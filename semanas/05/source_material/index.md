@@ -11,7 +11,7 @@ Este es el material fuente de la clase de Semana 5. La presentación reveal.js s
 | 3 | [03-plugins-distribucion.md](03-plugins-distribucion.md) | Marketplaces e instalación | Plugins (~13 min) |
 | 4 | [04-superpowers-que-es.md](04-superpowers-que-es.md) | Superpowers: qué problema resuelve | Superpowers intro (~12 min) |
 | 5 | [05-instalar-superpowers.md](05-instalar-superpowers.md) | Instalar Superpowers en vivo | Superpowers intro (~8 min) |
-| 6 | [06-brainstorming.md](06-brainstorming.md) | brainstorming — refinación socrática del diseño | Happy-path (~13 min) |
+| 6 | [06-brainstorming.md](06-brainstorming.md) | brainstorming — refinar el diseño con preguntas dirigidas | Happy-path (~13 min) |
 | 7 | [07-writing-plans.md](07-writing-plans.md) | writing-plans + spec-driven development | Happy-path (~14 min) |
 | 8 | [08-github-flow.md](08-github-flow.md) | git refresher + GitHub Flow | Happy-path (~17 min) |
 | 9 | [09-subagent-driven-development.md](09-subagent-driven-development.md) | subagent-driven-development | Happy-path (~13 min) |
@@ -26,4 +26,4 @@ Este es el material fuente de la clase de Semana 5. La presentación reveal.js s
 
 Semana 4 te dio las piezas sueltas del runtime de Claude Code: CLAUDE.md, rules, skills, sub-agents, plan mode. Semana 5 las recibe ya empaquetadas en un **plugin** — el envoltorio que las distribuye, instala y versiona. Para no quedarte sólo en "qué es un plugin", instalás el más completo que existe (**Superpowers**) y aprendés el flujo de trabajo que opera sobre Claude Code: brainstorming → spec → plan → ejecución autónoma → review → merge. Es la metodología con la que vas a armar tu trabajo final.
 
-La parte 1 (§§01-03) presenta plugins como concepto general; la parte 2 (§§04-05) instala Superpowers; la parte 3 (§§06-13) recorre las siete skills del happy-path con la misma plantilla — qué hace / cuándo se activa / por qué importa / punto crítico / anti-patrones — y termina cada una con una captura real del propio uso del flujo aplicado al demo-repo de la semana 04. El cierre (§§14-15) nombra el resto del cinturón y baja al trabajo final.
+La parte 1 (§§01-03) presenta plugins como concepto general; la parte 2 (§§04-05) instala Superpowers; la parte 3 (§§06-13) recorre las siete skills del happy-path con la misma plantilla — qué hace / cuándo se activa / por qué importa / punto crítico / anti-patrones — y termina cada una con un caso real: la sesión que agregó login con Google vía Auth0 al tp-final de referencia, corrida con Superpowers 6.4.1. El cierre (§§14-15) nombra el resto del cinturón y baja al trabajo final.

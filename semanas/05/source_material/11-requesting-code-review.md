@@ -29,7 +29,7 @@ agente y no carga el sesgo de quien implementó, así que detecta cosas que vos 
 
 Los issues críticos efectivamente bloquean el avance — eso evita que cosas obvias se cuelen al PR.
 Code review encuentra cosas que los tests no encuentran: dead code que quedó de una iteración
-anterior, mismatch entre lo que dice el spec y lo que hace el código, ergonomía pésima de la API
+anterior, desfasaje entre lo que dice el spec y lo que hace el código, ergonomía pésima de la API
 pública, archivos que crecieron demasiado, decisiones que rompen invariantes implícitos del codebase.
 
 ## El punto crítico

@@ -58,7 +58,6 @@ Superpowers incluye una skill llamada `using-git-worktrees` que automatiza un wo
 
 Ya sabés cómo enmarcar el trabajo en branches y PRs. La próxima skill es la que ejecuta el plan que escribiste, y lo hace dentro de la branch que abriste recién.
 
-<!-- INSERT-USER-CAPTURE -->
-<!-- Captura real: screenshot del PR de Enzo en el demo-repo de S04, abierto con
-     los commits que Superpowers generó durante la sesión, mostrando la lista de
-     commits + el diff resumen. -->
+## Caso real
+
+La sesión auth0 sobre el tp-final trabajó en `feature/auth0-login` con un commit por tarea (spec, plan, tests, backend, frontend, fix) y cerró con merge local a `main` y push.
