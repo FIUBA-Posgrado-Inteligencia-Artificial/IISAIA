@@ -4449,6 +4449,24 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
     color: var(--accent);
     font-family: var(--font-mono);
   }
+  .s11-sev-rules {
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+    text-align: center;
+  }
+  .reveal .s11-sev-rules p {
+    margin: 4px 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+  .s11-declined {
+    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+    border-top: 1px dashed var(--text-muted);
+  }
+  .s11-issue.is-minor {
+    border-left-color: var(--text-muted);
+  }
 </style>
 <section>
 <!-- §11.1 — Opener: mini-roadmap iluminado en s11 -->
@@ -4479,7 +4497,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
 
   <aside class="notes">
     <p><u>Opener de §11. Quinta skill del happy-path; pieza s11 iluminada en el roadmap.</u></p>
-    <p><em>"Quinta skill: requesting-code-review. Cuando subagent-driven-development cierra todas las tareas con tests verdes, todavía falta una pasada — un review estructurado contra el plan, con un agente distinto del que implementó. Eso es lo que hace esta skill."</em></p>
+    <p><em>"Quinta skill: requesting-code-review. Un review estructurado contra el plan, con un agente distinto del que implementó. Ya la vieron trabajar sin nombrarla: es la review final de toda la rama con la que cierran los dos modos de ejecución. Acá la miramos por dentro."</em></p>
   </aside>
 </section>
 
@@ -4527,7 +4545,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
     <div class="s6-compare">
       <div class="s6-compare-card is-yes">
         <div class="s6-compare-tag">Al final, antes de cerrar</div>
-        <p class="s6-compare-body">Cuando terminás de implementar el plan y los tests están verdes. También antes de mergear cambios que tocan más de un par de archivos.</p>
+        <p class="s6-compare-body">Viene incluida al final de los dos modos de ejecución. Sola, antes de mergear cambios que tocan más de un par de archivos.</p>
       </div>
       <div class="s6-compare-card is-no">
         <div class="s6-compare-tag">Útil también si estás trabado</div>
@@ -4540,7 +4558,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
     <p class="s6-sublabel">Por qué importa</p>
     <div class="s6-central" style="margin-top: 0;">
       <div class="s6-central-main">
-        Code review encuentra cosas <strong>distintas</strong> a las que encuentran los tests: dead code, mismatch entre spec y código, ergonomía pésima de API pública, archivos que crecieron demasiado, convenciones del proyecto rotas sin que los tests fallen.
+        Code review encuentra cosas <strong>distintas</strong> a las que encuentran los tests: dead code, desfasaje entre spec y código, ergonomía pésima de API pública, archivos que crecieron demasiado, convenciones del proyecto rotas sin que los tests fallen.
       </div>
       <p class="s6-central-sub">
         Tests verifican comportamiento. Review verifica diseño.
@@ -4551,8 +4569,8 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
   <aside class="notes">
     <p><strong>Dos reveals — cuándo + por qué.</strong></p>
     <p><u>Cuándo se invoca la skill + qué encuentra esta pasada que no encuentran los tests.</u></p>
-    <p><em>"Cuándo se activa: cuando terminás de implementar el plan, después de que TDD pasó verde, antes de pasar a finishing-branch. También antes de mergear features grandes o cualquier cambio que toque más de un par de archivos. Y un caso menos obvio: si estás trabado y no sabés qué falta, también sirve — un agente fresco lee el trabajo y te marca lo que vos ya no ves."</em></p>
-    <p><em>"Por qué importa: code review encuentra cosas distintas a las que encuentran los tests. Dead code que quedó de una iteración anterior. Mismatch entre lo que dice el spec y lo que hace el código. Ergonomía pésima de la API pública. Archivos que crecieron demasiado. Convenciones no escritas del proyecto — por ejemplo cómo se manejan los errores o cómo se nombran los endpoints — que el código viola sin que los tests se enteren. Los tests verifican comportamiento; el review verifica diseño. Son dos cosas distintas y se complementan."</em></p>
+    <p><em>"Cuándo se activa: cuando terminás de implementar el plan, después de que TDD pasó verde, antes de pasar a finishing-branch. Si ejecutaste con subagent-driven o en Native, ya corre sola al final: es la review de toda la rama. También la podés pedir aparte antes de mergear features grandes o cualquier cambio que toque más de un par de archivos. Y un caso menos obvio: si estás trabado y no sabés qué falta, también sirve — un agente fresco lee el trabajo y te marca lo que vos ya no ves."</em></p>
+    <p><em>"Por qué importa: code review encuentra cosas distintas a las que encuentran los tests. Dead code que quedó de una iteración anterior. Desfasaje entre lo que dice el spec y lo que hace el código. Ergonomía pésima de la API pública. Archivos que crecieron demasiado. Convenciones no escritas del proyecto — por ejemplo cómo se manejan los errores o cómo se nombran los endpoints — que el código viola sin que los tests se enteren. Los tests verifican comportamiento; el review verifica diseño. Son dos cosas distintas y se complementan."</em></p>
   </aside>
 </section>
 
@@ -4567,56 +4585,57 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
       <p class="s11-sev-when">No se &laquo;anota para después&raquo;.</p>
     </div>
     <div class="s11-sev-card is-major">
-      <p class="s11-sev-name">Mayor</p>
-      <p class="s11-sev-action"><strong>Aprobación humana</strong> antes de mergear.</p>
+      <p class="s11-sev-name">Importante</p>
+      <p class="s11-sev-action"><strong>Se arregla antes de seguir.</strong></p>
       <p class="s11-sev-when">No degradarlo a menor para no atrasar.</p>
     </div>
     <div class="s11-sev-card is-minor">
       <p class="s11-sev-name">Menor</p>
-      <p class="s11-sev-action"><strong>Nota en el PR</strong> como contexto.</p>
+      <p class="s11-sev-action"><strong>Se anota.</strong> La review final decide qué queda para después.</p>
       <p class="s11-sev-when">No requiere acción inmediata.</p>
     </div>
   </div>
 
+  <div class="s11-sev-rules fragment fade-in" data-fragment-index="0">
+    <p>Lo que el spec no dice se juzga por <strong>lo que esperaría un usuario razonable</strong>.</p>
+    <p>Lo que el reviewer decide no evaluar va a una lista aparte — <em>Declined to judge</em> — y lo decidís vos.</p>
+  </div>
+
   <aside class="notes">
-    <p><u>Las tres severidades + qué hacer con cada una. La severidad la decide el reviewer y es informativa, no negociable.</u></p>
-    <p><em>"El reviewer devuelve un report con dos partes: strengths — qué quedó bien — e issues clasificados por severidad. Los issues vienen en tres niveles."</em></p>
-    <p><em>"Críticos: se resuelven YA. Bloquean el avance. No se 'anotan para después' — se arreglan en el momento. Si el spec cambió durante la implementación, se modifica el plan; si el spec se mantiene, se ajusta el código."</em></p>
-    <p><em>"Mayores: requieren aprobación humana explícita antes de mergear. No los degradás a menores 'para no atrasar' — si el reviewer marcó algo como mayor, hay una razón; pedile que la explique antes de bajarlo de nivel."</em></p>
-    <p><em>"Menores: notas que pueden quedar en el PR como contexto. No requieren acción inmediata, pero quedan registrados para que el próximo que toque el código sepa que están ahí."</em></p>
+    <p><strong>Un reveal — las dos reglas de abajo.</strong></p>
+    <p><u>Las tres severidades + qué hacer con cada una. La severidad la propone el reviewer; quien ejecuta el plan la puede re-graduar por el efecto que tendría en un usuario, nunca para abajo por comodidad.</u></p>
+    <p><em>"El reviewer devuelve un report con dos partes: strengths — qué quedó bien — e issues clasificados por severidad. Los issues vienen en tres niveles. Críticos: se resuelven YA. Bloquean el avance. No se 'anotan para después' — se arreglan en el momento. Si el spec cambió durante la implementación, se modifica el plan; si el spec se mantiene, se ajusta el código. Importantes: se arreglan antes de seguir. No los degradás a menores 'para no atrasar' — si el reviewer marcó algo como importante, hay una razón; pedile que la explique antes de bajarlo de nivel. Menores: se anotan. No requieren acción inmediata; la review final mira la lista y decide qué queda para después."</em></p>
+    <p><em>"Dos reglas más, de las versiones recientes. Primera: el spec nunca nombra todos los casos. Lo que no dice, el reviewer lo juzga por lo que esperaría un usuario razonable — un crash con una entrada que nadie nombró no pasa como menor porque 'el spec no lo pedía'. Segunda: lo que el reviewer decide no evaluar no desaparece: va a una lista que se llama Declined to judge, y cada línea de esa lista la decidís vos."</em></p>
   </aside>
 </section>
 
-<!-- §11.5 — Caso real: reviewer final del demo-repo -->
+<!-- §11.5 — Caso real: la review final del login con Auth0 -->
 <section>
-  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Reviewer final del demo-repo</h2>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">La review final del login</h2>
 
   <div class="s11-case">
     <div class="s11-case-header">
-      Después de las 11 tasks, el coordinador dispatcheó <strong>un reviewer fresco</strong> sobre el branch entero. Resultado: <span class="s11-case-verdict">READY</span> con 3 violaciones de reglas del proyecto.
+      Tres tareas aprobadas, 33 tests en verde. Review de toda la rama con <strong>opus</strong>: ningún Crítico, <strong>un Importante</strong>.
     </div>
 
     <div class="s11-issue">
-      <p class="s11-issue-head"><code>run_import()</code> tiene 71 líneas</p>
-      <p class="s11-issue-rule">Regla del proyecto (CLAUDE.md): funciones &lt; 50 líneas.</p>
+      <p class="s11-issue-head">Importante — cerrar sesión te puede volver a meter</p>
+      <p class="s11-issue-rule">El logout vuelve a <code>/</code>, que redirige al login, y Google te re-loguea sin preguntar. Un usuario razonable espera terminar deslogueado.</p>
     </div>
-    <div class="s11-issue">
-      <p class="s11-issue-head">Router <code>POST</code> sin <code>status_code=</code> explícito</p>
-      <p class="s11-issue-rule">Regla de <code>api.md</code>: cada endpoint debe declarar su status code.</p>
-    </div>
-    <div class="s11-issue">
-      <p class="s11-issue-head"><code>admin.js:33</code> tiene 103 caracteres</p>
-      <p class="s11-issue-rule">Regla del proyecto: línea &lt; 100 caracteres.</p>
+    <div class="s11-issue is-minor fragment fade-in" data-fragment-index="0">
+      <p class="s11-issue-head">6 Menores — &laquo;ninguno bloquea el merge&raquo;</p>
+      <p class="s11-issue-rule s11-declined"><em>Declined to judge:</em> deploy y HTTPS, mostrar el nombre del usuario, logout por GET.</p>
     </div>
   </div>
 
-  <p class="s11-case-resolution">Tratados como blockers, arreglados antes de cerrar. Commit <strong>4988512</strong> — branch verificado.</p>
+  <p class="s11-case-resolution fragment fade-in" data-fragment-index="1">La prueba en navegador lo confirmó → página pública <code>/logged-out</code>, con su test.</p>
 
   <aside class="notes">
-    <p><u>Caso real del log. El reviewer final encontró 3 issues concretos referenciando las propias reglas del proyecto. Datos extraídos del log de la sesión.</u></p>
-    <p><em>"Acá lo vemos en la práctica. Cuando subagent-driven cerró las 11 tasks, el coordinador dispatcheó un reviewer fresco para que mirara el branch entero. El verdict overall fue READY — el código pasa los tests y cumple el spec — pero igual encontró tres violaciones de reglas del proyecto."</em></p>
-    <p><em>"La primera: la función run_import quedó en 71 líneas; las reglas del proyecto en CLAUDE.md piden funciones de menos de 50. La segunda: el router POST no declara explícitamente su status code, y la regla de api punto md exige que todos los endpoints lo hagan. La tercera: admin.js línea 33 tiene 103 caracteres, la regla pide menos de 100."</em></p>
-    <p><em>"Tres cosas que un tester nunca habría encontrado — los tests pasaban verde. Pero el reviewer mirando el código y comparando contra las reglas del proyecto las cazó al toque. Los traté como blockers, hice un commit de cleanup, y recién ahí cerré la branch."</em></p>
+    <p><strong>Dos reveals — menores y declined to judge, y la resolución.</strong></p>
+    <p><u>Caso real: la review final de la sesión del login con Auth0 (sesión en inglés, esto es traducción). Hallazgo en backend/auth.py; confirmado después en el navegador.</u></p>
+    <p><em>"Acá lo vemos en la práctica. Las tres tareas habían pasado su review, los 33 tests estaban en verde. Y la review final, la de toda la rama, en opus, encontró algo. Ningún crítico, pero un importante: el botón de cerrar sesión te podía volver a meter. El logout te mandaba a la raíz; la raíz, sin sesión, te manda al login; el login va directo a Google; y Google, que todavía tiene tu sesión abierta, te aprueba sin preguntar. Resultado: tocás cerrar sesión y volvés al catálogo como si nada. Ningún test lo atrapaba, porque los tests no hablan con Google. El reviewer lo razonó por lo que esperaría un usuario: si toco cerrar sesión, quiero quedar afuera."</em></p>
+    <p><em>"Además marcó seis menores y dijo explícitamente que ninguno bloqueaba el merge. Y la lista de lo que decidió no juzgar: deploy y HTTPS, porque el spec era solo local; mostrar el nombre del usuario, porque el spec lo dejaba afuera; que el logout sea un GET. Cada una de esas la decide uno."</em></p>
+    <p><em>"El reviewer propuso verificarlo en el navegador antes de arreglar. Lo probamos, pasó exactamente eso, y el fix fue una página pública de 'Cerraste sesión' como destino del logout, con su test. Un hallazgo que ningún test habría encontrado."</em></p>
   </aside>
 </section>
 </section>

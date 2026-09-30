@@ -8,9 +8,12 @@ sólo el diff y el spec original, no tu historial de sesión, así no carga el s
 narrativa de "ya lo discutimos y quedó así".
 
 Devuelve un report con dos partes. Por un lado, strengths: qué quedó bien, qué decisiones de diseño
-son sólidas. Por otro, issues clasificados por severidad: críticos (bloquean el avance), mayores
-(piden aprobación explícita del humano antes de mergear), menores (notas que pueden quedar como
-contexto en el PR).
+son sólidas. Por otro, issues clasificados por severidad: críticos (bloquean el avance), importantes
+(se arreglan antes de seguir), menores (se anotan; la review final decide qué queda para después).
+Desde v6.4 suma una lista **Declined to judge**: lo que el reviewer decidió no evaluar, para que lo
+decidas vos. Y lo que el spec no dice lo juzga por lo que esperaría un usuario razonable: un crash
+con una entrada que nadie nombró no pasa como menor porque "el spec no lo pedía". La review final
+de toda la rama ya viene incluida en los dos modos de ejecución (subagent-driven y Native).
 
 ## Cuándo se activa
 
@@ -33,15 +36,15 @@ pública, archivos que crecieron demasiado, decisiones que rompen invariantes im
 
 Los issues críticos se resuelven ANTES de avanzar. No se "anotan para después", se arreglan ya. Si
 el spec cambió durante la implementación, se modifica el plan; si el spec se mantiene, se ajusta el
-código. Los mayores requieren aprobación explícita del humano antes de mergear — no los degrades a
-menores para no atrasar. Los menores son notas que pueden quedar en el PR como contexto.
+código. Los importantes se arreglan antes de seguir — no los degrades a
+menores para no atrasar. Los menores se anotan; la review final decide qué queda para después.
 
 ## Anti-patrones a evitar
 
 - Saltearse la skill porque "los tests pasan". Code review encuentra cosas distintas a los tests:
-  dead code, mismatch con el spec, ergonomía pésima de la API. Los tests verifican comportamiento;
+  dead code, desfasaje con el spec, ergonomía pésima de la API. Los tests verifican comportamiento;
   el review verifica diseño.
-- Tratar issues críticos como mayores para "no atrasar el merge". La severidad es informativa, no
+- Tratar issues críticos como importantes para "no atrasar el merge". La severidad es informativa, no
   negociable. Si el reviewer marcó algo como crítico, hay una razón; pedile que la explique antes
   de degradarlo.
 - Pedir review antes de que TDD haya pasado verde. No tiene sentido revisar diseño en código que
@@ -51,7 +54,6 @@ menores para no atrasar. Los menores son notas que pueden quedar en el PR como c
 
 `semanas/05/source_material/superpowers/skills/requesting-code-review/SKILL.md`
 
-<!-- INSERT-USER-CAPTURE -->
-<!-- Captura real: screenshot del report de review generado al ejecutar la skill sobre el feature
-     implementado en el demo-repo de S04. Idealmente con al menos un issue marcado en cada nivel
-     de severidad (crítico, mayor, menor) para que se vea la estructura completa. -->
+## Caso real
+
+Review final de la sesión auth0 sobre el tp-final (opus): ningún crítico; un importante — el logout volvía a `/`, que redirige al login, y Google re-logueaba sin preguntar ("un usuario razonable espera terminar deslogueado"); seis menores, "ninguno bloquea el merge"; Declined to judge: deploy y HTTPS, mostrar el nombre del usuario, logout por GET. La prueba en navegador lo confirmó y el fix fue una página pública `/logged-out` con su test.
