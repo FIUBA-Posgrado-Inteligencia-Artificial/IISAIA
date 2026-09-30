@@ -28,7 +28,7 @@ Steps de 2 a 5 minutos (cada tarea, del tamaño de su propio ciclo de test) con 
 
 ## El artefacto: el plan en disco
 
-El plan se persiste en `docs/superpowers/plans/YYYY-MM-DD-<feature>.md` y se commitea junto al spec. Ese par —spec más plan— es lo que después lee subagent-driven-development para ejecutar autónomamente. Un ejemplo concreto a mano: el spec del rediseño del source material está en `docs/superpowers/specs/2026-05-21-semana-05-source-material-design.md` y el plan que se está ejecutando vive en `docs/superpowers/plans/2026-05-21-semana-05-source-material.md`. Son los mismos archivos que Superpowers produjo para armar esta clase; el archivo que estás leyendo fue escrito ejecutando esa misma cadena.
+El plan se persiste en `docs/superpowers/plans/YYYY-MM-DD-<feature>.md` y se commitea junto al spec. Ese par —spec más plan— es lo que después lee la ejecución (subagent-driven o Native) para ejecutar autónomamente. Un ejemplo concreto a mano: el spec del rediseño del source material está en `docs/superpowers/specs/2026-05-21-semana-05-source-material-design.md` y el plan que se está ejecutando vive en `docs/superpowers/plans/2026-05-21-semana-05-source-material.md`. Son los mismos archivos que Superpowers produjo para armar esta clase; el archivo que estás leyendo fue escrito ejecutando esa misma cadena.
 
 ## Punto de auto-review
 

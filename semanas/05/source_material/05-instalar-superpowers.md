@@ -23,7 +23,7 @@ Vamos a correr exactamente un comando para tener disponible todo el flujo que vi
 ```
 
 - **Qué tienen que mirar:** `superpowers` aparece listado, con su versión y el marketplace `claude-plugins-official` al costado.
-- **Qué digo:** "Estas quince skills son las que vamos a recorrer en las próximas dos horas. La vista panorámica del flujo ya la hicimos en la sección anterior, así que arrancamos directo con la primera skill del happy-path: brainstorming."
+- **Qué digo:** "El plugin trae quince skills: siete las recorremos en detalle en las próximas dos horas y el resto las nombramos al final. La vista panorámica del flujo ya la hicimos en la sección anterior, así que arrancamos directo con la primera skill del happy-path: brainstorming."
 
 ## Plan B si no coopera
 
@@ -43,6 +43,6 @@ Vamos a correr exactamente un comando para tener disponible todo el flujo que vi
 ## En otro harness
 
 - **Codex:** `/plugins`, buscar "superpowers", Install Plugin (está en el marketplace oficial de Codex). En la app de Codex: Plugins en la barra lateral, `+` al lado de Superpowers.
-- **OpenCode:** agregar a `opencode.json` (global o del proyecto) `"plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]` y reiniciar. Para fijar versión, `#v6.4.1` al final.
+- **OpenCode:** agregar a `opencode.json` (global o del proyecto) `"plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]` y reiniciar. Para fijar versión, `#v6.4.1` al final. En OpenCode 2.x (2.0.4+, todavía sin release estable) la clave es `"plugins"`, en plural.
 
 Fuente: README de Superpowers 6.4.1 (`source_material/superpowers/README.md`).

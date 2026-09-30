@@ -299,7 +299,7 @@
     </div>
     <div class="s10-rg-row">
       <span class="s10-rg-label">fix</span>
-      <span class="s10-rg-red">✗ 2 failed (falta la página /logged-out)</span>
+      <span class="s10-rg-red">✗ 2 failed (logout con destino nuevo)</span>
       <span class="s10-rg-arrow">→</span>
       <span class="s10-rg-green">✓ 34 passed</span>
     </div>
@@ -309,7 +309,6 @@
 
   <aside class="notes">
     <p><u>Caso real: el rastro de TDD en la sesión del login con Auth0, sacado de los reportes de cada implementer.</u></p>
-    <p><em>"Acá está el rastro real de TDD en la sesión del login. La primera tarea es especial: escribe tests para el API tal como está, antes de tocar nada, así que esos 11 pasan desde el principio — su trabajo es fijar lo que ya funciona para que el login no lo rompa sin que nadie se entere. Desde ahí, cada tarea arrancó en rojo. La dos: el test del login falló porque el módulo de auth ni existía — ModuleNotFoundError. Después, 31 en verde. La tres: dos tests fallaron porque la página no tenía el link de cerrar sesión; después, 33. Y el arreglo final, igual: dos rojos, después 34."</em></p>
-    <p><em>"Y fíjense en el cierre: 34 passed y cero warnings, corriendo la suite entera del proyecto. El agente no se conformó con que pasaran los tests de la última tarea. Ese es el rastro auditable que deja TDD."</em></p>
+    <p><em>"Acá está el rastro real de TDD en la sesión del login. La primera tarea es especial: escribe tests para el API tal como está, antes de tocar nada, así que esos 11 pasan desde el principio — su trabajo es fijar lo que ya funciona para que el login no lo rompa sin que nadie se entere. Desde ahí, cada tarea arrancó en rojo. La dos: el test del login falló porque el módulo de auth ni existía — ModuleNotFoundError. Después, 31 en verde. La tres: dos tests fallaron porque la página no tenía el link de cerrar sesión; después, 33. Y el arreglo final, igual: dos rojos — la ruta nueva que no existía y el test del logout que todavía esperaba el destino viejo —, después 34. Y fíjense en el cierre: 34 passed y cero warnings, corriendo la suite entera del proyecto. El agente no se conformó con que pasaran los tests de la última tarea. Ese es el rastro auditable que deja TDD."</em></p>
   </aside>
 </section>
