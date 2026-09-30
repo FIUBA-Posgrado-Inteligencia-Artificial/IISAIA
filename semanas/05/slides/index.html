@@ -2167,6 +2167,45 @@
     font-weight: 700;
     font-family: var(--font-mono);
   }
+  /* §6.3 — tres caminos según el tamaño del pedido */
+  .s6-paths {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .s6-path {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent-secondary);
+    border-radius: 6px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .s6-path-name {
+    display: block;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .s6-paths-note {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin: var(--spacing-xs) auto 0 auto;
+  }
+  .s6-session-q.is-skill {
+    color: var(--text-primary);
+  }
+  .s6-session-q.is-skill::before {
+    content: "skill ";
+    color: var(--accent);
+  }
 </style>
 <section>
 <!-- §6.1 — Opener: mini-roadmap iluminado en s6 + nombre de la skill -->
@@ -2195,13 +2234,13 @@
 
   <div class="s-skill-opener">
     <h2 class="s-skill-opener-name">brainstorming</h2>
-    <p class="s-skill-opener-tag">Idea cruda → design spec, vía preguntas dirigidas.</p>
+    <p class="s-skill-opener-tag">Idea cruda → diseño aprobado, vía preguntas dirigidas.</p>
   </div>
 
   <aside class="notes">
     <p><u>Opener de §6. Primera skill del happy-path; la pieza s6 del roadmap se ilumina mientras las otras quedan en gris. Slide-ancla visual: "estamos en el primer paso".</u></p>
     <p><em>"Arrancamos con la primera skill del happy-path. Se llama brainstorming. La pieza encendida en el mapa es esta — las demás se van a ir iluminando una por una en las próximas siete secciones."</em></p>
-    <p><em>"Qué hace en una línea: convierte una idea cruda en un design spec a través de preguntas dirigidas, una por vez. Esa idea tiene varias palabras importantes — vamos a abrirlas en las próximas slides."</em></p>
+    <p><em>"Qué hace en una línea: convierte una idea cruda en un diseño que vos aprobás, a través de preguntas dirigidas, una por vez. Esa idea tiene varias palabras importantes — vamos a abrirlas en las próximas slides."</em></p>
   </aside>
 </section>
 
@@ -2216,8 +2255,13 @@
     </div>
     <div class="s6-flow-arrow">↓</div>
     <div class="s6-flow-step">
+      <strong>Para qué y cuánto</strong>
+      Pregunta para qué lo querés y te devuelve lo que entendió. Clasifica el pedido en voz alta.
+    </div>
+    <div class="s6-flow-arrow">↓</div>
+    <div class="s6-flow-step">
       <strong>Exploración</strong>
-      Diálogo dirigido: una pregunta por vez sobre propósito, restricciones y criterios de éxito.
+      Una pregunta por vez sobre restricciones y criterios de éxito.
     </div>
     <div class="s6-flow-arrow">↓</div>
     <div class="s6-flow-step">
@@ -2227,14 +2271,14 @@
     <div class="s6-flow-arrow">↓</div>
     <div class="s6-flow-step">
       <strong>Salida</strong>
-      Un design spec escrito y aprobado por vos — antes de tocar código.
+      Un diseño aprobado por vos — antes de tocar código.
     </div>
   </div>
 
   <aside class="notes">
-    <p><u>El flujo concreto. Cuatro estaciones: idea cruda → exploración → propuesta → spec. Sin saltarse pasos.</u></p>
-    <p><em>"Cuatro estaciones. Vos entrás con una idea cruda. La skill explora el contexto del proyecto y empieza a hacer preguntas — una por vez, multiple-choice cuando se puede, sobre propósito, restricciones, criterios de éxito. Después propone dos o tres approaches con sus trade-offs. Y recién al final arma el spec escrito."</em></p>
-    <p><em>"El spec es lo que vas a aprobar antes de que se toque una sola línea de código. Eso es el contrato."</em></p>
+    <p><u>El flujo concreto. Cinco estaciones: idea cruda → para qué y cuánto → exploración → propuesta → diseño aprobado.</u></p>
+    <p><em>"Cinco estaciones. Vos entrás con una idea cruda. Lo primero que hace la skill no es preguntar por features: pregunta para qué lo querés, y te devuelve con sus palabras lo que entendió, para que lo corrijas si le erró. Y dice en voz alta qué tamaño de trabajo cree que es — eso lo vemos en la próxima slide. Después pregunta de a una sobre restricciones y criterios de éxito, propone dos o tres approaches con sus trade-offs, y recién al final arma el diseño."</em></p>
+    <p><em>"Ese diseño es lo que vas a aprobar antes de que se toque una sola línea de código. Eso es el contrato."</em></p>
   </aside>
 </section>
 
@@ -2247,7 +2291,7 @@
     <div class="s6-compare">
       <div class="s6-compare-card is-yes">
         <div class="s6-compare-tag">Sí se activa</div>
-        <p class="s6-compare-body">Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluye scripts de utilidad triviales y cambios de configuración.</p>
+        <p class="s6-compare-body">Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluye scripts triviales y cambios de configuración.</p>
       </div>
       <div class="s6-compare-card is-no">
         <div class="s6-compare-tag">No se activa</div>
@@ -2257,23 +2301,31 @@
   </div>
 
   <div class="fragment fade-in" data-fragment-index="1">
+    <p class="s6-sublabel">Tres caminos, según el tamaño</p>
+    <div class="s6-paths">
+      <div class="s6-path"><span class="s6-path-name">spike</span>¿Se puede? → una prueba descartable</div>
+      <div class="s6-path"><span class="s6-path-name">bounded</span>Cambio acotado → diseño corto en el chat</div>
+      <div class="s6-path"><span class="s6-path-name">architectural</span>Algo nuevo → spec escrito en disco</div>
+    </div>
+    <p class="s6-paths-note">Lo que escala es la ceremonia, no la aprobación.</p>
+  </div>
+
+  <div class="fragment fade-in" data-fragment-index="2">
     <p class="s6-sublabel">Por qué importa</p>
     <div class="s6-central" style="margin-top: 0;">
       <div class="s6-central-main">
         Sin esta skill, el agente arranca a codear con la <strong>primera interpretación plausible</strong> de tu pedido — y las suposiciones no examinadas recién se manifiestan cuando ya hay archivos, tests y commits.
       </div>
-      <p class="s6-central-sub">
-        Lo caro no es la primera versión. Es todo lo que tirás cuando descubrís que entendió otra cosa.
-      </p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Dos reveals — uno por sub-sección.</strong></p>
-    <p><u>Slide doble: cuándo aparece la skill + por qué vale tenerla. Cada parte se revela en orden con flecha abajo.</u></p>
-    <p><em>"Vamos a ver dos cosas sobre esta skill: dónde se mete, dónde no, y por qué vale tenerla."</em></p>
-    <p><em>"Cuándo se activa: antes de cualquier trabajo creativo. Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluso scripts de utilidad triviales y cambios de configuración. Cuándo no se activa: tareas exploratorias — leer código, explicar cómo funciona algo, debugging — y correcciones mecánicas donde el diseño ya está fijado. Si lo único que querés es 'cambiame este import' o 'arregla este typo', la skill no se mete."</em></p>
-    <p><em>"Por qué importa: sin esta skill, el modelo arranca a codear con la primera interpretación plausible del pedido. Esa interpretación viene cargada de suposiciones no examinadas que recién se manifiestan cuando ya hay archivos, tests y commits. Y ahí lo caro no es la primera versión — es todo lo que tenés que tirar y volver a hacer cuando descubrís que entendió otra cosa. El otro problema que resuelve es el de scope: pedidos que son cinco proyectos disfrazados de uno."</em></p>
+    <p><strong>Tres reveals — uno por sub-sección.</strong></p>
+    <p><u>Slide triple: cuándo aparece la skill, los tres caminos según el tamaño del pedido, y por qué vale tenerla.</u></p>
+    <p><em>"Vamos a ver tres cosas sobre esta skill: dónde se mete, cuánto proceso pone, y por qué vale tenerla."</em></p>
+    <p><em>"Cuándo se activa: antes de cualquier trabajo creativo. Features nuevas, componentes nuevos, agregar funcionalidad, modificar comportamiento existente. Incluso scripts triviales y cambios de configuración. Cuándo no se activa: tareas exploratorias — leer código, explicar cómo funciona algo, debugging — y correcciones mecánicas donde el diseño ya está fijado."</em></p>
+    <p><em>"Que se active siempre no quiere decir que siempre haga lo mismo. Clasifica el pedido en tres caminos. Spike: una pregunta de factibilidad, '¿se puede hacer esto?' — la respuesta es una prueba que después se tira. Bounded: un cambio acotado sobre algo que ya existe — el diseño es corto y queda en el chat, sin archivo. Architectural: un proyecto nuevo, un subsistema nuevo, algo que cambia contratos — ahí sí hay spec escrito en disco. En los tres caminos vos aprobás antes de que se escriba código. Lo que escala es la ceremonia, no la aprobación."</em></p>
+    <p><em>"Por qué importa: sin esta skill, el modelo arranca a codear con la primera interpretación plausible del pedido. Esa interpretación viene cargada de suposiciones no examinadas que recién se manifiestan cuando ya hay archivos, tests y commits. Y ahí lo caro no es la primera versión — es todo lo que tenés que tirar cuando descubrís que entendió otra cosa."</em></p>
   </aside>
 </section>
 
@@ -2283,17 +2335,16 @@
 
   <div class="s6-central">
     <div class="s6-central-main">
-      <strong>Nunca implementar nada</strong> — ni un esqueleto del proyecto, ni un archivo vacío — antes de que vos hayas <strong>aprobado el diseño escrito</strong>.
+      <strong>Nunca implementar nada</strong> — ni un esqueleto del proyecto, ni un archivo vacío — antes de que vos hayas <strong>aprobado el diseño</strong>.
     </div>
     <p class="s6-central-sub">
-      Aplica a todo proyecto sin importar cuán simple parezca.
+      Vale para los tres caminos, por simple que parezca el pedido.
     </p>
   </div>
 
   <aside class="notes">
-    <p><u>La regla central no negociable. Hard gate sobre la implementación.</u></p>
-    <p><em>"Una pregunta por vez. Multiple choice cuando se puede. Nunca implementar nada — ni un esqueleto del proyecto, ni un archivo vacío — antes de que vos hayas aprobado el diseño escrito. Esto aplica a todo proyecto sin importar cuán simple parezca."</em></p>
-    <p><em>"Es la regla que más resistencia genera al principio porque uno tiene el reflejo de 'pero si esto es obvio, hagámoslo y listo'. La skill no se saltea por simplicidad aparente. Y la próxima slide muestra dónde queda anclado ese diseño aprobado."</em></p>
+    <p><u>La regla central no negociable. Hard gate sobre la implementación, en los tres caminos.</u></p>
+    <p><em>"Nunca implementar nada — ni un esqueleto del proyecto, ni un archivo vacío — antes de que vos hayas aprobado el diseño. Si el pedido es chico, el diseño es corto y lo aprobás en el chat; si es grande, es un spec escrito. Pero la aprobación está siempre. Es la regla que más resistencia genera al principio, porque uno tiene el reflejo de 'pero si esto es obvio, hagámoslo y listo'. La skill no se saltea por simplicidad aparente: lo que cambia con el tamaño es cuánto escribe, no si te pregunta. Y la próxima slide muestra dónde queda anclado ese diseño cuando el trabajo es grande."</em></p>
   </aside>
 </section>
 
@@ -2306,7 +2357,7 @@
     <div class="s6-split">
       <div class="s6-split-card">
         <div class="s6-split-tag">El spec en disco</div>
-        <p class="s6-split-body">El spec aprobado se persiste en:</p>
+        <p class="s6-split-body">En trabajo architectural, el spec aprobado se persiste en:</p>
         <pre style="margin: var(--spacing-xs) 0; background: var(--bg-primary); border-radius: 4px; padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9rem; color: var(--accent-secondary); overflow-x: auto;"><code>docs/superpowers/specs/
   YYYY-MM-DD-&lt;topic&gt;-design.md</code></pre>
         <p class="s6-split-body" style="margin-top: var(--spacing-xs);">No es chat que se pierde. Es archivo versionado. Las próximas skills lo leen desde ahí.</p>
@@ -2334,7 +2385,7 @@
         Combinar varias preguntas en un solo mensaje. Si un tema necesita más exploración, se rompe en preguntas separadas.
       </div>
       <div class="s6-anti-card">
-        Invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito.
+        Invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño.
       </div>
     </div>
   </div>
@@ -2343,8 +2394,8 @@
     <p><strong>Dos reveals — uno por sub-sección.</strong></p>
     <p><u>Slide doble: dos detalles operativos del flujo + tres anti-patrones a evitar. Cada bloque se revela con flecha abajo.</u></p>
     <p><em>"Vamos a ver dos partes operativas: dos detalles del flujo, y tres anti-patrones a evitar."</em></p>
-    <p><em>"Dos cosas importantes del flujo. La primera: el spec aprobado se persiste en disco bajo docs/superpowers/specs, con nombre que arranca con la fecha en formato ISO y termina con el topic. Se commitea al repo — es archivo versionado, no chat que se pierde. Las próximas skills lo leen desde ese path. La segunda: hay un Spec Self-Review interno que corre antes de pasártelo a vos. Escanea placeholders como TBD o TODO, contradicciones entre secciones, scope creep, y ambigüedades. Lo arregla en el momento. Vos no deberías leer un TBD en tu propio spec."</em></p>
-    <p><em>"Y tres anti-patrones que vale tener en cabeza. Primero: 'esto es muy simple, no necesita diseño'. Los simples son donde las suposiciones no examinadas hacen más daño. Segundo: combinar varias preguntas en un solo mensaje — la skill está diseñada para una pregunta por vez. Tercero: invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño escrito. Ese es el hard gate."</em></p>
+    <p><em>"Dos cosas importantes del flujo. La primera: cuando el trabajo es architectural, el spec aprobado se persiste en disco bajo docs/superpowers/specs, con nombre que arranca con la fecha en formato ISO y termina con el topic. Se commitea al repo — es archivo versionado, no chat que se pierde. Las próximas skills lo leen desde ese path. La segunda: hay un Spec Self-Review interno que corre antes de pasártelo a vos. Escanea placeholders como TBD o TODO, contradicciones entre secciones, scope creep, y ambigüedades. Lo arregla en el momento. Vos no deberías leer un TBD en tu propio spec."</em></p>
+    <p><em>"Y tres anti-patrones que vale tener en cabeza. Primero: 'esto es muy simple, no necesita diseño'. Los simples son donde las suposiciones no examinadas hacen más daño. Segundo: combinar varias preguntas en un solo mensaje — la skill está diseñada para una pregunta por vez. Tercero: invocar cualquier skill de implementación antes de que vos hayas aprobado el diseño. Ese es el hard gate."</em></p>
   </aside>
 </section>
 
@@ -2355,96 +2406,75 @@
   <div class="s6-session">
     <div class="s6-session-prompt">
       <span class="s6-session-prompt-tag">Prompt inicial</span>
-      &laquo;Necesito que los usuarios admin puedan importar ítems en masa desde un archivo CSV. Quiero ver cómo manejás filas inválidas, duplicados y rollback. El frontend también debe tener elementos que permitan usar este nuevo feature.&raquo;
+      &laquo;Quiero agregar auth0 al proyecto de ejemplo en <code>semanas/00/source_material/apellido-iisaia/tp-final</code>.&raquo;
     </div>
 
     <div class="s6-session-qa fragment fade-in" data-fragment-index="0">
-      <span class="s6-session-q">¿Qué representa un &quot;ítem&quot; en este import? El repo hoy tiene <code>users</code> y <code>posts</code>, pero no hay un recurso llamado <code>items</code>.</span>
-      <span class="s6-session-a">Cuando decía ítem me refería tanto a posts como a users.</span>
+      <span class="s6-session-q is-skill"><strong>Clasificación: architectural.</strong> Suma un subsistema nuevo (identidad), cambia el contrato del API y trae las primeras variables de entorno. Voy por el camino completo: preguntas, approaches, diseño y spec escrito antes de cualquier código.</span>
     </div>
 
     <div class="s6-session-qa fragment fade-in" data-fragment-index="1">
-      <span class="s6-session-q">La auth hoy es un único bearer token (no hay roles). ¿Cómo modelamos el &quot;admin&quot;?</span>
-      <span class="s6-session-a">Bearer existente = admin.</span>
+      <span class="s6-session-q">Antes de hablar de features: ¿para qué es esta versión con Auth0?</span>
+      <span class="s6-session-a">Quiero agregar autenticación con Auth0 para que los usuarios entren fácil con su cuenta de Google.</span>
     </div>
 
     <div class="s6-session-qa fragment fade-in" data-fragment-index="2">
-      <span class="s6-session-q">Cuando el CSV tiene filas válidas e inválidas mezcladas, ¿qué hacemos?</span>
-      <span class="s6-session-a">Configurable por request.</span>
+      <span class="s6-session-q">¿Qué cambia al estar logueado? Guardar puntaje exige login · el login es opcional · todo el sitio exige login.</span>
+      <span class="s6-session-a">Todo el sitio exige login.</span>
     </div>
 
     <div class="s6-session-qa fragment fade-in" data-fragment-index="3">
-      <span class="s6-session-q">¿Qué cuenta como duplicado? Aplica tanto a filas repetidas dentro del CSV como a filas que ya existen en el store.</span>
-      <span class="s6-session-a">Users por email; posts por título, autor y body.</span>
-    </div>
-
-    <div class="s6-session-qa fragment fade-in" data-fragment-index="4">
-      <span class="s6-session-q">¿Dónde vive el feature en el frontend?</span>
-      <span class="s6-session-a">Página <code>admin.html</code> separada.</span>
-    </div>
-
-    <div class="s6-session-qa fragment fade-in" data-fragment-index="5">
-      <span class="s6-session-q">Para posts, si una fila trae <code>author_id</code> que no existe en el store, ¿cómo lo trato?</span>
-      <span class="s6-session-a">Error de fila (igual que validación).</span>
+      <span class="s6-session-q">Con todos logueados, ¿de dónde sale el nombre de un puntaje? De la cuenta de Google (recomendada) · lo sigue tipeando el jugador · las dos.</span>
+      <span class="s6-session-a">Lo sigue tipeando el jugador.</span>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Seis reveals — una pregunta+respuesta por click. La sesión real con Superpowers en el demo-repo.</strong></p>
-    <p><u>Caso real. La sesión existe en logs; las 6 preguntas son las que la skill me hizo, las respuestas son las que le di.</u></p>
-    <p><em>"Para cerrar, miremos cómo se vio esto en la realidad. Le pedí al agente que agregue una funcionalidad de importar items en masa desde un CSV — ahí arriba está el prompt original. Y miren lo que pasó."</em></p>
-    <p><em>"Primera pregunta: la skill detectó que mi pedido tenía una palabra ambigua. Yo dije 'ítems' pero el repo tiene users y posts, no items. La skill no asumió cuál; me preguntó. Yo aclaré que era ambos."</em></p>
-    <p><em>"Segunda: 'admin' tampoco existía como rol en el sistema. La skill me dio tres opciones para modelarlo. Yo elegí la más barata — el bearer actual cuenta como admin."</em></p>
-    <p><em>"Tercera: cómo manejar el caso mixto. La skill me ofreció tres modos: all-or-nothing, best-effort, o configurable. Elegí configurable."</em></p>
-    <p><em>"Cuarta: la definición de duplicado. Para users es claro — email. Para posts no había clave natural. La skill propuso opciones; yo amplié una de ellas: título, autor, y body."</em></p>
-    <p><em>"Quinta: dónde poner el UI. Tres opciones: integrado al index, página aparte, modal. Elegí página aparte."</em></p>
-    <p><em>"Sexta: caso borde — si un post viene con autor inexistente, ¿qué hacemos? Elegí tratarlo como error de validación, no inventar un user vacío."</em></p>
-    <p><em>"Con esas seis respuestas la skill tenía contexto suficiente para proponer arquitectura. Lo vemos en la próxima slide."</em></p>
+    <p><strong>Cuatro reveals — la clasificación y tres preguntas con su respuesta. Sesión real con Superpowers 6.4.1 sobre el tp-final.</strong></p>
+    <p><u>Caso real. La sesión fue en inglés; lo que está en pantalla es traducción fiel de las preguntas de la skill y de las respuestas que le di.</u></p>
+    <p><em>"Miremos cómo se vio esto en la realidad. Le pedí al agente que agregue Auth0 al proyecto de ejemplo del trabajo final. Ese es el prompt entero: una línea."</em></p>
+    <p><em>"Lo primero que hizo, antes de preguntar nada, fue decir en voz alta qué tamaño de trabajo era: architectural. Y dio las razones — un subsistema nuevo, un cambio en el contrato del API, las primeras variables de entorno. Eso le avisa a uno cuánto proceso viene."</em></p>
+    <p><em>"Primera pregunta: no fue sobre features, fue sobre el propósito. Me ofreció opciones y yo contesté con mis palabras: quiero que la gente entre fácil con su cuenta de Google."</em></p>
+    <p><em>"Segunda: qué cambia al estar logueado. Recomendó que solo guardar puntaje exija login. Yo elegí otra: todo el sitio detrás del login. La recomendación no decide; decide uno."</em></p>
+    <p><em>"Tercera: de dónde sale el nombre en el ranking. Volvió a recomendar sacarlo de Google, y volví a elegir otra cosa: que lo siga tipeando el jugador. Con eso el contrato de puntajes queda igual. Con estas respuestas pasó a proponer approaches."</em></p>
   </aside>
 </section>
 
 <!-- §6.7 — Approaches arquitecturales propuestos -->
 <section>
-  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Tres approaches arquitecturales</h2>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Dos approaches, y un diseño por partes</h2>
 
-  <p class="s6-approaches-intro">Con las 6 respuestas anteriores, la skill propuso 3 formas de implementar el feature y recomendó la primera.</p>
+  <p class="s6-approaches-intro">Con esas respuestas, la skill propuso dos formas de hacer el login y recomendó la primera.</p>
 
   <div class="s6-approaches-wrap">
     <div class="s6-approach-card is-chosen fragment fade-in" data-fragment-index="0">
-      <span class="s6-approach-badge">A</span><span class="s6-approach-title">Endpoint genérico</span><span class="s6-approach-recommended">recomendada</span>
+      <span class="s6-approach-badge">A</span><span class="s6-approach-title">Login en el servidor, con cookie de sesión</span><span class="s6-approach-recommended">recomendada</span>
       <p class="s6-approach-body">
-        Un router nuevo <code>backend/routers/imports.py</code> con <code>POST /import/users</code> y <code>POST /import/posts</code>. El parser CSV y el orquestador (validar → dedup → insertar → reportar) viven en <code>backend/services/csv_import.py</code> y son agnósticos del recurso; reciben un <em>adapter</em> por recurso que sabe cómo validar una fila, calcular su dup-key y crearla en el store.
+        FastAPI maneja todo el flujo de Auth0: <code>/login</code>, <code>/callback</code>, <code>/logout</code>. Un middleware revisa cada request: sin sesión, las páginas redirigen a <code>/login</code> y <code>/api/*</code> responde <code>401</code>.
       </p>
-      <p class="s6-approach-tradeoff"><strong>Ventaja:</strong> cero duplicación de lógica de errores y rollback. Sumar un tercer recurso después es trivial.</p>
+      <p class="s6-approach-tradeoff"><strong>Ventaja:</strong> es la única opción donde &laquo;nada es visible sin login&raquo; es cierto en el servidor.</p>
     </div>
 
     <div class="s6-approach-card fragment fade-in" data-fragment-index="1">
-      <span class="s6-approach-badge">B</span><span class="s6-approach-title">Endpoint por recurso, lógica inline</span>
+      <span class="s6-approach-badge">B</span><span class="s6-approach-title">Login en el browser, el API valida un JWT</span>
       <p class="s6-approach-body">
-        <code>POST /users/import</code> dentro de <code>routers/users.py</code>, <code>POST /posts/import</code> dentro de <code>routers/posts.py</code>. Cada uno con su parser, su validación, y su orquestación de rollback.
+        El SDK de Auth0 corre en el browser y cada request manda un token que el backend verifica.
       </p>
-      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> más simple de leer fila por fila, pero la lógica de rollback y el formato de respuesta se duplica entre los dos routers — y va a divergir con el tiempo.</p>
+      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> las páginas quedan públicas. Encaja con frontend y backend desplegados por separado, que no es el caso.</p>
     </div>
 
-    <div class="s6-approach-card fragment fade-in" data-fragment-index="2">
-      <span class="s6-approach-badge">C</span><span class="s6-approach-title">Endpoint único con discriminador</span>
-      <p class="s6-approach-body">
-        Un solo <code>POST /import</code> que toma multipart con <code>resource=users|posts</code> + el file. Un handler para todos los recursos, ramificando por el campo <code>resource</code>.
-      </p>
-      <p class="s6-approach-tradeoff"><strong>Trade-off:</strong> más fácil de testear como caja negra pero acopla el contrato HTTP — clientes que solo importan users tienen que conocer el discriminador.</p>
-    </div>
-
-    <p class="s6-approaches-result fragment fade-in" data-fragment-index="3">Elegí <strong>A</strong> → la skill pasa a escribir el spec en disco.</p>
+    <p class="s6-approaches-result fragment fade-in" data-fragment-index="2">Elegí <strong>A</strong> → diseño en tres partes, aprobadas de a una. A mitad de camino le sumé pytest.</p>
+    <p class="s6-approaches-result fragment fade-in" data-fragment-index="3">Spec commiteado, con aviso de lo que cambió respecto de lo charlado.</p>
   </div>
 
   <aside class="notes">
-    <p><strong>Cuatro reveals — uno por approach + el resultado final.</strong></p>
-    <p><u>Slide dedicada a los approaches que la skill propuso al cierre del brainstorming. Las descripciones son las reales del log, levemente acortadas.</u></p>
-    <p><em>"Con las seis respuestas anteriores, la skill tenía contexto suficiente para proponer arquitectura. Me ofreció tres opciones, en orden de preferencia."</em></p>
-    <p><em>"Opción A, la recomendada: un endpoint genérico, POST barra import barra resource. Un router nuevo, y un servicio agnóstico que vive en services/csv_import.py. El servicio no sabe nada de users ni de posts: recibe un 'adapter' por recurso que conoce cómo validar una fila, cómo calcular su dup-key, y cómo insertarla. La ventaja: cero duplicación. Si mañana quiero importar un tercer recurso, alcanza con agregar un adapter nuevo."</em></p>
-    <p><em>"Opción B: endpoint por recurso, con lógica inline. POST barra users barra import dentro del router de users, y lo mismo para posts. Cada uno con su parser, su validación, su rollback. Más simple de leer fila por fila, pero la lógica de rollback y el formato de respuesta se duplica — y eventualmente divergen."</em></p>
-    <p><em>"Opción C: un endpoint único, POST barra import, que toma el recurso como discriminador en el body. Un handler para todos. Es más fácil de testear como caja negra pero acopla el contrato HTTP — clientes que solo importan users tienen que conocer que existe el campo resource."</em></p>
-    <p><em>"Elegí A. A partir de ahí la skill pasa a escribir el spec en disco. Está commiteado en el repo, listo para que writing-plans lo lea en la próxima sección."</em></p>
+    <p><strong>Cuatro reveals — los dos approaches, el diseño por partes, y el spec.</strong></p>
+    <p><u>Descripciones reales del log (traducidas y acortadas). El spec quedó en <code>docs/superpowers/specs/2026-09-29-tp-final-auth0-design.md</code> dentro del tp-final.</u></p>
+    <p><em>"Con esas respuestas la skill propuso dos approaches, en orden de preferencia."</em></p>
+    <p><em>"A, la recomendada: el login lo maneja el servidor. FastAPI tiene tres rutas — login, callback y logout — y un middleware que revisa cada request. Si no hay sesión, las páginas te mandan al login y el API contesta 401. Su argumento: es la única opción donde 'nada es visible sin login' es cierto del lado del servidor."</em></p>
+    <p><em>"B: el login pasa en el browser con el SDK de Auth0, y el backend valida un token en cada llamada. El problema: el HTML y el JavaScript siguen siendo públicos. La skill dijo algo que vale anotar: esto encaja cuando frontend y backend se despliegan por separado, que no es este caso."</em></p>
+    <p><em>"Elegí A. El diseño no llegó de una: vino en tres partes — backend, frontend, y configuración más verificación — y aprobé cada una antes de la siguiente. En la tercera cambié de idea: el proyecto no tenía tests por decisión, y le pedí que sumara pytest. La skill lo incorporó y avisó que eso revertía una decisión documentada."</em></p>
+    <p><em>"Al final escribió el spec, lo commiteó, y antes de pedirme que lo revise me marcó lo que había cambiado respecto de lo que charlamos: por ejemplo, que un login cancelado devuelve un 400, algo que no habíamos discutido. Ese es el Self-Review trabajando. El spec está en el repo, listo para writing-plans."</em></p>
   </aside>
 </section>
 </section>
