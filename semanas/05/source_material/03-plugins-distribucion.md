@@ -63,4 +63,9 @@ Mostramos que la teoría de §02 efectivamente está en disco — el formato no 
 
 Ya viste qué es un plugin y cómo se instala. Ahora instalamos uno que vale la pena conocer en serio.
 
+## En otros harnesses
+
+- **Codex:** marketplaces como en Claude Code (un directorio público de OpenAI y los que agregás con `codex plugin marketplace add owner/repo`). Adentro de la sesión, `/plugins` abre el catálogo; desde la terminal, `codex plugin add <plugin>@<marketplace>`, `codex plugin remove`, `codex plugin list`. Se habilita por usuario (`~/.codex/config.toml`) o por repo (`.codex/config.toml`). Cache en `~/.codex/plugins/cache/<marketplace>/<plugin>/<versión>/`. Doc: learn.chatgpt.com/docs/plugins.
+- **OpenCode:** no hay marketplace. El plugin se declara como paquete npm o git en la lista `"plugin"` de `opencode.json` (global en `~/.config/opencode/` o por proyecto) y OpenCode lo baja al arrancar a `~/.cache/opencode/node_modules/`. Doc: opencode.ai/docs/plugins. OpenCode 2.0 cambia esta API y todavía no tiene doc.
+
 > Fuente canónica: https://code.claude.com/docs/en/plugins-reference

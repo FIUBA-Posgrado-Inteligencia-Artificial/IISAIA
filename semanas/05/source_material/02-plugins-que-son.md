@@ -50,4 +50,8 @@ El cierre del trato: no tenés que adivinar qué existe, porque hay marketplaces
 
 Lo único que falta saber es de dónde sale el comando que instala, y cómo se accede a esos marketplaces. Eso viene ya.
 
+## En otros harnesses
+
+La definición de arriba es la de Claude Code. **Codex** tiene el mismo concepto: una carpeta con manifest (`.codex-plugin/plugin.json`) que junta skills, hooks y servidores MCP. En **OpenCode** un plugin es otra cosa: un módulo JS/TS que se engancha a eventos del agente y se declara como paquete en `opencode.json`. Lo que comparten los tres es el `SKILL.md` (estándar Agent Skills): una skill escrita para uno la leen los otros dos. Superpowers lo muestra bien: un solo `skills/` compartido y un manifest por harness (`.claude-plugin/`, `.codex-plugin/`, `.opencode/`, `.cursor-plugin/`…).
+
 > Fuente canónica: https://code.claude.com/docs/en/plugins-reference

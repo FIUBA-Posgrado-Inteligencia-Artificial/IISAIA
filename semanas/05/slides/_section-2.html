@@ -176,6 +176,7 @@
     <p><em>"Vamos a leer las dos partes con cuidado. Primero, 'directorio autocontenido' — todo lo del plugin vive bajo una sola carpeta, sin paths que apunten afuera. Si tenés que clonar tres repos para que el plugin funcione, no es autocontenido."</em></p>
     <p><em>"Segundo, 'componentes' — no una sola cosa. Adentro del directorio puede haber varias piezas conocidas: skills, agents, hooks, slash commands. Las mismas piezas del runtime que vienen estudiando, ahora juntas bajo un layout que Claude Code ya sabe cargar."</em></p>
     <p><em>"Vamos a ver cómo se ve por dentro."</em></p>
+    <p><u>Si usan Codex u OpenCode: la definición es la de la doc de Claude Code. Codex tiene el mismo concepto (carpeta con manifest en <code>.codex-plugin/plugin.json</code>, instalable desde un marketplace). En OpenCode un plugin es otra cosa: un módulo JS/TS que se declara como paquete en <code>opencode.json</code>. Lo que comparten los tres es el <code>SKILL.md</code> (estándar Agent Skills): una skill escrita para uno la leen los otros dos.</u></p>
   </aside>
 </section>
 
@@ -199,6 +200,7 @@
     <p><em>"Adentro del directorio del plugin, el layout que importa al principio es éste. Cada folder lo conocen: skills va al folder skills, agents al folder agents, hooks tiene su archivo hooks.json, commands son los slash commands como markdown sueltos."</em></p>
     <p><em>"Lo nuevo es el folder con punto adelante: .claude-plugin/. Ahí vive un único archivo, plugin.json, que es el manifest del plugin. Es el archivo opcional que vemos en el próximo slide."</em></p>
     <p><em>"Si el plugin trae un binario, va en bin/ y queda disponible como comando bare dentro del Bash tool mientras el plugin esté activo. No lo necesitamos hoy, pero está bueno saber que existe."</em></p>
+    <p><u>Si usan Codex u OpenCode: el folder del manifest cambia por harness. Superpowers lo muestra bien: un solo <code>skills/</code> compartido y, al lado, un manifest por harness (<code>.claude-plugin/</code>, <code>.codex-plugin/</code>, <code>.opencode/</code>, <code>.cursor-plugin/</code>…). Las skills se escriben una vez; el envoltorio se repite.</u></p>
   </aside>
 </section>
 
@@ -261,6 +263,7 @@
     <p><em>"El descubrimiento deja de ser una búsqueda a ciegas porque el formato habilita marketplaces: registros consultables donde el autor publica y vos buscás por nombre. No hace falta seguir blogs ni preguntar en Discord. Hay un lugar canónico al que Claude Code le pregunta '¿qué plugins están disponibles?' — eso lo vemos al detalle en la próxima sección."</em></p>
     <p><em>"La bajada deja de ser un puzzle nuevo cada vez porque el layout está estandarizado. No importa quién publicó el plugin: las skills siempre van en skills/, los agents en agents/, los hooks en hooks/hooks.json. Vos no decidís dónde se instala cada cosa porque ya está decidido."</em></p>
     <p><em>"El mantenimiento deja de ser una foto inmóvil porque el plugin lleva versión explícita. Si el plugin.json declara version 2.1.0, ese string es la versión que Claude Code conserva como cache key. Cuando el autor sube 2.1.1, vos sabés exactamente qué cambió. Si el autor prefiere iterar más rápido y omite el campo, Claude Code cae al commit SHA del repo como versión, y cada commit es tratado como release nuevo. Dos modos, los dos explícitos, los dos visibles para el que instala."</em></p>
+    <p><u>Si usan Codex u OpenCode: las tres respuestas valen, cada harness con su formato. Codex resuelve las tres igual que Claude Code (marketplaces, layout fijo, <code>version</code> en el manifest). OpenCode no tiene marketplace: el descubrimiento es su página de ecosistema y la versión la fija el paquete npm o el tag de git.</u></p>
   </aside>
 </section>
 

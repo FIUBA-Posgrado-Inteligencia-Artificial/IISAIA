@@ -493,6 +493,7 @@
     <p><em>"Vamos a leer las dos partes con cuidado. Primero, 'directorio autocontenido' — todo lo del plugin vive bajo una sola carpeta, sin paths que apunten afuera. Si tenés que clonar tres repos para que el plugin funcione, no es autocontenido."</em></p>
     <p><em>"Segundo, 'componentes' — no una sola cosa. Adentro del directorio puede haber varias piezas conocidas: skills, agents, hooks, slash commands. Las mismas piezas del runtime que vienen estudiando, ahora juntas bajo un layout que Claude Code ya sabe cargar."</em></p>
     <p><em>"Vamos a ver cómo se ve por dentro."</em></p>
+    <p><u>Si usan Codex u OpenCode: la definición es la de la doc de Claude Code. Codex tiene el mismo concepto (carpeta con manifest en <code>.codex-plugin/plugin.json</code>, instalable desde un marketplace). En OpenCode un plugin es otra cosa: un módulo JS/TS que se declara como paquete en <code>opencode.json</code>. Lo que comparten los tres es el <code>SKILL.md</code> (estándar Agent Skills): una skill escrita para uno la leen los otros dos.</u></p>
   </aside>
 </section>
 
@@ -516,6 +517,7 @@
     <p><em>"Adentro del directorio del plugin, el layout que importa al principio es éste. Cada folder lo conocen: skills va al folder skills, agents al folder agents, hooks tiene su archivo hooks.json, commands son los slash commands como markdown sueltos."</em></p>
     <p><em>"Lo nuevo es el folder con punto adelante: .claude-plugin/. Ahí vive un único archivo, plugin.json, que es el manifest del plugin. Es el archivo opcional que vemos en el próximo slide."</em></p>
     <p><em>"Si el plugin trae un binario, va en bin/ y queda disponible como comando bare dentro del Bash tool mientras el plugin esté activo. No lo necesitamos hoy, pero está bueno saber que existe."</em></p>
+    <p><u>Si usan Codex u OpenCode: el folder del manifest cambia por harness. Superpowers lo muestra bien: un solo <code>skills/</code> compartido y, al lado, un manifest por harness (<code>.claude-plugin/</code>, <code>.codex-plugin/</code>, <code>.opencode/</code>, <code>.cursor-plugin/</code>…). Las skills se escriben una vez; el envoltorio se repite.</u></p>
   </aside>
 </section>
 
@@ -578,6 +580,7 @@
     <p><em>"El descubrimiento deja de ser una búsqueda a ciegas porque el formato habilita marketplaces: registros consultables donde el autor publica y vos buscás por nombre. No hace falta seguir blogs ni preguntar en Discord. Hay un lugar canónico al que Claude Code le pregunta '¿qué plugins están disponibles?' — eso lo vemos al detalle en la próxima sección."</em></p>
     <p><em>"La bajada deja de ser un puzzle nuevo cada vez porque el layout está estandarizado. No importa quién publicó el plugin: las skills siempre van en skills/, los agents en agents/, los hooks en hooks/hooks.json. Vos no decidís dónde se instala cada cosa porque ya está decidido."</em></p>
     <p><em>"El mantenimiento deja de ser una foto inmóvil porque el plugin lleva versión explícita. Si el plugin.json declara version 2.1.0, ese string es la versión que Claude Code conserva como cache key. Cuando el autor sube 2.1.1, vos sabés exactamente qué cambió. Si el autor prefiere iterar más rápido y omite el campo, Claude Code cae al commit SHA del repo como versión, y cada commit es tratado como release nuevo. Dos modos, los dos explícitos, los dos visibles para el que instala."</em></p>
+    <p><u>Si usan Codex u OpenCode: las tres respuestas valen, cada harness con su formato. Codex resuelve las tres igual que Claude Code (marketplaces, layout fijo, <code>version</code> en el manifest). OpenCode no tiene marketplace: el descubrimiento es su página de ecosistema y la versión la fija el paquete npm o el tag de git.</u></p>
   </aside>
 </section>
 
@@ -903,6 +906,7 @@
     <p><em>"Un marketplace es un registro de plugins que Claude Code sabe consultar. Es el lugar al que el cliente le pregunta '¿qué plugins están disponibles, y dónde están?' cuando ustedes escriben un comando de install."</em></p>
     <p><em>"Hay dos tipos. El oficial, claude-plugins-official, lo mantiene Anthropic y viene pre-registrado: no hace falta agregarlo, está disponible desde que abren Claude Code. Y existen los comunitarios: cualquiera puede armar uno, típicamente como repo de GitHub. Para usar uno, primero lo registran con barra plugin marketplace add seguido de usuario barra repo."</em></p>
     <p><em>"A partir de ese momento, los plugins de ese marketplace están disponibles para instalar igual que los del oficial."</em></p>
+    <p><u>Si usan Codex u OpenCode: Codex también tiene marketplaces (un directorio público de OpenAI más los que agregás con <code>codex plugin marketplace add owner/repo</code>). OpenCode no tiene marketplace: el plugin se declara como paquete npm o git en <code>opencode.json</code>, y OpenCode lo baja al arrancar.</u></p>
   </aside>
 </section>
 
@@ -964,6 +968,7 @@
     <p><em>"Update: actualiza a la última versión disponible según el campo version del manifest que vimos en §2. Si el autor omitió version, Claude Code trata cada commit como release nuevo."</em></p>
     <p><em>"Uninstall: desinstala. Por default también borra el directorio de datos persistente. Si querés conservarlo — por ejemplo porque vas a reinstalar una versión nueva en seguida — agregás --keep-data."</em></p>
     <p><em>"List: muestra lo que tenés instalado, con versión, marketplace de origen, y si está habilitado o no. Es el comando que van a usar primero para verificar instalaciones."</em></p>
+    <p><u>Si usan Codex: <code>/plugins</code> abre el catálogo adentro de la sesión; desde la terminal, <code>codex plugin add &lt;plugin&gt;@&lt;marketplace&gt;</code>, <code>codex plugin remove</code> y <code>codex plugin list</code>. En OpenCode el ciclo es editar la lista <code>"plugin"</code> de <code>opencode.json</code> (o <code>opencode plugin &lt;paquete&gt;</code>).</u></p>
   </aside>
 </section>
 
@@ -1009,6 +1014,7 @@
     <p><em>"Por default, install va a user: el plugin queda registrado en .claude/settings.json en su home, y les sirve para todos sus proyectos. Es el caso más común."</em></p>
     <p><em>"Si pasan --scope project, va al .claude/settings.json del repo en el que están parados. Queda versionado y se comparte con cualquiera que clone — útil para plugins de equipo. Por ejemplo, ejecutan slash plugin install formatter at my-marketplace --scope project y el plugin viaja con el repo."</em></p>
     <p><em>"Si pasan --scope local, queda en .claude/settings.local.json, que está gitignored, para cosas que quieren sólo en su copia del proyecto. Default user, opt-in a project cuando quieren que el plugin viaje con el repo."</em></p>
+    <p><u>Si usan Codex u OpenCode: la idea de scope se repite. Codex habilita cada plugin en <code>~/.codex/config.toml</code> (usuario) o en <code>.codex/config.toml</code> del repo. OpenCode lo declara en <code>~/.config/opencode/opencode.json</code> (global) o en el <code>opencode.json</code> del proyecto.</u></p>
   </aside>
 </section>
 
@@ -1028,6 +1034,7 @@
     <p><u>Demo en vivo. La teoría de §2 se confirma abriendo el cache del marketplace oficial.</u></p>
     <p><em>"Ya vimos qué dice la doc sobre la anatomía. Ahora vamos a verificarla con un plugin que ya tienen instalado: cualquier cosa del marketplace oficial. El folder real en disco es exactamente el árbol que dibujamos."</em></p>
     <p><em>"Beat 1: abro el cache del marketplace oficial. Beat 2: abro un plugin.json y un SKILL.md adentro para que vean que es prosa, no magia. Beat 3: cerramos comparando con el árbol del §2. Eso confirma que el formato no es un PDF — es un folder real que ustedes pueden inspeccionar."</em></p>
+    <p><u>Si usan Codex u OpenCode, el mismo ejercicio: Codex guarda los plugins en <code>~/.codex/plugins/cache/&lt;marketplace&gt;/&lt;plugin&gt;/&lt;versión&gt;/</code>; OpenCode, en <code>~/.cache/opencode/node_modules/</code>.</u></p>
   </aside>
 </section>
 </section>
