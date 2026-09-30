@@ -824,3 +824,185 @@ Plan listo.
 ## Execution Handoff
 
 Plan guardado en `semanas/05/plan.md`. Próximo paso: Fase 3 — ejecutar tarea por tarea. Per slide-generation skill override, **hand straight to phase 3** (no extra checkpoint — el gate del spine ya pasó). Voy con `superpowers:executing-plans` para mantener checkpoints humanos por sección (lo recomendado para slide work — el output visual necesita aprobación humana entre tareas).
+
+---
+---
+
+# Plan de revisión 2026-09-29 — harnesses + Superpowers 6.4.1
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Actualizar el deck de S05 para que (1) las notas de plugins sirvan a quien usa Codex u OpenCode y §5 muestre cómo instalar Superpowers ahí, y (2) todo lo que se dice de Superpowers corresponda a la v6.4.1, con los casos reales tomados de la sesión auth0 sobre tp-final.
+
+**Architecture:** Se editan los fragmentos `slides/_section-N.html` y se regenera `slides/index.html` con `node semanas/05/slides/_assemble.mjs`. Sin JS nuevo; se reusan las clases CSS que cada sección ya define. Los slides de caso real se reconstruyen en HTML a partir del log de la sesión (no screenshots), igual que los actuales.
+
+**Tech Stack:** reveal.js, CSS por sección + `_config/theme/components.css`, Playwright (medición de desbordes), Node.
+
+**Spec:** `semanas/05/spine.md` — bloque "Revisión 2026-09-29" al principio (manda sobre el resto del spine).
+
+**Fuentes de datos:**
+- Sesión auth0: `~/.claude/projects/c--Users-Enzo-Documents-intro-desarrollo-asistido-IA/2bd2fa5d-65dd-4040-a593-5b6b3553122d.jsonl` (líneas clave: 40-135 brainstorming, 193 plan, 230-338 SDD, 322 review final, 435-488 fix, 569 menú de cierre, 647 merge).
+- Spec y plan del caso real: `semanas/00/source_material/apellido-iisaia/tp-final/docs/superpowers/{specs,plans}/2026-09-29-tp-final-auth0*.md`.
+- Superpowers 6.4.1: `semanas/05/source_material/superpowers/` (skills + `RELEASE-NOTES.md`).
+
+## Global Constraints
+
+- Texto visible en español rioplatense (voseo); términos técnicos en inglés (spec, plan, review, branch, merge, commit, test suite, subagent).
+- Nada de "payoff", "bisagra", "diplomatura", "vibe coding", "diálogo socrático", "dolores", "mismatch"; nada de meta-referencias al curso en texto visible ("esta clase", "esta semana").
+- Sin marketing ni mención al TP en texto visible fuera de §15.
+- Body principal ≥1.1rem, secundario ≥1.05rem, eyebrows ≥0.85rem.
+- Speaker notes en tres formatos: `<strong>` acciones, `<u>` descripciones, `<p><em>"…"</em></p>` guion hablado; **un `<em>` por cada reveal** (intro + uno por fragment). Slide sin fragments → un solo `<em>`.
+- Nada de `<span>` dentro de `<pre><code>`; para terminal con color usar `<div>` con `white-space: pre-wrap`.
+- Citas de la sesión auth0: traducidas al español, fieles al original; las notas dicen que la sesión fue en inglés. No inventar frases que no están en el log.
+- Repo público: no mostrar el dominio del tenant de Auth0, el client ID ni ningún secreto. `apellido-iisaia` es placeholder, se puede mostrar.
+- Plugins en otros harnesses: **solo speaker notes** en §§1-3; slides nuevas no.
+- Commits por tarea, formato `tipo(s05 §N): descripción` en español, con el trailer `Co-Authored-By` de la sesión.
+
+## Review Focus
+
+1. **Desborde a 1280×720 con todos los fragments visibles**: un slide reescrito (sobre todo casos reales, más densos) puede cortar la última línea proyectado. Se mide en cada tarea con `measure.mjs` (Task 0).
+2. **Referencias viejas que sobreviven fuera del slide editado**: "dos reviewers", "two-stage", "cuatro opciones", "descartar", "46 tests", "CSV", "demo-repo", "v5.1.0" en otro slide o en las notas. Grep al cierre de cada tarea y en Task 13.
+3. **Notas desalineadas con los reveals**: al cambiar la cantidad de fragments, la cantidad de `<em>` tiene que seguirla. Se cuenta en cada tarea.
+4. **Afirmaciones sobre Codex/OpenCode no verificadas**: solo se usan las del bloque "Hechos verificados" del spine; OpenCode 2.0 no se menciona.
+5. **Filtración de datos de Auth0**: grep por el prefijo del tenant (leído del `.env` local del tp-final, sin imprimirlo) y por `AUTH0_CLIENT_SECRET=.` en `semanas/05` antes de cada commit.
+
+---
+
+### Task 0: Setup y herramienta de medición
+
+**Files:** Create `<scratchpad>/measure.mjs` (fuera del repo).
+
+- [ ] **Step 1:** Confirmar rama `feature/s05-harness-neutral-superpowers-6` y working tree limpio salvo untracked preexistentes.
+- [ ] **Step 2:** Escribir `measure.mjs`: abre `slides/index.html` por `file://` con Playwright a 1280×720, neutraliza el safety-net (`section { overflow: visible !important; max-height: none !important }`), muestra todos los fragments, y para cada `section` hoja reporta `h/v`, título y exceso de alto si lo hay.
+- [ ] **Step 3:** `node semanas/05/slides/_assemble.mjs` y correr `measure.mjs` → guardar la línea base de desbordes.
+
+### Task 1: §§2-3 — notas para otros harnesses
+
+**Files:** Modify `slides/_section-2.html`, `slides/_section-3.html`; `source_material/02-plugins-que-son.md`, `03-plugins-distribucion.md` (párrafo "En otros harnesses").
+
+- [ ] **Step 1:** §2.1 (definición) — notas: la definición es de la doc de Claude Code; en Codex es el mismo concepto (carpeta con manifest `.codex-plugin/plugin.json`); en OpenCode un plugin es un módulo JS/TS que se declara en `opencode.json`. Lo que comparten los tres es el `SKILL.md`.
+- [ ] **Step 2:** §2.2 (anatomía) — notas: Superpowers trae un `skills/` compartido y un manifest por harness (`.claude-plugin/`, `.codex-plugin/`, `.opencode/`, `.cursor-plugin/`…).
+- [ ] **Step 3:** §3.2 (marketplace) — notas: Codex tiene marketplaces (`codex plugin marketplace add owner/repo`); OpenCode no, se lista el paquete npm/git en `opencode.json`.
+- [ ] **Step 4:** §3.4 (cuatro comandos) — notas: equivalentes en Codex (`/plugins`, `codex plugin add x@mkt`, `codex plugin remove`, `codex plugin list`).
+- [ ] **Step 5:** §3.5 (scope) — notas: Codex habilita por usuario o por repo en `config.toml`; OpenCode global en `~/.config/opencode/` o por proyecto en `opencode.json`.
+- [ ] **Step 6:** §3.7 (demo anatomía) — notas: caches `~/.codex/plugins/cache/<mkt>/<plugin>/<versión>/` y `~/.cache/opencode/node_modules/`.
+- [ ] **Step 7:** Un `<em>` por reveal: el agregado va como `<u>` o dentro del `<em>` existente del momento. Assemble + measure + commit `docs(s05 §2-3): notas con el equivalente en Codex y OpenCode`.
+
+### Task 2: §5 — instalación 6.4.1 y otros harnesses
+
+**Files:** Modify `slides/_section-5.html`, `source_material/05-instalar-superpowers.md`.
+
+- [ ] **Step 1:** Output esperado de `/plugin list`: `superpowers v6.4.1 claude-plugins-official enabled`.
+- [ ] **Step 2:** Debajo de Plan B, franja compacta "En otro harness" con dos cards: **Codex** → `/plugins`, buscar "superpowers", Install; **OpenCode** → en `opencode.json`: `"plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]`. Reusar `.s5-planb-grid` / `.s5-planb-card` / `.s5-planb-cmd`.
+- [ ] **Step 3:** Notas: en Windows el hook de inicio corre con Git Bash; si no está, Claude Code pide instalarlo.
+- [ ] **Step 4:** Source: "catorce skills" → "quince".
+- [ ] **Step 5:** Assemble + measure §5 (si desborda, una sola línea por harness) + commit `feat(s05 §5): superpowers 6.4.1 y cómo instalarlo en Codex y OpenCode`.
+
+### Task 3: §4 — roadmap y notas
+
+**Files:** Modify `slides/_section-4.html` y cualquier `_section-*.html` que replique el sub-label.
+
+- [ ] **Step 1:** Sub-label del nodo finishing: "PR / merge / discard" → "merge / PR / seguir después". Grep `discard` en todos los `_section-*.html`.
+- [ ] **Step 2:** Notas del roadmap: la ejecución tiene dos modos (Subagent-driven / Native); el roadmap muestra SDD porque es el que se recorre; Native aparece en §9.
+- [ ] **Step 3:** Assemble + measure + commit `fix(s05 §4): finishing ya no ofrece descartar; mencionar el modo Native`.
+
+### Task 4: §6 — brainstorming
+
+**Files:** Modify `slides/_section-6.html`, `source_material/06-brainstorming.md`.
+
+- [ ] **Step 1:** §6.2 "Qué hace": agregar al principio **"Para qué y para quién"** (te devuelve lo que entendió para que lo corrijas) y **"Clasifica"** (spike / bounded / architectural, en voz alta). Salida: "diseño aprobado — escrito en disco si es architectural".
+- [ ] **Step 2:** §6.3 "Cuándo se activa": agregar tres chips: *spike* → prueba descartable · *bounded* → diseño corto en el chat · *architectural* → spec escrito. Texto: "Lo que escala es la ceremonia, no la aprobación."
+- [ ] **Step 3:** §6.4 "Punto crítico": "antes de que vos hayas aprobado el diseño" (sin "escrito"); "Vale para los tres caminos, por simple que parezca."
+- [ ] **Step 4:** §6.5 "Detalles": el spec en disco → "en trabajo architectural".
+- [ ] **Step 5:** §6.6 caso real → sesión auth0. Visible: prompt inicial traducido. Fragments: (1) *Clasificación: architectural* + por qué; (2) pregunta de propósito → "que los usuarios entren fácil con su cuenta de Google"; (3) "¿qué cambia al estar logueado?" → todo el sitio detrás del login; (4) "¿de dónde sale el nombre?" → lo sigue tipeando el jugador.
+- [ ] **Step 6:** §6.7 → "Dos approaches": A login en el servidor con cookie de sesión (recomendada); B SDK en el browser + JWT. Fragments: diseño en 3 secciones aprobadas una por una → el usuario agrega pytest a mitad de camino → spec commiteado + la skill marca lo que difiere de lo charlado.
+- [ ] **Step 7:** Notas (un `<em>` por reveal; aclarar traducción). Grep `CSV|csv|demo-repo` → 0. Assemble + measure §6 + commit `feat(s05 §6): brainstorming 6.4.1 — propósito, clasificación y caso real auth0`.
+
+### Task 5: §7 — writing-plans
+
+**Files:** Modify `slides/_section-7.html`, `source_material/07-writing-plans.md`.
+
+- [ ] **Step 1:** §7.4 "Qué hace": "tareas de 2 a 5 minutos" → "tareas del tamaño de su propio ciclo de test, partidas en steps de 2 a 5 minutos".
+- [ ] **Step 2:** §7.6 "Detalles": self-review de 4 chequeos (+ **Review Focus**); lo que el plan trae arriba de las tareas: `Spec:`, **Global Constraints**, **Review Focus**; "Vos revisás el plan guardado antes de que corra nada."
+- [ ] **Step 3:** Handoff: **Subagent-driven** vs **Native**, y la skill **recomienda uno con una razón**. Preferir sumarlo al caso real (Step 4).
+- [ ] **Step 4:** §7.7 caso real → plan auth0: spec `…/specs/2026-09-29-tp-final-auth0-design.md` → plan `…/plans/2026-09-29-tp-final-auth0.md` (commit `52ddf56`), 3 tareas. Fragment: Review Focus con 5 casos borde. Fragment final: "Recomiendo Native: son solo tres tareas, cada una depende de la anterior y el plan ya trae el código" → el usuario eligió Subagent-driven.
+- [ ] **Step 5:** Notas + grep `csv|demo-repo|2 a 5 min` + assemble + measure §7 + commit `feat(s05 §7): writing-plans 6.4.1 — estructura del plan, dos modos y caso real auth0`.
+
+### Task 6: §8 — git (retoque)
+
+**Files:** Modify `slides/_section-8.html`, `source_material/08-github-flow.md`.
+
+- [ ] **Step 1:** Diagrama §8.2: `feature/csv-import` → `feature/auth0-login`.
+- [ ] **Step 2:** §8.3: "vía subagent-driven-development, commitea por tarea" → "commitea por tarea, en cualquiera de los dos modos de ejecución".
+- [ ] **Step 3:** Assemble + measure §8 + commit `fix(s05 §8): branch del caso real y commits en ambos modos`.
+
+### Task 7: §9 — subagent-driven-development
+
+**Files:** Modify `slides/_section-9.html`, `source_material/09-subagent-driven-development.md`.
+
+- [ ] **Step 1:** §9.2 "Qué hace": cards auth0 — Task 1 tests del API · **haiku** · 62k · 3m 47s; Task 2 login en el backend · **sonnet** · 120k · 5m 51s; Task 3 frontend y cierre de sesión · **haiku** · 58k · 2m 5s; debajo de cada una reviewer **sonnet** "spec + quality"; al pie review final de rama · **opus**. Mensaje: cada dispatch nombra su modelo.
+- [ ] **Step 2:** §9.3: "executing-plans (conservador)" → **"Native (executing-plans)"**: la sesión implementa todo sin pausas; una sola review final con el modelo más capaz; más barato. SDD: subagent + reviewer por tarea, review final; más completo, más caro.
+- [ ] **Step 3:** §9.4 → **"Punto crítico: un reviewer, dos veredictos"**: spec compliance + code quality en la misma pasada; lo que no puede verificar desde el diff lo marca aparte. Pie: review final de rama con el modelo más capaz.
+- [ ] **Step 4:** §9.5 "Cómo se opera": el coordinador decide las ambigüedades, las registra y te las muestra al final como rulings; frena solo ante lo destructivo o irreversible. Re-dispatch: el fix vuelve al mismo implementer; si no converge, sube de modelo.
+- [ ] **Step 5:** §9.6 captura → reconstrucción HTML de la secuencia real de 9 dispatches con modelo, tokens y duración (62k/3m47s, 80k/1m42s, 120k/5m51s, 102k/2m56s, 58k/2m5s, 72k/1m46s, 98k/2m17s, 87k/3m11s, 79k/1m37s). Fragment: 2-3 "Rulings I made" traducidos.
+- [ ] **Step 6:** §9.7 "Por qué escala" → coordinador 132,6k → 175,7k (+43k) durante 3 tareas + review final; los 7 subagents de ese tramo usaron ~590k en sus propios contextos.
+- [ ] **Step 7:** Grep `two-stage|dos etapas|Spec review|Code quality review|11 tasks|csv|demo-repo`. Notas. Assemble + measure §9 + commit `feat(s05 §9): SDD 6.4.1 — un reviewer por tarea, modo Native, rulings y caso real auth0`.
+
+### Task 8: §10 — TDD
+
+**Files:** Modify `slides/_section-10.html`, `source_material/10-test-driven-development.md`.
+
+- [ ] **Step 1:** §10.3: **"Verde = toda la suite del proyecto, no solo tu archivo. Cada falla se reporta por nombre, aunque no la hayas causado vos."** Donde TDD se ata solo a SDD, "en cualquiera de los dos modos".
+- [ ] **Step 2:** §10.4 caso real: Task 1 11 tests · Task 2 RED `ModuleNotFoundError: backend.auth` → 31 passed · Task 3 RED 2 failed → 33 passed · fix final RED 2 failed → 34 passed, 0 warnings.
+- [ ] **Step 3:** Grep `46|csv` + notas + assemble + measure §10 + commit `feat(s05 §10): TDD 6.4.1 — la suite entera define el verde; caso real auth0`.
+
+### Task 9: §11 — requesting-code-review
+
+**Files:** Modify `slides/_section-11.html`, `source_material/11-requesting-code-review.md`.
+
+- [ ] **Step 1:** §11.4: Crítico → se arregla ya, bloquea · **Importante** → se arregla antes de seguir · Menor → se anota; la review final decide qué queda para después.
+- [ ] **Step 2:** Fragment: "Lo que el spec no dice se juzga por lo que esperaría un usuario razonable." / "Lo que el reviewer decide no evaluar va a *Declined to judge*, y lo decidís vos."
+- [ ] **Step 3:** §11.3: la review final ya viene incluida en los dos modos; la skill sirve sola antes de mergear algo grande.
+- [ ] **Step 4:** §11.5 caso real → review final (opus): Crítico ninguno · **Importante**: el logout te vuelve a meter (vuelve a `/` → login → Google re-loguea sin preguntar; "un usuario razonable espera terminar deslogueado") · 6 Menores, "ninguno bloquea el merge" · *Declined to judge*: deploy y HTTPS, mostrar el nombre, logout por GET. Fragment final: el navegador lo confirmó → página pública `/logged-out`; los 33 tests pasaban.
+- [ ] **Step 5:** Grep `Mayor|aprobación humana|csv|71 líneas` + notas + assemble + measure §11 + commit `feat(s05 §11): code review 6.4.1 — severidades, usuario razonable, declined to judge; caso real auth0`.
+
+### Task 10: §12 — verification-before-completion
+
+**Files:** Modify `slides/_section-12.html`.
+
+- [ ] **Step 1:** §12.2: ejemplo válido `$ uv run pytest` → `34 passed in 0.55s`.
+- [ ] **Step 2:** §12.4 caso real, tres fragments: (1) commit de la Tarea 3: el brief decía "Verificado en el navegador…", el commit real dice "Próximo paso: verificar en el navegador…"; (2) re-review: "arreglado solo vía TestClient, no en un navegador real"; (3) cierre: 34 passed sin warnings + recorrido real en navegador.
+- [ ] **Step 3:** Grep `46|csv` + notas + assemble + measure §12 + commit `feat(s05 §12): verificación — caso real auth0`.
+
+### Task 11: §13 — finishing-a-development-branch
+
+**Files:** Modify `slides/_section-13.html`, `source_material/13-finishing-a-development-branch.md`.
+
+- [ ] **Step 1:** §13.2 → **"Tres opciones, sin estado intermedio"**: 1 Merge a `main` local · 2 Push + abrir PR (default en GitHub Flow) · 3 Dejar la branch como está. Pie: "Descartar no está en el menú: pasa solo si lo pedís, y confirmás tipeando `discard`."
+- [ ] **Step 2:** §13.3: el menú aparece recién con la suite en verde; si te vas a la mitad, la branch queda como está y la retomás con el plan.
+- [ ] **Step 3:** §13.4 caso real: verificó (34 passed; branch sale de `main` en `097a342`) → 3 opciones → merge local + push → fast-forward, 34 passed en `main`, branch borrada, `.env` no subió.
+- [ ] **Step 4:** Grep `cuatro|Descartar|46|csv` + notas + assemble + measure §13 + commit `fix(s05 §13): finishing 6.4.1 — tres opciones; caso real auth0`.
+
+### Task 12: §§14-15 — cierre
+
+**Files:** Modify `slides/_section-14.html`, `slides/_section-15.html`, `source_material/14-resto-del-cinturon.md`, `15-bajada-al-tp-final.md`.
+
+- [ ] **Step 1:** §14: cinco → seis skills, sumando **`diagnosing-superpowers`** ("Cuando una sesión salió mal, lee los transcripts y te dice qué pasó, con evidencia"). Path con `<versión>`. Grid 3×2 si no entra.
+- [ ] **Step 2:** §15 notas: Native como opción barata al lado de SDD.
+- [ ] **Step 3:** Assemble + measure §§14-15 + commit `feat(s05 §14-15): diagnosing-superpowers y modo Native en el cierre`.
+
+### Task 13: Coherence pass y verificación final
+
+- [ ] **Step 1:** Grep global en `slides/_section-*.html` y `source_material/*.md`: `two-stage|dos etapas|cuatro opciones|Descartar|discard|v5\.1|catorce|46 test|csv|CSV|demo-repo|reset_store|aprobación humana` → cada hit resuelto o justificado.
+- [ ] **Step 2:** Leak check (prefijo del tenant leído del `.env` local, sin imprimirlo; y `AUTH0_CLIENT_SECRET=.`) en `semanas/05` → 0.
+- [ ] **Step 3:** Imágenes de `img/` sin referencia: listarlas y preguntar al docente si se borran.
+- [ ] **Step 4:** Assemble; `measure.mjs` sobre todo el deck → sin desbordes nuevos respecto de la línea base; recorrer §§4-15 con Playwright y revisar consola (0 errores).
+- [ ] **Step 5:** `source_material/index.md` (demo-repo → tp-final). Memoria `reference_demo_repo_session_log`: sumar el log auth0.
+- [ ] **Step 6:** Commit final con nota de próximo paso.
+
+## Self-review (writing-plans, revisión 2026-09-29)
+
+**Spec coverage:** notas plugins → T1; §5 → T2; §4 → T3; §6 → T4; §7 → T5; §9 → T7; §10 → T8; §11 → T9; §12 → T10; §13 → T11; §14/§15 → T12. §8 no estaba en el bloque pero muestra `csv-import` → T6. Sin huecos.
+**Placeholders:** ninguno; los textos visibles clave están fijados y los números salen del log.
+**Consistencia:** "Subagent-driven" / "Native" y "Crítico / Importante / Menor" iguales en T3, T5, T7, T9, T12.
+**Review Focus:** 1 → measure por tarea; 2 → greps por tarea + T13; 3 → conteo de `<em>`; 4 → T1 solo usa hechos del spine; 5 → leak grep por commit + T13.
