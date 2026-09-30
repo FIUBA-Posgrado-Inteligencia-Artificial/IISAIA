@@ -32,7 +32,6 @@ Evidencia antes de afirmaciones. Siempre. Sin excepción. Si no podés correr el
 
 `semanas/05/source_material/superpowers/skills/verification-before-completion/SKILL.md`
 
-<!-- INSERT-USER-CAPTURE -->
-<!-- Captura real: screenshot de los comandos de verificación corridos al final del feature
-     del demo-repo de S04 + el output citado en el commit o en la descripción del PR. Idealmente
-     que se vea el comando arriba y la salida abajo, sin recortes. -->
+## Caso real
+
+Sesión auth0 sobre el tp-final, tres momentos: (1) el plan traía el commit de la Task 3 como "Verificado en el navegador con login real de Google"; el commit real dice "Próximo paso: verificar en el navegador", porque todavía no había pasado. (2) La re-review del fix aclara que el bug se confirmó arreglado solo vía TestClient, no en un navegador real. (3) Cierre: `uv run pytest` → 34 passed sin warnings + recorrido real en navegador.

@@ -4804,7 +4804,7 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
       <p class="s12-rule-tag">Claim válido</p>
       <div class="s12-rule-claim">los tests pasan:
 <span class="out">$ uv run pytest
-======== 46 passed in 1.2s ========</span></div>
+======== 34 passed in 0.55s ========</span></div>
       <p class="s12-rule-body">Hecho. Comando corrido en este turno, salida citada al lado.</p>
     </div>
   </div>
@@ -4856,25 +4856,31 @@ git checkout -b feature/&lt;descripcion&gt;</code></pre>
   </aside>
 </section>
 
-<!-- §12.4 — Caso real: la verificación final del demo-repo -->
+<!-- §12.4 — Caso real: tres momentos de evidencia en el login con Auth0 -->
 <section>
-  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">La verificación final del demo-repo</h2>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Evidencia antes de afirmar, en tres momentos</h2>
 
   <div class="s12-case">
-    <p class="s12-case-tag is-cmd">Comando corrido</p>
-    <pre class="s12-case-cmd"><code>uv run python -m pytest 2>&amp;1 | tail -3
-git rev-parse --show-toplevel
-git status --short
-git log --oneline main..HEAD | wc -l</code></pre>
+    <p class="s12-case-tag is-cmd">1 · El commit de la Task 3</p>
+    <div class="s12-case-out">El plan traía el mensaje &laquo;Verificado en el navegador con login real de Google&raquo;. El commit dice <strong>&laquo;Próximo paso: verificar en el navegador&raquo;</strong>: todavía no había pasado.</div>
 
-    <p class="s12-case-tag is-out">Output citado en la afirmación</p>
-    <div class="s12-case-out">&laquo;<strong>46/46 tests passing</strong>. Repo normal (sin worktree), <strong>13 commits adelante de main</strong>, working tree limpio.&raquo;</div>
+    <div class="fragment fade-in" data-fragment-index="0">
+      <p class="s12-case-tag is-cmd">2 · La re-review del fix</p>
+      <div class="s12-case-out">&laquo;El bug quedó confirmado como arreglado <strong>solo vía TestClient</strong>, no en un navegador real.&raquo;</div>
+    </div>
+
+    <div class="fragment fade-in" data-fragment-index="1">
+      <p class="s12-case-tag is-out">3 · El cierre</p>
+      <div class="s12-case-out"><code>uv run pytest</code> → <strong>34 passed, sin warnings</strong>. En el navegador: login con Google, sesión vencida vuelve al login, cerrar sesión termina en &laquo;Cerraste sesión&raquo;.</div>
+    </div>
   </div>
 
   <aside class="notes">
-    <p><u>Caso real: la verificación que el coordinador corrió antes de cerrar la branch. Datos del log.</u></p>
-    <p><em>"Acá está la verificación final del demo-repo, real, del log. Arriba está el comando que el coordinador corrió antes de cerrar: pytest para los tests, git rev-parse para confirmar que estaba en un repo normal sin worktree, git status para el working tree, git log para contar los commits de la branch."</em></p>
-    <p><em>"Abajo está cómo se citó el resultado: '46 de 46 tests passing, repo normal, 13 commits adelante de main, working tree limpio'. No es 'creo que está todo bien' — son cuatro afirmaciones concretas, cada una respaldada por un comando que corrió en el mismo turno. Eso es lo que la skill exige."</em></p>
+    <p><strong>Dos reveals — la re-review y el cierre.</strong></p>
+    <p><u>Caso real: tres momentos de la sesión del login con Auth0 donde la regla de la evidencia se aplicó sola. La sesión fue en inglés; las citas son traducción.</u></p>
+    <p><em>"Acá la regla aparece tres veces en la misma sesión. La primera es la más linda. El plan le daba al implementer de la tarea tres el mensaje de commit ya escrito, y ese mensaje decía 'verificado en el navegador con login real de Google'. Pero la prueba en el navegador todavía no se había hecho: la iba a hacer yo después. El coordinador cambió el mensaje por 'próximo paso: verificar en el navegador'. Y el reviewer lo marcó como acierto: el commit no afirma algo falso aunque el plan lo trajera escrito."</em></p>
+    <p><em>"La segunda: después del arreglo del logout, la re-review dijo que todos los hallazgos estaban resueltos, pero agregó una aclaración: el bug se confirmó arreglado solo con el cliente de tests, no en un navegador real. No se lo guardó. Te dice exactamente hasta dónde llega su evidencia."</em></p>
+    <p><em>"Y la tercera, el cierre: corrió la suite entera — 34 passed, sin warnings — y recién después, con el recorrido completo en el navegador hecho, dijo 'funciona'. Cada afirmación con su comando o su prueba al lado."</em></p>
   </aside>
 </section>
 </section>
