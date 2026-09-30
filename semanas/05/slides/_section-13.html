@@ -157,6 +157,12 @@
   .s13-case-menu li.is-chosen::before {
     color: var(--accent);
   }
+  .s13-opt.is-off {
+    background: transparent;
+    border: 1px dashed var(--text-muted);
+    border-top: 4px dashed var(--text-muted);
+    opacity: 0.8;
+  }
 </style>
 
 <!-- §13.1 — Opener: mini-roadmap iluminado en s13 -->
@@ -191,42 +197,38 @@
   </aside>
 </section>
 
-<!-- §13.2 — Las 4 opciones -->
+<!-- §13.2 — Las 3 opciones (+ descartar, fuera del menú) -->
 <section>
-  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Cuatro opciones, sin estado intermedio</h2>
+  <h2 style="text-align: center; max-width: 900px; margin: 0 auto;">Tres opciones, sin estado intermedio</h2>
 
   <div class="s13-options">
+    <div class="s13-opt">
+      <span class="s13-opt-letter">1</span><span class="s13-opt-name">Merge a main local</span>
+      <p class="s13-opt-body">Checkout main, merge, corre los tests sobre el resultado, borra la branch local.</p>
+      <p class="s13-opt-when">Trabajo local que no necesita revisión.</p>
+    </div>
     <div class="s13-opt is-pr">
-      <span class="s13-opt-letter">A</span><span class="s13-opt-name">Abrir PR</span><span class="s13-opt-recommended">default en GitHub Flow</span>
-      <p class="s13-opt-body">Push de la branch al remote y abre el PR. La branch queda viva para iterar feedback.</p>
+      <span class="s13-opt-letter">2</span><span class="s13-opt-name">Push + abrir PR</span><span class="s13-opt-recommended">default en GitHub Flow</span>
+      <p class="s13-opt-body">Push de la branch y PR con la herramienta de tu forge. La branch queda viva para iterar feedback.</p>
       <p class="s13-opt-when">Para cualquier cambio que amerita revisión humana — casi siempre.</p>
     </div>
     <div class="s13-opt">
-      <span class="s13-opt-letter">B</span><span class="s13-opt-name">Merge a main local</span>
-      <p class="s13-opt-body">Checkout main, merge fast-forward, corre tests sobre el resultado, borra la branch local.</p>
-      <p class="s13-opt-when">Trabajo local que no necesita revisión.</p>
+      <span class="s13-opt-letter">3</span><span class="s13-opt-name">Dejarla como está</span>
+      <p class="s13-opt-body">Sin merge, sin push. La branch queda local con sus commits; la retomás con el plan.</p>
+      <p class="s13-opt-when">Todavía no querés integrarla.</p>
     </div>
-    <div class="s13-opt">
-      <span class="s13-opt-letter">C</span><span class="s13-opt-name">Mantener viva</span>
-      <p class="s13-opt-body">Sin merge, sin push. La branch queda local con sus commits y un plan explícito de seguimiento.</p>
-      <p class="s13-opt-when">Te tenés que ir y el trabajo quedó a mitad de camino.</p>
-    </div>
-    <div class="s13-opt">
-      <span class="s13-opt-letter">D</span><span class="s13-opt-name">Descartar</span>
-      <p class="s13-opt-body">Borra la branch y sus commits. Requiere confirmación explícita.</p>
-      <p class="s13-opt-when">El trabajo no va a ningún lado.</p>
+    <div class="s13-opt is-off">
+      <span class="s13-opt-letter">—</span><span class="s13-opt-name">Descartar: fuera del menú</span>
+      <p class="s13-opt-body">Solo si lo pedís con esas palabras, y confirmás tipeando <code>discard</code>.</p>
+      <p class="s13-opt-when">La skill nunca lo ofrece por su cuenta.</p>
     </div>
   </div>
 
-  <p class="s13-rule">La regla central: <strong>no quedarse en estado intermedio.</strong> Una de las cuatro, no &laquo;después decido&raquo;.</p>
+  <p class="s13-rule">La regla central: <strong>no quedarse en estado intermedio.</strong> Una de las tres, no &laquo;después decido&raquo;.</p>
 
   <aside class="notes">
-    <p><u>Las cuatro opciones que el skill presenta. La A (PR) es la más común en GitHub Flow.</u></p>
-    <p><em>"La skill te muestra cuatro opciones según el contexto del workspace. La A es abrir un PR — el default en GitHub Flow y la opción más frecuente. Hace push de la branch al remote y crea el PR con título y descripción. La branch queda viva para iterar el feedback de la revisión."</em></p>
-    <p><em>"La B es merge directo a main local. Checkout main, merge fast-forward, corre los tests sobre el resultado mergeado, borra la branch local. Es para trabajo que no necesita revisión humana — refactor interno, fixes triviales, cosas que no van al PR."</em></p>
-    <p><em>"La C es mantener la branch viva. Sin merge, sin push. Es la salida cuando te tenés que ir y el trabajo quedó a mitad de camino — pero con un plan explícito de seguimiento. No es 'la dejo y veo después'."</em></p>
-    <p><em>"La D es descartar todo. Borra la branch y sus commits. Requiere confirmación explícita tipeando 'discard' — para evitar accidentes."</em></p>
-    <p><em>"La regla central: no quedarse en estado intermedio. Una de las cuatro, no 'después decido'. Branches dormidas son ruido en el repo y confusión para quien venga después, incluido vos mismo dentro de dos semanas."</em></p>
+    <p><u>Las tres opciones que presenta la skill, en el orden en que aparecen en el menú. Desde la versión 6.2, descartar ya no está en el menú.</u></p>
+    <p><em>"La skill te muestra tres opciones, en este orden. La uno es merge a main local: checkout main, merge, corre los tests sobre el resultado mergeado y borra la branch. Es para trabajo que no necesita revisión humana. La dos es push y PR — el default en GitHub Flow y la más frecuente. Hace push de la branch y abre el PR con la herramienta de tu forge, sea GitHub u otra. La branch queda viva para iterar el feedback. La tres es dejarla como está: sin merge, sin push, la retomás después con el plan. Y fíjense en la cuarta caja, apagada. Versiones anteriores ofrecían 'descartar' al lado de 'merge', como una opción más. Se sacó: ofrecer borrar trabajo terminado y con tests en verde era una invitación al accidente. Ahora descartar solo pasa si vos lo pedís explícitamente, y tenés que tipear la palabra discard para confirmar. La regla central sigue: no quedarse en estado intermedio. Una de las tres, no 'después decido'. Branches dormidas son ruido en el repo y confusión para quien venga después, incluido vos mismo dentro de dos semanas."</em></p>
   </aside>
 </section>
 
@@ -242,8 +244,8 @@
         <p class="s6-compare-body">Después de que verification-before-completion pasó y el trabajo está listo para integrarse.</p>
       </div>
       <div class="s6-compare-card is-no">
-        <div class="s6-compare-tag">Cuando te vas a la mitad</div>
-        <p class="s6-compare-body">Si te tenés que ir y la branch quedó a mitad de camino, la skill te ofrece la opción C — mantenerla viva con un plan claro de seguimiento.</p>
+        <div class="s6-compare-tag">Si los tests fallan</div>
+        <p class="s6-compare-body">El menú aparece recién con la suite en verde. Si algo falla, la skill frena y te muestra qué falló.</p>
       </div>
     </div>
   </div>
@@ -263,51 +265,43 @@
   <aside class="notes">
     <p><strong>Dos reveals — cuándo + por qué.</strong></p>
     <p><u>Cuándo se invoca + qué resultados malos evita.</u></p>
-    <p><em>"Cuándo se activa: al final del plan, después de que verification-before-completion pasó y el trabajo está listo para integrarse. También cuando explícitamente pedís cerrar la sesión y querés decidir qué hacer con lo hecho — por ejemplo si te tenés que ir y la branch quedó a mitad de camino, la skill te ofrece la opción C, mantenerla viva con un plan claro de seguimiento en vez de dejarla flotando sin decisión."</em></p>
+    <p><em>"Cuándo se activa: al final del plan, después de que verification-before-completion pasó y el trabajo está listo para integrarse. Y un detalle: lo primero que hace es correr la suite entera. Si algo falla, no te muestra el menú: frena y te dice qué falló. Si te tenés que ir con el trabajo a medias, la branch simplemente queda como está y la retomás con el plan."</em></p>
     <p><em>"Por qué importa: sin esta skill el flujo termina en 'ya está, mergeá si querés', y el humano queda decidiendo a ojo qué hacer con una branch que recién parió. Esa decisión sin marco produce dos resultados malos típicos. O se mergea a main algo que merecía revisión, o la branch queda viva indefinidamente y se convierte en deuda silenciosa que después nadie se anima a borrar porque no se acuerda qué tenía."</em></p>
     <p><em>"La skill también ordena el cleanup: mergear primero, verificar tests sobre el resultado mergeado, después remover el worktree si aplica, y recién al final borrar la branch local. Saltearse ese orden produce errores feos — git branch -d falla si el worktree todavía referencia la branch, y git worktree remove falla en silencio si lo corrés desde adentro del worktree que estás intentando borrar."</em></p>
   </aside>
 </section>
 
-<!-- §13.4 — Caso real: el menú que apareció en el demo-repo -->
+<!-- §13.4 — Caso real: el cierre del login con Auth0 -->
 <section>
-  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El cierre del demo-repo</h2>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El cierre del login</h2>
 
   <div class="s13-case">
     <div class="s13-case-step is-verify fragment fade-in" data-fragment-index="0">
       <span class="s13-case-tag">Primero — verificó</span>
-      <p class="s13-case-body">Corrió <code>pytest</code> y <code>git status</code>. Output: <code>46/46 tests passing, repo normal sin worktree, 13 commits adelante de main</code>.</p>
+      <p class="s13-case-body">Corrió la suite sobre el árbol final: <code>uv run pytest</code> → <code>34 passed, no warnings</code>. La branch sale de <code>main</code> en <code>097a342</code>.</p>
     </div>
 
     <div class="s13-case-step is-menu fragment fade-in" data-fragment-index="1">
-      <span class="s13-case-tag">Después — presentó las 4 opciones</span>
+      <span class="s13-case-tag">Después — presentó las 3 opciones</span>
       <ul class="s13-case-menu">
-        <li data-letter="A.">Merge a main local</li>
-        <li data-letter="B.">Push + abrir PR</li>
-        <li data-letter="C.">Dejarla como está</li>
-        <li data-letter="D.">Descartar todo el trabajo</li>
+        <li data-letter="1.">Merge a main local</li>
+        <li data-letter="2.">Push y crear un Pull Request</li>
+        <li data-letter="3.">Dejar la branch como está (la retomo después)</li>
       </ul>
     </div>
 
     <div class="s13-case-step is-choice fragment fade-in" data-fragment-index="2">
-      <span class="s13-case-tag">Elegí — push solo (sin PR)</span>
-      <p class="s13-case-body">Variante de B: <code>git push -u origin feature/import-data</code>, sin abrir PR. La skill ejecutó el push y cerró la sesión con el resumen del trabajo.</p>
-    </div>
-
-    <div class="s13-case-step is-followup fragment fade-in" data-fragment-index="3">
-      <span class="s13-case-tag">Después — pedile a Claude la descripción del PR</span>
-      <p class="s13-case-body">Antes de abrir el PR en la UI, podés pedirle a Claude que arme la descripción a partir de los commits de la branch:</p>
-      <p class="s13-case-quote">&laquo;Escribime la descripción del PR para mergear <code>feature/import-data</code> a <code>main</code>. Usá los commits de la branch (<code>git log main..HEAD</code>) y el diff para armar el resumen, los cambios principales y notas de testing.&raquo;</p>
+      <span class="s13-case-tag">Elegí — merge local y push</span>
+      <p class="s13-case-body">Fast-forward a <code>main</code>, <strong>34 passed sobre main</strong> antes del push, branch borrada. Antes de subir, chequeó que el <code>.env</code> con los secretos de Auth0 no estuviera en ningún commit: el repo es público.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Cuatro reveals — uno por step.</strong></p>
-    <p><u>Caso real del log. La skill verifica primero, después arma el menú, y ejecuta la elección. El cuarto step (descripción del PR) es el follow-up natural después del push.</u></p>
-    <p><em>"Acá está el cierre real del demo-repo, paso por paso."</em></p>
-    <p><em>"Primero: la skill corrió ella misma la verificación final. Pytest, git status, comprobar que no hay worktree, contar los commits. El resultado fue 46 de 46 tests passing, repo normal, 13 commits adelante de main. Sin esa verificación, no presenta opciones."</em></p>
-    <p><em>"Después: armó el menú de cuatro opciones — exactamente las que vimos hace dos slides, adaptadas al contexto del workspace: merge a main, push más PR, dejarla como está, o descartar."</em></p>
-    <p><em>"Yo elegí una variante de B: push pero sin abrir el PR todavía, porque iba a iterar más cambios antes de pedir review. La skill ejecutó el push y cerró la sesión con el resumen del trabajo."</em></p>
-    <p><em>"Y el paso siguiente, que no es de la skill pero es el follow-up natural: antes de abrir el PR en la UI de GitHub, le pedís a Claude que escriba la descripción del PR a partir de los commits y el diff de la branch. Claude lee git log main..HEAD, mira los cambios, y te arma un PR con resumen, lista de cambios, y notas de testing. Vos lo revisás y lo pegás en la UI. Ese es el cierre real del happy-path."</em></p>
+    <p><strong>Tres reveals — uno por step.</strong></p>
+    <p><u>Caso real del log de la sesión del login con Auth0 (en inglés; esto es traducción). La skill verifica primero, después arma el menú, y ejecuta la elección con su cleanup.</u></p>
+    <p><em>"Acá está el cierre real del login, paso por paso."</em></p>
+    <p><em>"Primero: la skill corrió ella misma la suite entera sobre el árbol final. 34 passed, sin warnings. Y registró de qué commit de main sale la branch. Sin esa verificación, no presenta opciones."</em></p>
+    <p><em>"Después: el menú de tres opciones, exactamente las que vimos hace dos slides. Merge local, push más PR, o dejarla como está. No aparece descartar."</em></p>
+    <p><em>"Yo elegí merge local y después push. Hizo el merge — fue fast-forward —, corrió los tests de nuevo sobre main antes de subir nada, y borró la branch. Y un detalle que vale oro: como el repo es público, antes del push chequeó que el archivo .env con los secretos de Auth0 no estuviera en ningún commit. Ese es el cierre del happy-path."</em></p>
   </aside>
 </section>
