@@ -10,8 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-29-tp-final-auth0-design.md`
 
-All paths below are relative to the project directory
-`semanas/00/source_material/apellido-iisaia/tp-final/` (call it `TP`), and every
+All paths below are relative to the project root
+`tp-final/` (call it `TP`), and every
 command runs from there. Git branch: `feature/auth0-login` (already created, spec committed).
 
 ## Global Constraints

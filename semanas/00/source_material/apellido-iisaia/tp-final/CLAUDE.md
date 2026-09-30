@@ -8,7 +8,7 @@ Plataforma web con dos juegos (Tetris y Snake) que guarda puntajes y muestra un 
 
 Vive dentro del repo del curso, en `semanas/00/source_material/apellido-iisaia/tp-final/`, al lado de `tp1/` y `tp2/`. Es **material de referencia que leen los alumnos**: el código y el `README.md` son una sola entrega. El README no es documentación de uso, es el informe del TP — incluye "Qué decidí yo", "Cómo gestioné el contexto" y "Qué salió mal". Si un cambio invalida una decisión o un bug narrado ahí, hay que actualizar esa sección en el mismo commit.
 
-`docs/plan.md` es el plan original **congelado a propósito**. No coincide del todo con lo construido y esas diferencias están explicadas en el README. No lo actualices para "sincronizarlo".
+`docs/plan.md` es el plan original **congelado a propósito**. No coincide del todo con lo construido y esas diferencias están explicadas en el README. No lo actualices para "sincronizarlo". Lo mismo vale para `docs/superpowers/`: el spec y el plan del login con Auth0 quedan como los generó superpowers.
 
 ## Comandos
 

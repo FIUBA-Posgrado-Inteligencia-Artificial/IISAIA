@@ -68,7 +68,9 @@ tp-final/
 │           └── tetris.js
 ├── tests/              pytest sobre la API y el login, con Auth0 simulado
 ├── .env.example        las variables que necesita Auth0
-└── docs/plan.md        el plan con el que arranqué
+└── docs/
+    ├── plan.md         el plan con el que arranqué
+    └── superpowers/    spec y plan del login con Auth0
 ```
 
 ### Endpoints
@@ -142,6 +144,8 @@ La configuración del agente está versionada junto al código: `.claude/setting
 La verificación la hizo el agente con el MCP de Playwright, habilitado en `.claude/settings.local.json`. Jugó las partidas, leyó el estado de cada escena desde el navegador (posición de la pieza, largo de la snake, puntaje), guardó puntajes y cortó el servidor para ver los mensajes de error.
 
 El plan y lo construido no coinciden del todo. El plan tenía un `finish.js`, que pasó a ser `common.js` cuando apareció el problema del teclado, y no tenía `score-panel.js`, que salió de separar el ranking de `game-page.js`. Dejé el plan como estaba y las diferencias quedan explicadas acá.
+
+El login con Auth0 lo trabajé distinto, con las skills de superpowers. Primero el agente me hizo preguntas de a una hasta cerrar el diseño, que quedó en [un spec](docs/superpowers/specs/2026-09-29-tp-final-auth0-design.md). Después escribió [un plan de implementación](docs/superpowers/plans/2026-09-29-tp-final-auth0.md) con el código de cada tarea, y lo ejecutaron sub-agents: uno implementaba cada tarea y otro la revisaba antes de pasar a la siguiente. Los dos documentos están en inglés, tal como los generó el agente, y describen lo planeado. La página `/logged-out` no figura porque salió después, probando en el navegador.
 
 ## Qué salió mal
 

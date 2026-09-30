@@ -1,6 +1,6 @@
 # TP final sample: Auth0 login with Google — design
 
-Target project: `semanas/00/source_material/apellido-iisaia/tp-final/`
+Target project: `tp-final/` (this repository)
 
 ## Goal
 
