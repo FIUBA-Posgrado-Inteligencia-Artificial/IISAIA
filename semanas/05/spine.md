@@ -1,5 +1,38 @@
 # Spine — Semana 05: Plugins de Claude Code y Superpowers
 
+> **Revisión 2026-09-29 — delta sobre el spine original.** Dos motivos: (1) alumnos que usan otro harness (Codex, OpenCode) y (2) Superpowers pasó de v5.1.0 a **v6.4.1** (2026-09-18). Donde este bloque contradice el resto del spine, manda este bloque. Las secciones de abajo se corrigieron inline en los puntos marcados.
+>
+> **Decisiones tomadas con el docente:**
+> - **Plugins en otros harnesses → solo speaker notes + §5.** Sin slides nuevas en §§1-3. Las notas de §2-§3 agregan el equivalente en Codex y OpenCode; §5 suma cómo instalar Superpowers en esos dos.
+> - **Superpowers → corregir lo falso + novedades clave.** Sin bajar a internals de SDD (ledger, task-brief, circuit breaker, batching).
+> - **Caso real → todos los slides de captura (§§6-7, §§9-13) pasan a la sesión auth0 sobre tp-final** (log `2bd2fa5d-65dd-4040-a593-5b6b3553122d.jsonl`, 2026-09-29, Superpowers 6.4.1). Coherente con S04, que ya mudó sus demos del demo-repo al tp-final. La sesión está en inglés: se traduce al español y las notas lo aclaran.
+>
+> **Hechos verificados para las notas de plugins (§§2-3):**
+> - **El estándar compartido es el `SKILL.md`** (Agent Skills). Claude Code, Codex y OpenCode lo leen. Codex busca en `.agents/skills` y `~/.agents/skills`; OpenCode en `.opencode/skills`, `~/.config/opencode/skills`, y también `.claude/skills` y `.agents/skills`. **El envoltorio "plugin" es de cada harness.**
+> - **Codex:** mismo modelo que Claude Code: carpeta con manifest (`.codex-plugin/plugin.json`, o `plugin.json` en la raíz), marketplaces (`codex plugin marketplace add owner/repo`), instalación con `/plugins` o `codex plugin add x@mkt`, cache en `~/.codex/plugins/cache/<mkt>/<plugin>/<versión>/`. Se habilita por repo o por usuario en `config.toml`.
+> - **OpenCode:** otro modelo: el plugin es un **módulo JS/TS**, sin marketplace; se declara como paquete npm o git en `opencode.json` (`"plugin": [...]`), global en `~/.config/opencode/` o por proyecto. Cache en `~/.cache/opencode/node_modules/`. OpenCode 2.0 cambia la API y todavía no tiene doc: no se enseña.
+> - **Superpowers como ejemplo:** un solo `skills/` compartido y un manifest por harness (`.claude-plugin/`, `.codex-plugin/`, `.opencode/`, `.cursor-plugin/`, …).
+>
+> **Correcciones por v6.4.1 (lo que el deck decía y ya no es cierto):**
+> - **§4 roadmap / §13 finishing:** el menú tiene **3 opciones** (merge local / push + PR / dejar la branch). **Descartar** ya no se ofrece: solo si lo pedís explícitamente, y confirmás tipeando `discard`.
+> - **§6 brainstorming:** primero pregunta **para qué / para quién**, devuelve lo que entendió para que lo corrijas y **clasifica el pedido en voz alta**: *spike* (pregunta de factibilidad → prueba descartable), *bounded* (cambio acotado → diseño corto en el chat, sin archivo), *architectural* (proyecto nuevo, subsistema nuevo → spec escrito). La aprobación sigue siendo obligatoria en los tres. La regla del 1% se mantiene; lo que escala es la ceremonia, no la aprobación.
+> - **§7 writing-plans:** el plan trae `Spec:` (puntero al spec), **Global Constraints** (reglas que atan a todas las tareas), **Interfaces** por tarea y **Review Focus** (hasta 5 casos borde que el spec implica y ninguna tarea testea, cada uno clavado a un test). **Vos revisás el plan guardado** antes de que corra nada. El cierre ofrece **dos modos de ejecución** (Subagent-driven / Native), dice cuánto cuesta cada uno y **recomienda uno con una razón**. "Tareas de 2-5 min" → los *steps* son de 2-5 min; la tarea tiene el tamaño de su propio ciclo de test.
+> - **§9 subagent-driven-development:** **un reviewer por tarea con dos veredictos** (spec + calidad) en una sola pasada, no dos reviewers. Al final, **una review de toda la rama con el modelo más capaz**. Cada dispatch nombra su modelo (tareas mecánicas → modelo barato). El coordinador **no para a preguntarte por cada ambigüedad**: decide, lo registra y te lo muestra al final como *rulings*; solo frena ante lo destructivo o irreversible. `executing-plans` ya no es "pausa cada N tareas": es el **modo Native**, la sesión implementa todo y una sola review al final; más barato.
+> - **§10 TDD:** "verde" = **toda la suite del proyecto**, no solo tu archivo; se reporta cada falla por nombre, incluso las que no causaste.
+> - **§11 requesting-code-review:** Important = arreglar antes de seguir; Minor = se anota (no "aprobación humana"). El reviewer juzga lo que el spec no dice **por lo que esperaría un usuario razonable**. Nueva lista **"Declined to judge"**: lo que decidió no evaluar, para que lo decidas vos. La review final ya viene incorporada en SDD y en Native.
+> - **§14:** skill nueva **`diagnosing-superpowers`** (cuando una sesión salió mal, lee los transcripts y reporta con evidencia). Path del cache con versión: `…/superpowers/<versión>/skills/<nombre>/SKILL.md`. El plugin trae 15 skills.
+> - **§5:** versión esperada `6.4.1`. Windows: el hook de inicio corre con Git Bash; si falta, Claude Code pide instalarlo.
+> - **§15:** mencionar Native como la opción barata al lado de SDD.
+>
+> **Caso real por sección (sesión auth0 → tp-final):**
+> - **§6:** el pedido ("agregar auth0 al tp-final para login con Google") → *Classification: architectural* dicho en voz alta → primera pregunta por el propósito → 3 preguntas de alcance (qué cambia al loguearse → todo el sitio; de dónde sale el nombre → lo sigue tipeando el jugador) → 2 approaches (A: login en el servidor con cookie / B: SDK en el browser + JWT), recomienda A → diseño en 3 secciones, cada una aprobada → el usuario agrega pytest a mitad de camino → spec commiteado, y la skill marca lo que difiere de lo charlado.
+> - **§7:** plan de 3 tareas (tests del API actual → login en backend → frontend + navegador), `Spec:` + Global Constraints + Review Focus con 5 casos borde (4 con pytest, 1 en navegador). Cierra con la elección: **recomienda Native** ("solo 3 tareas, cada una depende de la anterior, el plan ya trae el código") y el usuario elige Subagent-driven.
+> - **§9:** Tarea 1 → implementer **haiku** → reviewer **sonnet** "spec + quality" → aprobada con 1 Minor. Tarea 2 → **sonnet** → aprobada. Tarea 3 → **haiku** → aprobada. Review final de rama → **opus**. Después, una ronda de fix y una re-review acotada solo a esos hallazgos. Reporte final con **"Rulings I made"** (ej.: "la verificación en navegador la corro con vos, no con un subagent, porque un subagent no puede hablarte").
+> - **§10:** RED/GREEN reales: Tarea 2 `ModuleNotFoundError: backend.auth` → 31 passed; Tarea 3 2 failed → 33 passed; fix final 2 failed → 34 passed, sin warnings.
+> - **§11:** la review final (opus) no encuentra Critical, sí un **Important**: el logout vuelve a `/`, que redirige a login y Google te re-loguea en silencio: "un usuario razonable espera terminar deslogueado". Los tests pasaban. Minors triados ("ninguno bloquea el merge") + **Declined to judge** (deploy/HTTPS, mostrar el nombre, logout por GET…). La prueba en navegador lo confirmó → página pública `/logged-out`.
+> - **§12:** tres momentos de evidencia: (1) el brief de la Tarea 3 traía un commit que decía "Verificado en el navegador" y **el commit real dice "Próximo paso: verificar en el navegador"**, porque todavía no había pasado; el reviewer lo marcó como acierto. (2) La re-review: "el bug se confirmó arreglado solo vía TestClient, no en un navegador real". (3) El cierre cita `uv run pytest` → **34 passed, no warnings** y el recorrido real en navegador (login, sesión expirada → vuelve a login, logout → "Cerraste sesión").
+> - **§13:** el menú real de 3 opciones (1 merge local / 2 push + PR / 3 dejarla) → el usuario elige merge local + push → fast-forward, 34 passed en `main` antes del push, branch borrada, chequeo de que no subió el `.env` (repo público).
+
 **Whole-week through-line:** Semana 04 te dio las piezas escribibles del runtime de Claude Code. Semana 05 hace un zoom-out en tres tiempos. **Parte 1 (§§1-3)**: existe un formato común — el **plugin** — que junta esas piezas en un paquete instalable y resuelve tres complicaciones predecibles (descubrimiento, bajada, mantenimiento). **Parte 2 (§§4-5)**: usamos ese formato para instalar el plugin más completo que existe — **Superpowers** — y vemos el happy-path entero como mapa. **Parte 3 (§§6-13)**: bajamos a cada skill del happy-path como **metodología en acción** sobre el demo-repo de semana 04. **Cierre (§§14-15)**: el resto del cinturón al pasar y la bajada al trabajo final. La cadena es *pieza → paquete → metodología*, y cada bloque cierra cuando entra el siguiente.
 
 **Dispositivos pedagógicos de toda la semana:**
@@ -7,7 +40,7 @@
 - **El happy-path como pipeline-roadmap re-iluminado**: se introduce en §4 como mapa de las 7 skills + GitHub Flow (callback al `pipeline-roadmap` de semana 01 "Construyamos un LLM" y al `.lens-tracker` de semana 04). En §§6-13 reaparece como mini-header en cada slide de apertura de skill, con la pieza correspondiente iluminada y el resto en gris. Es el ancla visual que mantiene al alumno orientado dentro del flujo en todo momento.
 - **Plantilla de skill recurrente (§§6-13, menos §8)**: cada skill se trata con la misma plantilla — *qué hace / cuándo se activa / por qué importa / punto crítico / anti-patrones a evitar* — más una captura real del flujo aplicado al demo-repo de semana 04 al cierre. La plantilla viene del source_material; el deck la respeta como contrato. §8 (git refresher + GitHub Flow) usa una plantilla distinta porque no es una skill.
 - **Self-application como meta-ejemplo (§7)**: el material del §7 ya revela que la propia clase fue construida usando el flujo (el spec en `docs/superpowers/specs/2026-05-21-...` y el plan en `docs/superpowers/plans/2026-05-21-...`). Esa revelación entra como slide de cierre del §7 y opera como prueba de que el flujo es realmente la metodología, no un ejercicio académico.
-- **Capturas reales del demo-repo**: cada skill §§6-7 y §§9-13 cierra con una captura del flujo corriendo sobre el demo-repo de semana 04. Cumple doble función: prueba de funcionamiento y costura con la clase anterior.
+- **Capturas reales del tp-final** *(rev. 2026-09-29; antes: demo-repo)*: cada skill §§6-7 y §§9-13 cierra con una captura de la sesión que agregó login con Google vía Auth0 al tp-final de referencia, corrida con Superpowers 6.4.1. Cumple doble función: prueba de funcionamiento y costura con S04, que ya usa el tp-final.
 - **Sin animaciones JS nuevas**: reuso de `pipeline-roadmap` (CSS + Reveal listeners para re-iluminación, mismo patrón que el `.lens-tracker` de S04) y `clickable-steps.js` adaptable cuando una sección lo pide. La heavy-lift visual está en componentes CSS y reveals.
 
 **Nota de escala:** 15 secciones, ~3h de clase. Estimado total ~70–85 slides — más liviano que S04 (~120) porque §§6-13 comparten plantilla, lo que reduce variación por sección.
@@ -100,7 +133,7 @@
 
 ## Section 6: brainstorming
 **Source material:** `source_material/06-brainstorming.md`
-**Through-line:** Convierte una idea cruda en un design spec a través de preguntas dirigidas. NO toca código antes de que vos apruebes el diseño escrito. Aplica a todo proyecto sin importar cuán simple parezca (regla del 1% del frontmatter). El spec aprobado se persiste en disco (`docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`) y queda como contrato versionado.
+**Through-line:** Convierte una idea cruda en un design spec a través de preguntas dirigidas. Arranca preguntando para qué y para quién, y clasifica el pedido (spike / bounded / architectural) para escalar la ceremonia. NO toca código antes de que vos apruebes el diseño; la aprobación aplica a todo proyecto sin importar cuán simple parezca (regla del 1% del frontmatter). En trabajo architectural el spec aprobado se persiste en disco (`docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`) y queda como contrato versionado.
 **Hook:** La regla deliberadamente paranoica del frontmatter — *"si hay un 1% de probabilidad de que el pedido implique construir algo, la skill se invoca"*. Es contraintuitiva y engancha (todo proyecto va por el flujo, incluso los "simples" — sobre todo los simples).
 **What students walk away knowing:**
 - Qué hace concretamente: diálogo de una pregunta por vez para explorar propósito, restricciones y criterios de éxito, antes de proponer approaches y armar el spec.
@@ -109,7 +142,7 @@
 - El **punto de auto-review** previo (Spec Self-Review): la skill caza placeholders, contradicciones, scope creep y ambigüedad antes de pedirte que revises.
 - Anti-patrones: "esto es muy simple", combinar varias preguntas en un mensaje, invocar implementación antes de aprobación.
 **Animations / interactive:** Pipeline-roadmap re-iluminado en el opener. `code-walkthrough` del path del spec en disco. Si hace falta, `clickable-steps` para el flow exploración → approaches → spec → self-review → aprobación.
-**Captura del flujo:** preguntas dirigidas recibidas al pedir un feature al demo-repo de S04 + el archivo de spec resultante abierto en VS Code.
+**Captura del flujo:** sesión auth0 → tp-final (ver bloque de revisión).
 **Slide budget:** 7–8 slides.
 
 ## Section 7: writing-plans (+ spec-driven development)
@@ -122,10 +155,11 @@
 - Qué hace writing-plans: tareas de 2–5 min con archivos exactos y código completo. Asunción agresiva (el ejecutor no conoce el codebase).
 - **Artefacto en disco**: `docs/superpowers/plans/...` se commitea junto al spec; ese par lo lee después subagent-driven-development.
 - **Punto crítico**: nada de "TBD", "TODO", "similar to Task N" sin código. Vago = no implementable.
-- **Plan Self-Review** previo: spec coverage / placeholder scan / type consistency.
+- **Plan Self-Review** previo: spec coverage / placeholder scan / type consistency / Review Focus.
+- *(rev. 2026-09-29)* Estructura nueva del plan (`Spec:`, Global Constraints, Review Focus) y la elección Subagent-driven / Native al cierre.
 - **El twist meta-pedagógico**: el spec y el plan que produjeron este deck están commiteados en el repo del curso. La clase es prueba de que el flujo funciona.
 **Animations / interactive:** Pipeline-roadmap re-iluminado. Posible reuse de `flow-with-arrows` o construcción CSS para mostrar la dirección **spec → plan → código** con la flecha que sólo va para un lado. El cierre meta es CSS-only con captura del spec + plan abiertos.
-**Captura del flujo:** screenshot del plan resultante del demo-repo de S04 + screenshot del spec y plan reales del repo del curso (meta).
+**Captura del flujo:** el plan de la sesión auth0 → tp-final (ver bloque de revisión).
 **Slide budget:** 8–9 slides.
 
 ## Section 8: git refresher + GitHub Flow
@@ -143,16 +177,16 @@
 
 ## Section 9: subagent-driven-development
 **Source material:** `source_material/09-subagent-driven-development.md`
-**Through-line:** Ejecuta el plan despachando un **subagent fresco por cada tarea** — contexto limpio, sin arrastrar decisiones tácitas. Entre tarea y tarea corre un **two-stage review** (spec compliance primero, code quality después). Es el corazón del autonomous coding: corre continuo entre checkpoints. La alternativa más conservadora (`executing-plans`) ejecuta en la misma sesión con checkpoints humanos por tarea — se menciona, no se profundiza.
+**Through-line:** Ejecuta el plan despachando un **subagent fresco por cada tarea** — contexto limpio, sin arrastrar decisiones tácitas. Entre tarea y tarea corre **un reviewer con dos veredictos** (spec compliance y code quality, en una sola pasada) y al final una review de toda la rama con el modelo más capaz *(rev. 2026-09-29; antes: two-stage review con dos reviewers)*. Corre continuo: las ambigüedades las decide el coordinador y te las reporta como rulings. La alternativa (`executing-plans`, modo **Native**) ejecuta todo en la misma sesión con una sola review al final — más barata; se menciona, no se profundiza.
 **Hook:** *"Fresh subagent o no arranca."* Es la punch line del source y captura la disciplina central: el reset de contexto es lo que escala el flujo, no la ejecución en paralelo.
 **What students walk away knowing:**
 - Subagent fresco por tarea — qué significa "fresco" (sin la sesión del coordinador, sin decisiones tácitas previas).
 - Por qué el reset de contexto importa: evita context rot y compensación de errores entre tareas.
-- **Two-stage review**: spec compliance primero (¿cumple lo pedido?), code quality después (¿está bien escrito?). El orden importa.
-- Cuándo elegir esta skill vs `executing-plans`: autonomía vs conservadurismo.
+- **Un reviewer, dos veredictos**: spec compliance (¿cumple lo pedido?) y code quality (¿está bien escrito?) en la misma pasada; más la review final de rama.
+- Cuándo elegir esta skill vs Native (`executing-plans`): review independiente por tarea vs costo.
 - Anti-patrones: reusar el subagent, saltearse el review, intervenir demasiado pronto.
 **Animations / interactive:** Pipeline-roadmap iluminado. Reuse de `clickable-steps.js` para el flow Task₁ → review → Task₂ → review (cuatro steps clicables que iluminan cada momento). Posible diagrama CSS del coordinador + subagents efímeros.
-**Captura del flujo:** terminal con subagents en serie + output de two-stage review entre dos tareas. Idealmente dos casos: uno donde el review pasó al primer intento y otro donde el reviewer encontró issues y el implementer re-ejecutó.
+**Captura del flujo:** sesión auth0 → tp-final: implementer/reviewer por tarea con su modelo, review final en opus, ronda de fix (ver bloque de revisión).
 **Slide budget:** 7–8 slides.
 
 ## Section 10: test-driven-development
@@ -165,7 +199,7 @@
 - La regla de borrar y reescribir el código pre-test (es disciplina, no perfeccionismo).
 - Anti-patrones: test post-hoc, test que pasa en RED, test con mocks de todo (no atrapa regresiones reales).
 **Animations / interactive:** Pipeline-roadmap iluminado. `code-walkthrough` del ciclo RED-GREEN-REFACTOR (un slide muestra los tres estados — test rojo, código mínimo, test verde — uno por reveal). CSS-only.
-**Captura del flujo:** terminal con el ciclo corriendo sobre el demo-repo de S04 — test fallando en rojo, después código mínimo, después test verde.
+**Captura del flujo:** RED/GREEN reales de la sesión auth0 → tp-final.
 **Slide budget:** 6–7 slides.
 
 ## Section 11: requesting-code-review
@@ -174,11 +208,11 @@
 **Hook:** Opcional. *"La última pasada con ojos frescos antes de que el código salga de tu cabeza"* — funciona como cierre del trío TDD + review + verification.
 **What students walk away knowing:**
 - El reviewer como agente separado del implementer; sin sesgo del autor, sin "ya lo discutimos y quedó así".
-- Las tres severidades y qué hacer con cada una: críticos se resuelven YA, mayores requieren aprobación humana explícita, menores van como notas del PR.
+- Las tres severidades y qué hacer con cada una *(rev. 2026-09-29)*: Critical se arregla ya, Important se arregla antes de seguir, Minor se anota. Lo que el spec no dice se juzga por lo que esperaría un usuario razonable; lo que el reviewer no evalúa va a "Declined to judge".
 - Qué encuentra code review que los tests no encuentran: dead code, desfasaje spec-código, ergonomía pésima de API.
 - Anti-patrones: saltearlo porque "los tests pasan", degradar críticos a mayores para no atrasar el merge, pedir review antes de que TDD pase verde.
 **Animations / interactive:** Pipeline-roadmap iluminado. `data-table` o grid 3×1 para las tres severidades con ejemplos.
-**Captura del flujo:** report de review generado sobre el feature del demo-repo de S04, con un issue de cada severidad si se puede.
+**Captura del flujo:** review final de rama de la sesión auth0 → tp-final (Important del logout).
 **Slide budget:** 6–7 slides.
 
 ## Section 12: verification-before-completion
@@ -192,19 +226,19 @@
 - Por qué fue promovida al happy-path: lo que distingue "trabajo terminado" de "probablemente terminado".
 - Anti-patrones: "deberían pasar" sin correr, "el feature funciona" sin end-to-end, "listo" porque compila.
 **Animations / interactive:** Pipeline-roadmap iluminado. CSS-only — un `comparison-2col` con la forma incorrecta ("los tests pasan") vs la correcta ("los tests pasan: \[output pegado\]") puede aterrizar la regla rápido.
-**Captura del flujo:** comandos de verificación corridos al final del feature del demo-repo + output citado en el commit o PR.
+**Captura del flujo:** los tres momentos de evidencia de la sesión auth0 → tp-final.
 **Slide budget:** 5–6 slides.
 
 ## Section 13: finishing-a-development-branch
 **Source material:** `source_material/13-finishing-a-development-branch.md`
-**Through-line:** Cuando todas las tareas están implementadas y verificadas, estructura **cuatro opciones de cierre** (merge directo / **PR (default en GitHub Flow)** / branch viva con plan / descartar). No decide por vos pero ordena el cleanup según el workspace. **No quedarse en estado intermedio** — "después decido" es deuda silenciosa.
-**Hook:** Opcional. *"O se mergea, o se manda a PR, o se mantiene viva con plan, o se cierra. Después decido = deuda silenciosa."*
+**Through-line:** Cuando todas las tareas están implementadas y verificadas, estructura **tres opciones de cierre** (merge local / **push + PR (default en GitHub Flow)** / dejar la branch) *(rev. 2026-09-29; descartar ya no se ofrece, solo a pedido explícito)*. El menú aparece solo con la suite en verde. No decide por vos pero ordena el cleanup según el workspace. **No quedarse en estado intermedio** — "después decido" es deuda silenciosa.
+**Hook:** Opcional. *"O se mergea, o se manda a PR, o se mantiene viva con plan. Después decido = deuda silenciosa."*
 **What students walk away knowing:**
-- Las cuatro opciones explícitas y cuándo recomendarse cada una. En GitHub Flow, el default es PR.
+- Las tres opciones explícitas y cuándo recomendarse cada una. En GitHub Flow, el default es PR.
 - El cleanup tiene orden: mergear primero, después remover worktree (si aplica), después borrar branch local. Saltearse el orden produce errores.
 - Anti-patrones: mergear directo a `main` algo que amerita revisión, dejar branches vivas sin razón, olvidarse del cleanup.
-**Animations / interactive:** Pipeline-roadmap iluminado (cierre del pipeline). CSS-only — grid 2×2 con las cuatro opciones, cada una con recomendación de contexto.
-**Captura del flujo:** PR final del feature del demo-repo, ya mergeado o listo para mergear, + estado de branches después del cleanup.
+**Animations / interactive:** Pipeline-roadmap iluminado (cierre del pipeline). CSS-only — grid con las tres opciones, cada una con recomendación de contexto.
+**Captura del flujo:** el menú real de 3 opciones y el merge local + push de la sesión auth0 → tp-final.
 **Slide budget:** 5–6 slides.
 
 ---
@@ -213,11 +247,11 @@
 
 ## Section 14: El resto del cinturón
 **Source material:** `source_material/14-resto-del-cinturon.md`
-**Through-line:** El plugin trae más skills que las que recorrimos en detalle. Las que no entran al happy-path lineal existen y se activan automáticamente cuando aplican — sólo hace falta reconocerlas para saber dónde buscar. Seis se nombran al pasar: `systematic-debugging`, `dispatching-parallel-agents`, `writing-skills`, `receiving-code-review`, `executing-plans`, `using-git-worktrees`.
+**Through-line:** El plugin trae más skills que las que recorrimos en detalle. Las que no entran al happy-path lineal existen y se activan automáticamente cuando aplican — sólo hace falta reconocerlas para saber dónde buscar. Se nombran al pasar: `systematic-debugging`, `dispatching-parallel-agents`, `writing-skills`, `receiving-code-review`, `using-git-worktrees` y, desde v6.4.1, `diagnosing-superpowers`. (`executing-plans` ya se cubre en §9 como modo Native.)
 **What students walk away knowing:**
 - Existen seis skills más que ya están instaladas y se activan solas.
 - Una frase por skill alcanza para reconocerla cuando aparezca.
-- Dónde encontrar el archivo SKILL.md de cada una si quieren explorar (`~/.claude/plugins/cache/.../<nombre>/SKILL.md`).
+- Dónde encontrar el archivo SKILL.md de cada una si quieren explorar (`~/.claude/plugins/cache/claude-plugins-official/superpowers/<versión>/skills/<nombre>/SKILL.md`).
 **Animations / interactive:** Ninguna. CSS-only. `data-table` o grid 3×2 con las seis skills, una línea por cada una.
 **Slide budget:** 3 slides.
 
