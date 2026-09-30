@@ -11,7 +11,7 @@ Después viene el orden que no se puede alterar:
 ```python
 app.middleware("http")(require_login)                           # exige sesión
 app.add_middleware(SessionMiddleware, secret_key=...)           # carga la sesión; corre antes que require_login
-app.include_router(auth_router)                                 # /login, /callback, /logout
+app.include_router(auth_router)                                 # /login, /callback, /logout, /logged-out
 app.include_router(router)                                      # /api/...
 app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True))  # todo lo demás
 ```
@@ -43,7 +43,7 @@ El orden del ranking es `points desc, created_at asc`: a igual puntaje gana el q
 | `models.py` | tablas `Game` y `Score`, con `created_at` por `default_factory` en UTC |
 | `schemas.py` | `GameOut` / `ScoreInput` / `ScoreOut`, separados de las tablas |
 | `routes.py` | los tres endpoints, `find_game()` y `to_score_out()` |
-| `auth.py` | settings de Auth0, cliente OAuth, `/login` `/callback` `/logout` y el middleware `require_login` |
+| `auth.py` | settings de Auth0, cliente OAuth, `/login` `/callback` `/logout` `/logged-out` y el middleware `require_login` |
 | `main.py` | app, `lifespan`, seed, montaje de estáticos |
 
 La separación modelo/schema no es ceremonia: `ScoreInput` deliberadamente **no** tiene `game` ni `created_at`, y `ScoreOut` expone `game` como slug en vez de `game_id`. Devolver un modelo de tabla directamente filtraría ambas cosas.

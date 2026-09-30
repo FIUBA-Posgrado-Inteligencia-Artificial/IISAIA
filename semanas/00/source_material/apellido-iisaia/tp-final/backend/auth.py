@@ -12,11 +12,16 @@ from starlette.middleware.base import RequestResponseEndpoint
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 REQUIRED_VARS = ("AUTH0_DOMAIN", "AUTH0_CLIENT_ID", "AUTH0_CLIENT_SECRET", "SESSION_SECRET")
-PUBLIC_PATHS = {"/login", "/callback", "/logout"}
+PUBLIC_PATHS = {"/login", "/callback", "/logout", "/logged-out"}
 LOGIN_FAILED_HTML = (
     '<!doctype html><html lang="es"><meta charset="utf-8">'
     "<title>No se pudo iniciar sesión</title>"
     '<p>No se pudo iniciar sesión. <a href="/login">Intentar de nuevo</a></p></html>'
+)
+LOGGED_OUT_HTML = (
+    '<!doctype html><html lang="es"><meta charset="utf-8">'
+    "<title>Sesión cerrada</title>"
+    '<p>Cerraste sesión. <a href="/login">Iniciar sesión de nuevo</a></p></html>'
 )
 
 
@@ -82,9 +87,14 @@ async def callback(request: Request) -> Response:
 async def logout(request: Request) -> Response:
     request.session.clear()
     params = urlencode(
-        {"client_id": settings.client_id, "returnTo": str(request.base_url).rstrip("/")}
+        {"client_id": settings.client_id, "returnTo": str(request.url_for("logged_out"))}
     )
     return RedirectResponse(f"https://{settings.auth0_domain}/v2/logout?{params}", status_code=302)
+
+
+@router.get("/logged-out")
+async def logged_out() -> Response:
+    return HTMLResponse(LOGGED_OUT_HTML)
 
 
 async def require_login(request: Request, call_next: RequestResponseEndpoint) -> Response:

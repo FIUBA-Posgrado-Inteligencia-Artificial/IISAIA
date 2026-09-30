@@ -19,7 +19,7 @@ Sin internet Phaser no carga. `game-page.js` chequea `typeof Phaser === "undefin
 
 `game.html` es genérico: el título, el texto de controles y el tamaño del canvas los completa `game-page.js` desde su mapa `GAMES`. No hay una página por juego.
 
-Las dos páginas están detrás del login: sin sesión el servidor redirige a `/login` antes de mandar el HTML, así que ningún módulo tiene que chequear si hay usuario. El header de las dos lleva `<a href="/logout">Cerrar sesión</a>`, un link común: el servidor borra la sesión y redirige a Auth0.
+Las dos páginas están detrás del login: sin sesión el servidor redirige a `/login` antes de mandar el HTML, así que ningún módulo tiene que chequear si hay usuario. El header de las dos lleva `<a href="/logout">Cerrar sesión</a>`, un link común: el servidor borra la sesión y redirige a Auth0, que vuelve a `/logged-out`.
 
 ## Quién llama a quién
 

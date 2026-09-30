@@ -10,7 +10,9 @@ No arregles nada todavía: primero el diagnóstico.
    "Qué decidí yo", "Cómo gestioné el contexto" o "Qué salió mal", decime qué
    sección hay que actualizar y con qué.
 3. `docs/plan.md` está congelado a propósito: avisá si aparece modificado.
-4. La app levanta con `uv run fastapi dev backend/main.py` y la home lista los juegos.
+4. `uv run pytest` pasa sin fallas ni warnings. Con un `.env` completo (ver `.env.example`),
+   la app levanta con `uv run fastapi dev backend/main.py`, pide login con Google y la
+   home lista los juegos.
 5. Los `CLAUDE.md` y las rules siguen describiendo el código como quedó.
 
 Cerrá con una lista corta de lo que falta antes de entregar, en orden de importancia.

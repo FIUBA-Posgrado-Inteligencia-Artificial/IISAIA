@@ -9,7 +9,7 @@ Hace falta Python 3.11 o superior, [uv](https://docs.astral.sh/uv/), conexión a
 En el dashboard de Auth0, una sola vez:
 
 1. Crear una aplicación de tipo *Regular Web Application*.
-2. En *Settings*, poner `http://127.0.0.1:8000/callback` en *Allowed Callback URLs* y `http://127.0.0.1:8000` en *Allowed Logout URLs*. Si usás el puerto 8765, agregá las mismas dos direcciones con ese puerto.
+2. En *Settings*, poner `http://127.0.0.1:8000/callback` en *Allowed Callback URLs* y `http://127.0.0.1:8000/logged-out` en *Allowed Logout URLs*. Si usás el puerto 8765, agregá las mismas dos direcciones con ese puerto. Usá siempre `127.0.0.1` y no `localhost`: Auth0 compara la dirección exacta y rechaza el login si no coincide.
 3. En *Authentication → Social*, activar Google (`google-oauth2`) para la aplicación.
 
 Después copiar `.env.example` a `.env` y completarlo. `AUTH0_DOMAIN` es el dominio del tenant sin `https://`, y el client ID y el secret están en *Settings*. `SESSION_SECRET` firma la cookie de sesión y puede ser cualquier texto largo al azar:
@@ -27,6 +27,8 @@ uv run fastapi dev backend/main.py
 ```
 
 Abrir `http://127.0.0.1:8000`. Sin sesión, cualquier página lleva al login de Google. La documentación interactiva de la API está en `http://127.0.0.1:8000/docs`, también detrás del login.
+
+Al iniciar sesión, Auth0 muestra una pantalla *Authorize App* para aceptar. En direcciones locales no se puede saltear, así que aparece cada vez.
 
 Si el servidor no arranca y muestra `[WinError 10013]` o `address already in use`, es que otro programa está usando el puerto 8000. En ese caso hay que levantarlo en otro puerto y abrir esa dirección:
 
@@ -78,7 +80,8 @@ tp-final/
 | `POST` | `/api/games/{slug}/scores` | `201` puntaje creado · `401` sin sesión · `404` el juego no existe · `422` nombre vacío o de más de 20 caracteres, o puntaje negativo |
 | `GET` | `/login` | `302` a Auth0, que va directo a Google |
 | `GET` | `/callback` | `302` a `/` con la sesión iniciada · `400` si el login falló o se canceló |
-| `GET` | `/logout` | `302` a Auth0 para cerrar la sesión, que vuelve a `/` |
+| `GET` | `/logout` | `302` a Auth0 para cerrar la sesión, que vuelve a `/logged-out` |
+| `GET` | `/logged-out` | `200` página que confirma que la sesión se cerró, con un link para volver a entrar |
 
 Sin sesión, cualquier otra ruta, páginas y `/docs` incluidas, redirige a `/login`.
 
@@ -149,3 +152,5 @@ El plan y lo construido no coinciden del todo. El plan tenía un `finish.js`, qu
 **El arreglo que parecía no andar.** Después de corregir la fecha, la API la seguía devolviendo sin zona. `fastapi dev` había detectado el cambio y avisado que recargaba, pero en Windows el proceso que recarga murió y dejó vivo al worker viejo, que siguió ocupando el puerto con el código anterior. Por eso un servidor nuevo tampoco podía arrancar. `netstat` mostró que el puerto figuraba a nombre de un proceso que ya no existía. Al cerrar el worker huérfano, el arreglo funcionó sin cambiar una línea. Antes de volver a tocar el código conviene confirmar qué proceso está respondiendo.
 
 **Snake arrancaba sola.** Al abrir la página la snake ya se movía, y si no reaccionabas en menos de dos segundos chocaba contra la pared. Se vio en una captura: la partida había terminado antes de tocar una tecla. El plan describía las reglas pero nunca decía cuándo empieza la partida, y el agente hizo lo más literal, que era arrancar al crear la escena. El hueco estaba en el plan, no en el código. Ahora la partida espera la primera flecha. En Tetris no hizo falta porque la pieza tarda 800 ms en bajar cada fila y hay tiempo para ubicarse.
+
+**Cerrar sesión no cerraba nada.** El logout borraba la cookie, Auth0 cerraba su sesión y después volvía a `/`. Sin sesión, `/` manda a `/login`, que va directo a Google, y Google seguía con la cuenta abierta, así que en un segundo estaba frente a la pantalla de autorización de Auth0, a un clic de entrar de nuevo. Los tests pasaban porque simulan a Auth0 y a Google: lo vi recién probando en el navegador. Ahora el logout vuelve a `/logged-out`, una página pública que avisa que la sesión se cerró y ofrece volver a entrar.

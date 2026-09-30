@@ -68,8 +68,14 @@ def test_logout_borra_la_sesion_y_sale_de_auth0(user_client):
     query = parse_qs(url.query)
     assert (url.netloc, url.path) == ("test.auth0.com", "/v2/logout")
     assert query["client_id"] == ["test-client-id"]
-    assert query["returnTo"] == ["http://testserver"]
+    assert query["returnTo"] == ["http://testserver/logged-out"]
     assert user_client.get("/api/games").status_code == 401
+
+
+def test_logged_out_es_publica_y_ofrece_volver(client):
+    response = client.get("/logged-out")
+    assert response.status_code == 200
+    assert 'href="/login"' in response.text
 
 
 @pytest.mark.parametrize("path", ["/", "/game.html?game=snake"])
