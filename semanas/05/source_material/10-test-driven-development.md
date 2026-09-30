@@ -16,7 +16,9 @@ Las únicas excepciones (que requieren confirmación explícita) son prototipos 
 
 Sin TDD, el agente escribe código que "parece" correcto y después arma tests que pasan al primer intento. Esos tests post-hoc validan lo que el código hace, no lo que vos querías que hiciera — pierden su valor como red de seguridad porque nunca los viste atrapar un bug.
 
-Ver el RED primero te obliga a expresar la intención en forma ejecutable antes de saber el cómo. Es la única forma de tener confianza real de que el feature funciona sin que un humano lea cada línea. Y en el contexto de subagent-driven-dev, donde el agente corre solo durante una hora sin supervisión, TDD es lo que evita que "ya funciona" termine siendo "compila".
+Ver el RED primero te obliga a expresar la intención en forma ejecutable antes de saber el cómo. Es la única forma de tener confianza real de que el feature funciona sin que un humano lea cada línea. Vale en los dos modos de ejecución: con subagent-driven, y también en modo Native, donde TDD es el único control por tarea hasta la review final.
+
+**Verde es toda la suite del proyecto** (desde v6.4): no alcanza con que pase el archivo de test de la tarea. Hay que correr el comando de tests del proyecto y reportar cada falla por nombre, incluso las que no causaste. En pruebas, cuando la tarea nombraba un solo archivo, el agente corría solo ese en 11 de 12 casos y un test roto al lado pasaba desapercibido. La referencia de la skill sobre cómo escribir buenos tests se llama ahora `writing-good-tests.md` (antes `testing-anti-patterns.md`).
 
 ## El punto crítico
 
@@ -32,7 +34,6 @@ Ver el test FALLAR antes de implementar. Si saltás el RED, no sabés si tu test
 
 `semanas/05/source_material/superpowers/skills/test-driven-development/SKILL.md`
 
-<!-- INSERT-USER-CAPTURE -->
-<!-- Captura real: screenshot del ciclo RED-GREEN-REFACTOR durante el demo — terminal con
-     el test fallando primero (en rojo, output del test runner), después el código mínimo
-     implementado, y después el test pasando (en verde). -->
+## Caso real
+
+Sesión auth0 sobre el tp-final: Task 1 fija el API existente (11 passed); Task 2 RED `ModuleNotFoundError: backend.auth` → 31 passed; Task 3 RED 2 failed → 33 passed; fix final RED 2 failed → 34 passed, 0 warnings (suite entera).

@@ -128,6 +128,46 @@
     color: var(--accent);
     font-family: var(--font-mono);
   }
+  /* §10.4 — RED → GREEN por tarea */
+  .s10-rg {
+    max-width: 1000px;
+    margin: var(--spacing-lg) auto 0 auto;
+  }
+  .s10-rg-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 30px 150px;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+  }
+  .s10-rg-label {
+    color: var(--text-muted);
+    text-align: right;
+  }
+  .s10-rg-red {
+    background: var(--bg-secondary);
+    border-left: 3px solid #ff5a5a;
+    border-radius: 4px;
+    padding: 6px var(--spacing-sm);
+    color: #ff5a5a;
+    text-align: left;
+  }
+  .s10-rg-red.is-none {
+    border-left-color: var(--text-muted);
+    color: var(--text-muted);
+    font-family: var(--font-body, inherit);
+  }
+  .s10-rg-arrow {
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .s10-rg-green {
+    color: var(--accent);
+    font-weight: 700;
+    text-align: left;
+  }
 </style>
 
 <!-- §10.1 — Opener: mini-roadmap iluminado en s10 -->
@@ -204,7 +244,7 @@
     <div class="s6-compare">
       <div class="s6-compare-card is-yes">
         <div class="s6-compare-tag">Por default — sí</div>
-        <p class="s6-compare-body">Durante la implementación de cualquier feature, bugfix o cambio de comportamiento, antes de escribir código de producción.</p>
+        <p class="s6-compare-body">Durante la implementación de cualquier feature, bugfix o cambio de comportamiento, antes de escribir código de producción. En los dos modos de ejecución.</p>
       </div>
       <div class="s6-compare-card is-no">
         <div class="s6-compare-tag">Excepciones — con confirmación</div>
@@ -220,7 +260,7 @@
         Sin TDD, el agente escribe código que <strong>parece correcto</strong> y después arma tests que pasan al primer intento. Esos tests <strong>escritos después del código</strong> validan lo que el código hace — no lo que vos querías que hiciera.
       </div>
       <p class="s6-central-sub">
-        En modo subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es lo que evita que &laquo;ya funciona&raquo; termine siendo &laquo;compila&raquo;.
+        Y <strong>verde es toda la suite del proyecto</strong>, no solo tu archivo de test. Cada falla se reporta por nombre, aunque no la hayas causado vos.
       </p>
     </div>
   </div>
@@ -228,54 +268,48 @@
   <aside class="notes">
     <p><strong>Dos reveals — cuándo + por qué.</strong></p>
     <p><u>Cuándo se activa la skill y por qué la disciplina vale.</u></p>
-    <p><em>"Cuándo se activa: durante la implementación de cualquier feature, bugfix o cambio de comportamiento — antes de escribir código de producción. Si la tarea es agregar un endpoint, la skill arranca con un test del endpoint. Si la tarea es arreglar un bug, arranca con un test que reproduce el bug y falla por la razón correcta."</em></p>
+    <p><em>"Cuándo se activa: durante la implementación de cualquier feature, bugfix o cambio de comportamiento — antes de escribir código de producción. Si la tarea es agregar un endpoint, la skill arranca con un test del endpoint. Si la tarea es arreglar un bug, arranca con un test que reproduce el bug y falla por la razón correcta. Vale igual si el plan lo ejecuta un subagent por tarea o la misma sesión en modo Native: en Native, TDD es el único control por tarea que queda hasta la review final."</em></p>
     <p><em>"Las únicas excepciones, que requieren confirmación explícita, son: prototipos descartables, archivos de configuración, y código autogenerado por herramientas — por ejemplo el openapi.yaml que produce FastAPI cuando le pedís el esquema. Esas tres no van por default por TDD; tienen que pedirse a propósito."</em></p>
-    <p><em>"Por qué importa: sin TDD, el agente escribe código que parece correcto y después arma tests que pasan al primer intento. Esos tests escritos después del código validan lo que el código hace, no lo que vos querías que hiciera — y por lo tanto pierden su valor como red de seguridad. Vos nunca los viste atrapar un bug. En el contexto de subagent-driven, donde el agente corre solo durante una hora sin supervisión, TDD es exactamente lo que evita que 'ya funciona' termine siendo 'compila'."</em></p>
+    <p><em>"Por qué importa: sin TDD, el agente escribe código que parece correcto y después arma tests que pasan al primer intento. Esos tests escritos después del código validan lo que el código hace, no lo que vos querías que hiciera — y por lo tanto pierden su valor como red de seguridad. Vos nunca los viste atrapar un bug. Y una regla que se agregó hace poco: verde quiere decir toda la suite del proyecto, no solo el archivo de test de la tarea. En pruebas, cuando la tarea nombraba un solo archivo, el agente corría solo ese en once de doce casos, y un test roto al lado pasaba desapercibido. Ahora corre el comando de tests del proyecto y reporta cada falla por nombre, incluso las que no causó."</em></p>
   </aside>
 </section>
 
-<!-- §10.4 — Caso real: tests acumulando a través de las 11 tasks -->
+<!-- §10.4 — Caso real: RED antes de GREEN en cada tarea del login con Auth0 -->
 <section>
-  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">Cada tarea agregó tests</h2>
+  <h2 style="text-align: center; max-width: 1000px; margin: 0 auto;">El rastro de TDD, tarea por tarea</h2>
 
-  <div class="s10-timeline">
-    <div class="s10-row">
-      <span class="s10-row-label">Task 1</span>
-      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 17%;"></div></div>
-      <span class="s10-row-count">8</span>
+  <div class="s10-rg">
+    <div class="s10-rg-row">
+      <span class="s10-rg-label">Task 1</span>
+      <span class="s10-rg-red is-none">tests del API existente: fijan lo que ya funciona</span>
+      <span class="s10-rg-arrow">→</span>
+      <span class="s10-rg-green">✓ 11 passed</span>
     </div>
-    <div class="s10-row">
-      <span class="s10-row-label">Task 2</span>
-      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 26%;"></div></div>
-      <span class="s10-row-count">12</span>
+    <div class="s10-rg-row">
+      <span class="s10-rg-label">Task 2</span>
+      <span class="s10-rg-red">✗ ModuleNotFoundError: backend.auth</span>
+      <span class="s10-rg-arrow">→</span>
+      <span class="s10-rg-green">✓ 31 passed</span>
     </div>
-    <div class="s10-row">
-      <span class="s10-row-label">Task 3</span>
-      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 30%;"></div></div>
-      <span class="s10-row-count">14</span>
+    <div class="s10-rg-row">
+      <span class="s10-rg-label">Task 3</span>
+      <span class="s10-rg-red">✗ 2 failed (falta el link de cerrar sesión)</span>
+      <span class="s10-rg-arrow">→</span>
+      <span class="s10-rg-green">✓ 33 passed</span>
     </div>
-    <div class="s10-row">
-      <span class="s10-row-label">Task 5</span>
-      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 52%;"></div></div>
-      <span class="s10-row-count">24</span>
-    </div>
-    <div class="s10-row">
-      <span class="s10-row-label">Task 6</span>
-      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 72%;"></div></div>
-      <span class="s10-row-count">33</span>
-    </div>
-    <div class="s10-row">
-      <span class="s10-row-label">Task 7</span>
-      <div class="s10-row-bar-track"><div class="s10-row-bar-fill" style="width: 100%;"></div></div>
-      <span class="s10-row-count">46</span>
+    <div class="s10-rg-row">
+      <span class="s10-rg-label">fix</span>
+      <span class="s10-rg-red">✗ 2 failed (falta la página /logged-out)</span>
+      <span class="s10-rg-arrow">→</span>
+      <span class="s10-rg-green">✓ 34 passed</span>
     </div>
   </div>
 
-  <p class="s10-timeline-cap">Al cerrar el feature: <strong>46/46 tests passing</strong>, 0 warnings, working tree limpio.</p>
+  <p class="s10-timeline-cap">Al cerrar: <strong>34 passed, 0 warnings</strong> — la suite entera, no el archivo de la última tarea.</p>
 
   <aside class="notes">
-    <p><u>Caso real: progresión real de tests del demo-repo a lo largo de las 11 tasks. Datos extraídos del log de la sesión.</u></p>
-    <p><em>"Acá está el rastro real de TDD en la sesión del demo-repo. Cada barra es una tarea del plan; el número de la derecha es cuántos tests pasaban después de cerrar esa tarea. Empezamos con 8 — el suite original más algunos nuevos del refactor inicial — y subimos hasta 46."</em></p>
-    <p><em>"Vean el salto entre Task 3 y Task 5: de 14 a 24, +10 tests para los adapters de validación. O entre Task 6 y Task 7: de 33 a 46, +13 tests para el router y los casos HTTP. Cada tarea no terminaba hasta que sus tests pasaban. Y al cerrar el feature: 46/46, 0 warnings, working tree limpio. Ese es el rastro auditable que deja TDD."</em></p>
+    <p><u>Caso real: el rastro de TDD en la sesión del login con Auth0, sacado de los reportes de cada implementer.</u></p>
+    <p><em>"Acá está el rastro real de TDD en la sesión del login. La primera tarea es especial: escribe tests para el API tal como está, antes de tocar nada, así que esos 11 pasan desde el principio — su trabajo es fijar lo que ya funciona para que el login no lo rompa sin que nadie se entere. Desde ahí, cada tarea arrancó en rojo. La dos: el test del login falló porque el módulo de auth ni existía — ModuleNotFoundError. Después, 31 en verde. La tres: dos tests fallaron porque la página no tenía el link de cerrar sesión; después, 33. Y el arreglo final, igual: dos rojos, después 34."</em></p>
+    <p><em>"Y fíjense en el cierre: 34 passed y cero warnings, corriendo la suite entera del proyecto. El agente no se conformó con que pasaran los tests de la última tarea. Ese es el rastro auditable que deja TDD."</em></p>
   </aside>
 </section>
