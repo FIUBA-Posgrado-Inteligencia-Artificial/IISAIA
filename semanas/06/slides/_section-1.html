@@ -2,7 +2,7 @@
   /* §1 — Más allá del set que trae el host */
   .s1-h2 {
     text-align: center;
-    max-width: 980px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   .s1-h2-sub {
@@ -10,7 +10,7 @@
     color: var(--text-muted);
     font-size: 1.1rem;
     margin: var(--spacing-xs) auto 0 auto;
-    max-width: 860px;
+    max-width: 1000px;
   }
 
   /* CC's native tools grid (recap) */
@@ -37,16 +37,24 @@
   }
   .s1-tool-detail {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     margin: 0;
-    line-height: 1.35;
+    line-height: 1.3;
+  }
+  .s1-tools-more {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    margin: var(--spacing-sm) auto 0 auto;
+    max-width: 1000px;
   }
   .s1-tools-takeaway {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-lg) auto 0 auto;
-    max-width: 860px;
+    margin: var(--spacing-md) auto 0 auto;
+    max-width: 1000px;
   }
   .s1-tools-takeaway strong {
     color: var(--text-primary);
@@ -99,8 +107,8 @@
   }
   .s1-nostá-gap {
     color: var(--text-muted);
-    font-size: 1.02rem;
-    line-height: 1.45;
+    font-size: 1.05rem;
+    line-height: 1.4;
     margin: 0;
   }
 
@@ -133,10 +141,10 @@
     line-height: 1.55;
     margin: 0;
   }
-  /* Postgres step-cards — narrativa en 3 pasos, apilados compactos */
+  /* Postgres step-cards — narrativa en 4 pasos, grid 2×2 compacto */
   .s1-steps {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: var(--spacing-sm);
     max-width: 1080px;
     margin: var(--spacing-sm) auto 0 auto;
@@ -144,10 +152,10 @@
   .s1-step-card {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     background: var(--bg-secondary);
     border-radius: 6px;
-    padding: 10px 18px;
+    padding: 10px 16px;
     align-items: start;
   }
   .s1-step-num {
@@ -188,10 +196,10 @@
   }
   .s1-step-foot {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-style: italic;
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.25;
   }
   .s1-step-foot code {
     font-family: var(--font-mono);
@@ -200,7 +208,7 @@
     background: var(--bg-code);
     padding: 0 5px;
     border-radius: 3px;
-    font-size: 0.9em;
+    font-size: 0.95rem;
   }
   .s1-missing-items {
     list-style: none;
@@ -302,12 +310,6 @@
     font-size: 1.25rem;
     line-height: 1.5;
     margin: 0;
-  }
-  .s1-bridge-hint {
-    color: var(--text-muted);
-    font-style: italic;
-    font-size: 1.05rem;
-    margin: var(--spacing-lg) 0 0 0;
   }
 
   /* Step foot — accent the punchline */
@@ -485,26 +487,26 @@
       <p class="s1-tool-detail">modificar líneas</p>
     </div>
     <div class="s1-tool-card">
-      <p class="s1-tool-name">Grep</p>
-      <p class="s1-tool-detail">buscar contenido</p>
-    </div>
-    <div class="s1-tool-card">
-      <p class="s1-tool-name">Glob</p>
-      <p class="s1-tool-detail">buscar por path</p>
+      <p class="s1-tool-name">Glob · Grep</p>
+      <p class="s1-tool-detail">buscar por path o contenido</p>
     </div>
     <div class="s1-tool-card">
       <p class="s1-tool-name">Bash</p>
       <p class="s1-tool-detail">correr comandos</p>
     </div>
+    <div class="s1-tool-card">
+      <p class="s1-tool-name">WebFetch · WebSearch</p>
+      <p class="s1-tool-detail">traer y buscar en la web</p>
+    </div>
   </div>
+
+  <p class="s1-tools-more">y ~40 más: <code>Agent</code>, <code>Skill</code>, <code>LSP</code>…</p>
 
   <p class="s1-tools-takeaway">Para el grueso del workflow de desarrollo local, te alcanza. <strong>Lo decidió Anthropic.</strong></p>
 
   <aside class="notes">
-    <p><u>Recap visual sin re-explicar qué es un tool. El alumno ya pasó por loop agentic + tools + harness + skills + sub-agents. El slide hace dos cosas: anclar lo que ya tienen y plantar la observación clave — el set es curado.</u></p>
-    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Grep, Glob para buscar. Bash para correr comandos. Cuando hacés un edit, cuando leés un schema, cuando corrés un test, alguno de esos seis está atrás."</em></p>
-    <p><em>"Para casi todo el workflow de desarrollo local — leer código, modificar código, correr comandos — ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos."</em></p>
-    <p><em>"De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
+    <p><u>Recap visual sin re-explicar qué es un tool. El alumno ya pasó por loop agentic + tools + harness + skills + sub-agents. El slide hace dos cosas: anclar lo que ya tienen y plantar la observación clave — el set es curado. Dato aparte: en macOS, Linux y WSL, Glob y Grep no vienen por defecto en el runtime — ahí el agente busca con <code>find</code>/<code>grep</code> vía Bash; no afecta el punto del slide, pero vale aclararlo si alguien lo nota en su máquina.</u></p>
+    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Glob y Grep para buscar. Bash para correr comandos. WebFetch y WebSearch para traer contenido de la web. Y unas cuarenta más, como Agent, Skill o LSP, que fueron apareciendo sin que lo noten. Para casi todo el workflow de desarrollo local ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos. De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
   </aside>
 </section>
 
@@ -527,20 +529,19 @@
     </div>
     <div class="s1-nostá-card fragment fade-in" data-fragment-index="2">
       <div class="s1-nostá-eyebrow">no está 3</div>
-      <h3 class="s1-nostá-title">Docs de un SDK que salió ayer.</h3>
-      <div class="s1-nostá-quiero">Cómo se usa streamText en esta versión.</div>
-      <p class="s1-nostá-gap">Cutoff de entrenamiento. Si la API cambió, no se entera; sale de memoria y alucina.</p>
+      <h3 class="s1-nostá-title">Tu gestor de tareas (Linear, Jira).</h3>
+      <div class="s1-nostá-quiero">Marcá este ticket como Done y asignalo a Flor.</div>
+      <p class="s1-nostá-gap">No hay tool nativo para eso. Bash podría pegarle al API REST, pero no tenés el cliente armado ni el token a mano.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Tres reveals — uno por capacidad faltante.</strong></p>
-    <p><u>El alumno aterriza tres casos concretos que cualquiera vivió. Cada card tiene el pedido en mono (lo que vos querrías escribir) y por qué el set actual no lo cubre limpio.</u></p>
+    <p><strong>Cuatro reveals — el aterrizaje y una capacidad faltante por card.</strong></p>
+    <p><u>El alumno aterriza tres casos concretos que cualquiera vivió. Cada card tiene el pedido en mono (lo que vos querrías escribir) y por qué el set actual no lo cubre limpio. El tercero anticipa el demo de §8: la razón por la que no está no es memoria del modelo, es que no hay canal hacia ese servicio. Browser: con la extensión Claude in Chrome (plan Pro/Max/Team/Enterprise y login) sí se puede controlar un browser real desde Claude Code — por dentro, esa extensión es un MCP server (aparece como <code>claude-in-chrome</code> en <code>/mcp</code>). Playwright sigue siendo la opción portable, sin plan ni login.</u></p>
     <p><em>"Tres ejemplos concretos de capacidad que el set por default no te da."</em></p>
     <p><em>"Primero: querés tirar una query contra Postgres de producción y traerte filas que matchean un patrón. Bash con psql te lo permite si las credenciales están en el entorno. Pero el agente no sabe el schema, no sabe los tipos, no sabe qué columnas son sensibles. Querrías un tool con tipos declarados y permisos, no una shell ciega."</em></p>
-    <p><em>"Segundo: querés controlar un browser. Abrir una página, hacer click, sacar una screenshot, completar un form. Bash con curl no hace nada de eso — no renderiza, no ejecuta JS, no clickea. La capacidad no está."</em></p>
-    <p><em>"Tercero: querés que el agente use un SDK que salió ayer. El modelo tiene cutoff de entrenamiento. Si la API cambió, no se entera; sale de memoria y alucina firmas que no existen. Querrías que pueda consultar la doc real antes de tipear, no salir de memoria."</em></p>
-    <p><em>"Tres situaciones reales. Tres cosas que el agente, con el set actual, no puede. ¿Qué hacés?"</em></p>
+    <p><em>"Segundo: querés controlar un browser. Abrir una página, hacer click, sacar una screenshot, completar un form. Bash con curl no hace nada de eso — no renderiza, no ejecuta JS, no clickea. La capacidad no está, de fábrica."</em></p>
+    <p><em>"Tercero: querés que el agente toque tu gestor de tareas — Linear, Jira. Marcar un ticket, asignarlo, agregar un comentario. Bash no tiene ni el cliente HTTP armado para ese API ni el token a mano. Tres situaciones reales. Tres cosas que el agente, con el set actual, no puede. ¿Qué hacés?"</em></p>
   </aside>
 </section>
 
@@ -553,9 +554,9 @@
       <div class="s1-step-num">1</div>
       <div class="s1-step-body">
         <h3 class="s1-step-title">El runtime ya corre <code>psql</code>.</h3>
-        <pre><code class="language-bash">$ psql postgresql://readonly:s3cret@10.0.1.42:5432/analytics \
+        <pre><code class="language-bash">$ psql postgresql://readonly@10.0.1.42/analytics \
     -c "SELECT email FROM users LIMIT 5"</code></pre>
-        <p class="s1-step-foot">Funciona — <strong>mientras lo que Opus sabe sobre psql cubra lo que necesitás.</strong></p>
+        <p class="s1-step-foot">Funciona — <strong>mientras lo que Opus sabe de psql cubra lo que necesitás.</strong></p>
       </div>
     </div>
 
@@ -564,11 +565,9 @@
       <div class="s1-step-body">
         <h3 class="s1-step-title">Agregás instrucciones al contexto.</h3>
         <pre><code class="language-markdown"># CLAUDE.md
-## Base de datos
-- Conexión: postgresql://readonly:s3cret@10.0.1.42:5432/analytics
-- Schema: users(id, email, signup_date, active)
-- Siempre limitá con LIMIT en queries exploratorias</code></pre>
-        <p class="s1-step-foot">Mejor. Pero <strong>¿cómo sabés si no te falta algo? No sabés lo que no sabés.</strong></p>
+Conexión: postgresql://readonly@10.0.1.42/analytics
+Schema: users(id, email, signup_date, active)</code></pre>
+        <p class="s1-step-foot">Mejor. Pero <strong>no sabés lo que no sabés que falta.</strong></p>
       </div>
     </div>
 
@@ -576,20 +575,20 @@
       <div class="s1-step-num">3</div>
       <div class="s1-step-body">
         <h3 class="s1-step-title">Sumás rules y permisos para que no haga DELETE.</h3>
-        <pre><code class="language-json">// .claude/settings.json
-{
+        <pre><code class="language-json">{
   "permissions": {
-    "deny": ["Bash(psql*DELETE*)", "Bash(psql*UPDATE*)", "Bash(psql*DROP*)"]
+    "deny": ["Bash(psql*DELETE*)",
+      "Bash(psql*UPDATE*)", "Bash(psql*DROP*)"]
   }
 }</code></pre>
-        <p class="s1-step-foot">Robusto. <strong>Para Claude Code.</strong></p>
+        <p class="s1-step-foot">El <code>deny</code> bloquea el comando, sin preguntar. <strong>Para Claude Code.</strong></p>
       </div>
     </div>
 
     <div class="s1-step-card fragment fade-in" data-fragment-index="3">
       <div class="s1-step-num">4</div>
       <div class="s1-step-body">
-        <h3 class="s1-step-title">Mañana querés probar Cursor. Después Codex. Después Opencode.</h3>
+        <h3 class="s1-step-title">Mañana cambiás de runtime.</h3>
         <div class="s1-runtime-list">
           <div class="s1-runtime-row">
             <div class="s1-runtime-name">Claude Code</div>
@@ -597,18 +596,18 @@
           </div>
           <div class="s1-runtime-row">
             <div class="s1-runtime-name">Cursor</div>
-            <div class="s1-runtime-artifacts"><code>.cursorrules</code><code>cursor settings</code></div>
+            <div class="s1-runtime-artifacts"><code>.cursor/rules/</code><code>cursor settings</code></div>
           </div>
           <div class="s1-runtime-row">
             <div class="s1-runtime-name">Codex CLI</div>
             <div class="s1-runtime-artifacts"><code>AGENTS.md</code><code>config.toml</code></div>
           </div>
           <div class="s1-runtime-row">
-            <div class="s1-runtime-name">Opencode</div>
+            <div class="s1-runtime-name">OpenCode</div>
             <div class="s1-runtime-artifacts"><code>AGENTS.md</code><code>opencode.json</code></div>
           </div>
         </div>
-        <p class="s1-step-foot">Mismo objetivo. <strong>Otro formato por cada runtime. Empezás de cero.</strong></p>
+        <p class="s1-step-foot">Mismo objetivo. <strong>Otro formato por runtime. Empezás de cero.</strong></p>
       </div>
     </div>
   </div>
@@ -619,8 +618,8 @@
     <p><em>"Ahora vamos al escenario real. Ustedes están usando Claude Code con Opus, y quieren que el agente trabaje contra una base de Postgres. ¿Cómo lo van resolviendo, paso a paso? Todo lo que vamos a ver son herramientas que ya conocen de las últimas dos clases."</em></p>
     <p><em>"Paso uno. Lo más simple: el runtime ya tiene Bash, y Opus sabe algo de psql del entrenamiento. Le tiran un pedido, el agente arma una query psql y la ejecuta. Funciona — mientras lo que Opus sabe sobre psql cubra lo que ustedes necesitan. Si Opus se olvidó del flag para timestamps con timezone, o no conoce la convención que usa el equipo, ahí estás. Están a la merced de los pesos del modelo."</em></p>
     <p><em>"Paso dos. Quieren más control. Agregan instrucciones al contexto — un CLAUDE.md con detalles de la base, el schema, las convenciones del equipo. Mejor. Pero acá aparece un problema sutil: cómo saben que no les falta nada. La doc la escriben ustedes, y ustedes no saben lo que no saben. Cada vacío en esa doc es un riesgo de que el agente actúe mal porque le falta información."</em></p>
-    <p><em>"Paso tres. Suman reglas y permisos. Configurás el settings.json de Claude Code para que el agente nunca corra DELETE, UPDATE o DROP sin pedir confirmación. Agregás hooks que validen comandos antes de ejecutarse. Ahora tu setup es robusto. Para Claude Code."</em></p>
-    <p><em>"Paso cuatro. Y acá está la trampa estructural. Mañana querés probar Cursor — mismo agente, otro runtime. Tu CLAUDE.md no se llama CLAUDE.md ahí, se llama .cursorrules. Tu settings.json no tiene equivalente directo, hay otra forma de configurar permisos. Tus hooks viven en otro lado. Codex CLI tiene su propio formato — AGENTS.md, config.toml. Opencode también — AGENTS.md, opencode.json. Cada runtime tiene su propia forma de implementar lo mismo. Y por cada capacidad nueva — browser, Slack, lo que sea — multiplicás el trabajo otra vez. La pregunta que sigue: ¿por qué crece tan feo?"</em></p>
+    <p><em>"Paso tres. Suman reglas y permisos. Configurás el settings.json de Claude Code con un <code>deny</code> que bloquea directo cualquier DELETE, UPDATE o DROP contra la base — no es que el agente pida confirmación, el comando directamente no corre. Agregás hooks que validen otros comandos antes de ejecutarse. El setup ya funciona bien. Para Claude Code."</em></p>
+    <p><em>"Paso cuatro. Y acá está la trampa estructural. Mañana querés probar Cursor — mismo agente, otro runtime. Tu CLAUDE.md no se llama CLAUDE.md ahí, las rules viven en <code>.cursor/rules/</code>. Tu settings.json no tiene equivalente directo, hay otra forma de configurar permisos. Tus hooks viven en otro lado. Codex CLI tiene su propio formato — AGENTS.md, config.toml. OpenCode también — AGENTS.md, opencode.json. Cada runtime tiene su propia forma de implementar lo mismo. Y por cada capacidad nueva — browser, tu gestor de tareas, lo que sea — multiplicás el trabajo otra vez. La pregunta que sigue: ¿por qué crece tan feo?"</em></p>
   </aside>
 </section>
 
@@ -637,7 +636,7 @@
         <div class="s1-nm-colhead">CC</div>
         <div class="s1-nm-colhead">Cursor</div>
         <div class="s1-nm-colhead">Codex</div>
-        <div class="s1-nm-colhead">Opencode</div>
+        <div class="s1-nm-colhead">OpenCode</div>
 
         <div class="s1-nm-rowhead">Postgres</div>
         <div class="s1-nm-cell">✗</div>
@@ -693,7 +692,7 @@
           <div class="s1-hub-item">CC</div>
           <div class="s1-hub-item">Cursor</div>
           <div class="s1-hub-item">Codex</div>
-          <div class="s1-hub-item">Opencode</div>
+          <div class="s1-hub-item">OpenCode</div>
         </div>
       </div>
       <p class="s1-matrix-math">4 + 4 = 8 conexiones</p>
@@ -703,7 +702,7 @@
   <aside class="notes">
     <p><strong>Un reveal — N×M visible primero, después aparece N+M al lado.</strong></p>
     <p><u>Convergencia visual del §1: cada celda de la matriz es lo que el dev acaba de armar para Postgres en Claude Code — el CLAUDE.md + las rules + los permisos. Cuatro capacidades por cuatro runtimes = dieciséis setups custom. Un protocolo común lo colapsa a N + M.</u></p>
-    <p><em>"Acá está la convergencia. Miren el grid de la izquierda. Cada celda es lo que ustedes acaban de armar para Postgres en Claude Code — el CLAUDE.md con instrucciones, las rules con permisos, los hooks. Cuatro capacidades por cuatro runtimes. Postgres en Claude Code, un setup. Postgres en Cursor, otro setup. Postgres en Codex CLI, otro. Postgres en Opencode, otro. Y así con browser, con docs, con Slack. Cuatro por cuatro: dieciséis setups completos, cada uno con sus formatos. Si mañana aparece un runtime nuevo, cuatro setups más. Si aparece una capacidad nueva, otros cuatro. Esto crece feo. Esto es N por M."</em></p>
+    <p><em>"Acá está la convergencia. Miren el grid de la izquierda. Cada celda es lo que ustedes acaban de armar para Postgres en Claude Code — el CLAUDE.md con instrucciones, las rules con permisos, los hooks. Cuatro capacidades por cuatro runtimes. Postgres en Claude Code, un setup. Postgres en Cursor, otro setup. Postgres en Codex CLI, otro. Postgres en OpenCode, otro. Y así con browser, con docs, con Slack. Cuatro por cuatro: dieciséis setups completos, cada uno con sus formatos. Si mañana aparece un runtime nuevo, cuatro setups más. Si aparece una capacidad nueva, otros cuatro. Esto crece feo. Esto es N por M."</em></p>
     <p><em>"Si en cambio metés un protocolo común al medio — esto es lo que aparece a la derecha — la matriz se colapsa. Cada capacidad habla el protocolo una sola vez. Cada runtime entiende el protocolo una sola vez. Cuatro más cuatro: ocho conexiones. Runtime nuevo: una integración, hereda todas las capacidades. Capacidad nueva: una integración, queda disponible en todos los runtimes. La matriz desaparece. Esto es N más M. Y ese protocolo común tiene nombre — viene ahora."</em></p>
   </aside>
 </section>
@@ -713,14 +712,11 @@
   <div class="s1-bridge">
     <p class="s1-bridge-pre">La salida estructural</p>
     <h2 class="s1-bridge-name">MCP</h2>
-    <p class="s1-bridge-tagline">Un protocolo común que el host habla, los proveedores hablan, y N×M se vuelve N+M.</p>
-    <p class="s1-bridge-hint">Cómo está armado por dentro — viene ahora.</p>
+    <p class="s1-bridge-tagline">Un protocolo común que hosts y proveedores de capacidades hablan por igual.</p>
   </div>
 
   <aside class="notes">
     <p><u>Bridge al resto del bloque. El nombre cae, sin desarrollar todavía. La frase central es la promesa estructural; las próximas secciones la desarman.</u></p>
-    <p><em>"Lo que falta no es otro wrapper. Es un protocolo común. Si tanto los hosts como los proveedores de capacidades acuerdan hablar el mismo formato, entonces vos escribís el server una vez y funciona en todos los hosts que hablen el protocolo. El problema N×M colapsa a N+M."</em></p>
-    <p><em>"Ese protocolo existe, se llama Model Context Protocol — MCP — y lo propuso Anthropic en 2024. Pero acá viene lo importante: no es un producto de Anthropic. Es un estándar abierto que adoptaron Cursor, Codex CLI, Opencode, y otros. Por eso lo vamos a estudiar — porque lo que aprendan acá viaja con ustedes a cualquier runtime que se sumen a usar."</em></p>
-    <p><em>"En la próxima sección vemos por qué tiene que ser protocolo y no librería, y por qué precedentes como HTTP y LSP cuentan acá."</em></p>
+    <p><em>"Lo que falta no es otro wrapper. Es un protocolo común. Si tanto los hosts como los proveedores de capacidades acuerdan hablar el mismo formato, entonces vos escribís el server una vez y funciona en todos los hosts que hablen el protocolo. Ese protocolo existe, se llama Model Context Protocol — MCP — y lo propuso Anthropic en 2024. Pero acá viene lo importante: no es un producto de Anthropic. Es un estándar abierto que adoptaron Cursor, Codex CLI, OpenCode, y otros. Por eso lo vamos a estudiar — porque lo que aprendan acá viaja con ustedes a cualquier runtime que se sumen a usar."</em></p>
   </aside>
 </section>
