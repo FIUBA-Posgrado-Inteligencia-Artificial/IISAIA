@@ -704,7 +704,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
         <div class="s1-nm-cell">✗</div>
         <div class="s1-nm-cell">✗</div>
 
-        <div class="s1-nm-rowhead">docs SDK</div>
+        <div class="s1-nm-rowhead">tareas</div>
         <div class="s1-nm-cell">✗</div>
         <div class="s1-nm-cell">✗</div>
         <div class="s1-nm-cell">✗</div>
@@ -726,7 +726,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
         <div class="s1-hub-col">
           <div class="s1-hub-item">Postgres</div>
           <div class="s1-hub-item">browser</div>
-          <div class="s1-hub-item">docs SDK</div>
+          <div class="s1-hub-item">tareas</div>
           <div class="s1-hub-item">Slack</div>
         </div>
         <div class="s1-hub-arrows">
@@ -756,7 +756,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   <aside class="notes">
     <p><strong>Un reveal — N×M visible primero, después aparece N+M al lado.</strong></p>
     <p><u>Convergencia visual del §1: cada celda de la matriz es lo que el dev acaba de armar para Postgres en Claude Code — el CLAUDE.md + las rules + los permisos. Cuatro capacidades por cuatro runtimes = dieciséis setups custom. Un protocolo común lo colapsa a N + M.</u></p>
-    <p><em>"Acá está la convergencia. Miren el grid de la izquierda. Cada celda es lo que ustedes acaban de armar para Postgres en Claude Code — el CLAUDE.md con instrucciones, las rules con permisos, los hooks. Cuatro capacidades por cuatro runtimes. Postgres en Claude Code, un setup. Postgres en Cursor, otro setup. Postgres en Codex CLI, otro. Postgres en OpenCode, otro. Y así con browser, con docs, con Slack. Cuatro por cuatro: dieciséis setups completos, cada uno con sus formatos. Si mañana aparece un runtime nuevo, cuatro setups más. Si aparece una capacidad nueva, otros cuatro. Esto crece feo. Esto es N por M."</em></p>
+    <p><em>"Acá está la convergencia. Miren el grid de la izquierda. Cada celda es lo que ustedes acaban de armar para Postgres en Claude Code — el CLAUDE.md con instrucciones, las rules con permisos, los hooks. Cuatro capacidades por cuatro runtimes. Postgres en Claude Code, un setup. Postgres en Cursor, otro setup. Postgres en Codex CLI, otro. Postgres en OpenCode, otro. Y así con browser, con tareas, con Slack. Cuatro por cuatro: dieciséis setups completos, cada uno con sus formatos. Si mañana aparece un runtime nuevo, cuatro setups más. Si aparece una capacidad nueva, otros cuatro. Esto crece feo. Esto es N por M."</em></p>
     <p><em>"Si en cambio metés un protocolo común al medio — esto es lo que aparece a la derecha — la matriz se colapsa. Cada capacidad habla el protocolo una sola vez. Cada runtime entiende el protocolo una sola vez. Cuatro más cuatro: ocho conexiones. Runtime nuevo: una integración, hereda todas las capacidades. Capacidad nueva: una integración, queda disponible en todos los runtimes. La matriz desaparece. Esto es N más M. Y ese protocolo común tiene nombre — viene ahora."</em></p>
   </aside>
 </section>
