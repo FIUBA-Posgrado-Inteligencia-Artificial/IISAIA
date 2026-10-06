@@ -1240,7 +1240,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   <div class="s2-bridge">
     <p class="s2-bridge-line">Por qué <em>tiene que ser</em> un protocolo.</p>
     <p class="s2-bridge-line">Cómo está armado <em>por dentro</em>.</p>
-    <p class="s2-bridge-hint">Host, cliente, servidor.</p>
+    <p class="s2-bridge-hint">Host, cliente, server.</p>
   </div>
 
   <aside class="notes">
@@ -1741,7 +1741,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
 
   <aside class="notes">
     <p><strong>Dos reveals — clientes adentro del host, después servers + arrows.</strong></p>
-    <p><u>Construye el diagrama por capas. Para arrancar va solo el host visible — la aplicación de IA con su nombre. Después aparecen los clientes adentro del host. Por último los servers y las flechas JSON-RPC que los conectan. El diagrama se va a re-iluminar en §4 (foco en el server) y §5 (foco en el handshake).</u></p>
+    <p><u>Construye el diagrama por capas. Para arrancar va solo el host visible — la aplicación de IA con su nombre. Después aparecen los clientes adentro del host. Por último los servers y las flechas JSON-RPC que los conectan. El diagrama se va a re-iluminar en §4, con foco en el server.</u></p>
     <p><em>"Acá llegamos a la arquitectura. MCP define tres roles, y vale separarlos bien porque la palabra cliente se sobrecarga rápido — uno piensa en cliente web, cliente de chat, lo que sea — y acá significa una cosa muy específica."</em></p>
     <p><em>"Arranquemos por el host. El host es la aplicación de IA con la que ustedes interactúan — Claude Code, Cursor, Visual Studio Code, Claude Desktop. Es la pieza que tiene la UI, que corre el LLM, que ustedes tipean. Es el contenedor de todo lo que viene. Adentro del host viven los clientes — esos rectángulos rayados que aparecen ahora. Cada cliente MCP es un componente del host que mantiene una conexión con UN server MCP. Acá ven dos clientes porque el host se va a conectar con dos servers distintos."</em></p>
     <p><em>"Y a la derecha aparecen los servers. Son programas externos al host, que viven como proceso aparte. Pueden correr locales — el primer ejemplo, Postgres, vive en la misma máquina y se conecta por stdio — o pueden correr remotos, como el segundo ejemplo, GitHub, que es un servicio externo y se conecta por Streamable HTTP. Entre cada cliente y su server viaja JSON-RPC, bidireccional. Esa es la arquitectura. Ahora vamos a las definiciones canónicas para fijarlas."</em></p>
@@ -2546,7 +2546,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
 
   <div class="s4-prim-card">
     <p class="s4-prim-eyebrow">primitive 3 — <strong>user-controlled</strong></p>
-    <p class="s4-prim-def">Templates reutilizables. El usuario los descubre y los invoca explícitamente con argumentos. Ejemplo genérico: <strong>un server de code review</strong> podría exponer esto.</p>
+    <p class="s4-prim-def">Templates reutilizables. El cliente los lista; el usuario elige cuál invocar, con argumentos. Ejemplo genérico: <strong>un server de code review</strong> podría exponer esto.</p>
 
     <div class="s4-prim-flow">
       <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
