@@ -13,6 +13,8 @@
     margin: var(--spacing-xs) auto 0 auto;
     max-width: 1000px;
   }
+  .s8-h2.s8-wide,
+  .s8-h2-sub.s8-wide { max-width: 1100px; }
   .s8-eyebrow {
     text-align: center;
     font-family: var(--font-mono);
@@ -67,80 +69,37 @@
   }
   .s8-sub strong { color: var(--accent); font-weight: 700; }
 
-  /* §8.2 — Contraste local vs remoto */
-  .s8-cmp-card {
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    padding: var(--spacing-md) var(--spacing-lg);
+  /* §8.2 — harness-map del remoto (mismo patrón que §6.2 .s6-addmap) */
+  .reveal .harness-map.s8-addmap {
+    grid-template-rows: repeat(4, auto);
+    margin-top: var(--spacing-md);
   }
-  .s8-cmp-card.is-local { border-top: 4px solid var(--text-muted); }
-  .s8-cmp-card.is-remote { border-top: 4px solid var(--accent); }
-  .s8-cmp-tag {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin: 0 0 var(--spacing-sm) 0;
-  }
-  .s8-cmp-card.is-local .s8-cmp-tag { color: var(--text-muted); }
-  .s8-cmp-card.is-remote .s8-cmp-tag { color: var(--accent); }
-  .s8-cmp-cmd {
-    background: var(--bg-code);
-    border-radius: 6px;
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--text-primary);
-    line-height: 1.5;
-    overflow-x: auto;
-    margin-bottom: var(--spacing-sm);
-  }
-  .s8-cmp-cmd .hl { color: var(--accent); font-weight: 700; }
-  .s8-cmp-cmd .muted { color: var(--text-muted); }
-  .s8-cmp-rows { display: flex; flex-direction: column; gap: 6px; }
-  .s8-cmp-row {
+  .reveal .s8-addmap .harness-map-col {
     display: grid;
-    grid-template-columns: 96px 1fr;
-    gap: var(--spacing-sm);
-    align-items: baseline;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    row-gap: 8px;
+  }
+  .reveal .s8-addmap pre {
+    width: 100%;
+    margin: 0;
+    padding: 10px 12px;
     font-size: 0.95rem;
-    color: var(--text-primary);
-    line-height: 1.4;
+    line-height: 1.45;
+    box-shadow: none;
+    align-self: start;
   }
-  .s8-cmp-row .k {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
+  .reveal .s8-addmap pre code {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    white-space: pre;
+    padding: 0;
+    background: none;
+    color: var(--code-text);
+    max-height: none;
+    overflow: visible;
   }
-  .s8-cmp-row code {
-    font-family: var(--font-mono);
-    color: var(--accent-secondary);
-    font-size: 0.88rem;
-  }
-  .s8-oauth {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin: var(--spacing-lg) auto 0 auto;
-  }
-  .s8-oauth-step {
-    background: var(--bg-secondary);
-    border-radius: 6px;
-    padding: var(--spacing-xs) var(--spacing-md);
-    font-size: 0.98rem;
-    color: var(--text-primary);
-  }
-  .s8-oauth-step code {
-    font-family: var(--font-mono);
-    color: var(--accent);
-    font-size: 0.9rem;
-  }
-  .s8-oauth-arrow { color: var(--text-muted); font-family: var(--font-mono); }
 
   /* §8.4 — Demo beats */
   .s8-demo-steps {
@@ -180,9 +139,31 @@
   .s8-close-card.is-remote .s8-close-name { color: var(--accent); }
   .s8-close-body {
     color: var(--text-primary);
-    font-size: 0.98rem;
+    font-size: 1.05rem;
     line-height: 1.45;
     margin: 0;
+  }
+  .s8-cmp-row {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--spacing-sm);
+    align-items: baseline;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-top: 8px;
+  }
+  .s8-cmp-row .k {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+  .s8-cmp-row code {
+    font-family: var(--font-mono);
+    color: var(--accent-secondary);
+    font-size: 0.95rem;
   }
   .s8-key {
     text-align: center;
@@ -218,45 +199,54 @@
   </aside>
 </section>
 
-<!-- §8.2 — Cómo se agrega un remoto: el contraste -->
+<!-- §8.2 — Cómo se agrega un remoto: harness-map -->
 <section>
-  <h2 class="s8-h2">Un remoto se agrega distinto.</h2>
-  <p class="s8-h2-sub">Mismo comando base, pero apunta a una URL — y la auth es OAuth.</p>
+  <h2 class="s8-h2 s8-wide">Un remoto se agrega distinto.</h2>
+  <p class="s8-h2-sub s8-wide">Mismo comando base, pero apunta a una URL — y la auth es OAuth.</p>
 
-  <div class="comparison-2col" style="max-width: 1000px; margin: var(--spacing-md) auto 0 auto;">
-    <div class="s8-cmp-card is-local">
-      <p class="s8-cmp-tag">local · Stdio (Playwright)</p>
-      <div class="s8-cmp-cmd"><span class="muted">$</span> claude mcp add playwright <span class="hl">npx @playwright/mcp@latest</span></div>
-      <div class="s8-cmp-rows">
-        <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "stdio"</code>, <code>command</code> + <code>args</code></span></div>
-        <div class="s8-cmp-row"><span class="k">arranque</span><span>un comando que corre local</span></div>
-        <div class="s8-cmp-row"><span class="k">auth</span><span>ninguna — vive en tu máquina</span></div>
-      </div>
+  <div class="harness-map s8-addmap">
+    <div class="harness-map-col is-ref">
+      <span class="harness-map-tool">Claude Code</span>
+      <span class="harness-map-path">claude mcp add --transport http linear-server https://mcp.linear.app/mcp</span>
+      <p class="harness-map-note">Escribe en <code>.mcp.json</code> o <code>~/.claude.json</code>, según el scope. OAuth con <code>/mcp</code> en la sesión, o <code>claude mcp login linear-server</code> desde la shell.</p>
+<pre><code class="language-json" data-trim>
+"mcpServers": {
+  "linear-server": {
+    "type": "http",
+    "url": "https://mcp.linear.app/mcp"
+  }
+}
+</code></pre>
     </div>
-    <div class="s8-cmp-card is-remote">
-      <p class="s8-cmp-tag">remoto · Streamable HTTP (Linear)</p>
-      <div class="s8-cmp-cmd"><span class="muted">$</span> claude mcp add <span class="hl">--transport http</span> linear-server <span class="hl">https://mcp.linear.app/mcp</span></div>
-      <div class="s8-cmp-rows">
-        <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "http"</code>, <code>url</code></span></div>
-        <div class="s8-cmp-row"><span class="k">arranque</span><span>una URL — el server ya corre afuera</span></div>
-        <div class="s8-cmp-row"><span class="k">auth</span><span>OAuth en el browser</span></div>
-      </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">Codex</span>
+      <span class="harness-map-path">codex mcp add linear --url https://mcp.linear.app/mcp</span>
+      <p class="harness-map-note">Escribe en <code>~/.codex/config.toml</code>. Dispara OAuth al agregar; re-login con <code>codex mcp login linear</code>.</p>
+<pre><code class="language-toml" data-trim>
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+</code></pre>
+    </div>
+    <div class="harness-map-col">
+      <span class="harness-map-tool">OpenCode</span>
+      <span class="harness-map-path">opencode mcp add</span>
+      <p class="harness-map-note">Interactivo: elegís <code>remote</code> y pegás la URL. Escribe en <code>opencode.json</code>. OAuth con <code>opencode mcp auth linear</code> (o automático en el primer 401).</p>
+<pre><code class="language-json" data-trim>
+"mcp": {
+  "linear": {
+    "type": "remote",
+    "url": "https://mcp.linear.app/mcp"
+  }
+}
+</code></pre>
     </div>
   </div>
 
-  <div class="s8-oauth">
-    <span class="s8-oauth-step">en Claude Code: <code>/mcp</code></span>
-    <span class="s8-oauth-arrow">&rarr;</span>
-    <span class="s8-oauth-step">se abre el browser, login en Linear</span>
-    <span class="s8-oauth-arrow">&rarr;</span>
-    <span class="s8-oauth-step">el token queda guardado (se renueva solo)</span>
-  </div>
+  <p class="harness-map-foot">Los tres guardan lo mismo: una URL. Y los tres piden OAuth — el token queda guardado y se renueva solo.</p>
 
   <aside class="notes">
-    <p><u>El corazón de las dos secciones: el contraste local vs remoto. Local = un comando que arranca un proceso (Stdio). Remoto = una URL a un server que ya corre afuera (HTTP) + OAuth. Materializa los dos transports de §3.</u></p>
-    <p><em>"Acá está la diferencia, y es el sentido de hacer estos dos demos juntos. A la izquierda, el local de recién: claude mcp add, y un comando que arranca un proceso en tu máquina. En el JSON queda type stdio, con command y args. No hay auth porque el server vive con vos."</em></p>
-    <p><em>"A la derecha, el remoto: claude mcp add, pero con transport http, y en vez de un comando, una URL — la de Linear. El server ya está corriendo en internet; vos solo apuntás a él. En el JSON queda type http, con url. Y como es un servicio de terceros con tus datos, necesita autenticación."</em></p>
-    <p><em>"Esa auth es OAuth, y se resuelve adentro de Claude Code: corrés barra mcp, se abre el browser, te logueás en Linear y das permiso, y el token queda guardado de forma segura, renovándose solo. No pegás ningún token a mano. Esto es exactamente Stdio versus Streamable HTTP, los dos transports que vimos en la arquitectura, ahora en concreto."</em></p>
+    <p><u>Espejo de §6.2, ahora con un server remoto. Claude Code: <code>claude mcp add --transport http &lt;nombre&gt; &lt;url&gt;</code> es la forma canónica; sin <code>--transport http</code> asume Stdio. Codex: <code>codex mcp add &lt;nombre&gt; --url &lt;url&gt;</code> dispara OAuth en el momento si el server lo soporta; re-login con <code>codex mcp login &lt;nombre&gt;</code>. OpenCode: <code>opencode mcp add</code> es un asistente que pregunta remote/local y la URL; auth con <code>opencode mcp auth &lt;nombre&gt;</code> o automática al primer 401 (la forma con flags existe solo en versiones recientes, no se enseña). Linear también ofrece un endpoint de solo lectura, <code>mcp.linear.app/mcp/readonly</code> — el alcance mínimo de §6.12.</u></p>
+    <p><em>"Agregar un server remoto es la misma idea que agregar uno local, con dos cambios. En Claude Code: claude mcp add, pero con transport http, y en vez de un comando, la URL de Linear. En el JSON queda type http, con url, en vez de command y args. En Codex: codex mcp add linear, con la flag url; en Codex, igual, escribe una tabla mcp_servers en su config.toml, ahora con url en lugar de command. En OpenCode: opencode mcp add te pregunta remote y la URL, y queda en opencode.json como type remote. Los tres guardan lo mismo que con Playwright — un nombre y cómo llegar al server — solo que ahora es una URL en vez de un comando. Y como es un servicio de terceros con tus datos, los tres piden OAuth: en Claude Code con barra mcp o claude mcp login; en Codex, codex mcp login; en OpenCode, opencode mcp auth. Te logueás en Linear una vez, el token queda guardado y se renueva solo — no lo pegás a mano en ningún lado."</em></p>
   </aside>
 </section>
 
@@ -276,8 +266,24 @@
   <aside class="notes">
     <p><strong>Demo en vivo, terminal + Linear lado a lado. Click cada beat.</strong></p>
     <p><u>Dos casos sobre un server remoto: lectura (buscar y resumir issues) y acción (crear un issue). El alumno tiene que ver que es el mismo patrón que Playwright, con datos que viven afuera.</u></p>
-    <p><em>"Al vivo, mismo molde que antes. Primero lectura: le pido que busque en Linear los issues abiertos que tengo asignados y me los resuma. El agente usa los tools de Linear para buscar, leer los issues y devolver el resumen — los datos vienen del workspace, no de la máquina."</em></p>
-    <p><em>"Después, acción: le pido que cree un issue nuevo. El agente llama el tool de crear y el issue aparece en Linear, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio."</em></p>
+    <p><em>"Al vivo, mismo molde que antes. Antes de nada, barra mcp para confirmar que linear-server está conectado y autenticado. Primer caso, lectura: le pido que busque en Linear los issues abiertos que tengo asignados y me los resuma — el agente usa los tools de Linear para buscar, leer los issues y devolver el resumen, con datos que vienen del workspace, no de la máquina. Segundo caso, acción: le pido que cree un issue nuevo. El agente llama el tool de crear y el issue aparece en Linear, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio."</em></p>
+    <hr>
+    <p><strong>Acciones (copiables):</strong></p>
+    <p><strong>Paso 1 — Lectura</strong></p>
+    <ul>
+      <li>En Claude: <code>/mcp</code> &rarr; confirmar <code>linear-server</code> connected y authenticated</li>
+      <li>En Claude: "buscá en Linear los issues abiertos asignados a mí y resumímelos"</li>
+      <li>Mirar: el agente llama los tools de Linear para buscar y abrir issues</li>
+      <li>Mirar: el resumen vuelve a la conversación, con datos del workspace remoto</li>
+    </ul>
+    <p><strong>Paso 2 — Acción</strong></p>
+    <ul>
+      <li>En Claude: "creá un issue 'arreglar el login' con prioridad alta"</li>
+      <li>Mirar: el agente llama el tool de crear issue</li>
+      <li>Mirar: el issue aparece en Linear, en vivo</li>
+      <li>En Claude: el agente confirma qué se creó</li>
+    </ul>
+    <p><em>Plan B: screenshots pre-armados de las dos corridas (lectura y acción), si Linear no responde en vivo.</em></p>
   </aside>
 </section>
 
@@ -289,19 +295,20 @@
     <div class="s8-close-card is-local">
       <p class="s8-close-name">Playwright · local · Stdio</p>
       <p class="s8-close-body">Corre en tu máquina, como subproceso. Sin red, sin auth. Lo arranca un comando.</p>
+      <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "stdio"</code></span></div>
     </div>
     <div class="s8-close-card is-remote">
       <p class="s8-close-name">Linear · remoto · HTTP</p>
       <p class="s8-close-body">Vive en internet, hosteado. Te conectás por red, con OAuth. Lo señalás con una URL.</p>
+      <div class="s8-cmp-row"><span class="k">en el JSON</span><span><code>"type": "http"</code></span></div>
     </div>
   </div>
 
-  <p class="s8-key">Cambia dónde vive el server y cómo te conectás. <strong>El intercambio es idéntico:</strong> el server expone, el LLM descubre, invoca, el resultado vuelve.</p>
+  <p class="s8-key">Cambia dónde vive el server y cómo te conectás. <strong>El intercambio es idéntico:</strong> el server expone, el cliente descubre, invoca, el resultado vuelve.</p>
 
   <aside class="notes">
     <p><u>Cierre del bloque de demos y del arco de los dos transports. La conclusión que se llevan: el transport (local/remoto) cambia la plomería de conexión, pero el patrón de intercambio MCP es el mismo. Esto cierra §3 (dos transports) con evidencia.</u></p>
-    <p><em>"Y este es el cierre de los dos demos. Pusimos lado a lado un server local y uno remoto. Playwright: local, Stdio, corre en tu máquina, sin auth, lo arranca un comando. Linear: remoto, HTTP, vive en internet, OAuth, lo señalás con una URL."</em></p>
-    <p><em>"Lo que cambia entre los dos es dónde vive el server y cómo te conectás — la plomería. Pero el intercambio, lo que pasa una vez conectados, es idéntico: el server expone sus capacidades, el modelo las descubre, las invoca, y el resultado vuelve a la conversación. Un solo patrón, para cualquier server, viva donde viva. Eso es MCP."</em></p>
+    <p><em>"Y este es el cierre de los dos demos. Pusimos lado a lado un server local y uno remoto. Playwright: local, Stdio, corre en tu máquina, sin auth, lo arranca un comando, y en el JSON queda type stdio. Linear: remoto, HTTP, vive en internet, OAuth, lo señalás con una URL, y en el JSON queda type http. Lo que cambia entre los dos es dónde vive el server y cómo te conectás — la plomería. Pero el intercambio, lo que pasa una vez conectados, es idéntico: el server expone sus capacidades, el cliente las descubre, las invoca, y el resultado vuelve a la conversación. Un solo patrón, para cualquier server, viva donde viva. Eso es MCP."</em></p>
   </aside>
 </section>
 
@@ -312,16 +319,16 @@
     steps: [
       {
         title: '1 — Lectura',
-        summary: 'Buscar y resumir issues de tu Linear.',
+        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/mcp</code> &rarr; confirmar <code>linear-server</code> connected y authenticated</li><li><strong>En Claude:</strong> "buscá en Linear los issues abiertos asignados a mí y resumímelos"</li><li><strong>Mirar:</strong> el agente llama los tools de Linear para buscar y abrir issues</li><li><strong>Mirar:</strong> el resumen vuelve a la conversación, con datos del workspace remoto</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en Linear los issues abiertos asignados a mí y resumímelos</div><p style="color: var(--text-primary); margin-top: 8px;">El agente usa los tools de Linear para buscar, abrir los issues y resumirlos. Los datos vienen del workspace remoto, no de tu disco.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en Linear los issues abiertos asignados a mí y resumímelos</div><p style="color: var(--text-primary); margin-top: 8px;">El agente confirma primero que el server está conectado y autenticado, después usa los tools de Linear para buscar, abrir los issues y resumirlos. Los datos vienen del workspace remoto, no de tu disco.</p>'
       },
       {
         title: '2 — Acción',
-        summary: 'Crear un issue: con efecto, sobre tus datos.',
+        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "creá un issue \'arreglar el login\' con prioridad alta"</li><li><strong>Mirar:</strong> el agente llama el tool de crear issue</li><li><strong>Mirar:</strong> el issue aparece en Linear, en vivo</li><li><strong>En Claude:</strong> el agente confirma qué se creó</li></ul>',
         borderColor: 'var(--accent)',
         borderFull: true,
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; creá un issue "arreglar el login" con prioridad alta</div><p style="color: var(--text-primary); margin-top: 8px;">El agente llama el tool de crear issue y aparece en Linear, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; creá un issue "arreglar el login" con prioridad alta</div><p style="color: var(--text-primary); margin-top: 8px;">El agente llama el tool de crear issue y aparece en Linear, en vivo. Mismo patrón que el form de Playwright — cambia el dominio, no el intercambio.</p><p style="color: var(--text-muted); margin-top: 10px; font-style: italic;">Plan B: si Linear no responde en vivo, screenshots pre-armados de las dos corridas (lectura y acción) muestran el mismo resultado.</p>'
       }
     ]
   });
