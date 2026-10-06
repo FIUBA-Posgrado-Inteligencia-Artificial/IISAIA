@@ -1,17 +1,23 @@
 <style>
   /* §2 — Protocolo, no API
      All centered elements share max-width 1000px so vertical edges align. */
-  .s2-h2 {
+  .reveal .s2-h2 {
     text-align: center;
     max-width: 1000px;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
-  .s2-h2-sub {
+  .reveal .s2-h2-sub {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-xs) auto 0 auto;
     max-width: 1000px;
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* §2.1 — Matrix N×M ↔ N+M visual */
@@ -78,23 +84,29 @@
     z-index: 3;
     box-shadow: 0 0 24px var(--accent);
   }
-  .s2-matrix-caption {
+  .reveal .s2-matrix-caption {
     text-align: center;
-    margin: var(--spacing-md) auto 0 auto;
     font-size: 1.2rem;
     color: var(--text-primary);
     max-width: 1000px;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s2-matrix-caption strong {
     color: var(--accent);
     font-family: var(--font-mono);
   }
-  .s2-matrix-caption-pre {
+  .reveal .s2-matrix-caption-pre {
     text-align: center;
-    margin: var(--spacing-md) auto 0 auto;
     font-size: 1.15rem;
     color: var(--text-muted);
     max-width: 1000px;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s2-matrix-caption-pre strong {
     color: var(--accent-secondary);
@@ -151,13 +163,16 @@
     color: var(--accent);
     font-weight: 700;
   }
-  .s2-prec-caption {
+  .reveal .s2-prec-caption {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-md) auto 0 auto;
     max-width: 1000px;
     line-height: 1.5;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* §2.3 — MCP canonical definition */
@@ -197,13 +212,16 @@
     text-align: right;
     padding-right: var(--spacing-lg);
   }
-  .s2-def-adopt {
+  .reveal .s2-def-adopt {
     color: var(--text-primary);
     font-size: 1.1rem;
-    margin: var(--spacing-xl) auto 0 auto;
     max-width: 1000px;
     text-align: center;
     line-height: 1.5;
+    margin-top: var(--spacing-xl);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s2-def-adopters {
     display: flex;

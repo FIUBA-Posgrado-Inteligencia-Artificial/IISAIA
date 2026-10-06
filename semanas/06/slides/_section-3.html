@@ -1,17 +1,23 @@
 <style>
   /* §3 — Arquitectura: host, cliente, servidor
      Every top-level centered element shares max-width: 1000px so edges align. */
-  .s3-h2 {
+  .reveal .s3-h2 {
     text-align: center;
     max-width: 1000px;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
-  .s3-h2-sub {
+  .reveal .s3-h2-sub {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-xs) auto 0 auto;
     max-width: 1000px;
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* §3.1 + §3.6 — Architecture diagram */
@@ -339,13 +345,16 @@
     color: var(--accent);
     font-weight: 700;
   }
-  .s3-twocol-caption {
+  .reveal .s3-twocol-caption {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-md) auto 0 auto;
     max-width: 1000px;
     line-height: 1.5;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s3-twocol-caption strong {
     color: var(--accent);
@@ -410,13 +419,16 @@
   }
 
   /* §3.6 closing line */
-  .s3-mental-caption {
+  .reveal .s3-mental-caption {
     text-align: center;
     color: var(--text-primary);
     font-size: 1.2rem;
-    margin: var(--spacing-md) auto 0 auto;
     max-width: 1000px;
     line-height: 1.5;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s3-mental-caption em {
     color: var(--accent);
