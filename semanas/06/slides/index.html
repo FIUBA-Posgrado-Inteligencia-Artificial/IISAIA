@@ -4261,7 +4261,7 @@ args = [
     color: var(--text-primary);
   }
   .s7-q0-no {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--accent);
     font-family: var(--font-mono);
@@ -4316,7 +4316,7 @@ args = [
     border-radius: 6px;
     padding: var(--spacing-sm) var(--spacing-md);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 1.45;
     max-width: 460px;
     text-align: left;
@@ -4359,7 +4359,7 @@ args = [
     border-radius: 8px;
     padding: var(--spacing-sm) var(--spacing-md);
     text-align: center;
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     color: var(--text-primary);
     line-height: 1.4;
     display: flex;
@@ -4382,14 +4382,6 @@ args = [
     max-width: 1000px;
   }
   .s7-key strong { color: var(--accent); font-weight: 700; }
-  .s7-bridge {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    font-style: italic;
-    margin: var(--spacing-md) auto 0 auto;
-    max-width: 1000px;
-  }
 </style>
 <section>
 <!-- §7.1 — Marco: pregunta cero + server local -->
@@ -4400,26 +4392,27 @@ args = [
   <div class="s7-q0flow">
     <span class="s7-q0-box">¿Claude Code maneja un browser?</span>
     <span class="s7-q0-arrow">&rarr;</span>
-    <span class="s7-q0-no">No</span>
+    <span class="s7-q0-no">De fábrica, no</span>
     <span class="s7-q0-arrow">&rarr;</span>
     <span class="s7-q0-mcp">corresponde MCP</span>
   </div>
 
-  <p class="s7-sub">Playwright MCP expone un browser controlado como tools. Es un server <strong>local</strong>: corre en tu máquina, hablando por Stdio. Lo conectamos a un proyecto y lo ponemos a trabajar.</p>
+  <p class="s7-sub">Con la extensión <strong>Claude in Chrome</strong>, sí — pero necesita plan pago, y por dentro también es un MCP server (aparece en <code>/mcp</code> como <code>claude-in-chrome</code>). Playwright es la opción portable: cualquier host, sin plan, headless incluido.</p>
+
+  <p class="s7-sub">Playwright MCP expone ese browser controlado como tools: un server <strong>local</strong>, que corre en tu máquina hablando por Stdio. Lo conectamos a un proyecto y lo ponemos a trabajar.</p>
 
   <aside class="notes">
-    <p><u>Marco del primer demo. La pregunta cero da "no" (CC no maneja un browser) → MCP corresponde. Y se planta el eje de las dos secciones: este es un server LOCAL, transport Stdio. El próximo será remoto.</u></p>
-    <p><em>"Primer demo. Apliquemos la pregunta cero: ¿Claude Code maneja un browser? No — sabe correr Bash, pero no renderiza páginas, no clickea, no completa forms. La respuesta es no, así que corresponde un MCP."</em></p>
-    <p><em>"El server que usamos es Playwright MCP: expone un browser controlado como tools. Y fíjense en una cosa que vamos a contrastar con el próximo demo: este es un server local. Corre en tu propia máquina, comunicándose por Stdio, sin red. Vamos a conectarlo a un proyecto y verlo actuar."</em></p>
+    <p><u>Marco del primer demo. La pregunta cero da "de fábrica, no" (CC no trae browser propio) → corresponde MCP. Con Claude in Chrome y plan pago sí se puede, y esa extensión es, por dentro, también un MCP server. Playwright es la alternativa portable. Codex CLI y OpenCode tampoco traen browser propio. Se planta el eje de las dos secciones: este es un server LOCAL, transport Stdio. El próximo será remoto.</u></p>
+    <p><em>"Primer demo. Apliquemos la pregunta cero: ¿Claude Code maneja un browser? De fábrica, no — sabe correr Bash, pero no renderiza páginas, no clickea, no completa forms. Con la extensión Claude in Chrome y un plan pago sí se puede, y por dentro esa extensión es, también, un MCP server. Playwright es la alternativa portable: corre en cualquier host, sin plan, hasta headless — y lo mismo les pasa con Codex CLI y OpenCode, que tampoco traen browser de fábrica. El server que usamos es Playwright MCP: expone ese browser controlado como tools. Y fíjense en algo que vamos a contrastar con el próximo demo: este es un server local, corriendo en su propia máquina, comunicándose por Stdio, sin red. Vamos a conectarlo a un proyecto y verlo actuar."</em></p>
   </aside>
 </section>
 
 <!-- §7.2 — Cómo se agrega (local / Stdio) -->
 <section>
   <h2 class="s7-h2">Una línea, y queda.</h2>
-  <p class="s7-h2-sub">El comando que ya vimos, aplicado.</p>
+  <p class="s7-h2-sub">Local, por Stdio: sin red, sin auth.</p>
 
-  <div class="s7-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> npx @playwright/mcp@latest</div>
+  <div class="s7-cmd"><span class="muted">$</span> claude mcp add <span class="hl">playwright</span> -- npx @playwright/mcp@latest</div>
 
   <div class="s7-transport">
     <div class="s7-transport-tag">
@@ -4434,8 +4427,8 @@ args = [
 
   <aside class="notes">
     <p><u>Install del server local. Lo importante para el contraste con §8: acá hay un comando que arranca un proceso local (Stdio, sin red, sin auth). En el remoto va a haber una URL y OAuth.</u></p>
-    <p><em>"Se agrega con el comando que ya vimos en el bloque del ecosistema: claude mcp add playwright, npx arroba playwright barra mcp arroba latest. Una línea."</em></p>
-    <p><em>"Y la forma de este server es la de un local, transport Stdio: corre como un subproceso en tu propia máquina. npx baja el paquete la primera vez y después lo arranca solo cada vez que abrís una sesión. Los mensajes viajan por stdin y stdout, sin red. No hay URL ni autenticación, porque el server vive con vos. Guarden esa imagen — el próximo demo es exactamente lo contrario."</em></p>
+    <p><u>@playwright/mcp todavía habla la revisión de protocolo 2025-11-25, así que acá el cliente usa el handshake initialize en vez de server/discover — el patrón del intercambio es el mismo (por eso la animación del §5 usó un server genérico).</u></p>
+    <p><em>"Se agrega con el mismo comando del bloque de harnesses: claude mcp add playwright, guión guión, npx arroba playwright barra mcp arroba latest. Una línea, y el server queda corriendo como un subproceso en tu propia máquina — transport Stdio. npx baja el paquete la primera vez y después lo arranca solo cada vez que abrís una sesión. Los mensajes viajan por stdin y stdout, sin red. No hay URL ni autenticación, porque el server vive con vos. Guarden esa imagen — el próximo demo es exactamente lo contrario."</em></p>
   </aside>
 </section>
 
@@ -4454,21 +4447,39 @@ args = [
 
   <aside class="notes">
     <p><strong>Demo en vivo, terminal + browser lado a lado. Click cada beat.</strong></p>
-    <p><u>Dos casos: lectura (traer datos de una página) y acción (completar un form). El alumno tiene que ver el browser moverse solo.</u></p>
-    <p><em>"Vamos al vivo. Dos casos. El primero, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts. Van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos — sin que yo copie ni pegue nada."</em></p>
-    <p><em>"El segundo, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena uno por uno y hace submit."</em></p>
+    <p><u>Dos casos: lectura (traer datos de una página) y acción (completar un form). Antes de arrancar, confirmar que el server está conectado con /mcp. El alumno tiene que ver el browser moverse solo.</u></p>
+    <p><em>"Vamos al vivo. Antes de nada, /mcp para confirmar que playwright está conectado. Primer caso, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts — van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos, sin que yo copie ni pegue nada. Segundo caso, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena uno por uno y hace submit."</em></p>
+    <hr>
+    <p><strong>Acciones (copiables):</strong></p>
+    <p><strong>Paso 1 — Lectura</strong></p>
+    <ul>
+      <li>En Claude: <code>/mcp</code> &rarr; confirmar <code>playwright</code> connected</li>
+      <li>En Claude: "abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts"</li>
+      <li>Mirar: el browser se abre solo y navega</li>
+      <li>Mirar: el agente llama <code>browser_navigate</code> y <code>browser_snapshot</code></li>
+      <li>Mirar: los 5 títulos vuelven a la conversación, sin copy-paste</li>
+    </ul>
+    <p><strong>Paso 2 — Acción</strong></p>
+    <ul>
+      <li>En Claude: "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li>
+      <li>Mirar: el agente identifica los campos del form</li>
+      <li>Mirar: llama <code>browser_type</code> campo por campo</li>
+      <li>Mirar: hace <code>browser_click</code> en submit</li>
+      <li>En Claude: el agente reporta qué se envió</li>
+    </ul>
+    <p><em>Plan B: screenshots pre-armados de las dos corridas (lectura y acción), si el browser no abre en vivo.</em></p>
   </aside>
 </section>
 
 <!-- §7.5 — Qué viste -->
 <section>
   <h2 class="s7-h2">Qué viste.</h2>
-  <p class="s7-h2-sub">El mismo intercambio del bloque de discovery, en concreto.</p>
+  <p class="s7-h2-sub">El mismo intercambio, en concreto.</p>
 
   <div class="s7-flow">
     <div class="s7-flow-step">El server expone capacidades</div>
     <div class="s7-flow-arrow">&rarr;</div>
-    <div class="s7-flow-step">el LLM las descubre</div>
+    <div class="s7-flow-step">el cliente las descubre</div>
     <div class="s7-flow-arrow">&rarr;</div>
     <div class="s7-flow-step">las invoca con argumentos</div>
     <div class="s7-flow-arrow">&rarr;</div>
@@ -4476,12 +4487,10 @@ args = [
   </div>
 
   <p class="s7-key">Lo que importa no es el cómo de Playwright. Es <strong>la forma del intercambio</strong> — la misma para cualquier server. Cambia qué hace; no cambia cómo se habla.</p>
-  <p class="s7-bridge">Esto fue un server local, en tu máquina. Ahora uno que vive afuera.</p>
 
   <aside class="notes">
     <p><u>Cierre del demo local. Mapea explícitamente al intercambio de §5. El takeaway no es Playwright — es la forma del intercambio, que se repite igual. Bridge a §8: el mismo patrón, pero con un server remoto.</u></p>
-    <p><em>"¿Qué vieron, en el fondo? Exactamente el intercambio del bloque de discovery. El server expuso sus capacidades, el modelo las descubrió en el contexto, las invocó con argumentos concretos, y el resultado volvió a la conversación. Ese es el patrón."</em></p>
-    <p><em>"Y lo que tienen que sacar no es cómo funciona Playwright — eso lo busca el agente. Es la forma del intercambio, que es idéntica para cualquier server. Cambia qué hace; no cambia cómo se habla. Esto fue un server local, corriendo en la máquina. Ahora veamos exactamente el mismo patrón, pero con un server que vive afuera, en internet."</em></p>
+    <p><em>"¿Qué vieron, en el fondo? Exactamente el mismo intercambio: el server expuso sus capacidades, el cliente las descubrió y armó el contexto, el modelo las invocó con argumentos concretos, y el resultado volvió a la conversación. Ese es el patrón. Y lo que tienen que sacar no es cómo funciona Playwright — eso lo busca el agente. Es la forma del intercambio, que es idéntica para cualquier server: cambia qué hace, no cambia cómo se habla. Esto fue un server local, corriendo en la máquina. Ahora veamos exactamente el mismo patrón, pero con un server que vive afuera, en internet."</em></p>
   </aside>
 </section>
 </section>
@@ -5124,15 +5133,15 @@ args = [
     steps: [
       {
         title: '1 — Lectura',
-        summary: 'Traer datos de una página, sin copiar y pegar.',
+        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/mcp</code> &rarr; confirmar <code>playwright</code> connected</li><li><strong>En Claude:</strong> "abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts"</li><li><strong>Mirar:</strong> el browser se abre solo y navega</li><li><strong>Mirar:</strong> llama <code>browser_navigate</code> y <code>browser_snapshot</code></li><li><strong>Mirar:</strong> los 5 títulos vuelven a la conversación, sin copy-paste</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts</div><p style="color: var(--text-primary); margin-top: 8px;">El agente llama <code>browser_navigate</code>, espera la carga, pide un <code>browser_snapshot</code>, y extrae los títulos del HTML. Vos no copiaste nada — fue, miró y trajo.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts</div><p style="color: var(--text-primary); margin-top: 8px;">El agente confirma primero que el server está conectado, después llama <code>browser_navigate</code>, espera la carga, pide un <code>browser_snapshot</code>, y extrae los títulos del HTML. Vos no copiaste nada — fue, miró y trajo.</p>'
       },
       {
         title: '2 — Acción',
-        summary: 'Completar un form: ahora con efecto.',
+        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li><li><strong>Mirar:</strong> el agente identifica los campos del form</li><li><strong>Mirar:</strong> llama <code>browser_type</code> campo por campo</li><li><strong>Mirar:</strong> hace <code>browser_click</code> en submit</li><li><strong>En Claude:</strong> el agente reporta qué se envió</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> en cada campo &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> en cada campo &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p><p style="color: var(--text-muted); margin-top: 10px; font-style: italic;">Plan B: si el browser no abre en vivo, screenshots pre-armados de las dos corridas (lectura y acción) muestran el mismo resultado.</p>'
       }
     ]
   });
