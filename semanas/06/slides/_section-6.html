@@ -665,7 +665,7 @@ args = [
   <p class="harness-map-foot">Los tres guardan lo mismo: un nombre y cómo arrancar el proceso.</p>
 
   <aside class="notes">
-    <p><u>El mismo server agregado en los tres harnesses: comando, archivo y forma de la config. Forma canónica en Claude Code: <code>claude mcp add [opciones] &lt;nombre&gt; -- &lt;comando&gt; [args]</code>. El <code>--</code> separa: antes van las opciones de Claude Code (<code>--scope</code>, <code>-e</code>); después, el comando del server tal cual. Codex usa la misma forma y no tiene flag de scope. OpenCode: <code>opencode mcp add</code> es un asistente (en un repo git pregunta si va al proyecto o global); desde v1.18 también acepta <code>opencode mcp add playwright -- npx @playwright/mcp@latest</code>. El JSON de Claude Code trae además <code>"env": {}</code> vacío; se omite en el slide.</u></p>
+    <p><u>El mismo server agregado en los tres harnesses: comando, archivo y forma de la config. Forma canónica en Claude Code: <code>claude mcp add [opciones] &lt;nombre&gt; -- &lt;comando&gt; [args]</code>. El <code>--</code> separa: antes van las opciones de Claude Code (<code>--scope</code>, <code>-e</code>); después, el comando del server tal cual. Codex usa la misma forma y no tiene flag de scope. OpenCode: <code>opencode mcp add</code> es un asistente (en un repo git pregunta si va al proyecto o global); en versiones recientes (≥ v1.18) también acepta la forma con flags: <code>opencode mcp add playwright -- npx @playwright/mcp@latest</code>. El JSON de Claude Code trae además <code>"env": {}</code> vacío; se omite en el slide.</u></p>
     <p><em>"¿Cómo se agrega un server, concretamente? En los tres harnesses es una línea en la terminal. En Claude Code: claude mcp add, el nombre que le querés poner, doble guion, y el comando que arranca el server. En Codex, la misma forma, cambiando claude por codex. En OpenCode, opencode mcp add te abre un asistente que te pregunta lo mismo: nombre, si es local o remoto, y el comando. Lo interesante es lo que queda escrito. Claude Code escribe un JSON con una clave mcpServers; Codex, una tabla mcp_servers en su config.toml; OpenCode, una clave mcp en opencode.json. Tres formatos, y adentro las mismas dos cosas: un nombre y cómo arrancar el proceso. Si mañana cambiás de harness, no reescribís nada importante: copiás eso. ¿Y dónde guarda Claude Code ese JSON? Depende del scope."</em></p>
   </aside>
 </section>
@@ -896,14 +896,14 @@ args = [
       </p>
       <div class="s6-class-item"><code>playwright</code><span class="s6-class-item-why">Un browser en cualquier host. <code>--chrome</code> lo hace con plan pago, y también es MCP.</span></div>
       <div class="s6-class-item"><code>linear</code><span class="s6-class-item-why">CC no ve tu gestor de tareas.</span></div>
-      <div class="s6-class-item"><code>postgres</code><span class="s6-class-item-why">CC no se conecta a tu base.</span></div>
-      <div class="s6-class-item"><code>github</code><span class="s6-class-item-why">Remoto oficial: issues y PRs sin depender de <code>gh</code>.</span></div>
+      <div class="s6-class-item"><code>postgres</code><span class="s6-class-item-why">Con <code>psql</code> sí, pero sin schema ni permisos acotados.</span></div>
+      <div class="s6-class-item"><code>github</code><span class="s6-class-item-why">Remoto oficial: OAuth y nada que instalar.</span></div>
     </div>
   </div>
 
   <aside class="notes">
-    <p><u>La pregunta cero aplicada a Claude Code; la clasificación es respecto a CC, no en abstracto. Redundantes: filesystem (Read/Write/Edit), git (Bash), fetch (WebFetch). Suman: Playwright (~25 tools; matiz: <code>claude --chrome</code> maneja Chrome con la extensión Claude in Chrome, con plan Pro, Max, Team o Enterprise, y en <code>/mcp</code> aparece como <code>claude-in-chrome</code>: es un MCP server; Playwright es lo portable), Linear y gestores de tareas, Postgres, GitHub (el server oficial es remoto: <code>https://api.githubcopilot.com/mcp/</code>). Zona gris, fuera de la tabla: context7 (docs de librerías al día); WebFetch y WebSearch cubren buena parte.</u></p>
-    <p><em>"Apliquemos la pregunta cero a servers populares. A la izquierda, los que en Claude Code son redundantes porque el host ya lo hace. Filesystem: Read, Write y Edit ya están. Git: Bash con git, y más flexible que el MCP. Fetch: WebFetch ya trae una página. Instalarlos en CC no suma, duplica. A la derecha, los que suman. Playwright, para manejar un browser: Claude Code lo puede hacer con la extensión de Chrome si tenés plan pago, y esa extensión es, por dentro, otro MCP server; Playwright es la opción que anda en cualquier host. Linear o tu gestor de tareas, que CC no ve. Postgres, para hablar con tu base. Y GitHub, cuyo server oficial es remoto. Playwright y Linear son justo los dos que vamos a poner a andar. ¿Y context7, que trae docs de librerías al día? Zona gris: WebFetch y WebSearch cubren buena parte."</em></p>
+    <p><u>La pregunta cero aplicada a Claude Code; la clasificación es respecto a CC, no en abstracto. Redundantes: filesystem (Read/Write/Edit), git (Bash), fetch (WebFetch). Suman: Playwright (~25 tools; matiz: <code>claude --chrome</code> maneja Chrome con la extensión Claude in Chrome, con plan Pro, Max, Team o Enterprise, y en <code>/mcp</code> aparece como <code>claude-in-chrome</code>: es un MCP server; Playwright es lo portable), Linear y gestores de tareas, Postgres (psql vía Bash llega a la base, pero sin schema declarado ni permisos acotados), GitHub (el server oficial es remoto: <code>https://api.githubcopilot.com/mcp/</code>; con <code>gh</code> vía Bash CC ya cubre buena parte, lo que suma el server es el remoto oficial con OAuth, sin instalar nada en la máquina). Zona gris, fuera de la tabla: context7 (docs de librerías al día); WebFetch y WebSearch cubren buena parte.</u></p>
+    <p><em>"Apliquemos la pregunta cero a servers populares. A la izquierda, los que en Claude Code son redundantes porque el host ya lo hace. Filesystem: Read, Write y Edit ya están. Git: Bash con git, y más flexible que el MCP. Fetch: WebFetch ya trae una página. Instalarlos en CC no suma, duplica. A la derecha, los que suman. Playwright, para manejar un browser: Claude Code lo puede hacer con la extensión de Chrome si tenés plan pago, y esa extensión es, por dentro, otro MCP server; Playwright es la opción que anda en cualquier host. Linear o tu gestor de tareas, que CC no ve. Postgres: psql por Bash llega a la base, pero sin schema ni permisos acotados. Y GitHub: con gh por Bash ya hacés mucho, pero el server oficial es remoto, con OAuth y nada que instalar. Playwright y Linear son justo los dos que vamos a poner a andar. ¿Y context7, que trae docs de librerías al día? Zona gris: WebFetch y WebSearch cubren buena parte."</em></p>
   </aside>
 </section>
 
@@ -940,7 +940,7 @@ args = [
 <!-- §6.12 — Tres riesgos de conectar un server -->
 <section>
   <h2 class="s6-h2">Tres riesgos de conectar un server.</h2>
-  <p class="s6-h2-sub">Valen para cualquier server, local o remoto, en cualquier host.</p>
+  <p class="s6-h2-sub">Valen para cualquier host.</p>
 
   <div class="s6-conseq">
     <div class="s6-conseq-card fragment fade-in" data-fragment-index="0">

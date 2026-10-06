@@ -47,7 +47,7 @@
       <!-- Title Slide -->
       <section class="title-slide">
         <h1>Model Context Protocol</h1>
-        <p class="subtitle">Cómo el LLM extiende lo que ve y lo que toca.</p>
+        <p class="subtitle">Cómo se extiende lo que el agente ve y lo que toca.</p>
         <p class="muted">Introducción al desarrollo de software asistido por IA</p>
       </section>
 
@@ -178,35 +178,6 @@
     margin: 0;
   }
 
-  /* Wrapper custom — N×M visual */
-  .s1-salida-card {
-    background: var(--bg-secondary);
-    border-top: 4px solid var(--accent-secondary);
-    border-radius: 8px;
-    padding: var(--spacing-lg);
-    max-width: 1000px;
-    margin: var(--spacing-lg) auto 0 auto;
-  }
-  .s1-salida-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent-secondary);
-    margin: 0 0 var(--spacing-xs) 0;
-  }
-  .s1-salida-title {
-    color: var(--text-heading);
-    font-size: 1.65rem;
-    font-weight: 700;
-    margin: 0 0 var(--spacing-md) 0;
-  }
-  .s1-salida-body {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    line-height: 1.55;
-    margin: 0;
-  }
   /* Postgres step-cards — narrativa en 4 pasos, grid 2×2 compacto */
   .s1-steps {
     display: grid;
@@ -258,7 +229,7 @@
     background: var(--bg-code) !important;
     border-radius: 4px;
     padding: 8px 12px !important;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
   .s1-step-foot {
     color: var(--text-muted);
@@ -275,79 +246,6 @@
     padding: 0 5px;
     border-radius: 3px;
     font-size: 0.95rem;
-  }
-  .s1-missing-items {
-    list-style: none;
-    padding: 0;
-    margin: 4px 0 0 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 24px;
-  }
-  .s1-missing-items li {
-    color: var(--text-primary);
-    font-size: 1.05rem;
-    padding-left: 1.5em;
-    position: relative;
-    line-height: 1.3;
-  }
-  .s1-missing-items li::before {
-    content: "✗";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--accent-secondary);
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-  .s1-missing-items li strong {
-    color: var(--accent);
-    font-weight: 700;
-    display: block;
-  }
-  .s1-missing-items li span {
-    display: block;
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    margin-top: 1px;
-    line-height: 1.3;
-  }
-  .s1-salida-takeaway {
-    color: var(--text-muted);
-    font-size: 1.02rem;
-    text-align: center;
-    margin: var(--spacing-md) 0 0 0;
-    line-height: 1.45;
-  }
-  .s1-salida-takeaway strong {
-    color: var(--accent-secondary);
-    font-weight: 700;
-  }
-
-  /* Pegar al prompt — three small chips */
-  .s1-complicaciones {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-sm);
-    margin: var(--spacing-lg) 0 0 0;
-  }
-  .s1-comp-chip {
-    background: var(--bg-code);
-    border-left: 3px solid var(--text-muted);
-    border-radius: 4px;
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-  .s1-comp-name {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 1rem;
-    margin: 0 0 2px 0;
-  }
-  .s1-comp-detail {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    margin: 0;
-    line-height: 1.4;
   }
 
   /* Bridge slide */
@@ -396,14 +294,14 @@
     grid-template-columns: 110px 1fr;
     align-items: baseline;
     gap: var(--spacing-sm);
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     line-height: 1.4;
   }
   .s1-runtime-name {
     font-family: var(--font-mono);
     color: var(--accent);
     font-weight: 700;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
   .s1-runtime-artifacts {
     color: var(--text-muted);
@@ -417,7 +315,7 @@
     color: var(--code-text);
     padding: 1px 6px;
     border-radius: 3px;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
   }
 
   /* §1.4 — N×M vs N+M convergence visual */
@@ -463,7 +361,7 @@
     grid-template-columns: auto repeat(4, 1fr);
     gap: 3px;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.95rem;
     margin: 0;
   }
   .s1-nm-grid > div {
@@ -501,7 +399,7 @@
     border-radius: 3px;
     text-align: center;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.95rem;
   }
   .s1-hub-arrows {
     display: flex;
@@ -527,7 +425,7 @@
     font-weight: 700;
     font-family: var(--font-mono);
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     white-space: nowrap;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
@@ -566,13 +464,13 @@
     </div>
   </div>
 
-  <p class="s1-tools-more">y ~40 más: <code>Agent</code>, <code>Skill</code>, <code>LSP</code>…</p>
+  <p class="s1-tools-more">~40 en total: <code>Agent</code>, <code>Skill</code>, <code>LSP</code>…</p>
 
   <p class="s1-tools-takeaway">Para el grueso del workflow de desarrollo local, te alcanza. <strong>Lo decidió Anthropic.</strong></p>
 
   <aside class="notes">
     <p><u>Recap visual sin re-explicar qué es un tool. El alumno ya pasó por loop agentic + tools + harness + skills + sub-agents. El slide hace dos cosas: anclar lo que ya tienen y plantar la observación clave — el set es curado. Dato aparte: en macOS, Linux y WSL, Glob y Grep no vienen por defecto en el runtime — ahí el agente busca con <code>find</code>/<code>grep</code> vía Bash; no afecta el punto del slide, pero vale aclararlo si alguien lo nota en su máquina.</u></p>
-    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Glob y Grep para buscar. Bash para correr comandos. WebFetch y WebSearch para traer contenido de la web. Y unas cuarenta más, como Agent, Skill o LSP, que fueron apareciendo sin que lo noten. Para casi todo el workflow de desarrollo local ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos. De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
+    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Glob y Grep para buscar. Bash para correr comandos. WebFetch y WebSearch para traer contenido de la web. En total son unas cuarenta, con Agent, Skill o LSP entre las que fueron apareciendo sin que lo noten. Para casi todo el workflow de desarrollo local ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos. De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
   </aside>
 </section>
 
@@ -597,12 +495,12 @@
       <div class="s1-nostá-eyebrow">no está 3</div>
       <h3 class="s1-nostá-title">Tu gestor de tareas (Linear, Jira).</h3>
       <div class="s1-nostá-quiero">Marcá este ticket como Done y asignalo a Flor.</div>
-      <p class="s1-nostá-gap">No hay tool nativo para eso. Bash podría pegarle al API REST, pero no tenés el cliente armado ni el token a mano.</p>
+      <p class="s1-nostá-gap">No hay tool nativo para eso. Bash podría pegarle a su API, pero no tenés el cliente armado ni el token a mano.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Cuatro reveals — el aterrizaje y una capacidad faltante por card.</strong></p>
+    <p><strong>Tres reveals — después del aterrizaje, una capacidad faltante por card.</strong></p>
     <p><u>El alumno aterriza tres casos concretos que cualquiera vivió. Cada card tiene el pedido en mono (lo que vos querrías escribir) y por qué el set actual no lo cubre limpio. El tercero anticipa el demo de §8: la razón por la que no está no es memoria del modelo, es que no hay canal hacia ese servicio. Browser: con la extensión Claude in Chrome (plan Pro/Max/Team/Enterprise y login) sí se puede controlar un browser real desde Claude Code — por dentro, esa extensión es un MCP server (aparece como <code>claude-in-chrome</code> en <code>/mcp</code>). Playwright sigue siendo la opción portable, sin plan ni login.</u></p>
     <p><em>"Tres ejemplos concretos de capacidad que el set por default no te da."</em></p>
     <p><em>"Primero: querés tirar una query contra Postgres de producción y traerte filas que matchean un patrón. Bash con psql te lo permite si las credenciales están en el entorno. Pero el agente no sabe el schema, no sabe los tipos, no sabe qué columnas son sensibles. Querrías un tool con tipos declarados y permisos, no una shell ciega."</em></p>
@@ -620,7 +518,7 @@
       <div class="s1-step-num">1</div>
       <div class="s1-step-body">
         <h3 class="s1-step-title">El runtime ya corre <code>psql</code>.</h3>
-        <pre><code class="language-bash">$ psql postgresql://readonly@10.0.1.42/analytics \
+        <pre><code class="language-bash">$ psql postgresql://readonly@db/analytics \
     -c "SELECT email FROM users LIMIT 5"</code></pre>
         <p class="s1-step-foot">Funciona — <strong>mientras lo que Opus sabe de psql cubra lo que necesitás.</strong></p>
       </div>
@@ -631,7 +529,7 @@
       <div class="s1-step-body">
         <h3 class="s1-step-title">Agregás instrucciones al contexto.</h3>
         <pre><code class="language-markdown"># CLAUDE.md
-Conexión: postgresql://readonly@10.0.1.42/analytics
+Conexión: postgresql://readonly@db/analytics
 Schema: users(id, email, signup_date, active)</code></pre>
         <p class="s1-step-foot">Mejor. Pero <strong>no sabés lo que no sabés que falta.</strong></p>
       </div>
@@ -1154,7 +1052,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
 
   <aside class="notes">
     <p><strong>Un reveal — spaghetti se va, hub aparece.</strong></p>
-    <p><u>Formalización de lo que armaron en §1 con Postgres: ahora en general, N clientes × M proveedores, con el protocolo nombrado en el centro. Este diagrama se reusa tal cual en §6.</u></p>
+    <p><u>Formalización de lo que armaron en §1 con Postgres: ahora en general, N clientes × M proveedores, con el protocolo nombrado en el centro. §6.1 vuelve a la idea, desde el server.</u></p>
     <p><em>"Esto que acaban de armar con Postgres y los cuatro runtimes, en general: N clientes, M proveedores. Sin protocolo común, cada par es una integración propia — no tiene techo."</em></p>
     <p><em>"Un protocolo al medio lo colapsa a N más M. Cliente nuevo hereda todos los proveedores con una sola integración; proveedor nuevo queda disponible para todos los clientes con una sola integración. Este patrón tiene nombre, y no es el primero en la historia del software."</em></p>
   </aside>
@@ -1240,7 +1138,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   <div class="s2-bridge">
     <p class="s2-bridge-line">Por qué <em>tiene que ser</em> un protocolo.</p>
     <p class="s2-bridge-line">Cómo está armado <em>por dentro</em>.</p>
-    <p class="s2-bridge-hint">Host, cliente, server.</p>
+    <p class="s2-bridge-hint">Host, client, server.</p>
   </div>
 
   <aside class="notes">
@@ -1420,7 +1318,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   .s3-arch-transports-quick-item strong {
     color: var(--accent-secondary);
     font-family: var(--font-mono);
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 700;
     display: block;
     margin-bottom: 2px;
@@ -1633,7 +1531,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   }
   .s3-stdio-node {
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     background: var(--bg-secondary);
     padding: 5px 10px;
@@ -1649,7 +1547,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   }
   .s3-stdio-edge-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.95rem;
     color: var(--accent-secondary);
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -1779,7 +1677,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
   <h2 class="s3-h2">Un client por cada server.</h2>
 
   <div class="s3-rule">
-    <p class="s3-rule-quote">Si el host se conecta a <strong>tres servers</strong>, corren <strong>tres clientes</strong> adentro.</p>
+    <p class="s3-rule-quote">Si el host se conecta a <strong>tres servers</strong>, corren <strong>tres clients</strong> adentro.</p>
     <p class="s3-rule-sub">El cliente no es uno solo que habla con muchos servers — son muchos clientes, cada uno con su conexión dedicada.</p>
   </div>
 
@@ -2474,7 +2372,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
 
   <div class="s4-prim-card">
     <p class="s4-prim-eyebrow">primitive 2 — <strong>application-controlled</strong></p>
-    <p class="s4-prim-def">Datos pasivos accesibles por URI. La aplicación los descubre y decide cuáles cargar al contexto. Ejemplo: <strong>un MCP server de Postgres</strong> — expone el schema de cada tabla.</p>
+    <p class="s4-prim-def">Datos pasivos accesibles por URI. El cliente los descubre; la aplicación decide cuáles cargar al contexto. Ejemplo: <strong>un MCP server de Postgres</strong> — expone el schema de cada tabla.</p>
 
     <div class="s4-prim-flow">
       <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
@@ -2524,7 +2422,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
     <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
       <div class="s4-prim-cc-label">así se ve en Claude Code</div>
       <div class="s4-prim-cc-internal">[ el usuario adjunta @postgres:postgres://db-prod/users/schema y @postgres:postgres://db-prod/orders/schema al prompt ]</div>
-      <div class="s4-prim-cc-internal">→ Claude Code lee esos resources con ReadMcpResourceTool y los carga al contexto antes de llamar al modelo</div>
+      <div class="s4-prim-cc-internal">→ Claude Code le pide esos resources al server (resources/read) y los adjunta al contexto antes de llamar al modelo</div>
       <div class="s4-prim-cc-user">&gt; Escribime una query que traiga usuarios con pedidos sin pagar</div>
       <div class="s4-prim-cc-assistant">claude &gt; <code>SELECT u.id, u.email FROM users u JOIN orders o ON o.user_id = u.id WHERE o.status = 'unpaid'</code> — columnas reales, sin alucinarlas</div>
     </div>
@@ -2532,11 +2430,11 @@ Schema: users(id, email, signup_date, active)</code></pre>
 
   <aside class="notes">
     <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
-    <p><u>Resources con un server de Postgres genérico (el server de referencia que documentaba esto quedó archivado, así que no se nombra como "oficial"). CC ya lee archivos nativamente, pero no se conecta solo a una DB para introspeccionar schemas — ahí entra el resource. Cronología clave: el read sucede ANTES de que el usuario pregunte algo. En Claude Code la vía de attach es @server:uri (code.claude.com/docs/en/mcp.md); el modelo también puede leer resources directo con ReadMcpResourceTool, sin pasar por el usuario.</u></p>
+    <p><u>Resources con un server de Postgres genérico (el server de referencia que documentaba esto quedó archivado, así que no se nombra como "oficial"). CC ya lee archivos nativamente, pero no se conecta solo a una DB para introspeccionar schemas — ahí entra el resource. Cronología clave: el read sucede ANTES de que el usuario pregunte algo. En Claude Code la vía de attach es @server:uri (code.claude.com/docs/en/mcp.md): el cliente le pide cada resource al server con resources/read y lo adjunta al contexto. Además, el modelo puede leerlos por su cuenta con ReadMcpResourceTool, sin pasar por el usuario.</u></p>
     <p><em>"Segunda primitive: resources. Datos pasivos accesibles por URI. Ejemplo: un MCP server de Postgres que expone el schema de cada tabla de la base como un resource — algo que CC no puede hacer solo, porque no se conecta a una base de datos para introspeccionar schemas."</em></p>
     <p><em>"Paso uno. El cliente le pide al server el catálogo con resources/list. El server introspecciona la base — corre las queries de catálogo de Postgres — y devuelve una URI por cada tabla. Dos ejemplos: users.schema y orders.schema. Cada URI viene con mimeType application slash json porque el contenido es JSON estructurado del schema."</em></p>
     <p><em>"Paso dos. La app decide cargar el schema de users. Emite resources/read con la URI concreta. El server consulta la base y devuelve el JSON del schema: las columnas, tipos, nullability, índices. La app lo inyecta al contexto del modelo."</em></p>
-    <p><em>"Y así se ve en Claude Code, con la cronología correcta: el usuario adjunta los schemas de users y orders con la sintaxis arroba-server-dos puntos-uri, @postgres:postgres://db-prod/users/schema. Es una acción del usuario en el prompt, no una consulta al modelo. Claude Code lee esos resources con ReadMcpResourceTool y los carga al contexto antes de que el usuario pregunte nada. Recién después llega la pregunta: escribime una query que traiga usuarios con pedidos sin pagar. El modelo arma el SQL con los nombres reales de las columnas — sin alucinarlos, porque los tiene en contexto. Eso es application-controlled. Nota al margen: algunos servers exponen resource templates, URIs parametrizadas con placeholders entre llaves, que la app expande con valores concretos en tiempo real."</em></p>
+    <p><em>"Y así se ve en Claude Code, con la cronología correcta: el usuario adjunta los schemas de users y orders con la sintaxis arroba-server-dos puntos-uri, @postgres:postgres://db-prod/users/schema. Es una acción del usuario en el prompt, no una consulta al modelo. Claude Code se los pide al server con resources/read y los adjunta al contexto antes de que el usuario pregunte nada. Recién después llega la pregunta: escribime una query que traiga usuarios con pedidos sin pagar. El modelo arma el SQL con los nombres reales de las columnas — sin alucinarlos, porque los tiene en contexto. Eso es application-controlled. Nota al margen: algunos servers exponen resource templates, URIs parametrizadas con placeholders entre llaves, que la app expande con valores concretos en tiempo real."</em></p>
   </aside>
 </section>
 
@@ -3231,7 +3129,7 @@ Schema: users(id, email, signup_date, active)</code></pre>
 
   <aside class="notes">
     <p><u>El insight + la distinción que evita el cruce con "model-controlled" de §4: descubrir lo hace el cliente; invocar lo decide el modelo. Dos operaciones, dos dueños.</u></p>
-    <p><em>"Si se llevan una sola idea de todo esto, que sea esta. El contexto con las herramientas disponibles no lo armás vos a mano, y tampoco lo decide el modelo: lo arma el cliente, solo. Y acá conviene atar un cabo del bloque anterior, porque es donde más se confunde. Dijimos que los tools son model-controlled. Eso aplica a invocarlos: decidir cuál usar y llamarlo, el tools/call, es del modelo. Pero descubrir qué tools existen, el tools/list, lo hace el cliente. El modelo no descubre servers ni tools: recibe lo que el cliente le listó y elige sobre eso. Y descubrir no es ningún truco nuevo: es el mismo cargar-al-contexto de context engineering, estandarizado y automático. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo."</em></p>
+    <p><em>"El punto de fondo de todo esto es este. El contexto con las herramientas disponibles no lo armás vos a mano, y tampoco lo decide el modelo: lo arma el cliente, solo. Y acá conviene atar un cabo del bloque anterior, porque es donde más se confunde. Dijimos que los tools son model-controlled. Eso aplica a invocarlos: decidir cuál usar y llamarlo, el tools/call, es del modelo. Pero descubrir qué tools existen, el tools/list, lo hace el cliente. El modelo no descubre servers ni tools: recibe lo que el cliente le listó y elige sobre eso. Y descubrir no es ningún truco nuevo: es el mismo cargar-al-contexto de context engineering, estandarizado y automático. Por eso un server escrito hoy funciona hoy, en cualquier host que hable el protocolo."</em></p>
   </aside>
 </section>
 
@@ -3963,7 +3861,7 @@ args = [
   <p class="harness-map-foot">Los tres guardan lo mismo: un nombre y cómo arrancar el proceso.</p>
 
   <aside class="notes">
-    <p><u>El mismo server agregado en los tres harnesses: comando, archivo y forma de la config. Forma canónica en Claude Code: <code>claude mcp add [opciones] &lt;nombre&gt; -- &lt;comando&gt; [args]</code>. El <code>--</code> separa: antes van las opciones de Claude Code (<code>--scope</code>, <code>-e</code>); después, el comando del server tal cual. Codex usa la misma forma y no tiene flag de scope. OpenCode: <code>opencode mcp add</code> es un asistente (en un repo git pregunta si va al proyecto o global); desde v1.18 también acepta <code>opencode mcp add playwright -- npx @playwright/mcp@latest</code>. El JSON de Claude Code trae además <code>"env": {}</code> vacío; se omite en el slide.</u></p>
+    <p><u>El mismo server agregado en los tres harnesses: comando, archivo y forma de la config. Forma canónica en Claude Code: <code>claude mcp add [opciones] &lt;nombre&gt; -- &lt;comando&gt; [args]</code>. El <code>--</code> separa: antes van las opciones de Claude Code (<code>--scope</code>, <code>-e</code>); después, el comando del server tal cual. Codex usa la misma forma y no tiene flag de scope. OpenCode: <code>opencode mcp add</code> es un asistente (en un repo git pregunta si va al proyecto o global); en versiones recientes (≥ v1.18) también acepta la forma con flags: <code>opencode mcp add playwright -- npx @playwright/mcp@latest</code>. El JSON de Claude Code trae además <code>"env": {}</code> vacío; se omite en el slide.</u></p>
     <p><em>"¿Cómo se agrega un server, concretamente? En los tres harnesses es una línea en la terminal. En Claude Code: claude mcp add, el nombre que le querés poner, doble guion, y el comando que arranca el server. En Codex, la misma forma, cambiando claude por codex. En OpenCode, opencode mcp add te abre un asistente que te pregunta lo mismo: nombre, si es local o remoto, y el comando. Lo interesante es lo que queda escrito. Claude Code escribe un JSON con una clave mcpServers; Codex, una tabla mcp_servers en su config.toml; OpenCode, una clave mcp en opencode.json. Tres formatos, y adentro las mismas dos cosas: un nombre y cómo arrancar el proceso. Si mañana cambiás de harness, no reescribís nada importante: copiás eso. ¿Y dónde guarda Claude Code ese JSON? Depende del scope."</em></p>
   </aside>
 </section>
@@ -4194,14 +4092,14 @@ args = [
       </p>
       <div class="s6-class-item"><code>playwright</code><span class="s6-class-item-why">Un browser en cualquier host. <code>--chrome</code> lo hace con plan pago, y también es MCP.</span></div>
       <div class="s6-class-item"><code>linear</code><span class="s6-class-item-why">CC no ve tu gestor de tareas.</span></div>
-      <div class="s6-class-item"><code>postgres</code><span class="s6-class-item-why">CC no se conecta a tu base.</span></div>
-      <div class="s6-class-item"><code>github</code><span class="s6-class-item-why">Remoto oficial: issues y PRs sin depender de <code>gh</code>.</span></div>
+      <div class="s6-class-item"><code>postgres</code><span class="s6-class-item-why">Con <code>psql</code> sí, pero sin schema ni permisos acotados.</span></div>
+      <div class="s6-class-item"><code>github</code><span class="s6-class-item-why">Remoto oficial: OAuth y nada que instalar.</span></div>
     </div>
   </div>
 
   <aside class="notes">
-    <p><u>La pregunta cero aplicada a Claude Code; la clasificación es respecto a CC, no en abstracto. Redundantes: filesystem (Read/Write/Edit), git (Bash), fetch (WebFetch). Suman: Playwright (~25 tools; matiz: <code>claude --chrome</code> maneja Chrome con la extensión Claude in Chrome, con plan Pro, Max, Team o Enterprise, y en <code>/mcp</code> aparece como <code>claude-in-chrome</code>: es un MCP server; Playwright es lo portable), Linear y gestores de tareas, Postgres, GitHub (el server oficial es remoto: <code>https://api.githubcopilot.com/mcp/</code>). Zona gris, fuera de la tabla: context7 (docs de librerías al día); WebFetch y WebSearch cubren buena parte.</u></p>
-    <p><em>"Apliquemos la pregunta cero a servers populares. A la izquierda, los que en Claude Code son redundantes porque el host ya lo hace. Filesystem: Read, Write y Edit ya están. Git: Bash con git, y más flexible que el MCP. Fetch: WebFetch ya trae una página. Instalarlos en CC no suma, duplica. A la derecha, los que suman. Playwright, para manejar un browser: Claude Code lo puede hacer con la extensión de Chrome si tenés plan pago, y esa extensión es, por dentro, otro MCP server; Playwright es la opción que anda en cualquier host. Linear o tu gestor de tareas, que CC no ve. Postgres, para hablar con tu base. Y GitHub, cuyo server oficial es remoto. Playwright y Linear son justo los dos que vamos a poner a andar. ¿Y context7, que trae docs de librerías al día? Zona gris: WebFetch y WebSearch cubren buena parte."</em></p>
+    <p><u>La pregunta cero aplicada a Claude Code; la clasificación es respecto a CC, no en abstracto. Redundantes: filesystem (Read/Write/Edit), git (Bash), fetch (WebFetch). Suman: Playwright (~25 tools; matiz: <code>claude --chrome</code> maneja Chrome con la extensión Claude in Chrome, con plan Pro, Max, Team o Enterprise, y en <code>/mcp</code> aparece como <code>claude-in-chrome</code>: es un MCP server; Playwright es lo portable), Linear y gestores de tareas, Postgres (psql vía Bash llega a la base, pero sin schema declarado ni permisos acotados), GitHub (el server oficial es remoto: <code>https://api.githubcopilot.com/mcp/</code>; con <code>gh</code> vía Bash CC ya cubre buena parte, lo que suma el server es el remoto oficial con OAuth, sin instalar nada en la máquina). Zona gris, fuera de la tabla: context7 (docs de librerías al día); WebFetch y WebSearch cubren buena parte.</u></p>
+    <p><em>"Apliquemos la pregunta cero a servers populares. A la izquierda, los que en Claude Code son redundantes porque el host ya lo hace. Filesystem: Read, Write y Edit ya están. Git: Bash con git, y más flexible que el MCP. Fetch: WebFetch ya trae una página. Instalarlos en CC no suma, duplica. A la derecha, los que suman. Playwright, para manejar un browser: Claude Code lo puede hacer con la extensión de Chrome si tenés plan pago, y esa extensión es, por dentro, otro MCP server; Playwright es la opción que anda en cualquier host. Linear o tu gestor de tareas, que CC no ve. Postgres: psql por Bash llega a la base, pero sin schema ni permisos acotados. Y GitHub: con gh por Bash ya hacés mucho, pero el server oficial es remoto, con OAuth y nada que instalar. Playwright y Linear son justo los dos que vamos a poner a andar. ¿Y context7, que trae docs de librerías al día? Zona gris: WebFetch y WebSearch cubren buena parte."</em></p>
   </aside>
 </section>
 
@@ -4238,7 +4136,7 @@ args = [
 <!-- §6.12 — Tres riesgos de conectar un server -->
 <section>
   <h2 class="s6-h2">Tres riesgos de conectar un server.</h2>
-  <p class="s6-h2-sub">Valen para cualquier server, local o remoto, en cualquier host.</p>
+  <p class="s6-h2-sub">Valen para cualquier host.</p>
 
   <div class="s6-conseq">
     <div class="s6-conseq-card fragment fade-in" data-fragment-index="0">
@@ -4468,7 +4366,7 @@ args = [
 
   <p class="s7-sub">Con la extensión <strong>Claude in Chrome</strong>, sí — pero necesita plan pago, y por dentro también es un MCP server (aparece en <code>/mcp</code> como <code>claude-in-chrome</code>). Playwright es la opción portable: cualquier host, sin plan, headless incluido.</p>
 
-  <p class="s7-sub">Playwright MCP expone ese browser controlado como tools: un server <strong>local</strong>, que corre en tu máquina hablando por Stdio. Lo conectamos a un proyecto y lo ponemos a trabajar.</p>
+  <p class="s7-sub">Playwright MCP expone el browser como tools desde un server <strong>local</strong>: corre en tu máquina y habla por Stdio.</p>
 
   <aside class="notes">
     <p><u>Marco del primer demo. La pregunta cero da "de fábrica, no" (CC no trae browser propio) → corresponde MCP. Con Claude in Chrome y plan pago sí se puede, y esa extensión es, por dentro, también un MCP server. Playwright es la alternativa portable. Codex CLI y OpenCode tampoco traen browser propio. Se planta el eje de las dos secciones: este es un server LOCAL, transport Stdio. El próximo será remoto.</u></p>
@@ -4495,7 +4393,7 @@ args = [
   </div>
 
   <aside class="notes">
-    <p><u>Install del server local. Lo importante para el contraste con §8: acá hay un comando que arranca un proceso local (Stdio, sin red, sin auth). En el remoto va a haber una URL y OAuth.</u></p>
+    <p><u>Install del server local. Lo importante para el contraste con §8: acá hay un comando que arranca un proceso local (Stdio, sin red, sin auth). En el remoto va a haber una URL y OAuth. En la demo usamos @latest por comodidad; en tu repo, versión fija (el riesgo 3 de §6.12).</u></p>
     <p><u>@playwright/mcp todavía habla la revisión de protocolo 2025-11-25, así que acá el cliente usa el handshake initialize en vez de server/discover — el patrón del intercambio es el mismo (por eso la animación del §5 usó un server genérico).</u></p>
     <p><em>"Se agrega con el mismo comando del bloque de harnesses: claude mcp add playwright, guión guión, npx arroba playwright barra mcp arroba latest. Una línea, y el server queda corriendo como un subproceso en tu propia máquina — transport Stdio. npx baja el paquete la primera vez y después lo arranca solo cada vez que abrís una sesión. Los mensajes viajan por stdin y stdout, sin red. No hay URL ni autenticación, porque el server vive con vos. Guarden esa imagen — el próximo demo es exactamente lo contrario."</em></p>
   </aside>
@@ -4517,7 +4415,7 @@ args = [
   <aside class="notes">
     <p><strong>Demo en vivo, terminal + browser lado a lado. Click cada beat.</strong></p>
     <p><u>Dos casos: lectura (traer datos de una página) y acción (completar un form). Antes de arrancar, confirmar que el server está conectado con /mcp. El alumno tiene que ver el browser moverse solo.</u></p>
-    <p><em>"Vamos al vivo. Antes de nada, /mcp para confirmar que playwright está conectado. Primer caso, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts — van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos, sin que yo copie ni pegue nada. Segundo caso, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena uno por uno y hace submit."</em></p>
+    <p><em>"Vamos al vivo. Antes de nada, /mcp para confirmar que playwright está conectado. Primer caso, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts — van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos, sin que yo copie ni pegue nada. Segundo caso, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena y hace submit."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Paso 1 — Lectura</strong></p>
@@ -4532,7 +4430,7 @@ args = [
     <ul>
       <li>En Claude: "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li>
       <li>Mirar: el agente identifica los campos del form</li>
-      <li>Mirar: llama <code>browser_type</code> campo por campo</li>
+      <li>Mirar: llama <code>browser_type</code> o <code>browser_fill_form</code> para los campos</li>
       <li>Mirar: hace <code>browser_click</code> en submit</li>
       <li>En Claude: el agente reporta qué se envió</li>
     </ul>
@@ -4827,7 +4725,7 @@ url = "https://mcp.linear.app/mcp"
   <p class="harness-map-foot">Los tres guardan lo mismo: una URL. Y los tres piden OAuth — el token queda guardado y se renueva solo.</p>
 
   <aside class="notes">
-    <p><u>Espejo de §6.2, ahora con un server remoto. Claude Code: <code>claude mcp add --transport http &lt;nombre&gt; &lt;url&gt;</code> es la forma canónica; sin <code>--transport http</code> asume Stdio. Codex: <code>codex mcp add &lt;nombre&gt; --url &lt;url&gt;</code> dispara OAuth en el momento si el server lo soporta; re-login con <code>codex mcp login &lt;nombre&gt;</code>. OpenCode: <code>opencode mcp add</code> es un asistente que pregunta remote/local y la URL; auth con <code>opencode mcp auth &lt;nombre&gt;</code> o automática al primer 401 (la forma con flags existe solo en versiones recientes, no se enseña). Linear también ofrece un endpoint de solo lectura, <code>mcp.linear.app/mcp/readonly</code> — el alcance mínimo de §6.12.</u></p>
+    <p><u>Espejo de §6.2, ahora con un server remoto. Claude Code: <code>claude mcp add --transport http &lt;nombre&gt; &lt;url&gt;</code> es la forma canónica; sin <code>--transport http</code> asume Stdio. Codex: <code>codex mcp add &lt;nombre&gt; --url &lt;url&gt;</code> dispara OAuth en el momento si el server lo soporta; re-login con <code>codex mcp login &lt;nombre&gt;</code>. OpenCode: <code>opencode mcp add</code> es un asistente que pregunta remote/local y la URL; en versiones recientes (≥ v1.18) también acepta la forma con flags: <code>opencode mcp add linear --url https://mcp.linear.app/mcp</code>. Auth con <code>opencode mcp auth &lt;nombre&gt;</code> o automática al primer 401. Linear también ofrece un endpoint de solo lectura, <code>mcp.linear.app/mcp/readonly</code> — el alcance mínimo de §6.12.</u></p>
     <p><em>"Agregar un server remoto es la misma idea que agregar uno local, con dos cambios. En Claude Code: claude mcp add, pero con transport http, y en vez de un comando, la URL de Linear. En el JSON queda type http, con url, en vez de command y args. En Codex: codex mcp add linear, con la flag url; en Codex, igual, escribe una tabla mcp_servers en su config.toml, ahora con url en lugar de command. En OpenCode: opencode mcp add te pregunta remote y la URL, y queda en opencode.json como type remote. Los tres guardan lo mismo que con Playwright — un nombre y cómo llegar al server — solo que ahora es una URL en vez de un comando. Y como es un servicio de terceros con tus datos, los tres piden OAuth: en Claude Code con barra mcp o claude mcp login; en Codex, codex mcp login; en OpenCode, opencode mcp auth. Te logueás en Linear una vez, el token queda guardado y se renueva solo — no lo pegás a mano en ningún lado."</em></p>
   </aside>
 </section>
@@ -4966,7 +4864,7 @@ url = "https://mcp.linear.app/mcp"
   }
   .s9-tip-cmd .alias {
     color: var(--text-muted);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     font-weight: 400;
     margin-left: 6px;
   }
@@ -5064,7 +4962,7 @@ url = "https://mcp.linear.app/mcp"
     </div>
     <div class="s9-tip fragment fade-in" data-fragment-index="3">
       <p class="s9-tip-cmd">/rewind <span class="alias">o Esc Esc</span></p>
-      <p class="s9-tip-what">Volvés atrás la <strong style="color: var(--accent);">conversación y el código</strong> a un checkpoint anterior.</p>
+      <p class="s9-tip-what">Volvés atrás la <strong style="color: var(--accent);">conversación y el código</strong> a un checkpoint anterior. Lo hecho vía Bash (<code>rm</code>, migraciones) no vuelve.</p>
       <p class="s9-tip-when">Cuando algo salió mal y querés deshacer sin pelear con git.</p>
       <p class="s9-tip-equiv"><strong>Codex:</strong> Esc Esc, solo la conversación · <strong>OpenCode:</strong> <code>/undo</code> revierte mensaje y archivos.</p>
     </div>
@@ -5072,12 +4970,12 @@ url = "https://mcp.linear.app/mcp"
 
   <aside class="notes">
     <p><strong>Cuatro reveals — los tips de a uno.</strong></p>
-    <p><u>Los cuatro comandos/flujos de Claude Code, cada uno con su equivalente citado en la tarjeta. Codex verificado contra learn.chatgpt.com/docs/developer-commands.md; OpenCode contra opencode.ai/docs/tui y /docs/cli.</u></p>
+    <p><u>Los cuatro comandos/flujos de Claude Code, cada uno con su equivalente citado en la tarjeta. Codex verificado contra learn.chatgpt.com/docs/developer-commands.md; OpenCode contra opencode.ai/docs/tui y /docs/cli. Los checkpoints de Claude Code solo rastrean las ediciones hechas con sus tools de archivos: lo que cambió vía Bash (rm, mv, migraciones) no se revierte con /rewind (code.claude.com/docs/en/checkpointing.md).</u></p>
     <p><em>"Van cuatro, y cada una tiene su versión en los otros dos harnesses. Vamos de a una."</em></p>
     <p><em>"Primero, barra btw, de 'by the way'. Le hacés una pregunta al pasar y la respuesta no entra al historial ni te infla el contexto — aparece y se va. Ideal para chequear un detalle sin ensuciar la sesión en la que estás laburando. En Codex es barra side, o también barra btw. OpenCode no tiene nada parecido todavía."</em></p>
-    <p><em>"Segundo, barra rc, que es alias de barra remote-control. Deja la sesión disponible para controlarla desde claude.ai. Arrancás algo en la terminal de la oficina y lo seguís desde el celular. En Codex el equivalente es seguir desde la app de escritorio de ChatGPT, con barra app. En OpenCode no es exactamente lo mismo: vos levantás el servidor con opencode serve o opencode web, y te conectás con attach — la sesión la servís vos, no un tercero."</em></p>
+    <p><em>"Segundo, barra rc, que es alias de barra remote-control. Deja la sesión disponible para controlarla desde claude.ai. Arrancás algo en la terminal de la oficina y lo seguís desde el celular. En Codex el equivalente es seguir desde la app de escritorio, con barra app. En OpenCode no es exactamente lo mismo: vos levantás el servidor con opencode serve o opencode web, y te conectás con attach — la sesión la servís vos, no un tercero."</em></p>
     <p><em>"Tercero, retomar sesiones. claude menos c retoma la última sesión de ese directorio, directo. claude menos r abre un picker para que elijas cuál. Es la forma de no perder el contexto de un día para el otro. En Codex es codex resume guión guión last, o codex resume para el picker. En OpenCode, opencode menos c o barra sessions."</em></p>
-    <p><em>"Y cuarto, para mí el más subestimado: barra rewind, o apretar Escape dos veces. Vuelve atrás no solo la conversación sino también el código, a un checkpoint anterior. Cuando una serie de cambios se fue al descenso, en vez de pelearte con git, hacés rewind. En Codex, Escape dos veces edita el mensaje anterior y bifurca la conversación, pero no toca los archivos. En OpenCode, barra undo sí revierte archivos además del mensaje, usando snapshots de git, y barra redo los vuelve a poner."</em></p>
+    <p><em>"Y cuarto, para mí el más subestimado: barra rewind, o apretar Escape dos veces. Vuelve atrás no solo la conversación sino también el código, a un checkpoint anterior. Cuando una serie de cambios se fue al descenso, en vez de pelearte con git, hacés rewind. Ojo: lo que el agente hizo por Bash, un rm o una migración, eso no vuelve. En Codex, Escape dos veces edita el mensaje anterior y bifurca la conversación, pero no toca los archivos. En OpenCode, barra undo sí revierte archivos además del mensaje, usando snapshots de git, y barra redo los vuelve a poner."</em></p>
   </aside>
 </section>
 
@@ -5150,7 +5048,7 @@ url = "https://mcp.linear.app/mcp"
               '  "_meta": { <span class="k">"io.modelcontextprotocol/serverInfo"</span>:',
               '    { "name": "weather", "version": "1.0.0" } } } }'
             ]
-          ) + note('El server se presenta. La tarjeta del cliente no queda registrada: viaja en cada pedido.')
+          ) + note('El server se presenta. La tarjeta del cliente no queda registrada: viaja en cada pedido (se ve en el paso 2).')
         },
         {
           title: '2 · tools/list',
@@ -5235,13 +5133,13 @@ url = "https://mcp.linear.app/mcp"
         title: '1 — Lectura',
         summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/mcp</code> &rarr; confirmar <code>playwright</code> connected</li><li><strong>En Claude:</strong> "abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts"</li><li><strong>Mirar:</strong> el browser se abre solo y navega</li><li><strong>Mirar:</strong> llama <code>browser_navigate</code> y <code>browser_snapshot</code></li><li><strong>Mirar:</strong> los 5 títulos vuelven a la conversación, sin copy-paste</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts</div><p style="color: var(--text-primary); margin-top: 8px;">El agente confirma primero que el server está conectado, después llama <code>browser_navigate</code>, espera la carga, pide un <code>browser_snapshot</code>, y extrae los títulos del HTML. Vos no copiaste nada — fue, miró y trajo.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts</div><p style="color: var(--text-primary); margin-top: 8px;">Con <code>/mcp</code> confirmás primero que el server está conectado. Después el agente llama <code>browser_navigate</code>, espera la carga, pide un <code>browser_snapshot</code> y extrae los títulos del snapshot de la página. Vos no copiaste nada — fue, miró y trajo.</p>'
       },
       {
         title: '2 — Acción',
-        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li><li><strong>Mirar:</strong> el agente identifica los campos del form</li><li><strong>Mirar:</strong> llama <code>browser_type</code> campo por campo</li><li><strong>Mirar:</strong> hace <code>browser_click</code> en submit</li><li><strong>En Claude:</strong> el agente reporta qué se envió</li></ul>',
+        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li><li><strong>Mirar:</strong> el agente identifica los campos del form</li><li><strong>Mirar:</strong> llama <code>browser_type</code> o <code>browser_fill_form</code> para los campos</li><li><strong>Mirar:</strong> hace <code>browser_click</code> en submit</li><li><strong>En Claude:</strong> el agente reporta qué se envió</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> en cada campo &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p><p style="color: var(--text-muted); margin-top: 10px; font-style: italic;">Plan B: si el browser no abre en vivo, screenshots pre-armados de las dos corridas (lectura y acción) muestran el mismo resultado.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> o <code>browser_fill_form</code> en los campos &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p><p style="color: var(--text-muted); margin-top: 10px; font-style: italic;">Plan B: si el browser no abre en vivo, screenshots pre-armados de las dos corridas (lectura y acción) muestran el mismo resultado.</p>'
       }
     ]
   });
@@ -5256,7 +5154,7 @@ url = "https://mcp.linear.app/mcp"
         title: '1 — Lectura',
         summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/mcp</code> &rarr; confirmar <code>linear-server</code> connected y authenticated</li><li><strong>En Claude:</strong> "buscá en Linear los issues abiertos asignados a mí y resumímelos"</li><li><strong>Mirar:</strong> el agente llama los tools de Linear para buscar y abrir issues</li><li><strong>Mirar:</strong> el resumen vuelve a la conversación, con datos del workspace remoto</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en Linear los issues abiertos asignados a mí y resumímelos</div><p style="color: var(--text-primary); margin-top: 8px;">El agente confirma primero que el server está conectado y autenticado, después usa los tools de Linear para buscar, abrir los issues y resumirlos. Los datos vienen del workspace remoto, no de tu disco.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; buscá en Linear los issues abiertos asignados a mí y resumímelos</div><p style="color: var(--text-primary); margin-top: 8px;">Con <code>/mcp</code> confirmás primero que el server está conectado y autenticado. Después el agente usa los tools de Linear para buscar, abrir los issues y resumirlos. Los datos vienen del workspace remoto, no de tu disco.</p>'
       },
       {
         title: '2 — Acción',

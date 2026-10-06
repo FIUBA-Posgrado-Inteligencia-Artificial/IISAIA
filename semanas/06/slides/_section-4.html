@@ -547,7 +547,7 @@
 
   <div class="s4-prim-card">
     <p class="s4-prim-eyebrow">primitive 2 — <strong>application-controlled</strong></p>
-    <p class="s4-prim-def">Datos pasivos accesibles por URI. La aplicación los descubre y decide cuáles cargar al contexto. Ejemplo: <strong>un MCP server de Postgres</strong> — expone el schema de cada tabla.</p>
+    <p class="s4-prim-def">Datos pasivos accesibles por URI. El cliente los descubre; la aplicación decide cuáles cargar al contexto. Ejemplo: <strong>un MCP server de Postgres</strong> — expone el schema de cada tabla.</p>
 
     <div class="s4-prim-flow">
       <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
@@ -597,7 +597,7 @@
     <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
       <div class="s4-prim-cc-label">así se ve en Claude Code</div>
       <div class="s4-prim-cc-internal">[ el usuario adjunta @postgres:postgres://db-prod/users/schema y @postgres:postgres://db-prod/orders/schema al prompt ]</div>
-      <div class="s4-prim-cc-internal">→ Claude Code lee esos resources con ReadMcpResourceTool y los carga al contexto antes de llamar al modelo</div>
+      <div class="s4-prim-cc-internal">→ Claude Code le pide esos resources al server (resources/read) y los adjunta al contexto antes de llamar al modelo</div>
       <div class="s4-prim-cc-user">&gt; Escribime una query que traiga usuarios con pedidos sin pagar</div>
       <div class="s4-prim-cc-assistant">claude &gt; <code>SELECT u.id, u.email FROM users u JOIN orders o ON o.user_id = u.id WHERE o.status = 'unpaid'</code> — columnas reales, sin alucinarlas</div>
     </div>
@@ -605,11 +605,11 @@
 
   <aside class="notes">
     <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
-    <p><u>Resources con un server de Postgres genérico (el server de referencia que documentaba esto quedó archivado, así que no se nombra como "oficial"). CC ya lee archivos nativamente, pero no se conecta solo a una DB para introspeccionar schemas — ahí entra el resource. Cronología clave: el read sucede ANTES de que el usuario pregunte algo. En Claude Code la vía de attach es @server:uri (code.claude.com/docs/en/mcp.md); el modelo también puede leer resources directo con ReadMcpResourceTool, sin pasar por el usuario.</u></p>
+    <p><u>Resources con un server de Postgres genérico (el server de referencia que documentaba esto quedó archivado, así que no se nombra como "oficial"). CC ya lee archivos nativamente, pero no se conecta solo a una DB para introspeccionar schemas — ahí entra el resource. Cronología clave: el read sucede ANTES de que el usuario pregunte algo. En Claude Code la vía de attach es @server:uri (code.claude.com/docs/en/mcp.md): el cliente le pide cada resource al server con resources/read y lo adjunta al contexto. Además, el modelo puede leerlos por su cuenta con ReadMcpResourceTool, sin pasar por el usuario.</u></p>
     <p><em>"Segunda primitive: resources. Datos pasivos accesibles por URI. Ejemplo: un MCP server de Postgres que expone el schema de cada tabla de la base como un resource — algo que CC no puede hacer solo, porque no se conecta a una base de datos para introspeccionar schemas."</em></p>
     <p><em>"Paso uno. El cliente le pide al server el catálogo con resources/list. El server introspecciona la base — corre las queries de catálogo de Postgres — y devuelve una URI por cada tabla. Dos ejemplos: users.schema y orders.schema. Cada URI viene con mimeType application slash json porque el contenido es JSON estructurado del schema."</em></p>
     <p><em>"Paso dos. La app decide cargar el schema de users. Emite resources/read con la URI concreta. El server consulta la base y devuelve el JSON del schema: las columnas, tipos, nullability, índices. La app lo inyecta al contexto del modelo."</em></p>
-    <p><em>"Y así se ve en Claude Code, con la cronología correcta: el usuario adjunta los schemas de users y orders con la sintaxis arroba-server-dos puntos-uri, @postgres:postgres://db-prod/users/schema. Es una acción del usuario en el prompt, no una consulta al modelo. Claude Code lee esos resources con ReadMcpResourceTool y los carga al contexto antes de que el usuario pregunte nada. Recién después llega la pregunta: escribime una query que traiga usuarios con pedidos sin pagar. El modelo arma el SQL con los nombres reales de las columnas — sin alucinarlos, porque los tiene en contexto. Eso es application-controlled. Nota al margen: algunos servers exponen resource templates, URIs parametrizadas con placeholders entre llaves, que la app expande con valores concretos en tiempo real."</em></p>
+    <p><em>"Y así se ve en Claude Code, con la cronología correcta: el usuario adjunta los schemas de users y orders con la sintaxis arroba-server-dos puntos-uri, @postgres:postgres://db-prod/users/schema. Es una acción del usuario en el prompt, no una consulta al modelo. Claude Code se los pide al server con resources/read y los adjunta al contexto antes de que el usuario pregunte nada. Recién después llega la pregunta: escribime una query que traiga usuarios con pedidos sin pagar. El modelo arma el SQL con los nombres reales de las columnas — sin alucinarlos, porque los tiene en contexto. Eso es application-controlled. Nota al margen: algunos servers exponen resource templates, URIs parametrizadas con placeholders entre llaves, que la app expande con valores concretos en tiempo real."</em></p>
   </aside>
 </section>
 

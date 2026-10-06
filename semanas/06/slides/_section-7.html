@@ -195,7 +195,7 @@
 
   <p class="s7-sub">Con la extensión <strong>Claude in Chrome</strong>, sí — pero necesita plan pago, y por dentro también es un MCP server (aparece en <code>/mcp</code> como <code>claude-in-chrome</code>). Playwright es la opción portable: cualquier host, sin plan, headless incluido.</p>
 
-  <p class="s7-sub">Playwright MCP expone ese browser controlado como tools: un server <strong>local</strong>, que corre en tu máquina hablando por Stdio. Lo conectamos a un proyecto y lo ponemos a trabajar.</p>
+  <p class="s7-sub">Playwright MCP expone el browser como tools desde un server <strong>local</strong>: corre en tu máquina y habla por Stdio.</p>
 
   <aside class="notes">
     <p><u>Marco del primer demo. La pregunta cero da "de fábrica, no" (CC no trae browser propio) → corresponde MCP. Con Claude in Chrome y plan pago sí se puede, y esa extensión es, por dentro, también un MCP server. Playwright es la alternativa portable. Codex CLI y OpenCode tampoco traen browser propio. Se planta el eje de las dos secciones: este es un server LOCAL, transport Stdio. El próximo será remoto.</u></p>
@@ -222,7 +222,7 @@
   </div>
 
   <aside class="notes">
-    <p><u>Install del server local. Lo importante para el contraste con §8: acá hay un comando que arranca un proceso local (Stdio, sin red, sin auth). En el remoto va a haber una URL y OAuth.</u></p>
+    <p><u>Install del server local. Lo importante para el contraste con §8: acá hay un comando que arranca un proceso local (Stdio, sin red, sin auth). En el remoto va a haber una URL y OAuth. En la demo usamos @latest por comodidad; en tu repo, versión fija (el riesgo 3 de §6.12).</u></p>
     <p><u>@playwright/mcp todavía habla la revisión de protocolo 2025-11-25, así que acá el cliente usa el handshake initialize en vez de server/discover — el patrón del intercambio es el mismo (por eso la animación del §5 usó un server genérico).</u></p>
     <p><em>"Se agrega con el mismo comando del bloque de harnesses: claude mcp add playwright, guión guión, npx arroba playwright barra mcp arroba latest. Una línea, y el server queda corriendo como un subproceso en tu propia máquina — transport Stdio. npx baja el paquete la primera vez y después lo arranca solo cada vez que abrís una sesión. Los mensajes viajan por stdin y stdout, sin red. No hay URL ni autenticación, porque el server vive con vos. Guarden esa imagen — el próximo demo es exactamente lo contrario."</em></p>
   </aside>
@@ -244,7 +244,7 @@
   <aside class="notes">
     <p><strong>Demo en vivo, terminal + browser lado a lado. Click cada beat.</strong></p>
     <p><u>Dos casos: lectura (traer datos de una página) y acción (completar un form). Antes de arrancar, confirmar que el server está conectado con /mcp. El alumno tiene que ver el browser moverse solo.</u></p>
-    <p><em>"Vamos al vivo. Antes de nada, /mcp para confirmar que playwright está conectado. Primer caso, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts — van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos, sin que yo copie ni pegue nada. Segundo caso, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena uno por uno y hace submit."</em></p>
+    <p><em>"Vamos al vivo. Antes de nada, /mcp para confirmar que playwright está conectado. Primer caso, lectura: le pido que abra Hacker News y me traiga los títulos de los cinco primeros posts — van a ver al agente decidir que necesita el browser, navegar, leer la página, y volver con los títulos, sin que yo copie ni pegue nada. Segundo caso, acción, que ya tiene efecto: le pido que vaya a un form público y lo complete con datos de prueba. Mismo patrón, pero ahora el agente identifica los campos, los llena y hace submit."</em></p>
     <hr>
     <p><strong>Acciones (copiables):</strong></p>
     <p><strong>Paso 1 — Lectura</strong></p>
@@ -259,7 +259,7 @@
     <ul>
       <li>En Claude: "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li>
       <li>Mirar: el agente identifica los campos del form</li>
-      <li>Mirar: llama <code>browser_type</code> campo por campo</li>
+      <li>Mirar: llama <code>browser_type</code> o <code>browser_fill_form</code> para los campos</li>
       <li>Mirar: hace <code>browser_click</code> en submit</li>
       <li>En Claude: el agente reporta qué se envió</li>
     </ul>
@@ -299,13 +299,13 @@
         title: '1 — Lectura',
         summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> <code>/mcp</code> &rarr; confirmar <code>playwright</code> connected</li><li><strong>En Claude:</strong> "abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts"</li><li><strong>Mirar:</strong> el browser se abre solo y navega</li><li><strong>Mirar:</strong> llama <code>browser_navigate</code> y <code>browser_snapshot</code></li><li><strong>Mirar:</strong> los 5 títulos vuelven a la conversación, sin copy-paste</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts</div><p style="color: var(--text-primary); margin-top: 8px;">El agente confirma primero que el server está conectado, después llama <code>browser_navigate</code>, espera la carga, pide un <code>browser_snapshot</code>, y extrae los títulos del HTML. Vos no copiaste nada — fue, miró y trajo.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; abrí news.ycombinator.com y traeme los títulos de los 5 primeros posts</div><p style="color: var(--text-primary); margin-top: 8px;">Con <code>/mcp</code> confirmás primero que el server está conectado. Después el agente llama <code>browser_navigate</code>, espera la carga, pide un <code>browser_snapshot</code> y extrae los títulos del snapshot de la página. Vos no copiaste nada — fue, miró y trajo.</p>'
       },
       {
         title: '2 — Acción',
-        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li><li><strong>Mirar:</strong> el agente identifica los campos del form</li><li><strong>Mirar:</strong> llama <code>browser_type</code> campo por campo</li><li><strong>Mirar:</strong> hace <code>browser_click</code> en submit</li><li><strong>En Claude:</strong> el agente reporta qué se envió</li></ul>',
+        summary: '<ul style="font-size:0.88em;padding-left:16px;margin:4px 0 0;line-height:1.5;text-align:left;"><li><strong>En Claude:</strong> "andá a httpbin.org/forms/post y completá los campos con datos de prueba"</li><li><strong>Mirar:</strong> el agente identifica los campos del form</li><li><strong>Mirar:</strong> llama <code>browser_type</code> o <code>browser_fill_form</code> para los campos</li><li><strong>Mirar:</strong> hace <code>browser_click</code> en submit</li><li><strong>En Claude:</strong> el agente reporta qué se envió</li></ul>',
         borderColor: 'var(--accent)',
-        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> en cada campo &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p><p style="color: var(--text-muted); margin-top: 10px; font-style: italic;">Plan B: si el browser no abre en vivo, screenshots pre-armados de las dos corridas (lectura y acción) muestran el mismo resultado.</p>'
+        example: '<div style="color: var(--accent); font-family: var(--font-mono);">&gt; andá a httpbin.org/forms/post y completá los campos con datos de prueba</div><p style="color: var(--text-primary); margin-top: 8px;">Mismo patrón, con efecto: <code>browser_navigate</code> &rarr; <code>browser_type</code> o <code>browser_fill_form</code> en los campos &rarr; <code>browser_click</code> en submit. El agente reporta lo que salió.</p><p style="color: var(--text-muted); margin-top: 10px; font-style: italic;">Plan B: si el browser no abre en vivo, screenshots pre-armados de las dos corridas (lectura y acción) muestran el mismo resultado.</p>'
       }
     ]
   });

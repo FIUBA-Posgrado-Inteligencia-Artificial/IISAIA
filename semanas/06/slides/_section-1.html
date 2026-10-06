@@ -124,35 +124,6 @@
     margin: 0;
   }
 
-  /* Wrapper custom — N×M visual */
-  .s1-salida-card {
-    background: var(--bg-secondary);
-    border-top: 4px solid var(--accent-secondary);
-    border-radius: 8px;
-    padding: var(--spacing-lg);
-    max-width: 1000px;
-    margin: var(--spacing-lg) auto 0 auto;
-  }
-  .s1-salida-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent-secondary);
-    margin: 0 0 var(--spacing-xs) 0;
-  }
-  .s1-salida-title {
-    color: var(--text-heading);
-    font-size: 1.65rem;
-    font-weight: 700;
-    margin: 0 0 var(--spacing-md) 0;
-  }
-  .s1-salida-body {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    line-height: 1.55;
-    margin: 0;
-  }
   /* Postgres step-cards — narrativa en 4 pasos, grid 2×2 compacto */
   .s1-steps {
     display: grid;
@@ -204,7 +175,7 @@
     background: var(--bg-code) !important;
     border-radius: 4px;
     padding: 8px 12px !important;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
   .s1-step-foot {
     color: var(--text-muted);
@@ -221,79 +192,6 @@
     padding: 0 5px;
     border-radius: 3px;
     font-size: 0.95rem;
-  }
-  .s1-missing-items {
-    list-style: none;
-    padding: 0;
-    margin: 4px 0 0 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 24px;
-  }
-  .s1-missing-items li {
-    color: var(--text-primary);
-    font-size: 1.05rem;
-    padding-left: 1.5em;
-    position: relative;
-    line-height: 1.3;
-  }
-  .s1-missing-items li::before {
-    content: "✗";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--accent-secondary);
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-  .s1-missing-items li strong {
-    color: var(--accent);
-    font-weight: 700;
-    display: block;
-  }
-  .s1-missing-items li span {
-    display: block;
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    margin-top: 1px;
-    line-height: 1.3;
-  }
-  .s1-salida-takeaway {
-    color: var(--text-muted);
-    font-size: 1.02rem;
-    text-align: center;
-    margin: var(--spacing-md) 0 0 0;
-    line-height: 1.45;
-  }
-  .s1-salida-takeaway strong {
-    color: var(--accent-secondary);
-    font-weight: 700;
-  }
-
-  /* Pegar al prompt — three small chips */
-  .s1-complicaciones {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-sm);
-    margin: var(--spacing-lg) 0 0 0;
-  }
-  .s1-comp-chip {
-    background: var(--bg-code);
-    border-left: 3px solid var(--text-muted);
-    border-radius: 4px;
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-  .s1-comp-name {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 1rem;
-    margin: 0 0 2px 0;
-  }
-  .s1-comp-detail {
-    color: var(--text-muted);
-    font-size: 0.92rem;
-    margin: 0;
-    line-height: 1.4;
   }
 
   /* Bridge slide */
@@ -342,14 +240,14 @@
     grid-template-columns: 110px 1fr;
     align-items: baseline;
     gap: var(--spacing-sm);
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     line-height: 1.4;
   }
   .s1-runtime-name {
     font-family: var(--font-mono);
     color: var(--accent);
     font-weight: 700;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
   .s1-runtime-artifacts {
     color: var(--text-muted);
@@ -363,7 +261,7 @@
     color: var(--code-text);
     padding: 1px 6px;
     border-radius: 3px;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
   }
 
   /* §1.4 — N×M vs N+M convergence visual */
@@ -409,7 +307,7 @@
     grid-template-columns: auto repeat(4, 1fr);
     gap: 3px;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.95rem;
     margin: 0;
   }
   .s1-nm-grid > div {
@@ -447,7 +345,7 @@
     border-radius: 3px;
     text-align: center;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.95rem;
   }
   .s1-hub-arrows {
     display: flex;
@@ -473,7 +371,7 @@
     font-weight: 700;
     font-family: var(--font-mono);
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     white-space: nowrap;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
@@ -512,13 +410,13 @@
     </div>
   </div>
 
-  <p class="s1-tools-more">y ~40 más: <code>Agent</code>, <code>Skill</code>, <code>LSP</code>…</p>
+  <p class="s1-tools-more">~40 en total: <code>Agent</code>, <code>Skill</code>, <code>LSP</code>…</p>
 
   <p class="s1-tools-takeaway">Para el grueso del workflow de desarrollo local, te alcanza. <strong>Lo decidió Anthropic.</strong></p>
 
   <aside class="notes">
     <p><u>Recap visual sin re-explicar qué es un tool. El alumno ya pasó por loop agentic + tools + harness + skills + sub-agents. El slide hace dos cosas: anclar lo que ya tienen y plantar la observación clave — el set es curado. Dato aparte: en macOS, Linux y WSL, Glob y Grep no vienen por defecto en el runtime — ahí el agente busca con <code>find</code>/<code>grep</code> vía Bash; no afecta el punto del slide, pero vale aclararlo si alguien lo nota en su máquina.</u></p>
-    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Glob y Grep para buscar. Bash para correr comandos. WebFetch y WebSearch para traer contenido de la web. Y unas cuarenta más, como Agent, Skill o LSP, que fueron apareciendo sin que lo noten. Para casi todo el workflow de desarrollo local ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos. De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
+    <p><em>"Las últimas dos clases estuvimos trabajando con Claude Code, y lo vienen usando con un set de tools que viene de fábrica. Read, Write, Edit para tocar archivos. Glob y Grep para buscar. Bash para correr comandos. WebFetch y WebSearch para traer contenido de la web. En total son unas cuarenta, con Agent, Skill o LSP entre las que fueron apareciendo sin que lo noten. Para casi todo el workflow de desarrollo local ese set te alcanza. No es accidente: lo curó Anthropic para eso. Pero notá una cosa: vos no podés agregarle un tool nuevo a Claude Code editando su código fuente. El set es finito, y quién lo decide no sos vos. De ahí sale la pregunta que abre la clase. ¿Qué hacés cuando necesitás que el agente haga algo que está afuera de ese set?"</em></p>
   </aside>
 </section>
 
@@ -543,12 +441,12 @@
       <div class="s1-nostá-eyebrow">no está 3</div>
       <h3 class="s1-nostá-title">Tu gestor de tareas (Linear, Jira).</h3>
       <div class="s1-nostá-quiero">Marcá este ticket como Done y asignalo a Flor.</div>
-      <p class="s1-nostá-gap">No hay tool nativo para eso. Bash podría pegarle al API REST, pero no tenés el cliente armado ni el token a mano.</p>
+      <p class="s1-nostá-gap">No hay tool nativo para eso. Bash podría pegarle a su API, pero no tenés el cliente armado ni el token a mano.</p>
     </div>
   </div>
 
   <aside class="notes">
-    <p><strong>Cuatro reveals — el aterrizaje y una capacidad faltante por card.</strong></p>
+    <p><strong>Tres reveals — después del aterrizaje, una capacidad faltante por card.</strong></p>
     <p><u>El alumno aterriza tres casos concretos que cualquiera vivió. Cada card tiene el pedido en mono (lo que vos querrías escribir) y por qué el set actual no lo cubre limpio. El tercero anticipa el demo de §8: la razón por la que no está no es memoria del modelo, es que no hay canal hacia ese servicio. Browser: con la extensión Claude in Chrome (plan Pro/Max/Team/Enterprise y login) sí se puede controlar un browser real desde Claude Code — por dentro, esa extensión es un MCP server (aparece como <code>claude-in-chrome</code> en <code>/mcp</code>). Playwright sigue siendo la opción portable, sin plan ni login.</u></p>
     <p><em>"Tres ejemplos concretos de capacidad que el set por default no te da."</em></p>
     <p><em>"Primero: querés tirar una query contra Postgres de producción y traerte filas que matchean un patrón. Bash con psql te lo permite si las credenciales están en el entorno. Pero el agente no sabe el schema, no sabe los tipos, no sabe qué columnas son sensibles. Querrías un tool con tipos declarados y permisos, no una shell ciega."</em></p>
@@ -566,7 +464,7 @@
       <div class="s1-step-num">1</div>
       <div class="s1-step-body">
         <h3 class="s1-step-title">El runtime ya corre <code>psql</code>.</h3>
-        <pre><code class="language-bash">$ psql postgresql://readonly@10.0.1.42/analytics \
+        <pre><code class="language-bash">$ psql postgresql://readonly@db/analytics \
     -c "SELECT email FROM users LIMIT 5"</code></pre>
         <p class="s1-step-foot">Funciona — <strong>mientras lo que Opus sabe de psql cubra lo que necesitás.</strong></p>
       </div>
@@ -577,7 +475,7 @@
       <div class="s1-step-body">
         <h3 class="s1-step-title">Agregás instrucciones al contexto.</h3>
         <pre><code class="language-markdown"># CLAUDE.md
-Conexión: postgresql://readonly@10.0.1.42/analytics
+Conexión: postgresql://readonly@db/analytics
 Schema: users(id, email, signup_date, active)</code></pre>
         <p class="s1-step-foot">Mejor. Pero <strong>no sabés lo que no sabés que falta.</strong></p>
       </div>
