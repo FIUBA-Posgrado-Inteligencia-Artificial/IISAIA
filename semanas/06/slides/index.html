@@ -4882,32 +4882,35 @@ url = "https://mcp.linear.app/mcp"
   }
   .s9-tip-what {
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 1.45;
     margin: 0 0 var(--spacing-xs) 0;
   }
   .s9-tip-when {
     color: var(--text-muted);
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     line-height: 1.4;
     margin: 0;
     font-style: italic;
   }
-  .s9-tips-extra {
-    text-align: center;
+  .s9-tip-equiv {
     color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.5;
-    margin: var(--spacing-lg) auto 0 auto;
-    max-width: 1000px;
-  }
-  .s9-tips-extra code {
-    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin: var(--spacing-xs) 0 0 0;
+    padding-top: var(--spacing-xs);
+    border-top: 1px solid #2a3a5a;
     font-style: normal;
-    color: var(--accent);
-    font-size: 0.92rem;
   }
-
+  .s9-tip-equiv strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .s9-tip-equiv code {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent-secondary);
+  }
   /* §9.3 — Cierre */
   .s9-close {
     max-width: 1000px;
@@ -4934,16 +4937,15 @@ url = "https://mcp.linear.app/mcp"
 <section>
 <!-- §9.1 — Opener -->
 <section>
-  <p class="s9-eyebrow" style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-secondary); margin: 0 auto var(--spacing-sm) auto; max-width: 1000px;">Para cerrar</p>
-  <h2 class="s9-h2">Cuatro cosas de Claude Code que te van a servir.</h2>
+  <h2 class="s9-h2">Cuatro cosas del día a día.</h2>
 
   <div class="s9-opener">
-    <p class="s9-opener-sub">No son de MCP — son del día a día con la herramienta. Poco obvias, y te ahorran tiempo apenas las incorporás.</p>
+    <p class="s9-opener-sub">No son de MCP — son del día a día con la herramienta. Van sobre Claude Code, que usamos como referencia, y cada una tiene su versión en Codex y en OpenCode, cuando existe.</p>
   </div>
 
   <aside class="notes">
-    <p><u>Opener del cierre. Cambia el registro: dejamos MCP y pasamos a tips prácticos de Claude Code, la herramienta que usan. Cuatro comandos/flujos poco conocidos pero de alto valor.</u></p>
-    <p><em>"Y para cerrar, cambio de registro. Dejamos MCP un momento y les dejo cuatro cosas de Claude Code, la herramienta que vienen usando, que no son obvias y que les van a ahorrar tiempo apenas las incorporen. Nada de teoría — puro día a día."</em></p>
+    <p><u>Opener del cierre. Cambia el registro: dejamos MCP y pasamos a tips prácticos de la herramienta que usan, con su equivalente en Codex y OpenCode.</u></p>
+    <p><em>"Y para cerrar, cambio de registro. Dejamos MCP un momento y les dejo cuatro cosas del día a día con la herramienta, no son obvias y les van a ahorrar tiempo apenas las incorporen. Las vemos sobre Claude Code, que usan más seguido, pero cada una tiene su versión en Codex y en OpenCode. Nada de teoría — puro día a día."</em></p>
   </aside>
 </section>
 
@@ -4955,35 +4957,37 @@ url = "https://mcp.linear.app/mcp"
     <div class="s9-tip fragment fade-in" data-fragment-index="0">
       <p class="s9-tip-cmd">/btw &lt;pregunta&gt;</p>
       <p class="s9-tip-what">Una pregunta al pasar que <strong style="color: var(--accent);">no entra al historial</strong> ni infla el contexto.</p>
-      <p class="s9-tip-when">Para chequear un detalle sin ensuciar la sesión en la que estás trabajando.</p>
+      <p class="s9-tip-when">Para chequear un detalle sin ensuciar la sesión.</p>
+      <p class="s9-tip-equiv"><strong>Codex:</strong> <code>/side</code> o <code>/btw</code> · <strong>OpenCode:</strong> no tiene.</p>
     </div>
     <div class="s9-tip fragment fade-in" data-fragment-index="1">
       <p class="s9-tip-cmd">/rc <span class="alias">alias de /remote-control</span></p>
       <p class="s9-tip-what">Deja la sesión disponible para controlarla desde <strong style="color: var(--accent);">claude.ai</strong>.</p>
-      <p class="s9-tip-when">Para seguir desde el celular o el browser, lejos de la terminal.</p>
+      <p class="s9-tip-when">Para seguir desde el celular, lejos de la terminal.</p>
+      <p class="s9-tip-equiv"><strong>Codex:</strong> app de escritorio (<code>/app</code>) · <strong>OpenCode:</strong> <code>serve</code>/<code>web</code> + <code>attach</code>.</p>
     </div>
     <div class="s9-tip fragment fade-in" data-fragment-index="2">
       <p class="s9-tip-cmd">claude -c &nbsp;/&nbsp; claude -r</p>
-      <p class="s9-tip-what"><strong style="color: var(--accent);">Retomás una sesión anterior.</strong> <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.9rem;">-c</code> la última del directorio; <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.9rem;">-r</code> abre un picker para elegir cuál.</p>
+      <p class="s9-tip-what"><strong style="color: var(--accent);">Retomás una sesión anterior.</strong> <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.95rem;">-c</code> la última del directorio; <code style="font-family: var(--font-mono); color: var(--accent-secondary); font-size: 0.95rem;">-r</code> abre un picker para elegir cuál.</p>
       <p class="s9-tip-when">Para no perder el contexto de un día para el otro.</p>
+      <p class="s9-tip-equiv"><strong>Codex:</strong> <code>codex resume --last</code> / <code>codex resume</code> · <strong>OpenCode:</strong> <code>opencode -c</code> / <code>/sessions</code>.</p>
     </div>
     <div class="s9-tip fragment fade-in" data-fragment-index="3">
       <p class="s9-tip-cmd">/rewind <span class="alias">o Esc Esc</span></p>
       <p class="s9-tip-what">Volvés atrás la <strong style="color: var(--accent);">conversación y el código</strong> a un checkpoint anterior.</p>
-      <p class="s9-tip-when">Cuando una serie de cambios salió mal y querés deshacer sin pelear con git.</p>
+      <p class="s9-tip-when">Cuando algo salió mal y querés deshacer sin pelear con git.</p>
+      <p class="s9-tip-equiv"><strong>Codex:</strong> Esc Esc, solo la conversación · <strong>OpenCode:</strong> <code>/undo</code> revierte mensaje y archivos.</p>
     </div>
   </div>
 
-  <p class="s9-tips-extra fragment fade-in" data-fragment-index="4">Y una de yapa: <code>/compact</code> resume la conversación cuando el contexto se llena, sin perder el hilo.</p>
-
   <aside class="notes">
-    <p><strong>Cinco reveals — los cuatro tips de a uno, después la yapa de /compact.</strong></p>
-    <p><u>Los cuatro comandos/flujos. Verificados contra la doc de Claude Code. Cada uno con qué hace y cuándo usarlo. El quinto, /compact, como bonus.</u></p>
-    <p><em>"Primero, barra btw, de 'by the way'. Le hacés una pregunta al pasar y la respuesta no entra al historial ni te infla el contexto — aparece y se va. Ideal para chequear un detalle sin ensuciar la sesión en la que estás laburando."</em></p>
-    <p><em>"Segundo, barra rc, que es alias de barra remote-control. Deja la sesión disponible para controlarla desde claude.ai. Arrancás algo en la terminal de la oficina y lo seguís desde el celular, o desde el browser. La sesión es la misma."</em></p>
-    <p><em>"Tercero, retomar sesiones. claude menos c retoma la última sesión de ese directorio, directo. claude menos r abre un picker para que elijas cuál de tus sesiones anteriores retomar. Es la forma de no perder el contexto de un día para el otro — no arrancás de cero cada vez."</em></p>
-    <p><em>"Cuarto, y para mí el más subestimado: barra rewind, o apretar Escape dos veces. Vuelve atrás no solo la conversación sino también el código, a un checkpoint anterior. Cada prompt crea un checkpoint automático. Cuando una serie de cambios se fue al descenso, en vez de pelearte con git para deshacer, hacés rewind y volvés a un punto bueno."</em></p>
-    <p><em>"Y una de yapa para cuando una sesión se hace larga: barra compact resume toda la conversación en algo breve, libera contexto, y seguís sin perder el hilo. Esas cinco, incorpórenlas y van a laburar bastante más cómodos."</em></p>
+    <p><strong>Cuatro reveals — los tips de a uno.</strong></p>
+    <p><u>Los cuatro comandos/flujos de Claude Code, cada uno con su equivalente citado en la tarjeta. Codex verificado contra learn.chatgpt.com/docs/developer-commands.md; OpenCode contra opencode.ai/docs/tui y /docs/cli.</u></p>
+    <p><em>"Van cuatro, y cada una tiene su versión en los otros dos harnesses. Vamos de a una."</em></p>
+    <p><em>"Primero, barra btw, de 'by the way'. Le hacés una pregunta al pasar y la respuesta no entra al historial ni te infla el contexto — aparece y se va. Ideal para chequear un detalle sin ensuciar la sesión en la que estás laburando. En Codex es barra side, o también barra btw. OpenCode no tiene nada parecido todavía."</em></p>
+    <p><em>"Segundo, barra rc, que es alias de barra remote-control. Deja la sesión disponible para controlarla desde claude.ai. Arrancás algo en la terminal de la oficina y lo seguís desde el celular. En Codex el equivalente es seguir desde la app de escritorio de ChatGPT, con barra app. En OpenCode no es exactamente lo mismo: vos levantás el servidor con opencode serve o opencode web, y te conectás con attach — la sesión la servís vos, no un tercero."</em></p>
+    <p><em>"Tercero, retomar sesiones. claude menos c retoma la última sesión de ese directorio, directo. claude menos r abre un picker para que elijas cuál. Es la forma de no perder el contexto de un día para el otro. En Codex es codex resume guión guión last, o codex resume para el picker. En OpenCode, opencode menos c o barra sessions."</em></p>
+    <p><em>"Y cuarto, para mí el más subestimado: barra rewind, o apretar Escape dos veces. Vuelve atrás no solo la conversación sino también el código, a un checkpoint anterior. Cuando una serie de cambios se fue al descenso, en vez de pelearte con git, hacés rewind. En Codex, Escape dos veces edita el mensaje anterior y bifurca la conversación, pero no toca los archivos. En OpenCode, barra undo sí revierte archivos además del mensaje, usando snapshots de git, y barra redo los vuelve a poner."</em></p>
   </aside>
 </section>
 
@@ -4996,7 +5000,7 @@ url = "https://mcp.linear.app/mcp"
 
   <aside class="notes">
     <p><u>Cierre temático de la semana, en una sola idea (no un recap con bullets). Conecta el arco entero: el problema de §1 (el set finito) se resuelve con MCP, y la pregunta cero es la herramienta de criterio. Después viene la slide de preguntas.</u></p>
-    <p><em>"Y con esto cerramos. Arrancamos la clase con un problema: el agente trae un set finito de tools, curado, que no podés extender editando el host. Lo terminamos con la respuesta: MCP es la forma estándar de extender lo que el agente ve y lo que toca, sin atarte a un host. Y si se llevan una sola herramienta de criterio, que sea la pregunta cero: antes de sumar cualquier server, ¿el host ya lo hace? Eso es todo. ¿Preguntas?"</em></p>
+    <p><em>"Y con esto cerramos. Arrancamos la clase con un problema: el agente trae un set finito de tools, curado, que no podés extender editando el host. Lo terminamos con la respuesta: MCP es la forma estándar de extender lo que el agente ve y lo que toca, sin atarte a un host. La pregunta cero queda como criterio: antes de sumar cualquier server, ¿el host ya lo hace? Eso es todo. ¿Preguntas?"</em></p>
   </aside>
 </section>
 </section>
