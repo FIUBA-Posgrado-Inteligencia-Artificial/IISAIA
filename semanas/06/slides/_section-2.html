@@ -1,17 +1,23 @@
 <style>
   /* §2 — Protocolo, no API
      All centered elements share max-width 1000px so vertical edges align. */
-  .s2-h2 {
+  .reveal .s2-h2 {
     text-align: center;
     max-width: 1000px;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
-  .s2-h2-sub {
+  .reveal .s2-h2-sub {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-xs) auto 0 auto;
     max-width: 1000px;
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* §2.1 — Matrix N×M ↔ N+M visual */
@@ -78,23 +84,29 @@
     z-index: 3;
     box-shadow: 0 0 24px var(--accent);
   }
-  .s2-matrix-caption {
+  .reveal .s2-matrix-caption {
     text-align: center;
-    margin: var(--spacing-md) auto 0 auto;
     font-size: 1.2rem;
     color: var(--text-primary);
     max-width: 1000px;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s2-matrix-caption strong {
     color: var(--accent);
     font-family: var(--font-mono);
   }
-  .s2-matrix-caption-pre {
+  .reveal .s2-matrix-caption-pre {
     text-align: center;
-    margin: var(--spacing-md) auto 0 auto;
     font-size: 1.15rem;
     color: var(--text-muted);
     max-width: 1000px;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s2-matrix-caption-pre strong {
     color: var(--accent-secondary);
@@ -143,7 +155,7 @@
   }
   .s2-prec-body {
     color: var(--text-primary);
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     margin: 0;
   }
@@ -151,13 +163,16 @@
     color: var(--accent);
     font-weight: 700;
   }
-  .s2-prec-caption {
+  .reveal .s2-prec-caption {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-md) auto 0 auto;
     max-width: 1000px;
     line-height: 1.5;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* §2.3 — MCP canonical definition */
@@ -197,13 +212,16 @@
     text-align: right;
     padding-right: var(--spacing-lg);
   }
-  .s2-def-adopt {
+  .reveal .s2-def-adopt {
     color: var(--text-primary);
     font-size: 1.1rem;
-    margin: var(--spacing-xl) auto 0 auto;
     max-width: 1000px;
     text-align: center;
     line-height: 1.5;
+    margin-top: var(--spacing-xl);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s2-def-adopters {
     display: flex;
@@ -259,7 +277,7 @@
   }
   .s2-usbc-attr {
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     margin: var(--spacing-md) 0 0 0;
   }
@@ -290,8 +308,8 @@
 
 <!-- §2.1 — Matrix N×M ↔ N+M (visual canónico) -->
 <section>
-  <h2 class="s2-h2">El patrón estructural.</h2>
-  <p class="s2-h2-sub">Por qué necesariamente tiene forma de protocolo.</p>
+  <h2 class="s2-h2">El patrón tiene nombre.</h2>
+  <p class="s2-h2-sub">N clientes, M proveedores — en general.</p>
 
   <div class="s2-matrix-wrap">
     <div class="s2-matrix-clients">
@@ -339,14 +357,14 @@
     </svg>
   </div>
 
-  <p class="s2-matrix-caption-pre">N clientes × M proveedores, cada par una integración. <strong>N × M = 16</strong>.</p>
-  <p class="s2-matrix-caption fragment fade-in" data-fragment-index="0">Un protocolo común al medio. <strong>N + M = 8</strong>.</p>
+  <p class="s2-matrix-caption-pre">N clientes × M proveedores. <strong>N × M = 16</strong>.</p>
+  <p class="s2-matrix-caption fragment fade-in" data-fragment-index="0">Un protocolo al medio. <strong>N + M = 8</strong>.</p>
 
   <aside class="notes">
     <p><strong>Un reveal — spaghetti se va, hub aparece.</strong></p>
-    <p><u>La matriz formal, abstracta. §1.4 ya mostró el caso concreto (Postgres × runtimes); §2.1 generaliza: N clientes × M proveedores. La transición de spaghetti a hub es la promesa estructural del protocolo. Este diagrama se va a reusar tal cual en §6, cuando hablemos del ecosistema.</u></p>
-    <p><em>"Pongamos en abstracto lo que vimos en concreto. Tenés N clientes — pueden ser agentes, IDEs, runtimes — y tenés M proveedores de capacidades — Postgres, browser, Slack, lo que sea. Si cada cliente define su propia forma de integrar capacidades, entonces cada par cliente-proveedor es una integración custom. Eso es lo que ven a la izquierda: N por M. Cuatro por cuatro, dieciséis líneas. Cliente nuevo, M integraciones más. Proveedor nuevo, N integraciones más. Crece feo, sin techo."</em></p>
-    <p><em>"Si en cambio metés un protocolo común al medio — esto es lo que aparece ahora — la matriz se colapsa. Cada cliente habla el protocolo, una vez. Cada proveedor habla el protocolo, una vez. Total: N más M. Cuatro más cuatro, ocho conexiones. Y la propiedad clave: cliente nuevo, una integración, hereda todos los proveedores. Proveedor nuevo, una integración, queda disponible para todos los clientes. Esto es lo que hace un protocolo. Y este patrón no es nuevo — ya pasó antes."</em></p>
+    <p><u>Formalización de lo que armaron en §1 con Postgres: ahora en general, N clientes × M proveedores, con el protocolo nombrado en el centro. §6.1 vuelve a la idea, desde el server.</u></p>
+    <p><em>"Esto que acaban de armar con Postgres y los cuatro runtimes, en general: N clientes, M proveedores. Sin protocolo común, cada par es una integración propia — no tiene techo."</em></p>
+    <p><em>"Un protocolo al medio lo colapsa a N más M. Cliente nuevo hereda todos los proveedores con una sola integración; proveedor nuevo queda disponible para todos los clientes con una sola integración. Este patrón tiene nombre, y no es el primero en la historia del software."</em></p>
   </aside>
 </section>
 
@@ -361,14 +379,14 @@
       <h3 class="s2-prec-name">HTTP</h3>
       <p class="s2-prec-fullname">HyperText Transfer Protocol</p>
       <p class="s2-prec-pair">browsers × servers</p>
-      <p class="s2-prec-body">Antes: cada browser hablaba con cada server por su cuenta. Después de HTTP, <strong>cualquier browser habla con cualquier server</strong>, sin coordinación entre autores. Internet se vuelve posible.</p>
+      <p class="s2-prec-body">Antes de HTTP, cada browser hablaba con cada server por su cuenta, coordinando formatos a mano. Con un protocolo común, <strong>cualquier browser habla con cualquier server</strong>, sin acuerdo previo entre autores.</p>
     </div>
     <div class="s2-prec-card fragment fade-in" data-fragment-index="0">
       <p class="s2-prec-year">2016</p>
       <h3 class="s2-prec-name">LSP</h3>
       <p class="s2-prec-fullname">Language Server Protocol</p>
       <p class="s2-prec-pair">IDEs × lenguajes</p>
-      <p class="s2-prec-body">Antes: cada IDE × cada lenguaje, autocompletado a mano. Después de LSP, <strong>cada lenguaje publica un server, cada IDE lo consume</strong>. La matriz colapsa.</p>
+      <p class="s2-prec-body">Antes de LSP, cada IDE implementaba autocompletado para cada lenguaje por separado. Con un protocolo común, <strong>cada lenguaje publica un server y cualquier IDE lo consume</strong>.</p>
     </div>
   </div>
 
@@ -393,20 +411,20 @@
     <p class="s2-def-attr">— modelcontextprotocol.io</p>
   </div>
 
-  <p class="s2-def-adopt">Lo propuso Anthropic en 2024. Lo adoptaron:</p>
+  <p class="s2-def-adopt">Propuesto por Anthropic en 2024. Desde diciembre de 2025 lo gobierna la <strong>Agentic AI Foundation</strong> (Linux Foundation), co-fundada por Anthropic, Block y OpenAI. Lo adoptaron:</p>
   <div class="s2-def-adopters">
     <code>Claude</code>
     <code>ChatGPT</code>
     <code>Cursor</code>
     <code>Codex CLI</code>
-    <code>Opencode</code>
+    <code>OpenCode</code>
     <code>VS Code</code>
   </div>
 
   <aside class="notes">
-    <p><u>La definición oficial. Nota deliberada: la definición no menciona a Anthropic. Es un estándar abierto que Anthropic propuso, no un producto Anthropic.</u></p>
-    <p><em>"Esta es la definición oficial, de la doc de modelcontextprotocol.io. Léanla con cuidado: 'MCP es un estándar open-source para conectar aplicaciones de IA a sistemas externos.' Notá lo que esa frase no dice. No dice 'estándar de Anthropic'. No dice 'protocolo de Claude'. Dice 'estándar open-source'. Es deliberado: aunque lo propuso Anthropic en 2024, el protocolo es abierto y existe independientemente."</em></p>
-    <p><em>"La adopción lo confirma. Claude lo soporta, obviamente. Pero también ChatGPT, Cursor, Codex CLI, Opencode, VS Code, y otros. Cuando ustedes aprenden MCP, aprenden algo que viaja con ustedes a cualquier runtime de IA que vayan a usar. Eso es lo que hace que valga la pena estudiarlo."</em></p>
+    <p><u>La definición oficial no menciona a Anthropic: es un estándar abierto que Anthropic propuso, no un producto Anthropic.</u></p>
+    <p><u>Gobernanza verificada: https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/ — Anthropic donó MCP a la Agentic AI Foundation, un fondo de la Linux Foundation co-fundado por Anthropic, Block y OpenAI.</u></p>
+    <p><em>"Esta es la definición oficial, de la doc de modelcontextprotocol.io: 'MCP es un estándar open-source para conectar aplicaciones de IA a sistemas externos.' Noten lo que no dice — no dice 'estándar de Anthropic', no dice 'protocolo de Claude'. Lo propuso Anthropic en 2024, pero desde diciembre de 2025 lo gobierna la Agentic AI Foundation, un fondo de la Linux Foundation co-fundado por Anthropic, Block y OpenAI. Y la adopción lo confirma: Claude lo soporta, pero también ChatGPT, Cursor, Codex CLI, OpenCode, VS Code, y otros. Lo que aprendan acá viaja a cualquier runtime de IA que usen después."</em></p>
   </aside>
 </section>
 
@@ -421,17 +439,16 @@
 
   <aside class="notes">
     <p><u>La analogía oficial, en versión de bolsillo. HTTP y LSP explicaron el porqué estructural; USB-C es la metáfora rápida que se quedan.</u></p>
-    <p><em>"Y la doc oficial propone una analogía más corta, más memorable, que les va a venir a la cabeza después: MCP es como un puerto USB-C para aplicaciones de IA. La idea es la misma — antes de USB-C cada dispositivo tenía su propio cable, su propio conector, su propia forma de comunicarse. Después de USB-C, cualquier dispositivo con USB-C se conecta a cualquier otro con USB-C, sin pensar."</em></p>
-    <p><em>"HTTP y LSP les sirven para entender el porqué estructural — el N por M que colapsa a N más M. USB-C les sirve como mnemónico, para acordarse del concepto en dos palabras. Las dos son útiles."</em></p>
+    <p><em>"La doc oficial propone una analogía corta y memorable: MCP es como un puerto USB-C para aplicaciones de IA. Antes de USB-C, cada dispositivo tenía su propio cable, su propio conector, su propia forma de comunicarse. Después de USB-C, cualquier dispositivo se conecta a cualquier otro, sin pensar. HTTP y LSP explican el porqué estructural; USB-C queda como mnemónico, en dos palabras."</em></p>
   </aside>
 </section>
 
 <!-- §2.5 — Bridge a §3 -->
 <section>
   <div class="s2-bridge">
-    <p class="s2-bridge-line">Vimos <em>por qué tiene que ser un protocolo</em>.</p>
-    <p class="s2-bridge-line">Veamos <em>cómo está armado por dentro</em>.</p>
-    <p class="s2-bridge-hint">Arquitectura: host, cliente, servidor — viene ahora.</p>
+    <p class="s2-bridge-line">Por qué <em>tiene que ser</em> un protocolo.</p>
+    <p class="s2-bridge-line">Cómo está armado <em>por dentro</em>.</p>
+    <p class="s2-bridge-hint">Host, client, server.</p>
   </div>
 
   <aside class="notes">

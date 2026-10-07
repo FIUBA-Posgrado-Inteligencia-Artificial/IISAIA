@@ -626,3 +626,172 @@ Plan listo.
 Plan guardado en `semanas/06/plan.md`. Próximo paso: Fase 3 — ejecutar tarea por tarea. Per slide-generation skill override, **hand straight to phase 3** (no extra checkpoint — el gate del spine ya pasó).
 
 Recomendación: usar `superpowers:executing-plans` (no `subagent-driven-development`) para mantener checkpoints humanos por sección.
+
+---
+
+# Plan de revisión 2026-10-05 — spec MCP 2026-07-28, harnesses y estilo
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Dejar el deck de S06 al día con (1) la spec MCP 2026-07-28 (stateless, `server/discover`, Roots/Sampling/Logging deprecados) y el Claude Code actual (tool search, WebFetch/WebSearch nativos, `--chrome`); (2) los equivalentes de Codex y OpenCode donde se configura MCP y en los tips de §9; (3) las reglas de estilo acumuladas desde junio. Suma 1-2 slides de riesgos en §6.
+
+**Architecture:** Se editan los fragmentos `slides/_section-N.html` (y `_scaffold.html`) y se regenera `slides/index.html` con `node semanas/06/slides/_assemble.mjs`. Sin JS nuevo: §5 reusa `clickable-steps.js`; los `harness-map` usan las clases de `_config/theme/components.css`. Cada sección es dueña de su fragmento, así que las tareas 1-9 son independientes entre sí.
+
+**Tech Stack:** reveal.js, CSS por sección + `_config/theme/components.css`, Playwright (medición), Node.
+
+**Spec:** `semanas/06/spine.md` — bloque "Revisión 2026-10-05" al principio (manda sobre el resto del spine). Los hechos técnicos salen **solo** de ese bloque o de una verificación nueva contra la doc oficial, citada en las notas `<u>`.
+
+**Herramienta de medición:** `<scratchpad>/measure.mjs <index.html> [filtroTitulo]` — mide cada estado de fragments de cada slide a 1280×800 con el safety-net neutralizado. Línea base (2026-10-05): 54 slides; desbordan §1 "¿Cómo le damos Postgres…" (392px) y §4 Tools / Resources / Prompts (27-56px).
+
+## Global Constraints
+
+- Texto visible en español rioplatense (voseo); términos técnicos en inglés (server, client, host, transport, tool, schema, request, OAuth, scope…). Nada de "net-new" visible → "suma" / "nuevo".
+- Nada de "payoff", "bisagra", "diplomatura", "vibe coding", "diálogo socrático", "dolores", "mismatch", "robusto"; **nada de meta-referencias en texto visible** ("vimos", "viene ahora", "al cierre", "de la sección", "de la clase", "hace semanas", "esta semana"). En notas se permiten.
+- Sin marketing ni mención al TP en texto visible.
+- Body principal ≥1.1rem, secundario ≥1.05rem, eyebrows/labels ≥0.85rem, mono en línea ≥0.95rem. Si el aumento desborda, se recorta texto, no se baja el tamaño.
+- Texto centrado: un solo `max-width` por slide para h2/sub/caption, con `margin-left/right: auto` (no shorthand que pise otros márgenes).
+- Speaker notes en tres formatos, cada uno en su `<p>`: `<strong>` acciones, `<u>` descripciones, `<p><em>"…"</em></p>` guion. **Un `<em>` por estado de reveal** (aterrizaje + uno por fragment). Slide sin fragments → un solo `<em>` (fusionar, no agregar fragments).
+- Un aforismo de cierre por slide como máximo; prosa de notas ~80-200 palabras por slide.
+- Nada de `<span>` dentro de `<pre><code>`. Sin emojis ni glifos decorativos (⚠ ✓ ⌘).
+- Codex/OpenCode: solo hechos del bloque verificado del spine. La config V2 de OpenCode no se menciona.
+- Los subagentes no commitean; el coordinador revisa el diff, ensambla, mide y commitea por sección con `tipo(s06 §N): descripción` + trailer `Co-Authored-By`.
+
+## Review Focus
+
+1. **Desborde por estado** a 1280×800 tras subir tamaños y sumar `harness-map`: medir cada sección con `measure.mjs`.
+2. **Restos del modelo viejo** en cualquier slide o nota: `initialize` (fuera de la nota de compatibilidad de §5), "handshake", "stateful", "roots", "sampling", "cuatro primitives", "siete", "Notion", "context7" como demo, "§10", "cinco preguntas", "Aider", "MCPJam", "claude.ai" como host de servers locales, "CC no maneja un browser" sin matiz. Grep en la Task 11.
+3. **`<em>` vs reveals**: contar fragments (por `data-fragment-index` distinto) vs `<p><em>` en cada slide tocada.
+4. **Coherencia del discovery**: en ningún lado "el LLM descubre"; quien descubre y arma el contexto es el **cliente**.
+5. **JS de §5**: el `initClickableSteps` reescrito carga sin errores de consola y la barra ilumina la dirección correcta en cada paso.
+
+---
+
+### Task 0: Setup — hecho
+
+- [x] Branch `fix/semana06-revision-preclase`; spine delta commiteado (`fdaf32a`).
+- [x] `measure.mjs` en el scratchpad + línea base.
+
+### Task 1: §1 — el set nativo y lo que falta
+
+**Files:** `slides/_section-1.html`.
+
+- [ ] §1.1 set nativo: sumar WebFetch y WebSearch y una línea "y ~40 más: Agent, Skill, LSP…". Notas `<u>`: en macOS/Linux/WSL Glob y Grep no vienen por defecto (busca con `find`/`grep` vía Bash). Un solo max-width (1000px) para h2/sub/takeaway.
+- [ ] §1.2 "Tres cosas que no están": reemplazar "Docs de un SDK que salió ayer" por **tu gestor de tareas (Linear, Jira)** — anticipa §8. Browser queda, con el matiz `--chrome` en `<u>`. Notas: 4 estados → 4 `<em>` (fusionar el cierre en el último).
+- [ ] §1.3 "¿Cómo le damos Postgres…?": "Robusto" fuera; `.cursorrules` → `.cursor/rules/`; "Opencode" → "OpenCode" en todo el fragmento; nota de `deny` precisa (bloquea, no pregunta). Arreglar el desborde de 392px (medir por estado; aplicar las trampas de fragments de reveal si son fade-out que no liberan espacio).
+- [ ] §1.5 poster MCP: fuera "Cómo está armado por dentro — viene ahora." y la tercera repetición de N×M.
+- [ ] Tamaños (`.s1-tool-detail`, `.s1-nostá-gap`, `.s1-step-foot`) a mínimos; `<em>` fusionados en slides sin fragments.
+- [ ] Assemble + measure + commit `fix(s06 §1): set nativo actual, ejemplos que de verdad faltan y estilo`.
+
+### Task 2: §2 — protocolo, no API
+
+**Files:** `slides/_section-2.html`.
+
+- [ ] Definición: "propuesto por Anthropic en 2024; desde diciembre de 2025 lo gobierna la Agentic AI Foundation (Linux Foundation), co-fundada por Anthropic, OpenAI y Block".
+- [ ] Bridge visible ("Vimos… / Veamos… / — viene ahora") → solo la línea conceptual; la narración a notas.
+- [ ] §2.1 repite §1.4 casi literal: §2 queda como la formalización (matriz); recortar lo que §1 ya dijo, en texto visible y notas.
+- [ ] Un aforismo por slide (caption de precedentes y bodies de las cards). Tamaños (`.s2-prec-body`, `.s2-usbc-attr`). `<em>` fusionados.
+- [ ] Assemble + measure + commit `fix(s06 §2): gobernanza de MCP y estilo`.
+
+### Task 3: §3 — arquitectura
+
+**Files:** `slides/_section-3.html`.
+
+- [ ] Data layer: "discovery (`server/discover`), primitives, notifications" — fuera "lifecycle". Streamable HTTP: sin sesiones de protocolo; auth: bearer, API keys, headers, OAuth recomendado.
+- [ ] Ejemplos de servers sin sqlite (archivado).
+- [ ] H2 "La regla clave." → la regla como h2 ("Un client por cada server."). Fuera "de memoria al final de la sección"; "Vimos qué participantes hay…" → "Falta qué viaja por esas flechas."
+- [ ] "transporte" → "transport"; notas: unificar "server/client"; typo "Es el modo el server vive con vos".
+- [ ] Labels del diagrama (0.65-0.8rem) → ≥0.85rem sin romper el diagrama (se re-ilumina en §4 y §5: no cambiar clases ni estructura). `<em>` fusionados.
+- [ ] Assemble + measure + commit `fix(s06 §3): data layer de la spec actual y estilo`.
+
+### Task 4: §4 — primitives
+
+**Files:** `slides/_section-4.html`.
+
+- [ ] §4.1: "El cliente expone otras cuatro — al cierre." → sin forward reference, coherente con la §4.6 nueva.
+- [ ] §4.2 Tools: `browser_click` con params actuales (`element` opcional, `target`); descripciones actuales; prompt de permiso con el nombre real `mcp__playwright__browser_navigate`; fuera ⚠ ✓. Desborde 27px.
+- [ ] §4.3 Resources: Postgres "oficial de Anthropic" (archivado) → server genérico o DBHub; en Claude Code un resource se pide con `@server:protocol://path` (y el modelo también puede leerlos con `ReadMcpResourceTool`), no un panel. "Net-new"/"llave-owner" fuera. Desborde 35px.
+- [ ] §4.4 Prompts: fuera "Git MCP" con prompts inventados → ejemplo explícitamente genérico ("un server de code review podría exponer…"); invocación real `/mcp__server__prompt` (args separados por espacio); fuera ⌘; "Dialogo" → "Diálogo". Desborde 56px.
+- [ ] §4.5: un aforismo como máximo.
+- [ ] §4.6 reescrita: h2 "Y del otro lado: lo que pone el cliente." Elicitation como la activa (el server necesita un dato del usuario → devuelve `input_required`, el cliente pregunta y reintenta). Roots, Sampling y Logging en gris como **deprecadas en 2026-07-28** con su reemplazo en una línea (directorios por parámetro / integrar el LLM directo / stderr u OpenTelemetry). Fuera "Las nombramos para que sepan que existen…". Notas sin el framing del cutoff.
+- [ ] Tamaños de cards, bloques spec/JSON y labels. `<em>` alineados.
+- [ ] Assemble + measure + commit `fix(s06 §4): primitives según la spec 2026-07-28 y ejemplos reales`.
+
+### Task 5: §5 — discovery sobre la spec actual
+
+**Files:** `slides/_section-5.html` (incluye el bloque `INIT-SCRIPTS-§5`).
+
+- [ ] Hook: sin "lo venís haciendo hace semanas" → "ya lo hacés".
+- [ ] Timeline (5 nodos): conectás → el cliente le pregunta al server quién es y qué sabe (`server/discover`: versiones, capabilities, identidad) → pide `*/list` → **el cliente** arma el contexto del modelo (en Claude Code, con tool search: primero los nombres, el schema completo cuando hace falta) → el modelo ya sabe. Caption que responde el hook. Fuera "stateful / queda fijo toda la sesión": ahora **cada request lleva su tarjeta** (versión + capabilities del cliente en `_meta`). Notas: los servers en revisiones anteriores usan `initialize`; los clientes nuevos usan `server/discover` como sonda y caen al handshake viejo si hace falta. `<em>`: 8 estados → 8 bloques.
+- [ ] Animación `clickable-steps` (barra Client⟷Server): 4 pasos — (1) `server/discover` →/← con mini-JSON real; (2) `tools/list` con `_meta` (`io.modelcontextprotocol/protocolVersion`, `clientCapabilities`) y result con `tools[]`, `ttlMs`, `resultType`; (3) **Cliente → contexto del LLM** (corrige "Server → contexto"); (4) `tools/call`. Verificar las formas exactas contra `modelcontextprotocol.io/specification/2026-07-28` antes de escribir el JSON.
+- [ ] Poster del insight: "el contexto lo arma el cliente, solo" — se mantiene; la explicación "descubrir vs usar" queda solo acá (fuera de las notas del timeline).
+- [ ] Notifications: el cliente se suscribe (`subscriptions/listen`, opt-in a `toolsListChanged`) → el server avisa `notifications/tools/list_changed` → el cliente vuelve a pedir `tools/list`. Fuera roots. `<em>`: 4 estados → 4 bloques.
+- [ ] Consecuencia: un aforismo como máximo. Tamaños (`.s5-tl-desc` 0.86 etc.).
+- [ ] Assemble + measure + clickear los 4 pasos de la animación en Playwright sin errores de consola + commit `feat(s06 §5): discovery sobre la spec 2026-07-28 — server/discover, sin handshake`.
+
+### Task 6: §6 — ecosistema, harnesses y riesgos
+
+**Files:** `slides/_section-6.html`.
+
+- [ ] Hub "Un server, muchos hosts": Claude Code, Codex, OpenCode, Cursor, VS Code, Gemini CLI (fuera Aider y MCPJam). "Mismo server" en vez de "mismo binario"; notas: ChatGPT y claude.ai solo aceptan servers remotos.
+- [ ] "Cómo se agrega un server" → `harness-map` (Claude Code `is-ref` / Codex / OpenCode): comando de Playwright + archivo que escribe y su forma (`mcpServers` con `"type": "stdio"` / `[mcp_servers.playwright]` en `config.toml` / `"mcp": {"playwright": {"type": "local", "command": [...]}}` en `opencode.json`). `harness-map-foot`: lo que comparten (un nombre + cómo arrancar el proceso). Forma canónica de CC con `--` en notas.
+- [ ] "¿Dónde vive ese JSON?": tabla de CC intacta; notas `<u>` con los scopes de Codex (`~/.codex/config.toml`; `.codex/config.toml` solo si el proyecto es trusted) y OpenCode (global + proyecto, merge, gana el proyecto). Tamaños.
+- [ ] "Una sesión nueva, antes y después": nativas actuales; las tools de MCP entran **diferidas** (tool search: nombres primero). Fuera "el discovery que vimos recién" y el "extiende, no reemplaza" adelantado. `<em>` 3 estados → 3 bloques. "~20 tools" → "~25".
+- [ ] "Tres consecuencias": `<em>` 4 estados → 4 bloques.
+- [ ] "Aplicado a Claude Code": redundantes = filesystem, git, **fetch (WebFetch)**; suman = Playwright (con `--chrome` como matiz en una línea), Linear/gestores de tareas, Postgres, GitHub; context7 fuera (zona gris en notas: WebFetch/WebSearch cubren buena parte). "Net-new" → "suma".
+- [ ] "¿Y por qué existen, entonces?": claude.ai → **Claude Desktop**.
+- [ ] Pregunta cero: fuera "lo vemos al cierre de la clase"; un solo max-width; notas sin §10, "cinco preguntas" ni context7-demo.
+- [ ] **Slide nueva de riesgos**, después de la pregunta cero: tres cards con reveal — (1) **lo que la tool devuelve entra al contexto**: una página o un issue pueden traer instrucciones (prompt injection); (2) **el server actúa con tus credenciales**: alcance del token/OAuth (ej.: `mcp.linear.app/mcp/readonly`); (3) **un server local es código de terceros en tu máquina**: `npx …@latest` corre lo que se publicó hoy (versión fija, servers oficiales, MCP Registry). Línea de cierre: las reglas allow/deny/ask aplican a las tools de MCP (`mcp__server__tool`). Notas: "cuándo no" — si el host tiene Bash, un CLI + skill puede reemplazar a un server (Playwright CLI, `ctx7`). Sin bullets. 4 `<em>`.
+- [ ] Tamaños de las clases `.s6-*` de la auditoría. `<em>` fusionados en slides sin fragments.
+- [ ] Assemble + measure + commit `feat(s06 §6): harness-map, clasificación actual en CC y riesgos`.
+
+### Task 7: §7 — demo local Playwright
+
+**Files:** `slides/_section-7.html` (incluye `INIT-SCRIPTS-§7`).
+
+- [ ] §7.1 pregunta cero reencuadrada: "¿Claude Code maneja un browser?" → "De fábrica, no" → "corresponde MCP", más una línea: la extensión Claude in Chrome lo hace con plan pago, y por dentro es un MCP server; Playwright es el portable (cualquier host, sin plan). Notas: Codex y OpenCode no manejan browser.
+- [ ] §7.2: fuera "El comando que ya vimos, aplicado."; comando consistente con §6.
+- [ ] §7.4 demo: `summary` de cada paso → bullets de acciones (`Terminal:`, `En Claude:`, `Mirar:`); Plan B al final del `example` del último paso; en notas, `<hr>` + "Acciones (copiables)" + Plan B (screenshots pre-armados).
+- [ ] §7.5: "el LLM las descubre" → "el cliente las descubre"; fuera "del bloque de discovery" y el bridge visible (a notas); un solo aforismo.
+- [ ] Tamaños (`.s7-transport-tag`, `.s7-flow-step`). `<em>` fusionados.
+- [ ] Assemble + measure + commit `fix(s06 §7): pregunta cero con --chrome, demo boxes accionables y discovery correcto`.
+
+### Task 8: §8 — demo remoto Linear
+
+**Files:** `slides/_section-8.html` (incluye `INIT-SCRIPTS-§8`).
+
+- [ ] §8.2 "Un remoto se agrega distinto" → `harness-map` del remoto: `claude mcp add --transport http linear-server https://mcp.linear.app/mcp` + `/mcp` o `claude mcp login` / `codex mcp add linear --url …` + `codex mcp login linear` / `opencode mcp add linear --url …` + `opencode mcp auth linear`. Foot: lo que comparten (URL + OAuth; el token queda guardado y se renueva). El contraste local/remoto (`type: stdio` vs `type: http`) se conserva si entra; si no, a notas. JSON consistente con §6.
+- [ ] §8.4 demo: mismo formato de demo boxes que §7 + acciones copiables + Plan B.
+- [ ] §8.5: "el LLM descubre" → "el cliente descubre". Tamaños (`.s8-close-body`, `.s8-cmp-row`). `<em>` fusionados.
+- [ ] Assemble + measure + commit `feat(s06 §8): harness-map del server remoto y demo boxes accionables`.
+
+### Task 9: §9 — día a día, en los tres harnesses
+
+**Files:** `slides/_section-9.html`.
+
+- [ ] Opener: fuera el eyebrow "Para cerrar" (y su inline style); h2 "Cuatro cosas del día a día."; sub con Claude Code como referencia y su equivalente en los otros dos.
+- [ ] Grid 2×2: cada tip-card suma una línea "Codex: … · OpenCode: …" (`/btw` → `/side` o `/btw` · no tiene; `/rc` → vía la app de escritorio (`/app`) · `opencode serve`/`web` + `attach`; retomar → `codex resume --last` / `codex resume` · `opencode -c` / `/sessions`; `/rewind` → Esc Esc, solo la conversación · `/undo` revierte mensaje y archivos). Fuera `/compact`. 4 fragments → 5 `<em>` (el aterrizaje no narra el tip 1).
+- [ ] Cierre temático intacto (sin puente a otra clase); notas sin "si se llevan una sola idea" repetido.
+- [ ] Tamaños (`.s9-tip-what`, `.s9-tip-when`). Assemble + measure + commit `feat(s06 §9): tips del día a día con su equivalente en Codex y OpenCode`.
+
+### Task 10: Scaffold + source material
+
+**Files:** `slides/_scaffold.html`, `source_material/index.md`.
+
+- [ ] `_scaffold.html`: comentario de §8 "Notion" → "Linear".
+- [ ] `index.md`: nota de estado "Revisión 2026-10-05" — qué del source quedó superado (handshake `initialize`, client primitives, set nativo de CC, context7 como net-new) y que manda el spine.
+- [ ] Commit `docs(s06): scaffold y source al día con la revisión`.
+
+### Task 11: Coherence pass
+
+- [ ] Grep de restos (Review Focus 2) en `semanas/06/slides/_section-*.html` y `_scaffold.html`.
+- [ ] Conteo fragments vs `<em>` en todas las slides; `<p>` envolviendo cada `<strong>/<u>/<em>` de notas.
+- [ ] `measure.mjs` sobre el deck completo: 0 desbordes, 0 errores de consola.
+- [ ] Screenshots de las slides tocadas (último estado de fragments) y revisión visual.
+- [ ] Spine: corregir la "Nota de escala" y la línea del whole-week through-line sobre §9.
+- [ ] Commit `chore(s06): coherence pass de la revisión`.
+
+## Self-review (writing-plans, revisión 2026-10-05)
+
+- Cobertura del delta del spine: §1 (T1), §2 (T2), §3 (T3), §4 + §4.6 (T4), §5 (T5), §6 hub/harness-map/scopes/clasificación/Desktop/riesgos/cuándo-no (T6), §7 (T7), §8 (T8), §9 (T9), global + bridge (T10-T11).
+- Sin placeholders: cada tarea nombra la slide, el texto que sale y el que entra, o el criterio verificable.
+- Riesgo principal: §5 (JSON de la spec nueva). Mitigación: verificar contra la spec 2026-07-28 antes de escribir y probar la animación clickeando.

@@ -4,6 +4,8 @@ Este es el material fuente de la clase de Semana 6. La presentación reveal.js s
 
 > **Estado:** el deck entregado sigue el rediseño aprobado el 2026-06-09 (documentado en `spine.md`). El cierre pasó de tres demos net-new + una sección de riesgos a **dos demos que contrastan los transports** (local Stdio vs remoto Streamable HTTP) más un cierre con recomendaciones prácticas de Claude Code. Las secciones §8 y §9 se escribieron directamente contra la documentación oficial y no tienen `.md` de source dedicado.
 
+> **Revisión 2026-10-05:** el deck se revisó contra la spec MCP **2026-07-28** y las versiones vigentes de Claude Code, Codex y OpenCode. Quedaron superados: el handshake `initialize` y la sesión stateful que describen `05-discovery-dinamico.md` y `03-arquitectura-mcp.md` (la spec actual es stateless, discovery vía `server/discover`); las cuatro client primitives de `04-tres-primitives.md` (Roots, Sampling y Logging ahora deprecadas, Elicitation sigue); y el set nativo de Claude Code que describen `01-mas-alla-del-set-que-trae-el-host.md` y `06-ecosistema-vendor-neutral.md`, que ahora suma WebFetch y WebSearch — eso saca a context7 de la lista de servers net-new. §6 ganó una slide de riesgos y §§6, 8 y 9 muestran el equivalente en Codex y OpenCode junto al de Claude Code. El bloque "Revisión 2026-10-05" al principio de `spine.md` manda sobre estos `.md`, que no se actualizaron.
+
 ## Orden de lectura
 
 | # | Archivo | Tema | Bloque de clase |

@@ -2,7 +2,19 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest"]
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "clima": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--script",
+        "${CLAUDE_PROJECT_DIR:-.}/semanas/06/demo-clima/server.py"
+      ],
+      "env": {}
     }
   }
 }

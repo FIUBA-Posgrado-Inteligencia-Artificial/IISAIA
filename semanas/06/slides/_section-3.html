@@ -1,17 +1,23 @@
 <style>
   /* §3 — Arquitectura: host, cliente, servidor
      Every top-level centered element shares max-width: 1000px so edges align. */
-  .s3-h2 {
+  .reveal .s3-h2 {
     text-align: center;
     max-width: 1000px;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
-  .s3-h2-sub {
+  .reveal .s3-h2-sub {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-xs) auto 0 auto;
     max-width: 1000px;
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* §3.1 + §3.6 — Architecture diagram */
@@ -38,7 +44,7 @@
     background: var(--bg-primary);
     padding: 0 8px;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
@@ -61,7 +67,7 @@
     border-radius: 6px;
     padding: 8px 12px;
     font-family: var(--font-mono);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     text-align: center;
   }
@@ -101,7 +107,7 @@
   }
   .s3-arch-arrow-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     letter-spacing: 0.05em;
   }
@@ -125,7 +131,7 @@
     background: var(--bg-primary);
     padding: 0 6px;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--accent-secondary);
@@ -134,11 +140,11 @@
   .s3-arch-server-remote::before { content: 'Streamable HTTP'; }
   .s3-arch-server-name {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-heading);
   }
   .s3-arch-server-detail {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     margin-top: 2px;
   }
@@ -153,14 +159,14 @@
     text-align: center;
   }
   .s3-arch-transports-quick-item {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--text-muted);
     line-height: 1.4;
   }
   .s3-arch-transports-quick-item strong {
     color: var(--accent-secondary);
     font-family: var(--font-mono);
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 700;
     display: block;
     margin-bottom: 2px;
@@ -195,7 +201,7 @@
   }
   .s3-def-body {
     color: var(--text-primary);
-    font-size: 1.02rem;
+    font-size: 1.1rem;
     line-height: 1.45;
     margin: 0;
   }
@@ -254,7 +260,7 @@
     background: var(--bg-primary);
     padding: 0 6px;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
@@ -271,7 +277,7 @@
     border-radius: 4px;
     padding: 4px 10px;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     text-align: center;
   }
@@ -296,7 +302,7 @@
     border-radius: 4px;
     padding: 4px 10px;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     text-align: center;
   }
@@ -317,7 +323,7 @@
   }
   .s3-twocol-badge {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -331,7 +337,7 @@
   }
   .s3-twocol-body {
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.45;
     margin: 0;
   }
@@ -339,13 +345,16 @@
     color: var(--accent);
     font-weight: 700;
   }
-  .s3-twocol-caption {
+  .reveal .s3-twocol-caption {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin: var(--spacing-md) auto 0 auto;
     max-width: 1000px;
     line-height: 1.5;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s3-twocol-caption strong {
     color: var(--accent);
@@ -370,7 +379,7 @@
   }
   .s3-stdio-node {
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     background: var(--bg-secondary);
     padding: 5px 10px;
@@ -386,7 +395,7 @@
   }
   .s3-stdio-edge-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.95rem;
     color: var(--accent-secondary);
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -410,13 +419,16 @@
   }
 
   /* §3.6 closing line */
-  .s3-mental-caption {
+  .reveal .s3-mental-caption {
     text-align: center;
     color: var(--text-primary);
     font-size: 1.2rem;
-    margin: var(--spacing-md) auto 0 auto;
     max-width: 1000px;
     line-height: 1.5;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .s3-mental-caption em {
     color: var(--accent);
@@ -475,10 +487,10 @@
 
   <aside class="notes">
     <p><strong>Dos reveals — clientes adentro del host, después servers + arrows.</strong></p>
-    <p><u>Construye el diagrama por capas. Para arrancar va solo el host visible — la aplicación de IA con su nombre. Después aparecen los clientes adentro del host. Por último los servers y las flechas JSON-RPC que los conectan. El diagrama se va a re-iluminar en §4 (foco en el server) y §5 (foco en el handshake).</u></p>
+    <p><u>Construye el diagrama por capas. Para arrancar va solo el host visible — la aplicación de IA con su nombre. Después aparecen los clientes adentro del host. Por último los servers y las flechas JSON-RPC que los conectan. El diagrama se va a re-iluminar en §4, con foco en el server.</u></p>
     <p><em>"Acá llegamos a la arquitectura. MCP define tres roles, y vale separarlos bien porque la palabra cliente se sobrecarga rápido — uno piensa en cliente web, cliente de chat, lo que sea — y acá significa una cosa muy específica."</em></p>
-    <p><em>"Arranquemos por el host. El host es la aplicación de IA con la que ustedes interactúan — Claude Code, Cursor, Visual Studio Code, Claude Desktop. Es la pieza que tiene la UI, que corre el LLM, que ustedes tipean. Es el contenedor de todo lo que viene. Adentro del host viven los clientes — esos rectángulos rayados que aparecen ahora. Cada cliente MCP es un componente del host que mantiene una conexión con UN servidor MCP. Acá ven dos clientes porque el host se va a conectar con dos servers distintos."</em></p>
-    <p><em>"Y a la derecha aparecen los servidores. Son programas externos al host, que viven como proceso aparte. Pueden correr locales — el primer ejemplo, Postgres, vive en la misma máquina y se conecta por stdio — o pueden correr remotos, como el segundo ejemplo, GitHub, que es un servicio externo y se conecta por Streamable HTTP. Entre cada cliente y su servidor viaja JSON-RPC, bidireccional. Esa es la arquitectura. Ahora vamos a las definiciones canónicas para fijarlas."</em></p>
+    <p><em>"Arranquemos por el host. El host es la aplicación de IA con la que ustedes interactúan — Claude Code, Cursor, Visual Studio Code, Claude Desktop. Es la pieza que tiene la UI, que corre el LLM, que ustedes tipean. Es el contenedor de todo lo que viene. Adentro del host viven los clientes — esos rectángulos rayados que aparecen ahora. Cada cliente MCP es un componente del host que mantiene una conexión con UN server MCP. Acá ven dos clientes porque el host se va a conectar con dos servers distintos."</em></p>
+    <p><em>"Y a la derecha aparecen los servers. Son programas externos al host, que viven como proceso aparte. Pueden correr locales — el primer ejemplo, Postgres, vive en la misma máquina y se conecta por stdio — o pueden correr remotos, como el segundo ejemplo, GitHub, que es un servicio externo y se conecta por Streamable HTTP. Entre cada cliente y su server viaja JSON-RPC, bidireccional. Esa es la arquitectura. Ahora vamos a las definiciones canónicas para fijarlas."</em></p>
   </aside>
 </section>
 
@@ -504,17 +516,16 @@
 
   <aside class="notes">
     <p><u>Definiciones canónicas. No paráfrasis — tal cual aparecen en modelcontextprotocol.io. La que vale la pena destacar es la del Client porque la regla "uno por server" sale de ahí.</u></p>
-    <p><em>"Las definiciones tal cual están en la doc oficial. El Host coordina y administra clientes. Los Clients — en plural — viven adentro del host y cada uno mantiene una conexión con un único Server. El Server provee contexto, corre aparte, puede ser local o remoto."</em></p>
-    <p><em>"Notá la palabra clave de la definición del Client: 'un MCP Server', singular. No 'los servers', no 'varios servers'. Un cliente, una conexión, un server. Esa regla es lo suficientemente importante como para dedicarle el próximo slide."</em></p>
+    <p><em>"Las definiciones tal cual están en la doc oficial. El Host coordina y administra clientes. Los Clients, en plural, viven adentro del host y cada uno mantiene una conexión con un único Server. El Server provee contexto, corre aparte, puede ser local o remoto. Notá la palabra clave de la definición del Client: 'un Server', singular — no 'los servers', no 'varios servers'. Un cliente, una conexión, un server. Esa regla alcanza para dedicarle el próximo slide."</em></p>
   </aside>
 </section>
 
 <!-- §3.3 — La regla clave: un cliente por server -->
 <section>
-  <h2 class="s3-h2">La regla clave.</h2>
+  <h2 class="s3-h2">Un client por cada server.</h2>
 
   <div class="s3-rule">
-    <p class="s3-rule-quote">Si el host se conecta a <strong>tres servers</strong>, corren <strong>tres clientes</strong> adentro.</p>
+    <p class="s3-rule-quote">Si el host se conecta a <strong>tres servers</strong>, corren <strong>tres clients</strong> adentro.</p>
     <p class="s3-rule-sub">El cliente no es uno solo que habla con muchos servers — son muchos clientes, cada uno con su conexión dedicada.</p>
   </div>
 
@@ -541,8 +552,7 @@
 
   <aside class="notes">
     <p><u>Slide-poster con la regla destacada y un diagrama mínimo que la materializa: host con 3 clientes, cada uno con su flecha a un server.</u></p>
-    <p><em>"La regla. Si el host está conectado a tres servers, corren tres clientes adentro. No es uno solo multiplexando — son tres, cada uno con su conexión dedicada. Esa es la forma de pensar la relación cliente-servidor en MCP."</em></p>
-    <p><em>"¿Por qué importa? Porque cuando hablemos de capabilities, primitives, discovery, en los próximos slides, todo se piensa por par cliente-servidor. La conexión es la unidad de trabajo. Si lo piensan como N clientes para N servers, las propiedades del protocolo cierran solas. Si lo piensan como un cliente multiplexando, se confunden."</em></p>
+    <p><em>"La regla: si el host está conectado a tres servers, corren tres clientes adentro — no es uno solo multiplexando, son tres, cada uno con su conexión dedicada. Así se piensa la relación entre cliente y server en MCP. Importa porque cuando aparezcan capabilities, primitives y discovery, todo se piensa por par cliente-server: la conexión es la unidad de trabajo. Pensado como N clientes para N servers, las propiedades del protocolo cierran solas; pensado como un cliente multiplexando, se confunden."</em></p>
   </aside>
 </section>
 
@@ -552,24 +562,26 @@
   <p class="s3-h2-sub">MCP se divide en data layer (qué se intercambia) y transport layer (por dónde).</p>
 
   <div class="s3-twocol">
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="0">
       <p class="s3-twocol-badge">capa interna</p>
       <h3 class="s3-twocol-title">Data layer</h3>
-      <p class="s3-twocol-body">Define <strong>qué se intercambia</strong>: estructura de mensajes, métodos, primitives, lifecycle, notifications. Wire format: JSON-RPC 2.0.</p>
+      <p class="s3-twocol-body">Define <strong>qué se intercambia</strong>: discovery (<code>server/discover</code>), primitives, notifications. Wire format: JSON-RPC 2.0.</p>
     </div>
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="1">
       <p class="s3-twocol-badge">capa externa</p>
       <h3 class="s3-twocol-title">Transport layer</h3>
       <p class="s3-twocol-body">Define <strong>por dónde viajan</strong> esos mensajes: canal físico y autenticación.</p>
     </div>
   </div>
 
-  <p class="s3-twocol-caption">El mismo set de mensajes funciona <strong>idéntico</strong> sobre cualquier transporte. No tenés que aprender JSON-RPC para usar MCP — sólo saber que está abajo.</p>
+  <p class="s3-twocol-caption fragment fade-in" data-fragment-index="1">El mismo set de mensajes funciona <strong>idéntico</strong> sobre cualquier transport. No tenés que aprender JSON-RPC para usar MCP — sólo saber que está abajo.</p>
 
   <aside class="notes">
+    <p><strong>Dos reveals — data layer, después transport layer + caption.</strong></p>
     <p><u>Separación canónica data layer vs transport layer. La razón pedagógica importante: el mensaje es el mismo independiente del canal. Eso es lo que hace que el protocolo viaje entre transports.</u></p>
-    <p><em>"MCP se divide internamente en dos capas, y vale separarlas mentalmente. La data layer es la capa interna: define qué se intercambia entre cliente y servidor. Mensajes, métodos, las primitives que vamos a ver en el próximo bloque, el lifecycle de la conexión, las notificaciones. Wire format JSON-RPC 2.0 — formato viejo y aburrido, no hay nada que aprender ahí."</em></p>
-    <p><em>"La transport layer es la capa externa: define por dónde viajan los mensajes — qué canal físico se usa y cómo se autentican. Y acá viene la propiedad clave: el mismo set de mensajes JSON-RPC funciona idéntico sobre cualquier transporte. Es lo que les da la portabilidad del protocolo. Ustedes no aprenden JSON-RPC para usar MCP — alcanza con saber que abajo hay un formato estándar."</em></p>
+    <p><em>"MCP se divide internamente en dos capas, y vale separarlas mentalmente."</em></p>
+    <p><em>"La data layer es la capa interna: define qué se intercambia entre cliente y server — el discovery inicial con server/discover, las primitives que vamos a ver en el próximo bloque, las notificaciones. Wire format JSON-RPC 2.0, formato viejo y aburrido, no hay nada que aprender ahí."</em></p>
+    <p><em>"La transport layer es la capa externa: define por dónde viajan esos mensajes, qué canal físico se usa y cómo se autentican. La propiedad clave es que el mismo set de mensajes JSON-RPC funciona idéntico sobre cualquier transport — eso es lo que le da la portabilidad al protocolo. No aprenden JSON-RPC para usar MCP, alcanza con saber que abajo hay un formato estándar."</em></p>
   </aside>
 </section>
 
@@ -579,7 +591,7 @@
   <p class="s3-h2-sub">Cuándo se usa cada uno.</p>
 
   <div class="s3-twocol">
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="0">
       <p class="s3-twocol-badge">local</p>
       <h3 class="s3-twocol-title">Stdio transport</h3>
       <p class="s3-twocol-body">El server corre como <strong>proceso local en la misma máquina</strong>. Mensajes por stdin/stdout. Cero overhead de red.</p>
@@ -598,27 +610,28 @@
         <div class="s3-stdio-node">pantalla</div>
       </div>
     </div>
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="1">
       <p class="s3-twocol-badge">remoto</p>
       <h3 class="s3-twocol-title">Streamable HTTP transport</h3>
-      <p class="s3-twocol-body">El server <strong>corre remoto</strong> y el host se conecta por red. HTTP POST + Server-Sent Events opcionales. Auth HTTP estándar — bearer, API keys, OAuth.</p>
+      <p class="s3-twocol-body">El server <strong>corre remoto</strong> y el host se conecta por red. HTTP POST + Server-Sent Events opcionales, sin sesión de protocolo. Auth por bearer token, API key o header propio — <strong>OAuth recomendado</strong>.</p>
     </div>
   </div>
 
-  <p class="s3-twocol-caption">Regla simple: <strong>disco/red local → Stdio. Servicio compartido o de terceros → Streamable HTTP.</strong></p>
+  <p class="s3-twocol-caption fragment fade-in" data-fragment-index="1">Regla simple: <strong>disco/red local → Stdio. Servicio compartido o de terceros → Streamable HTTP.</strong></p>
 
   <aside class="notes">
+    <p><strong>Dos reveals — Stdio, después Streamable HTTP + caption.</strong></p>
     <p><u>Los dos transports definidos por la spec. Lo importante es la regla de cuándo usar cada uno. La mayoría de los servers populares hoy son stdio.</u></p>
-    <p><em>"Los dos transports que la spec define. Stdio — el server corre como proceso local en la misma máquina que el host. Los mensajes viajan por stdin y stdout. Es el modo el server vive con vos en tu máquina. Cero overhead de red. La mayoría de los servers populares hoy son stdio — filesystem, git, sqlite. Tu máquina los corre y listo."</em></p>
-    <p><em>"Streamable HTTP — el server corre remoto y el host se conecta por red. Usa HTTP POST para mensajes cliente a server, con Server-Sent Events opcionales para streaming. Soporta autenticación HTTP estándar: bearer tokens, API keys, OAuth. Sirve cuando el server vive en un servicio compartido — varios desarrolladores hablando con la misma instancia de Postgres centralizado — o cuando lo hostea un tercero, como GitHub o Notion que exponen su API por MCP."</em></p>
-    <p><em>"La regla simple es la del caption: disco o red local — stdio. Servicio compartido o de terceros — Streamable HTTP."</em></p>
+    <p><em>"Los dos transports que la spec define."</em></p>
+    <p><em>"Stdio: el server corre como proceso local en la misma máquina que el host, es el modo en que el server vive con vos. Los mensajes viajan por stdin y stdout, igual que cualquier comando de terminal — cero overhead de red. La mayoría de los servers populares hoy son stdio: filesystem, git. Tu máquina los corre y listo."</em></p>
+    <p><em>"Streamable HTTP: el server corre remoto y el host se conecta por red. HTTP POST para mensajes cliente a server, con Server-Sent Events opcionales para streaming, y sin sesión de protocolo — cada request es independiente. La autenticación es bearer tokens, API keys o headers propios, con OAuth recomendado. Sirve cuando el server vive en un servicio compartido, como una instancia de Postgres centralizado, o cuando lo hostea un tercero, como GitHub. La regla simple es la del caption: disco o red local, stdio; servicio compartido o de terceros, Streamable HTTP."</em></p>
   </aside>
 </section>
 
 <!-- §3.6 — El diagrama mental que se llevan -->
 <section>
   <h2 class="s3-h2">El diagrama mental.</h2>
-  <p class="s3-h2-sub">Lo que tienen que poder dibujar de memoria al final de la sección.</p>
+  <p class="s3-h2-sub">Host, clients, servers — y el transport que conecta a cada par.</p>
 
   <div class="s3-arch">
     <div class="s3-arch-host">
@@ -653,11 +666,10 @@
     </div>
   </div>
 
-  <p class="s3-mental-caption">Vimos qué participantes hay. <em>Falta qué se manda por esas flechas.</em></p>
+  <p class="s3-mental-caption"><em>Falta qué viaja por esas flechas.</em></p>
 
   <aside class="notes">
     <p><u>Cierre de §3. El diagrama completo, etiquetado con todo lo que acabamos de definir. Para llevarse y dibujar mentalmente. Bridge al §4 — primitives.</u></p>
-    <p><em>"Y este es el diagrama que se llevan de la sección. Un host — Claude Code, en este caso — con dos clientes adentro. Cada cliente conectado a un server distinto. Un server local que se conecta por stdio — Postgres, vive en tu máquina. Un server remoto que se conecta por Streamable HTTP — GitHub, vive en internet. Entre cada cliente y su server, JSON-RPC bidireccional. Esto es lo que se llevan."</em></p>
-    <p><em>"Lo que falta es lo que viene en el próximo bloque: qué se intercambia por esas flechas. Hasta acá vimos los participantes y cómo se hablan. Falta el contenido. Vamos."</em></p>
+    <p><em>"Este es el diagrama completo: un host, Claude Code en este caso, con dos clientes adentro, cada uno conectado a un server distinto. Un server local que se conecta por stdio, Postgres, vive en tu máquina; un server remoto que se conecta por Streamable HTTP, GitHub, vive en internet. Entre cada cliente y su server, JSON-RPC bidireccional. Falta lo que viaja por esas flechas — eso viene en el próximo bloque."</em></p>
   </aside>
 </section>
