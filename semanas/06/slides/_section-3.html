@@ -562,23 +562,26 @@
   <p class="s3-h2-sub">MCP se divide en data layer (qué se intercambia) y transport layer (por dónde).</p>
 
   <div class="s3-twocol">
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="0">
       <p class="s3-twocol-badge">capa interna</p>
       <h3 class="s3-twocol-title">Data layer</h3>
       <p class="s3-twocol-body">Define <strong>qué se intercambia</strong>: discovery (<code>server/discover</code>), primitives, notifications. Wire format: JSON-RPC 2.0.</p>
     </div>
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="1">
       <p class="s3-twocol-badge">capa externa</p>
       <h3 class="s3-twocol-title">Transport layer</h3>
       <p class="s3-twocol-body">Define <strong>por dónde viajan</strong> esos mensajes: canal físico y autenticación.</p>
     </div>
   </div>
 
-  <p class="s3-twocol-caption">El mismo set de mensajes funciona <strong>idéntico</strong> sobre cualquier transport. No tenés que aprender JSON-RPC para usar MCP — sólo saber que está abajo.</p>
+  <p class="s3-twocol-caption fragment fade-in" data-fragment-index="1">El mismo set de mensajes funciona <strong>idéntico</strong> sobre cualquier transport. No tenés que aprender JSON-RPC para usar MCP — sólo saber que está abajo.</p>
 
   <aside class="notes">
+    <p><strong>Dos reveals — data layer, después transport layer + caption.</strong></p>
     <p><u>Separación canónica data layer vs transport layer. La razón pedagógica importante: el mensaje es el mismo independiente del canal. Eso es lo que hace que el protocolo viaje entre transports.</u></p>
-    <p><em>"MCP se divide internamente en dos capas, y vale separarlas mentalmente. La data layer es la capa interna: define qué se intercambia entre cliente y server — el discovery inicial con server/discover, las primitives que vamos a ver en el próximo bloque, las notificaciones. Wire format JSON-RPC 2.0, formato viejo y aburrido, no hay nada que aprender ahí. La transport layer es la capa externa: define por dónde viajan esos mensajes, qué canal físico se usa y cómo se autentican. La propiedad clave es que el mismo set de mensajes JSON-RPC funciona idéntico sobre cualquier transport — eso es lo que le da la portabilidad al protocolo. No aprenden JSON-RPC para usar MCP, alcanza con saber que abajo hay un formato estándar."</em></p>
+    <p><em>"MCP se divide internamente en dos capas, y vale separarlas mentalmente."</em></p>
+    <p><em>"La data layer es la capa interna: define qué se intercambia entre cliente y server — el discovery inicial con server/discover, las primitives que vamos a ver en el próximo bloque, las notificaciones. Wire format JSON-RPC 2.0, formato viejo y aburrido, no hay nada que aprender ahí."</em></p>
+    <p><em>"La transport layer es la capa externa: define por dónde viajan esos mensajes, qué canal físico se usa y cómo se autentican. La propiedad clave es que el mismo set de mensajes JSON-RPC funciona idéntico sobre cualquier transport — eso es lo que le da la portabilidad al protocolo. No aprenden JSON-RPC para usar MCP, alcanza con saber que abajo hay un formato estándar."</em></p>
   </aside>
 </section>
 
@@ -588,7 +591,7 @@
   <p class="s3-h2-sub">Cuándo se usa cada uno.</p>
 
   <div class="s3-twocol">
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="0">
       <p class="s3-twocol-badge">local</p>
       <h3 class="s3-twocol-title">Stdio transport</h3>
       <p class="s3-twocol-body">El server corre como <strong>proceso local en la misma máquina</strong>. Mensajes por stdin/stdout. Cero overhead de red.</p>
@@ -607,18 +610,21 @@
         <div class="s3-stdio-node">pantalla</div>
       </div>
     </div>
-    <div class="s3-twocol-card">
+    <div class="s3-twocol-card fragment fade-in" data-fragment-index="1">
       <p class="s3-twocol-badge">remoto</p>
       <h3 class="s3-twocol-title">Streamable HTTP transport</h3>
       <p class="s3-twocol-body">El server <strong>corre remoto</strong> y el host se conecta por red. HTTP POST + Server-Sent Events opcionales, sin sesión de protocolo. Auth por bearer token, API key o header propio — <strong>OAuth recomendado</strong>.</p>
     </div>
   </div>
 
-  <p class="s3-twocol-caption">Regla simple: <strong>disco/red local → Stdio. Servicio compartido o de terceros → Streamable HTTP.</strong></p>
+  <p class="s3-twocol-caption fragment fade-in" data-fragment-index="1">Regla simple: <strong>disco/red local → Stdio. Servicio compartido o de terceros → Streamable HTTP.</strong></p>
 
   <aside class="notes">
+    <p><strong>Dos reveals — Stdio, después Streamable HTTP + caption.</strong></p>
     <p><u>Los dos transports definidos por la spec. Lo importante es la regla de cuándo usar cada uno. La mayoría de los servers populares hoy son stdio.</u></p>
-    <p><em>"Los dos transports que la spec define. Stdio: el server corre como proceso local en la misma máquina que el host, es el modo en que el server vive con vos. Los mensajes viajan por stdin y stdout, cero overhead de red. La mayoría de los servers populares hoy son stdio: filesystem, git. Tu máquina los corre y listo. Streamable HTTP: el server corre remoto y el host se conecta por red. HTTP POST para mensajes cliente a server, con Server-Sent Events opcionales para streaming, y sin sesión de protocolo — cada request es independiente. La autenticación es bearer tokens, API keys o headers propios, con OAuth recomendado. Sirve cuando el server vive en un servicio compartido, como una instancia de Postgres centralizado, o cuando lo hostea un tercero, como GitHub. La regla simple es la del caption: disco o red local, stdio; servicio compartido o de terceros, Streamable HTTP."</em></p>
+    <p><em>"Los dos transports que la spec define."</em></p>
+    <p><em>"Stdio: el server corre como proceso local en la misma máquina que el host, es el modo en que el server vive con vos. Los mensajes viajan por stdin y stdout, igual que cualquier comando de terminal — cero overhead de red. La mayoría de los servers populares hoy son stdio: filesystem, git. Tu máquina los corre y listo."</em></p>
+    <p><em>"Streamable HTTP: el server corre remoto y el host se conecta por red. HTTP POST para mensajes cliente a server, con Server-Sent Events opcionales para streaming, y sin sesión de protocolo — cada request es independiente. La autenticación es bearer tokens, API keys o headers propios, con OAuth recomendado. Sirve cuando el server vive en un servicio compartido, como una instancia de Postgres centralizado, o cuando lo hostea un tercero, como GitHub. La regla simple es la del caption: disco o red local, stdio; servicio compartido o de terceros, Streamable HTTP."</em></p>
   </aside>
 </section>
 
