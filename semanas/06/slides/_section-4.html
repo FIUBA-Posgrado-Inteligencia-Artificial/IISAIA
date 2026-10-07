@@ -209,6 +209,8 @@
     border-radius: 3px;
     color: var(--accent-secondary);
     font-size: 0.95rem;
+    display: inline;
+    white-space: nowrap;
   }
   .s4-prim-spec-desc {
     font-size: 1.05rem;
@@ -409,6 +411,34 @@
     margin-left: auto !important;
     margin-right: auto !important;
   }
+  /* §4.2 — Código del server de clima (highlight por pasos) */
+  .reveal .s4-code {
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto;
+  }
+  .reveal .s4-code pre {
+    width: 100%;
+    margin: 0;
+    font-size: 1rem;
+    box-shadow: none;
+  }
+  .reveal .s4-code pre code {
+    max-height: none;
+    line-height: 1.4;
+  }
+  .reveal .s4-code .hljs-meta {
+    color: var(--accent);
+  }
+  .reveal .s4-code-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 1000px;
+    margin: var(--spacing-md) auto 0 auto !important;
+  }
+  .reveal .s4-code-caption strong {
+    color: var(--accent);
+  }
 </style>
 
 <!-- §4.1 — Opener: qué expone un MCP Server (re-iluminar el diagrama del §3) -->
@@ -464,17 +494,60 @@
 
   <aside class="notes">
     <p><u>Anclaje visual: el mismo diagrama del §3, ahora con foco en los servers. Las tres primitives viven adentro de cada server. La fila de abajo es preview de los tres slides que siguen.</u></p>
-    <p><em>"Volvemos al diagrama. El host y los clientes se atenúan, los servers se destacan. Lo que importa ahora es qué expone cada server por adentro: la doc de MCP define tres primitives del lado del server, y la clave para entenderlas es el framing oficial: cada una tiene un dueño distinto de la iniciativa, alguien que decide cuándo se usa. Tools las invoca el modelo, resources las decide cargar la aplicación, prompts las pide el usuario. Esa diferencia organiza todo. Vamos una por una, y después vemos qué pone el cliente del otro lado."</em></p>
+    <p><em>"Volvemos al diagrama. El host y los clientes se atenúan, los servers se destacan. Lo que importa ahora es qué expone cada server por adentro: la doc de MCP define tres primitives del lado del server, y la clave para entenderlas es el framing oficial: cada una tiene un dueño distinto de la iniciativa, alguien que decide cuándo se usa. Tools las invoca el modelo, resources las decide cargar la aplicación, prompts las pide el usuario. Esa diferencia organiza todo. Vamos una por una, con un mismo server de ejemplo para las tres, y después vemos qué pone el cliente del otro lado."</em></p>
   </aside>
 </section>
 
-<!-- §4.2 — Tools (model-controlled) -->
+<!-- §4.2 — El server de clima: tres primitives en un archivo -->
+<section>
+  <h2 class="s4-h2">Un server, tres primitives.</h2>
+  <p class="s4-h2-sub">Un server MCP de clima, completo en un archivo de Python. Lo vamos a usar de ejemplo para las tres.</p>
+
+  <div class="s4-code">
+<pre><code class="language-python" data-trim data-line-numbers="|5-8|10-13|15-18|1,3,20">
+from mcp.server import MCPServer
+
+mcp = MCPServer("clima")
+
+@mcp.tool()
+def clima_actual(ciudad: str) -> str:
+    """Devuelve el clima actual de una ciudad."""
+    ...  # consulta Open-Meteo
+
+@mcp.resource("clima://pronostico/{ciudad}")
+def pronostico(ciudad: str) -> str:
+    """Pronóstico de los próximos 3 días."""
+    ...
+
+@mcp.prompt()
+def reporte_clima(ciudad: str) -> str:
+    """Arma un reporte del clima de una ciudad."""
+    return f"Usá la tool clima_actual para {ciudad}..."
+
+mcp.run()  # stdio
+</code></pre>
+  </div>
+
+  <p class="s4-code-caption">Una primitive es <strong>una función con un decorador</strong>. El SDK arma el schema con los type hints y el docstring.</p>
+
+  <aside class="notes">
+    <p><strong>Cuatro clicks — tool, resource, prompt, plomería.</strong></p>
+    <p><u>Server real, vive en semanas/06/demo-clima/server.py (SDK oficial de Python, mcp 2.x, datos de Open-Meteo sin API key). El código del slide está recortado: el archivo real tiene además el resource fijo clima://ciudades y el llamado HTTP. Las tres slides que siguen usan este mismo server, con las respuestas JSON capturadas de verdad.</u></p>
+    <p><em>"Antes de ir una por una, les muestro un server entero. Es un server MCP de clima, lo escribí para la clase, y es esto: un archivo de Python. Lo van a ver en las tres slides que siguen, así que vale mirarlo una vez completo."</em></p>
+    <p><em>"Primero, una tool: clima_actual. Es una función común que recibe una ciudad y devuelve un string con el clima. Lo único MCP es el decorador arroba mcp punto tool."</em></p>
+    <p><em>"Después, un resource. Mismo patrón, otro decorador, y acá aparece la URI: clima dos puntos barra barra pronostico, con la ciudad entre llaves. Eso es un template — la URI tiene un hueco que se completa con la ciudad que pidas."</em></p>
+    <p><em>"Y un prompt: reporte_clima. Fíjense que no consulta nada, solo devuelve texto — un mensaje armado para el modelo. Eso va a importar cuando lo veamos."</em></p>
+    <p><em>"El resto es plomería: le ponés nombre al server y lo corrés. Sin argumentos corre por stdio, el transport local que vimos en la sección anterior. No escribieron ni un schema ni una línea de JSON-RPC: el SDK lee los type hints y el docstring y arma todo lo que el cliente va a descubrir."</em></p>
+  </aside>
+</section>
+
+<!-- §4.3 — Tools (model-controlled) -->
 <section>
   <h2 class="s4-h2">Tools.</h2>
 
   <div class="s4-prim-card">
     <p class="s4-prim-eyebrow">primitive 1 — <strong>model-controlled</strong></p>
-    <p class="s4-prim-def">Funciones que el LLM puede invocar. El cliente las descubre primero, después el modelo decide cuál llamar. Ejemplo: <strong>Playwright MCP</strong>.</p>
+    <p class="s4-prim-def">Funciones que el LLM puede invocar. El cliente las descubre primero, después el modelo decide cuál llamar. En el server de clima: <strong>clima_actual</strong>.</p>
 
     <div class="s4-prim-flow">
       <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
@@ -488,17 +561,10 @@
               <div class="s4-prim-step-items">
                 <div class="s4-prim-spec">
                   <div class="s4-prim-spec-row">
-                    <span class="s4-prim-spec-name">browser_navigate</span>
-                    <span class="s4-prim-spec-schema">inputs: <code>url: string</code> (required)</span>
+                    <span class="s4-prim-spec-name">clima_actual</span>
+                    <span class="s4-prim-spec-schema">inputs: <code>ciudad: string</code> (required)</span>
                   </div>
-                  <div class="s4-prim-spec-desc">"Navigate to a URL"</div>
-                </div>
-                <div class="s4-prim-spec">
-                  <div class="s4-prim-spec-row">
-                    <span class="s4-prim-spec-name">browser_click</span>
-                    <span class="s4-prim-spec-schema">inputs: <code>target: string</code> (required), <code>element: string</code> (opcional)</span>
-                  </div>
-                  <div class="s4-prim-spec-desc">"Perform click on a web page"</div>
+                  <div class="s4-prim-spec-desc">"Devuelve el clima actual de una ciudad: temperatura, viento y estado del cielo."</div>
                 </div>
               </div>
             </div>
@@ -509,12 +575,12 @@
       <div class="s4-prim-step fragment fade-in" data-fragment-index="1">
         <span class="s4-prim-step-num">2</span>
         <div class="s4-prim-step-body">
-          <div class="s4-prim-step-call">tools/call<span class="s4-prim-step-call-args">(name: "browser_navigate", arguments: { url: "https://docs.anthropic.com" })</span></div>
+          <div class="s4-prim-step-call">tools/call<span class="s4-prim-step-call-args">(name: "clima_actual", arguments: { ciudad: "Montevideo" })</span></div>
           <div class="s4-prim-step-return">
             <span class="s4-prim-step-return-arrow">↳</span>
             <div>
-              <div class="s4-prim-step-return-label">el server ejecuta y devuelve</div>
-              <div class="s4-prim-step-return-shape">{ <span class="key">content</span>: [ { <span class="key">type</span>: <span class="str">"text"</span>, <span class="key">text</span>: <span class="str">"Navigated to docs.anthropic.com — page snapshot..."</span> } ] }</div>
+              <div class="s4-prim-step-return-label">el server consulta Open-Meteo y devuelve</div>
+              <div class="s4-prim-step-return-shape">{ <span class="key">content</span>: [ { <span class="key">type</span>: <span class="str">"text"</span>, <span class="key">text</span>: <span class="str">"Montevideo, Uruguay: 17.7 °C, viento 15.3 km/h, tormenta."</span> } ] }</div>
             </div>
           </div>
         </div>
@@ -523,55 +589,55 @@
 
     <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
       <div class="s4-prim-cc-label">así se ve en Claude Code</div>
-      <div class="s4-prim-cc-user">&gt; Abrí docs.anthropic.com y dame los headers principales</div>
-      <div class="s4-prim-cc-internal">→ tool call: browser_navigate({ url: "https://docs.anthropic.com" })</div>
-      <div class="s4-prim-cc-confirmation">Allow mcp__playwright__browser_navigate? (y/n)</div>
+      <div class="s4-prim-cc-user">&gt; ¿Qué temperatura hace en Montevideo?</div>
+      <div class="s4-prim-cc-internal">→ tool call: clima_actual({ ciudad: "Montevideo" })</div>
+      <div class="s4-prim-cc-confirmation">Allow mcp__clima__clima_actual? (y/n)</div>
       <div class="s4-prim-cc-internal">approved · result returned to model</div>
-      <div class="s4-prim-cc-assistant">claude &gt; Los headers principales son: Introduction, Quickstart, Models, Guides, API Reference...</div>
+      <div class="s4-prim-cc-assistant">claude &gt; En Montevideo hay 17.7 °C, con tormenta y viento de 15 km/h. Si salís, llevá paraguas.</div>
     </div>
   </div>
 
   <aside class="notes">
     <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
-    <p><u>Tools como flujo de 2 pasos con schema completo + cierre concreto que muestra cómo se ve en Claude Code. La confirmación antes de ejecutar visualiza el "acción con efecto" sin necesidad de etiquetarlo. Params y descripciones verificados contra github.com/microsoft/playwright-mcp (README, sección de tools): browser_click pide target (required) y element (opcional, solo para el permiso); browser_navigate sin cambios de fondo.</u></p>
-    <p><em>"Primera primitive: tools. Funciones que el LLM puede invocar. Para el ejemplo uso Playwright MCP — el server real de Microsoft que ya van a ver en el demo del §7."</em></p>
-    <p><em>"Paso uno. El cliente le pregunta al server qué tools tiene, con un tools/list. El server le devuelve un catálogo — esos dos ejemplos son dos tools reales de Playwright MCP: navegar a una URL y hacer click en un elemento. Cada entry trae el nombre, una descripción que el modelo va a leer, y un schema de parámetros — noten que browser_click pide un target exacto, la referencia del snapshot, y element es opcional, solo para mostrarle al usuario qué va a tocar."</em></p>
-    <p><em>"Paso dos. Durante la conversación, cuando el modelo decide que tiene que abrir la doc de Anthropic, mira el catálogo, identifica browser_navigate, arma los argumentos concretos con la URL, y emite un tools/call. El server real abre el browser headless, navega a esa URL y devuelve el snapshot de la página al modelo."</em></p>
-    <p><em>"Y así se ve esto desde Claude Code. El usuario pide algo en lenguaje natural — 'abrí docs.anthropic.com y dame los headers'. Claude identifica que tiene que usar browser_navigate y arma el call. Pero antes de ejecutar, Claude Code pide confirmación con el nombre completo de la tool, mcp__playwright__browser_navigate — porque los tools cambian el mundo, son acción con efecto. Una vez aprobado, el server ejecuta y la respuesta vuelve. El modelo después la usa para contestar."</em></p>
+    <p><u>Tools con el server de clima del slide anterior. El catálogo y la respuesta son los JSON reales del server (capturados con un cliente MCP por stdio), recortados a lo que importa. El nombre en el permiso sigue la regla de Claude Code: mcp__server__tool. La confirmación antes de ejecutar visualiza el "acción con efecto" sin necesidad de etiquetarlo.</u></p>
+    <p><em>"Primera primitive: tools. Funciones que el LLM puede invocar. Seguimos con el server de clima: su tool es clima_actual."</em></p>
+    <p><em>"Paso uno. El cliente le pregunta al server qué tools tiene, con un tools/list. El server devuelve el catálogo — acá hay una sola tool. Fíjense de dónde sale cada campo: el nombre es el de la función, la descripción es el docstring, y el schema dice que ciudad es un string obligatorio porque así lo dice el type hint. Nadie escribió eso a mano. La descripción es lo que el modelo lee para decidir cuándo usarla."</em></p>
+    <p><em>"Paso dos. Durante la conversación, cuando el modelo decide que necesita el clima de Montevideo, mira el catálogo, elige clima_actual, arma los argumentos y emite un tools/call. El server corre la función — que consulta Open-Meteo — y devuelve el resultado como texto."</em></p>
+    <p><em>"Y así se ve desde Claude Code. El usuario pregunta en lenguaje natural, sin nombrar ninguna tool. Claude decide usar clima_actual y arma el call. Antes de ejecutar, Claude Code pide permiso con el nombre completo: mcp, doble guión bajo, clima — el nombre del server —, doble guión bajo, clima_actual. Los tools pueden cambiar el mundo, por eso se confirman. Aprobado, el server ejecuta y el modelo contesta con el dato. Eso es model-controlled: la iniciativa la tuvo el modelo."</em></p>
   </aside>
 </section>
 
-<!-- §4.3 — Resources (application-controlled) -->
+<!-- §4.4 — Resources (application-controlled) -->
 <section>
   <h2 class="s4-h2">Resources.</h2>
 
   <div class="s4-prim-card">
     <p class="s4-prim-eyebrow">primitive 2 — <strong>application-controlled</strong></p>
-    <p class="s4-prim-def">Datos pasivos accesibles por URI. El cliente los descubre; la aplicación decide cuáles cargar al contexto. Ejemplo: <strong>un MCP server de Postgres</strong> — expone el schema de cada tabla.</p>
+    <p class="s4-prim-def">Datos pasivos accesibles por URI. El cliente los descubre; la aplicación decide cuáles cargar al contexto. En el server de clima: <strong>el pronóstico de una ciudad</strong>.</p>
 
     <div class="s4-prim-flow">
       <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
         <span class="s4-prim-step-num">1</span>
         <div class="s4-prim-step-body">
-          <div class="s4-prim-step-call">resources/list</div>
+          <div class="s4-prim-step-call">resources/list<span class="s4-prim-step-call-args"> · resources/templates/list</span></div>
           <div class="s4-prim-step-return">
             <span class="s4-prim-step-return-arrow">↳</span>
             <div>
-              <div class="s4-prim-step-return-label">catálogo — cada resource con uri, name, mimeType</div>
+              <div class="s4-prim-step-return-label">catálogo — resources fijos y templates con parámetro, cada uno con uri, name, mimeType</div>
               <div class="s4-prim-step-items">
                 <div class="s4-prim-spec">
                   <div class="s4-prim-spec-row">
-                    <span class="s4-prim-spec-name">postgres://db-prod/users/schema</span>
-                    <span class="s4-prim-spec-schema">mimeType: <code>application/json</code></span>
+                    <span class="s4-prim-spec-name">clima://ciudades</span>
+                    <span class="s4-prim-spec-schema">mimeType: <code>text/plain</code></span>
                   </div>
-                  <div class="s4-prim-spec-desc">name: "users.schema" · description: "Schema for users table"</div>
+                  <div class="s4-prim-spec-desc">name: "ciudades" · description: "Ciudades sugeridas para la demo."</div>
                 </div>
                 <div class="s4-prim-spec">
                   <div class="s4-prim-spec-row">
-                    <span class="s4-prim-spec-name">postgres://db-prod/orders/schema</span>
-                    <span class="s4-prim-spec-schema">mimeType: <code>application/json</code></span>
+                    <span class="s4-prim-spec-name">clima://pronostico/{ciudad}</span>
+                    <span class="s4-prim-spec-schema">template · mimeType: <code>text/plain</code></span>
                   </div>
-                  <div class="s4-prim-spec-desc">name: "orders.schema" · description: "Schema for orders table"</div>
+                  <div class="s4-prim-spec-desc">name: "pronostico" · description: "Pronóstico de los próximos 3 días para una ciudad."</div>
                 </div>
               </div>
             </div>
@@ -582,12 +648,12 @@
       <div class="s4-prim-step fragment fade-in" data-fragment-index="1">
         <span class="s4-prim-step-num">2</span>
         <div class="s4-prim-step-body">
-          <div class="s4-prim-step-call">resources/read<span class="s4-prim-step-call-args">(uri: "postgres://db-prod/users/schema")</span></div>
+          <div class="s4-prim-step-call">resources/read<span class="s4-prim-step-call-args">(uri: "clima://pronostico/Madrid")</span></div>
           <div class="s4-prim-step-return">
             <span class="s4-prim-step-return-arrow">↳</span>
             <div>
-              <div class="s4-prim-step-return-label">el server consulta la base y devuelve</div>
-              <div class="s4-prim-step-return-shape">{ <span class="key">contents</span>: [ { <span class="key">uri</span>: <span class="str">"postgres://db-prod/users/schema"</span>, <span class="key">mimeType</span>: <span class="str">"application/json"</span>, <span class="key">text</span>: <span class="str">'{ "columns": [{ "name": "id", "type": "uuid" }, { "name": "email", "type": "text" }, ...] }'</span> } ] }</div>
+              <div class="s4-prim-step-return-label">el server completa el template, consulta Open-Meteo y devuelve</div>
+              <div class="s4-prim-step-return-shape">{ <span class="key">contents</span>: [ { <span class="key">uri</span>: <span class="str">"clima://pronostico/Madrid"</span>, <span class="key">mimeType</span>: <span class="str">"text/plain"</span>, <span class="key">text</span>: <span class="str">"Pronóstico para Madrid:\n2026-10-07: 14.0–21.7 °C, tormenta\n2026-10-08: 13.1–20.0 °C, nublado\n..."</span> } ] }</div>
             </div>
           </div>
         </div>
@@ -596,30 +662,30 @@
 
     <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
       <div class="s4-prim-cc-label">así se ve en Claude Code</div>
-      <div class="s4-prim-cc-internal">[ el usuario adjunta @postgres:postgres://db-prod/users/schema y @postgres:postgres://db-prod/orders/schema al prompt ]</div>
-      <div class="s4-prim-cc-internal">→ Claude Code le pide esos resources al server (resources/read) y los adjunta al contexto antes de llamar al modelo</div>
-      <div class="s4-prim-cc-user">&gt; Escribime una query que traiga usuarios con pedidos sin pagar</div>
-      <div class="s4-prim-cc-assistant">claude &gt; <code>SELECT u.id, u.email FROM users u JOIN orders o ON o.user_id = u.id WHERE o.status = 'unpaid'</code> — columnas reales, sin alucinarlas</div>
+      <div class="s4-prim-cc-internal">[ el usuario adjunta @clima:clima://pronostico/Madrid al prompt ]</div>
+      <div class="s4-prim-cc-internal">→ Claude Code le pide el resource al server (resources/read) y lo adjunta al contexto antes de llamar al modelo</div>
+      <div class="s4-prim-cc-user">&gt; Viajo a Madrid mañana, ¿qué llevo?</div>
+      <div class="s4-prim-cc-assistant">claude &gt; Mañana en Madrid va de 13 a 20 °C y nublado: capas y un abrigo liviano para la mañana.</div>
     </div>
   </div>
 
   <aside class="notes">
     <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
-    <p><u>Resources con un server de Postgres genérico (el server de referencia que documentaba esto quedó archivado, así que no se nombra como "oficial"). CC ya lee archivos nativamente, pero no se conecta solo a una DB para introspeccionar schemas — ahí entra el resource. Cronología clave: el read sucede ANTES de que el usuario pregunte algo. En Claude Code la vía de attach es @server:uri (code.claude.com/docs/en/mcp.md): el cliente le pide cada resource al server con resources/read y lo adjunta al contexto. Además, el modelo puede leerlos por su cuenta con ReadMcpResourceTool, sin pasar por el usuario.</u></p>
-    <p><em>"Segunda primitive: resources. Datos pasivos accesibles por URI. Ejemplo: un MCP server de Postgres que expone el schema de cada tabla de la base como un resource — algo que CC no puede hacer solo, porque no se conecta a una base de datos para introspeccionar schemas."</em></p>
-    <p><em>"Paso uno. El cliente le pide al server el catálogo con resources/list. El server introspecciona la base — corre las queries de catálogo de Postgres — y devuelve una URI por cada tabla. Dos ejemplos: users.schema y orders.schema. Cada URI viene con mimeType application slash json porque el contenido es JSON estructurado del schema."</em></p>
-    <p><em>"Paso dos. La app decide cargar el schema de users. Emite resources/read con la URI concreta. El server consulta la base y devuelve el JSON del schema: las columnas, tipos, nullability, índices. La app lo inyecta al contexto del modelo."</em></p>
-    <p><em>"Y así se ve en Claude Code, con la cronología correcta: el usuario adjunta los schemas de users y orders con la sintaxis arroba-server-dos puntos-uri, @postgres:postgres://db-prod/users/schema. Es una acción del usuario en el prompt, no una consulta al modelo. Claude Code se los pide al server con resources/read y los adjunta al contexto antes de que el usuario pregunte nada. Recién después llega la pregunta: escribime una query que traiga usuarios con pedidos sin pagar. El modelo arma el SQL con los nombres reales de las columnas — sin alucinarlos, porque los tiene en contexto. Eso es application-controlled. Nota al margen: algunos servers exponen resource templates, URIs parametrizadas con placeholders entre llaves, que la app expande con valores concretos en tiempo real."</em></p>
+    <p><u>Resources con el mismo server de clima. Catálogo y respuesta son los JSON reales, recortados. Los resources fijos salen de resources/list y los templates de resources/templates/list — por eso el paso 1 muestra los dos. Cronología clave: el read sucede ANTES de que el modelo vea la pregunta. En Claude Code la vía de attach es @server:uri (code.claude.com/docs/en/mcp): el cliente pide el resource con resources/read y lo adjunta al contexto. Escribir la URI del template a mano, con la ciudad completada, funciona (probado). La doc también dice que Claude Code le da al modelo tools para listar y leer resources por su cuenta; no nombra esas tools, así que no las nombres.</u></p>
+    <p><em>"Segunda primitive: resources. Datos pasivos accesibles por URI. No hacen nada, se leen. En el server de clima, el pronóstico de una ciudad."</em></p>
+    <p><em>"Paso uno. El cliente pide el catálogo. Acá hay dos cosas: un resource fijo, la lista de ciudades, con su URI clima://ciudades; y un template, el pronóstico, que tiene la ciudad entre llaves. El template es una URI con un hueco: el server no puede listar el pronóstico de todas las ciudades del mundo, entonces publica el patrón y vos lo completás."</em></p>
+    <p><em>"Paso dos. La app decide cargar el pronóstico de Madrid: completa el template y emite resources/read con la URI concreta. El server consulta Open-Meteo y devuelve el texto con los próximos tres días. La app lo inyecta al contexto del modelo."</em></p>
+    <p><em>"Y así se ve en Claude Code, con la cronología correcta. El usuario adjunta el pronóstico con arroba, igual que adjunta un archivo: arroba, clima — el server —, dos puntos, y la URI. Es una acción del usuario en el prompt, no una decisión del modelo. Claude Code pide el resource y lo adjunta antes de que el modelo vea nada. Recién ahí llega la pregunta, y el modelo contesta con los números del pronóstico porque ya los tiene en contexto. No llamó a ninguna tool. Eso es application-controlled."</em></p>
   </aside>
 </section>
 
-<!-- §4.4 — Prompts (user-controlled) -->
+<!-- §4.5 — Prompts (user-controlled) -->
 <section>
   <h2 class="s4-h2">Prompts.</h2>
 
   <div class="s4-prim-card">
     <p class="s4-prim-eyebrow">primitive 3 — <strong>user-controlled</strong></p>
-    <p class="s4-prim-def">Templates reutilizables. El cliente los lista; el usuario elige cuál invocar, con argumentos. Ejemplo genérico: <strong>un server de code review</strong> podría exponer esto.</p>
+    <p class="s4-prim-def">Templates reutilizables. El cliente los lista; el usuario elige cuál invocar, con argumentos. En el server de clima: <strong>reporte_clima</strong>.</p>
 
     <div class="s4-prim-flow">
       <div class="s4-prim-step fragment fade-in" data-fragment-index="0">
@@ -633,17 +699,10 @@
               <div class="s4-prim-step-items">
                 <div class="s4-prim-spec">
                   <div class="s4-prim-spec-row">
-                    <span class="s4-prim-spec-name">review-pr</span>
-                    <span class="s4-prim-spec-schema">arguments: <code>diff: string</code> (required)</span>
+                    <span class="s4-prim-spec-name">reporte_clima</span>
+                    <span class="s4-prim-spec-schema">arguments: <code>ciudad</code> (required)</span>
                   </div>
-                  <div class="s4-prim-spec-desc">"Review a pull request diff with structured feedback"</div>
-                </div>
-                <div class="s4-prim-spec">
-                  <div class="s4-prim-spec-row">
-                    <span class="s4-prim-spec-name">explain-commit</span>
-                    <span class="s4-prim-spec-schema">arguments: <code>sha: string</code> (required)</span>
-                  </div>
-                  <div class="s4-prim-spec-desc">"Explain what a commit changes and why"</div>
+                  <div class="s4-prim-spec-desc">"Arma un reporte del clima de una ciudad, con recomendación de qué ponerse."</div>
                 </div>
               </div>
             </div>
@@ -654,12 +713,12 @@
       <div class="s4-prim-step fragment fade-in" data-fragment-index="1">
         <span class="s4-prim-step-num">2</span>
         <div class="s4-prim-step-body">
-          <div class="s4-prim-step-call">prompts/get<span class="s4-prim-step-call-args">(name: "explain-commit", arguments: { sha: "a3f9c21" })</span></div>
+          <div class="s4-prim-step-call">prompts/get<span class="s4-prim-step-call-args">(name: "reporte_clima", arguments: { ciudad: "Buenos_Aires" })</span></div>
           <div class="s4-prim-step-return">
             <span class="s4-prim-step-return-arrow">↳</span>
             <div>
               <div class="s4-prim-step-return-label">el server expande el template y devuelve</div>
-              <div class="s4-prim-step-return-shape">{ <span class="key">messages</span>: [ { <span class="key">role</span>: <span class="str">"user"</span>, <span class="key">content</span>: { <span class="key">type</span>: <span class="str">"text"</span>, <span class="key">text</span>: <span class="str">"Explain what commit a3f9c21 changes and why..."</span> } } ] }</div>
+              <div class="s4-prim-step-return-shape">{ <span class="key">messages</span>: [ { <span class="key">role</span>: <span class="str">"user"</span>, <span class="key">content</span>: { <span class="key">type</span>: <span class="str">"text"</span>, <span class="key">text</span>: <span class="str">"Usá la tool clima_actual para consultar el clima de Buenos Aires. Después escribí un reporte de tres líneas..."</span> } } ] }</div>
             </div>
           </div>
         </div>
@@ -668,24 +727,24 @@
 
     <div class="s4-prim-cc fragment fade-in" data-fragment-index="2">
       <div class="s4-prim-cc-label">así se ve en Claude Code</div>
-      <div class="s4-prim-cc-user">&gt; /mcp__code-review__explain-commit a3f9c21</div>
-      <div class="s4-prim-cc-internal">→ Claude Code llama prompts/get("explain-commit", { sha: "a3f9c21" })</div>
-      <div class="s4-prim-cc-internal">→ template expandido, mensaje listo enviado al modelo</div>
-      <div class="s4-prim-cc-assistant">claude &gt; El commit a3f9c21 refactoriza el manejo de errores en <code>auth.ts</code>, sin cambiar la lógica pública.</div>
+      <div class="s4-prim-cc-user">&gt; /mcp__clima__reporte_clima Buenos_Aires</div>
+      <div class="s4-prim-cc-internal">→ Claude Code llama prompts/get y le manda al modelo el mensaje armado</div>
+      <div class="s4-prim-cc-internal">→ el modelo sigue la instrucción: tool call clima_actual({ ciudad: "Buenos Aires" })</div>
+      <div class="s4-prim-cc-assistant">claude &gt; Buenos Aires: 16 °C y tormenta. Campera impermeable. Sí, llevá paraguas.</div>
     </div>
   </div>
 
   <aside class="notes">
     <p><strong>Tres reveals — discover, invoke, CC interaction.</strong></p>
-    <p><u>Prompts como flujo de 2 pasos + cierre concreto que muestra la sintaxis real de slash command que el usuario tipea (/mcp__server__prompt, args separados por espacio — code.claude.com/docs/en/mcp.md). El ejemplo de server es explícitamente genérico, no un producto real, para no inventar un "Git MCP" que no existe así.</u></p>
-    <p><em>"Tercera primitive: prompts. Templates reutilizables. El ejemplo es genérico a propósito: pensemos en un server de code review cualquiera, de los que ya existen en la comunidad para acciones recurrentes sobre un repositorio."</em></p>
-    <p><em>"Paso uno. El cliente le pide al server qué templates tiene disponibles con prompts/list. El server le devuelve un catálogo: review-pr para revisar un pull request, explain-commit para entender qué hace un commit concreto. Cada template tiene un nombre, una descripción, y un schema de argumentos."</em></p>
-    <p><em>"Paso dos. El usuario decide pedirle al agente que explique un commit puntual. El host emite prompts/get con el nombre y el sha. El server combina internamente instrucciones para el modelo con ese dato, y devuelve todo armado como un mensaje listo en la estructura messages que ven en la response. No ejecuta nada, sólo arma el material."</em></p>
-    <p><em>"Y así se ve en Claude Code, con la sintaxis real: barra, mcp doble guión bajo nombre del server doble guión bajo nombre del prompt, y los argumentos separados por espacio — barra mcp__code-review__explain-commit a3f9c21. Si tipean barra solita y tienen un server MCP conectado, sus prompts aparecen ahí mezclados con los comandos nativos. Claude Code llama prompts/get internamente, el template se expande, se envía al modelo. Por eso user-controlled — el usuario invoca explícitamente, no se disparan solos."</em></p>
+    <p><u>Prompts con el mismo server de clima. Catálogo y messages son los JSON reales, recortados. Sintaxis de Claude Code verificada en code.claude.com/docs/en/mcp: en el menú / aparece como /clima:reporte_clima (MCP), y tipear /mcp__clima__reporte_clima también lo corre. Los argumentos se separan por espacios, por eso "Buenos_Aires" va con guión bajo (el server lo convierte). El cierre muestra que las primitives se combinan: el prompt no ejecuta nada, pero el mensaje que arma le pide al modelo usar la tool.</u></p>
+    <p><em>"Tercera primitive: prompts. Templates reutilizables. En el server de clima: reporte_clima, un reporte con recomendación de qué ponerse."</em></p>
+    <p><em>"Paso uno. El cliente pide los templates disponibles con prompts/list. El server devuelve el catálogo: el nombre, la descripción, y los argumentos — acá uno solo, la ciudad, obligatorio."</em></p>
+    <p><em>"Paso dos. El usuario elige el prompt y le pasa la ciudad. El host emite prompts/get con el nombre y el argumento. El server completa el template y devuelve un mensaje listo, en la estructura messages que ven ahí. No consultó el clima, no ejecutó nada: solo armó el texto. Fíjense qué dice ese texto — le pide al modelo que use la tool clima_actual."</em></p>
+    <p><em>"Y así se ve en Claude Code. Si tipean barra con el server conectado, el prompt aparece en el menú mezclado con los comandos nativos. Lo corren con barra, mcp, doble guión bajo, clima, doble guión bajo, reporte_clima, y la ciudad separada por espacio — con guión bajo en Buenos_Aires, porque cada argumento es una sola palabra. Claude Code llama prompts/get y le manda al modelo el mensaje armado. Y ahora el modelo sí llama la tool, porque el mensaje se lo pidió. User-controlled: la iniciativa fue del usuario. Y de paso ven que las primitives se combinan: un prompt que dispara una tool."</em></p>
   </aside>
 </section>
 
-<!-- §4.5 — Por qué la separación -->
+<!-- §4.6 — Por qué la separación -->
 <section>
   <h2 class="s4-h2">Por qué la separación.</h2>
   <p class="s4-h2-sub">Cada primitive tiene un dueño distinto de la iniciativa. Eso determina todo lo demás.</p>
@@ -720,7 +779,7 @@
   </aside>
 </section>
 
-<!-- §4.6 — Y del otro lado: lo que pone el cliente -->
+<!-- §4.7 — Y del otro lado: lo que pone el cliente -->
 <section>
   <h2 class="s4-h2">Y del otro lado: lo que pone el cliente.</h2>
   <p class="s4-h2-sub">El cliente también expone primitives hacia el server. La comunicación no es de una sola dirección.</p>
