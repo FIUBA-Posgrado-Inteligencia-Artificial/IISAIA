@@ -333,84 +333,6 @@
     font-weight: 700;
   }
 
-  /* §4.6 — Client primitives: Elicitation activa + Roots/Sampling/Logging deprecadas */
-  .s4-client-card {
-    background: var(--bg-secondary);
-    border-left: 3px solid var(--accent-secondary);
-    border-radius: 6px;
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-  .s4-client-name {
-    color: var(--accent-secondary);
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-  }
-  .s4-client-body {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    line-height: 1.45;
-    margin: 4px 0 0 0;
-  }
-  /* Elicitation — la primitive activa */
-  .s4-client-card.is-active {
-    max-width: 1000px;
-    margin: var(--spacing-md) auto 0 auto;
-    border-left: 4px solid var(--accent);
-    padding: var(--spacing-md) var(--spacing-lg);
-  }
-  .s4-client-card.is-active .s4-client-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin: 0 0 var(--spacing-xs) 0;
-  }
-  .s4-client-card.is-active .s4-client-name {
-    color: var(--accent);
-    font-size: 1.2rem;
-  }
-  /* Roots / Sampling / Logging — deprecadas, grises */
-  .s4-client-deprecated-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--spacing-md);
-    max-width: 1000px;
-    margin: var(--spacing-sm) auto 0 auto;
-  }
-  .s4-client-card.is-deprecated {
-    border-left: 3px solid var(--text-muted);
-    opacity: 0.6;
-  }
-  .s4-client-card.is-deprecated .s4-client-name {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-  }
-  .s4-client-card.is-deprecated .s4-client-tag {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-    margin: 2px 0 0 0;
-  }
-  .s4-client-card.is-deprecated .s4-client-body {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    margin: 6px 0 0 0;
-  }
-  .reveal .s4-client-caption {
-    text-align: center;
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    max-width: 1000px;
-    line-height: 1.5;
-    margin-top: var(--spacing-md);
-    margin-bottom: 0;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
   /* §4.2 — Código del server de clima (highlight por pasos) */
   .reveal .s4-code {
     max-width: 1000px;
@@ -444,7 +366,7 @@
 <!-- §4.1 — Opener: qué expone un MCP Server (re-iluminar el diagrama del §3) -->
 <section>
   <h2 class="s4-h2">Qué expone un MCP Server.</h2>
-  <p class="s4-h2-sub">Tres primitives <em>del server</em>, cada una con un dueño distinto. Del otro lado, el cliente también expone las suyas.</p>
+  <p class="s4-h2-sub">Tres primitives <em>del server</em>, cada una con un dueño distinto.</p>
 
   <div class="s3-arch focus-server">
     <div class="s3-arch-host">
@@ -494,7 +416,7 @@
 
   <aside class="notes">
     <p><u>Anclaje visual: el mismo diagrama del §3, ahora con foco en los servers. Las tres primitives viven adentro de cada server. La fila de abajo es preview de los tres slides que siguen.</u></p>
-    <p><em>"Volvemos al diagrama. El host y los clientes se atenúan, los servers se destacan. Lo que importa ahora es qué expone cada server por adentro: la doc de MCP define tres primitives del lado del server, y la clave para entenderlas es el framing oficial: cada una tiene un dueño distinto de la iniciativa, alguien que decide cuándo se usa. Tools las invoca el modelo, resources las decide cargar la aplicación, prompts las pide el usuario. Esa diferencia organiza todo. Vamos una por una, con un mismo server de ejemplo para las tres, y después vemos qué pone el cliente del otro lado."</em></p>
+    <p><em>"Volvemos al diagrama. El host y los clientes se atenúan, los servers se destacan. Lo que importa ahora es qué expone cada server por adentro: la doc de MCP define tres primitives del lado del server, y la clave para entenderlas es el framing oficial: cada una tiene un dueño distinto de la iniciativa, alguien que decide cuándo se usa. Tools las invoca el modelo, resources las decide cargar la aplicación, prompts las pide el usuario. Esa diferencia organiza todo. Vamos una por una, con un mismo server de ejemplo para las tres."</em></p>
   </aside>
 </section>
 
@@ -776,42 +698,5 @@ mcp.run()  # stdio
   <aside class="notes">
     <p><u>Síntesis: el por qué pedagógico de las tres primitives. La diferencia de iniciativa determina permisos y UI. Esa es la razón estructural por la que MCP las separa.</u></p>
     <p><em>"La síntesis. Por qué tres primitives distintas y no una sola con flags. La razón es que cada una tiene un dueño distinto de la iniciativa, y esa diferencia se propaga al resto del diseño. Los tools los decide el modelo, y eso implica un modelo de permisos de acción con confirmación. Los resources los decide la aplicación, eso implica permisos de lectura, transparentes, sin pedir nada. Los prompts los decide el usuario, eso implica invocación explícita, slash commands. Iniciativa distinta lleva a permisos distintos lleva a interfaz distinta: mezclar las tres en una sola primitive haría imposible un modelo de permisos coherente, porque el host no sabría cuándo pedir confirmación, cuándo cargar transparente, cuándo esperar al usuario. Por eso la spec separa."</em></p>
-  </aside>
-</section>
-
-<!-- §4.7 — Y del otro lado: lo que pone el cliente -->
-<section>
-  <h2 class="s4-h2">Y del otro lado: lo que pone el cliente.</h2>
-  <p class="s4-h2-sub">El cliente también expone primitives hacia el server. La comunicación no es de una sola dirección.</p>
-
-  <div class="s4-client-card is-active">
-    <p class="s4-client-eyebrow">la que queda activa</p>
-    <p class="s4-client-name">Elicitation</p>
-    <p class="s4-client-body">El server necesita un dato que no tiene y no puede seguir sin él — confirmación, preferencia, valor faltante. Devuelve <code>resultType: "input_required"</code> con la pregunta; el cliente se la hace al usuario y reintenta el pedido original con la respuesta.</p>
-  </div>
-
-  <div class="s4-client-deprecated-row">
-    <div class="s4-client-card is-deprecated">
-      <p class="s4-client-name">Roots</p>
-      <p class="s4-client-tag">deprecada — spec 2026-07-28</p>
-      <p class="s4-client-body">Reemplazo: directorios por parámetro de tool, URI de resource o config del server.</p>
-    </div>
-    <div class="s4-client-card is-deprecated">
-      <p class="s4-client-name">Sampling</p>
-      <p class="s4-client-tag">deprecada — spec 2026-07-28</p>
-      <p class="s4-client-body">Reemplazo: integrar el LLM directo contra la API del provider.</p>
-    </div>
-    <div class="s4-client-card is-deprecated">
-      <p class="s4-client-name">Logging</p>
-      <p class="s4-client-tag">deprecada — spec 2026-07-28</p>
-      <p class="s4-client-body">Reemplazo: stderr (stdio) u OpenTelemetry.</p>
-    </div>
-  </div>
-
-  <p class="s4-client-caption">Siguen funcionando durante la ventana de deprecación — doce meses como mínimo — pero no conviene construir nada nuevo sobre ellas.</p>
-
-  <aside class="notes">
-    <p><u>Cierre de §4: client primitives, al día con SEP-2577 (modelcontextprotocol.io/specification/latest/changelog). Elicitation es la única vigente, vía multi round-trip requests (resultType input_required, el cliente reintenta con inputResponses). Roots, Sampling y Logging quedan grises con su reemplazo en una línea, sin profundizar.</u></p>
-    <p><em>"Y del otro lado: el cliente también expone primitives hacia el server, la comunicación no es de una sola dirección. De las cuatro que define la spec, hoy conviene mirar solo una en detalle: Elicitation. El server la usa cuando necesita un dato que no tiene y no puede seguir sin él — una confirmación, una preferencia, un valor faltante a mitad de una operación. En la spec actual esto ya no es un mensaje aparte: el server devuelve un resultado con input_required y la pregunta adentro, el cliente se la hace al usuario, y reintenta el pedido original con la respuesta. Las otras tres — Roots, Sampling, Logging — siguen ahí, el server que las use todavía funciona, pero están en ventana de deprecación: no construyan nada nuevo pensando en ellas. Roots se reemplaza pasando el directorio como parámetro de una tool o en la config del server. Sampling se reemplaza integrando el LLM directo contra la API del provider, sin pedírselo al cliente. Logging se reemplaza mandando a stderr si el transport es stdio, o con OpenTelemetry."</em></p>
   </aside>
 </section>
