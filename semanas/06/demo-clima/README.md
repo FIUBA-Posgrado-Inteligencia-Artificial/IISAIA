@@ -11,13 +11,17 @@ Server MCP local (stdio) con una primitive de cada tipo. Datos de [Open-Meteo](h
 
 ## Registrarlo en Claude Code
 
-Requiere [uv](https://docs.astral.sh/uv/). Desde la raíz del repo:
+Requiere [uv](https://docs.astral.sh/uv/). El server ya viene registrado en el `.mcp.json` del repo (scope `project`):
 
-```bash
-claude mcp add clima -- uv run --script semanas/06/demo-clima/server.py
+```json
+"clima": {
+  "type": "stdio",
+  "command": "uv",
+  "args": ["run", "--script", "${CLAUDE_PROJECT_DIR:-.}/semanas/06/demo-clima/server.py"]
+}
 ```
 
-Verificá con `/mcp` dentro de Claude Code que `clima` figure como conectado.
+La primera vez que abras Claude Code en el repo te pide aprobarlo. Después verificá con `/mcp` que `clima` figure como conectado.
 
 ## Qué escribir en la demo
 
